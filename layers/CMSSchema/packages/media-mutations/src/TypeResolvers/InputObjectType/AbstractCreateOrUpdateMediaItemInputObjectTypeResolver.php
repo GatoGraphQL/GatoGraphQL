@@ -100,17 +100,17 @@ abstract class AbstractCreateOrUpdateMediaItemInputObjectTypeResolver extends Ab
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         $inputFieldDescription = match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('Media item ID', 'media-mutations'),
-            MutationInputProperties::FROM => $this->__('Source for the file', 'media-mutations'),
-            MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'media-mutations'),
-            MutationInputProperties::TITLE => $this->__('Attachment title', 'media-mutations'),
-            MutationInputProperties::SLUG => $this->__('Attachment slug', 'media-mutations'),
-            MutationInputProperties::CAPTION => $this->__('Attachment caption', 'media-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'media-mutations'),
-            MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'media-mutations'),
-            MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'media-mutations'),
-            MutationInputProperties::DATE => $this->__('Date to use for the attachment', 'media-mutations'),
-            MutationInputProperties::GMT_DATE => $this->__('GMT date to use for the attachment', 'media-mutations'),
+            MutationInputProperties::ID => $this->__('Media item ID', 'gatographql'),
+            MutationInputProperties::FROM => $this->__('Source for the file', 'gatographql'),
+            MutationInputProperties::AUTHOR_ID => $this->__('The ID of the author', 'gatographql'),
+            MutationInputProperties::TITLE => $this->__('Attachment title', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('Attachment slug', 'gatographql'),
+            MutationInputProperties::CAPTION => $this->__('Attachment caption', 'gatographql'),
+            MutationInputProperties::DESCRIPTION => $this->__('Attachment description', 'gatographql'),
+            MutationInputProperties::ALT_TEXT => $this->__('Image alternative information', 'gatographql'),
+            MutationInputProperties::MIME_TYPE => $this->__('Mime type to use for the attachment, when this information can\'t be deduced from the filename (because it has no extension)', 'gatographql'),
+            MutationInputProperties::DATE => $this->__('Date to use for the attachment', 'gatographql'),
+            MutationInputProperties::GMT_DATE => $this->__('GMT date to use for the attachment', 'gatographql'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 

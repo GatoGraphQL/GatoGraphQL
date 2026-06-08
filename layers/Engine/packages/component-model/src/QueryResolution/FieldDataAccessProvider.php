@@ -90,7 +90,7 @@ class FieldDataAccessProvider implements FieldDataAccessProviderInterface
             if ($objectTypeResolverCount > 1) {
                 throw new ShouldNotHappenException(
                     sprintf(
-                        $this->__('When not specifying the ObjectTypeResolver, the FieldDataAccessProvider can contain only 1, but %s were set'),
+                        $this->__('When not specifying the ObjectTypeResolver, the FieldDataAccessProvider can contain only 1, but %s were set', 'gatographql'),
                         $objectTypeResolverCount
                     )
                 );

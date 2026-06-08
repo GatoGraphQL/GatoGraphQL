@@ -80,7 +80,7 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a custom post', 'custompost-mutations');
+        return $this->__('Input to update a custom post', 'gatographql');
     }
 
     /**
@@ -118,15 +118,15 @@ abstract class AbstractCreateOrUpdateCustomPostInputObjectTypeResolver extends A
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'custompost-mutations'),
-            MutationInputProperties::PARENT_BY => $this->__('The parent of the custom post. Pass `null` to remove the parent', 'custompost-mutations'),
-            MutationInputProperties::TITLE => $this->__('The title of the custom post', 'custompost-mutations'),
-            MutationInputProperties::CONTENT_AS => $this->__('The content of the custom post', 'custompost-mutations'),
-            MutationInputProperties::EXCERPT => $this->__('The excerpt of the custom post', 'custompost-mutations'),
-            MutationInputProperties::SLUG => $this->__('The slug of the custom post', 'custompost-mutations'),
-            MutationInputProperties::STATUS => $this->__('The status of the custom post', 'custompost-mutations'),
-            MutationInputProperties::DATE => $this->__('The date of the custom post', 'custompost-mutations'),
-            MutationInputProperties::GMT_DATE => $this->__('The date in GMT of the custom post', 'custompost-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the custom post to update', 'gatographql'),
+            MutationInputProperties::PARENT_BY => $this->__('The parent of the custom post. Pass `null` to remove the parent', 'gatographql'),
+            MutationInputProperties::TITLE => $this->__('The title of the custom post', 'gatographql'),
+            MutationInputProperties::CONTENT_AS => $this->__('The content of the custom post', 'gatographql'),
+            MutationInputProperties::EXCERPT => $this->__('The excerpt of the custom post', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('The slug of the custom post', 'gatographql'),
+            MutationInputProperties::STATUS => $this->__('The status of the custom post', 'gatographql'),
+            MutationInputProperties::DATE => $this->__('The date of the custom post', 'gatographql'),
+            MutationInputProperties::GMT_DATE => $this->__('The date in GMT of the custom post', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

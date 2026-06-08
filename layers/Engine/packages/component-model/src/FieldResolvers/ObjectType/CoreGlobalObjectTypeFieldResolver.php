@@ -143,11 +143,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_isObjectType' => $this->__('Indicate if the object is of a given type', 'component-model'),
-            '_implements' => $this->__('Indicate if the object implements a given interface', 'component-model'),
-            '_isInUnionType' => $this->__('Indicate if the object is part of a given union type', 'component-model'),
-            '_isTypeOrImplements' => $this->__('Indicate if the object is of a given type or implements a given interface', 'component-model'),
-            '_isTypeOrImplementsAll' => $this->__('Indicate if the object is all of the given types or interfaces', 'component-model'),
+            '_isObjectType' => $this->__('Indicate if the object is of a given type', 'gatographql'),
+            '_implements' => $this->__('Indicate if the object implements a given interface', 'gatographql'),
+            '_isInUnionType' => $this->__('Indicate if the object is part of a given union type', 'gatographql'),
+            '_isTypeOrImplements' => $this->__('Indicate if the object is of a given type or implements a given interface', 'gatographql'),
+            '_isTypeOrImplementsAll' => $this->__('Indicate if the object is all of the given types or interfaces', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -180,11 +180,11 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['_isObjectType' => 'type'] => $this->__('The type name to compare against', 'component-model'),
-            ['_implements' => 'interface'] => $this->__('The interface name to compare against', 'component-model'),
-            ['_isInUnionType' => 'type'] => $this->__('The union type name to compare against', 'component-model'),
-            ['_isTypeOrImplements' => 'typeOrInterface'] => $this->__('The type or interface name to compare against', 'component-model'),
-            ['_isTypeOrImplementsAll' => 'typesOrInterfaces'] => $this->__('The types and interface names to compare against', 'component-model'),
+            ['_isObjectType' => 'type'] => $this->__('The type name to compare against', 'gatographql'),
+            ['_implements' => 'interface'] => $this->__('The interface name to compare against', 'gatographql'),
+            ['_isInUnionType' => 'type'] => $this->__('The union type name to compare against', 'gatographql'),
+            ['_isTypeOrImplements' => 'typeOrInterface'] => $this->__('The type or interface name to compare against', 'gatographql'),
+            ['_isTypeOrImplementsAll' => 'typesOrInterfaces'] => $this->__('The types and interface names to compare against', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

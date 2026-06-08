@@ -103,8 +103,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'user-roles'),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'user-roles'),
+            self::COMPONENT_FILTERINPUT_USER_ROLES => $this->__('Get the users with given roles', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_USER_ROLES => $this->__('Get the users without the given roles', 'gatographql'),
             default => null,
         };
     }

@@ -64,6 +64,19 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
         return 'docs/tutorial';
     }
 
+    /**
+     * Link the English-doc notice straight to this tutorial lesson's page on the
+     * localized website (e.g. https://es.gatographql.com/tutorial/<slug>).
+     *
+     * @param array{0:string,1:string} $entry
+     */
+    protected function getEntryWebsiteURL(array $entry): ?string
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGatoGraphQLTutorialPageURL() . '/' . $entry[0];
+    }
+
     // protected function enumerateEntries(): bool
     // {
     //     return true;

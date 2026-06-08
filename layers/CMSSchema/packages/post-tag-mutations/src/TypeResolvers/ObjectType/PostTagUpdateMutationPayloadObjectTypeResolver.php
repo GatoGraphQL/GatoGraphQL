@@ -13,6 +13,6 @@ class PostTagUpdateMutationPayloadObjectTypeResolver extends AbstractPostTagMuta
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update nested mutation on a post tag', 'tag-mutations');
+        return $this->__('Payload of executing an update nested mutation on a post tag', 'gatographql');
     }
 }

@@ -29,7 +29,7 @@ class LoggedInUserHasNoPermissionToEditCommentErrorPayloadObjectTypeResolver ext
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit the comment"', 'comment-mutations');
+        return $this->__('Error payload for: "The logged-in user has no permission to edit the comment"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

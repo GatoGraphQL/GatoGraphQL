@@ -180,10 +180,10 @@ abstract class AbstractTagObjectTypeFieldResolver extends AbstractObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addMeta' => $this->__('Add a tag term meta entry', 'tagmeta-mutations'),
-            'deleteMeta' => $this->__('Delete a tag term meta entry', 'tagmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a tag term', 'tagmeta-mutations'),
-            'updateMeta' => $this->__('Update a tag term meta entry', 'tagmeta-mutations'),
+            'addMeta' => $this->__('Add a tag term meta entry', 'gatographql'),
+            'deleteMeta' => $this->__('Delete a tag term meta entry', 'gatographql'),
+            'setMeta' => $this->__('Set meta entries to a tag term', 'gatographql'),
+            'updateMeta' => $this->__('Update a tag term meta entry', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

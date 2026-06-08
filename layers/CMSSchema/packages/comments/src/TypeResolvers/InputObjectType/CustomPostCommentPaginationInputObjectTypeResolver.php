@@ -18,7 +18,7 @@ class CustomPostCommentPaginationInputObjectTypeResolver extends PaginationInput
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to paginate custom post comments', 'comments');
+        return $this->__('Input to paginate custom post comments', 'gatographql');
     }
 
     protected function getDefaultLimit(): ?int

@@ -29,7 +29,7 @@ class PostTagAddMetaMutationErrorPayloadUnionTypeResolver extends AbstractTagAdd
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding meta on a post\'s tag term (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when adding meta on a post\'s tag term (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

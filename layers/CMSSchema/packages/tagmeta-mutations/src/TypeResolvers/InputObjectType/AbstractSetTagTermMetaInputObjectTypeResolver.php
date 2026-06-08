@@ -11,13 +11,13 @@ abstract class AbstractSetTagTermMetaInputObjectTypeResolver extends AbstractSet
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to set a tag term\'s meta entries', 'tagmeta-mutations');
+        return $this->__('Input to set a tag term\'s meta entries', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the tag', 'tagmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the tag', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

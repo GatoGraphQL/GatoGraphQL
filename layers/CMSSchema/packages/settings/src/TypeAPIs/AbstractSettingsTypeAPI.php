@@ -75,7 +75,7 @@ abstract class AbstractSettingsTypeAPI extends AbstractBasicService implements S
         if (!$this->validateIsOptionAllowed($name)) {
             throw new OptionNotAllowedException(
                 sprintf(
-                    $this->__('There is no option with name \'%s\'', 'settings'),
+                    $this->__('There is no option with name \'%s\'', 'gatographql'),
                     $name
                 )
             );

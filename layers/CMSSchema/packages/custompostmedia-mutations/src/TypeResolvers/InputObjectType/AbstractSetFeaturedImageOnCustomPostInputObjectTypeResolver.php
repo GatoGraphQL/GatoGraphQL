@@ -37,7 +37,7 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to set the featured image on a custom post', 'custompostmedia-mutations');
+        return $this->__('Input to set the featured image on a custom post', 'gatographql');
     }
 
     /**
@@ -60,8 +60,8 @@ abstract class AbstractSetFeaturedImageOnCustomPostInputObjectTypeResolver exten
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'custompostmedia-mutations'),
-            MutationInputProperties::MEDIAITEM_BY => $this->__('The image to set as featured', 'custompostmedia-mutations'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post', 'gatographql'),
+            MutationInputProperties::MEDIAITEM_BY => $this->__('The image to set as featured', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -1,19 +1,19 @@
-# {plugin-name} — Support
+# {title}
 
 <div class="hide-for-customers" markdown=1>
 
-_Support is provided to customers with an active license of {plugin-name}._
+_{support-customers-note}_
 
 </div>
 
 <div class="show-for-customers" markdown=1>
 
-Send your message to our support team:
+{support-intro}
 
 <form action="{contact-form-url}" method="POST" name="support" target="_blank">
   <input type="hidden" name="form-name" value="support" />
 
-  <label for="field-name">Your name:</label>
+  <label for="field-name">{your-name-label}</label>
   <br/>
   <input
     type="text"
@@ -30,7 +30,7 @@ Send your message to our support team:
 
   <br/><br/>
 
-  <label for="field-email">Your email:</label>
+  <label for="field-email">{your-email-label}</label>
   <br/>
   <input
     type="email"
@@ -45,7 +45,7 @@ Send your message to our support team:
 
   <br/><br/>
 
-  <label for="field-subject">Subject:</label>
+  <label for="field-subject">{subject-label}</label>
   <br/>
   <input
     type="text"
@@ -63,7 +63,7 @@ Send your message to our support team:
 
   <br/><br/>
 
-  <label for="field-message">Message:</label>
+  <label for="field-message">{message-label}</label>
   <br/>
   <textarea
     id="field-message"
@@ -80,12 +80,12 @@ Send your message to our support team:
   <br/><br/>
 
   <button type="submit" class="button">
-    Send message
+    {send-message-button}
   </button>
 
   <br/><br/><hr/><br/>
 
-  <label for="field-domain"><em>Attached extension license data</em>:</label>
+  <label for="field-domain"><em>{license-data-label}</em>:</label>
   <br/>
   <textarea
     id="field-extensions-license-data"

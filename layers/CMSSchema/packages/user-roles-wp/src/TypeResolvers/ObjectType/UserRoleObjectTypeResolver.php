@@ -30,7 +30,7 @@ class UserRoleObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('User roles', 'user-roles');
+        return $this->__('User roles', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

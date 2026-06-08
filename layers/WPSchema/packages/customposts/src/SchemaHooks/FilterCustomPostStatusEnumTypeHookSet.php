@@ -103,10 +103,10 @@ class FilterCustomPostStatusEnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            CustomPostStatus::FUTURE => $this->__('Future content - custom posts to publish in the future', 'customposts'),
-            CustomPostStatus::PRIVATE => $this->__('Private content - not visible to users who are not logged in', 'customposts'),
-            CustomPostStatus::INHERIT => $this->__('Used with a child custom post (such as Attachments and Revisions) to determine the actual status from the parent custom post', 'customposts'),
-            CustomPostStatus::ANY => $this->__('Any custom post status', 'customposts'),
+            CustomPostStatus::FUTURE => $this->__('Future content - custom posts to publish in the future', 'gatographql'),
+            CustomPostStatus::PRIVATE => $this->__('Private content - not visible to users who are not logged in', 'gatographql'),
+            CustomPostStatus::INHERIT => $this->__('Used with a child custom post (such as Attachments and Revisions) to determine the actual status from the parent custom post', 'gatographql'),
+            CustomPostStatus::ANY => $this->__('Any custom post status', 'gatographql'),
             /**
              * @todo "auto-draft" must be converted to enum value "auto_draft" on `Post.status`.
              *       Until then, this code is commented

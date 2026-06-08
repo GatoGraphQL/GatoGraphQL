@@ -75,7 +75,7 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the attributes of a block type', 'blocks');
+        return $this->__('Input to filter the attributes of a block type', 'gatographql');
     }
 
     /**
@@ -93,9 +93,9 @@ class BlockTypeAttributesFilterInputObjectTypeResolver extends AbstractQueryable
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'fieldTypes' => $this->__('Filter attributes by their JSON-Schema "type" property. An attribute matches if any of its declared types is in the provided list.', 'blocks'),
-            'autoGenerateControl' => $this->__('Filter attributes that have (or do not have) an auto-generated editor control. Available since WordPress 7.0.', 'blocks'),
-            'hasEnum' => $this->__('Filter attributes that are (or are not) restricted to a list of allowed values via the `enum` schema property', 'blocks'),
+            'fieldTypes' => $this->__('Filter attributes by their JSON-Schema "type" property. An attribute matches if any of its declared types is in the provided list.', 'gatographql'),
+            'autoGenerateControl' => $this->__('Filter attributes that have (or do not have) an auto-generated editor control. Available since WordPress 7.0.', 'gatographql'),
+            'hasEnum' => $this->__('Filter attributes that are (or are not) restricted to a list of allowed values via the `enum` schema property', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

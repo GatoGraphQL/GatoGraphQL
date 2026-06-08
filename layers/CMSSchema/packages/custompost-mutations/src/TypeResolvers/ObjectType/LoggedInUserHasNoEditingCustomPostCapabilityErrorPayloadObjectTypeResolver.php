@@ -29,7 +29,7 @@ class LoggedInUserHasNoEditingCustomPostCapabilityErrorPayloadObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit custom posts"', 'customposts');
+        return $this->__('Error payload for: "The logged-in user has no permission to edit custom posts"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

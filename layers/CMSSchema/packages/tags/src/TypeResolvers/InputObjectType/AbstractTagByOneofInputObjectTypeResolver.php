@@ -12,14 +12,14 @@ abstract class AbstractTagByOneofInputObjectTypeResolver extends AbstractTaxonom
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Query by tag ID', 'tags'),
-            InputProperties::SLUG => $this->__('Query by tag slug', 'tags'),
+            InputProperties::ID => $this->__('Query by tag ID', 'gatographql'),
+            InputProperties::SLUG => $this->__('Query by tag slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
 
     protected function getTypeDescriptionTaxonomyEntity(): string
     {
-        return $this->__('a tag', 'tags');
+        return $this->__('a tag', 'gatographql');
     }
 }

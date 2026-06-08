@@ -18,20 +18,12 @@ GitHub Plugin URI: GatoGraphQL/gatographql-dist
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use PoPIncludes\GatoGraphQL\Startup;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
-
-/**
- * Load translations
- * @todo Re-enable when an actual translation (*.po/*.mo) is provided
- * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2051
- */
-// add_action('init', function (): void {
-//     load_plugin_textdomain('gatographql', false, plugin_basename(__FILE__) . '/languages');
-// });
 
 /**
  * Plugin's name and version.
@@ -60,9 +52,15 @@ if (class_exists(Plugin::class)) {
 
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
-if (!\PoPIncludes\GatoGraphQL\Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
+if (!Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
     return;
 }
+
+add_action('init', function (): void {
+    // Register the global JS-pack resolver once (covers every extension's scripts).
+    Startup::registerScriptTranslationFileResolver();
+    Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+}, PHP_INT_MIN);
 
 /**
  * Can't use Composer to load this file, as "vendor/" is loaded only

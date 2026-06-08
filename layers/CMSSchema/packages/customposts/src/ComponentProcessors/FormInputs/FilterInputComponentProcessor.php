@@ -144,8 +144,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => $this->__('Custom Post Status', 'customposts'),
-            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->__('Return results from Union of the Custom Post Types', 'customposts'),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOSTSTATUS => $this->__('Custom Post Status', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_UNIONCUSTOMPOSTTYPES => $this->__('Return results from Union of the Custom Post Types', 'gatographql'),
             default => null,
         };
     }

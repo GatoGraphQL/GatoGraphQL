@@ -11,13 +11,13 @@ abstract class AbstractDeleteTagTermInputObjectTypeResolver extends AbstractDele
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a tag term', 'tag-mutations');
+        return $this->__('Input to delete a tag term', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the tag to delete', 'tag-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the tag to delete', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -42,7 +42,7 @@ class FilterByAuthorInputObjectTypeResolver extends AbstractQueryableInputObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Filter by author', 'users');
+        return $this->__('Filter by author', 'gatographql');
     }
 
     /**
@@ -60,9 +60,9 @@ class FilterByAuthorInputObjectTypeResolver extends AbstractQueryableInputObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('Get results from the authors with given IDs', 'pop-users'),
-            'slug' => $this->__('Get results from the authors with given slug', 'pop-users'),
-            'excludeIDs' => $this->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
+            'ids' => $this->__('Get results from the authors with given IDs', 'gatographql'),
+            'slug' => $this->__('Get results from the authors with given slug', 'gatographql'),
+            'excludeIDs' => $this->__('Get results excluding the ones from authors with given IDs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

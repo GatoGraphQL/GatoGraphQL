@@ -66,7 +66,7 @@ trait ClientTrait
         if ($fileContents === false) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('Cannot read the contents of file \'%s\''),
+                    $this->__('Cannot read the contents of file \'%s\'', 'gatographql'),
                     $file
                 )
             );
@@ -93,7 +93,7 @@ trait ClientTrait
         $endpoint = $this->getEndpointURLOrURLPath();
         if ($endpoint === null) {
             throw new ShouldNotHappenException(
-                $this->__('There is no endpoint for the client')
+                $this->__('There is no endpoint for the client', 'gatographql')
             );
         }
 

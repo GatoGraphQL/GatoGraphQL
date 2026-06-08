@@ -57,7 +57,7 @@ class EnumTypeHookSet extends AbstractHookSet
             return $enumValueDescription;
         }
         return match ($enumValue) {
-            MediaItemOrderBy::AUTHOR => $this->__('Order by media item author', 'media'),
+            MediaItemOrderBy::AUTHOR => $this->__('Order by media item author', 'gatographql'),
             default => $enumValueDescription,
         };
     }

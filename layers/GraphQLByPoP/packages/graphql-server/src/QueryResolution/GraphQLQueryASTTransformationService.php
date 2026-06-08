@@ -89,7 +89,7 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
         } else {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\''),
+                    $this->__('Cannot recognize GraphQL Operation AST object, with class \'%s\'', 'gatographql'),
                     get_class($operation)
                 )
             );

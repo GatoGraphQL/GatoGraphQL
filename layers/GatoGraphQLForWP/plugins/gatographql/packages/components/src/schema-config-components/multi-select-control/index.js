@@ -60,14 +60,14 @@ function MultiSelectControl( props ) {
 							} )
 						}
 					>
-						{ showSearch ? __( 'Hide search' ) : __( 'Show search' ) }
+						{ showSearch ? __( 'Hide search', 'gatographql' ) : __( 'Show search', 'gatographql' ) }
 					</Button>
 				) }
 			</div>
 			{ ( !showSearchBtn || showSearch ) &&
 				<TextControl
 					type="search"
-					label={ __( 'Search' ) }
+					label={ __( 'Search', 'gatographql' ) }
 					value={ search }
 					onChange={ ( nextSearch ) =>
 						setState( {
@@ -80,12 +80,12 @@ function MultiSelectControl( props ) {
 			<div
 				tabIndex="0"
 				role="region"
-				aria-label={ __( 'Available items' ) }
+				aria-label={ __( 'Available items', 'gatographql' ) }
 				className="multi-select-control__results"
 			>
 				{ filteredItems.length === 0 && (
 					<p className="multi-select-control__no-results">
-						{ __( 'No items found.' ) }
+						{ __( 'No items found.', 'gatographql' ) }
 					</p>
 				) }
 				{ Object.keys(uniqueFilteredItems).map( ( group ) => (

@@ -146,9 +146,9 @@ class RootQueryableObjectTypeFieldResolver extends AbstractQueryableObjectTypeFi
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'myCustomPosts' => $this->__('Custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPostCount' => $this->__('Number of custom posts by the logged-in user', 'custompost-mutations'),
-            'myCustomPost' => $this->__('Retrieve a single custom post', 'custompost-mutations'),
+            'myCustomPosts' => $this->__('Custom posts by the logged-in user', 'gatographql'),
+            'myCustomPostCount' => $this->__('Number of custom posts by the logged-in user', 'gatographql'),
+            'myCustomPost' => $this->__('Retrieve a single custom post', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

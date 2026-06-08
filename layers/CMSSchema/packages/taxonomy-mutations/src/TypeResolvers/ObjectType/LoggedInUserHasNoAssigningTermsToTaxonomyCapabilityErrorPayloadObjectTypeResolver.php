@@ -29,7 +29,7 @@ class LoggedInUserHasNoAssigningTermsToTaxonomyCapabilityErrorPayloadObjectTypeR
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to assign terms to a taxonomy"', 'taxonomy-mutations');
+        return $this->__('Error payload for: "The logged-in user has no permission to assign terms to a taxonomy"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

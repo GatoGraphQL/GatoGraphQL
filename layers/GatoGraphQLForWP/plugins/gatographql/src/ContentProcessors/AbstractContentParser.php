@@ -144,20 +144,47 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
             $relativePathDir = \trailingslashit($relativePathDir);
         }
         $localeLanguage = $this->getLocaleHelper()->getLocaleLanguage();
+        $defaultDocsLanguage = $this->getDefaultDocsLanguage();
+        /**
+         * Whether the doc is shown in English to a non-English user — i.e. it fell
+         * back to the default-language file because no localized version exists
+         * (and it is not a PHP-translated "all-locales" doc). Used to prepend a
+         * notice pointing to the localized website. Only shown for languages the
+         * website is actually translated to (see getWebsiteTranslatedLanguages),
+         * since linking to a non-existent localized site would be pointless.
+         */
+        $isEnglishOnlyDoc = false;
         $localizeFile = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $localeLanguage . '.' . $extension;
         if (file_exists($localizeFile)) {
             // First check if the localized version exists
             $file = $localizeFile;
         } else {
             // Otherwise, use the default language version
-            $defaultDocsLanguage = $this->getDefaultDocsLanguage();
             $file = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/' . $defaultDocsLanguage . '.' . $extension;
             // Make sure this file exists
             if (!file_exists($file)) {
-                throw new ContentNotExistsException(sprintf(
-                    \__('File \'%s\' does not exist', 'gatographql'),
-                    $file
-                ));
+                /**
+                 * Finally, fall back to a non-localized doc named "all-locales"
+                 * (e.g. about/all-locales.md). This serves every locale by default
+                 * — its visible text is injected and translated from PHP rather
+                 * than from per-language Markdown files. A per-locale
+                 * "<locale>.<ext>" (or "en.<ext>") still wins over it when present,
+                 * so Markdown-level localization remains available if ever wanted.
+                 */
+                $nonLocalizedFile = \trailingslashit($this->getFileDir()) . $relativePathDir . $filename . '/all-locales.' . $extension;
+                if (!file_exists($nonLocalizedFile)) {
+                    throw new ContentNotExistsException(sprintf(
+                        \__('File \'%s\' does not exist', 'gatographql'),
+                        $file
+                    ));
+                }
+                $file = $nonLocalizedFile;
+            } else {
+                // Resolved to the default-language (English) file: flag it when the
+                // user's language is not English AND the website is translated to it,
+                // to prepend the notice below.
+                $isEnglishOnlyDoc = $localeLanguage !== $defaultDocsLanguage
+                    && in_array($localeLanguage, $this->getLocaleHelper()->getWebsiteTranslatedLanguages(), true);
             }
         }
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
@@ -174,7 +201,49 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         if (!RootEnvironment::isApplicationEnvironmentDev()) {
             $options[self::PATH_URL_TO_DOCS] = \trailingslashit($this->githubRepoDocsRootPathURL . '/' . $this->docsFolder) . $relativePathDir . $filename . '/';
         }
-        return $this->processHTMLContent($htmlContent, $pathURL, $options);
+        $htmlContent = $this->processHTMLContent($htmlContent, $pathURL, $options);
+        if ($isEnglishOnlyDoc) {
+            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $options) . $htmlContent;
+        }
+        return $htmlContent;
+    }
+
+    /**
+     * Notice prepended to English documentation shown to a non-English user,
+     * linking to the same docs on the localized website: the user's language as a
+     * subdomain (e.g. https://gatographql.com -> https://es.gatographql.com). When the
+     * doc's canonical website URL is provided (option WEBSITE_DOC_URL — e.g. the
+     * extension resolver's getWebsiteURL, or a tutorial page's per-entry URL) the link
+     * points straight at it; otherwise it links to the main plugin's website root
+     * (getPluginWebsiteURL()), so it works for any plugin/site. The notice text is
+     * itself translated to the user's language via the plugin's .mo.
+     *
+     * @param array<string,mixed> $options
+     */
+    protected function getEnglishOnlyDocNotice(string $language, array $options = []): string
+    {
+        /** @var string|null */
+        $websiteDocURL = $options[ContentParserOptions::WEBSITE_DOC_URL] ?? null;
+        $websiteURL = ($websiteDocURL !== null && $websiteDocURL !== '')
+            ? $websiteDocURL
+            : rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/');
+        // Prefix the user's language as a subdomain: https://gatographql.com -> https://es.gatographql.com
+        $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
+        $host = (string) parse_url($localizedURL, PHP_URL_HOST);
+        $path = (string) parse_url($localizedURL, PHP_URL_PATH);
+        $link = sprintf(
+            '<a href="%s" target="_blank">%s</a>',
+            \esc_url($localizedURL),
+            \esc_html($host !== '' ? $host . $path : $localizedURL)
+        );
+        return sprintf(
+            '<div class="doc-config-highlight">%s</div>',
+            sprintf(
+                /* translators: %s: link to this documentation on the localized website */
+                \__('This documentation is in English. You can read it in your language at %s.', 'gatographql'),
+                $link
+            )
+        );
     }
 
     /**

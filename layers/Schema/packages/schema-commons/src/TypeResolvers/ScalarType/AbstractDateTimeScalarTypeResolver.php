@@ -24,7 +24,7 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->__('%s scalar. It follows the ISO 8601 specification, with format "%s")', 'schema-commons'),
+            $this->__('%s scalar. It follows the ISO 8601 specification, with format "%s")', 'gatographql'),
             $this->getTypeName(),
             $this->getDateTimeFormat()
         );

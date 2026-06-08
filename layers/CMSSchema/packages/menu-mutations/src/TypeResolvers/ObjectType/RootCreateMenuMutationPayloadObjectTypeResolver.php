@@ -13,6 +13,6 @@ class RootCreateMenuMutationPayloadObjectTypeResolver extends AbstractMenuMutati
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of creating a menu', 'menu-mutations');
+        return $this->__('Payload of creating a menu', 'gatographql');
     }
 }

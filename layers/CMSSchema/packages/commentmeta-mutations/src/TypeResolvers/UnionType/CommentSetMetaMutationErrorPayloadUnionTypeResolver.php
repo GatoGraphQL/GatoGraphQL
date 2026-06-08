@@ -29,7 +29,7 @@ class CommentSetMetaMutationErrorPayloadUnionTypeResolver extends AbstractCommen
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting meta on a comment (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting meta on a comment (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

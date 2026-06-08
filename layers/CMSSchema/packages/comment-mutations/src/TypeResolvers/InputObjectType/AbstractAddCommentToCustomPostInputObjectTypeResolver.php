@@ -102,12 +102,12 @@ abstract class AbstractAddCommentToCustomPostInputObjectTypeResolver extends Abs
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::COMMENT_AS => $this->__('The comment to add', 'comment-mutations'),
-            MutationInputProperties::PARENT_COMMENT_ID => $this->__('The ID of the parent comment', 'comment-mutations'),
-            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post to add a comment to', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_NAME => $this->__('The comment author\'s name', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_EMAIL => $this->__('The comment author\'s email', 'comment-mutations'),
-            MutationInputProperties::AUTHOR_URL => $this->__('The comment author\'s site URL', 'comment-mutations'),
+            MutationInputProperties::COMMENT_AS => $this->__('The comment to add', 'gatographql'),
+            MutationInputProperties::PARENT_COMMENT_ID => $this->__('The ID of the parent comment', 'gatographql'),
+            MutationInputProperties::CUSTOMPOST_ID => $this->__('The ID of the custom post to add a comment to', 'gatographql'),
+            MutationInputProperties::AUTHOR_NAME => $this->__('The comment author\'s name', 'gatographql'),
+            MutationInputProperties::AUTHOR_EMAIL => $this->__('The comment author\'s email', 'gatographql'),
+            MutationInputProperties::AUTHOR_URL => $this->__('The comment author\'s site URL', 'gatographql'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
     }

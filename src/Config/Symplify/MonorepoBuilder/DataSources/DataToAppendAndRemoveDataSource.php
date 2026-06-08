@@ -23,6 +23,7 @@ class DataToAppendAndRemoveDataSource
                 'symplify/monorepo-builder' => '^10.2.2',
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
+                'wp-cli/i18n-command' => '^2.7',
             ],
             'autoload' => [
                 'psr-4' => [

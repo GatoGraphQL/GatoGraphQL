@@ -29,7 +29,7 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the property and data to fetch a menu', 'menus');
+        return $this->__('Oneof input to specify the property and data to fetch a menu', 'gatographql');
     }
 
     /**
@@ -45,7 +45,7 @@ class MenuByInputObjectTypeResolver extends AbstractOneofInputObjectTypeResolver
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by menu ID', 'menus'),
+            'id' => $this->__('Query by menu ID', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

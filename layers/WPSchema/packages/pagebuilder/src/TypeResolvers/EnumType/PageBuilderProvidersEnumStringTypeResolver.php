@@ -29,7 +29,7 @@ class PageBuilderProvidersEnumStringTypeResolver extends AbstractEnumStringScala
 
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('Page builder providers', 'pagebuilder');
+        return $this->__('Page builder providers', 'gatographql');
     }
 
     /**

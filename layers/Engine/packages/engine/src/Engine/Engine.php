@@ -28,8 +28,8 @@ class Engine extends UpstreamEngine
         if ($notImplementedNames = $this->getLooseContractManager()->getNotImplementedRequiredNames()) {
             throw new ContractNotSatisfiedException(
                 sprintf(
-                    $this->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.'),
-                    implode($this->__('", "'), $notImplementedNames)
+                    $this->__('The following names have not been implemented by the CMS: "%s". Hence, we can\'t continue.', 'gatographql'),
+                    implode($this->__('", "', 'gatographql'), $notImplementedNames)
                 )
             );
         }

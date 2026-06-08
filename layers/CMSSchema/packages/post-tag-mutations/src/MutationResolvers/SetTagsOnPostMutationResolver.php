@@ -10,6 +10,6 @@ class SetTagsOnPostMutationResolver extends AbstractSetTagsOnCustomPostMutationR
 {
     protected function getEntityName(): string
     {
-        return $this->__('post', 'post-tag-mutations');
+        return $this->__('post', 'gatographql');
     }
 }

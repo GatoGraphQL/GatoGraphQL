@@ -29,7 +29,7 @@ class FeaturedImageIsNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver 
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "Setting the featured image is not supported by the custom post type"', 'custompostmedia-mutations');
+        return $this->__('Error payload for: "Setting the featured image is not supported by the custom post type"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

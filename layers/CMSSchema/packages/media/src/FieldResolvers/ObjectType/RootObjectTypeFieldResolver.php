@@ -122,9 +122,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'mediaItem' => $this->__('Get a media item', 'media'),
-            'mediaItems' => $this->__('Get the media items', 'media'),
-            'mediaItemCount' => $this->__('Number of media items', 'media'),
+            'mediaItem' => $this->__('Get a media item', 'gatographql'),
+            'mediaItems' => $this->__('Get the media items', 'gatographql'),
+            'mediaItemCount' => $this->__('Number of media items', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

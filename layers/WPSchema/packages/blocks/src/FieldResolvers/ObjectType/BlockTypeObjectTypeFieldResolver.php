@@ -102,11 +102,11 @@ class BlockTypeObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Block name (e.g. "core/paragraph")', 'blocks'),
-            'supports' => $this->__('Block "supports" configuration as registered in `block.json`, returned as a JSON object', 'blocks'),
-            'hasRenderCallback' => $this->__('Whether this block has a registered `render_callback` (i.e. is a dynamic/PHP-rendered block)', 'blocks'),
-            'attributes' => $this->__('The block\'s registered attributes', 'blocks'),
-            'attributeNames' => $this->__('The names of the block\'s registered attributes', 'blocks'),
+            'name' => $this->__('Block name (e.g. "core/paragraph")', 'gatographql'),
+            'supports' => $this->__('Block "supports" configuration as registered in `block.json`, returned as a JSON object', 'gatographql'),
+            'hasRenderCallback' => $this->__('Whether this block has a registered `render_callback` (i.e. is a dynamic/PHP-rendered block)', 'gatographql'),
+            'attributes' => $this->__('The block\'s registered attributes', 'gatographql'),
+            'attributeNames' => $this->__('The names of the block\'s registered attributes', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

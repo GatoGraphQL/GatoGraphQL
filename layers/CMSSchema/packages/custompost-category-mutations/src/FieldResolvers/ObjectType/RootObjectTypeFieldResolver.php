@@ -145,7 +145,7 @@ class RootObjectTypeFieldResolver extends AbstractRootObjectTypeFieldResolver
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'post-category-mutations');
+        return $this->__('custom post', 'gatographql');
     }
 
     protected function getSetCategoriesFieldName(): string

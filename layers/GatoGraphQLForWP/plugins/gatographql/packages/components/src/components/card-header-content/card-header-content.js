@@ -1,6 +1,6 @@
 import { MarkdownInfoModalButton } from '../markdown-modal';
 import { InfoTooltip } from '../info-tooltip';
-import { __ } from '@wordpress/i18n';
+import { __, sprintf } from '@wordpress/i18n';
 
 const CardHeaderContent = ( props ) => {
 	const {
@@ -8,7 +8,7 @@ const CardHeaderContent = ( props ) => {
 		tooltip,
 		isSelected,
 		getMarkdownContentCallback,
-		documentationTitle = __(`Documentation for: "${ header }"`, 'gatographql')
+		documentationTitle = sprintf( __( 'Documentation for: "%s"', 'gatographql' ), header )
 	} = props;
 	return (
 		<span>

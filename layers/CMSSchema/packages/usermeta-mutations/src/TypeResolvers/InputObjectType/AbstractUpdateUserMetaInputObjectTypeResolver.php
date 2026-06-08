@@ -11,13 +11,13 @@ abstract class AbstractUpdateUserMetaInputObjectTypeResolver extends AbstractUpd
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a user\'s meta', 'usermeta-mutations');
+        return $this->__('Input to update a user\'s meta', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the user', 'usermeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the user', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

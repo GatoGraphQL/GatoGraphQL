@@ -12,7 +12,7 @@ abstract class AbstractDeleteCommentMetaInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the comment', 'commentmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the comment', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

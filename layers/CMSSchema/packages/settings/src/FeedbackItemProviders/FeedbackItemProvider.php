@@ -24,7 +24,7 @@ class FeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('There is no option with name \'%s\'', 'settings'),
+            self::E1 => $this->__('There is no option with name \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

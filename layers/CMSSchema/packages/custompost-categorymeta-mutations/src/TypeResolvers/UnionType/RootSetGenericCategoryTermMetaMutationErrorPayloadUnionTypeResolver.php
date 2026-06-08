@@ -29,7 +29,7 @@ class RootSetGenericCategoryTermMetaMutationErrorPayloadUnionTypeResolver extend
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting meta on a category term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting meta on a category term', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

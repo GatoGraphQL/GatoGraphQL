@@ -26,7 +26,7 @@ class IdentifierStringScalarTypeResolver extends StringScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('An identifier string scalar type that validates the string matches the pattern [a-zA-Z_][a-zA-Z0-9_]*.', 'extended-schema-commons');
+        return $this->__('An identifier string scalar type that validates the string matches the pattern [a-zA-Z_][a-zA-Z0-9_]*.', 'gatographql');
     }
 
     public function coerceValue(

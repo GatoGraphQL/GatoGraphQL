@@ -29,7 +29,7 @@ class UserHasNoPermissionToUploadFilesErrorPayloadObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to upload files"', 'media-mutations');
+        return $this->__('Error payload for: "The user has no permission to upload files"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

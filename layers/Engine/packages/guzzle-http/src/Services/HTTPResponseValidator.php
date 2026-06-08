@@ -29,12 +29,12 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
             $bodyResponse = $response->getBody()->__toString();
             $errorMessage = !empty($bodyResponse)
                 ? sprintf(
-                    $this->__('Response with status code \'%s\': %s', 'guzzle-http'),
+                    $this->__('Response with status code \'%s\': %s', 'gatographql'),
                     $statusCode,
                     $bodyResponse,
                 )
                 : sprintf(
-                    $this->__('Response has status code \'%s\'', 'guzzle-http'),
+                    $this->__('Response has status code \'%s\'', 'gatographql'),
                     $statusCode,
                 );
             throw new GuzzleHTTPInvalidResponseException($errorMessage);
@@ -65,7 +65,7 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
         if (!$isJSONContentType) {
             throw new GuzzleHTTPInvalidResponseException(
                 sprintf(
-                    $this->__('The response content type is \'%s\', but \'application/json\' (or one of its JSON variants) is expected', 'guzzle-http'),
+                    $this->__('The response content type is \'%s\', but \'application/json\' (or one of its JSON variants) is expected', 'gatographql'),
                     $contentType
                 )
             );
@@ -74,7 +74,7 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
         $bodyResponse = $response->getBody()->__toString();
         if (!$bodyResponse) {
             throw new GuzzleHTTPInvalidResponseException(
-                $this->__('The body of the response is empty', 'guzzle-http')
+                $this->__('The body of the response is empty', 'gatographql')
             );
         }
 
@@ -85,7 +85,7 @@ class HTTPResponseValidator extends AbstractBasicService implements HTTPResponse
         if (!is_array($decodedJSON) && !($decodedJSON instanceof stdClass)) {
             throw new GuzzleHTTPInvalidResponseException(
                 sprintf(
-                    $this->__('The body of the response could not be JSON-decoded: \'%s\'', 'guzzle-http'),
+                    $this->__('The body of the response could not be JSON-decoded: \'%s\'', 'gatographql'),
                     $bodyResponse
                 )
             );

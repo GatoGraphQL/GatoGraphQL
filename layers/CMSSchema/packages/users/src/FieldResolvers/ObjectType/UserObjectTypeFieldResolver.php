@@ -160,17 +160,17 @@ class UserObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('URL of the user\'s profile in the website', 'pop-users'),
-            'urlPath' => $this->__('URL path of the user\'s profile in the website', 'pop-users'),
-            'slug' => $this->__('Slug of the URL of the user\'s profile in the website', 'pop-users'),
-            'username' => $this->__('User\'s username handle', 'pop-users'),
-            'name' => $this->__('Name of the user', 'pop-users'),
-            'displayName' => $this->__('Name of the user as displayed on the website', 'pop-users'),
-            'firstName' => $this->__('User\'s first name', 'pop-users'),
-            'lastName' => $this->__('User\'s last name', 'pop-users'),
-            'email' => $this->__('User\'s email', 'pop-users'),
-            'description' => $this->__('Description of the user', 'pop-users'),
-            'websiteURL' => $this->__('User\'s own website\'s URL', 'pop-users'),
+            'url' => $this->__('URL of the user\'s profile in the website', 'gatographql'),
+            'urlPath' => $this->__('URL path of the user\'s profile in the website', 'gatographql'),
+            'slug' => $this->__('Slug of the URL of the user\'s profile in the website', 'gatographql'),
+            'username' => $this->__('User\'s username handle', 'gatographql'),
+            'name' => $this->__('Name of the user', 'gatographql'),
+            'displayName' => $this->__('Name of the user as displayed on the website', 'gatographql'),
+            'firstName' => $this->__('User\'s first name', 'gatographql'),
+            'lastName' => $this->__('User\'s last name', 'gatographql'),
+            'email' => $this->__('User\'s email', 'gatographql'),
+            'description' => $this->__('Description of the user', 'gatographql'),
+            'websiteURL' => $this->__('User\'s own website\'s URL', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

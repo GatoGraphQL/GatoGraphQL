@@ -62,7 +62,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isGutenbergEditorEnabled' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugin is not enabled)', 'settings'),
+            'isGutenbergEditorEnabled' => $this->__('Is the Gutenberg editor enabled? (i.e. the "Classic Editor" plugin is not enabled)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

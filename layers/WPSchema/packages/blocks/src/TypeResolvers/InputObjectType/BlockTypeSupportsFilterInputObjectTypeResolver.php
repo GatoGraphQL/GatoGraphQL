@@ -38,7 +38,7 @@ class BlockTypeSupportsFilterInputObjectTypeResolver extends AbstractInputObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Filter block types by their `supports` configuration', 'blocks');
+        return $this->__('Filter block types by their `supports` configuration', 'gatographql');
     }
 
     /**
@@ -62,15 +62,15 @@ class BlockTypeSupportsFilterInputObjectTypeResolver extends AbstractInputObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'autoRegister' => $this->__('Filter blocks registered fully in PHP (PHP-only blocks). Available since WordPress 7.0.', 'blocks'),
-            'anchor' => $this->__('Filter blocks supporting the `anchor` attribute', 'blocks'),
-            'align' => $this->__('Filter blocks supporting alignment', 'blocks'),
-            'className' => $this->__('Filter blocks supporting the auto-generated className', 'blocks'),
-            'customClassName' => $this->__('Filter blocks supporting a custom className', 'blocks'),
-            'html' => $this->__('Filter blocks supporting direct HTML editing', 'blocks'),
-            'inserter' => $this->__('Filter blocks shown in the inserter', 'blocks'),
-            'multiple' => $this->__('Filter blocks that may be inserted multiple times in a post', 'blocks'),
-            'reusable' => $this->__('Filter blocks that can be converted into reusable blocks', 'blocks'),
+            'autoRegister' => $this->__('Filter blocks registered fully in PHP (PHP-only blocks). Available since WordPress 7.0.', 'gatographql'),
+            'anchor' => $this->__('Filter blocks supporting the `anchor` attribute', 'gatographql'),
+            'align' => $this->__('Filter blocks supporting alignment', 'gatographql'),
+            'className' => $this->__('Filter blocks supporting the auto-generated className', 'gatographql'),
+            'customClassName' => $this->__('Filter blocks supporting a custom className', 'gatographql'),
+            'html' => $this->__('Filter blocks supporting direct HTML editing', 'gatographql'),
+            'inserter' => $this->__('Filter blocks shown in the inserter', 'gatographql'),
+            'multiple' => $this->__('Filter blocks that may be inserted multiple times in a post', 'gatographql'),
+            'reusable' => $this->__('Filter blocks that can be converted into reusable blocks', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

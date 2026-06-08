@@ -64,7 +64,7 @@ class ErrorPayloadInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldR
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'message' => $this->__('Error message', 'schema-commons'),
+            'message' => $this->__('Error message', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

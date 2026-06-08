@@ -13,7 +13,7 @@ class CommentReplyInputObjectTypeResolver extends AbstractAddCommentToCustomPost
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to reply to a comment', 'comment-mutations');
+        return $this->__('Input to reply to a comment', 'gatographql');
     }
 
     protected function addCustomPostInputField(): bool

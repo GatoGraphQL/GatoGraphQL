@@ -23,9 +23,9 @@ class TagInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeField
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Tag', 'tags'),
-            'description' => $this->__('Tag description', 'tags'),
-            'count' => $this->__('Number of custom posts containing this tag', 'tags'),
+            'name' => $this->__('Tag', 'gatographql'),
+            'description' => $this->__('Tag description', 'gatographql'),
+            'count' => $this->__('Number of custom posts containing this tag', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

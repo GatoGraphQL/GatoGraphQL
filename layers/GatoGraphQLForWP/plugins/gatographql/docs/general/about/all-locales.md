@@ -1,24 +1,8 @@
-# About {plugin-name}
+# {title}
 
-Powerful and flexible GraphQL server for WordPress.
+{tagline}
 
-<!-- <div class="notice notice-info" markdown=1>
-
-### Rate {plugin-name}
-
-We work really hard to deliver a plugin that enables accessing any piece of data on our WordPress sites. It takes plenty of time and effort to develop, test and maintain the free Gato GraphQL plugin. Therefore if you like what you see and appreciate our work, we ask you nothing more than to please rate the plugin in the directory. Thanks in advance!
-
-<a class="rating-link" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank"><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span><span class="dashicons dashicons-star-filled"></span></a> <a class="button" rel="noopener noreferrer" href="https://wordpress.org/plugins/gatographql/#reviews" target="_blank">Rate Plugin</a>
-
-</div> -->
-
-<!-- ## Intro video
-
-Gato GraphQL is a productivity tool for interacting with data in your WordPress site. Check the video to discover all the things you can do with it.
-
-[Watch “Introduction to Gato GraphQL” on YouTube](https://www.youtube.com/watch?v=uabFL_CoEWo) -->
-
-## Our channels
+## {our-channels-title}
 
 <div style="display: flex; gap: 20px; margin-top: 10px;">
 
@@ -28,7 +12,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
   <p markdown=1>
 
-  **Website:** [gatographql.com](https://gatographql.com)
+  **{website-label}** [gatographql.com](https://gatographql.com)
 
   </p>
 
@@ -36,7 +20,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
   
   <p markdown=1>
 
-  **Plugin in WordPress.org:** [wordpress.org/plugins/gatographql](https://wordpress.org/plugins/gatographql/)
+  **{wporg-plugin-label}** [wordpress.org/plugins/gatographql](https://wordpress.org/plugins/gatographql/)
 
   </p>
 
@@ -44,7 +28,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
   
   <p markdown=1>
 
-  **Source code:** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
+  **{source-code-label}** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
   </p>
 
@@ -52,7 +36,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
   
   <p markdown=1>
 
-  **YouTube channel:** [youtube.com/@GatoPlugins](https://www.youtube.com/@GatoPlugins)
+  **{youtube-label}** [youtube.com/@GatoPlugins](https://www.youtube.com/@GatoPlugins)
 
   </p>
   
@@ -60,7 +44,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
   <p markdown=1>
 
-  **Contact:** [gatographql.com/contact](https://gatographql.com/contact)
+  **{contact-label}** [gatographql.com/contact](https://gatographql.com/contact)
 
   </p>
 
@@ -72,11 +56,11 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
 
 <div class="notice notice-warning inline" markdown=1>
 
-<strong>Subscribe to our newsletter</strong> to receive timely updates about Gato GraphQL:
+{newsletter-intro}
 
 <form action="https://store.gatoplugins.com/?fluentcrm=1&route=contact&hash=7e623bde-a144-4e96-b0f3-0ed52034c5f9" method="POST" target="_blank">
   <p markdown=1>
-    <label for="field-name">Name:</label>
+    <label for="field-name">{name-label}</label>
     <input
       type="text"
       name="full_name"
@@ -85,7 +69,7 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
       aria-required="true"
       placeholder="John Doe"
     >
-    <label for="field-email">Email:</label>
+    <label for="field-email">{email-label}</label>
     <input
       type="email"
       name="email"
@@ -95,17 +79,17 @@ Gato GraphQL is a productivity tool for interacting with data in your WordPress 
       placeholder="your@email.com"
       autocomplete="email"
     >
-    <button type="submit" class="button">Subscribe</button>
+    <button type="submit" class="button">{subscribe-button}</button>
   </p>
 </form>
 
 </div>
 
-## Release Notes
+## {release-notes-title}
 
-New features released on each version:
+{release-notes-intro}
 
-- **[18.1](../../release-notes/18.1/en.md)** (current)
+- **[18.1](../../release-notes/18.1/en.md)** ({current})
 - [18.0](../../release-notes/18.0/en.md)
 - [17.1](../../release-notes/17.1/en.md)
 - [17.0](../../release-notes/17.0/en.md)
@@ -160,22 +144,22 @@ New features released on each version:
 - [0.7](../../release-notes/0.7/en.md)
 - [0.6](../../release-notes/0.6/en.md)
 
-## Support
+## {support-title}
 
 <div class="hide-for-customers" markdown=1>
 
-_Support is provided to customers of any Gato GraphQL product with an active license._
+_{support-customers-note}_
 
 </div>
 
 <div class="show-for-customers" markdown=1>
 
-Send your message to the Gato GraphQL Support team:
+{support-intro}
 
 <form action="{contact-form-url}" method="POST" name="support" target="_blank">
   <input type="hidden" name="form-name" value="support" />
 
-  <label for="field-name">Your name:</label>
+  <label for="field-name">{your-name-label}</label>
   <br/>
   <input
     type="text"
@@ -192,7 +176,7 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-email">Your email:</label>
+  <label for="field-email">{your-email-label}</label>
   <br/>
   <input
     type="email"
@@ -207,7 +191,7 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-subject">Subject:</label>
+  <label for="field-subject">{subject-label}</label>
   <br/>
   <input
     type="text"
@@ -225,7 +209,7 @@ Send your message to the Gato GraphQL Support team:
 
   <br/><br/>
 
-  <label for="field-message">Message:</label>
+  <label for="field-message">{message-label}</label>
   <br/>
   <textarea
     id="field-message"
@@ -242,12 +226,12 @@ Send your message to the Gato GraphQL Support team:
   <br/><br/>
 
   <button type="submit" class="button">
-    Send message
+    {send-message-button}
   </button>
 
   <br/><br/><hr/><br/>
 
-  <label for="field-domain"><em>Attached extension license data</em>:</label>
+  <label for="field-domain"><em>{license-data-label}</em>:</label>
   <br/>
   <textarea
     id="field-extensions-license-data"

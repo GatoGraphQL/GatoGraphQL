@@ -82,8 +82,8 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'author' => $this->__('Filter comments by author', 'comments'),
-            'customPostAuthor' => $this->__('Filter comments added to custom posts from the given authors', 'comments'),
+            'author' => $this->__('Filter comments by author', 'gatographql'),
+            'customPostAuthor' => $this->__('Filter comments added to custom posts from the given authors', 'gatographql'),
             default => $inputFieldDescription,
         };
     }

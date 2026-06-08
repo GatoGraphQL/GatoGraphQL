@@ -28,7 +28,7 @@ class RootReplyCommentMutationErrorPayloadUnionTypeResolver extends AbstractComm
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when replying to a comment', 'comment-mutations');
+        return $this->__('Union of \'Error Payload\' types when replying to a comment', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -13,6 +13,6 @@ class RootSetFeaturedImageOnCustomPostMutationPayloadObjectTypeResolver extends 
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of setting the featured image to a custom post', 'custompostmedia-mutations');
+        return $this->__('Payload of setting the featured image to a custom post', 'gatographql');
     }
 }

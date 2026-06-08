@@ -118,8 +118,8 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'pop-users'),
-            self::COMPONENT_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'pop-users'),
+            self::COMPONENT_FILTERINPUT_NAME => $this->__('Search users whose name contains this string', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_EMAILS => $this->__('Search users with any of the provided emails', 'gatographql'),
             default => null,
         };
     }

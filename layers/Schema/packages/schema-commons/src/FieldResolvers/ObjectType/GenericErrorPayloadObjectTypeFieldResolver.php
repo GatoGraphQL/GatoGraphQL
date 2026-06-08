@@ -73,8 +73,8 @@ class GenericErrorPayloadObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'code' => $this->__('Error code', 'schema-commons'),
-            'data' => $this->__('Error data', 'schema-commons'),
+            'code' => $this->__('Error code', 'gatographql'),
+            'data' => $this->__('Error data', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

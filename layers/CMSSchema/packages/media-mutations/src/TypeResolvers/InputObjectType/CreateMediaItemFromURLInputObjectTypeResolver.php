@@ -42,7 +42,7 @@ class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectT
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Create and upload the attachment from a URL', 'media-mutations');
+        return $this->__('Create and upload the attachment from a URL', 'gatographql');
     }
 
     /**
@@ -69,8 +69,8 @@ class CreateMediaItemFromURLInputObjectTypeResolver extends AbstractInputObjectT
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::FILENAME => $this->__('File name (to override the one from the URL source)', 'media-mutations'),
-            MutationInputProperties::SOURCE => $this->__('URL source', 'media-mutations'),
+            MutationInputProperties::FILENAME => $this->__('File name (to override the one from the URL source)', 'gatographql'),
+            MutationInputProperties::SOURCE => $this->__('URL source', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

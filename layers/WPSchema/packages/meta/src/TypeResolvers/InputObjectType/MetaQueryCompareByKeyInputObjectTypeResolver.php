@@ -42,7 +42,7 @@ class MetaQueryCompareByKeyInputObjectTypeResolver extends AbstractInputObjectTy
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'operator' => $this->__('The operator to compare against', 'meta'),
+            'operator' => $this->__('The operator to compare against', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

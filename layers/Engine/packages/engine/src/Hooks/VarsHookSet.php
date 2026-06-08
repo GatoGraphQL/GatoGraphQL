@@ -29,7 +29,7 @@ class VarsHookSet extends AbstractHookSet
         // Removing fields changes the configuration
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $elements[] = $this->__('disable redundant root fields:', 'pop-engine') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
+        $elements[] = $this->__('disable redundant root fields:', 'gatographql') . $moduleConfiguration->disableRedundantRootTypeMutationFields();
         return $elements;
     }
 }

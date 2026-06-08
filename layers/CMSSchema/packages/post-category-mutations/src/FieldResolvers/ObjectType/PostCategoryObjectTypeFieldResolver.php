@@ -129,8 +129,8 @@ class PostCategoryObjectTypeFieldResolver extends AbstractCategoryObjectTypeFiel
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'update' => $this->__('Update the post category', 'category-mutations'),
-            'delete' => $this->__('Delete the post category', 'category-mutations'),
+            'update' => $this->__('Update the post category', 'gatographql'),
+            'delete' => $this->__('Delete the post category', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

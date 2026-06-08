@@ -116,10 +116,10 @@ abstract class AbstractWithParentCustomPostObjectTypeFieldResolver extends Abstr
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'parent' => $this->__('Parent custom post', 'customposts'),
-            'ancestors' => $this->__('List of all ancestor custom posts (parent, grandparent, etc.)', 'customposts'),
-            'children' => $this->__('Child custom posts', 'customposts'),
-            'childCount' => $this->__('Number of child custom posts', 'customposts'),
+            'parent' => $this->__('Parent custom post', 'gatographql'),
+            'ancestors' => $this->__('List of all ancestor custom posts (parent, grandparent, etc.)', 'gatographql'),
+            'children' => $this->__('Child custom posts', 'gatographql'),
+            'childCount' => $this->__('Number of child custom posts', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

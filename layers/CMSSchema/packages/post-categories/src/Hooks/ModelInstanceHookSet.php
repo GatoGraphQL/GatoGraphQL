@@ -89,7 +89,7 @@ class ModelInstanceHookSet extends AbstractHookSet
                     $slug = $universalCategoryTypeAPI->getCategorySlug($cat);
                     $categories[] = $slug . $categoryID;
                 }
-                $elements[] = $this->__('categories:', 'post-categories') . implode('.', $categories);
+                $elements[] = $this->__('categories:', 'gatographql') . implode('.', $categories);
             }
         }
         return $elements;

@@ -94,16 +94,16 @@ class BlockTypeAttributeObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Attribute name', 'blocks'),
-            'blockTypeName' => $this->__('Name of the block type owning this attribute', 'blocks'),
-            'fieldType' => $this->__('JSON-Schema "type" of the attribute (e.g. "string", "boolean"). Returns the first type if it\'s a union.', 'blocks'),
-            'label' => $this->__('Human-readable label for the attribute (used by auto-generated controls in WP 7.0+)', 'blocks'),
-            'default' => $this->__('Default value of the attribute', 'blocks'),
-            'enum' => $this->__('Allowed values, if the attribute is restricted to an enum', 'blocks'),
-            'source' => $this->__('Where the attribute value is parsed from (e.g. "attribute", "html", "text"); null when stored in block-comment delimiters', 'blocks'),
-            'role' => $this->__('Attribute role (e.g. "local", "content")', 'blocks'),
-            'autoGenerateControl' => $this->__('Whether WordPress auto-generates an editor control for this attribute (PHP-only blocks, WP 7.0+)', 'blocks'),
-            'schema' => $this->__('Full attribute schema as a JSON object', 'blocks'),
+            'name' => $this->__('Attribute name', 'gatographql'),
+            'blockTypeName' => $this->__('Name of the block type owning this attribute', 'gatographql'),
+            'fieldType' => $this->__('JSON-Schema "type" of the attribute (e.g. "string", "boolean"). Returns the first type if it\'s a union.', 'gatographql'),
+            'label' => $this->__('Human-readable label for the attribute (used by auto-generated controls in WP 7.0+)', 'gatographql'),
+            'default' => $this->__('Default value of the attribute', 'gatographql'),
+            'enum' => $this->__('Allowed values, if the attribute is restricted to an enum', 'gatographql'),
+            'source' => $this->__('Where the attribute value is parsed from (e.g. "attribute", "html", "text"); null when stored in block-comment delimiters', 'gatographql'),
+            'role' => $this->__('Attribute role (e.g. "local", "content")', 'gatographql'),
+            'autoGenerateControl' => $this->__('Whether WordPress auto-generates an editor control for this attribute (PHP-only blocks, WP 7.0+)', 'gatographql'),
+            'schema' => $this->__('Full attribute schema as a JSON object', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

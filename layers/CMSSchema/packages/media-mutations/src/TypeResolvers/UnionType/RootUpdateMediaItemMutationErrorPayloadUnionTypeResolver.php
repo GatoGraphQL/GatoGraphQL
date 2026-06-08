@@ -28,7 +28,7 @@ class RootUpdateMediaItemMutationErrorPayloadUnionTypeResolver extends AbstractU
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating the metadata for an attachment', 'media-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating the metadata for an attachment', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

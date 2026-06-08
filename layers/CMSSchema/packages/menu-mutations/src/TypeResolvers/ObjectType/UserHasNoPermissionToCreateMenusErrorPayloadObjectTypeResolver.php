@@ -29,7 +29,7 @@ class UserHasNoPermissionToCreateMenusErrorPayloadObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to create menus"', 'menu-mutations');
+        return $this->__('Error payload for: "The user has no permission to create menus"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

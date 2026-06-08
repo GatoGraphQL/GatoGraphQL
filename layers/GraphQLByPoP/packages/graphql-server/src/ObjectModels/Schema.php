@@ -90,7 +90,7 @@ class Schema
             TypeKinds::ENUM => new EnumType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             TypeKinds::INPUT_OBJECT => new InputObjectType($fullSchemaDefinition, $typeSchemaDefinitionPath),
             default => throw new ImpossibleToHappenException(sprintf(
-                $this->__('Unknown type kind \'%s\'', 'graphql-server'),
+                $this->__('Unknown type kind \'%s\'', 'gatographql'),
                 $typeKind
             )),
         };

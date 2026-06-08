@@ -22,14 +22,12 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-/**
- * Load translations
- * @todo Re-enable when an actual translation (*.po/*.mo) is provided
- * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2051
- */
-// \add_action('init', function (): void {
-//     load_plugin_textdomain('gatographql-testing-schema', false, plugin_basename(__FILE__) . '/languages');
-// });
+add_action('init', function (): void {
+    if (!class_exists(\PoPIncludes\GatoGraphQL\Startup::class)) {
+        return;
+    }
+    \PoPIncludes\GatoGraphQL\Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+}, PHP_INT_MIN);
 
 /**
  * Create and set-up the extension
@@ -73,8 +71,8 @@ add_action(
                 $adminNotice_safe = sprintf(
                     '<div class="notice notice-error"><p>%s</p></div>',
                     sprintf(
-                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql-testing-schema'),
-                        __('Gato GraphQL', 'gatographql-testing-schema'),
+                        __('Plugin <strong>%s</strong> is not installed or activated. Without it, plugin <strong>%s</strong> will not be loaded.', 'gatographql'),
+                        __('Gato GraphQL', 'gatographql'),
                         $extensionName
                     )
                 );

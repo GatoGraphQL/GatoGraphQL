@@ -14,8 +14,8 @@ abstract class AbstractCustomPostListCategoryObjectTypeFieldResolver extends Abs
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->__('Custom posts which contain this category', 'pop-categories'),
-            'customPostCount' => $this->__('Number of custom posts which contain this category', 'pop-categories'),
+            'customPosts' => $this->__('Custom posts which contain this category', 'gatographql'),
+            'customPostCount' => $this->__('Number of custom posts which contain this category', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -73,7 +73,7 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return sprintf(
-            $this->__('The tags to set, of type \'%s\'', 'custompost-tag-mutations'),
+            $this->__('The tags to set, of type \'%s\'', 'gatographql'),
             $this->getTagTypeResolver()->getMaybeNamespacedTypeName()
         );
     }

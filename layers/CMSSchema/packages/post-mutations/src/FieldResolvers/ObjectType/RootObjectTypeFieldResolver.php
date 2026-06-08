@@ -225,12 +225,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createPost' => $this->__('Create a post', 'post-mutations'),
-            'createPosts' => $this->__('Create posts', 'post-mutations'),
-            'updatePost' => $this->__('Update a post', 'post-mutations'),
-            'updatePosts' => $this->__('Update posts', 'post-mutations'),
-            'createPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPost` mutation', 'post-mutations'),
-            'updatePostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePost` mutation', 'post-mutations'),
+            'createPost' => $this->__('Create a post', 'gatographql'),
+            'createPosts' => $this->__('Create posts', 'gatographql'),
+            'updatePost' => $this->__('Update a post', 'gatographql'),
+            'updatePosts' => $this->__('Update posts', 'gatographql'),
+            'createPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPost` mutation', 'gatographql'),
+            'updatePostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePost` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

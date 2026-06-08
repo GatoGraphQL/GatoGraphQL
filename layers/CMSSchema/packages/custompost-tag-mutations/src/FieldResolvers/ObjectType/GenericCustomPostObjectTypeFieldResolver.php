@@ -145,6 +145,6 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'tag-mutations');
+        return $this->__('custom post', 'gatographql');
     }
 }

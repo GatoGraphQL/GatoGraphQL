@@ -154,9 +154,9 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'comment' => $this->__('Retrieve a single comment', 'pop-comments'),
-            'commentCount' => $this->__('Number of comments on the site', 'pop-comments'),
-            'comments' => $this->__('Comments on the site', 'pop-comments'),
+            'comment' => $this->__('Retrieve a single comment', 'gatographql'),
+            'commentCount' => $this->__('Number of comments on the site', 'gatographql'),
+            'comments' => $this->__('Comments on the site', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -29,7 +29,7 @@ class LoggedInUserHasNoPermissionToEditMenuErrorPayloadObjectTypeResolver extend
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to edit the menu"', 'menu-mutations');
+        return $this->__('Error payload for: "The user has no permission to edit the menu"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

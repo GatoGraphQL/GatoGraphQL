@@ -29,7 +29,7 @@ class LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver e
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user has no permission to edit the media item"', 'media-mutations');
+        return $this->__('Error payload for: "The user has no permission to edit the media item"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

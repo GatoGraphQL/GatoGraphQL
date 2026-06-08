@@ -22,7 +22,7 @@ abstract class AbstractObjectMutationTransientOperationPayload extends AbstractT
     ) {
         if ($objectID === null && ($errors === null || $errors === [])) {
             throw new RuntimeException(
-                $this->__('Either the object ID or the error(s) must be provided', 'schema-commons')
+                $this->__('Either the object ID or the error(s) must be provided', 'gatographql')
             );
         }
         parent::__construct($status, $errors);

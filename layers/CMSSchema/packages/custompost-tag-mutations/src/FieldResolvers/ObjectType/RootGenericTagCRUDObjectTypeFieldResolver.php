@@ -305,15 +305,15 @@ class RootGenericTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldR
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createTag' => $this->__('Create a tag', 'tag-mutations'),
-            'createTags' => $this->__('Create tags', 'tag-mutations'),
-            'updateTag' => $this->__('Update a tag', 'tag-mutations'),
-            'updateTags' => $this->__('Update tags', 'tag-mutations'),
-            'deleteTag' => $this->__('Delete a tag', 'tag-mutations'),
-            'deleteTags' => $this->__('Delete tags', 'tag-mutations'),
-            'createTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createTag` mutation', 'tag-mutations'),
-            'updateTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateTag` mutation', 'tag-mutations'),
-            'deleteTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteTag` mutation', 'tag-mutations'),
+            'createTag' => $this->__('Create a tag', 'gatographql'),
+            'createTags' => $this->__('Create tags', 'gatographql'),
+            'updateTag' => $this->__('Update a tag', 'gatographql'),
+            'updateTags' => $this->__('Update tags', 'gatographql'),
+            'deleteTag' => $this->__('Delete a tag', 'gatographql'),
+            'deleteTags' => $this->__('Delete tags', 'gatographql'),
+            'createTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createTag` mutation', 'gatographql'),
+            'updateTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateTag` mutation', 'gatographql'),
+            'deleteTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteTag` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

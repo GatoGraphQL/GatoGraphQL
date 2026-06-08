@@ -29,7 +29,7 @@ class AccessToMetaKeyIsNotAllowedErrorPayloadObjectTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "Access to the meta key is not allowed"', 'taxonomymeta-mutations');
+        return $this->__('Error payload for: "Access to the meta key is not allowed"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

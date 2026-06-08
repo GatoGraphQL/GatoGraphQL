@@ -18,7 +18,7 @@ class CustomPostEnumStringScalarTypeResolver extends AbstractEnumStringScalarTyp
 
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('Custom post types (available for querying via the API)', 'customposts');
+        return $this->__('Custom post types (available for querying via the API)', 'gatographql');
     }
 
     /**

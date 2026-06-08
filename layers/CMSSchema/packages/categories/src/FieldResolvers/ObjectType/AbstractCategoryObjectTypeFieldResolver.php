@@ -137,12 +137,12 @@ abstract class AbstractCategoryObjectTypeFieldResolver extends AbstractObjectTyp
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'url' => $this->__('Category URL', 'pop-categories'),
-            'urlPath' => $this->__('Category URL path', 'pop-categories'),
-            'slug' => $this->__('Category slug', 'pop-categories'),
-            'taxonomy' => $this->__('Category taxonomy', 'pop-categories'),
-            'parent' => $this->__('Parent category (if this category is a child of another one)', 'pop-categories'),
-            'ancestors' => $this->__('List of all ancestor categories (parent, grandparent, etc.)', 'pop-categories'),
+            'url' => $this->__('Category URL', 'gatographql'),
+            'urlPath' => $this->__('Category URL path', 'gatographql'),
+            'slug' => $this->__('Category slug', 'gatographql'),
+            'taxonomy' => $this->__('Category taxonomy', 'gatographql'),
+            'parent' => $this->__('Parent category (if this category is a child of another one)', 'gatographql'),
+            'ancestors' => $this->__('List of all ancestor categories (parent, grandparent, etc.)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -8,7 +8,7 @@ trait RootUpdateCategoryTermInputObjectTypeResolverTrait
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update a category term', 'category-mutations');
+        return $this->__('Input to update a category term', 'gatographql');
     }
 
     protected function addIDInputField(): bool

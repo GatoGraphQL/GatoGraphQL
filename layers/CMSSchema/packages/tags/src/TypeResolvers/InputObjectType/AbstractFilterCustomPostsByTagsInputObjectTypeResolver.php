@@ -26,7 +26,7 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter custom posts by tags', 'tags');
+        return $this->__('Input to filter custom posts by tags', 'gatographql');
     }
 
     /**
@@ -46,9 +46,9 @@ abstract class AbstractFilterCustomPostsByTagsInputObjectTypeResolver extends Ab
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'taxonomy' => $this->__('Tag taxonomy', 'tags'),
-            'includeBy' => $this->__('Retrieve custom posts which contain tags', 'tags'),
-            'excludeBy' => $this->__('Retrieve custom posts which do not contain tags', 'tags'),
+            'taxonomy' => $this->__('Tag taxonomy', 'gatographql'),
+            'includeBy' => $this->__('Retrieve custom posts which contain tags', 'gatographql'),
+            'excludeBy' => $this->__('Retrieve custom posts which do not contain tags', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -29,7 +29,7 @@ class CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver extends Abs
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The comment\'s parent does not exist"', 'comment-mutations');
+        return $this->__('Error payload for: "The comment\'s parent does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

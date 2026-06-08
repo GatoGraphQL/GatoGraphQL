@@ -35,14 +35,14 @@ trait CustomPostOrderByEnumTypeResolverTrait
     public function getAdditionalCustomPostEnumStringValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CustomPostOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'customposts'),
-            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'customposts'),
-            CustomPostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'customposts'),
-            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'customposts'),
-            CustomPostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'customposts'),
-            CustomPostOrderBy::TYPE => $this->getTranslationAPI()->__('Order by type', 'customposts'),
-            CustomPostOrderBy::PARENT => $this->getTranslationAPI()->__('Order by custom post parent id', 'customposts'),
-            CustomPostOrderBy::MENU_ORDER => $this->getTranslationAPI()->__('Order by menu order', 'customposts'),
+            CustomPostOrderBy::NONE => $this->getTranslationAPI()->__('Skip ordering', 'gatographql'),
+            CustomPostOrderBy::COMMENT_COUNT => $this->getTranslationAPI()->__('Order by number of comments', 'gatographql'),
+            CustomPostOrderBy::RANDOM => $this->getTranslationAPI()->__('Order by a random number', 'gatographql'),
+            CustomPostOrderBy::MODIFIED_DATE => $this->getTranslationAPI()->__('Order by last modified date', 'gatographql'),
+            CustomPostOrderBy::RELEVANCE => $this->getTranslationAPI()->__('Order by relevance', 'gatographql'),
+            CustomPostOrderBy::TYPE => $this->getTranslationAPI()->__('Order by type', 'gatographql'),
+            CustomPostOrderBy::PARENT => $this->getTranslationAPI()->__('Order by custom post parent id', 'gatographql'),
+            CustomPostOrderBy::MENU_ORDER => $this->getTranslationAPI()->__('Order by menu order', 'gatographql'),
             // CustomPostOrderBy::POST__IN => $this->getTranslationAPI()->__('Preserve post ID order given in the post__in array', 'customposts'),
             // CustomPostOrderBy::POST_PARENT__IN => $this->getTranslationAPI()->__('Preserve post parent order given in the ‘post_parent__in’ array', 'customposts'),
             default => null,

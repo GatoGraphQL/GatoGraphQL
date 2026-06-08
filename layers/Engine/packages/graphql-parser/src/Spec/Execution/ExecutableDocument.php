@@ -215,7 +215,7 @@ class ExecutableDocument implements ExecutableDocumentInterface
         if (!$this->isValidatedAndInitialized) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('Before executing `%s`, must call `validateAndInitialize`', 'graphql-server'),
+                    $this->__('Before executing `%s`, must call `validateAndInitialize`', 'gatographql'),
                     __FUNCTION__,
                 )
             );

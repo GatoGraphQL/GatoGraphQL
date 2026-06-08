@@ -13,6 +13,6 @@ class PostCategoryUpdateMutationPayloadObjectTypeResolver extends AbstractPostCa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update nested mutation on a post category', 'category-mutations');
+        return $this->__('Payload of executing an update nested mutation on a post category', 'gatographql');
     }
 }

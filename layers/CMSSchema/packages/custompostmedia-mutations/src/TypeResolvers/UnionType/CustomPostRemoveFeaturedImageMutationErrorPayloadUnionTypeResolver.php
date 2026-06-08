@@ -28,7 +28,7 @@ class CustomPostRemoveFeaturedImageMutationErrorPayloadUnionTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when removing a featured from a custom post (using nested mutations)', 'custompostmedia-mutations');
+        return $this->__('Union of \'Error Payload\' types when removing a featured from a custom post (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

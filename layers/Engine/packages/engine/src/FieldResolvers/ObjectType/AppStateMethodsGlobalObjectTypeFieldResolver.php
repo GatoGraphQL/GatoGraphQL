@@ -110,9 +110,9 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_appState' => $this->__('Retrieve the application state', 'component-model'),
-            '_appStateKeys' => $this->__('Retrieve the keys in the application state', 'component-model'),
-            '_appStateValue' => $this->__('Retrieve the value of a certain property from the application state', 'component-model'),
+            '_appState' => $this->__('Retrieve the application state', 'gatographql'),
+            '_appStateKeys' => $this->__('Retrieve the keys in the application state', 'gatographql'),
+            '_appStateValue' => $this->__('Retrieve the value of a certain property from the application state', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -133,7 +133,7 @@ class AppStateMethodsGlobalObjectTypeFieldResolver extends AbstractGlobalObjectT
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['_appStateValue' => 'name'] => $this->__('The name of the variable to retrieve from the application state', 'component-model'),
+            ['_appStateValue' => 'name'] => $this->__('The name of the variable to retrieve from the application state', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

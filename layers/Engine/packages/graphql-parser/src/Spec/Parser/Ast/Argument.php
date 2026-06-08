@@ -101,7 +101,7 @@ class Argument extends AbstractAst
 
         throw new ShouldNotHappenException(
             sprintf(
-                $this->__('Cannot recognize the type of the object, of class \'%s\'', 'graphql-parser'),
+                $this->__('Cannot recognize the type of the object, of class \'%s\'', 'gatographql'),
                 get_class($thisValueAST)
             )
         );

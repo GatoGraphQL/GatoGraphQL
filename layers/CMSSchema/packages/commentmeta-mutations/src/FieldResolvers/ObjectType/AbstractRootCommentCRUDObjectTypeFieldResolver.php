@@ -303,18 +303,18 @@ abstract class AbstractRootCommentCRUDObjectTypeFieldResolver extends AbstractOb
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addCommentMeta' => $this->__('Add meta to comment', 'comment-mutations'),
-            'addCommentMetas' => $this->__('Add meta to comments', 'comment-mutations'),
-            'updateCommentMeta' => $this->__('Update meta from comment', 'comment-mutations'),
-            'updateCommentMetas' => $this->__('Update meta from comments', 'comment-mutations'),
-            'deleteCommentMeta' => $this->__('Delete meta from comment', 'comment-mutations'),
-            'deleteCommentMetas' => $this->__('Delete meta from comments', 'comment-mutations'),
-            'setCommentMeta' => $this->__('Set meta on comment', 'comment-mutations'),
-            'setCommentMetas' => $this->__('Set meta on comments', 'comment-mutations'),
-            'addCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentMeta` mutation', 'comment-mutations'),
-            'updateCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCommentMeta` mutation', 'comment-mutations'),
-            'deleteCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCommentMeta` mutation', 'comment-mutations'),
-            'setCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCommentMeta` mutation', 'comment-mutations'),
+            'addCommentMeta' => $this->__('Add meta to comment', 'gatographql'),
+            'addCommentMetas' => $this->__('Add meta to comments', 'gatographql'),
+            'updateCommentMeta' => $this->__('Update meta from comment', 'gatographql'),
+            'updateCommentMetas' => $this->__('Update meta from comments', 'gatographql'),
+            'deleteCommentMeta' => $this->__('Delete meta from comment', 'gatographql'),
+            'deleteCommentMetas' => $this->__('Delete meta from comments', 'gatographql'),
+            'setCommentMeta' => $this->__('Set meta on comment', 'gatographql'),
+            'setCommentMetas' => $this->__('Set meta on comments', 'gatographql'),
+            'addCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCommentMeta` mutation', 'gatographql'),
+            'updateCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCommentMeta` mutation', 'gatographql'),
+            'deleteCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCommentMeta` mutation', 'gatographql'),
+            'setCommentMetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCommentMeta` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

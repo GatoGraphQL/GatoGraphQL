@@ -13,6 +13,6 @@ class RootAddPostMetaMutationPayloadObjectTypeResolver extends AbstractPostMetaM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a posts\'s custom post', 'custompost-mutations');
+        return $this->__('Payload of adding meta to a posts\'s custom post', 'gatographql');
     }
 }

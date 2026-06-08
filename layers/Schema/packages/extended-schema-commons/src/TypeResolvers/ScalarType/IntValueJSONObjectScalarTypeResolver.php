@@ -13,7 +13,7 @@ class IntValueJSONObjectScalarTypeResolver extends AbstractScalarValueJSONObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Custom scalar representing a JSON Object where values are integers', 'extended-schema-commons');
+        return $this->__('Custom scalar representing a JSON Object where values are integers', 'gatographql');
     }
 
     protected function canCastJSONObjectPropertyValue(

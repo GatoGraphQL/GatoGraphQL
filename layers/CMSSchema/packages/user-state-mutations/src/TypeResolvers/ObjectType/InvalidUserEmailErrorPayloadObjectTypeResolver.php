@@ -29,7 +29,7 @@ class InvalidUserEmailErrorPayloadObjectTypeResolver extends AbstractErrorPayloa
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "No user is registered with the provided email"', 'user-state-mutations');
+        return $this->__('Error payload for: "No user is registered with the provided email"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

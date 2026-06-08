@@ -77,10 +77,10 @@ class MetaQueryCompareByOneofInputObjectTypeResolver extends AbstractOneofInputO
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'key' => $this->__('Compare against the meta key', 'meta'),
-            'numericValue' => $this->__('Compare against a numeric meta value', 'meta'),
-            'stringValue' => $this->__('Compare against a string meta value', 'meta'),
-            'arrayValue' => $this->__('Compare against an array meta value', 'meta'),
+            'key' => $this->__('Compare against the meta key', 'gatographql'),
+            'numericValue' => $this->__('Compare against a numeric meta value', 'gatographql'),
+            'stringValue' => $this->__('Compare against a string meta value', 'gatographql'),
+            'arrayValue' => $this->__('Compare against an array meta value', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

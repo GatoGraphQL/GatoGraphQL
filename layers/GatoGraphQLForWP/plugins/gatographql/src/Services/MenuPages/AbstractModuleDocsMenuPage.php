@@ -295,7 +295,7 @@ abstract class AbstractModuleDocsMenuPage extends AbstractDocsMenuPage
             \__('More details', 'gatographql'),
             sprintf(
                 '<span class="compatibility-compatible">%s</span>',
-                \__('<strong>Compatible</strong> with your version of WordPress')
+                \__('<strong>Compatible</strong> with your version of WordPress', 'gatographql')
             )
         );
     }

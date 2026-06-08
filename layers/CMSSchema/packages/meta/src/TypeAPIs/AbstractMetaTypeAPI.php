@@ -41,7 +41,7 @@ abstract class AbstractMetaTypeAPI extends AbstractBasicService implements MetaT
         if (!$this->validateIsMetaKeyAllowed($key)) {
             throw new MetaKeyNotAllowedException(
                 sprintf(
-                    $this->__('There is no meta with key \'%s\'', 'commentmeta'),
+                    $this->__('There is no meta with key \'%s\'', 'gatographql'),
                     $key
                 )
             );

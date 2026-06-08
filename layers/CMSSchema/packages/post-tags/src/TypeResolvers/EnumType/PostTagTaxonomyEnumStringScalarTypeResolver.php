@@ -28,7 +28,7 @@ class PostTagTaxonomyEnumStringScalarTypeResolver extends AbstractTagTaxonomyEnu
 
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('Post tag taxonomies (available for querying via the API)', 'tags');
+        return $this->__('Post tag taxonomies (available for querying via the API)', 'gatographql');
     }
 
     protected function getRegisteredCustomPostTagTaxonomyNames(): ?array

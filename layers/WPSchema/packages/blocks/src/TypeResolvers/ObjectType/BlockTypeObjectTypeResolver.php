@@ -29,7 +29,7 @@ class BlockTypeObjectTypeResolver extends AbstractTransientObjectObjectTypeResol
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('A block type registered in the WordPress block registry', 'blocks');
+        return $this->__('A block type registered in the WordPress block registry', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

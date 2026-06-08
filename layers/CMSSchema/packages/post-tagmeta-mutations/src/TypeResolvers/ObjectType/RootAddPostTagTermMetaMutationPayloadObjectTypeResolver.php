@@ -13,6 +13,6 @@ class RootAddPostTagTermMetaMutationPayloadObjectTypeResolver extends AbstractPo
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a posts\'s tag term', 'tag-mutations');
+        return $this->__('Payload of adding meta to a posts\'s tag term', 'gatographql');
     }
 }

@@ -23,7 +23,7 @@ class URLScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'component-model');
+        return $this->__('URL scalar, such as https://mysite.com/my-fabulous-page', 'gatographql');
     }
 
     public function getSpecifiedByURL(): ?string

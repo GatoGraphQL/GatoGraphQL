@@ -76,6 +76,6 @@ abstract class AbstractCustomPostMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::FEATUREDIMAGE_BY || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The image to set as featured', 'custompost-mutations');
+        return $this->__('The image to set as featured', 'gatographql');
     }
 }

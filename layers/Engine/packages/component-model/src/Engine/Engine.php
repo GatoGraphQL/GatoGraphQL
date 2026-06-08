@@ -241,7 +241,7 @@ class Engine extends AbstractBasicService implements EngineInterface
         $engineState->entryComponent = $this->getEntryComponentManager()->getEntryComponent();
         if ($engineState->entryComponent === null) {
             throw new ImpossibleToHappenException(
-                $this->__('No entry component for this request', 'component-model')
+                $this->__('No entry component for this request', 'gatographql')
             );
         }
 

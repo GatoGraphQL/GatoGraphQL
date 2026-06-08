@@ -50,8 +50,8 @@ class MenuByInputObjectTypeResolver extends UpstreamMenuByInputObjectTypeResolve
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'slug' => $this->__('Query by slug', 'menus'),
-            'location' => $this->__('Query by location', 'menus'),
+            'slug' => $this->__('Query by slug', 'gatographql'),
+            'location' => $this->__('Query by location', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

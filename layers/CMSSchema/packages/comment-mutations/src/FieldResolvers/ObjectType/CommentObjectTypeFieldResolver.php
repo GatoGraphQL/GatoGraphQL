@@ -137,8 +137,8 @@ class CommentObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'reply' => $this->__('Reply a comment with another comment', 'comment-mutations'),
-            'replyWithComments' => $this->__('Reply a comment with other comments', 'comment-mutations'),
+            'reply' => $this->__('Reply a comment with another comment', 'gatographql'),
+            'replyWithComments' => $this->__('Reply a comment with other comments', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

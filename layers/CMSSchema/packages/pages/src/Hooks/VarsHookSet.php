@@ -36,7 +36,7 @@ class VarsHookSet extends AbstractHookSet
                 $component_types = [];
                 if (in_array(ModelInstanceComponentTypes::SINGLE_PAGE, $component_types)) {
                     $page_id = App::getState(['routing', 'queried-object-id']);
-                    $elements[] = $this->__('page id:', 'pop-engine') . $page_id;
+                    $elements[] = $this->__('page id:', 'gatographql') . $page_id;
                 }
                 break;
         }

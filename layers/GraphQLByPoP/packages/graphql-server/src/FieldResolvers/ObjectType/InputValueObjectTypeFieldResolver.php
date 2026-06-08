@@ -102,11 +102,11 @@ class InputValueObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Input value\'s name as defined by the GraphQL spec', 'graphql-server'),
-            'description' => $this->__('Input value\'s description', 'graphql-server'),
-            'type' => $this->__('Type of the input value', 'graphql-server'),
-            'defaultValue' => $this->__('Default value of the input value', 'graphql-server'),
-            'extensions' => $this->__('Extensions (custom metadata) added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'graphql-server'),
+            'name' => $this->__('Input value\'s name as defined by the GraphQL spec', 'gatographql'),
+            'description' => $this->__('Input value\'s description', 'gatographql'),
+            'type' => $this->__('Type of the input value', 'gatographql'),
+            'defaultValue' => $this->__('Default value of the input value', 'gatographql'),
+            'extensions' => $this->__('Extensions (custom metadata) added to the input (see: https://github.com/graphql/graphql-spec/issues/300#issuecomment-504734306 and below comments, and https://github.com/graphql/graphql-js/issues/1527)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

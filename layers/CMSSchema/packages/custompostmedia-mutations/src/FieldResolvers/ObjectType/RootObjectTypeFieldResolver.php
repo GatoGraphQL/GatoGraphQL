@@ -211,12 +211,12 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImageOnCustomPost' => $this->__('Set the featured image on a custom post', 'custompostmedia-mutations'),
-            'setFeaturedImageOnCustomPosts' => $this->__('Set the featured image on custom posts', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPost' => $this->__('Remove the featured image from a custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPosts' => $this->__('Remove the featured image from custom posts', 'custompostmedia-mutations'),
-            'setFeaturedImageOnCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setFeaturedImageOnCustomPost` mutation', 'custompostmedia-mutations'),
-            'removeFeaturedImageFromCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `removeFeaturedImageFromCustomPost` mutation', 'custompostmedia-mutations'),
+            'setFeaturedImageOnCustomPost' => $this->__('Set the featured image on a custom post', 'gatographql'),
+            'setFeaturedImageOnCustomPosts' => $this->__('Set the featured image on custom posts', 'gatographql'),
+            'removeFeaturedImageFromCustomPost' => $this->__('Remove the featured image from a custom post', 'gatographql'),
+            'removeFeaturedImageFromCustomPosts' => $this->__('Remove the featured image from custom posts', 'gatographql'),
+            'setFeaturedImageOnCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setFeaturedImageOnCustomPost` mutation', 'gatographql'),
+            'removeFeaturedImageFromCustomPostMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `removeFeaturedImageFromCustomPost` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

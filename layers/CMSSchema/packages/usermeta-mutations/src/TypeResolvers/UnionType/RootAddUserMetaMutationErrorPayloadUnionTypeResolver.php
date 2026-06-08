@@ -29,7 +29,7 @@ class RootAddUserMetaMutationErrorPayloadUnionTypeResolver extends AbstractRootA
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when adding meta on a user', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when adding meta on a user', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

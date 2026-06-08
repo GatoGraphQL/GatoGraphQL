@@ -55,7 +55,7 @@ abstract class AbstractEnumStringScalarTypeResolver extends AbstractScalarTypeRe
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
-                            implode($this->__('\', \''), $possibleValues),
+                            implode($this->__('\', \'', 'gatographql'), $possibleValues),
                         ]
                     ),
                     $astNode,

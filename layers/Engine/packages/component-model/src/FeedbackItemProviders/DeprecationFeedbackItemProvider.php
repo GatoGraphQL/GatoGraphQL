@@ -26,8 +26,8 @@ class DeprecationFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::D1 => $this->__('Field \'%s\' is deprecated: %s', 'component-model'),
-            self::D2 => $this->__('Directive \'%s\' is deprecated: %s', 'component-model'),
+            self::D1 => $this->__('Field \'%s\' is deprecated: %s', 'gatographql'),
+            self::D2 => $this->__('Directive \'%s\' is deprecated: %s', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

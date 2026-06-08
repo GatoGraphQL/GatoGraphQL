@@ -13,6 +13,6 @@ class RootDeletePageMetaMutationPayloadObjectTypeResolver extends AbstractPageMe
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete meta mutation on a page', 'pagemeta-mutations');
+        return $this->__('Payload of executing a delete meta mutation on a page', 'gatographql');
     }
 }

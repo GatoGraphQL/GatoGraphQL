@@ -90,10 +90,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'optionValue' => $this->__('Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
-            'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'pop-settings'),
-            'optionObjectValue' => $this->__('Object-value option saved in the DB, or `null` if entry does not exist', 'pop-settings'),
-            'optionObjectValues' => $this->__('Array of object-value options saved in the DB, or `null` if entry does not exist', 'pop-settings'),
+            'optionValue' => $this->__('Single-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'gatographql'),
+            'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'gatographql'),
+            'optionObjectValue' => $this->__('Object-value option saved in the DB, or `null` if entry does not exist', 'gatographql'),
+            'optionObjectValues' => $this->__('Array of object-value options saved in the DB, or `null` if entry does not exist', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -141,7 +141,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'name' => $this->__('The option name', 'pop-settings'),
+            'name' => $this->__('The option name', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

@@ -225,12 +225,12 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createMediaItem' => $this->__('Upload an attachment', 'media-mutations'),
-            'createMediaItems' => $this->__('Upload attachments', 'media-mutations'),
-            'updateMediaItem' => $this->__('Update the metadata for an attachment', 'media-mutations'),
-            'updateMediaItems' => $this->__('Update the metadata for attachments', 'media-mutations'),
-            'createMediaItemMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createMediaItem` mutation', 'media-mutations'),
-            'updateMediaItemMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateMediaItem` mutation', 'media-mutations'),
+            'createMediaItem' => $this->__('Upload an attachment', 'gatographql'),
+            'createMediaItems' => $this->__('Upload attachments', 'gatographql'),
+            'updateMediaItem' => $this->__('Update the metadata for an attachment', 'gatographql'),
+            'updateMediaItems' => $this->__('Update the metadata for attachments', 'gatographql'),
+            'createMediaItemMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createMediaItem` mutation', 'gatographql'),
+            'updateMediaItemMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateMediaItem` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

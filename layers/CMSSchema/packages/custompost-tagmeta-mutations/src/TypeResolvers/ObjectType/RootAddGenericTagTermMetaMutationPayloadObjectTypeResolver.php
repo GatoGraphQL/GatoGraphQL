@@ -13,6 +13,6 @@ class RootAddGenericTagTermMetaMutationPayloadObjectTypeResolver extends Abstrac
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of adding meta to a tag term', 'tag-mutations');
+        return $this->__('Payload of adding meta to a tag term', 'gatographql');
     }
 }

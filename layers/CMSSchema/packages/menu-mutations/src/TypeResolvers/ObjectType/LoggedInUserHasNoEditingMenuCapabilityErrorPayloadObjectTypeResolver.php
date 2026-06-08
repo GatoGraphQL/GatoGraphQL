@@ -29,7 +29,7 @@ class LoggedInUserHasNoEditingMenuCapabilityErrorPayloadObjectTypeResolver exten
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The user cannot edit menus"', 'menu-mutations');
+        return $this->__('Error payload for: "The user cannot edit menus"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

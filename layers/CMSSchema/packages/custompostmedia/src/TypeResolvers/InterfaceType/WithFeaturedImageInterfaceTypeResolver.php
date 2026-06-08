@@ -15,6 +15,6 @@ class WithFeaturedImageInterfaceTypeResolver extends AbstractInterfaceTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Fields concerning an entity\'s featured image', 'custompostmedia');
+        return $this->__('Fields concerning an entity\'s featured image', 'gatographql');
     }
 }

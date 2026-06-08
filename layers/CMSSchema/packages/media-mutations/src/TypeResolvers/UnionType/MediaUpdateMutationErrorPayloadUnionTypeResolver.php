@@ -28,7 +28,7 @@ class MediaUpdateMutationErrorPayloadUnionTypeResolver extends AbstractUpdateMed
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating the metadata for an attachment (nested mutations)', 'media-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating the metadata for an attachment (nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

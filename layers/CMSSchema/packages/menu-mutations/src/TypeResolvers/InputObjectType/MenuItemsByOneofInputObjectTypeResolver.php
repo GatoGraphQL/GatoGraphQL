@@ -30,7 +30,7 @@ class MenuItemsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to select how to provide the menu items', 'menu-mutations');
+        return $this->__('Input to select how to provide the menu items', 'gatographql');
     }
 
     /**
@@ -51,7 +51,7 @@ class MenuItemsByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::JSON => $this->__('Input the menu items list', 'menu-mutations'),
+            MutationInputProperties::JSON => $this->__('Input the menu items list', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

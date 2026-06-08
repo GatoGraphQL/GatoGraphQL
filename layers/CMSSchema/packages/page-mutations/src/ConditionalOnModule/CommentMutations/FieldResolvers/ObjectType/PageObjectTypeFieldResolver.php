@@ -45,6 +45,6 @@ class PageObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
 
     public function getAddCommentFieldDescription(): string
     {
-        return $this->__('Add a comment to the page', 'page-mutations');
+        return $this->__('Add a comment to the page', 'gatographql');
     }
 }
