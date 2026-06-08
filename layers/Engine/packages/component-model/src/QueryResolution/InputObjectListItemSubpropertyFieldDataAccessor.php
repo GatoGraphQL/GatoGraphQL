@@ -55,8 +55,9 @@ class InputObjectListItemSubpropertyFieldDataAccessor extends FieldDataAccessor 
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
-                        'Input value under argument \'%s\' is not a List type'
-                    , 'gatographql'),
+                        'Input value under argument \'%s\' is not a List type',
+                        'gatographql'
+                    ),
                     $inputObjectListSubpropertyName
                 )
             );
@@ -67,8 +68,9 @@ class InputObjectListItemSubpropertyFieldDataAccessor extends FieldDataAccessor 
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
-                        'Input list value under argument \'%s\' has no item on position \'%s\''
-                    , 'gatographql'),
+                        'Input list value under argument \'%s\' has no item on position \'%s\'',
+                        'gatographql'
+                    ),
                     $inputObjectListSubpropertyName,
                     $inputObjectListItemPosition
                 )
@@ -79,8 +81,9 @@ class InputObjectListItemSubpropertyFieldDataAccessor extends FieldDataAccessor 
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
-                        'Input list value under argument \'%s\' and position \'%s\' is not an InputObject type'
-                    , 'gatographql'),
+                        'Input list value under argument \'%s\' and position \'%s\' is not an InputObject type',
+                        'gatographql'
+                    ),
                     $inputObjectListSubpropertyName,
                     $inputObjectListItemPosition
                 )
