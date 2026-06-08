@@ -37,6 +37,11 @@ class PluginDataSource
                     'block-helpers/\*',
                     'docs/images/\*',
                     'extensions/*/docs/images/\*',
+                    // i18n source/template files: not used at runtime (only the
+                    // compiled .mo/.l10n.php/.json are). The .po lives in git as the
+                    // translation source; the .pot is the extraction template.
+                    'languages/\*.po',
+                    'languages/\*.pot',
                     ...$this->getExcludeGraphiQLAppFiles(),
                     sprintf($excludeJSBlockFilesPlaceholder, 'blocks'),
                     sprintf($excludeJSBlockFilesPlaceholder, 'editor-scripts'),
