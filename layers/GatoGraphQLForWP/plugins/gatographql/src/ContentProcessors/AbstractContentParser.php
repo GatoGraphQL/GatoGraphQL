@@ -204,7 +204,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         }
         $htmlContent = $this->processHTMLContent($htmlContent, $pathURL, $options);
         if ($isEnglishOnlyDoc) {
-            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $relativePathDir, $filename, $options) . $htmlContent;
+            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $options) . $htmlContent;
         }
         return $htmlContent;
     }
@@ -212,25 +212,22 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
     /**
      * Notice prepended to English documentation shown to a non-English user,
      * linking to the same docs on the localized website: the user's language as a
-     * subdomain of the main plugin's website (getPluginWebsiteURL(), e.g.
-     * https://gatographql.com -> https://es.gatographql.com), so it works for any
-     * plugin/site. When the doc's canonical website URL is provided (option
-     * WEBSITE_DOC_URL, e.g. from the extension resolver's getWebsiteURL) the link
-     * points straight at it; otherwise the path is derived from the local docs layout
-     * (tutorials). The notice text is itself translated to the user's language via
-     * the plugin's .mo.
+     * subdomain (e.g. https://gatographql.com -> https://es.gatographql.com). When the
+     * doc's canonical website URL is provided (option WEBSITE_DOC_URL — e.g. the
+     * extension resolver's getWebsiteURL, or a tutorial page's per-entry URL) the link
+     * points straight at it; otherwise it links to the main plugin's website root
+     * (getPluginWebsiteURL()), so it works for any plugin/site. The notice text is
+     * itself translated to the user's language via the plugin's .mo.
      *
      * @param array<string,mixed> $options
      */
-    protected function getEnglishOnlyDocNotice(string $language, string $relativePathDir = '', string $filename = '', array $options = []): string
+    protected function getEnglishOnlyDocNotice(string $language, array $options = []): string
     {
         /** @var string|null */
         $websiteDocURL = $options[ContentParserOptions::WEBSITE_DOC_URL] ?? null;
-        if ($websiteDocURL !== null && $websiteDocURL !== '') {
-            $websiteURL = $websiteDocURL;
-        } else {
-            $websiteURL = rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
-        }
+        $websiteURL = ($websiteDocURL !== null && $websiteDocURL !== '')
+            ? $websiteDocURL
+            : rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/');
         // Prefix the user's language as a subdomain: https://gatographql.com -> https://es.gatographql.com
         $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
         $host = (string) parse_url($localizedURL, PHP_URL_HOST);
@@ -248,28 +245,6 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
                 $link
             )
         );
-    }
-
-    /**
-     * Best-effort path to a doc's page on the website, derived from the local docs
-     * layout `<category>/<slug>/...` — e.g. extensions/access-control/... maps to
-     * `/extensions/access-control`. Returns '' (link to the site root) when the
-     * doc's website page is not derivable.
-     */
-    protected function getWebsiteDocPath(string $relativePathDir, string $filename): string
-    {
-        $category = basename(rtrim($relativePathDir, '/'));
-        $slug = explode('/', $filename)[0];
-        if ($slug === '') {
-            return '';
-        }
-        if (in_array($category, ['extensions', 'bundle-extensions'], true)) {
-            return '/extensions/' . $slug;
-        }
-        if ($category === 'tutorial') {
-            return '/tutorial/' . $slug;
-        }
-        return '';
     }
 
     /**
