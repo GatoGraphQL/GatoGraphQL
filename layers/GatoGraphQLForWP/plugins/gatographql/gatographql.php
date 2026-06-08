@@ -18,68 +18,12 @@ GitHub Plugin URI: GatoGraphQL/gatographql-dist
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use PoPIncludes\GatoGraphQL\Startup;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
-
-if (!function_exists('gatographql_load_textdomain_with_fallback')) {
-    /**
-     * Load the .mo for the current locale into the 'gatographql' text domain,
-     * falling back to a shipped variant of the same base language when the exact
-     * locale's file is absent (e.g. es_AR / es_MX reuse es_ES, fr_CA reuses fr_FR).
-     */
-    function gatographql_load_textdomain_with_fallback(string $dir, string $prefix): void
-    {
-        $locale = determine_locale();
-        $mofile = $dir . $prefix . $locale . '.mo';
-        if (!is_readable($mofile)) {
-            $base = (string) strtok($locale, '_');
-            $canonical = $dir . $prefix . $base . '_' . strtoupper($base) . '.mo';
-            if (is_readable($canonical)) {
-                $mofile = $canonical;
-            } else {
-                $variants = glob($dir . $prefix . $base . '_*.mo') ?: [];
-                $mofile = $variants[0] ?? $mofile;
-            }
-        }
-        if (is_readable($mofile)) {
-            load_textdomain('gatographql', $mofile);
-        }
-    }
-}
-if (!function_exists('gatographql_resolve_script_translation_file')) {
-    /**
-     * Mirror the .mo language fallback for JS translation packs: when the exact
-     * locale's <domain>-<locale>-<md5>.json is missing, reuse a shipped variant of
-     * the same base language. The md5 (script-path hash) is locale-independent, so
-     * only the locale segment is swapped. Hooked on 'load_script_translation_file'.
-     *
-     * @param string|false $file
-     * @return string|false
-     */
-    function gatographql_resolve_script_translation_file($file, $handle, $domain)
-    {
-        if ($domain !== 'gatographql' || !is_string($file) || is_readable($file)) {
-            return $file;
-        }
-        if (!preg_match('#^(.*/gatographql-)([a-z]{2,3})(?:_[A-Za-z0-9]+)*(-[0-9a-f]+\.json)$#', $file, $m)) {
-            return $file;
-        }
-        $canonical = $m[1] . $m[2] . '_' . strtoupper($m[2]) . $m[3];
-        if (is_readable($canonical)) {
-            return $canonical;
-        }
-        $variants = glob($m[1] . $m[2] . '_*' . $m[3]) ?: [];
-        return $variants[0] ?? $file;
-    }
-}
-add_filter('load_script_translation_file', 'gatographql_resolve_script_translation_file', 10, 3);
-
-add_action('init', function (): void {
-    gatographql_load_textdomain_with_fallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
-}, PHP_INT_MIN);
 
 /**
  * Plugin's name and version.
@@ -108,9 +52,13 @@ if (class_exists(Plugin::class)) {
 
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
-if (!\PoPIncludes\GatoGraphQL\Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
+if (!Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
     return;
 }
+
+add_action('init', function (): void {
+    Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+}, PHP_INT_MIN);
 
 /**
  * Can't use Composer to load this file, as "vendor/" is loaded only
