@@ -1,2 +1,3 @@
 es_ES
 fr_FR
+it_IT
