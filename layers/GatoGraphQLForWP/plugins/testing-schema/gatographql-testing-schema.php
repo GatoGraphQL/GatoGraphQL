@@ -23,9 +23,10 @@ if (!defined('ABSPATH')) {
 }
 
 add_action('init', function (): void {
-    if (class_exists(\PoPIncludes\GatoGraphQL\Startup::class)) {
-        \PoPIncludes\GatoGraphQL\Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+    if (!class_exists(\PoPIncludes\GatoGraphQL\Startup::class)) {
+        return;
     }
+    \PoPIncludes\GatoGraphQL\Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
 }, PHP_INT_MIN);
 
 /**
