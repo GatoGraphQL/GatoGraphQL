@@ -105,6 +105,15 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         return $this->getSlug($module) . '/docs/modules';
     }
 
+    /**
+     * The extension's canonical website URL, so the English-doc notice can link
+     * straight to this extension's page on the localized website.
+     */
+    protected function getDocumentationWebsiteURL(string $module): string
+    {
+        return $this->getWebsiteURL($module);
+    }
+
     public function isPremium(string $module): bool
     {
         return false;

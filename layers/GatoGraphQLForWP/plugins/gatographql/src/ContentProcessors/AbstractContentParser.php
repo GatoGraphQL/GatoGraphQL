@@ -206,7 +206,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         }
         $htmlContent = $this->processHTMLContent($htmlContent, $pathURL, $options);
         if ($isEnglishOnlyDoc) {
-            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $relativePathDir, $filename) . $htmlContent;
+            $htmlContent = $this->getEnglishOnlyDocNotice($localeLanguage, $relativePathDir, $filename, $options) . $htmlContent;
         }
         return $htmlContent;
     }
@@ -216,17 +216,26 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
      * linking to the same docs on the localized website: the user's language as a
      * subdomain of the configured Gato GraphQL website (e.g. https://gatographql.com
      * -> https://es.gatographql.com), so it works for any configured site. When the
-     * doc's website page is derivable (extensions, tutorials) the link points
-     * straight at it (the localized site redirects to the matching slug). The
-     * notice text is itself translated to the user's language via the plugin's .mo.
+     * doc's canonical website URL is provided (option WEBSITE_DOC_URL, e.g. from the
+     * extension resolver's getWebsiteURL) the link points straight at it; otherwise
+     * the path is derived from the local docs layout (tutorials). The notice text is
+     * itself translated to the user's language via the plugin's .mo.
+     *
+     * @param array<string,mixed> $options
      */
-    protected function getEnglishOnlyDocNotice(string $language, string $relativePathDir = '', string $filename = ''): string
+    protected function getEnglishOnlyDocNotice(string $language, string $relativePathDir = '', string $filename = '', array $options = []): string
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        $websiteURL = $moduleConfiguration->getGatoGraphQLWebsiteURL();
+        /** @var string|null */
+        $websiteDocURL = $options[ContentParserOptions::WEBSITE_DOC_URL] ?? null;
+        if ($websiteDocURL !== null && $websiteDocURL !== '') {
+            $websiteURL = $websiteDocURL;
+        } else {
+            /** @var ModuleConfiguration */
+            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+            $websiteURL = rtrim($moduleConfiguration->getGatoGraphQLWebsiteURL(), '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
+        }
+        // Prefix the user's language as a subdomain: https://gatographql.com -> https://es.gatographql.com
         $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
-        $localizedURL = rtrim($localizedURL, '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
         $host = (string) parse_url($localizedURL, PHP_URL_HOST);
         $path = (string) parse_url($localizedURL, PHP_URL_PATH);
         $link = sprintf(

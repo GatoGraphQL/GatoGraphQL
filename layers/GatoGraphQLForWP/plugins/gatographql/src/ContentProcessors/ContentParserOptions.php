@@ -17,4 +17,10 @@ class ContentParserOptions
     public final const HIGHLIGHT_CODE = 'highlightCode';
     public final const TAB_CONTENT = 'tabContent';
     public final const REPLACEMENTS = 'replacements';
+    /**
+     * Canonical URL of this doc's page on the (non-localized) website. When set, the
+     * English-doc notice links to it (injecting the user's language subdomain) instead
+     * of deriving the path from the local docs layout.
+     */
+    public final const WEBSITE_DOC_URL = 'websiteDocURL';
 }

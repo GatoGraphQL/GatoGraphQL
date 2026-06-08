@@ -59,18 +59,33 @@ trait HasMarkdownDocumentationModuleResolverTrait
         return $this->getMarkdownContent(
             $markdownFilename,
             $this->getDocumentationMarkdownContentRelativePathDir($module),
-            $this->getMarkdownContentOptions()
+            $this->getMarkdownContentOptions($module)
         );
     }
 
     /**
      * @return array<string,mixed>
      */
-    protected function getMarkdownContentOptions(): array
+    protected function getMarkdownContentOptions(string $module): array
     {
-        return [
+        $options = [
             ContentParserOptions::TAB_CONTENT => true,
         ];
+        $websiteURL = $this->getDocumentationWebsiteURL($module);
+        if ($websiteURL !== null) {
+            $options[ContentParserOptions::WEBSITE_DOC_URL] = $websiteURL;
+        }
+        return $options;
+    }
+
+    /**
+     * The doc's canonical page URL on the website, or null when not available.
+     * When set, the English-doc notice links straight to it (injecting the user's
+     * language subdomain) instead of deriving the path from the local docs layout.
+     */
+    protected function getDocumentationWebsiteURL(string $module): ?string
+    {
+        return null;
     }
 
     protected function getDocumentationMarkdownContentRelativePathDir(
