@@ -95,9 +95,26 @@ class AboutMenuPage extends AbstractDocsMenuPage
                     ),
                 ]
             );
-            $replacements['placeholder="John Doe"'] = 'placeholder="John Doe" value="' . $customerName . '"';
-            $replacements['placeholder="your@email.com"'] = 'placeholder="your@email.com" value="' . $customerEmail . '"';
-            $replacements['{extensions-license-data}</textarea>'] = $extensionsLicenseData . '</textarea>';
+            $textInputValueInjections = [
+                'placeholder="John Doe"' => $customerName,
+                'placeholder="your@email.com"' => $customerEmail,
+            ];
+            foreach ($textInputValueInjections as $search => $valueInject) {
+                $replacements[$search] = sprintf(
+                    '%s value="%s"',
+                    $search,
+                    $valueInject
+                );
+            }
+            $textareaInputValueInjections = [
+                '{extensions-license-data}' => $extensionsLicenseData,
+            ];
+            foreach ($textareaInputValueInjections as $search => $valueInject) {
+                $replacements[$search . '</textarea>'] = sprintf(
+                    '%s</textarea>',
+                    $valueInject
+                );
+            }
         }
 
         $content = str_replace(array_keys($replacements), array_values($replacements), $content);
