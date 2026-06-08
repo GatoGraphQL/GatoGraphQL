@@ -6,8 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\ContentProcessors;
 
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
-use GatoGraphQL\GatoGraphQL\Module;
-use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
@@ -214,12 +212,13 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
     /**
      * Notice prepended to English documentation shown to a non-English user,
      * linking to the same docs on the localized website: the user's language as a
-     * subdomain of the configured Gato GraphQL website (e.g. https://gatographql.com
-     * -> https://es.gatographql.com), so it works for any configured site. When the
-     * doc's canonical website URL is provided (option WEBSITE_DOC_URL, e.g. from the
-     * extension resolver's getWebsiteURL) the link points straight at it; otherwise
-     * the path is derived from the local docs layout (tutorials). The notice text is
-     * itself translated to the user's language via the plugin's .mo.
+     * subdomain of the main plugin's website (getPluginWebsiteURL(), e.g.
+     * https://gatographql.com -> https://es.gatographql.com), so it works for any
+     * plugin/site. When the doc's canonical website URL is provided (option
+     * WEBSITE_DOC_URL, e.g. from the extension resolver's getWebsiteURL) the link
+     * points straight at it; otherwise the path is derived from the local docs layout
+     * (tutorials). The notice text is itself translated to the user's language via
+     * the plugin's .mo.
      *
      * @param array<string,mixed> $options
      */
@@ -230,9 +229,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         if ($websiteDocURL !== null && $websiteDocURL !== '') {
             $websiteURL = $websiteDocURL;
         } else {
-            /** @var ModuleConfiguration */
-            $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-            $websiteURL = rtrim($moduleConfiguration->getGatoGraphQLWebsiteURL(), '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
+            $websiteURL = rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/') . $this->getWebsiteDocPath($relativePathDir, $filename);
         }
         // Prefix the user's language as a subdomain: https://gatographql.com -> https://es.gatographql.com
         $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;

@@ -274,13 +274,11 @@ class Plugin extends AbstractMainPlugin
 
     protected function enqueueDocsWebsiteURLData(): void
     {
-        /** @var ModuleConfiguration */
-        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         wp_add_inline_script(
             'wp-blocks',
             sprintf(
                 'window.gatoGraphQLDocsWebsiteURL = %s; window.gatoGraphQLDocsTranslatedLanguages = %s;',
-                (string) wp_json_encode($moduleConfiguration->getGatoGraphQLWebsiteURL()),
+                (string) wp_json_encode(PluginApp::getMainPlugin()->getPluginWebsiteURL()),
                 (string) wp_json_encode(LocaleUtils::getWebsiteTranslatedLanguages())
             ),
             'before'
