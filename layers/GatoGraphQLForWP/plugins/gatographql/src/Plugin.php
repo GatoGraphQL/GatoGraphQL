@@ -13,11 +13,11 @@ use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFac
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginGeneralSettingsFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\AbstractMainPlugin;
+use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AboutMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
-use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 use PoP\Root\Module\ModuleInterface;
@@ -274,12 +274,15 @@ class Plugin extends AbstractMainPlugin
 
     protected function enqueueDocsWebsiteURLData(): void
     {
+        $instanceManager = InstanceManagerFacade::getInstance();
+        /** @var LocaleHelper */
+        $localeHelper = $instanceManager->getInstance(LocaleHelper::class);
         wp_add_inline_script(
             'wp-blocks',
             sprintf(
                 'window.gatoGraphQLDocsWebsiteURL = %s; window.gatoGraphQLDocsTranslatedLanguages = %s;',
                 (string) wp_json_encode(PluginApp::getMainPlugin()->getPluginWebsiteURL()),
-                (string) wp_json_encode(LocaleUtils::getWebsiteTranslatedLanguages())
+                (string) wp_json_encode($localeHelper->getWebsiteTranslatedLanguages())
             ),
             'before'
         );

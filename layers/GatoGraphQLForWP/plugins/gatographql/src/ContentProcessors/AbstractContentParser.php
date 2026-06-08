@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\Exception\ContentNotExistsException;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\LocaleHelper;
-use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 use PoPCMSSchema\SchemaCommons\CMS\CMSHelperServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\HelperServices\RequestHelperServiceInterface;
@@ -185,7 +184,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
                 // user's language is not English AND the website is translated to it,
                 // to prepend the notice below.
                 $isEnglishOnlyDoc = $localeLanguage !== $defaultDocsLanguage
-                    && in_array($localeLanguage, LocaleUtils::getWebsiteTranslatedLanguages(), true);
+                    && in_array($localeLanguage, $this->getLocaleHelper()->getWebsiteTranslatedLanguages(), true);
             }
         }
         // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
