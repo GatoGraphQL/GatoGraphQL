@@ -225,10 +225,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 18.1.0 =
-* Improved - Updated docs for the Schema Functions extension (#3314)
-* Improved - The "About" and "Support" admin pages are now translatable (their text is injected from PHP) (#3315)
-* Improved - English documentation now shows non-English users a notice linking to the localized website (#3316)
-* Improved - The plugin is now translated to Spanish (es_ES) (#3317)
+* Improved - Updated docs for the Schema Functions extension
+* Improved - The plugin is now translated to Spanish (es_ES) (#3314)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 
 = 18.0.0 =
