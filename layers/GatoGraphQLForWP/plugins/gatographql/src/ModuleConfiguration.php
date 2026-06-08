@@ -140,6 +140,17 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    public function getGatoGraphQLTutorialPageURL(): string
+    {
+        $envVariable = Environment::GATOGRAPHQL_TUTORIAL_PAGE_URL;
+        $defaultValue = 'https://gatographql.com/tutorial';
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+        );
+    }
+
     public function getGatoGraphQLRequestExtensionPageURL(): string
     {
         $envVariable = Environment::GATOGRAPHQL_REQUEST_EXTENSION_PAGE_URL;

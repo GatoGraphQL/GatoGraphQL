@@ -11,7 +11,6 @@ use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentR
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\Aggregators\BundleExtensionAggregator;
 use GatoGraphQL\GatoGraphQL\Services\DataProviders\TutorialLessonDataProvider;
@@ -73,7 +72,9 @@ class TutorialMenuPage extends AbstractVerticalTabDocsMenuPage
      */
     protected function getEntryWebsiteURL(array $entry): ?string
     {
-        return rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/') . '/tutorial/' . $entry[0];
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        return $moduleConfiguration->getGatoGraphQLTutorialPageURL() . '/' . $entry[0];
     }
 
     // protected function enumerateEntries(): bool
