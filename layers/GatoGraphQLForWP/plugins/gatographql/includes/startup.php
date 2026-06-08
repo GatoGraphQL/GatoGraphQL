@@ -9,6 +9,7 @@ use PoP\Root\Environment as RootEnvironment;
 
 use function wp_convert_hr_to_bytes;
 use function add_action;
+use function add_filter;
 
 class Startup {
     /**
@@ -106,6 +107,16 @@ class Startup {
         if (is_readable($mofile)) {
             load_textdomain('gatographql', $mofile);
         }
+    }
+
+    /**
+     * Register the JS translation-pack resolver (same-base-language locale fallback)
+     * on the 'gatographql' domain. It is global, so registering it once (by the main
+     * plugin, or a self-contained plugin) covers every plugin's scripts.
+     */
+    public static function registerScriptTranslationFileResolver(): void
+    {
+        add_filter('load_script_translation_file', [self::class, 'resolveScriptTranslationFile'], 10, 3);
     }
 
     /**
