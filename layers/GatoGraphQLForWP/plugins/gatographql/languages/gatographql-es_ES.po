@@ -6701,7 +6701,7 @@ msgstr ""
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:127
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
 msgstr ", "
@@ -6725,14 +6725,14 @@ msgstr ""
 msgid "Input value under argument '%s' is not a List type"
 msgstr "El valor de entrada bajo el argumento '%s' no es de tipo List"
 
-#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:69
+#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:70
 #, php-format
 msgid "Input list value under argument '%s' has no item on position '%s'"
 msgstr ""
 "El valor de lista de entrada bajo el argumento '%s' no tiene ningún elemento "
 "en la posición '%s'"
 
-#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:81
+#: Engine/packages/component-model/src/QueryResolution/InputObjectListItemSubpropertyFieldDataAccessor.php:83
 #, php-format
 msgid ""
 "Input list value under argument '%s' and position '%s' is not an InputObject "
@@ -7419,7 +7419,7 @@ msgstr "No hay ningún estado de aplicación bajo la ruta '%s'"
 msgid ","
 msgstr ","
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:35
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:36
 #, php-format
 msgid ""
 "Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of "
@@ -7431,12 +7431,12 @@ msgstr ""
 "en <strong>%3$s</strong>. Por favor, aumente el límite de memoria para "
 "cargar el plugin."
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:41
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:42
 #, php-format
 msgid " <a href=\"%s\" target=\"_blank\">%s</a>"
 msgstr " <a href=\"%s\" target=\"_blank\">%s</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:43
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:44
 msgid "Browse documentation&#x2197;"
 msgstr "Ver documentación&#x2197;"
 
@@ -7647,13 +7647,13 @@ msgstr "Mostrar detalles"
 msgid "File '%s' does not exist"
 msgstr "El archivo '%s' no existe"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:192
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:194
 #, php-format
 msgid "File '%s' is corrupted"
 msgstr "El archivo '%s' está corrupto"
 
 #. translators: %s: link to this documentation on the localized website
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:236
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:243
 #, php-format
 msgid ""
 "This documentation is in English. You can read it in your language at %s."
@@ -10400,11 +10400,11 @@ msgstr ""
 msgid "Documentation on using the Gato GraphQL"
 msgstr "Documentación sobre el uso de Gato GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:95
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:96
 msgid "Please rate Gato GraphQL ❤️"
 msgstr "Por favor, valora Gato GraphQL ❤️"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:96
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:97
 msgid ""
 "We work really hard to deliver a plugin that converts the WordPress site "
 "into a full-fledged GraphQL server. It takes plenty of time and effort to "
@@ -10418,11 +10418,11 @@ msgstr ""
 "lo que ves y aprecias nuestro trabajo, solo te pedimos que por favor valores "
 "el plugin en el directorio. ¡Gracias de antemano!"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:99
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:100
 msgid "Rate Plugin"
 msgstr "Valorar Plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:166
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:167
 #, php-format
 msgid ""
 "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</"
@@ -10434,7 +10434,7 @@ msgstr ""
 "strong> | <a href=\"%s\">Desactivar este aviso de administración en los "
 "Ajustes</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:313
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:316
 msgid "Go PRO"
 msgstr "Hazte PRO"
 
@@ -11058,40 +11058,40 @@ msgstr "Acerca de"
 msgid "Oops, there was a problem loading the page"
 msgstr "Vaya, hubo un problema al cargar la página"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:121
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:138
 #, php-format
 msgid "About %s"
 msgstr "Acerca de %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:122
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:139
 msgid "Powerful and flexible GraphQL server for WordPress."
 msgstr "Servidor GraphQL potente y flexible para WordPress."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:123
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:140
 msgid "Our channels"
 msgstr "Nuestros canales"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:124
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:141
 msgid "Website:"
 msgstr "Sitio web:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:125
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
 msgid "Plugin in WordPress.org:"
 msgstr "Plugin en WordPress.org:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:126
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "Source code:"
 msgstr "Código fuente:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:127
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
 msgid "YouTube channel:"
 msgstr "Canal de YouTube:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:128
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
 msgid "Contact:"
 msgstr "Contacto:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:129
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
 #, php-format
 msgid ""
 "<strong>Subscribe to our newsletter</strong> to receive timely updates about "
@@ -11100,36 +11100,36 @@ msgstr ""
 "<strong>Suscríbete a nuestro boletín</strong> para recibir actualizaciones "
 "puntuales sobre %s:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:130
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
 msgid "Name:"
 msgstr "Nombre:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:131
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
 msgid "Email:"
 msgstr "Email:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:132
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
 msgid "Subscribe"
 msgstr "Suscribirse"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:133
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
 msgid "Release Notes"
 msgstr "Notas de la versión"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:134
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
 msgid "New features released on each version:"
 msgstr "Nuevas funcionalidades publicadas en cada versión:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:135
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
 msgid "current"
 msgstr "actual"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:136
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
 msgid "Support"
 msgstr "Soporte"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:137
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
 msgid ""
 "Support is provided to customers of any Gato GraphQL product with an active "
 "license."
@@ -11137,31 +11137,31 @@ msgstr ""
 "El soporte se ofrece a los clientes de cualquier producto de Gato GraphQL "
 "con una licencia activa."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:138
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
 msgid "Send your message to the Gato GraphQL Support team:"
 msgstr "Envía tu mensaje al equipo de soporte de Gato GraphQL:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
 msgid "Your name:"
 msgstr "Tu nombre:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:140
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
 msgid "Your email:"
 msgstr "Tu correo electrónico:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:141
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
 msgid "Subject:"
 msgstr "Asunto:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
 msgid "Message:"
 msgstr "Mensaje:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
 msgid "Send message"
 msgstr "Enviar mensaje"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:161
 msgid "Attached extension license data"
 msgstr "Datos de licencia de la extensión adjuntos"
 
@@ -11209,7 +11209,7 @@ msgstr "No hay elementos que configurar"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:199
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
@@ -11219,14 +11219,14 @@ msgstr "%s — %s"
 msgid "Save All Changes ('%s' tab)"
 msgstr "Guardar todos los cambios (pestaña '%s')"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:84
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:85
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:130
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:140
 #, php-format
 msgid "%s. %s"
 msgstr "%s. %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:131
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:140
 #, php-format
 msgid "Oops, there was a problem loading entry \"%s\""
 msgstr "Vaya, hubo un problema al cargar la entrada \"%s\""
@@ -11240,11 +11240,11 @@ msgstr "La ruta no es accesible"
 msgid "Page '%s' does not exist"
 msgstr "La página '%s' no existe"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:38
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:39
 msgid "Extension Reference Docs"
 msgstr "Documentación de referencia de extensiones"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:78
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:95
 #, php-format
 msgid ""
 "%s <a href=\"%s\" class=\"button\">Back to the <strong>Extensions</strong> "
@@ -11253,29 +11253,29 @@ msgstr ""
 "%s <a href=\"%s\" class=\"button\">Volver a la página de "
 "<strong>Extensiones</strong></a></span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:172
 #, php-format
 msgid "%s <small>(<a href=\"%s\" target=\"%s\" title=\"%s\">%s%s</a>)</small>"
 msgstr "%s <small>(<a href=\"%s\" target=\"%s\" title=\"%s\">%s%s</a>)</small>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:176
 msgid "Open in shop"
 msgstr "Abrir en la tienda"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:161
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:178
 msgid "go PRO"
 msgstr "hazte PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:161
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:162
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:178
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:179
 msgid "website"
 msgstr "sitio web"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:235
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:255
 msgid "Modules included in this extension:"
 msgstr "Módulos incluidos en esta extensión:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:236
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:256
 msgid "Modules included in this bundle:"
 msgstr "Módulos incluidos en este paquete:"
 
@@ -11413,26 +11413,26 @@ msgstr ""
 msgid "Schema Tutorial"
 msgstr "Tutorial del esquema"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:121
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:134
 #, php-format
 msgid "(It is included in %s)"
 msgstr "(Está incluido en %s)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:122
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:135
 #, php-format
 msgid "(They are all included in %s)"
 msgstr "(Todos están incluidos en %s)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:138
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:151
 #, php-format
 msgid "<strong>🔗 %s</strong>: %s"
 msgstr "<strong>🔗 %s</strong>: %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:152
 msgid "Extensions referenced in this tutorial lesson"
 msgstr "Extensiones referenciadas en esta lección del tutorial"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:174
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:187
 #, php-format
 msgid "<strong><a href=\"%s\" target=\"%s\">%s%s</a></strong>"
 msgstr "<strong><a href=\"%s\" target=\"%s\">%s%s</a></strong>"
