@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The plugin is now translated to Italian (`it_IT`) (#3316)
 - The plugin is now translated to German (`de_DE`) (#8694a2b)
 - The plugin is now translated to Portuguese (`pt_BR`) (#3317)
+- The plugin is now translated to Polish (`pl_PL`) (#3318)
 
 ### Fixed
 

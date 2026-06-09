@@ -231,6 +231,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - The plugin is now translated to Italian (it_IT) (#3316)
 * Improved - The plugin is now translated to German (de_DE) (#8694a2b)
 * Improved - The plugin is now translated to Portuguese (pt_BR) (#3317)
+* Improved - The plugin is now translated to Polish (pl_PL) (#3318)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 
 = 18.0.0 =
