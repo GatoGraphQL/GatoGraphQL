@@ -2,3 +2,4 @@ es_ES
 fr_FR
 it_IT
 de_DE
+pt_BR
