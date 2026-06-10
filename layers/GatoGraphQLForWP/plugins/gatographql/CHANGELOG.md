@@ -18,6 +18,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
+- Fix lost styles in Extensions page (#3319)
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 
 ## 18.0.0 - 20/05/2026
