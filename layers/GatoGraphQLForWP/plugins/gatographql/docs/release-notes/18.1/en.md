@@ -12,4 +12,5 @@
 
 ## Fixed
 
+- Fix lost styles in Extensions page ([#3319](https://github.com/GatoGraphQL/GatoGraphQL/pull/3319))
 - Replace non-standard spaces in block attributes when doing useHTML5Parser ([#3313](https://github.com/GatoGraphQL/GatoGraphQL/pull/3313))
