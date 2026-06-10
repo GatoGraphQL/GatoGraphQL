@@ -115,6 +115,15 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         };
     }
 
+    public function showDocumentationForModule(string $module): bool
+    {
+        return match ($module) {
+            self::ALL_INCLUSIVE,
+            self::POWER_EXTENSIONS => false,
+            default => parent::showDocumentationForModule($module),
+        };
+    }
+
     public function getWebsiteURL(string $module): string
     {
         /** @var ModuleConfiguration */
