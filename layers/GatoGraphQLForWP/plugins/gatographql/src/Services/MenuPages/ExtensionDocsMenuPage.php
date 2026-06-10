@@ -141,6 +141,9 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
                 continue;
             }
+            if (!$moduleResolver->showDocumentationForModule($module)) {
+                continue;
+            }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
             if (!$isBundleExtension && !$displayGatoGraphQLPROExtensionsOnExtensionsPage) {
                 continue;

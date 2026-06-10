@@ -13,4 +13,5 @@ interface ExtensionModuleResolverInterface extends ModuleResolverInterface
     public function getWebsiteURL(string $module): string;
     public function getLogoURL(string $module): string;
     public function isPremium(string $module): bool;
+    public function showDocumentationForModule(string $module): bool;
 }
