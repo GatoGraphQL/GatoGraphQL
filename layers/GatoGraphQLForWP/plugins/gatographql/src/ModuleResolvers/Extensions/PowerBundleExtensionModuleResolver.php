@@ -106,12 +106,12 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
         return 30;
     }
 
-    public function getGatoGraphQLExtensionSlug(string $module): string
+    protected function doesGatoGraphQLExtensionSlugAppendBundleSuffix(string $module): bool
     {
         return match ($module) {
             self::ALL_INCLUSIVE,
-            self::POWER_EXTENSIONS => parent::getGatoGraphQLExtensionSlug($module) . '-bundle',
-            default => parent::getGatoGraphQLExtensionSlug($module),
+            self::POWER_EXTENSIONS => true,
+            default => parent::doesGatoGraphQLExtensionSlugAppendBundleSuffix($module),
         };
     }
 

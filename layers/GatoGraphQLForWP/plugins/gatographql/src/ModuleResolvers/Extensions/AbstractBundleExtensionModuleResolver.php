@@ -46,13 +46,17 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
         return $pluginURL . 'assets/img/logos/GatoGraphQL-logo-back-long.png';
     }
 
-    /**
-     * Commented out because this does not apply to all bundles.
-     */
-    // public function getGatoGraphQLExtensionSlug(string $module): string
-    // {
-    //     return parent::getGatoGraphQLExtensionSlug($module) . '-bundle';
-    // }
+    public function getGatoGraphQLExtensionSlug(string $module): string
+    {
+        return $this->doesGatoGraphQLExtensionSlugAppendBundleSuffix($module)
+            ? parent::getGatoGraphQLExtensionSlug($module) . '-bundle'
+            : parent::getGatoGraphQLExtensionSlug($module);
+    }
+
+    protected function doesGatoGraphQLExtensionSlugAppendBundleSuffix(string $module): bool
+    {
+        return false;
+    }
 
     /**
      * @return string[]
