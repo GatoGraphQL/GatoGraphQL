@@ -109,7 +109,6 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
     public function getGatoGraphQLExtensionSlug(string $module): string
     {
         return match ($module) {
-            // self::PRO => \__('All the PRO extensions for Gato GraphQL, the most powerful GraphQL server for WordPress', 'gatographql'),
             self::ALL_INCLUSIVE,
             self::POWER_EXTENSIONS => parent::getGatoGraphQLExtensionSlug($module) . '-bundle',
             default => parent::getGatoGraphQLExtensionSlug($module),
