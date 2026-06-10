@@ -53,6 +53,11 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         return true;
     }
 
+    public function showDocumentationForModule(string $module): bool
+    {
+        return true;
+    }
+
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return true;
