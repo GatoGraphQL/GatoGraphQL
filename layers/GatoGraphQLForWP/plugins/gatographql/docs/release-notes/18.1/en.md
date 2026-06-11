@@ -11,7 +11,7 @@
 - The plugin is now translated to Polish (`pl_PL`) ([#3318](https://github.com/GatoGraphQL/GatoGraphQL/pull/3318))
 - The plugin is now translated to Dutch (`nl_NL`) ([#3322](https://github.com/GatoGraphQL/GatoGraphQL/pull/3322))
 - Do not show All Inclusive bundle in Extension docs ([#3321](https://github.com/GatoGraphQL/GatoGraphQL/pull/3321))
-- Upgraded GraphiQL to version 5.2.3
+- Upgraded GraphiQL to version 5.2.3 ([#3323](https://github.com/GatoGraphQL/GatoGraphQL/pull/3323))
 
 ## Fixed
 
