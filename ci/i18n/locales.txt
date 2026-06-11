@@ -4,3 +4,4 @@ it_IT
 de_DE
 pt_BR
 pl_PL
+nl_NL
