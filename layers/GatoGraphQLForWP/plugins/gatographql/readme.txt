@@ -234,6 +234,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - The plugin is now translated to Polish (pl_PL) (#3318)
 * Improved - The plugin is now translated to Dutch (nl_NL) (#3322)
 * Improved - Do not show All Inclusive bundle in Extension docs (#3321)
+* Improved - Upgraded GraphiQL to version 5.2.3
 * Fixed - Fix lost styles in Extensions page (#3319)
 * Fixed - Fix items not shown as active in Extensions page (#3320)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
