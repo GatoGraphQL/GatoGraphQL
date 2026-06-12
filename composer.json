@@ -604,6 +604,7 @@
         "pop-wp-schema/users": "18.0.1"
     },
     "config": {
+        "source-fallback": true,
         "sort-packages": true,
         "allow-plugins": {
             "boxuk/wp-muplugin-loader": true,
