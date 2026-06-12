@@ -18,3 +18,4 @@
 - Fix lost styles in Extensions page ([#3319](https://github.com/GatoGraphQL/GatoGraphQL/pull/3319))
 - Fix items not shown as active in Extensions page ([#3320](https://github.com/GatoGraphQL/GatoGraphQL/pull/3320))
 - Replace non-standard spaces in block attributes when doing useHTML5Parser ([#3313](https://github.com/GatoGraphQL/GatoGraphQL/pull/3313))
+- Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed ([#3326](https://github.com/GatoGraphQL/GatoGraphQL/pull/3326))
