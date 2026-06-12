@@ -25,7 +25,7 @@ class LocaleHelper
     /**
      * Language codes for which a translated version of the website exists. The
      * website is localized to the same set of languages as the plugin itself, so
-     * this is derived from the shipped translation files (gatographql-<locale>.mo)
+     * this is derived from the shipped translation files (gatographql-<locale>.l10n.php)
      * — staying in sync automatically as new locales are added.
      *
      * @return string[]
@@ -37,13 +37,13 @@ class LocaleHelper
         }
         $languages = [];
         $mainPlugin = PluginApp::getMainPlugin();
-        // The .mo files are named "<plugin-file-basename>-<locale>.mo" (matching the
-        // text-domain loading wiring in the plugin entry file).
+        // The .l10n.php files are named "<plugin-file-basename>-<locale>.l10n.php" (matching
+        // the text-domain loading wiring in the plugin entry file).
         $prefix = basename($mainPlugin->getPluginFile(), '.php') . '-';
         $languagesDir = $mainPlugin->getPluginDir() . '/languages/';
-        foreach (glob($languagesDir . $prefix . '*.mo') ?: [] as $moFile) {
-            // "gatographql-es_ES.mo" => locale "es_ES" => language "es"
-            $locale = substr(basename($moFile), strlen($prefix), -strlen('.mo'));
+        foreach (glob($languagesDir . $prefix . '*.l10n.php') ?: [] as $translationFile) {
+            // "gatographql-es_ES.l10n.php" => locale "es_ES" => language "es"
+            $locale = substr(basename($translationFile), strlen($prefix), -strlen('.l10n.php'));
             $language = explode('_', $locale)[0];
             $languages[$language] = $language;
         }
