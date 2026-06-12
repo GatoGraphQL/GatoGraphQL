@@ -20,3 +20,4 @@
 - Fix items not shown as active in Extensions page ([#3320](https://github.com/GatoGraphQL/GatoGraphQL/pull/3320))
 - Replace non-standard spaces in block attributes when doing useHTML5Parser ([#3313](https://github.com/GatoGraphQL/GatoGraphQL/pull/3313))
 - Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed ([#3326](https://github.com/GatoGraphQL/GatoGraphQL/pull/3326))
+- Fix the GraphiQL Explorer plugin replacing the History plugin button instead of being added alongside it ([#3327](https://github.com/GatoGraphQL/GatoGraphQL/pull/3327))
