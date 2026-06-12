@@ -238,6 +238,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Fix lost styles in Extensions page (#3319)
 * Fixed - Fix items not shown as active in Extensions page (#3320)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
+* Fixed - Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed (#3326)
 
 = 18.0.0 =
 * Breaking changes - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)
