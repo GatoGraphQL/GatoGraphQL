@@ -419,14 +419,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/package-builder.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/symplify-easy-testing.git"
         }
     ],
     "replace": {
@@ -604,7 +596,6 @@
         "pop-wp-schema/users": "18.0.1"
     },
     "config": {
-        "source-fallback": true,
         "sort-packages": true,
         "allow-plugins": {
             "boxuk/wp-muplugin-loader": true,
