@@ -26,7 +26,6 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Fix items not shown as active in Extensions page (#3320)
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 - Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed (#3326)
-- Fix the GraphiQL Explorer plugin replacing the History plugin button instead of being added alongside it (#3327)
 
 ## 18.0.0 - 20/05/2026
 
