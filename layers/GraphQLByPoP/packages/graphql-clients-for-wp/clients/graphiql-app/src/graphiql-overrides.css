@@ -1,0 +1,25 @@
+/**
+ * GraphiQL v5 renders its query editor with the Monaco editor, whose built-in
+ * Find/Replace widget (Cmd/Ctrl+F) stays visible after being closed: on close
+ * Monaco removes the `.visible` class and sets `aria-hidden="true"`, but the
+ * bundled GraphiQL styles never actually hide the widget, so it remains
+ * floating over the editor even after pressing Esc or its close (x) button.
+ *
+ * Hide the widget whenever it is not in its open (`.visible`) state, but do it
+ * with `opacity` rather than `display: none` / `visibility: hidden`:
+ *
+ *   - `display: none` removes the widget from layout, so Monaco reads a height
+ *     of 0 when sizing its docked view-zone and the re-opened widget collapses.
+ *   - `visibility: hidden` keeps it measurable but makes it unfocusable. Monaco
+ *     adds the `.visible` class asynchronously (setTimeout 0) yet focuses the
+ *     find input synchronously, so at focus time the widget is still
+ *     `:not(.visible)`; an unfocusable widget makes `focus()` a no-op and the
+ *     keystrokes go to the editor instead of the search box.
+ *
+ * `opacity: 0` hides the widget while keeping it both measurable and focusable;
+ * `pointer-events: none` stops the invisible widget from catching clicks.
+ */
+.monaco-editor .find-widget:not(.visible) {
+	opacity: 0 !important;
+	pointer-events: none !important;
+}

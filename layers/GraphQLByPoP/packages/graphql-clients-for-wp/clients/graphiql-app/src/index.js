@@ -13,6 +13,7 @@ import './monaco-worker-public-path';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import 'graphiql/style.css';
+import './graphiql-overrides.css';
 import App from './App';
 
 const container = document.getElementById('graphiql');
