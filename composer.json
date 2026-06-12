@@ -418,6 +418,14 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-easy-testing.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/leoloso/package-builder.git"
         }
     ],
