@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "527dbef6710ef3563063e7ccb1736665",
+    "content-hash": "06fd06394b7d8ccf2676629c9302de7d",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -8245,13 +8245,13 @@
             "version": "10.2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symplify/composer-json-manipulator.git",
-                "reference": "29e4fb846636e0a3b7aae601aa1eac2f68a103c9"
+                "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git",
+                "reference": "6c9084f4177a7928235b9a5f154175a745c9ddbe"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/composer-json-manipulator/zipball/29e4fb846636e0a3b7aae601aa1eac2f68a103c9",
-                "reference": "29e4fb846636e0a3b7aae601aa1eac2f68a103c9",
+                "url": "https://api.github.com/repos/leoloso/symplify-composer-json-manipulator/zipball/6c9084f4177a7928235b9a5f154175a745c9ddbe",
+                "reference": "6c9084f4177a7928235b9a5f154175a745c9ddbe",
                 "shasum": ""
             },
             "require": {
@@ -8304,39 +8304,33 @@
                     "Symplify\\ComposerJsonManipulator\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\ComposerJsonManipulator\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "Package to load, merge and save composer.json file(s)",
             "support": {
-                "source": "https://github.com/symplify/composer-json-manipulator/tree/10.2.2"
+                "source": "https://github.com/leoloso/symplify-composer-json-manipulator/tree/10.2.2",
+                "issues": "https://github.com/leoloso/symplify-composer-json-manipulator/issues"
             },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/rectorphp",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "abandoned": true,
-            "time": "2022-04-17T10:40:52+00:00"
+            "time": "2026-06-12T01:32:32+00:00"
         },
         {
             "name": "symplify/easy-testing",
             "version": "10.2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symplify/easy-testing.git",
-                "reference": "6ff0dda15ab96be196c9eb29eb1db427d0e0637d"
+                "url": "https://github.com/leoloso/symplify-easy-testing.git",
+                "reference": "d8ba2fa23a2bdd6b3853c1920ff45c6f918b96c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symplify/easy-testing/zipball/6ff0dda15ab96be196c9eb29eb1db427d0e0637d",
-                "reference": "6ff0dda15ab96be196c9eb29eb1db427d0e0637d",
+                "url": "https://api.github.com/repos/leoloso/symplify-easy-testing/zipball/d8ba2fa23a2bdd6b3853c1920ff45c6f918b96c0",
+                "reference": "d8ba2fa23a2bdd6b3853c1920ff45c6f918b96c0",
                 "shasum": ""
             },
             "require": {
@@ -8391,26 +8385,20 @@
                     "Symplify\\EasyTesting\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Symplify\\EasyTesting\\Tests\\": "tests"
+                }
+            },
             "license": [
                 "MIT"
             ],
             "description": "Testing made easy",
             "support": {
-                "source": "https://github.com/symplify/easy-testing/tree/10.2.2"
+                "source": "https://github.com/leoloso/symplify-easy-testing/tree/10.2.2",
+                "issues": "https://github.com/leoloso/symplify-easy-testing/issues"
             },
-            "funding": [
-                {
-                    "url": "https://www.paypal.me/rectorphp",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/tomasvotruba",
-                    "type": "github"
-                }
-            ],
-            "abandoned": true,
-            "time": "2022-04-17T10:40:56+00:00"
+            "time": "2026-06-12T01:33:23+00:00"
         },
         {
             "name": "symplify/monorepo-builder",
