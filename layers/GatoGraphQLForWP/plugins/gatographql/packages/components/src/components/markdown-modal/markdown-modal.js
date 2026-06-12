@@ -36,7 +36,7 @@ const getEnglishDocNoticeHTML = () => {
 		host = new URL( localizedURL ).host;
 	} catch ( e ) {}
 	const link = `<a href="${ localizedURL }" target="_blank">${ host }</a>`;
-	return `<div class="notice notice-warning inline" style="margin-bottom: 1.5em;"><p>${ sprintf(
+	return `<div class="notice notice-warning" style="margin-bottom: 1.5em;"><p>${ sprintf(
 		__( 'This documentation is in English. You can read it in your language at %s.', 'gatographql' ),
 		link
 	) }</p></div>`;
