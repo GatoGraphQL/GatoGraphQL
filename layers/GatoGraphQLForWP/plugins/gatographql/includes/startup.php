@@ -120,10 +120,20 @@ class Startup {
     }
 
     /**
-     * Mirror the .mo language fallback for JS translation packs: when the exact
-     * locale's <domain>-<locale>-<md5>.json is missing, reuse a shipped variant of
-     * the same base language. The md5 (script-path hash) is locale-independent, so
-     * only the locale segment is swapped. Hooked on 'load_script_translation_file'.
+     * Resolve the JS translation pack for a 'gatographql' script.
+     *
+     * WordPress looks for <domain>-<locale>-<md5>.json, where the md5 hashes the
+     * script's path relative to the plugin WordPress believes owns it. When an
+     * extension is loaded nested inside another plugin (e.g. bundled under a bundle
+     * plugin's vendor/ dir), that relative path — and therefore the md5 — differs
+     * from the one the shipped .json was built against (the standalone layout), so
+     * every exact-locale lookup misses (including WP's handle-based lookup, tried
+     * first) and the block falls back to English.
+     *
+     * Recompute the md5 from the script's path relative to its *own* plugin dir,
+     * which is layout-independent, and apply the same same-base-language locale
+     * fallback used for the .l10n.php files (es_AR / es_MX reuse es_ES, etc.).
+     * Hooked on 'load_script_translation_file'.
      *
      * @param string|false $file
      * @return string|false
@@ -133,14 +143,66 @@ class Startup {
         if ($domain !== 'gatographql' || !is_string($file) || is_readable($file)) {
             return $file;
         }
-        if (!preg_match('#^(.*/gatographql-)([a-z]{2,3})(?:_[A-Za-z0-9]+)*(-[0-9a-f]+\.json)$#', $file, $m)) {
-            return $file;
+        $languagesDir = dirname($file);
+        $locale = determine_locale();
+        $md5 = self::getPluginRelativeScriptMD5($handle, $languagesDir);
+        if ($md5 !== null) {
+            $resolved = self::findScriptTranslationFile($languagesDir, $locale, $md5);
+            if ($resolved !== null) {
+                return $resolved;
+            }
         }
-        $canonical = $m[1] . $m[2] . '_' . strtoupper($m[2]) . $m[3];
+        if (preg_match('#^.*/gatographql-[a-z]{2,3}(?:_[A-Za-z0-9]+)*-([0-9a-f]+)\.json$#', $file, $m)) {
+            $resolved = self::findScriptTranslationFile($languagesDir, $locale, $m[1]);
+            if ($resolved !== null) {
+                return $resolved;
+            }
+        }
+        return $file;
+    }
+
+    /**
+     * The md5 of the script's path relative to its own plugin dir (the languages
+     * dir's parent), matching how the shipped .json was hashed for the standalone
+     * plugin layout. Null when it cannot be determined.
+     */
+    private static function getPluginRelativeScriptMD5(string $handle, string $languagesDir): ?string
+    {
+        $scripts = wp_scripts();
+        $src = $scripts->registered[$handle]->src ?? '';
+        if (!is_string($src) || $src === '') {
+            return null;
+        }
+        $pluginDir = dirname($languagesDir);
+        $pluginPath = (string) parse_url(plugins_url('', $pluginDir . '/plugin.php'), PHP_URL_PATH);
+        $srcPath = (string) parse_url($src, PHP_URL_PATH);
+        if ($pluginPath === '' || strpos($srcPath, $pluginPath . '/') !== 0) {
+            return null;
+        }
+        $relative = substr($srcPath, strlen($pluginPath) + 1);
+        if (str_ends_with($relative, '.min.js')) {
+            $relative = substr($relative, 0, -strlen('.min.js')) . '.js';
+        }
+        return md5($relative);
+    }
+
+    /**
+     * Find the <domain>-<locale>-<md5>.json pack in the languages dir, reusing a
+     * shipped variant of the same base language when the exact locale is absent.
+     */
+    private static function findScriptTranslationFile(string $languagesDir, string $locale, string $md5): ?string
+    {
+        $suffix = '-' . $md5 . '.json';
+        $exact = $languagesDir . '/gatographql-' . $locale . $suffix;
+        if (is_readable($exact)) {
+            return $exact;
+        }
+        $base = (string) strtok($locale, '_');
+        $canonical = $languagesDir . '/gatographql-' . $base . '_' . strtoupper($base) . $suffix;
         if (is_readable($canonical)) {
             return $canonical;
         }
-        $variants = glob($m[1] . $m[2] . '_*' . $m[3]) ?: [];
-        return $variants[0] ?? $file;
+        $variants = glob($languagesDir . '/gatographql-' . $base . '_*' . $suffix) ?: [];
+        return $variants[0] ?? null;
     }
 }
