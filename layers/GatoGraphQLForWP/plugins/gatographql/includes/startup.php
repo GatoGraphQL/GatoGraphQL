@@ -86,26 +86,26 @@ class Startup {
     }
 
     /**
-     * Load the .mo for the current locale into the 'gatographql' text domain,
+     * Load the .l10n.php for the current locale into the 'gatographql' text domain,
      * falling back to a shipped variant of the same base language when the exact
      * locale's file is absent (e.g. es_AR / es_MX reuse es_ES, fr_CA reuses fr_FR).
      */
     public static function loadTextdomainWithFallback(string $dir, string $prefix): void
     {
         $locale = determine_locale();
-        $mofile = $dir . $prefix . $locale . '.mo';
-        if (!is_readable($mofile)) {
+        $translationFile = $dir . $prefix . $locale . '.l10n.php';
+        if (!is_readable($translationFile)) {
             $base = (string) strtok($locale, '_');
-            $canonical = $dir . $prefix . $base . '_' . strtoupper($base) . '.mo';
+            $canonical = $dir . $prefix . $base . '_' . strtoupper($base) . '.l10n.php';
             if (is_readable($canonical)) {
-                $mofile = $canonical;
+                $translationFile = $canonical;
             } else {
-                $variants = glob($dir . $prefix . $base . '_*.mo') ?: [];
-                $mofile = $variants[0] ?? $mofile;
+                $variants = glob($dir . $prefix . $base . '_*.l10n.php') ?: [];
+                $translationFile = $variants[0] ?? $translationFile;
             }
         }
-        if (is_readable($mofile)) {
-            load_textdomain('gatographql', $mofile);
+        if (is_readable($translationFile)) {
+            load_textdomain('gatographql', $translationFile);
         }
     }
 
