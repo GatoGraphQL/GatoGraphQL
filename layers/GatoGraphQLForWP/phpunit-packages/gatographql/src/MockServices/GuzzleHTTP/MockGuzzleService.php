@@ -42,6 +42,11 @@ class MockGuzzleService implements MockGuzzleServiceInterface
         $this->guzzleService->setClient($client);
     }
 
+    public function getClient(): Client
+    {
+        return $this->guzzleService->getClient();
+    }
+
     /**
      * Execute an HTTP request to the passed endpoint URL and form params
      *
