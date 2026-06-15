@@ -22,7 +22,18 @@ class Logger extends AbstractBasicService implements LoggerInterface
 {
     public const CONTEXT_SEPARATOR = 'CONTEXT: ';
 
+    /**
+     * When `true`, every log entry is prefixed with "[DRY-RUN]", so that
+     * queries executed as a dry-run are distinguishable in the logs.
+     */
+    private bool $isDryRun = false;
+
     private ?SystemLoggerInterface $systemLogger = null;
+
+    public function isDryRun(bool $isDryRun): void
+    {
+        $this->isDryRun = $isDryRun;
+    }
 
     final protected function getSystemLogger(): SystemLoggerInterface
     {
@@ -126,6 +137,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
             $message = sprintf(
                 $this->__('%s %s', 'gatographql'),
                 $this->getLoggerSeveritySign($severity),
+                $message,
+            );
+        }
+
+        if ($this->isDryRun) {
+            $message = sprintf(
+                $this->__('%s %s', 'gatographql'),
+                '[DRY-RUN]',
                 $message,
             );
         }

@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 18.1.0 - DATE
 
+### Added
+
+- Added the ability to execute queries as a DRY RUN, marked with a `[DRY-RUN]` prefix in the logs
+
 ### Improvements
 
 - Updated docs for the Schema Functions extension

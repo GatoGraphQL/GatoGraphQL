@@ -225,6 +225,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 18.1.0 =
+* Added - The ability to execute queries as a DRY RUN, marked with a [DRY-RUN] prefix in the logs
 * Improved - Updated docs for the Schema Functions extension
 * Improved - The plugin is now translated to Spanish (es_ES) (#3314)
 * Improved - The plugin is now translated to French (fr_FR) (#3315)

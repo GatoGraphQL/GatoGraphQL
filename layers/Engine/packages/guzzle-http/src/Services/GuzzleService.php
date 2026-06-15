@@ -46,7 +46,7 @@ class GuzzleService implements GuzzleServiceInterface
         return new ResponseWrapper($response);
     }
 
-    protected function getClient(): Client
+    public function getClient(): Client
     {
         if ($this->client === null) {
             $this->client = $this->createClient();
