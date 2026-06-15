@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Added the ability to register custom WordPress REST API controllers/endpoints via the service container
 - Added the ability to execute queries as a DRY RUN, marked with a `[DRY-RUN]` prefix in the logs
 
 ### Improvements
