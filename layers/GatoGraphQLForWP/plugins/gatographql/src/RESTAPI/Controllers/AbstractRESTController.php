@@ -20,6 +20,11 @@ use function register_rest_route;
  */
 abstract class AbstractRESTController extends WP_REST_Controller implements RESTControllerInterface
 {
+    public function registerRoutes(): void
+    {
+        $this->register_routes();
+    }
+
     /**
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */

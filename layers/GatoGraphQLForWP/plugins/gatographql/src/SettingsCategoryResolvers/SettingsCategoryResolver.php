@@ -19,6 +19,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public final const PLUGIN_INTEGRATION_CONFIGURATION = Plugin::NAMESPACE . '\plugin-integration-configuration';
     public final const API_KEYS = Plugin::NAMESPACE . '\api-keys';
     public final const PLUGIN_MANAGEMENT = Plugin::NAMESPACE . '\plugin-management';
+    public final const EXTERNAL_TOOLS = Plugin::NAMESPACE . '\external-tools';
 
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
@@ -47,6 +48,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_INTEGRATION_CONFIGURATION,
             self::API_KEYS,
             self::PLUGIN_MANAGEMENT,
+            self::EXTERNAL_TOOLS,
         ];
     }
 
@@ -62,6 +64,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_INTEGRATION_CONFIGURATION => $this->__('Plugin Integration Configuration', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gatographql'),
+            self::EXTERNAL_TOOLS => $this->__('External Tools', 'gatographql'),
             default => parent::getName($settingsCategory),
         };
     }
@@ -78,6 +81,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_INTEGRATION_CONFIGURATION => Options::PLUGIN_INTEGRATION_CONFIGURATION,
             self::API_KEYS => Options::API_KEYS,
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
+            self::EXTERNAL_TOOLS => Options::EXTERNAL_TOOLS,
             default => parent::getDBOptionName($settingsCategory),
         };
         return $this->getOptionNamespacer()->namespaceOption($option);
@@ -95,6 +99,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_INTEGRATION_CONFIGURATION => 45,
             self::API_KEYS => 40,
             self::PLUGIN_MANAGEMENT => 30,
+            self::EXTERNAL_TOOLS => 20,
             default => parent::getPriority($settingsCategory),
         };
     }
@@ -103,6 +108,7 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     {
         return match ($settingsCategory) {
             self::PLUGIN_MANAGEMENT => false,
+            self::EXTERNAL_TOOLS => false,
             default => parent::addOptionsFormSubmitButton($settingsCategory),
         };
     }

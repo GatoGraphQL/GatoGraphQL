@@ -8,8 +8,6 @@ interface RESTControllerInterface
 {
     /**
      * Register the WordPress REST routes for this controller.
-     *
-     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    public function register_routes(): void;
+    public function registerRoutes(): void;
 }

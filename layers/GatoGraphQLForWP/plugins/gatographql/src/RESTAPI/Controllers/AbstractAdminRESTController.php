@@ -14,14 +14,19 @@ use function current_user_can;
 abstract class AbstractAdminRESTController extends AbstractRESTController
 {
     /**
-     * Validate the user has the required capability.
+     * Validate the user has the required capability. When the capability
+     * is `null`, no capability is required and access is always granted.
      */
     public function checkPermission(): bool
     {
-        return current_user_can($this->getCapability());
+        $capability = $this->getCapability();
+        if ($capability === null) {
+            return true;
+        }
+        return current_user_can($capability);
     }
 
-    protected function getCapability(): string
+    protected function getCapability(): ?string
     {
         return (string) constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA');
     }

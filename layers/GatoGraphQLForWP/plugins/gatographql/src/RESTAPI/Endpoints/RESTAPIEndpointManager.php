@@ -13,7 +13,7 @@ use function add_action;
  * On `rest_api_init`, registers the WordPress REST routes for every
  * REST controller collected into the registry (via the CompilerPass).
  */
-class RESTAPIEndpointManager extends AbstractAutomaticallyInstantiatedService
+class RESTAPIEndpointManager extends AbstractAutomaticallyInstantiatedService implements RESTAPIEndpointManagerInterface
 {
     private ?RESTControllerRegistryInterface $restControllerRegistry = null;
 
@@ -38,7 +38,7 @@ class RESTAPIEndpointManager extends AbstractAutomaticallyInstantiatedService
     public function registerRoutes(): void
     {
         foreach ($this->getRESTControllerRegistry()->getRESTControllers() as $restController) {
-            $restController->register_routes();
+            $restController->registerRoutes();
         }
     }
 }

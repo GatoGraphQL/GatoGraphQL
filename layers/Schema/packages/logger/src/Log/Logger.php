@@ -30,7 +30,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
 
     private ?SystemLoggerInterface $systemLogger = null;
 
-    public function isDryRun(bool $isDryRun): void
+    public function setDryRun(bool $isDryRun): void
     {
         $this->isDryRun = $isDryRun;
     }

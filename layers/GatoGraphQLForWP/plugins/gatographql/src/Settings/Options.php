@@ -52,6 +52,13 @@ class Options
      */
     public final const PLUGIN_MANAGEMENT = 'plugin-management';
     /**
+     * Option name for the "External Tools" category.
+     *
+     * This option won't be actually stored to DB, but it's
+     * still needed to render the corresponding form.
+     */
+    public final const EXTERNAL_TOOLS = 'external-tools';
+    /**
      * Option name under which to store the enabled/disabled Modules
      */
     public final const MODULES = 'modules';
