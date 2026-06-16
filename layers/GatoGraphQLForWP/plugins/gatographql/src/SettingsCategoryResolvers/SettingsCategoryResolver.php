@@ -46,9 +46,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_CONFIGURATION,
             self::SERVICE_CONFIGURATION,
             self::PLUGIN_INTEGRATION_CONFIGURATION,
+            self::EXTERNAL_TOOLS,
             self::API_KEYS,
             self::PLUGIN_MANAGEMENT,
-            self::EXTERNAL_TOOLS,
         ];
     }
 
@@ -62,9 +62,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gatographql'),
             self::SERVICE_CONFIGURATION => $this->__('Service Configuration', 'gatographql'),
             self::PLUGIN_INTEGRATION_CONFIGURATION => $this->__('Plugin Integration Configuration', 'gatographql'),
+            self::EXTERNAL_TOOLS => $this->__('External Tools', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gatographql'),
-            self::EXTERNAL_TOOLS => $this->__('External Tools', 'gatographql'),
             default => parent::getName($settingsCategory),
         };
     }
@@ -79,9 +79,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_CONFIGURATION => Options::PLUGIN_CONFIGURATION,
             self::SERVICE_CONFIGURATION => Options::SERVICE_CONFIGURATION,
             self::PLUGIN_INTEGRATION_CONFIGURATION => Options::PLUGIN_INTEGRATION_CONFIGURATION,
+            self::EXTERNAL_TOOLS => Options::EXTERNAL_TOOLS,
             self::API_KEYS => Options::API_KEYS,
             self::PLUGIN_MANAGEMENT => Options::PLUGIN_MANAGEMENT,
-            self::EXTERNAL_TOOLS => Options::EXTERNAL_TOOLS,
             default => parent::getDBOptionName($settingsCategory),
         };
         return $this->getOptionNamespacer()->namespaceOption($option);
@@ -97,9 +97,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
             self::PLUGIN_CONFIGURATION => 60,
             self::SERVICE_CONFIGURATION => 50,
             self::PLUGIN_INTEGRATION_CONFIGURATION => 45,
+            self::EXTERNAL_TOOLS => 43,
             self::API_KEYS => 40,
             self::PLUGIN_MANAGEMENT => 30,
-            self::EXTERNAL_TOOLS => 20,
             default => parent::getPriority($settingsCategory),
         };
     }
@@ -107,8 +107,9 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function addOptionsFormSubmitButton(string $settingsCategory): bool
     {
         return match ($settingsCategory) {
-            self::PLUGIN_MANAGEMENT => false,
-            self::EXTERNAL_TOOLS => false,
+            self::EXTERNAL_TOOLS,
+            self::PLUGIN_MANAGEMENT
+                => false,
             default => parent::addOptionsFormSubmitButton($settingsCategory),
         };
     }
