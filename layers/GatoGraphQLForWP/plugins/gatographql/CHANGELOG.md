@@ -28,6 +28,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Fixed
 
+- Fixed a module being initialized more than once when booting an attached app (such as the Internal GraphQL Server), which could re-register its services and override others (#3331)
 - Fix lost styles in Extensions page (#3319)
 - Fix items not shown as active in Extensions page (#3320)
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
