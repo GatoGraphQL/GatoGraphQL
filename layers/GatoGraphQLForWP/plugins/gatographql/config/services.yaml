@@ -4,6 +4,12 @@ services:
         autowire: true
         autoconfigure: true
 
+    GatoGraphQL\GatoGraphQL\RESTAPI\Registries\RESTControllerRegistryInterface:
+        class: \GatoGraphQL\GatoGraphQL\RESTAPI\Registries\RESTControllerRegistry
+
+    GatoGraphQL\GatoGraphQL\RESTAPI\Endpoints\RESTAPIEndpointManagerInterface:
+        class: \GatoGraphQL\GatoGraphQL\RESTAPI\Endpoints\RESTAPIEndpointManager
+
     GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface:
         class: \GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistry
 

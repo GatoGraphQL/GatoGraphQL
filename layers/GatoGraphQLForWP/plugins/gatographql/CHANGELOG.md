@@ -6,6 +6,12 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 18.1.0 - DATE
 
+### Added
+
+- Added the ability to register custom WordPress REST API controllers/endpoints via the service container (#3330)
+- Added the ability to execute queries as a DRY RUN, marked with a `[DRY-RUN]` prefix in the logs (#3330)
+- Added the "External Tools" settings category, for extensions to surface tooling/informational sections (#3330)
+
 ### Improvements
 
 - Updated docs for the Schema Functions extension
