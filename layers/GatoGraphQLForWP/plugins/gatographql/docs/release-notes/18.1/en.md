@@ -16,6 +16,7 @@
 - The plugin is now translated to Portuguese (`pt_BR`) ([#3317](https://github.com/GatoGraphQL/GatoGraphQL/pull/3317))
 - The plugin is now translated to Polish (`pl_PL`) ([#3318](https://github.com/GatoGraphQL/GatoGraphQL/pull/3318))
 - The plugin is now translated to Dutch (`nl_NL`) ([#3322](https://github.com/GatoGraphQL/GatoGraphQL/pull/3322))
+- The plugin is now translated to Japanese (`ja`) ([#3332](https://github.com/GatoGraphQL/GatoGraphQL/pull/3332))
 - Do not show All Inclusive bundle in Extension docs ([#3321](https://github.com/GatoGraphQL/GatoGraphQL/pull/3321))
 - Upgraded GraphiQL to version 5.2.3 ([#3323](https://github.com/GatoGraphQL/GatoGraphQL/pull/3323))
 - Added the Explorer plugin to the GraphiQL client, to build queries by point-and-click ([#3327](https://github.com/GatoGraphQL/GatoGraphQL/pull/3327))

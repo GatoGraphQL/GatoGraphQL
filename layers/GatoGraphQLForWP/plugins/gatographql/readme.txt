@@ -236,6 +236,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - The plugin is now translated to Portuguese (pt_BR) (#3317)
 * Improved - The plugin is now translated to Polish (pl_PL) (#3318)
 * Improved - The plugin is now translated to Dutch (nl_NL) (#3322)
+* Improved - The plugin is now translated to Japanese (ja) (#3332)
 * Improved - Do not show All Inclusive bundle in Extension docs (#3321)
 * Improved - Upgraded GraphiQL to version 5.2.3 (#3323)
 * Improved - Added the Explorer plugin to the GraphiQL client, to build queries by point-and-click (#3327)
