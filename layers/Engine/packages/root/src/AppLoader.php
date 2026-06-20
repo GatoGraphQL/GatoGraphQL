@@ -258,6 +258,7 @@ class AppLoader implements AppLoaderInterface
         );
         $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
+            // Make sure the module is not already initialized by someone else in the recursion
             if (in_array($moduleClass, $this->initializedModuleClasses, true)) {
                 continue;
             }
