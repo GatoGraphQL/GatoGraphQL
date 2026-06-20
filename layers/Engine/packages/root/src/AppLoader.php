@@ -258,6 +258,9 @@ class AppLoader implements AppLoaderInterface
         );
         $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
+            if (in_array($moduleClass, $this->initializedModuleClasses, true)) {
+                continue;
+            }
             $this->initializedModuleClasses[] = $moduleClass;
 
             // Initialize and register the Module
@@ -325,15 +328,7 @@ class AppLoader implements AppLoaderInterface
             }
 
             // We reached the bottom of the rung, add the module to the list.
-            // Guard against adding a module that's already ordered: a module
-            // can be reached again (e.g. when its dependents are processed
-            // across an additional initialization pass) while not yet present
-            // in `$initializedModuleClasses`; without this guard it would be
-            // initialized twice, re-running its service registration and
-            // clobbering any overrides registered in between.
-            if (!in_array($moduleClass, $this->orderedModuleClasses, true)) {
-                $this->orderedModuleClasses[] = $moduleClass;
-            }
+            $this->orderedModuleClasses[] = $moduleClass;
 
             /**
              * If this component satisfies the contracts for other
