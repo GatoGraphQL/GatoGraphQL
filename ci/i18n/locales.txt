@@ -6,3 +6,4 @@ pt_BR
 pl_PL
 nl_NL
 ja
+zh_CN
