@@ -50,7 +50,7 @@ abstract class AbstractBundleExtension extends AbstractExtension implements Bund
      * the bundle can override services from any of the
      * bundled extensions.
      */
-    protected function getInitializeExtensionPriority(): int
+    public function getInitializeExtensionPriority(): int
     {
         return parent::getInitializeExtensionPriority() + 10;
     }
