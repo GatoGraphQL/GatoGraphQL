@@ -5,3 +5,4 @@ de_DE
 pt_BR
 pl_PL
 nl_NL
+ja
