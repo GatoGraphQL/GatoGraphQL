@@ -7904,8 +7904,9 @@ msgstr "De Voyager-client configureren voor het enkele eindpunt"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:488
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:120
-#: Schema/packages/logger/src/Log/Logger.php:127
+#: Schema/packages/logger/src/Log/Logger.php:125
+#: Schema/packages/logger/src/Log/Logger.php:139
+#: Schema/packages/logger/src/Log/Logger.php:146
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -8041,7 +8042,7 @@ msgstr "Geen"
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/EndpointSchemaConfigurationBlock.php:147
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:238
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:74
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
 msgid "Schema Configuration"
 msgstr "Schemaconfiguratie"
 
@@ -11431,7 +11432,7 @@ msgid "Endpoint"
 msgstr "Endpoint"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:67
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
 msgid "Endpoint Configuration"
 msgstr "Endpointconfiguratie"
 
@@ -11456,7 +11457,7 @@ msgid "General Settings"
 msgstr "Algemene instellingen"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:73
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:67
 msgid "Plugin Management"
 msgstr "Pluginbeheer"
 
@@ -11539,27 +11540,31 @@ msgstr "endpoint categorieën"
 msgid "Unsupported Settings Category '%s'"
 msgstr "Niet-ondersteunde instellingencategorie '%s'"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:60
 msgid "Schema Elements Configuration"
 msgstr "Configuratie van schema-elementen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
 msgid "Server Configuration"
 msgstr "Serverconfiguratie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:60
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
 msgid "Plugin Configuration"
 msgstr "Pluginconfiguratie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:63
 msgid "Service Configuration"
 msgstr "Serviceconfiguratie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
 msgid "Plugin Integration Configuration"
 msgstr "Configuratie plug-inintegratie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:63
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:65
+msgid "External Tools"
+msgstr "Externe tools"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:66
 msgid "API Keys"
 msgstr "API-sleutels"
 
@@ -12460,7 +12465,7 @@ msgstr ""
 "UUID (universally unique identifier) scalar, zoals 25770975-0c3d-4ff0-ba27-"
 "a0f98fe9b052"
 
-#: Schema/packages/logger/src/Log/Logger.php:85
+#: Schema/packages/logger/src/Log/Logger.php:96
 msgid " "
 msgstr " "
 

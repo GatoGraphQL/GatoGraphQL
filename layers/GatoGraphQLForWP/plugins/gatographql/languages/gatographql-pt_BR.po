@@ -7342,33 +7342,33 @@ msgid "Browse documentation&#x2197;"
 msgstr "Navegar na documentação&#x2197;"
 
 #. translators: %s: Plugin name and version.
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:219
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:213
 #, php-format
 msgctxt "plugin"
 msgid "Get extension %s"
 msgstr "Obter extensão %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:235
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:229
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractModuleDocsMenuPage.php:294
 msgid "Website"
 msgstr "Site"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:249
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:243
 msgid ""
 "Ooops something went wrong: No extensions found. Please contact the admin."
 msgstr ""
 "Ops, algo deu errado: Nenhuma extensão encontrada. Por favor, entre em "
 "contato com o administrador."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:399
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:393
 msgid "Missing an Extension?"
 msgstr "Falta uma Extensão?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:396
 msgid "Request an Extension"
 msgstr "Solicitar uma Extensão"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:403
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:397
 msgid ""
 "Needing an integration with a 3rd-party plugin? Let us know, and we can work "
 "on an extension."
@@ -7376,7 +7376,7 @@ msgstr ""
 "Precisa de uma integração com um plugin de terceiros? Avise-nos e podemos "
 "trabalhar em uma extensão."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:404
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:398
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "Entre em contato com o <strong>Gato GraphQL</strong>"
 
@@ -7813,8 +7813,9 @@ msgstr "Configurando o cliente Voyager para o endpoint único"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:488
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:120
-#: Schema/packages/logger/src/Log/Logger.php:127
+#: Schema/packages/logger/src/Log/Logger.php:125
+#: Schema/packages/logger/src/Log/Logger.php:139
+#: Schema/packages/logger/src/Log/Logger.php:146
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -7949,7 +7950,7 @@ msgstr "Nenhuma"
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/EndpointSchemaConfigurationBlock.php:147
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:238
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:74
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
 msgid "Schema Configuration"
 msgstr "Configuração de Schema"
 
@@ -11049,12 +11050,12 @@ msgstr "Enviar mensagem"
 msgid "Attached extension license data"
 msgstr "Dados de licença de extensão anexados"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:31
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:78
 #, php-format
 msgid "Oops, extension '%s' does not exist"
 msgstr "Ops, a extensão '%s' não existe"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:41
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:88
 #, php-format
 msgid "Oops, extension '%s' has no documentation"
 msgstr "Ops, a extensão '%s' não possui documentação"
@@ -11137,29 +11138,29 @@ msgstr ""
 "%s <a href=\"%s\" class=\"button\">Voltar para a página de "
 "<strong>Extensões</strong></a></span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:172
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:175
 #, php-format
 msgid "%s <small>(<a href=\"%s\" target=\"%s\" title=\"%s\">%s%s</a>)</small>"
 msgstr "%s <small>(<a href=\"%s\" target=\"%s\" title=\"%s\">%s%s</a>)</small>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:176
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:179
 msgid "Open in shop"
 msgstr "Abrir na loja"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:178
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:181
 msgid "go PRO"
 msgstr "seja PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:178
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:179
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:181
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:182
 msgid "website"
 msgstr "site"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:255
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:258
 msgid "Modules included in this extension:"
 msgstr "Módulos incluídos nesta extensão:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:256
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ExtensionDocsMenuPage.php:259
 msgid "Modules included in this bundle:"
 msgstr "Módulos incluídos neste pacote:"
 
@@ -11328,7 +11329,7 @@ msgid "Endpoint"
 msgstr "Endpoint"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:67
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
 msgid "Endpoint Configuration"
 msgstr "Configuração de Endpoint"
 
@@ -11353,7 +11354,7 @@ msgid "General Settings"
 msgstr "Configurações Gerais"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:73
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:67
 msgid "Plugin Management"
 msgstr "Gerenciamento de Plugin"
 
@@ -11436,27 +11437,31 @@ msgstr "categorias de endpoint"
 msgid "Unsupported Settings Category '%s'"
 msgstr "Categoria de Configurações não suportada '%s'"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:60
 msgid "Schema Elements Configuration"
 msgstr "Configuração de Elementos do Schema"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
 msgid "Server Configuration"
 msgstr "Configuração do Servidor"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:60
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
 msgid "Plugin Configuration"
 msgstr "Configuração do Plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:63
 msgid "Service Configuration"
 msgstr "Configuração de Serviço"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
 msgid "Plugin Integration Configuration"
 msgstr "Configuração de Integração de Plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:63
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:65
+msgid "External Tools"
+msgstr "Ferramentas Externas"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:66
 msgid "API Keys"
 msgstr "Chaves de API"
 
@@ -12350,7 +12355,7 @@ msgstr ""
 "Scalar UUID (identificador universalmente único), como 25770975-0c3d-4ff0-"
 "ba27-a0f98fe9b052"
 
-#: Schema/packages/logger/src/Log/Logger.php:85
+#: Schema/packages/logger/src/Log/Logger.php:96
 msgid " "
 msgstr " "
 
