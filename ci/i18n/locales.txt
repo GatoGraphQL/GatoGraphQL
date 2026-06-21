@@ -8,3 +8,4 @@ nl_NL
 ja
 zh_CN
 ko_KR
+vi
