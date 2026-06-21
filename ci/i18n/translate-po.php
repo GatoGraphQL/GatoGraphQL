@@ -52,6 +52,7 @@ function localeToLanguageName(string $locale): string
         'zh_TW' => 'Chinese (Traditional)',
         'ru_RU' => 'Russian',
         'pl_PL' => 'Polish (Poland)',
+        'ko_KR' => 'Korean',
     ];
     return $map[$locale] ?? $locale;
 }
