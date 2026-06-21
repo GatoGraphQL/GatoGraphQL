@@ -9,3 +9,4 @@ ja
 zh_CN
 ko_KR
 vi
+th

@@ -26,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The plugin is now translated to Chinese (Simplified) (`zh_CN`) (#3334)
 - The plugin is now translated to Korean (`ko_KR`) (#3335)
 - The plugin is now translated to Vietnamese (`vi`) (#3336)
+- The plugin is now translated to Thai (`th`) (#3337)
 - Completed translations for the existing locales and resynced the block-editor JS language packs with the catalog (#3333)
 - Do not show All Inclusive bundle in Extension docs (#3321)
 - Upgraded GraphiQL to version 5.2.3 (#3323)
