@@ -53,6 +53,7 @@ function localeToLanguageName(string $locale): string
         'ru_RU' => 'Russian',
         'pl_PL' => 'Polish (Poland)',
         'ko_KR' => 'Korean',
+        'vi'    => 'Vietnamese',
     ];
     return $map[$locale] ?? $locale;
 }
