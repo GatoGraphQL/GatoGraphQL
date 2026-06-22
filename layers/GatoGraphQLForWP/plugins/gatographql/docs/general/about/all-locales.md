@@ -89,7 +89,7 @@
 
 {release-notes-intro}
 
-- **[18.1](../../release-notes/18.1/en.md)** ({current})
+- **[19.0](../../release-notes/19.0/en.md)** ({current})
 - [18.0](../../release-notes/18.0/en.md)
 - [17.1](../../release-notes/17.1/en.md)
 - [17.0](../../release-notes/17.0/en.md)

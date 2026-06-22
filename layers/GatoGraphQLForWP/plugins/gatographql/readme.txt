@@ -224,7 +224,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 18.1.0 =
+= 19.0.0 =
 * Added - The ability to register custom WordPress REST API controllers/endpoints via the service container (#3330)
 * Added - The ability to execute queries as a DRY RUN, marked with a [DRY-RUN] prefix in the logs (#3330)
 * Added - The "External Tools" settings category, for extensions to surface tooling/informational sections (#3330)
