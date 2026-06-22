@@ -55,6 +55,7 @@ function localeToLanguageName(string $locale): string
         'ko_KR' => 'Korean',
         'vi'    => 'Vietnamese',
         'th'    => 'Thai',
+        'id_ID' => 'Indonesian',
     ];
     return $map[$locale] ?? $locale;
 }

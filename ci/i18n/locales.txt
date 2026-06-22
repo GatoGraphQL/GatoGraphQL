@@ -10,3 +10,4 @@ zh_CN
 ko_KR
 vi
 th
+id_ID
