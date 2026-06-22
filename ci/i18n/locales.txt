@@ -12,3 +12,4 @@ vi
 th
 id_ID
 ru_RU
+tr_TR
