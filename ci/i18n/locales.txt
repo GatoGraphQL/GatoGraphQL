@@ -11,3 +11,4 @@ ko_KR
 vi
 th
 id_ID
+ru_RU
