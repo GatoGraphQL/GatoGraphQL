@@ -38,6 +38,7 @@ extend-ignore-re = [
     "Symplify",
     "Automattic",
     "getTransferrableToEndpointRequestParams",
+    "mis-escape",
 ]
 
 [default.extend-words]
