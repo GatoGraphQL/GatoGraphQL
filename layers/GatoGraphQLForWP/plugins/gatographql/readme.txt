@@ -243,6 +243,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Improved - The plugin is now translated to Thai (th) (#3337)
 * Improved - The plugin is now translated to Bahasa Indonesia (id_ID) (#3338)
 * Improved - The plugin is now translated to Russian (ru_RU) (#3339)
+* Improved - The plugin is now translated to Swedish (sv_SE) (#3341)
 * Improved - Completed translations for the existing locales and resynced the block-editor JS language packs with the catalog (#3333)
 * Improved - Do not show All Inclusive bundle in Extension docs (#3321)
 * Improved - Upgraded GraphiQL to version 5.2.3 (#3323)
