@@ -29,6 +29,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The plugin is now translated to Thai (`th`) (#3337)
 - The plugin is now translated to Bahasa Indonesia (`id_ID`) (#3338)
 - The plugin is now translated to Russian (`ru_RU`) (#3339)
+- The plugin is now translated to Swedish (`sv_SE`) (#3341)
 - Completed translations for the existing locales and resynced the block-editor JS language packs with the catalog (#3333)
 - Do not show All Inclusive bundle in Extension docs (#3321)
 - Upgraded GraphiQL to version 5.2.3 (#3323)

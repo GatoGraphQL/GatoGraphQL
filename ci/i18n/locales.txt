@@ -13,3 +13,4 @@ th
 id_ID
 ru_RU
 tr_TR
+sv_SE
