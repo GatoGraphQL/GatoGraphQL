@@ -43,6 +43,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
 - Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed (#3326)
 - Register always first the capability to access the plugin (so it doesn't fail installing whenever the server does not have enough memory) (#3343)
+- Show the Marketplace Provider's own error message when activating or validating a license fails with an error HTTP status code, such as when the license's activation limit has been reached, instead of a generic HTTP error (#3344)
 
 ## 18.0.0 - 20/05/2026
 
