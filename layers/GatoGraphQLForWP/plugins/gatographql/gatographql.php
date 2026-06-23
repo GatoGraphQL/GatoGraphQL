@@ -50,6 +50,23 @@ if (class_exists(Plugin::class)) {
     return;
 }
 
+/**
+ * Execute always first, to guarantee the capability is registered even if the
+ * webserver doesn't have enough memory. Otherwise, once it fails, the capability
+ * won't be registered (even after increasing the memory limit), and the plugin
+ * will not be available on the menu.
+ *
+ * Can't use Composer to load this file, as "vendor/" is loaded only
+ * in the "plugins_loaded" hook, and that's too late to register
+ * the capabilities.
+ */
+require_once __DIR__ . '/includes/capabilities.php';
+require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
+\PoPIncludes\GatoGraphQL\SchemaEditingAccessCapabilities::registerGatoGraphQLSchemaEditingAccessCapabilities(
+    __FILE__,
+    constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
+);
+
 // Validate that there is enough memory to run the plugin
 require_once __DIR__ . '/includes/startup.php';
 if (!Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
@@ -61,18 +78,6 @@ add_action('init', function (): void {
     Startup::registerScriptTranslationFileResolver();
     Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
 }, PHP_INT_MIN);
-
-/**
- * Can't use Composer to load this file, as "vendor/" is loaded only
- * in the "plugins_loaded" hook, and that's too late to register
- * the capabilities.
- */
-require_once __DIR__ . '/includes/capabilities.php';
-require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
-\PoPIncludes\GatoGraphQL\SchemaEditingAccessCapabilities::registerGatoGraphQLSchemaEditingAccessCapabilities(
-    __FILE__,
-    constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
-);
 
 /**
  * The commit hash is added to the plugin version 
