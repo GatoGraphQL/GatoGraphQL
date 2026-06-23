@@ -58,6 +58,7 @@ function localeToLanguageName(string $locale): string
         'id_ID' => 'Indonesian',
         'tr_TR' => 'Turkish',
         'sv_SE' => 'Swedish (Sweden)',
+        'el'    => 'Greek',
     ];
     return $map[$locale] ?? $locale;
 }
