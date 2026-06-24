@@ -78,7 +78,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.
 
 [WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch product data.
 
@@ -90,7 +90,7 @@ You can use Gato GraphQL to do everything offered by Gato Plugins!
 
 The plugins are:
 
-[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
 
