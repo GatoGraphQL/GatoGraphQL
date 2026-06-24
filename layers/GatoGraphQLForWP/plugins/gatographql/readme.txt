@@ -113,24 +113,24 @@ The Gato GraphQL website contains extensive documentation:
 
 When running WordPress 6.5 or above, the plugin is available in the following languages (not only its admin interface, but also the schema documentation):
 
-- 🇮🇩 Bahasa Indonesia (id_ID)
-- 🇨🇳 Chinese (Simplified) (zh_CN)
-- 🇳🇱 Dutch (nl_NL)
+- 🇮🇩 Bahasa Indonesia
+- 🇨🇳 Chinese
+- 🇳🇱 Dutch
 - 🇺🇸 English
-- 🇫🇷 French (fr_FR)
-- 🇩🇪 German (de_DE)
-- 🇬🇷 Greek (el)
-- 🇮🇹 Italian (it_IT)
-- 🇯🇵 Japanese (ja)
-- 🇰🇷 Korean (ko_KR)
-- 🇵🇱 Polish (pl_PL)
-- 🇧🇷 Portuguese (pt_BR)
-- 🇷🇺 Russian (ru_RU)
-- 🇪🇸 Spanish (es_ES)
-- 🇸🇪 Swedish (sv_SE)
-- 🇹🇭 Thai (th)
-- 🇹🇷 Turkish (tr_TR)
-- 🇻🇳 Vietnamese (vi)
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇬🇷 Greek
+- 🇮🇹 Italian
+- 🇯🇵 Japanese
+- 🇰🇷 Korean
+- 🇵🇱 Polish
+- 🇧🇷 Portuguese
+- 🇷🇺 Russian
+- 🇪🇸 Spanish
+- 🇸🇪 Swedish
+- 🇹🇭 Thai
+- 🇹🇷 Turkish
+- 🇻🇳 Vietnamese
 
 = Can I watch videos demonstrating the plugin? =
 
