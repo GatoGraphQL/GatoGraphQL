@@ -7761,13 +7761,13 @@ msgstr "Riga corrispondente"
 msgid "Line %s"
 msgstr "Riga %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:51
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:68
 #, php-format
 msgid "Request to \"%s\" failed with HTTP status code %d: %s"
 msgstr ""
 "La richiesta a \"%s\" non è riuscita con il codice di stato HTTP %d: %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:65
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:79
 #, php-format
 msgid ""
 "The response from the license API (endpoint: \"%s\") could not be decoded as "
@@ -7776,19 +7776,19 @@ msgstr ""
 "La risposta dall'API della licenza (endpoint: \"%s\") non può essere "
 "decodificata come JSON"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:79
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
 msgid "Unknown error"
 msgstr "Errore sconosciuto"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:130
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:144
 msgid ""
 "The license is for test mode, but the extension is not on development mode"
 msgstr ""
 "La licenza è per la modalità di test, ma l'estensione non è in modalità di "
 "sviluppo"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:140
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:154
 msgid ""
 "The license is not for test mode, but the extension is on development mode"
 msgstr ""

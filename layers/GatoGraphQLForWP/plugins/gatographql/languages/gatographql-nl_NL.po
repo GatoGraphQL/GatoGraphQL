@@ -7766,12 +7766,12 @@ msgstr "Overeenkomende regel"
 msgid "Line %s"
 msgstr "Regel %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:51
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:68
 #, php-format
 msgid "Request to \"%s\" failed with HTTP status code %d: %s"
 msgstr "Verzoek aan \"%s\" mislukt met HTTP-statuscode %d: %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:65
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:79
 #, php-format
 msgid ""
 "The response from the license API (endpoint: \"%s\") could not be decoded as "
@@ -7780,18 +7780,18 @@ msgstr ""
 "De respons van de licentie-API (eindpunt: \"%s\") kon niet worden "
 "gedecodeerd als JSON"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:79
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
 msgid "Unknown error"
 msgstr "Onbekende fout"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:130
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:144
 msgid ""
 "The license is for test mode, but the extension is not on development mode"
 msgstr ""
 "De licentie is voor testmodus, maar de extensie staat niet in ontwikkelmodus"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:140
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:154
 msgid ""
 "The license is not for test mode, but the extension is on development mode"
 msgstr ""
