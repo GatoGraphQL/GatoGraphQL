@@ -109,6 +109,29 @@ The Gato GraphQL website contains extensive documentation:
 - [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
 - [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
 
+= In which languages is the plugin available? =
+
+When running WordPress 6.5 or above, the plugin is available in the following languages (not only its admin interface, but also the schema documentation):
+
+- English
+- Spanish (es_ES)
+- French (fr_FR)
+- Italian (it_IT)
+- German (de_DE)
+- Portuguese (pt_BR)
+- Polish (pl_PL)
+- Dutch (nl_NL)
+- Japanese (ja)
+- Chinese (Simplified) (zh_CN)
+- Korean (ko_KR)
+- Vietnamese (vi)
+- Thai (th)
+- Bahasa Indonesia (id_ID)
+- Russian (ru_RU)
+- Turkish (tr_TR)
+- Swedish (sv_SE)
+- Greek (el)
+
 = Can I watch videos demonstrating the plugin? =
 
 Sure you can. There are videos demonstrating how to use Gato GraphQL in:
