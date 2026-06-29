@@ -8339,12 +8339,12 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
 msgid ""
 "Translate content to multiple languages using the service provider of your "
-"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and "
-"Google Translate."
+"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"self-hosted LLM (eg: via Ollama), DeepL, and Google Translate."
 msgstr ""
-"Dịch nội dung sang nhiều ngôn ngữ bằng nhà cung cấp dịch vụ theo lựa chọn "
-"của bạn, bao gồm ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL và "
-"Google Translate."
+"Dịch nội dung sang nhiều ngôn ngữ bằng nhà cung cấp dịch vụ bạn chọn, bao "
+"gồm ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, LLM tự lưu "
+"trữ (ví dụ: qua Ollama), DeepL và Google Translate."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
@@ -13101,3 +13101,12 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid ""
+#~ "Translate content to multiple languages using the service provider of "
+#~ "your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, "
+#~ "and Google Translate."
+#~ msgstr ""
+#~ "Dịch nội dung sang nhiều ngôn ngữ bằng nhà cung cấp dịch vụ theo lựa chọn "
+#~ "của bạn, bao gồm ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL và "
+#~ "Google Translate."

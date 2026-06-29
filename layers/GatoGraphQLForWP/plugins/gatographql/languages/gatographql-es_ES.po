@@ -8564,12 +8564,12 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
 msgid ""
 "Translate content to multiple languages using the service provider of your "
-"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and "
-"Google Translate."
+"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"self-hosted LLM (eg: via Ollama), DeepL, and Google Translate."
 msgstr ""
-"Traduce contenido a múltiples idiomas usando el proveedor de servicios de tu "
-"elección, entre ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL y "
-"Google Translate."
+"Traduce contenido a múltiples idiomas utilizando el proveedor de servicios "
+"de tu elección, entre ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, "
+"OpenRouter, LLM autoalojado (ej.: mediante Ollama), DeepL y Google Translate."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
@@ -13395,3 +13395,12 @@ msgstr "Ordenar por el nicename del usuario"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordenar por el email del usuario"
+
+#~ msgid ""
+#~ "Translate content to multiple languages using the service provider of "
+#~ "your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, "
+#~ "and Google Translate."
+#~ msgstr ""
+#~ "Traduce contenido a múltiples idiomas usando el proveedor de servicios de "
+#~ "tu elección, entre ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL y "
+#~ "Google Translate."

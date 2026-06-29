@@ -8467,11 +8467,12 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
 msgid ""
 "Translate content to multiple languages using the service provider of your "
-"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and "
-"Google Translate."
+"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"self-hosted LLM (eg: via Ollama), DeepL, and Google Translate."
 msgstr ""
-"Переводите контент на несколько языков с помощью выбранного поставщика "
-"услуг: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL или Google "
+"Переводите контент на несколько языков с помощью выбранного вами поставщика "
+"услуг: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"самостоятельно развёртываемой LLM (например, через Ollama), DeepL или Google "
 "Translate."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
@@ -13248,3 +13249,12 @@ msgstr "Сортировка по псевдониму пользователя 
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Сортировка по электронной почте пользователя"
+
+#~ msgid ""
+#~ "Translate content to multiple languages using the service provider of "
+#~ "your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, "
+#~ "and Google Translate."
+#~ msgstr ""
+#~ "Переводите контент на несколько языков с помощью выбранного поставщика "
+#~ "услуг: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL или Google "
+#~ "Translate."

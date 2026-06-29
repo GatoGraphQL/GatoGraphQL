@@ -7992,11 +7992,12 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
 msgid ""
 "Translate content to multiple languages using the service provider of your "
-"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and "
-"Google Translate."
+"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"self-hosted LLM (eg: via Ollama), DeepL, and Google Translate."
 msgstr ""
-"ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, Google Translate 중 원"
-"하는 서비스 제공업체를 사용하여 콘텐츠를 여러 언어로 번역합니다."
+"ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, 자체 호스팅 "
+"LLM(예: Ollama), DeepL, Google 번역 중 원하는 서비스 제공업체를 사용하여 콘텐"
+"츠를 여러 언어로 번역하세요."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
@@ -12662,3 +12663,11 @@ msgstr "사용자 닉네임 슬러그 순으로 정렬"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "사용자 이메일 순으로 정렬"
+
+#~ msgid ""
+#~ "Translate content to multiple languages using the service provider of "
+#~ "your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, "
+#~ "and Google Translate."
+#~ msgstr ""
+#~ "ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, Google Translate 중 "
+#~ "원하는 서비스 제공업체를 사용하여 콘텐츠를 여러 언어로 번역합니다."

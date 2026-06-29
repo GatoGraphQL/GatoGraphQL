@@ -8515,12 +8515,13 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
 msgid ""
 "Translate content to multiple languages using the service provider of your "
-"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and "
-"Google Translate."
+"choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
+"self-hosted LLM (eg: via Ollama), DeepL, and Google Translate."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας τον πάροχο "
 "υπηρεσιών της επιλογής σας, μεταξύ ChatGPT, Claude, Gemini, DeepSeek, "
-"Mistral AI, DeepL και Google Translate."
+"Mistral AI, OpenRouter, αυτο-φιλοξενούμενο LLM (π.χ. μέσω Ollama), DeepL και "
+"Google Translate."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
@@ -13378,3 +13379,12 @@ msgstr "Ταξινόμηση με βάση το nicename χρήστη"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ταξινόμηση με βάση το email χρήστη"
+
+#~ msgid ""
+#~ "Translate content to multiple languages using the service provider of "
+#~ "your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, "
+#~ "and Google Translate."
+#~ msgstr ""
+#~ "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας τον πάροχο "
+#~ "υπηρεσιών της επιλογής σας, μεταξύ ChatGPT, Claude, Gemini, DeepSeek, "
+#~ "Mistral AI, DeepL και Google Translate."
