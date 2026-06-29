@@ -1947,7 +1947,99 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 
 <!-- wp:block {"ref":1136} /-->
 
-<!-- wp:breadcrumbs {"separator":"::"} /-->]]></content:encoded>
+<!-- wp:breadcrumbs {"separator":"::"} /-->
+
+<!-- wp:search {"label":"Search the site","placeholder":"Type your query here","buttonText":"Go!"} /-->
+
+<!-- wp:categories {"label":"Browse categories"} /-->
+
+<!-- wp:read-more {"content":"Read the full story"} /-->
+
+<!-- wp:post-author {"byline":"Written by"} /-->
+
+<!-- wp:post-excerpt {"moreText":"Continue reading"} /-->
+
+<!-- wp:post-terms {"term":"category","prefix":"Filed under: ","suffix":" - thanks for reading!"} /-->
+
+<!-- wp:post-navigation-link {"type":"previous","label":"Previous article"} /-->
+
+<!-- wp:post-navigation-link {"label":"Next article"} /-->
+
+<!-- wp:details -->
+<details class="wp-block-details"><summary>Click to expand this disclosure summary</summary><!-- wp:paragraph -->
+<p>Hidden content inside the details block.</p>
+<!-- /wp:paragraph --></details>
+<!-- /wp:details -->
+
+<!-- wp:accordion -->
+<div role="group" class="wp-block-accordion"><!-- wp:accordion-item -->
+<div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
+<h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">This is the accordion title</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
+<!-- /wp:accordion-heading -->
+
+<!-- wp:accordion-panel -->
+<div role="region" class="wp-block-accordion-panel"><!-- wp:paragraph -->
+<p>We are inside the accordion here.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:accordion-panel --></div>
+<!-- /wp:accordion-item -->
+
+<!-- wp:accordion-item -->
+<div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
+<h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">This is another accordion title</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
+<!-- /wp:accordion-heading -->
+
+<!-- wp:accordion-panel -->
+<div role="region" class="wp-block-accordion-panel"><!-- wp:paragraph -->
+<p>We are inside the second accordion panel here.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:accordion-panel --></div>
+<!-- /wp:accordion-item --></div>
+<!-- /wp:accordion -->
+
+<!-- wp:navigation -->
+<!-- wp:home-link {"label":"Home page"} /-->
+
+<!-- wp:navigation-link {"label":"About us","description":"Learn more about our company","url":"/about","title":"Go to the About page","kind":"custom"} /-->
+
+<!-- wp:navigation-submenu {"label":"Services","description":"Everything we offer","url":"/services","title":"Browse our services","kind":"custom"} -->
+<!-- wp:navigation-link {"label":"Consulting","url":"/consulting","kind":"custom"} /-->
+<!-- /wp:navigation-submenu -->
+
+<!-- wp:navigation-overlay-close {"text":"Close menu"} /-->
+<!-- /wp:navigation -->
+
+<!-- wp:social-links -->
+<ul class="wp-block-social-links"><!-- wp:social-link {"url":"https://twitter.com/gatographql","service":"x","label":"Follow us on X"} /--></ul>
+<!-- /wp:social-links -->
+
+<!-- wp:widget-group {"title":"Footer widgets","className":"wp-block-widget-group"} -->
+<h2 class="widget-title">Footer widgets</h2><div class="wp-widget-group__inner-blocks"><!-- wp:paragraph -->
+<p>Widget content.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:widget-group -->
+
+<!-- wp:query {"queryId":42,"query":{"perPage":3,"postType":"post"}} -->
+<div class="wp-block-query"><!-- wp:query-pagination -->
+<!-- wp:query-pagination-previous {"label":"Newer posts"} /-->
+
+<!-- wp:query-pagination-next {"label":"Older posts"} /-->
+<!-- /wp:query-pagination --></div>
+<!-- /wp:query -->
+
+<!-- wp:comments -->
+<div class="wp-block-comments"><!-- wp:comments-pagination -->
+<!-- wp:comments-pagination-previous {"label":"Older comments"} /-->
+
+<!-- wp:comments-pagination-next {"label":"Newer comments"} /-->
+<!-- /wp:comments-pagination --></div>
+<!-- /wp:comments -->
+
+<!-- wp:terms-query {"termQuery":{"perPage":10,"taxonomy":"category","include":[1],"order":"asc","orderBy":"name"}} -->
+<div class="wp-block-terms-query"><!-- wp:paragraph -->
+<p>Terms query.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:terms-query -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>

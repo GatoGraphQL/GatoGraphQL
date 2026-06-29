@@ -13,7 +13,7 @@ abstract class AbstractTagTaxonomyEnumStringScalarTypeResolver extends AbstractE
 {
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('Tag taxonomies (available for querying via the API)', 'tags');
+        return $this->__('Tag taxonomies (available for querying via the API)', 'gatographql');
     }
 
     /**

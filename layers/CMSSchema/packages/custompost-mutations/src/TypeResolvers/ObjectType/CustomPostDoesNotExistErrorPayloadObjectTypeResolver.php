@@ -29,7 +29,7 @@ class CustomPostDoesNotExistErrorPayloadObjectTypeResolver extends AbstractError
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The requested custom post does not exist"', 'customposts');
+        return $this->__('Error payload for: "The requested custom post does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -29,7 +29,7 @@ class RootDeletePostTagTermMutationErrorPayloadUnionTypeResolver extends Abstrac
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when deleting a post tag term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when deleting a post tag term', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

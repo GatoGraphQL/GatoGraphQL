@@ -17,6 +17,8 @@ interface GuzzleServiceInterface
 {
     public function setClient(Client $client): void;
 
+    public function getClient(): Client;
+
     /**
      * Execute an HTTP request to the passed endpoint URL and form params
      *

@@ -10,6 +10,6 @@ abstract class AbstractBlockObjectTypeResolver extends AbstractTransientObjectOb
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Block', 'blocks');
+        return $this->__('Block', 'gatographql');
     }
 }

@@ -66,7 +66,7 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input for a Menu Item', 'menu-mutations');
+        return $this->__('Input for a Menu Item', 'gatographql');
     }
 
     /**
@@ -92,17 +92,17 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::LABEL => $this->__('Menu item label', 'menu-mutations'),
-            MutationInputProperties::TITLE_ATTRIBUTE => $this->__('Menu item title attribute (attr-title)', 'menu-mutations'),
-            MutationInputProperties::URL => $this->__('Menu item URL', 'menu-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('Menu item description', 'menu-mutations'),
-            MutationInputProperties::CSS_CLASSES => $this->__('Menu item CSS classes', 'menu-mutations'),
-            MutationInputProperties::TARGET => $this->__('Menu item target', 'menu-mutations'),
-            MutationInputProperties::LINK_RELATIONSHIP => $this->__('Menu item link relationship (rel/xfn)', 'menu-mutations'),
-            MutationInputProperties::OBJECT_ID => $this->__('The ID of the linked object (eg: post ID)', 'menu-mutations'),
-            MutationInputProperties::ITEM_TYPE => $this->__('The menu item type', 'menu-mutations'),
-            MutationInputProperties::OBJECT_TYPE => $this->__('The type of the linked object (post type or taxonomy)', 'menu-mutations'),
-            MutationInputProperties::CHILDREN => $this->__('Child menu items', 'menu-mutations'),
+            MutationInputProperties::LABEL => $this->__('Menu item label', 'gatographql'),
+            MutationInputProperties::TITLE_ATTRIBUTE => $this->__('Menu item title attribute (attr-title)', 'gatographql'),
+            MutationInputProperties::URL => $this->__('Menu item URL', 'gatographql'),
+            MutationInputProperties::DESCRIPTION => $this->__('Menu item description', 'gatographql'),
+            MutationInputProperties::CSS_CLASSES => $this->__('Menu item CSS classes', 'gatographql'),
+            MutationInputProperties::TARGET => $this->__('Menu item target', 'gatographql'),
+            MutationInputProperties::LINK_RELATIONSHIP => $this->__('Menu item link relationship (rel/xfn)', 'gatographql'),
+            MutationInputProperties::OBJECT_ID => $this->__('The ID of the linked object (eg: post ID)', 'gatographql'),
+            MutationInputProperties::ITEM_TYPE => $this->__('The menu item type', 'gatographql'),
+            MutationInputProperties::OBJECT_TYPE => $this->__('The type of the linked object (post type or taxonomy)', 'gatographql'),
+            MutationInputProperties::CHILDREN => $this->__('Child menu items', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

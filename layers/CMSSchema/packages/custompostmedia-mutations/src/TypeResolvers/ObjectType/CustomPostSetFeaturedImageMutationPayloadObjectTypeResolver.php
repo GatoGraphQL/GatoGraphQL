@@ -13,6 +13,6 @@ class CustomPostSetFeaturedImageMutationPayloadObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of setting the featured image to a custom post (using nested mutations)', 'custompostmedia-mutations');
+        return $this->__('Payload of setting the featured image to a custom post (using nested mutations)', 'gatographql');
     }
 }

@@ -15,7 +15,7 @@ class RootMyCommentsFilterInputObjectTypeResolver extends AbstractCommentsFilter
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the logged-in user\'s comments', 'comment-mutations');
+        return $this->__('Input to filter the logged-in user\'s comments', 'gatographql');
     }
 
     protected function addParentInputFields(): bool

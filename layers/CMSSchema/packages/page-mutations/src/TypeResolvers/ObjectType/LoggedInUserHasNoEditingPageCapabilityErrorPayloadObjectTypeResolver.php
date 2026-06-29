@@ -29,7 +29,7 @@ class LoggedInUserHasNoEditingPageCapabilityErrorPayloadObjectTypeResolver exten
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to edit pages"', 'customposts');
+        return $this->__('Error payload for: "The logged-in user has no permission to edit pages"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

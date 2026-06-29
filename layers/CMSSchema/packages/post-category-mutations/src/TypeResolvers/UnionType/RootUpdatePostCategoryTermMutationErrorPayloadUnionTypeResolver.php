@@ -29,7 +29,7 @@ class RootUpdatePostCategoryTermMutationErrorPayloadUnionTypeResolver extends Ab
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating a post category term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating a post category term', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

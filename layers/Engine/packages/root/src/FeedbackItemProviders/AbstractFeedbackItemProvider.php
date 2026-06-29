@@ -52,7 +52,7 @@ abstract class AbstractFeedbackItemProvider extends AbstractBasicService impleme
     {
         throw new MisconfiguredServiceException(
             \sprintf(
-                $this->__('There is no message placeholder for code \'%s\'', 'root'),
+                $this->__('There is no message placeholder for code \'%s\'', 'gatographql'),
                 $code
             )
         );
@@ -62,7 +62,7 @@ abstract class AbstractFeedbackItemProvider extends AbstractBasicService impleme
     {
         throw new MisconfiguredServiceException(
             \sprintf(
-                $this->__('There is no category for code \'%s\'', 'root'),
+                $this->__('There is no category for code \'%s\'', 'gatographql'),
                 $code
             )
         );

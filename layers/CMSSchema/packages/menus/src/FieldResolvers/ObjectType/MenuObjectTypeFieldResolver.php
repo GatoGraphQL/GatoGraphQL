@@ -143,8 +143,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['itemDataEntries' => 'flat'] => $this->__('Flatten the items', 'menus'),
-            ['itemDataEntries' => 'propertiesBy'] => $this->__('Filter properties to include or exclude in the menu item data entries', 'menus'),
+            ['itemDataEntries' => 'flat'] => $this->__('Flatten the items', 'gatographql'),
+            ['itemDataEntries' => 'propertiesBy'] => $this->__('Filter properties to include or exclude in the menu item data entries', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -152,8 +152,8 @@ class MenuObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'items' => $this->__('The menu items', 'menus'),
-            'itemDataEntries' => $this->__('The data for the menu items', 'menus'),
+            'items' => $this->__('The menu items', 'gatographql'),
+            'itemDataEntries' => $this->__('The data for the menu items', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -15,7 +15,7 @@ class MenuLocationEnumStringScalarTypeResolver extends AbstractEnumStringScalarT
 
     public function getEnumStringTypeDescription(): ?string
     {
-        return $this->__('Menu Locations', 'menus');
+        return $this->__('Menu Locations', 'gatographql');
     }
 
     /**

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\NoDocsFolderPluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\BundleExtensionModuleResolverInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\Extensions\ExtensionModuleResolverInterface;
@@ -62,6 +63,22 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
             return 'bundle-extensions';
         }
         return 'extensions';
+    }
+
+    /**
+     * Link the English-doc notice straight to this extension's page on the
+     * localized website (the resolver's canonical website URL).
+     *
+     * @param array{0:string,1:string,2:string} $entry
+     * @phpstan-ignore-next-line
+     */
+    protected function getEntryWebsiteURL(array $entry): ?string
+    {
+        /** @var string */
+        $entryModule = $entry[2];
+        /** @var ExtensionModuleResolverInterface */
+        $entryModuleResolver = $this->getModuleRegistry()->getModuleResolver($entryModule);
+        return $entryModuleResolver->getWebsiteURL($entryModule);
     }
 
     protected function getDocsFolder(): string
@@ -122,6 +139,9 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
         foreach ($modules as $module) {
             $moduleResolver = $moduleRegistry->getModuleResolver($module);
             if (!($moduleResolver instanceof ExtensionModuleResolverInterface)) {
+                continue;
+            }
+            if (!$moduleResolver->showDocumentationForModule($module)) {
                 continue;
             }
             $isBundleExtension = $moduleResolver instanceof BundleExtensionModuleResolverInterface;
@@ -218,7 +238,10 @@ class ExtensionDocsMenuPage extends AbstractVerticalTabDocsMenuPage
                         $extensionModuleResolver->getName($bundleExtensionModule),
                         $bundleExtensionModule,
                     ]),
-                    $markdownContentOptions
+                    array_merge(
+                        $markdownContentOptions,
+                        [ContentParserOptions::WEBSITE_DOC_URL => $extensionModuleResolver->getWebsiteURL($bundleExtensionModule)]
+                    )
                 ) ?? '';
                 $contentEntries[] = $entryModuleContent;
             }

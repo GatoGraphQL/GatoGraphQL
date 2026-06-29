@@ -53,10 +53,10 @@ class PageObjectTypeFieldResolver extends AbstractWithParentCustomPostObjectType
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'parent' => $this->__('Parent page', 'pages'),
-            'ancestors' => $this->__('List of all ancestor pages (parent, grandparent, etc.)', 'pages'),
-            'children' => $this->__('Child pages', 'pages'),
-            'childCount' => $this->__('Number of child pages', 'pages'),
+            'parent' => $this->__('Parent page', 'gatographql'),
+            'ancestors' => $this->__('List of all ancestor pages (parent, grandparent, etc.)', 'gatographql'),
+            'children' => $this->__('Child pages', 'gatographql'),
+            'childCount' => $this->__('Number of child pages', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

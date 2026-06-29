@@ -22,7 +22,18 @@ class Logger extends AbstractBasicService implements LoggerInterface
 {
     public const CONTEXT_SEPARATOR = 'CONTEXT: ';
 
+    /**
+     * When `true`, every log entry is prefixed with "[DRY-RUN]", so that
+     * queries executed as a dry-run are distinguishable in the logs.
+     */
+    private bool $isDryRun = false;
+
     private ?SystemLoggerInterface $systemLogger = null;
+
+    public function setDryRun(bool $isDryRun): void
+    {
+        $this->isDryRun = $isDryRun;
+    }
 
     final protected function getSystemLogger(): SystemLoggerInterface
     {
@@ -82,7 +93,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
         $date = date(DateTimeInterface::ATOM);
 
         if ($context !== null && $context !== []) {
-            $message .= $this->__(' ', 'logger') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+            $message .= $this->__(' ', 'gatographql') . LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR . json_encode($context, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
 
         error_log(sprintf(
@@ -107,6 +118,14 @@ class Logger extends AbstractBasicService implements LoggerInterface
     {
         if (!in_array($severity, LoggerSeverity::ALL)) {
             throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
+        }
+
+        if ($this->isDryRun) {
+            $message = sprintf(
+                $this->__('%s %s', 'gatographql'),
+                '[DRY-RUN]',
+                $message,
+            );
         }
 
         if ($this->addSpacePaddingToLogSeverity()) {

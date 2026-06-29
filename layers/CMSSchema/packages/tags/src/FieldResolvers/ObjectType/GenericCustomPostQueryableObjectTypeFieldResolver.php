@@ -66,9 +66,9 @@ class GenericCustomPostQueryableObjectTypeFieldResolver extends AbstractCustomPo
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'tags' => $this->__('Tags added to this custom post', 'pop-post-tags'),
-            'tagCount' => $this->__('Number of tags added to this custom post', 'pop-post-tags'),
-            'tagNames' => $this->__('Names of the tags added to this custom post', 'pop-post-tags'),
+            'tags' => $this->__('Tags added to this custom post', 'gatographql'),
+            'tagCount' => $this->__('Number of tags added to this custom post', 'gatographql'),
+            'tagNames' => $this->__('Names of the tags added to this custom post', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

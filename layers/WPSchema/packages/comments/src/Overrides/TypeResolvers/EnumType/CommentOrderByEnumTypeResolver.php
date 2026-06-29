@@ -34,11 +34,11 @@ class CommentOrderByEnumTypeResolver extends UpstreamCommentOrderByEnumTypeResol
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            CommentOrderBy::AUTHOR_EMAIL => $this->__('Order by author email', 'comments'),
-            CommentOrderBy::AUTHOR_IP => $this->__('Order by author IP', 'comments'),
-            CommentOrderBy::AUTHOR_URL => $this->__('Order by author URL', 'comments'),
-            CommentOrderBy::KARMA => $this->__('Order by karma', 'comments'),
-            CommentOrderBy::NONE => $this->__('Skip ordering', 'comments'),
+            CommentOrderBy::AUTHOR_EMAIL => $this->__('Order by author email', 'gatographql'),
+            CommentOrderBy::AUTHOR_IP => $this->__('Order by author IP', 'gatographql'),
+            CommentOrderBy::AUTHOR_URL => $this->__('Order by author URL', 'gatographql'),
+            CommentOrderBy::KARMA => $this->__('Order by karma', 'gatographql'),
+            CommentOrderBy::NONE => $this->__('Skip ordering', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

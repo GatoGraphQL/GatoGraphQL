@@ -76,7 +76,7 @@ abstract class AbstractAddAuthorInputFieldsInputObjectTypeHookSet extends Abstra
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'author' => $this->__('Filter by author', 'pop-users'),
+            'author' => $this->__('Filter by author', 'gatographql'),
             default => $inputFieldDescription,
         };
     }

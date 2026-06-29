@@ -30,7 +30,7 @@ class IncludeBlockPropertiesInputObjectTypeResolver extends AbstractInputObjectT
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to configure which properties to include in the block data', 'blocks');
+        return $this->__('Input to configure which properties to include in the block data', 'gatographql');
     }
 
     /**
@@ -46,7 +46,7 @@ class IncludeBlockPropertiesInputObjectTypeResolver extends AbstractInputObjectT
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'innerContent' => $this->__('Include the innerContent property in the block data', 'blocks'),
+            'innerContent' => $this->__('Include the innerContent property in the block data', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

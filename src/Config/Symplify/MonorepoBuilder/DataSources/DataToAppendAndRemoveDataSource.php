@@ -23,6 +23,7 @@ class DataToAppendAndRemoveDataSource
                 'symplify/monorepo-builder' => '^10.2.2',
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
+                'wp-cli/i18n-command' => '^2.7',
             ],
             'autoload' => [
                 'psr-4' => [
@@ -33,6 +34,14 @@ class DataToAppendAndRemoveDataSource
                 [
                     'type' => 'vcs',
                     'url' => 'https://github.com/leoloso/monorepo-builder.git',
+                ],
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/symplify-composer-json-manipulator.git',
+                ],
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/symplify-easy-testing.git',
                 ],
                 /**
                  * Also override "symplify/package-builder" because its dependency

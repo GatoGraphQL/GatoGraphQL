@@ -29,7 +29,7 @@ class RootUpdatePostMutationErrorPayloadUnionTypeResolver extends AbstractRootUp
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating a post', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating a post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -41,7 +41,7 @@ class BlockUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Block\' types', 'blocks');
+        return $this->__('Union of \'Block\' types', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

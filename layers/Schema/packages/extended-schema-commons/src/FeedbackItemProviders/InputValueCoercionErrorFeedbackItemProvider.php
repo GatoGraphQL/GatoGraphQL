@@ -29,10 +29,10 @@ class InputValueCoercionErrorFeedbackItemProvider extends AbstractFeedbackItemPr
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'extended-schema-commons'),
-            self::E2 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'extended-schema-commons'),
-            self::E3 => $this->__('Type \'%s\' must receive arrays as values (even for single-item values, eg: `{ some_key: [ "some value" ] }`), but received: `%s`', 'extended-schema-commons'),
-            self::E4 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /^[a-zA-Z_][a-zA-Z0-9_]*$/', 'extended-schema-commons'),
+            self::E1 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /(\+{1}[0-9]{1,3}[0-9]{8,9})/', 'gatographql'),
+            self::E2 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /^{?[A-Z0-9]{8}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{12}}?$/', 'gatographql'),
+            self::E3 => $this->__('Type \'%s\' must receive arrays as values (even for single-item values, eg: `{ some_key: [ "some value" ] }`), but received: `%s`', 'gatographql'),
+            self::E4 => $this->__('The format for type \'%s\' is not correct: it must be satisfied via regex /^[a-zA-Z_][a-zA-Z0-9_]*$/', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

@@ -59,7 +59,7 @@ abstract class AbstractAddEntityMetaInputObjectTypeResolver extends AbstractInpu
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to an entity', 'meta-mutations');
+        return $this->__('Input to add meta to an entity', 'gatographql');
     }
 
     /**
@@ -84,10 +84,10 @@ abstract class AbstractAddEntityMetaInputObjectTypeResolver extends AbstractInpu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the entity', 'meta-mutations'),
-            MutationInputProperties::KEY => $this->__('The meta key', 'meta-mutations'),
-            MutationInputProperties::VALUE => $this->__('The meta value', 'meta-mutations'),
-            MutationInputProperties::SINGLE => $this->__('Is the meta a single value?', 'meta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the entity', 'gatographql'),
+            MutationInputProperties::KEY => $this->__('The meta key', 'gatographql'),
+            MutationInputProperties::VALUE => $this->__('The meta value', 'gatographql'),
+            MutationInputProperties::SINGLE => $this->__('Is the meta a single value?', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -29,7 +29,7 @@ class CommentsAreNotSupportedByCustomPostTypeErrorPayloadObjectTypeResolver exte
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "Comments are not supported by the custom post type"', 'comment-mutations');
+        return $this->__('Error payload for: "Comments are not supported by the custom post type"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

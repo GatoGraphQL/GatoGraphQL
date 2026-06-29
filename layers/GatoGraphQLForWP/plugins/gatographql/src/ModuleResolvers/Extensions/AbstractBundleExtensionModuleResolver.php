@@ -48,7 +48,14 @@ abstract class AbstractBundleExtensionModuleResolver extends AbstractExtensionMo
 
     public function getGatoGraphQLExtensionSlug(string $module): string
     {
-        return parent::getGatoGraphQLExtensionSlug($module) . '-bundle';
+        return $this->doesGatoGraphQLExtensionSlugAppendBundleSuffix($module)
+            ? parent::getGatoGraphQLExtensionSlug($module) . '-bundle'
+            : parent::getGatoGraphQLExtensionSlug($module);
+    }
+
+    protected function doesGatoGraphQLExtensionSlugAppendBundleSuffix(string $module): bool
+    {
+        return false;
     }
 
     /**

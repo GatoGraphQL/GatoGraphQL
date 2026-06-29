@@ -161,7 +161,7 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
         );
     }
 
-    protected function getInitializeExtensionPriority(): int
+    public function getInitializeExtensionPriority(): int
     {
         return 10;
     }

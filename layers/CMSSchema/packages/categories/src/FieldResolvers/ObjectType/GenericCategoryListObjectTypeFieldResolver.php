@@ -54,8 +54,8 @@ class GenericCategoryListObjectTypeFieldResolver extends AbstractCustomPostListO
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'customPosts' => $this->__('Custom posts which contain this category', 'pop-taxonomies'),
-            'customPostCount' => $this->__('Number of custom posts which contain this category', 'pop-taxonomies'),
+            'customPosts' => $this->__('Custom posts which contain this category', 'gatographql'),
+            'customPostCount' => $this->__('Number of custom posts which contain this category', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -39,7 +39,7 @@ class LoginUserByOneofInputObjectTypeResolver extends AbstractOneofInputObjectTy
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'credentials' => $this->__('Login using the website credentials', 'user-state-mutations'),
+            'credentials' => $this->__('Login using the website credentials', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

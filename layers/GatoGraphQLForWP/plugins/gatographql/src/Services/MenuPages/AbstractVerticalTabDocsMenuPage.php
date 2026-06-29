@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
+use GatoGraphQL\GatoGraphQL\ContentProcessors\ContentParserOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\PluginMarkdownContentRetrieverTrait;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
@@ -121,10 +122,18 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
 
             $entryRelativePathDir = $this->getEntryRelativePathDir($entry);
 
+            $entryWebsiteURL = $this->getEntryWebsiteURL($entry);
+            $entryMarkdownContentOptions = $entryWebsiteURL === null
+                ? $markdownContentOptions
+                : array_merge(
+                    $markdownContentOptions,
+                    [ContentParserOptions::WEBSITE_DOC_URL => $entryWebsiteURL]
+                );
+
             $entryContent = $this->getMarkdownContent(
                 $entryName,
                 $entryRelativePathDir,
-                $markdownContentOptions
+                $entryMarkdownContentOptions
             ) ?? sprintf(
                 '<p>%s</p>',
                 sprintf(
@@ -216,6 +225,18 @@ abstract class AbstractVerticalTabDocsMenuPage extends AbstractDocsMenuPage
      * @param array{0:string,1:string} $entry
      */
     abstract protected function getEntryRelativePathDir(array $entry): string;
+
+    /**
+     * The canonical website URL for this entry's doc, or null to link the
+     * English-doc notice to the website root. Override per page (e.g. extensions
+     * link to their shop page, tutorial lessons to their tutorial page).
+     *
+     * @param array{0:string,1:string} $entry
+     */
+    protected function getEntryWebsiteURL(array $entry): ?string
+    {
+        return null;
+    }
 
     /**
      * @param array{0:string,1:string} $entry

@@ -13,6 +13,6 @@ class RootUpdateMediaItemMutationPayloadObjectTypeResolver extends AbstractMedia
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of updating the metadata for an attachment', 'media-mutations');
+        return $this->__('Payload of updating the metadata for an attachment', 'gatographql');
     }
 }

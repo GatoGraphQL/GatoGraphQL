@@ -13,6 +13,6 @@ class RootUpdatePageMutationPayloadObjectTypeResolver extends AbstractPageMutati
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update mutation on a page', 'page-mutations');
+        return $this->__('Payload of executing an update mutation on a page', 'gatographql');
     }
 }

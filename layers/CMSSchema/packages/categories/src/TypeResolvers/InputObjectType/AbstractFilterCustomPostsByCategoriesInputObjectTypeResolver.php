@@ -26,7 +26,7 @@ abstract class AbstractFilterCustomPostsByCategoriesInputObjectTypeResolver exte
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter custom posts by categories', 'categories');
+        return $this->__('Input to filter custom posts by categories', 'gatographql');
     }
 
     /**
@@ -46,9 +46,9 @@ abstract class AbstractFilterCustomPostsByCategoriesInputObjectTypeResolver exte
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'taxonomy' => $this->__('Category taxonomy', 'categories'),
-            'includeBy' => $this->__('Retrieve custom posts which contain categories', 'categories'),
-            'excludeBy' => $this->__('Retrieve custom posts which do not contain categories', 'categories'),
+            'taxonomy' => $this->__('Category taxonomy', 'gatographql'),
+            'includeBy' => $this->__('Retrieve custom posts which contain categories', 'gatographql'),
+            'excludeBy' => $this->__('Retrieve custom posts which do not contain categories', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

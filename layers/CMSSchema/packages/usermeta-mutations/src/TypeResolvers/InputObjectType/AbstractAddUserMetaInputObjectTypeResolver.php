@@ -11,13 +11,13 @@ abstract class AbstractAddUserMetaInputObjectTypeResolver extends AbstractAddEnt
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to a user', 'usermeta-mutations');
+        return $this->__('Input to add meta to a user', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the user', 'usermeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the user', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

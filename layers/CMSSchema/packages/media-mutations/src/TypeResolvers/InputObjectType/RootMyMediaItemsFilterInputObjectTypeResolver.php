@@ -15,6 +15,6 @@ class RootMyMediaItemsFilterInputObjectTypeResolver extends AbstractMediaItemsFi
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter the logged-in user\'s media items', 'media-mutations');
+        return $this->__('Input to filter the logged-in user\'s media items', 'gatographql');
     }
 }

@@ -77,8 +77,8 @@ class TypeObjectTypeFieldResolver extends UpstreamTypeObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['name' => 'namespaced'] => $this->__('Namespace type name?', 'graphql-server'),
-            ['fields' => 'includeGlobal'] => $this->__('Include global fields?', 'graphql-server'),
+            ['name' => 'namespaced'] => $this->__('Namespace type name?', 'gatographql'),
+            ['fields' => 'includeGlobal'] => $this->__('Include global fields?', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

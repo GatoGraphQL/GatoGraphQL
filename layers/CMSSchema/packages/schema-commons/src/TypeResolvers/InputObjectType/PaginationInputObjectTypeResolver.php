@@ -70,16 +70,16 @@ class PaginationInputObjectTypeResolver extends AbstractQueryableInputObjectType
     {
         $maxLimit = $this->getMaxLimit();
         $limitDesc = match ($maxLimit) {
-            null => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'schema-commons'),
-            -1 => $this->__('Limit the results. \'-1\' brings all the results', 'schema-commons'),
+            null => $this->__('Limit the results. \'-1\' brings all the results (or the maximum amount allowed)', 'gatographql'),
+            -1 => $this->__('Limit the results. \'-1\' brings all the results', 'gatographql'),
             default => sprintf(
-                $this->__('Limit the results. The maximum amount allowed is \'%s\'', 'schema-commons'),
+                $this->__('Limit the results. The maximum amount allowed is \'%s\'', 'gatographql'),
                 $maxLimit
             ),
         };
         return match ($inputFieldName) {
             'limit' => $limitDesc,
-            'offset' => $this->__('Offset the results by how many positions', 'schema-commons'),
+            'offset' => $this->__('Offset the results by how many positions', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

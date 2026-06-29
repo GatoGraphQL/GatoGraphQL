@@ -64,8 +64,8 @@ class DirectiveExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'needsDataToExecute' => $this->__('If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?', 'graphql-server'),
-            'fieldDirectiveSupportedTypeNamesOrDescriptions' => $this->__('On field from which types can the directive be applied. `null` means all of them', 'graphql-server'),
+            'needsDataToExecute' => $this->__('If no objects are returned in the field (eg: because they failed validation), does the directive still need to be executed?', 'gatographql'),
+            'fieldDirectiveSupportedTypeNamesOrDescriptions' => $this->__('On field from which types can the directive be applied. `null` means all of them', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

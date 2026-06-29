@@ -41,7 +41,7 @@ class CategoryUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'category\' type resolvers', 'categories');
+        return $this->__('Union of \'category\' type resolvers', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

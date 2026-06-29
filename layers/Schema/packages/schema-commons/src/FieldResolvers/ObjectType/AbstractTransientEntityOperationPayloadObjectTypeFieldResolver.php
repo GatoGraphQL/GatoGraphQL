@@ -54,7 +54,7 @@ abstract class AbstractTransientEntityOperationPayloadObjectTypeFieldResolver ex
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            $this->getObjectIDFieldName() => $this->__('ID of the entity, if the operation was successful', 'schema-commons'),
+            $this->getObjectIDFieldName() => $this->__('ID of the entity, if the operation was successful', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

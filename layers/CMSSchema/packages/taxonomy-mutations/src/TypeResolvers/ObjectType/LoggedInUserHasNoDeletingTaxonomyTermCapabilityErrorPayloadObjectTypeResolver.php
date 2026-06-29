@@ -29,7 +29,7 @@ class LoggedInUserHasNoDeletingTaxonomyTermCapabilityErrorPayloadObjectTypeResol
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The logged-in user has no permission to delete a taxonomy term"', 'taxonomy-mutations');
+        return $this->__('Error payload for: "The logged-in user has no permission to delete a taxonomy term"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

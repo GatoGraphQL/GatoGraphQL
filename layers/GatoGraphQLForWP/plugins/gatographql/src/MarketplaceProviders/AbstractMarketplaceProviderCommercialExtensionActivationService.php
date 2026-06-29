@@ -44,8 +44,25 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
             throw new HTTPRequestNotSuccessfulException($response->get_error_message());
         }
 
+        /** @var mixed $body */
+        $body = json_decode($response['body'], true);
+
         $statusCode = (int) wp_remote_retrieve_response_code($response);
         if ($statusCode < 200 || $statusCode >= 300) {
+            /**
+             * Even when the HTTP request failed (non-2xx status code), the
+             * Marketplace Provider may still return a JSON body with a
+             * meaningful error message (e.g. FluentCart returns a 422 with
+             * error_type "activation_limit_exceeded" when the license's
+             * activation limit has been reached). Surface that message
+             * instead of the generic HTTP status code error.
+             */
+            if (is_array($body)) {
+                $error = $this->getErrorFromResponseBody($body, $response);
+                if ($error !== null) {
+                    throw new LicenseOperationNotSuccessfulException($error);
+                }
+            }
             throw new HTTPRequestNotSuccessfulException(
                 sprintf(
                     $this->__('Request to "%s" failed with HTTP status code %d: %s', 'gatographql'),
@@ -55,9 +72,6 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
                 )
             );
         }
-
-        /** @var mixed $body */
-        $body = json_decode($response['body'], true);
 
         if (!is_array($body)) {
             throw new LicenseOperationNotSuccessfulException(

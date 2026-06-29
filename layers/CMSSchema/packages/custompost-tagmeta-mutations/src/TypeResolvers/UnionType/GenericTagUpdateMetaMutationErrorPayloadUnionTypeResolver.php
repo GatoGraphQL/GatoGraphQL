@@ -29,7 +29,7 @@ class GenericTagUpdateMetaMutationErrorPayloadUnionTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating meta on a tag term (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating meta on a tag term (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

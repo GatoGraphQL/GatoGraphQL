@@ -69,15 +69,15 @@ abstract class AbstractRootObjectTypeFieldResolver extends AbstractQueryableObje
     {
         return match ($fieldName) {
             $this->getSetTagsFieldName() => sprintf(
-                $this->__('Set tags on a %s', 'custompost-tag-mutations'),
+                $this->__('Set tags on a %s', 'gatographql'),
                 $this->getEntityName()
             ),
             $this->getBulkOperationSetTagsFieldName() => sprintf(
-                $this->__('Set tags on a %s in bulk', 'custompost-tag-mutations'),
+                $this->__('Set tags on a %s in bulk', 'gatographql'),
                 $this->getEntityName()
             ),
             $this->getSetTagsFieldName() . 'MutationPayloadObjects' => sprintf(
-                $this->__('Retrieve the payload objects from a recently-executed `%s` mutation', 'custompost-tag-mutations'),
+                $this->__('Retrieve the payload objects from a recently-executed `%s` mutation', 'gatographql'),
                 $this->getSetTagsFieldName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

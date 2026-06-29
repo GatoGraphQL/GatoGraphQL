@@ -28,7 +28,7 @@ class RootUpdatePageMutationErrorPayloadUnionTypeResolver extends AbstractRootUp
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating a page', 'page-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating a page', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

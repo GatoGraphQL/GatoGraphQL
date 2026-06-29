@@ -258,6 +258,10 @@ class AppLoader implements AppLoaderInterface
         );
         $moduleManager = App::getModuleManager();
         foreach ($moduleClasses as $moduleClass) {
+            // Make sure the module is not already initialized by someone else in the recursion
+            if (in_array($moduleClass, $this->initializedModuleClasses, true)) {
+                continue;
+            }
             $this->initializedModuleClasses[] = $moduleClass;
 
             // Initialize and register the Module
@@ -324,7 +328,7 @@ class AppLoader implements AppLoaderInterface
                 );
             }
 
-            // We reached the bottom of the rung, add the module to the list
+            // We reached the bottom of the rung, add the module to the list.
             $this->orderedModuleClasses[] = $moduleClass;
 
             /**

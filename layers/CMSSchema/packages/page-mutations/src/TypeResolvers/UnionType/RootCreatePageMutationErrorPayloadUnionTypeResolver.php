@@ -28,7 +28,7 @@ class RootCreatePageMutationErrorPayloadUnionTypeResolver extends AbstractRootCr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when creating a page', 'page-mutations');
+        return $this->__('Union of \'Error Payload\' types when creating a page', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

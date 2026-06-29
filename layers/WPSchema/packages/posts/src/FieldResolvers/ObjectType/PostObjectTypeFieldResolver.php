@@ -64,8 +64,8 @@ class PostObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'postFormat' => $this->__('Retrieve the format slug for a post', 'posts'),
-            'isSticky' => $this->__('Determines whether a custom post is sticky', 'customposts'),
+            'postFormat' => $this->__('Retrieve the format slug for a post', 'gatographql'),
+            'isSticky' => $this->__('Determines whether a custom post is sticky', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

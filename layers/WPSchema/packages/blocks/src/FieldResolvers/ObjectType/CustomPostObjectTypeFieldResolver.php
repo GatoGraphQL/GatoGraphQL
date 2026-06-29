@@ -109,9 +109,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'blocks'),
-            'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'blocks'),
-            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property \'innerBlocks\' with \'innerBlockPositions\', indicating the position of the inner blocks in the array (starting from 0)', 'blocks'),
+            'blocks' => $this->__('(Gutenberg) Blocks in a custom post', 'gatographql'),
+            'blockDataItems' => $this->__('(Gutenberg) Block data items (as JSON objects) in a custom post', 'gatographql'),
+            'blockFlattenedDataItems' => $this->__('(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property \'innerBlocks\' with \'innerBlockPositions\', indicating the position of the inner blocks in the array (starting from 0)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -174,7 +174,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ($fieldArgName) {
-            'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as "U+00A0", to "&nbsp;" entities.', 'blocks'),
+            'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as "U+00A0", to "&nbsp;" entities.', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

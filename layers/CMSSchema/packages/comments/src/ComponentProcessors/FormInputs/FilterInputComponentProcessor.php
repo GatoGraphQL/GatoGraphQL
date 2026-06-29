@@ -238,12 +238,12 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'comments'),
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->__('Limit results to elements with the given custom post ID', 'comments'),
-            self::COMPONENT_FILTERINPUT_CUSTOMPOST_STATUS => $this->__('Limit results to elements with the given custom post status', 'comments'),
-            self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->__('Exclude elements with the given custom post IDs', 'comments'),
-            self::COMPONENT_FILTERINPUT_COMMENT_TYPES => $this->__('Types of comment', 'comments'),
-            self::COMPONENT_FILTERINPUT_COMMENT_STATUS => $this->__('Status of the comment', 'comments'),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_IDS => $this->__('Limit results to elements with the given custom post IDs', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_ID => $this->__('Limit results to elements with the given custom post ID', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_CUSTOMPOST_STATUS => $this->__('Limit results to elements with the given custom post status', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_EXCLUDE_CUSTOMPOST_IDS => $this->__('Exclude elements with the given custom post IDs', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_COMMENT_TYPES => $this->__('Types of comment', 'gatographql'),
+            self::COMPONENT_FILTERINPUT_COMMENT_STATUS => $this->__('Status of the comment', 'gatographql'),
             default => null,
         };
     }

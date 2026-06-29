@@ -29,7 +29,7 @@ class CommentAuthorEmailIsMissingErrorPayloadObjectTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The comment\'s author email is missing"', 'comment-mutations');
+        return $this->__('Error payload for: "The comment\'s author email is missing"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -13,6 +13,6 @@ class PostTagUpdateMetaMutationPayloadObjectTypeResolver extends AbstractPostTag
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update meta nested mutation on a post\'s tag term', 'tag-mutations');
+        return $this->__('Payload of executing an update meta nested mutation on a post\'s tag term', 'gatographql');
     }
 }

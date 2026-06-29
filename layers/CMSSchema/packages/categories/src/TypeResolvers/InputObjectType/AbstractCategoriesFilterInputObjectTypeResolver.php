@@ -10,7 +10,7 @@ abstract class AbstractCategoriesFilterInputObjectTypeResolver extends AbstractT
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter categories', 'categories');
+        return $this->__('Input to filter categories', 'gatographql');
     }
 
     protected function addParentIDInputField(): bool

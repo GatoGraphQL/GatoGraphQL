@@ -56,23 +56,17 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
         remove_all_filters('plugins_api_result');
         remove_all_filters('plugin_install_action_links');
 
-        $overrideInstallPluginTabs = $this->overrideInstallPluginTabs(...);
-        $overrideInstallPluginNonMenuTabs = $this->overrideInstallPluginNonMenuTabs(...);
-        $overridePluginsAPI = $this->overridePluginsAPI(...);
-        $overridePluginsAPIResult = $this->overridePluginsAPIResult(...);
-        $overridePluginInstallActionLinks = $this->overridePluginInstallActionLinks(...);
-
-        add_filter('install_plugins_tabs', $overrideInstallPluginTabs);
-        add_filter('install_plugins_nonmenu_tabs', $overrideInstallPluginNonMenuTabs);
-        add_filter('plugins_api', $overridePluginsAPI);
-        add_filter('plugins_api_result', $overridePluginsAPIResult);
-        add_filter('plugin_install_action_links', $overridePluginInstallActionLinks, 10, 2);
+        add_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
+        add_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        add_filter('plugins_api', $this->overridePluginsAPI(...));
+        add_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        add_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10, 2);
         parent::prepare_items();
-        remove_filter('plugin_install_action_links', $overridePluginInstallActionLinks, 10);
-        remove_filter('plugins_api_result', $overridePluginsAPIResult);
-        remove_filter('plugins_api', $overridePluginsAPI);
-        remove_filter('install_plugins_nonmenu_tabs', $overrideInstallPluginNonMenuTabs);
-        remove_filter('install_plugins_tabs', $overrideInstallPluginTabs);
+        remove_filter('plugin_install_action_links', $this->overridePluginInstallActionLinks(...), 10);
+        remove_filter('plugins_api_result', $this->overridePluginsAPIResult(...));
+        remove_filter('plugins_api', $this->overridePluginsAPI(...));
+        remove_filter('install_plugins_nonmenu_tabs', $this->overrideInstallPluginNonMenuTabs(...));
+        remove_filter('install_plugins_tabs', $this->overrideInstallPluginTabs(...));
     }
 
     /**
@@ -216,7 +210,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
                 esc_attr($plugin['slug'] ?? ''),
                 esc_url($plugin['homepage'] ?? ''),
                 /* translators: %s: Plugin name and version. */
-                esc_attr(sprintf(_x('Get extension %s', 'plugin'), $plugin['name'] ?? '')),
+                esc_attr(sprintf(_x('Get extension %s', 'plugin', 'gatographql'), $plugin['name'] ?? '')),
                 esc_attr($plugin['name'] ?? ''),
                 '_blank',
                 $this->getPluginInstallActionLabel($plugin)
@@ -401,7 +395,7 @@ abstract class AbstractExtensionListTable extends WP_Plugin_Install_List_Table i
             $moduleConfiguration->getGatoGraphQLRequestExtensionPageURL(),
             \__('Request an Extension', 'gatographql'),
             \__('Needing an integration with a 3rd-party plugin? Let us know, and we can work on an extension.', 'gatographql'),
-            \__('Contact <strong>Gato GraphQL</strong>'),
+            \__('Contact <strong>Gato GraphQL</strong>', 'gatographql'),
             HTMLCodes::OPEN_IN_NEW_WINDOW
         );
     }

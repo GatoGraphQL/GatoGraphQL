@@ -18,20 +18,12 @@ GitHub Plugin URI: GatoGraphQL/gatographql-dist
 
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use PoPIncludes\GatoGraphQL\Startup;
 
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
     exit;
 }
-
-/**
- * Load translations
- * @todo Re-enable when an actual translation (*.po/*.mo) is provided
- * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2051
- */
-// add_action('init', function (): void {
-//     load_plugin_textdomain('gatographql', false, plugin_basename(__FILE__) . '/languages');
-// });
 
 /**
  * Plugin's name and version.
@@ -58,13 +50,12 @@ if (class_exists(Plugin::class)) {
     return;
 }
 
-// Validate that there is enough memory to run the plugin
-require_once __DIR__ . '/includes/startup.php';
-if (!\PoPIncludes\GatoGraphQL\Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
-    return;
-}
-
 /**
+ * Execute always first, to guarantee the capability is registered even if the
+ * webserver doesn't have enough memory. Otherwise, once it fails, the capability
+ * won't be registered (even after increasing the memory limit), and the plugin
+ * will not be available on the menu.
+ *
  * Can't use Composer to load this file, as "vendor/" is loaded only
  * in the "plugins_loaded" hook, and that's too late to register
  * the capabilities.
@@ -75,6 +66,18 @@ require_once __DIR__ . '/includes/schema-editing-access-capabilities.php';
     __FILE__,
     constant('GATOGRAPHQL_CAPABILITY_MANAGE_GRAPHQL_SCHEMA')
 );
+
+// Validate that there is enough memory to run the plugin
+require_once __DIR__ . '/includes/startup.php';
+if (!Startup::checkGatoGraphQLMemoryRequirements($pluginName)) {
+    return;
+}
+
+add_action('init', function (): void {
+    // Register the global JS-pack resolver once (covers every extension's scripts).
+    Startup::registerScriptTranslationFileResolver();
+    Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+}, PHP_INT_MIN);
 
 /**
  * The commit hash is added to the plugin version 

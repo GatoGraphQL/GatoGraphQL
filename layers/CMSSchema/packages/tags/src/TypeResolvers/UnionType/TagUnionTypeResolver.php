@@ -41,7 +41,7 @@ class TagUnionTypeResolver extends AbstractUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'tag\' type resolvers', 'tags');
+        return $this->__('Union of \'tag\' type resolvers', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -49,7 +49,8 @@ class InputObjectSubpropertyFieldDataAccessor extends FieldDataAccessor implemen
             throw new ShouldNotHappenException(
                 sprintf(
                     $this->__(
-                        'Input value under argument \'%s\' is not an InputObject type'
+                        'Input value under argument \'%s\' is not an InputObject type',
+                        'gatographql'
                     ),
                     $inputObjectSubpropertyName
                 )

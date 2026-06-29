@@ -44,7 +44,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'setTags' => sprintf(
-                $this->__('Set tags on the %s', 'custompost-tag-mutations'),
+                $this->__('Set tags on the %s', 'gatographql'),
                 $this->getEntityName()
             ),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),

@@ -11,13 +11,13 @@ abstract class AbstractAddTaxonomyTermMetaInputObjectTypeResolver extends Abstra
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to a taxonomy term', 'taxonomymeta-mutations');
+        return $this->__('Input to add meta to a taxonomy term', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -75,12 +75,12 @@ class ArrayOrJSONObjectTraversionHelperService extends AbstractBasicService impl
         throw new RuntimeOperationException(
             is_integer($path)
                 ? sprintf(
-                    $this->__('Index \'%s\' is not set for array: %s', 'extended-schema-commons'),
+                    $this->__('Index \'%s\' is not set for array: %s', 'gatographql'),
                     $path,
                     $this->getOutputService()->jsonEncodeArrayOrStdClassValue($data)
                 )
                 : sprintf(
-                    $this->__('Key or path \'%s\' is not reachable for object: %s', 'extended-schema-commons'),
+                    $this->__('Key or path \'%s\' is not reachable for object: %s', 'gatographql'),
                     $path,
                     $this->getOutputService()->jsonEncodeArrayOrStdClassValue($data)
                 )
@@ -95,12 +95,12 @@ class ArrayOrJSONObjectTraversionHelperService extends AbstractBasicService impl
         throw new RuntimeOperationException(
             is_integer($path)
                 ? sprintf(
-                    $this->__('The item under index \'%s\' (with value \'%s\') is not an array', 'extended-schema-commons'),
+                    $this->__('The item under index \'%s\' (with value \'%s\') is not an array', 'gatographql'),
                     $path,
                     $dataPointer
                 )
                 : sprintf(
-                    $this->__('The item under path \'%s\' (with value \'%s\') is not an array', 'extended-schema-commons'),
+                    $this->__('The item under path \'%s\' (with value \'%s\') is not an array', 'gatographql'),
                     $path,
                     $dataPointer
                 )

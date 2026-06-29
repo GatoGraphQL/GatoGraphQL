@@ -86,7 +86,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_POST_CATEGORY_TAXONOMY => $this->__('Post category taxonomy', 'post-categories'),
+            self::COMPONENT_FILTERINPUT_POST_CATEGORY_TAXONOMY => $this->__('Post category taxonomy', 'gatographql'),
             default => null,
         };
     }

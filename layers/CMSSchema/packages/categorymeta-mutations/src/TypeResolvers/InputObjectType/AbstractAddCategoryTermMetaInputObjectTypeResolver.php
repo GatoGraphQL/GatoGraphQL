@@ -11,13 +11,13 @@ abstract class AbstractAddCategoryTermMetaInputObjectTypeResolver extends Abstra
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to add meta to a category term', 'categorymeta-mutations');
+        return $this->__('Input to add meta to a category term', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the category', 'categorymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the category', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

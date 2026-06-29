@@ -96,7 +96,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
     public function getFilterInputDescription(Component $component): ?string
     {
         return match ($component->name) {
-            self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->__('Limit results to elements with the given mime types', 'media'),
+            self::COMPONENT_FILTERINPUT_MIME_TYPES => $this->__('Limit results to elements with the given mime types', 'gatographql'),
             default => null,
         };
     }

@@ -6,8 +6,8 @@ namespace PoP\PoP\Extensions\Symplify\MonorepoBuilder\Json;
 
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\Option;
 use PoP\PoP\Extensions\Symplify\MonorepoBuilder\ValueObject\OptionValues;
+use PoP\Root\Exception\ShouldNotHappenException;
 use Symplify\PackageBuilder\Parameter\ParameterProvider;
-use Symplify\SymplifyKernel\Exception\ShouldNotHappenException;
 
 final class PluginConfigEntriesJsonProvider
 {

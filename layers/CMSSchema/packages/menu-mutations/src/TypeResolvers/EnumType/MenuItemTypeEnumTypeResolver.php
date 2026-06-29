@@ -29,9 +29,9 @@ class MenuItemTypeEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            MenuItemType::CUSTOM => $this->__('Custom link menu item', 'menu-mutations'),
-            MenuItemType::POST_TYPE => $this->__('Menu item linking to a post type object', 'menu-mutations'),
-            MenuItemType::TAXONOMY => $this->__('Menu item linking to a taxonomy term', 'menu-mutations'),
+            MenuItemType::CUSTOM => $this->__('Custom link menu item', 'gatographql'),
+            MenuItemType::POST_TYPE => $this->__('Menu item linking to a post type object', 'gatographql'),
+            MenuItemType::TAXONOMY => $this->__('Menu item linking to a taxonomy term', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

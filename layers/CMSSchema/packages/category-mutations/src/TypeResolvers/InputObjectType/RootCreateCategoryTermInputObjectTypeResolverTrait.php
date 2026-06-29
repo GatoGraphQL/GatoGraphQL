@@ -8,7 +8,7 @@ trait RootCreateCategoryTermInputObjectTypeResolverTrait
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create a category term', 'category-mutations');
+        return $this->__('Input to create a category term', 'gatographql');
     }
 
     protected function addIDInputField(): bool

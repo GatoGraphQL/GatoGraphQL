@@ -72,7 +72,7 @@ class MediaObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResol
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'parentCustomPost' => $this->__('Custom post the media item is attached to.', 'media'),
+            'parentCustomPost' => $this->__('Custom post the media item is attached to.', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

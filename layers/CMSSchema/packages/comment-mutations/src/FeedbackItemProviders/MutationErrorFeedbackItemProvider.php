@@ -44,17 +44,17 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('You are not logged in', 'user-state-mutations'),
-            self::E2 => $this->__('The comment author\'s name is missing', 'comment-mutations'),
-            self::E3 => $this->__('The comment author\'s email is missing', 'comment-mutations'),
-            self::E4 => $this->__('The custom post ID is missing', 'comment-mutations'),
-            self::E5 => $this->__('The comment is empty', 'comment-mutations'),
-            self::E6 => $this->__('There is no (parent) comment with ID \'%s\'', 'comment-mutations'),
-            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'comment-mutations'),
-            self::E8 => $this->__('Comments are not supported for custom post type \'%s\'', 'comment-mutations'),
-            self::E9 => $this->__('Comments are not open for custom post with ID \'%s\'', 'comment-mutations'),
-            self::E10 => $this->__('There is no comment with ID \'%s\'', 'comment-mutations'),
-            self::E11 => $this->__('The logged-in user doesn\'t have the ability to edit comment with ID \'%s\'', 'comment-mutations'),
+            self::E1 => $this->__('You are not logged in', 'gatographql'),
+            self::E2 => $this->__('The comment author\'s name is missing', 'gatographql'),
+            self::E3 => $this->__('The comment author\'s email is missing', 'gatographql'),
+            self::E4 => $this->__('The custom post ID is missing', 'gatographql'),
+            self::E5 => $this->__('The comment is empty', 'gatographql'),
+            self::E6 => $this->__('There is no (parent) comment with ID \'%s\'', 'gatographql'),
+            self::E7 => $this->__('There is no custom post with ID \'%s\'', 'gatographql'),
+            self::E8 => $this->__('Comments are not supported for custom post type \'%s\'', 'gatographql'),
+            self::E9 => $this->__('Comments are not open for custom post with ID \'%s\'', 'gatographql'),
+            self::E10 => $this->__('There is no comment with ID \'%s\'', 'gatographql'),
+            self::E11 => $this->__('The logged-in user doesn\'t have the ability to edit comment with ID \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

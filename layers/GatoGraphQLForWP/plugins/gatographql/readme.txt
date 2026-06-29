@@ -78,7 +78,7 @@ The available premium extensions are:
 
 [Polylang](https://gatographql.com/extensions/polylang): Integration with the Polylang plugin, adding fields and filters to select the language when fetching data on a multilingual site.
 
-[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.
 
 [WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch product data.
 
@@ -90,7 +90,7 @@ You can use Gato GraphQL to do everything offered by Gato Plugins!
 
 The plugins are:
 
-[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, DeepL, and Google Translate.
+[Gato AI Translations for Polylang](https://gatoaitranslations.com): Automatically translate all content on your WordPress site, using the LLM of your choice: ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.
 
 == Frequently Asked Questions ==
 
@@ -108,6 +108,29 @@ The Gato GraphQL website contains extensive documentation:
 - [Extensions reference](https://gatographql.com/extensions-reference) docs
 - [Queries library](https://gatographql.com/library) with examples of GraphQL queries for many use cases
 - [Schema tutorial](https://gatographql.com/tutorial) to learn all the elements of the GraphQL schema
+
+= In which languages is the plugin available? =
+
+When running WordPress 6.5 or above, the plugin is available in the following languages (not only its admin interface, but also the schema documentation):
+
+- 🇮🇩 Bahasa Indonesia
+- 🇨🇳 Chinese
+- 🇳🇱 Dutch
+- 🇺🇸 English
+- 🇫🇷 French
+- 🇩🇪 German
+- 🇬🇷 Greek
+- 🇮🇹 Italian
+- 🇯🇵 Japanese
+- 🇰🇷 Korean
+- 🇵🇱 Polish
+- 🇧🇷 Portuguese
+- 🇷🇺 Russian
+- 🇪🇸 Spanish
+- 🇸🇪 Swedish
+- 🇹🇭 Thai
+- 🇹🇷 Turkish
+- 🇻🇳 Vietnamese
 
 = Can I watch videos demonstrating the plugin? =
 
@@ -224,8 +247,38 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
-= 18.0.1 =
+= 19.0.0 =
+* Added - The ability to register custom WordPress REST API controllers/endpoints via the service container (#3330)
+* Added - The ability to execute queries as a DRY RUN, marked with a [DRY-RUN] prefix in the logs (#3330)
+* Added - The "External Tools" settings category, for extensions to surface tooling/informational sections (#3330)
+* Improved - Updated docs for the Schema Functions extension
+* Improved - The plugin is now translated to Spanish (es_ES) (#3314)
+* Improved - The plugin is now translated to French (fr_FR) (#3315)
+* Improved - The plugin is now translated to Italian (it_IT) (#3316)
+* Improved - The plugin is now translated to German (de_DE) (#8694a2b)
+* Improved - The plugin is now translated to Portuguese (pt_BR) (#3317)
+* Improved - The plugin is now translated to Polish (pl_PL) (#3318)
+* Improved - The plugin is now translated to Dutch (nl_NL) (#3322)
+* Improved - The plugin is now translated to Japanese (ja) (#3332)
+* Improved - The plugin is now translated to Chinese (Simplified) (zh_CN) (#3334)
+* Improved - The plugin is now translated to Korean (ko_KR) (#3335)
+* Improved - The plugin is now translated to Vietnamese (vi) (#3336)
+* Improved - The plugin is now translated to Thai (th) (#3337)
+* Improved - The plugin is now translated to Bahasa Indonesia (id_ID) (#3338)
+* Improved - The plugin is now translated to Russian (ru_RU) (#3339)
+* Improved - The plugin is now translated to Swedish (sv_SE) (#3341)
+* Improved - The plugin is now translated to Greek (el) (#3345)
+* Improved - Completed translations for the existing locales and resynced the block-editor JS language packs with the catalog (#3333)
+* Improved - Do not show All Inclusive bundle in Extension docs (#3321)
+* Improved - Upgraded GraphiQL to version 5.2.3 (#3323)
+* Improved - Added the Explorer plugin to the GraphiQL client, to build queries by point-and-click (#3327)
+* Fixed - Fixed a module being initialized more than once when booting an attached app (such as the Internal GraphQL Server), which could re-register its services and override others (#3331)
+* Fixed - Fix lost styles in Extensions page (#3319)
+* Fixed - Fix items not shown as active in Extensions page (#3320)
 * Fixed - Replace non-standard spaces in block attributes when doing useHTML5Parser (#3313)
+* Fixed - Fix the GraphiQL editor's Find box (Cmd/Ctrl+F) staying visible after being closed (#3326)
+* Fixed - Register always first the capability to access the plugin (so it doesn't fail installing whenever the server does not have enough memory) (#3343)
+* Fixed - Show the Marketplace Provider's own error message when activating or validating a license fails with an error HTTP status code, such as when the license's activation limit has been reached, instead of a generic HTTP error (#3344)
 
 = 18.0.0 =
 * Breaking changes - Changed namespace for packages in Gato GraphQL extensions (HTTP Client/PHP Constants and Environment Variables via Schema)

@@ -78,9 +78,9 @@ class NamedTypeExtensionsObjectTypeFieldResolver extends AbstractObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'elementName' => $this->__('The type\'s non-namespaced name', 'graphql-server'),
-            'namespacedName' => $this->__('The type\'s namespaced name', 'graphql-server'),
-            'possibleValues' => $this->__('Enum-like "possible values" for EnumString type resolvers, `null` otherwise', 'graphql-server'),
+            'elementName' => $this->__('The type\'s non-namespaced name', 'gatographql'),
+            'namespacedName' => $this->__('The type\'s namespaced name', 'gatographql'),
+            'possibleValues' => $this->__('Enum-like "possible values" for EnumString type resolvers, `null` otherwise', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

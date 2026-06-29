@@ -42,7 +42,7 @@ class ObjectSerializationManager extends AbstractBasicService implements ObjectS
         if (!method_exists($object, '__serialize')) {
             throw new ShouldNotHappenException(
                 sprintf(
-                    $this->__('The object of class \'%s\' does not support method \'__serialize\'', 'component-model'),
+                    $this->__('The object of class \'%s\' does not support method \'__serialize\'', 'gatographql'),
                     get_class($object)
                 )
             );

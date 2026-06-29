@@ -305,15 +305,15 @@ class RootPostTagCRUDObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'createPostTag' => $this->__('Create a post tag', 'tag-mutations'),
-            'createPostTags' => $this->__('Create post tags', 'tag-mutations'),
-            'updatePostTag' => $this->__('Update a post tag', 'tag-mutations'),
-            'updatePostTags' => $this->__('Update post tags', 'tag-mutations'),
-            'deletePostTag' => $this->__('Delete a post tag', 'tag-mutations'),
-            'deletePostTags' => $this->__('Delete post tags', 'tag-mutations'),
-            'createPostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPostTag` mutation', 'tag-mutations'),
-            'updatePostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePostTag` mutation', 'tag-mutations'),
-            'deletePostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deletePostTag` mutation', 'tag-mutations'),
+            'createPostTag' => $this->__('Create a post tag', 'gatographql'),
+            'createPostTags' => $this->__('Create post tags', 'gatographql'),
+            'updatePostTag' => $this->__('Update a post tag', 'gatographql'),
+            'updatePostTags' => $this->__('Update post tags', 'gatographql'),
+            'deletePostTag' => $this->__('Delete a post tag', 'gatographql'),
+            'deletePostTags' => $this->__('Delete post tags', 'gatographql'),
+            'createPostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `createPostTag` mutation', 'gatographql'),
+            'updatePostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updatePostTag` mutation', 'gatographql'),
+            'deletePostTagMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deletePostTag` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

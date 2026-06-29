@@ -34,18 +34,18 @@ abstract class AbstractCreateOrUpdateCategoryTermInputObjectTypeResolver extends
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create or update a category term', 'category-mutations');
+        return $this->__('Input to create or update a category term', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the category to update', 'category-mutations'),
-            MutationInputProperties::NAME => $this->__('The name of the category', 'category-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('The description of the category', 'category-mutations'),
-            MutationInputProperties::SLUG => $this->__('The slug of the category', 'category-mutations'),
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy of the category', 'category-mutations'),
-            MutationInputProperties::PARENT_BY => $this->__('The category\'s parent, or `null` to remove it', 'category-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the category to update', 'gatographql'),
+            MutationInputProperties::NAME => $this->__('The name of the category', 'gatographql'),
+            MutationInputProperties::DESCRIPTION => $this->__('The description of the category', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('The slug of the category', 'gatographql'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy of the category', 'gatographql'),
+            MutationInputProperties::PARENT_BY => $this->__('The category\'s parent, or `null` to remove it', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

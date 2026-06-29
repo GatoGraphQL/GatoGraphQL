@@ -29,7 +29,7 @@ class RootCreateGenericTagTermMutationErrorPayloadUnionTypeResolver extends Abst
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when creating a tag term', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when creating a tag term', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

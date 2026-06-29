@@ -29,7 +29,7 @@ abstract class AbstractSetCategoriesOnGenericCustomPostInputObjectTypeResolver e
 
     protected function getEntityName(): string
     {
-        return $this->__('custom post', 'postcategory-mutations');
+        return $this->__('custom post', 'gatographql');
     }
 
     protected function addTaxonomyInputField(): bool

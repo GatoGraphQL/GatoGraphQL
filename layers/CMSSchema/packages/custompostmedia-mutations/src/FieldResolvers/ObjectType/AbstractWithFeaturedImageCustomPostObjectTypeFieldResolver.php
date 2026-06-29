@@ -148,8 +148,8 @@ abstract class AbstractWithFeaturedImageCustomPostObjectTypeFieldResolver extend
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'setFeaturedImage' => $this->__('Set the featured image on the custom post', 'custompostmedia-mutations'),
-            'removeFeaturedImage' => $this->__('Remove the featured image on the custom post', 'custompostmedia-mutations'),
+            'setFeaturedImage' => $this->__('Set the featured image on the custom post', 'gatographql'),
+            'removeFeaturedImage' => $this->__('Remove the featured image on the custom post', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

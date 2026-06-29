@@ -29,7 +29,7 @@ class PostObjectTypeResolver extends AbstractCustomPostObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a post', 'posts');
+        return $this->__('Representation of a post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

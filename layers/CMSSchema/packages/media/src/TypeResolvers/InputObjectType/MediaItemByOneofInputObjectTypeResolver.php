@@ -64,7 +64,7 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the property and data to fetch a media item', 'media');
+        return $this->__('Oneof input to specify the property and data to fetch a media item', 'gatographql');
     }
 
     /**
@@ -81,8 +81,8 @@ class MediaItemByOneofInputObjectTypeResolver extends AbstractOneofQueryableInpu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Query by media item ID', 'media'),
-            InputProperties::SLUG => $this->__('Query by media item slug', 'media'),
+            InputProperties::ID => $this->__('Query by media item ID', 'gatographql'),
+            InputProperties::SLUG => $this->__('Query by media item slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

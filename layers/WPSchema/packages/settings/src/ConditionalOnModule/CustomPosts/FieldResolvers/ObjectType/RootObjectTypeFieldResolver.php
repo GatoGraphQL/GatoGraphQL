@@ -73,7 +73,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'useGutenbergEditorWithCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'settings'),
+            'useGutenbergEditorWithCustomPostType' => $this->__('Is the Gutenberg editor enabled for the custom post type?', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

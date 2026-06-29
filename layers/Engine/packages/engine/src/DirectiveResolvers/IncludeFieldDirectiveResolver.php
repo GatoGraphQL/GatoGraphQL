@@ -136,7 +136,7 @@ class IncludeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
     }
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'api');
+        return $this->__('Include the field value in the output only if the argument \'if\' evals to `true`', 'gatographql');
     }
 
     /**
@@ -162,7 +162,7 @@ class IncludeFieldDirectiveResolver extends AbstractGlobalFieldDirectiveResolver
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'if' => $this->__('Argument that must evaluate to `true` to include the field value in the output', 'api'),
+            'if' => $this->__('Argument that must evaluate to `true` to include the field value in the output', 'gatographql'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

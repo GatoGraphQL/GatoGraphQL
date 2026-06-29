@@ -73,7 +73,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'useWhichPageBuilderWithCustomPostType' => $this->__('Indicate which Page Builder (if any) is configured to edit the custom post type, or `null` if none', 'pagebuilder'),
+            'useWhichPageBuilderWithCustomPostType' => $this->__('Indicate which Page Builder (if any) is configured to edit the custom post type, or `null` if none', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

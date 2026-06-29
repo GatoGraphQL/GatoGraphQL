@@ -48,7 +48,7 @@ abstract class AbstractUpdateEntityMetaInputObjectTypeResolver extends AbstractI
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to update an entity\'s meta', 'meta-mutations');
+        return $this->__('Input to update an entity\'s meta', 'gatographql');
     }
 
     /**
@@ -73,10 +73,10 @@ abstract class AbstractUpdateEntityMetaInputObjectTypeResolver extends AbstractI
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the entity', 'meta-mutations'),
-            MutationInputProperties::KEY => $this->__('The meta key', 'meta-mutations'),
-            MutationInputProperties::VALUE => $this->__('The meta value', 'meta-mutations'),
-            MutationInputProperties::PREV_VALUE => $this->__('Previous value to check before updating. If specified, only update existing metadata entries with this value. Otherwise, update all entries', 'meta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the entity', 'gatographql'),
+            MutationInputProperties::KEY => $this->__('The meta key', 'gatographql'),
+            MutationInputProperties::VALUE => $this->__('The meta value', 'gatographql'),
+            MutationInputProperties::PREV_VALUE => $this->__('Previous value to check before updating. If specified, only update existing metadata entries with this value. Otherwise, update all entries', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

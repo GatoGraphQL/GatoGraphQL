@@ -28,7 +28,7 @@ class GeneralBlockObjectTypeResolver extends AbstractBlockObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a Block that works for all blocks, retrieving the block attributes as a non-strictly-typed JSON object', 'blocks');
+        return $this->__('Representation of a Block that works for all blocks, retrieving the block attributes as a non-strictly-typed JSON object', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -40,7 +40,7 @@ class CommentObjectTypeResolver extends AbstractObjectTypeResolver implements Co
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Comments added to custom posts', 'comments');
+        return $this->__('Comments added to custom posts', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

@@ -23,7 +23,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to filter users', 'users');
+        return $this->__('Input to filter users', 'gatographql');
     }
 
     /**
@@ -42,7 +42,7 @@ abstract class AbstractUsersFilterInputObjectTypeResolver extends AbstractObject
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'searchBy' => $this->__('Search for users', 'users'),
+            'searchBy' => $this->__('Search for users', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

@@ -116,9 +116,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'rawStatus' => $this->__('Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)', 'customposts'),
-            'wpAdminEditURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'customposts'),
-            'menuOrder' => $this->__('Menu order', 'customposts'),
+            'rawStatus' => $this->__('Custom post raw status (as it exists in the database, eg: `publish` instead of `future`)', 'gatographql'),
+            'wpAdminEditURL' => $this->__('The URL in the wp-admin to edit the custom post, or `null` if the user has no permissions to access it', 'gatographql'),
+            'menuOrder' => $this->__('Menu order', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

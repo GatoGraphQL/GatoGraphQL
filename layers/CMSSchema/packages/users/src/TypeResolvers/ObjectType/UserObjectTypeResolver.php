@@ -40,7 +40,7 @@ class UserObjectTypeResolver extends AbstractObjectTypeResolver implements UserO
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of a user', 'users');
+        return $this->__('Representation of a user', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

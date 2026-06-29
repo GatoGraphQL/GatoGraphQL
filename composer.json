@@ -55,6 +55,7 @@
         "symfony/var-dumper": "^6.0",
         "symplify/monorepo-builder": "^10.2.2",
         "szepeviktor/phpstan-wordpress": "^2.0",
+        "wp-cli/i18n-command": "^2.7",
         "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
@@ -418,6 +419,14 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/package-builder.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-easy-testing.git"
         }
     ],
     "replace": {
@@ -642,7 +651,7 @@
         "check-style-wp": "php -d memory_limit=512M vendor/bin/phpcs --standard=phpcs/WordPress-Custom/ruleset.xml -n $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --wp-only --subfolder=src --subfolder=tests)",
         "fix-style": "php -d memory_limit=512M vendor/bin/phpcbf -n src $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --subfolder=src --subfolder=tests)",
         "fix-style-wp": "php -d memory_limit=512M vendor/bin/phpcbf --standard=phpcs/WordPress-Custom/ruleset.xml -n src $(monorepo-builder source-packages --config=config/monorepo-builder/monorepo-builder-without-upstream-packages.php --psr4-only --wp-only --subfolder=src --subfolder=tests)",
-        "analyse": "phpstan analyse --memory-limit 1G --ansi",
+        "analyse": "phpstan analyse --memory-limit 2G --ansi",
         "preview-src-downgrade": "rector process $(monorepo-builder source-packages --config=config/monorepo-builder/source-packages.php --psr4-only --subfolder=src) --config=config/rector/downgrade/monorepo/rector.php --ansi --dry-run || true",
         "preview-vendor-downgrade": "ci/downgrade/downgrade_code.sh config/rector/downgrade/monorepo/rector.php --dry-run \"\" \"\" \"\" \"$(monorepo-builder local-package-owners --config=config/monorepo-builder/local-package-owners.php)\" || true",
         "preview-code-downgrade": [
@@ -737,9 +746,28 @@
         "merge-monorepo": "monorepo-builder merge --config=config/monorepo-builder/merge.php --ansi",
         "propagate-monorepo": "monorepo-builder propagate --config=config/monorepo-builder/propagate.php --ansi",
         "validate-monorepo": "monorepo-builder validate --config=config/monorepo-builder/validate.php --ansi",
-        "release-patch": "monorepo-builder release patch --config=config/monorepo-builder/release.php --ansi",
-        "release-minor": "monorepo-builder release minor --config=config/monorepo-builder/release.php --ansi",
-        "release-major": "monorepo-builder release major --config=config/monorepo-builder/release.php --ansi",
+        "i18n-extract": "bash ci/i18n/extract.sh",
+        "i18n-translate": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash ci/i18n/translate.sh"
+        ],
+        "i18n-compile": [
+            "Composer\\Config::disableProcessTimeout",
+            "bash ci/i18n/compile.sh"
+        ],
+        "i18n-check": "bash ci/i18n/check.sh",
+        "release-patch": [
+            "@i18n-check",
+            "monorepo-builder release patch --config=config/monorepo-builder/release.php --ansi"
+        ],
+        "release-minor": [
+            "@i18n-check",
+            "monorepo-builder release minor --config=config/monorepo-builder/release.php --ansi"
+        ],
+        "release-major": [
+            "@i18n-check",
+            "monorepo-builder release major --config=config/monorepo-builder/release.php --ansi"
+        ],
         "merge-phpstan": "monorepo-builder merge-phpstan --config=config/monorepo-builder/merge-phpstan.php --ansi",
         "improve-code-quality": "rector process --config=config/rector/code-quality/rector.php --ansi",
         "upgrade-to-phpunit-10": "rector process --config=config/rector/upgrades/phpunit-10/rector.php --ansi",

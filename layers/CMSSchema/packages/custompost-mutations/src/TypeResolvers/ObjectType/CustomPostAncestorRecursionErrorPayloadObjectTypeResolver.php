@@ -29,7 +29,7 @@ class CustomPostAncestorRecursionErrorPayloadObjectTypeResolver extends Abstract
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The custom post is an ancestor of itself"', 'customposts');
+        return $this->__('Error payload for: "The custom post is an ancestor of itself"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

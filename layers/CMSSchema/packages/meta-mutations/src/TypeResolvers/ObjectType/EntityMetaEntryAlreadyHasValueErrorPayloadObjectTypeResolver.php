@@ -29,7 +29,7 @@ class EntityMetaEntryAlreadyHasValueErrorPayloadObjectTypeResolver extends Abstr
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The taxonomy term already has the meta entry with the provided update value"', 'taxonomymeta-mutations');
+        return $this->__('Error payload for: "The taxonomy term already has the meta entry with the provided update value"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

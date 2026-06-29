@@ -24,7 +24,7 @@ class ErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('The execution of the regex replace produced error: \'%s\'', 'function-directives'),
+            self::E1 => $this->__('The execution of the regex replace produced error: \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

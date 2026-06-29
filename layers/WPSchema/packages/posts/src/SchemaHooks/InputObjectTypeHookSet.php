@@ -88,7 +88,7 @@ class InputObjectTypeHookSet extends AbstractHookSet
             return $inputFieldDescription;
         }
         return match ($inputFieldName) {
-            'isSticky' => $this->__('Filter by sticky posts', 'posts'),
+            'isSticky' => $this->__('Filter by sticky posts', 'gatographql'),
             default => $inputFieldDescription,
         };
     }

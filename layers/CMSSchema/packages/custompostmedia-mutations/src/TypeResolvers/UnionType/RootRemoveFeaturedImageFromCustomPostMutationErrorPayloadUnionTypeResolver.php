@@ -28,7 +28,7 @@ class RootRemoveFeaturedImageFromCustomPostMutationErrorPayloadUnionTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when removing a featured image from a custom post', 'custompostmedia-mutations');
+        return $this->__('Union of \'Error Payload\' types when removing a featured image from a custom post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

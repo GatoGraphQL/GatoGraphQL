@@ -104,7 +104,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
                         [
                             $inputValue,
                             $this->getMaybeNamespacedTypeName(),
-                            implode($this->__('\', \''), $nonDeprecatedEnumValues)
+                            implode($this->__('\', \'', 'gatographql'), $nonDeprecatedEnumValues)
                         ]
                     ),
                     $astNode,
@@ -164,7 +164,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
             return [
                 sprintf(
-                    $this->__('Enum value \'%s\' is deprecated: %s', 'component-model'),
+                    $this->__('Enum value \'%s\' is deprecated: %s', 'gatographql'),
                     $inputValue,
                     $deprecationMessage
                 ),

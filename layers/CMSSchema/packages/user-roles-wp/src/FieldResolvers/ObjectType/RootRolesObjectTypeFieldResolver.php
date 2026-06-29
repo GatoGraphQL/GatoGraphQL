@@ -90,7 +90,7 @@ class RootRolesObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'roleNames' => $this->__('All user role names', 'user-roles'),
+            'roleNames' => $this->__('All user role names', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

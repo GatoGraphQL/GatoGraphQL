@@ -381,11 +381,11 @@ abstract class AbstractUnionTypeResolver extends AbstractRelationalTypeResolver 
                 if ($notImplementingInterfaceTypeResolvers) {
                     throw new SchemaReferenceException(
                         sprintf(
-                            $this->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'component-model'),
+                            $this->__('Union Type \'%s\' is defined to implement interface \'%s\', hence its Type members must also satisfy this interface, but the following ones do not: \'%s\'', 'gatographql'),
                             $this->getMaybeNamespacedTypeName(),
                             $interfaceTypeResolver->getMaybeNamespacedTypeName(),
                             implode(
-                                $this->__('\', \''),
+                                $this->__('\', \'', 'gatographql'),
                                 array_map(
                                     fn (ObjectTypeResolverInterface $objectTypeResolver) => $objectTypeResolver->getMaybeNamespacedTypeName(),
                                     $notImplementingInterfaceTypeResolvers

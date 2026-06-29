@@ -76,6 +76,6 @@ abstract class AbstractAddMenuOrderCustomPostMutationResolverHookSet extends Abs
         if ($inputFieldName !== MutationInputProperties::MENU_ORDER || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The menu order', 'customposts');
+        return $this->__('The menu order', 'gatographql');
     }
 }

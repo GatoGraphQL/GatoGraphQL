@@ -173,10 +173,10 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'category' => $this->__('Retrieve a single category', 'categories'),
-            'categories' => $this->__('Categories', 'categories'),
-            'categoryCount' => $this->__('Number of categories', 'categories'),
-            'categoryNames' => $this->__('Names of the categories', 'categories'),
+            'category' => $this->__('Retrieve a single category', 'gatographql'),
+            'categories' => $this->__('Categories', 'gatographql'),
+            'categoryCount' => $this->__('Number of categories', 'gatographql'),
+            'categoryNames' => $this->__('Names of the categories', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -230,10 +230,10 @@ class RootCategoryObjectTypeFieldResolver extends AbstractQueryableObjectTypeFie
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         if ($fieldArgName === 'taxonomy') {
-            return $this->__('Taxonomy of the category', 'categories');
+            return $this->__('Taxonomy of the category', 'gatographql');
         }
         return match ([$fieldName => $fieldArgName]) {
-            ['category' => 'by'] => $this->__('Parameter by which to select the category', 'categories'),
+            ['category' => 'by'] => $this->__('Parameter by which to select the category', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

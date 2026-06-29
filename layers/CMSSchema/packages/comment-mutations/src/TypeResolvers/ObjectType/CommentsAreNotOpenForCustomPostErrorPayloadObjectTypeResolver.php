@@ -29,7 +29,7 @@ class CommentsAreNotOpenForCustomPostErrorPayloadObjectTypeResolver extends Abst
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "Comments are not open for the custom post"', 'comment-mutations');
+        return $this->__('Error payload for: "Comments are not open for the custom post"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

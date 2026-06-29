@@ -13,6 +13,6 @@ class CommentAddMetaMutationPayloadObjectTypeResolver extends AbstractCommentMet
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an add meta nested mutation on a comment', 'comment-mutations');
+        return $this->__('Payload of executing an add meta nested mutation on a comment', 'gatographql');
     }
 }

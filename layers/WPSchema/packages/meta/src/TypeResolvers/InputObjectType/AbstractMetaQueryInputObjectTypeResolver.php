@@ -78,7 +78,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'meta');
+        return $this->__('Filter by meta key and value. The key must be allowed access in the Settings. See: https://developer.wordpress.org/reference/classes/wp_meta_query/', 'gatographql');
     }
 
     /**
@@ -97,10 +97,10 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'key' => $this->__('Custom field key', 'meta'),
-            'type' => $this->__('Custom field type', 'meta'),
-            'compareBy' => $this->__('Value and operator to compare against', 'meta'),
-            'relation' => $this->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'meta'),
+            'key' => $this->__('Custom field key', 'gatographql'),
+            'type' => $this->__('Custom field type', 'gatographql'),
+            'compareBy' => $this->__('Value and operator to compare against', 'gatographql'),
+            'relation' => $this->__('OR or AND, how the sub-arrays should be compared. Default: AND. Only the value from the first sub-array will be used', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

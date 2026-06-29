@@ -70,9 +70,9 @@ abstract class AbstractIsTaxonomyInterfaceTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Taxonomy', 'taxonomies'),
-            'description' => $this->__('Taxonomy description', 'taxonomies'),
-            'count' => $this->__('Number of custom posts containing this taxonomy', 'taxonomies'),
+            'name' => $this->__('Taxonomy', 'gatographql'),
+            'description' => $this->__('Taxonomy description', 'gatographql'),
+            'count' => $this->__('Number of custom posts containing this taxonomy', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

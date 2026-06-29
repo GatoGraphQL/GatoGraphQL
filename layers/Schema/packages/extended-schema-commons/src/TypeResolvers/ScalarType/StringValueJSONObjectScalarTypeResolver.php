@@ -13,7 +13,7 @@ class StringValueJSONObjectScalarTypeResolver extends AbstractScalarValueJSONObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Custom scalar representing a JSON Object where values are strings', 'extended-schema-commons');
+        return $this->__('Custom scalar representing a JSON Object where values are strings', 'gatographql');
     }
 
     protected function canCastJSONObjectPropertyValue(

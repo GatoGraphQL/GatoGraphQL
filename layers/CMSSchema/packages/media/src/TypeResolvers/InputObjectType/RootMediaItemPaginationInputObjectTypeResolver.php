@@ -18,7 +18,7 @@ class RootMediaItemPaginationInputObjectTypeResolver extends PaginationInputObje
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to paginate media items', 'media');
+        return $this->__('Input to paginate media items', 'gatographql');
     }
 
     protected function getDefaultLimit(): ?int

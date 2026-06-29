@@ -59,14 +59,14 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
     public function getTypeDescription(): ?string
     {
         return sprintf(
-            $this->__('Oneof input to specify the property and data to fetch %s', 'customposts'),
+            $this->__('Oneof input to specify the property and data to fetch %s', 'gatographql'),
             $this->getTypeDescriptionCustomPostEntity()
         );
     }
 
     protected function getTypeDescriptionCustomPostEntity(): string
     {
-        return $this->__('a custom post', 'customposts');
+        return $this->__('a custom post', 'gatographql');
     }
 
     /**
@@ -83,8 +83,8 @@ abstract class AbstractCustomPostByOneofInputObjectTypeResolver extends Abstract
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'id' => $this->__('Query by custom post ID', 'customposts'),
-            'slug' => $this->__('Query by custom post slug', 'customposts'),
+            'id' => $this->__('Query by custom post ID', 'gatographql'),
+            'slug' => $this->__('Query by custom post slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

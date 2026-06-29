@@ -28,8 +28,8 @@ class OrderEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            Order::ASC => $this->__('Ascending order', 'schema-commons'),
-            Order::DESC => $this->__('Descending order', 'schema-commons'),
+            Order::ASC => $this->__('Ascending order', 'gatographql'),
+            Order::DESC => $this->__('Descending order', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

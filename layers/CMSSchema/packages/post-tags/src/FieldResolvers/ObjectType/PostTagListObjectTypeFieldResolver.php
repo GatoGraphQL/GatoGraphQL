@@ -37,8 +37,8 @@ class PostTagListObjectTypeFieldResolver extends AbstractPostObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'posts' => $this->__('Posts which contain this tag', 'pop-taxonomies'),
-            'postCount' => $this->__('Number of posts which contain this tag', 'pop-taxonomies'),
+            'posts' => $this->__('Posts which contain this tag', 'gatographql'),
+            'postCount' => $this->__('Number of posts which contain this tag', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

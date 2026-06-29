@@ -13,6 +13,6 @@ class RootDeletePostCategoryTermMutationPayloadObjectTypeResolver extends Abstra
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing a delete mutation on a post category term', 'category-mutations');
+        return $this->__('Payload of executing a delete mutation on a post category term', 'gatographql');
     }
 }

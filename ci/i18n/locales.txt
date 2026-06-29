@@ -1,0 +1,17 @@
+es_ES
+fr_FR
+it_IT
+de_DE
+pt_BR
+pl_PL
+nl_NL
+ja
+zh_CN
+ko_KR
+vi
+th
+id_ID
+ru_RU
+tr_TR
+sv_SE
+el

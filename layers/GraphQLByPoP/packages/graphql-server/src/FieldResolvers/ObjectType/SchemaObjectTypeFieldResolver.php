@@ -106,13 +106,13 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'queryType' => $this->__('The type, accessible from the root, that resolves queries', 'graphql-server'),
-            'mutationType' => $this->__('The type, accessible from the root, that resolves mutations', 'graphql-server'),
-            'subscriptionType' => $this->__('The type, accessible from the root, that resolves subscriptions', 'graphql-server'),
-            'types' => $this->__('All types registered in the data graph', 'graphql-server'),
-            'directives' => $this->__('All directives registered in the data graph', 'graphql-server'),
-            'type' => $this->__('Obtain a specific type from the schema', 'graphql-server'),
-            'extensions' => $this->__('Extensions (custom metadata) added to the GraphQL schema', 'graphql-server'),
+            'queryType' => $this->__('The type, accessible from the root, that resolves queries', 'gatographql'),
+            'mutationType' => $this->__('The type, accessible from the root, that resolves mutations', 'gatographql'),
+            'subscriptionType' => $this->__('The type, accessible from the root, that resolves subscriptions', 'gatographql'),
+            'types' => $this->__('All types registered in the data graph', 'gatographql'),
+            'directives' => $this->__('All directives registered in the data graph', 'gatographql'),
+            'type' => $this->__('Obtain a specific type from the schema', 'gatographql'),
+            'extensions' => $this->__('Extensions (custom metadata) added to the GraphQL schema', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -133,7 +133,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['type' => 'name'] => $this->__('The name of the type', 'graphql-server'),
+            ['type' => 'name'] => $this->__('The name of the type', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

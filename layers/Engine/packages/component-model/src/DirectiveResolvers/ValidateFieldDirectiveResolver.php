@@ -215,6 +215,6 @@ final class ValidateFieldDirectiveResolver extends AbstractGlobalFieldDirectiveR
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->__('Validate the fields before they are resolved. This directive is already included by the engine, since its execution is mandatory', 'component-model');
+        return $this->__('Validate the fields before they are resolved. This directive is already included by the engine, since its execution is mandatory', 'gatographql');
     }
 }

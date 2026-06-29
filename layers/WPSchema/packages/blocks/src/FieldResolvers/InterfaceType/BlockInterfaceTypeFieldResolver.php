@@ -101,11 +101,11 @@ class BlockInterfaceTypeFieldResolver extends AbstractInterfaceTypeFieldResolver
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Block name', 'blocks'),
-            'attributes' => $this->__('Block attributes, parsed to the type declared in their block.json schema', 'blocks'),
-            'innerBlocks' => $this->__('Block\'s inner blocks (if suitable)', 'blocks'),
+            'name' => $this->__('Block name', 'gatographql'),
+            'attributes' => $this->__('Block attributes, parsed to the type declared in their block.json schema', 'gatographql'),
+            'innerBlocks' => $this->__('Block\'s inner blocks (if suitable)', 'gatographql'),
             // 'innerHTML' => $this->__('Block\'s inner HTML code', 'blocks'),
-            'contentSource' => $this->__('Block\'s whole HTML code, including the block comment delimiters', 'blocks'),
+            'contentSource' => $this->__('Block\'s whole HTML code, including the block comment delimiters', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

@@ -13,6 +13,6 @@ class RootLogoutUserMutationPayloadObjectTypeResolver extends AbstractUserStateM
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of logging the user out', 'user-state-mutations');
+        return $this->__('Payload of logging the user out', 'gatographql');
     }
 }

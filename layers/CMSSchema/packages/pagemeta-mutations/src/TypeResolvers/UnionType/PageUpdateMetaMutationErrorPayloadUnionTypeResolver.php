@@ -29,7 +29,7 @@ class PageUpdateMetaMutationErrorPayloadUnionTypeResolver extends AbstractCustom
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when updating meta on a page (using nested mutations)', 'page-mutations');
+        return $this->__('Union of \'Error Payload\' types when updating meta on a page (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

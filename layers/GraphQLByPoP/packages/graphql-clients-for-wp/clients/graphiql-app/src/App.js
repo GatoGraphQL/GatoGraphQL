@@ -1,5 +1,14 @@
 import React from 'react';
-import { GraphiQL } from 'graphiql';
+import { GraphiQL, HISTORY_PLUGIN } from 'graphiql';
+import { explorerPlugin } from '@graphiql/plugin-explorer';
+import '@graphiql/plugin-explorer/style.css';
+
+/**
+ * GraphiQL Explorer plugin. v5's `explorerPlugin()` is stateless: it reads and
+ * writes the query through GraphiQL's React context, so no `query` / `onEdit`
+ * props are needed. Created once at module scope for a stable plugin identity.
+ */
+const explorer = explorerPlugin();
 
 /**
  * Custom fetcher for WordPress: adds X-WP-Nonce and credentials.
@@ -45,6 +54,7 @@ export default function App() {
       fetcher={createFetcher()}
       initialQuery={initialQuery}
       defaultVariableEditorOpen={false}
+      plugins={[HISTORY_PLUGIN, explorer]}
     />
   );
 }

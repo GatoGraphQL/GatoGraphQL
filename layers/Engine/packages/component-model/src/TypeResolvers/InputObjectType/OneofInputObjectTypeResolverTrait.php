@@ -54,7 +54,7 @@ trait OneofInputObjectTypeResolverTrait
                             $this->getMaybeNamespacedTypeName(),
                             $inputValueSize,
                             implode(
-                                $this->getTranslationAPI()->__('\', \'', 'component-model'),
+                                $this->getTranslationAPI()->__('\', \'', 'gatographql'),
                                 array_keys($inputValueAsArray)
                             ),
                         ]

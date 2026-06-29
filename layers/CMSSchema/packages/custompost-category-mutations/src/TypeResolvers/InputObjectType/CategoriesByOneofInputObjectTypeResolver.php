@@ -59,8 +59,8 @@ class CategoriesByOneofInputObjectTypeResolver extends AbstractOneofInputObjectT
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::IDS => $this->__('Input the category IDs', 'custompost-category-mutations'),
-            MutationInputProperties::SLUGS => $this->__('Input the category slugs', 'custompost-category-mutations'),
+            MutationInputProperties::IDS => $this->__('Input the category IDs', 'gatographql'),
+            MutationInputProperties::SLUGS => $this->__('Input the category slugs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

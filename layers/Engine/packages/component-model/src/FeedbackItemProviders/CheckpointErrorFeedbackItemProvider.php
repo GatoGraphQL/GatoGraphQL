@@ -26,8 +26,8 @@ class CheckpointErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E1 => $this->__('Mutations cannot be executed', 'component-model'),
-            self::E2 => $this->__('Use the operation \'mutation\' to mutate data', 'component-model'),
+            self::E1 => $this->__('Mutations cannot be executed', 'gatographql'),
+            self::E2 => $this->__('Use the operation \'mutation\' to mutate data', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

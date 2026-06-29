@@ -30,7 +30,7 @@ class UserAvatarObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('User avatar', 'user-avatars');
+        return $this->__('User avatar', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

@@ -86,7 +86,7 @@ abstract class AbstractCacheControlFieldDirectiveResolver extends AbstractGlobal
 
     public function getDirectiveDescription(RelationalTypeResolverInterface $relationalTypeResolver): ?string
     {
-        return $this->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'cache-control');
+        return $this->__('HTTP caching (https://tools.ietf.org/html/rfc7234): Cache the response by setting a Cache-Control header with a max-age value; this value is calculated as the minimum max-age value among all requested fields. If any field has max-age: 0, a corresponding \'no-store\' value is sent, indicating to not cache the response', 'gatographql');
     }
 
     /**
@@ -105,7 +105,7 @@ abstract class AbstractCacheControlFieldDirectiveResolver extends AbstractGlobal
     public function getDirectiveArgDescription(RelationalTypeResolverInterface $relationalTypeResolver, string $directiveArgName): ?string
     {
         return match ($directiveArgName) {
-            'maxAge' => $this->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'cache-control'),
+            'maxAge' => $this->__('Use a specific max-age value for the field, instead of the one configured in the directive', 'gatographql'),
             default => parent::getDirectiveArgDescription($relationalTypeResolver, $directiveArgName),
         };
     }

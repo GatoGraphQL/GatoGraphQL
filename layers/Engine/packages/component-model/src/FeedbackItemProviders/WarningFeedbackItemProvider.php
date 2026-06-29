@@ -27,7 +27,7 @@ class WarningFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             self::W1 => sprintf(
-                $this->__('URL param \'%s\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: ', 'component-model'),
+                $this->__('URL param \'%s\' expects the type and field name separated by \'%s\' (eg: \'%s\'), so the following value has been ignored: ', 'gatographql'),
                 Params::VERSION_CONSTRAINT_FOR_FIELDS,
                 Constants::TYPE_FIELD_SEPARATOR,
                 '?' . Params::VERSION_CONSTRAINT_FOR_FIELDS . '[Post' . Constants::TYPE_FIELD_SEPARATOR . 'title]=^0.1'

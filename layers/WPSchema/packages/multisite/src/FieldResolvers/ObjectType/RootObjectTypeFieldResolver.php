@@ -76,8 +76,8 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'networkSites' => $this->__('Sites in the WordPress multisite network', 'multisite'),
-            'networkSiteCount' => $this->__('Number of sites in the WordPress multisite network', 'multisite'),
+            'networkSites' => $this->__('Sites in the WordPress multisite network', 'gatographql'),
+            'networkSiteCount' => $this->__('Number of sites in the WordPress multisite network', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -29,7 +29,7 @@ class CommentDoesNotExistErrorPayloadObjectTypeResolver extends AbstractErrorPay
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Error payload for: "The comment does not exist"', 'comment-mutations');
+        return $this->__('Error payload for: "The comment does not exist"', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

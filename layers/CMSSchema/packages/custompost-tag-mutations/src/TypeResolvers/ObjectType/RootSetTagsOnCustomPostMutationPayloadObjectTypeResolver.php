@@ -13,6 +13,6 @@ class RootSetTagsOnCustomPostMutationPayloadObjectTypeResolver extends AbstractG
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of setting tags on a custom post', 'posttag-mutations');
+        return $this->__('Payload of setting tags on a custom post', 'gatographql');
     }
 }

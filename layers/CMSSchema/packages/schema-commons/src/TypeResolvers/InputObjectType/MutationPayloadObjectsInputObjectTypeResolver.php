@@ -41,7 +41,7 @@ class MutationPayloadObjectsInputObjectTypeResolver extends AbstractQueryableInp
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('IDs of the payload objects for the recently-executed mutations', 'schema-commons'),
+            'ids' => $this->__('IDs of the payload objects for the recently-executed mutations', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

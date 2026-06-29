@@ -307,18 +307,18 @@ abstract class AbstractRootCategoryCRUDObjectTypeFieldResolver extends AbstractO
     {
         $categoryEntityName = $this->getCategoryEntityName();
         return match ($fieldName) {
-            'add' . $categoryEntityName . 'Meta' => $this->__('Add meta to category', 'category-mutations'),
-            'add' . $categoryEntityName . 'Metas' => $this->__('Add meta to categories', 'category-mutations'),
-            'update' . $categoryEntityName . 'Meta' => $this->__('Update meta from category', 'category-mutations'),
-            'update' . $categoryEntityName . 'Metas' => $this->__('Update meta from categories', 'category-mutations'),
-            'delete' . $categoryEntityName . 'Meta' => $this->__('Delete meta from category', 'category-mutations'),
-            'delete' . $categoryEntityName . 'Metas' => $this->__('Delete meta from categories', 'category-mutations'),
-            'set' . $categoryEntityName . 'Meta' => $this->__('Set meta on category', 'category-mutations'),
-            'set' . $categoryEntityName . 'Metas' => $this->__('Set meta on categories', 'category-mutations'),
-            'add' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCategoryMeta` mutation', 'category-mutations'),
-            'update' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategoryMeta` mutation', 'category-mutations'),
-            'delete' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategoryMeta` mutation', 'category-mutations'),
-            'set' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCategoryMeta` mutation', 'category-mutations'),
+            'add' . $categoryEntityName . 'Meta' => $this->__('Add meta to category', 'gatographql'),
+            'add' . $categoryEntityName . 'Metas' => $this->__('Add meta to categories', 'gatographql'),
+            'update' . $categoryEntityName . 'Meta' => $this->__('Update meta from category', 'gatographql'),
+            'update' . $categoryEntityName . 'Metas' => $this->__('Update meta from categories', 'gatographql'),
+            'delete' . $categoryEntityName . 'Meta' => $this->__('Delete meta from category', 'gatographql'),
+            'delete' . $categoryEntityName . 'Metas' => $this->__('Delete meta from categories', 'gatographql'),
+            'set' . $categoryEntityName . 'Meta' => $this->__('Set meta on category', 'gatographql'),
+            'set' . $categoryEntityName . 'Metas' => $this->__('Set meta on categories', 'gatographql'),
+            'add' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `addCategoryMeta` mutation', 'gatographql'),
+            'update' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `updateCategoryMeta` mutation', 'gatographql'),
+            'delete' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `deleteCategoryMeta` mutation', 'gatographql'),
+            'set' . $categoryEntityName . 'MetaMutationPayloadObjects' => $this->__('Retrieve the payload objects from a recently-executed `setCategoryMeta` mutation', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

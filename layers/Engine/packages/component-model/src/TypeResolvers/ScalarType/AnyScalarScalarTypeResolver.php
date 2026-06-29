@@ -17,7 +17,7 @@ class AnyScalarScalarTypeResolver extends AbstractScalarTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Wildcard type representing any of GraphQL\'s scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types', 'component-model');
+        return $this->__('Wildcard type representing any of GraphQL\'s scalar types, including built-in types (String, Int, Boolean, Float or ID) and custom types', 'gatographql');
     }
 
     /**

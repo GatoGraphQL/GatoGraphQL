@@ -28,7 +28,7 @@ class RootSetFeaturedImageOnCustomPostMutationErrorPayloadUnionTypeResolver exte
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when setting a featured image to a custom post', 'custompostmedia-mutations');
+        return $this->__('Union of \'Error Payload\' types when setting a featured image to a custom post', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

@@ -15,6 +15,6 @@ class BlockInterfaceTypeResolver extends AbstractInterfaceTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Entities representing a Block', 'blocks');
+        return $this->__('Entities representing a Block', 'gatographql');
     }
 }

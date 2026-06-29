@@ -3,6 +3,7 @@ extend-exclude = [
     ".git/",
     "**/vendors/**",
     "**/build/**",
+    "**/languages/**",
     "**.wordpress.xml",
     "**/gatographql-testing-data.xml",
     "**/fixture-schema/*.json",
@@ -37,6 +38,7 @@ extend-ignore-re = [
     "Symplify",
     "Automattic",
     "getTransferrableToEndpointRequestParams",
+    "mis-escape",
 ]
 
 [default.extend-words]

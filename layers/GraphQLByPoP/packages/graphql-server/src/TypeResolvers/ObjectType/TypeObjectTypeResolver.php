@@ -29,7 +29,7 @@ class TypeObjectTypeResolver extends AbstractIntrospectionObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Representation of each GraphQL type in the graph', 'graphql-server');
+        return $this->__('Representation of each GraphQL type in the graph', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

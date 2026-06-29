@@ -102,11 +102,11 @@ abstract class AbstractCreateOrUpdateMenuInputObjectTypeResolver extends Abstrac
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         $inputFieldDescription = match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('Menu item ID', 'menu-mutations'),
-            MutationInputProperties::NAME => $this->__('Menu name', 'menu-mutations'),
-            MutationInputProperties::SLUG => $this->__('Menu slug', 'menu-mutations'),
-            MutationInputProperties::ITEMS_BY => $this->__('Menu items', 'menu-mutations'),
-            MutationInputProperties::LOCATIONS => $this->__('Menu locations to assign the menu to', 'menu-mutations'),
+            MutationInputProperties::ID => $this->__('Menu item ID', 'gatographql'),
+            MutationInputProperties::NAME => $this->__('Menu name', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('Menu slug', 'gatographql'),
+            MutationInputProperties::ITEMS_BY => $this->__('Menu items', 'gatographql'),
+            MutationInputProperties::LOCATIONS => $this->__('Menu locations to assign the menu to', 'gatographql'),
             default => parent::getInputFieldDefaultValue($inputFieldName),
         };
 

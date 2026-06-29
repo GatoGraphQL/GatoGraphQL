@@ -13,6 +13,7 @@ use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 use function wp_register_style;
 use function wp_enqueue_style;
 use function wp_localize_script;
+use function wp_set_script_translations;
 use function add_action;
 
 /**
@@ -212,6 +213,11 @@ abstract class AbstractScript extends AbstractAutomaticallyInstantiatedService
             ),
             $script_asset['version'],
             true
+        );
+        wp_set_script_translations(
+            $scriptName,
+            'gatographql',
+            $this->getPluginDir() . '/languages'
         );
         \wp_enqueue_script($scriptName);
 

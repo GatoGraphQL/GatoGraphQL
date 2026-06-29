@@ -83,13 +83,13 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         if ($bulkActionSelectedIdsCount === 0) {
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
-                __('No IDs were selected.', 'gato-ai-translations-for-polylang')
+                __('No IDs were selected.', 'gatographql')
             );
         } else {
             printf(
                 '<div class="notice notice-info is-dismissible"><p>%s</p></div>',
                 sprintf(
-                    __('The following IDs were selected: <strong>%s</strong>', 'gato-ai-translations-for-polylang'),
+                    __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
                     implode('</strong>, <strong>', $bulkActionSelectedIds)
                 )
             );

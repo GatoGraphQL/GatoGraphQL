@@ -50,7 +50,7 @@ class SuperRootObjectTypeResolver extends AbstractObjectTypeResolver
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('(Internal) Super Root type, starting from which the query is executed', 'engine');
+        return $this->__('(Internal) Super Root type, starting from which the query is executed', 'gatographql');
     }
 
     public function getID(object $object): string|int|null

@@ -54,9 +54,9 @@ class FieldExtensionsObjectTypeFieldResolver extends AbstractObjectTypeFieldReso
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'isGlobal' => $this->__('Is this a global field? (i.e. a field that is added to all types in the schema)', 'graphql-server'),
-            'isMutation' => $this->__('Is this a mutation field? Particularly required when doing \'nested mutations\' (where mutation fields can be present on any type, not only on `MutationRoot`)', 'graphql-server'),
-            'isSensitiveDataElement' => $this->__('Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when \'Expose “sensitive” data elements\' is enabled)', 'graphql-server'),
+            'isGlobal' => $this->__('Is this a global field? (i.e. a field that is added to all types in the schema)', 'gatographql'),
+            'isMutation' => $this->__('Is this a mutation field? Particularly required when doing \'nested mutations\' (where mutation fields can be present on any type, not only on `MutationRoot`)', 'gatographql'),
+            'isSensitiveDataElement' => $this->__('Is this element considered a “sensitive” data element in the schema? (If so, it is only exposed in the schema when \'Expose “sensitive” data elements\' is enabled)', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

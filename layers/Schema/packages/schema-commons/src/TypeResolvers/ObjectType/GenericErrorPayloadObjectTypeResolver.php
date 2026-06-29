@@ -28,7 +28,7 @@ class GenericErrorPayloadObjectTypeResolver extends AbstractErrorPayloadObjectTy
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Generic error payload', 'schema-commons');
+        return $this->__('Generic error payload', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

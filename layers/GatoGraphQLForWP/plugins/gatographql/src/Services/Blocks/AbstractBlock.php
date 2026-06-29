@@ -29,6 +29,7 @@ use function wp_localize_script;
 use function wp_enqueue_style;
 use function wp_register_script;
 use function wp_register_style;
+use function wp_set_script_translations;
 
 /**
  * Base class for a Gutenberg block, within a multi-block plugin.
@@ -427,6 +428,11 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
                 $this->getBlockDependencies()
             ),
             $script_asset['version']
+        );
+        wp_set_script_translations(
+            $scriptRegistrationName,
+            'gatographql',
+            $this->getPluginDir() . '/languages'
         );
         $blockConfiguration['editor_script'] = $blockRegistrationName . '-block-editor';
 

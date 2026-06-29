@@ -13,6 +13,6 @@ class RootUpdatePostTagTermMutationPayloadObjectTypeResolver extends AbstractPos
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Payload of executing an update mutation on a post tag term', 'tag-mutations');
+        return $this->__('Payload of executing an update mutation on a post tag term', 'gatographql');
     }
 }

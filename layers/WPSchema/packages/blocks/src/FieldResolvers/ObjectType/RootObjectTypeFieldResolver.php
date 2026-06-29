@@ -92,7 +92,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'blockTypes' => $this->__('All registered block types in the WordPress block registry', 'blocks'),
+            'blockTypes' => $this->__('All registered block types in the WordPress block registry', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

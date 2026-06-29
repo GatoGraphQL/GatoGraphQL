@@ -29,7 +29,7 @@ class GenericTagDeleteMutationErrorPayloadUnionTypeResolver extends AbstractTagD
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Union of \'Error Payload\' types when deleting a tag term (using nested mutations)', 'post-mutations');
+        return $this->__('Union of \'Error Payload\' types when deleting a tag term (using nested mutations)', 'gatographql');
     }
 
     public function getRelationalTypeDataLoader(): RelationalTypeDataLoaderInterface

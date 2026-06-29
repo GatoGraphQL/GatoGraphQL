@@ -11,13 +11,13 @@ abstract class AbstractDeleteTaxonomyTermMetaInputObjectTypeResolver extends Abs
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a taxonomy term\'s meta entry', 'taxonomymeta-mutations');
+        return $this->__('Input to delete a taxonomy term\'s meta entry', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'taxonomymeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the taxonomy term', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

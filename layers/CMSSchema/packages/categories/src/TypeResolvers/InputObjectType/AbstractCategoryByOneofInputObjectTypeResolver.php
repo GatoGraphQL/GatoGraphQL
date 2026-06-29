@@ -12,14 +12,14 @@ abstract class AbstractCategoryByOneofInputObjectTypeResolver extends AbstractTa
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Query by category ID', 'categories'),
-            InputProperties::SLUG => $this->__('Query by category slug', 'categories'),
+            InputProperties::ID => $this->__('Query by category ID', 'gatographql'),
+            InputProperties::SLUG => $this->__('Query by category slug', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
 
     protected function getTypeDescriptionTaxonomyEntity(): string
     {
-        return $this->__('a category', 'categories');
+        return $this->__('a category', 'gatographql');
     }
 }

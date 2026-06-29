@@ -45,6 +45,6 @@ class PostObjectTypeFieldResolver extends AbstractAddCommentToCustomPostObjectTy
 
     public function getAddCommentFieldDescription(): string
     {
-        return $this->__('Add a comment to the post', 'post-mutations');
+        return $this->__('Add a comment to the post', 'gatographql');
     }
 }

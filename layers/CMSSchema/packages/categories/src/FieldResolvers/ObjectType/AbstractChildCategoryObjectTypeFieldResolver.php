@@ -113,9 +113,9 @@ abstract class AbstractChildCategoryObjectTypeFieldResolver extends AbstractQuer
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'children' => $this->__('Child categories', 'categories'),
-            'childCount' => $this->__('Number of child categories', 'categories'),
-            'childNames' => $this->__('Names of the child categories', 'categories'),
+            'children' => $this->__('Child categories', 'gatographql'),
+            'childCount' => $this->__('Number of child categories', 'gatographql'),
+            'childNames' => $this->__('Names of the child categories', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

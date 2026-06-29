@@ -77,7 +77,7 @@ abstract class AbstractTagMutationResolverHookSet extends AbstractHookSet
         if ($inputFieldName !== MutationInputProperties::META || !$this->isInputObjectTypeResolver($inputObjectTypeResolver)) {
             return $inputFieldDescription;
         }
-        return $this->__('The meta to set', 'custompost-tagmeta-mutations');
+        return $this->__('The meta to set', 'gatographql');
     }
 
     abstract protected function getTagTypeResolver(): TagObjectTypeResolverInterface;

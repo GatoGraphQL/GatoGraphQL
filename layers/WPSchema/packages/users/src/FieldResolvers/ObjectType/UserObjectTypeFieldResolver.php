@@ -107,11 +107,11 @@ class UserObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'nicename' => $this->__('User\'s nicename', 'pop-users'),
-            'nickname' => $this->__('User\'s nickname', 'pop-users'),
-            'locale' => $this->__('Retrieves the locale of a user', 'pop-users'),
-            'registeredDate' => $this->__('The date the user registered on the site', 'pop-users'),
-            'registeredDateStr' => $this->__('The date the user registered on the site, in String format', 'pop-users'),
+            'nicename' => $this->__('User\'s nicename', 'gatographql'),
+            'nickname' => $this->__('User\'s nickname', 'gatographql'),
+            'locale' => $this->__('Retrieves the locale of a user', 'gatographql'),
+            'registeredDate' => $this->__('The date the user registered on the site', 'gatographql'),
+            'registeredDateStr' => $this->__('The date the user registered on the site, in String format', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

@@ -34,17 +34,17 @@ abstract class AbstractCreateOrUpdateTagTermInputObjectTypeResolver extends Abst
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to create or update a tag term', 'tag-mutations');
+        return $this->__('Input to create or update a tag term', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the tag to update', 'tag-mutations'),
-            MutationInputProperties::NAME => $this->__('The name of the tag', 'tag-mutations'),
-            MutationInputProperties::DESCRIPTION => $this->__('The description of the tag', 'tag-mutations'),
-            MutationInputProperties::SLUG => $this->__('The slug of the tag', 'tag-mutations'),
-            MutationInputProperties::TAXONOMY => $this->__('The taxonomy of the tag', 'tag-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the tag to update', 'gatographql'),
+            MutationInputProperties::NAME => $this->__('The name of the tag', 'gatographql'),
+            MutationInputProperties::DESCRIPTION => $this->__('The description of the tag', 'gatographql'),
+            MutationInputProperties::SLUG => $this->__('The slug of the tag', 'gatographql'),
+            MutationInputProperties::TAXONOMY => $this->__('The taxonomy of the tag', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

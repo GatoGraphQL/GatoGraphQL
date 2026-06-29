@@ -28,8 +28,8 @@ class OperationStatusEnumTypeResolver extends AbstractEnumTypeResolver
     public function getEnumValueDescription(string $enumValue): ?string
     {
         return match ($enumValue) {
-            OperationStatusEnum::SUCCESS => $this->__('Success', 'schema-commons'),
-            OperationStatusEnum::FAILURE => $this->__('Failure', 'schema-commons'),
+            OperationStatusEnum::SUCCESS => $this->__('Success', 'gatographql'),
+            OperationStatusEnum::FAILURE => $this->__('Failure', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),
         };
     }

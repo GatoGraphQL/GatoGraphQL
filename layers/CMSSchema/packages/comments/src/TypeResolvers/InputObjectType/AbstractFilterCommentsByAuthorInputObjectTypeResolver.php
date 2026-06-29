@@ -49,8 +49,8 @@ abstract class AbstractFilterCommentsByAuthorInputObjectTypeResolver extends Abs
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('Get results from the authors with given IDs', 'pop-users'),
-            'excludeIDs' => $this->__('Get results excluding the ones from authors with given IDs', 'pop-users'),
+            'ids' => $this->__('Get results from the authors with given IDs', 'gatographql'),
+            'excludeIDs' => $this->__('Get results excluding the ones from authors with given IDs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

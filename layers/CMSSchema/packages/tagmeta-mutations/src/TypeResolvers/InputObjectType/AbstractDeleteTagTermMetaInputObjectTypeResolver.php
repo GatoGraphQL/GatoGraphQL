@@ -11,13 +11,13 @@ abstract class AbstractDeleteTagTermMetaInputObjectTypeResolver extends Abstract
 {
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to delete a tag term\'s meta entry', 'tagmeta-mutations');
+        return $this->__('Input to delete a tag term\'s meta entry', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::ID => $this->__('The ID of the tag', 'tagmeta-mutations'),
+            MutationInputProperties::ID => $this->__('The ID of the tag', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

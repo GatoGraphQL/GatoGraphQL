@@ -17,15 +17,15 @@ class AuthorByOneofInputObjectTypeResolver extends UserByOneofInputObjectTypeRes
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Oneof input to specify the custom post author', 'custompost-user-mutations');
+        return $this->__('Oneof input to specify the custom post author', 'gatographql');
     }
 
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            InputProperties::ID => $this->__('Provide author by ID', 'custompost-user-mutations'),
-            InputProperties::USERNAME => $this->__('Provide author by username', 'custompost-user-mutations'),
-            InputProperties::EMAIL => $this->__('Provide author by email', 'custompost-user-mutations'),
+            InputProperties::ID => $this->__('Provide author by ID', 'gatographql'),
+            InputProperties::USERNAME => $this->__('Provide author by username', 'gatographql'),
+            InputProperties::EMAIL => $this->__('Provide author by email', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

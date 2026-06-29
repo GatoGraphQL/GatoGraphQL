@@ -53,6 +53,11 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         return true;
     }
 
+    public function showDocumentationForModule(string $module): bool
+    {
+        return true;
+    }
+
     public function isPredefinedEnabledOrDisabled(string $module): ?bool
     {
         return true;
@@ -103,6 +108,15 @@ abstract class AbstractExtensionModuleResolver extends AbstractModuleResolver im
         string $module,
     ): string {
         return $this->getSlug($module) . '/docs/modules';
+    }
+
+    /**
+     * The extension's canonical website URL, so the English-doc notice can link
+     * straight to this extension's page on the localized website.
+     */
+    protected function getDocumentationWebsiteURL(string $module): ?string
+    {
+        return $this->getWebsiteURL($module);
     }
 
     public function isPremium(string $module): bool

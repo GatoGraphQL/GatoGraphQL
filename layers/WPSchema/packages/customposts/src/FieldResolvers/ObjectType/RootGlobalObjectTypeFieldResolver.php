@@ -53,7 +53,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            '_urlToCustomPostID' => $this->__('Get the custom post ID from a URL', 'customposts'),
+            '_urlToCustomPostID' => $this->__('Get the custom post ID from a URL', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -82,7 +82,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     public function getFieldArgDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): ?string
     {
         return match ([$fieldName => $fieldArgName]) {
-            ['_urlToCustomPostID' => 'url'] => $this->__('The URL to convert to a custom post ID', 'customposts'),
+            ['_urlToCustomPostID' => 'url'] => $this->__('The URL to convert to a custom post ID', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }

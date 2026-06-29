@@ -38,14 +38,14 @@ class FieldResolutionErrorFeedbackItemProvider extends AbstractFeedbackItemProvi
     public function getMessagePlaceholder(string $code): string
     {
         return match ($code) {
-            self::E2 => $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'component-model'),
-            self::E3 => $this->__('Non-nullable field \'%s\' cannot return null', 'component-model'),
-            self::E4 => $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'component-model'),
-            self::E5 => $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'component-model'),
-            self::E6 => $this->__('Field \'%s\' must not return an array with null items', 'component-model'),
-            self::E7 => $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'component-model'),
-            self::E8 => $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'component-model'),
-            self::E9 => $this->__('Field \'%s\' must not return an array of arrays with null items', 'component-model'),
+            self::E2 => $this->__('Field \'%s\' could not be processed due to the error(s) from its arguments', 'gatographql'),
+            self::E3 => $this->__('Non-nullable field \'%s\' cannot return null', 'gatographql'),
+            self::E4 => $this->__('Field \'%s\' must not return an array, but returned \'%s\'', 'gatographql'),
+            self::E5 => $this->__('Field \'%s\' must return an array, but returned \'%s\'', 'gatographql'),
+            self::E6 => $this->__('Field \'%s\' must not return an array with null items', 'gatographql'),
+            self::E7 => $this->__('Array value in field \'%s\' must not contain arrays, but returned \'%s\'', 'gatographql'),
+            self::E8 => $this->__('Field \'%s\' must return an array of arrays, but returned \'%s\'', 'gatographql'),
+            self::E9 => $this->__('Field \'%s\' must not return an array of arrays with null items', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

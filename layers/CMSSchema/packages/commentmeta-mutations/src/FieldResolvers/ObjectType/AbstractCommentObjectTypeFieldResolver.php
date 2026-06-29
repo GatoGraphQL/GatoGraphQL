@@ -180,10 +180,10 @@ abstract class AbstractCommentObjectTypeFieldResolver extends AbstractObjectType
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
-            'addMeta' => $this->__('Add a comment meta entry', 'commentmeta-mutations'),
-            'deleteMeta' => $this->__('Delete a comment meta entry', 'commentmeta-mutations'),
-            'setMeta' => $this->__('Set meta entries to a comment', 'commentmeta-mutations'),
-            'updateMeta' => $this->__('Update a comment meta entry', 'commentmeta-mutations'),
+            'addMeta' => $this->__('Add a comment meta entry', 'gatographql'),
+            'deleteMeta' => $this->__('Delete a comment meta entry', 'gatographql'),
+            'setMeta' => $this->__('Set meta entries to a comment', 'gatographql'),
+            'updateMeta' => $this->__('Update a comment meta entry', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }

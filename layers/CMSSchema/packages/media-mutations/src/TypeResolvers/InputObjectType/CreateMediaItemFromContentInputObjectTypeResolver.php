@@ -31,7 +31,7 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Provide the data to create and upload the attachment', 'media-mutations');
+        return $this->__('Provide the data to create and upload the attachment', 'gatographql');
     }
 
     /**
@@ -59,8 +59,8 @@ class CreateMediaItemFromContentInputObjectTypeResolver extends AbstractInputObj
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            MutationInputProperties::FILENAME => $this->__('File name', 'media-mutations'),
-            MutationInputProperties::BODY => $this->__('File body', 'media-mutations'),
+            MutationInputProperties::FILENAME => $this->__('File name', 'gatographql'),
+            MutationInputProperties::BODY => $this->__('File body', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }

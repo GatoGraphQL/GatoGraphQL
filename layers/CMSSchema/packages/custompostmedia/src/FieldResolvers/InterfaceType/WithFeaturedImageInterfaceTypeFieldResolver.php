@@ -91,8 +91,8 @@ class WithFeaturedImageInterfaceTypeFieldResolver extends AbstractInterfaceTypeF
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'hasFeaturedImage' => $this->__('Does the custom post have a featured image?', 'custompostmedia'),
-            'featuredImage' => $this->__('Featured image from the custom post', 'custompostmedia'),
+            'hasFeaturedImage' => $this->__('Does the custom post have a featured image?', 'gatographql'),
+            'featuredImage' => $this->__('Featured image from the custom post', 'gatographql'),
             default => parent::getFieldDescription($fieldName),
         };
     }

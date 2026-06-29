@@ -18,7 +18,7 @@ class RootMenuPaginationInputObjectTypeResolver extends PaginationInputObjectTyp
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to paginate menus', 'menus');
+        return $this->__('Input to paginate menus', 'gatographql');
     }
 
     protected function getDefaultLimit(): ?int

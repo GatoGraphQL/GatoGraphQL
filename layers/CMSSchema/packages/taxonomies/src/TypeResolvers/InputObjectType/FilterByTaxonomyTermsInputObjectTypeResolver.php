@@ -53,8 +53,8 @@ class FilterByTaxonomyTermsInputObjectTypeResolver extends AbstractQueryableInpu
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'ids' => $this->__('Filter by IDs', 'tags'),
-            'slugs' => $this->__('Filter by slugs', 'tags'),
+            'ids' => $this->__('Filter by IDs', 'gatographql'),
+            'slugs' => $this->__('Filter by slugs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
     }
