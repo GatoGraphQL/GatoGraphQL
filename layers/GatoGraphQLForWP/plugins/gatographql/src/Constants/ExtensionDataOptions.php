@@ -9,4 +9,5 @@ class ExtensionDataOptions
     public final const CHANGELOG_URL = 'changelogURL';
     public final const HOMEPAGE_URL = 'homepageURL';
     public final const MARKETPLACE_PRODUCT_IDS = 'marketplaceProductIDs';
+    public final const IS_LICENSE_NEEDED = 'isLicenseNeeded';
 }

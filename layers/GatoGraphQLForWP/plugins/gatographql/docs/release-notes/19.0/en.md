@@ -29,6 +29,7 @@
 - Do not show All Inclusive bundle in Extension docs ([#3321](https://github.com/GatoGraphQL/GatoGraphQL/pull/3321))
 - Upgraded GraphiQL to version 5.2.3 ([#3323](https://github.com/GatoGraphQL/GatoGraphQL/pull/3323))
 - Added the Explorer plugin to the GraphiQL client, to build queries by point-and-click ([#3327](https://github.com/GatoGraphQL/GatoGraphQL/pull/3327))
+- Distribute Gato GraphQL plugin via the Gato Plugins store (instead of wordpress.org) (`v19.0.1`) ([#3347](https://github.com/GatoGraphQL/GatoGraphQL/pull/3347))
 
 ## Fixed
 

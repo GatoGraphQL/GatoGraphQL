@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.0.1 =
+* Improved - Distribute Gato GraphQL plugin via the Gato Plugins store (instead of wordpress.org) (#3347)
+
 = 19.0.0 =
 * Added - The ability to register custom WordPress REST API controllers/endpoints via the service container (#3330)
 * Added - The ability to execute queries as a DRY RUN, marked with a [DRY-RUN] prefix in the logs (#3330)
