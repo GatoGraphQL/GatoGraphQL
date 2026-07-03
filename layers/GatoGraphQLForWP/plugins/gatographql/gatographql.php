@@ -126,6 +126,7 @@ if (!$extensionManager->assertCommercialLicenseHasBeenActivated(
         ExtensionDataOptions::MARKETPLACE_PRODUCT_IDS => [
             MarketplaceVersion::V2_FLUENTCART => 249,
         ],
+        ExtensionDataOptions::IS_LICENSE_NEEDED => false,
     ]
 )) {
     return;
