@@ -1221,18 +1221,8 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         \add_filter(
             'admin_body_class',
             function (string $classes): string {
-                $extensions = PluginApp::getExtensionManager()->getExtensions();
-                if ($extensions === []) {
-                    return $classes;
-                }
-
                 $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
-                foreach ($extensions as $extension) {
-                    if (!$extension->isCommercial()) {
-                        continue;
-                    }
-                    // Check that the extension has "active" status
-                    $extensionCommercialExtensionActivatedLicenseObjectProperties = $commercialExtensionActivatedLicenseObjectProperties[$extension->getPluginSlug()] ?? null;
+                foreach ($commercialExtensionActivatedLicenseObjectProperties as $extensionSlug => $extensionCommercialExtensionActivatedLicenseObjectProperties) {
                     if ($extensionCommercialExtensionActivatedLicenseObjectProperties === null) {
                         continue;
                     }
