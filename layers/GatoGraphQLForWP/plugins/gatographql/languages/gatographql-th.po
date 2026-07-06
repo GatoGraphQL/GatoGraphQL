@@ -12,6 +12,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: gatographql\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: API/packages/api-clients/src/ClientTrait.php:69
 #, php-format
@@ -8703,8 +8704,8 @@ msgid "Debug"
 msgstr "ดีบัก"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "เปิดใช้งานส่วนขยาย"
+msgid "Activate Plugins and Extensions"
+msgstr "เปิดใช้งานปลั๊กอินและส่วนขยาย"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -8712,45 +8713,33 @@ msgstr "รีเซ็ตการตั้งค่า"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "เปิดใช้งานแพ็กเกจและส่วนขยายจาก %s"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "เปิดใช้งานปลั๊กอินและส่วนขยายจาก %s"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "กู้คืนการตั้งค่า Gato GraphQL เป็นค่าเริ่มต้น"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "การเพิ่มคีย์ใบอนุญาตจะ <strong>เปิดใช้งานผลิตภัณฑ์</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr "การเพิ่มคีย์ใบอนุญาตจะ <strong>เปิดใช้งานปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
-msgstr "การลบคีย์ใบอนุญาตที่มีอยู่จะ <strong>ปิดใช้งานผลิตภัณฑ์</strong>"
+msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgstr "การลบคีย์ใบอนุญาตที่มีอยู่จะ <strong>ปิดใช้งานปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
-msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
-"strong> again (using the new license key)"
-msgstr ""
-"การอัปเดตคีย์ใบอนุญาตจะ <strong>ปิดใช้งานผลิตภัณฑ์</strong> ก่อน (โดยใช้คีย์ใบอนุญาตเดิม) "
-"จากนั้น <strong>เปิดใช้งานผลิตภัณฑ์</strong> อีกครั้ง (โดยใช้คีย์ใบอนุญาตใหม่)"
+msgid "Updating a license key will first <strong>deactivate the plugin</strong> (using the previous license key) and then <strong>activate the plugin</strong> again (using the new license key)"
+msgstr "การอัปเดตคีย์ใบอนุญาตจะ <strong>ปิดใช้งานปลั๊กอิน</strong> ก่อน (โดยใช้คีย์ใบอนุญาตเดิม) จากนั้น <strong>เปิดใช้งานปลั๊กอิน</strong> อีกครั้ง (โดยใช้คีย์ใบอนุญาตใหม่)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
-msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
-"strong>"
-msgstr "การไม่อัปเดตคีย์ใบอนุญาตจะ <strong>ตรวจสอบสถานะของผลิตภัณฑ์</strong>"
+msgid "Not updating a license key will <strong>validate the status of the plugin</strong>"
+msgstr "การไม่อัปเดตคีย์ใบอนุญาตจะ <strong>ตรวจสอบสถานะของปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
-msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
-msgstr ""
-"ป้อนคีย์ใบอนุญาตสำหรับผลิตภัณฑ์ที่ซื้อบน %s แล้วคลิก <strong>เปิดใช้งานใบอนุญาต (หรือปิดใช้งาน/"
-"ตรวจสอบ)</strong>:"
+msgid "Enter the license keys from the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:"
+msgstr "ป้อนคีย์ใบอนุญาตจาก %s แล้วคลิก <strong>เปิดใช้งานใบอนุญาต (หรือปิดใช้งาน/ตรวจสอบ)</strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -8761,8 +8750,8 @@ msgstr ""
 "จะมีการดำเนินการหนึ่งในต่อไปนี้:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
-msgstr "(แสดงรายละเอียด: ผลิตภัณฑ์ถูกเปิดใช้งาน ปิดใช้งาน หรือตรวจสอบเมื่อใด?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
+msgstr "(แสดงรายละเอียด: ใบอนุญาตถูกเปิดใช้งาน ปิดใช้งาน หรือตรวจสอบเมื่อใด?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -8897,12 +8886,12 @@ msgid "Confirm: Reset Settings"
 msgstr "ยืนยัน: รีเซ็ตการตั้งค่า"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "เปิดใช้งานใบอนุญาตส่วนขยาย"
+msgid "Activate Licenses"
+msgstr "เปิดใช้งานใบอนุญาต"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"

@@ -98,7 +98,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public function getName(string $module): string
     {
         return match ($module) {
-            self::ACTIVATE_EXTENSIONS => \__('Activate Extensions', 'gatographql'),
+            self::ACTIVATE_EXTENSIONS => \__('Activate Plugins and Extensions', 'gatographql'),
             self::RESET_SETTINGS => \__('Reset Settings', 'gatographql'),
             default => $module,
         };
@@ -108,7 +108,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         return match ($module) {
             self::ACTIVATE_EXTENSIONS => sprintf(
-                \__('Activate Bundles and Extensions from the %s', 'gatographql'),
+                \__('Activate Plugins and Extensions from the %s', 'gatographql'),
                 $this->getGatoGraphQLShopName()
             ),
             self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gatographql'),
@@ -149,10 +149,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             if ($commercialExtensionSlugProductNames !== []) {
                 $ulPlaceholder = '<ul><li>%s</li></ul>';
                 $handlingLicenseMessageItems = [
-                    \__('Adding a license key will <strong>activate the product</strong>', 'gatographql'),
-                    \__('Removing an existing license key will <strong>deactivate the product</strong>', 'gatographql'),
-                    \__('Updating a license key will first <strong>deactivate the product</strong> (using the previous license key) and then <strong>activate the product</strong> again (using the new license key)', 'gatographql'),
-                    \__('Not updating a license key will <strong>validate the status of the product</strong>', 'gatographql'),
+                    \__('Adding a license key will <strong>activate the plugin</strong>', 'gatographql'),
+                    \__('Removing an existing license key will <strong>deactivate the plugin</strong>', 'gatographql'),
+                    \__('Updating a license key will first <strong>deactivate the plugin</strong> (using the previous license key) and then <strong>activate the plugin</strong> again (using the new license key)', 'gatographql'),
+                    \__('Not updating a license key will <strong>validate the status of the plugin</strong>', 'gatographql'),
                 ];
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
@@ -165,7 +165,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     Properties::DESCRIPTION => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
-                            \__('Enter the license keys for the products purchased on the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
+                            \__('Enter the license keys from the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
                             $this->getGatoGraphQLShopName()
                         ),
                         $this->getCollapsible(
@@ -180,7 +180,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                     )
                                 ),
                             ),
-                            \__('(Show details: When are products activated, deactivated or validated?)', 'gatographql')
+                            \__('(Show details: When are licenses activated, deactivated or validated?)', 'gatographql')
                         ),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
@@ -394,11 +394,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     protected function getGatoGraphQLShopName(): string
     {
-        return \__('Gato Shop', 'gatographql');
+        return \__('Gato Plugins Store', 'gatographql');
     }
 
     protected function getActivateExtensionLicensesTitle(): string
     {
-        return \__('Activate Extension Licenses', 'gatographql');
+        return \__('Activate Licenses', 'gatographql');
     }
 }

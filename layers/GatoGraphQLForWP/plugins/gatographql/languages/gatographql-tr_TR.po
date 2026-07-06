@@ -9027,8 +9027,8 @@ msgid "Debug"
 msgstr "Hata Ayıklama"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "Uzantıları Etkinleştir"
+msgid "Activate Plugins and Extensions"
+msgstr "Eklentileri ve Uzantıları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -9036,51 +9036,50 @@ msgstr "Ayarları Sıfırla"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "%s'den Paket ve Uzantıları Etkinleştir"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "%s'den Eklentileri ve Uzantıları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Gato GraphQL Ayarlarını varsayılan değerlere geri yükle"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "Bir lisans anahtarı eklemek <strong>ürünü etkinleştirecektir</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr "Bir lisans anahtarı eklemek <strong>eklentiyi etkinleştirecektir</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
+msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
-"Mevcut bir lisans anahtarını kaldırmak <strong>ürünü devre dışı "
+"Mevcut bir lisans anahtarını kaldırmak <strong>eklentiyi devre dışı "
 "bırakacaktır</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"Bir lisans anahtarını güncellemek önce <strong>ürünü devre dışı bırakacak</"
-"strong> (önceki lisans anahtarını kullanarak) ve ardından <strong>ürünü "
-"tekrar etkinleştirecektir</strong> (yeni lisans anahtarını kullanarak)"
+"Bir lisans anahtarını güncellemek önce <strong>eklentiyi devre dışı "
+"bırakacak</strong> (önceki lisans anahtarını kullanarak) ve ardından "
+"<strong>eklentiyi tekrar etkinleştirecektir</strong> (yeni lisans "
+"anahtarını kullanarak)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
-"Bir lisans anahtarını güncellememek <strong>ürünün durumunu doğrulayacaktır</"
-"strong>"
+"Bir lisans anahtarını güncellememek <strong>eklentinin durumunu "
+"doğrulayacaktır</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"%s'de satın alınan ürünler için lisans anahtarlarını girin ve "
-"<strong>Lisansları etkinleştir (veya Devre Dışı Bırak/Doğrula)</strong> "
-"üzerine tıklayın:"
+"%s'den lisans anahtarlarını girin ve <strong>Lisansları etkinleştir (veya "
+"Devre Dışı Bırak/Doğrula)</strong> üzerine tıklayın:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -9091,10 +9090,10 @@ msgstr ""
 "üzerine tıklandığında aşağıdaki işlemlerden biri gerçekleşecektir:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
-"(Ayrıntıları göster: Ürünler ne zaman etkinleştirilir, devre dışı bırakılır "
-"veya doğrulanır?)"
+"(Ayrıntıları göster: Lisanslar ne zaman etkinleştirilir, devre dışı "
+"bırakılır veya doğrulanır?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -9235,12 +9234,12 @@ msgid "Confirm: Reset Settings"
 msgstr "Onayla: Ayarları Sıfırla"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "Uzantı Lisanslarını Etkinleştir"
+msgid "Activate Licenses"
+msgstr "Lisansları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"
