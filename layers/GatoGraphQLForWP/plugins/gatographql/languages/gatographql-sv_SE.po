@@ -9128,8 +9128,8 @@ msgstr ""
 msgid ""
 "Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
-"Att ta bort en befintlig licensnyckel kommer att <strong>inaktivera "
-"plugin</strong>"
+"Att ta bort en befintlig licensnyckel kommer att <strong>inaktivera plugin</"
+"strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
@@ -9138,8 +9138,8 @@ msgid ""
 "strong> again (using the new license key)"
 msgstr ""
 "Att uppdatera en licensnyckel kommer först att <strong>inaktivera plugin</"
-"strong> (med den tidigare licensnyckeln) och sedan <strong>aktivera "
-"plugin</strong> igen (med den nya licensnyckeln)"
+"strong> (med den tidigare licensnyckeln) och sedan <strong>aktivera plugin</"
+"strong> igen (med den nya licensnyckeln)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
@@ -9152,11 +9152,11 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys from the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"Ange licensnycklarna från %s och klicka på "
-"<strong>Aktivera licenser (eller Inaktivera/Validera)</strong>:"
+"Ange licensnycklarna från %s och klicka på <strong>Aktivera licenser (eller "
+"Inaktivera/Validera)</strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -10194,7 +10194,7 @@ msgstr "Bearbeta data från externa tjänster"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "Tillägget med klassen '%s' har inte registrerats ännu"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10203,7 +10203,7 @@ msgstr ""
 "Licensen är ogiltig. Vänligen <a href=\"%s\">ange en ny licensnyckel i %s</"
 "a> för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10212,18 +10212,18 @@ msgstr ""
 "Den angivna licensnyckeln tillhör ett annat tillägg. Vänligen <a "
 "href=\"%s\">ange rätt licensnyckel i %s</a> för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Vänligen <a href=\"%s\">ange licensnyckeln i %s</a> för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "Licensen är ogiltig. Vänligen ange en ny licensnyckel för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10231,16 +10231,16 @@ msgstr ""
 "Den angivna licensnyckeln tillhör ett annat tillägg. Vänligen ange rätt "
 "licensnyckel för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Vänligen ange licensnyckeln för att aktivera den"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

@@ -9045,10 +9045,12 @@ msgstr "Gato GraphQL Ayarlarını varsayılan değerlere geri yükle"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
 msgid "Adding a license key will <strong>activate the plugin</strong>"
-msgstr "Bir lisans anahtarı eklemek <strong>eklentiyi etkinleştirecektir</strong>"
+msgstr ""
+"Bir lisans anahtarı eklemek <strong>eklentiyi etkinleştirecektir</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Mevcut bir lisans anahtarını kaldırmak <strong>eklentiyi devre dışı "
 "bırakacaktır</strong>"
@@ -9061,8 +9063,8 @@ msgid ""
 msgstr ""
 "Bir lisans anahtarını güncellemek önce <strong>eklentiyi devre dışı "
 "bırakacak</strong> (önceki lisans anahtarını kullanarak) ve ardından "
-"<strong>eklentiyi tekrar etkinleştirecektir</strong> (yeni lisans "
-"anahtarını kullanarak)"
+"<strong>eklentiyi tekrar etkinleştirecektir</strong> (yeni lisans anahtarını "
+"kullanarak)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
@@ -10117,7 +10119,7 @@ msgstr "Harici servislerden gelen verileri işleme"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "'%s' sınıfına sahip uzantı henüz kaydedilmedi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10126,7 +10128,7 @@ msgstr ""
 "Lisans geçersiz. Etkinleştirmek için lütfen <a href=\"%s\">%s içinde yeni "
 "bir lisans anahtarı girin</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10135,19 +10137,19 @@ msgstr ""
 "Sağlanan lisans anahtarı farklı bir uzantıya aittir. Etkinleştirmek için "
 "lütfen <a href=\"%s\">%s içinde doğru lisans anahtarını girin</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Etkinleştirmek için lütfen <a href=\"%s\">%s içinde lisans anahtarını girin</"
 "a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "Lisans geçersiz. Etkinleştirmek için lütfen yeni bir lisans anahtarı girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10155,16 +10157,16 @@ msgstr ""
 "Sağlanan lisans anahtarı farklı bir uzantıya aittir. Etkinleştirmek için "
 "lütfen doğru lisans anahtarını girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Etkinleştirmek için lütfen lisans anahtarını girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

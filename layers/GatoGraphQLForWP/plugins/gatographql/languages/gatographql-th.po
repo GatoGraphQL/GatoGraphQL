@@ -8725,21 +8725,33 @@ msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "การเพิ่มคีย์ใบอนุญาตจะ <strong>เปิดใช้งานปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr "การลบคีย์ใบอนุญาตที่มีอยู่จะ <strong>ปิดใช้งานปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
-msgid "Updating a license key will first <strong>deactivate the plugin</strong> (using the previous license key) and then <strong>activate the plugin</strong> again (using the new license key)"
-msgstr "การอัปเดตคีย์ใบอนุญาตจะ <strong>ปิดใช้งานปลั๊กอิน</strong> ก่อน (โดยใช้คีย์ใบอนุญาตเดิม) จากนั้น <strong>เปิดใช้งานปลั๊กอิน</strong> อีกครั้ง (โดยใช้คีย์ใบอนุญาตใหม่)"
+msgid ""
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
+"strong> again (using the new license key)"
+msgstr ""
+"การอัปเดตคีย์ใบอนุญาตจะ <strong>ปิดใช้งานปลั๊กอิน</strong> ก่อน (โดยใช้คีย์ใบอนุญาตเดิม) "
+"จากนั้น <strong>เปิดใช้งานปลั๊กอิน</strong> อีกครั้ง (โดยใช้คีย์ใบอนุญาตใหม่)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
-msgid "Not updating a license key will <strong>validate the status of the plugin</strong>"
+msgid ""
+"Not updating a license key will <strong>validate the status of the plugin</"
+"strong>"
 msgstr "การไม่อัปเดตคีย์ใบอนุญาตจะ <strong>ตรวจสอบสถานะของปลั๊กอิน</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
-msgid "Enter the license keys from the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:"
-msgstr "ป้อนคีย์ใบอนุญาตจาก %s แล้วคลิก <strong>เปิดใช้งานใบอนุญาต (หรือปิดใช้งาน/ตรวจสอบ)</strong>:"
+msgid ""
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
+msgstr ""
+"ป้อนคีย์ใบอนุญาตจาก %s แล้วคลิก <strong>เปิดใช้งานใบอนุญาต (หรือปิดใช้งาน/ตรวจสอบ)</"
+"strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -9746,14 +9758,14 @@ msgstr "ประมวลผลข้อมูลจากบริการภ
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "ส่วนขยายที่มีคลาส '%s' ยังไม่ได้ถูกลงทะเบียน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
 "a> to enable it"
 msgstr "ใบอนุญาตไม่ถูกต้อง กรุณา<a href=\"%s\">ป้อนคีย์ใบอนุญาตใหม่ใน %s</a> เพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -9762,31 +9774,31 @@ msgstr ""
 "คีย์ใบอนุญาตที่ระบุเป็นของส่วนขยายอื่น กรุณา<a href=\"%s\">ป้อนคีย์ใบอนุญาตที่ถูกต้องใน %s</a> "
 "เพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr "กรุณา<a href=\"%s\">ป้อนคีย์ใบอนุญาตใน %s</a> เพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr "ใบอนุญาตไม่ถูกต้อง กรุณาป้อนคีย์ใบอนุญาตใหม่เพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
 msgstr "คีย์ใบอนุญาตที่ระบุเป็นของส่วนขยายอื่น กรุณาป้อนคีย์ใบอนุญาตที่ถูกต้องเพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "กรุณาป้อนคีย์ใบอนุญาตเพื่อเปิดใช้งาน"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

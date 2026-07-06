@@ -9080,7 +9080,8 @@ msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "Menambahkan kunci lisensi akan <strong>mengaktifkan plugin</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Menghapus kunci lisensi yang ada akan <strong>menonaktifkan plugin</strong>"
 
@@ -9095,7 +9096,9 @@ msgstr ""
 "<strong>mengaktifkan plugin</strong> kembali (menggunakan kunci lisensi baru)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
-msgid "Not updating a license key will <strong>validate the status of the plugin</strong>"
+msgid ""
+"Not updating a license key will <strong>validate the status of the plugin</"
+"strong>"
 msgstr ""
 "Tidak memperbarui kunci lisensi akan <strong>memvalidasi status plugin</"
 "strong>"
@@ -10142,7 +10145,7 @@ msgstr "Proses data dari layanan eksternal"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "Ekstensi dengan kelas '%s' belum terdaftar"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10151,7 +10154,7 @@ msgstr ""
 "Lisensi tidak valid. Silakan <a href=\"%s\">masukkan kunci lisensi baru di "
 "%s</a> untuk mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10160,19 +10163,19 @@ msgstr ""
 "Kunci lisensi yang diberikan milik ekstensi yang berbeda. Silakan <a "
 "href=\"%s\">masukkan kunci lisensi yang tepat di %s</a> untuk mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Silakan <a href=\"%s\">masukkan kunci lisensi di %s</a> untuk mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "Lisensi tidak valid. Silakan masukkan kunci lisensi baru untuk "
 "mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10180,16 +10183,16 @@ msgstr ""
 "Kunci lisensi yang diberikan milik ekstensi yang berbeda. Silakan masukkan "
 "kunci lisensi yang tepat untuk mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Silakan masukkan kunci lisensi untuk mengaktifkannya"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

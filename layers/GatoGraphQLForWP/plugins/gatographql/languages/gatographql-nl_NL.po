@@ -9382,7 +9382,8 @@ msgstr ""
 "strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Het verwijderen van een bestaande licentiesleutel zal de plugin "
 "<strong>deactiveren</strong>"
@@ -9408,11 +9409,11 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys from the %s, and click on <strong>Activate "
-"licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"Voer de licentiesleutels van de %s in en klik op <strong>Licenties "
-"activeren (of Deactiveren/Valideren)</strong>:"
+"Voer de licentiesleutels van de %s in en klik op <strong>Licenties activeren "
+"(of Deactiveren/Valideren)</strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -10458,7 +10459,7 @@ msgstr "Verwerk gegevens van externe diensten"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "De extensie met klasse '%s' is nog niet geregistreerd"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10467,7 +10468,7 @@ msgstr ""
 "De licentie is ongeldig. <a href=\"%s\">Voer een nieuwe licentiesleutel in "
 "bij %s</a> om deze in te schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10477,19 +10478,19 @@ msgstr ""
 "href=\"%s\">Voer de juiste licentiesleutel in bij %s</a> om deze in te "
 "schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "<a href=\"%s\">Voer de licentiesleutel in bij %s</a> om deze in te schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "De licentie is ongeldig. Voer een nieuwe licentiesleutel in om deze in te "
 "schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10497,16 +10498,16 @@ msgstr ""
 "De opgegeven licentiesleutel behoort tot een andere extensie. Voer de juiste "
 "licentiesleutel in om deze in te schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Voer de licentiesleutel in om deze in te schakelen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

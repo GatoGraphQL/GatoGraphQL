@@ -9071,8 +9071,10 @@ msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "ライセンスキーを追加すると<strong>プラグインが有効化されます</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
-msgstr "既存のライセンスキーを削除すると<strong>プラグインが無効化されます</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgstr ""
+"既存のライセンスキーを削除すると<strong>プラグインが無効化されます</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
@@ -9089,8 +9091,8 @@ msgid ""
 "Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
-"ライセンスキーを更新しない場合は<strong>プラグインのステータスが検証されま"
-"す</strong>"
+"ライセンスキーを更新しない場合は<strong>プラグインのステータスが検証されます"
+"</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
@@ -9098,8 +9100,8 @@ msgid ""
 "Enter the license keys from the %s, and click on <strong>Activate licenses "
 "(or Deactivate/Validate)</strong>:"
 msgstr ""
-"%sのライセンスキーを入力し、<strong>ライセンスを有効化（または無効化/検証）"
-"</strong>をクリックしてください："
+"%sのライセンスキーを入力し、<strong>ライセンスを有効化（または無効化/検証）</"
+"strong>をクリックしてください："
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -9111,7 +9113,8 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
 msgid "(Show details: When are licenses activated, deactivated or validated?)"
-msgstr "（詳細を表示：ライセンスが有効化、無効化、または検証されるタイミングは？）"
+msgstr ""
+"（詳細を表示：ライセンスが有効化、無効化、または検証されるタイミングは？）"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -10133,7 +10136,7 @@ msgstr "外部サービスからのデータを処理する"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "クラス '%s' を持つ拡張機能はまだ登録されていません"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10142,7 +10145,7 @@ msgstr ""
 "ライセンスが無効です。有効にするには <a href=\"%s\">%s に新しいライセンスキー"
 "を入力してください</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10151,18 +10154,18 @@ msgstr ""
 "指定されたライセンスキーは別の拡張機能のものです。有効にするには <a "
 "href=\"%s\">%s に正しいライセンスキーを入力してください</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "有効にするには <a href=\"%s\">%s にライセンスキーを入力してください</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "ライセンスが無効です。有効にするには新しいライセンスキーを入力してください"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10170,16 +10173,16 @@ msgstr ""
 "指定されたライセンスキーは別の拡張機能のものです。有効にするには正しいライセ"
 "ンスキーを入力してください"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "有効にするにはライセンスキーを入力してください"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

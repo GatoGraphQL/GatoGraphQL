@@ -9391,7 +9391,8 @@ msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "Añadir una clave de licencia <strong>activará el plugin</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgid ""
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Eliminar una clave de licencia existente <strong>desactivará el plugin</"
 "strong>"
@@ -9417,8 +9418,8 @@ msgstr ""
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys from the %s, and click on <strong>Activate "
-"licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
 "Introduce las claves de licencia de %s y haz clic en <strong>Activar "
 "licencias (o Desactivar/Validar)</strong>:"
@@ -10467,7 +10468,7 @@ msgstr "Procesar datos de servicios externos"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "La extensión con la clase '%s' no se ha registrado aún"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10476,7 +10477,7 @@ msgstr ""
 "La licencia no es válida. Por favor, <a href=\"%s\">introduce una nueva "
 "clave de licencia en %s</a> para activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10486,20 +10487,20 @@ msgstr ""
 "favor, <a href=\"%s\">introduce la clave de licencia correcta en %s</a> para "
 "activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Por favor, <a href=\"%s\">introduce la clave de licencia en %s</a> para "
 "activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "La licencia no es válida. Por favor, introduce una nueva clave de licencia "
 "para activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10507,16 +10508,16 @@ msgstr ""
 "La clave de licencia proporcionada pertenece a una extensión diferente. Por "
 "favor, introduce la clave de licencia correcta para activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Por favor, introduce la clave de licencia para activarla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
