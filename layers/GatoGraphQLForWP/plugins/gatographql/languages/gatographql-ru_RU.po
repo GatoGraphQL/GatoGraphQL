@@ -9267,8 +9267,8 @@ msgid "Debug"
 msgstr "Отладка"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "Активировать расширения"
+msgid "Activate Plugins and Extensions"
+msgstr "Активировать плагины и расширения"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -9276,50 +9276,50 @@ msgstr "Сбросить настройки"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "Активировать наборы и расширения из %s"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "Активировать плагины и расширения из %s"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Восстановить настройки Gato GraphQL до значений по умолчанию"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "Добавление лицензионного ключа <strong>активирует продукт</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr "Добавление лицензионного ключа <strong>активирует плагин</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
 msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
-"Удаление существующего лицензионного ключа <strong>деактивирует продукт</"
+"Удаление существующего лицензионного ключа <strong>деактивирует плагин</"
 "strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"Обновление лицензионного ключа сначала <strong>деактивирует продукт</strong> "
+"Обновление лицензионного ключа сначала <strong>деактивирует плагин</strong> "
 "(с использованием предыдущего лицензионного ключа), а затем снова "
-"<strong>активирует продукт</strong> (с использованием нового лицензионного "
+"<strong>активирует плагин</strong> (с использованием нового лицензионного "
 "ключа)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
 "Если лицензионный ключ не обновляется, будет <strong>проверен статус "
-"продукта</strong>"
+"плагина</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
+"Enter the license keys from the %s, and click on "
 "<strong>Activate licenses (or Deactivate/Validate)</strong>:"
 msgstr ""
-"Введите лицензионные ключи для продуктов, приобретённых на %s, и нажмите "
+"Введите лицензионные ключи из %s и нажмите "
 "<strong>Активировать лицензии (или Деактивировать/Подтвердить)</strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
@@ -9331,9 +9331,9 @@ msgstr ""
 "Подтвердить)</strong> будет выполнено одно из следующих действий:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
-"(Показать подробности: когда продукты активируются, деактивируются или "
+"(Показать подробности: когда лицензии активируются, деактивируются или "
 "подтверждаются?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
@@ -9473,12 +9473,12 @@ msgid "Confirm: Reset Settings"
 msgstr "Подтверждение: Сброс настроек"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "Активировать лицензии расширений"
+msgid "Activate Licenses"
+msgstr "Активировать лицензии"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"

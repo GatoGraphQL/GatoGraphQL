@@ -10,6 +10,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: WP-CLI 2.13.0-alpha\n"
 "X-Domain: gatographql\n"
 
@@ -8532,8 +8533,8 @@ msgid "Debug"
 msgstr "调试"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "激活扩展"
+msgid "Activate Plugins and Extensions"
+msgstr "激活插件和扩展"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -8541,44 +8542,44 @@ msgstr "重置设置"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "从 %s 激活套件和扩展"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "从 %s 激活插件和扩展"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "将 Gato GraphQL 设置恢复为默认值"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "添加许可证密钥将<strong>激活产品</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr "添加许可证密钥将<strong>激活插件</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
 msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
-msgstr "删除现有许可证密钥将<strong>停用产品</strong>"
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgstr "删除现有许可证密钥将<strong>停用插件</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"更新许可证密钥将首先<strong>停用产品</strong>（使用旧许可证密钥），然后再次"
-"<strong>激活产品</strong>（使用新许可证密钥）"
+"更新许可证密钥将首先<strong>停用插件</strong>（使用旧许可证密钥），然后再次"
+"<strong>激活插件</strong>（使用新许可证密钥）"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
-msgstr "不更新许可证密钥将<strong>验证产品状态</strong>"
+msgstr "不更新许可证密钥将<strong>验证插件状态</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
+"Enter the license keys from the %s, and click on "
 "<strong>Activate licenses (or Deactivate/Validate)</strong>:"
 msgstr ""
-"输入在 %s 购买的产品的许可证密钥，然后点击<strong>激活许可证（或停用/验证）</"
+"输入从 %s 获取的许可证密钥，然后点击<strong>激活许可证（或停用/验证）</"
 "strong>："
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
@@ -8588,8 +8589,8 @@ msgid ""
 msgstr "点击<strong>激活许可证（或停用/验证）</strong>时，将执行以下操作之一："
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
-msgstr "（显示详情：产品何时被激活、停用或验证？）"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
+msgstr "（显示详情：许可证何时被激活、停用或验证？）"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -8724,12 +8725,12 @@ msgid "Confirm: Reset Settings"
 msgstr "确认：重置设置"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato 商店"
+msgid "Gato Plugins Store"
+msgstr "Gato 插件商店"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "激活扩展许可证"
+msgid "Activate Licenses"
+msgstr "激活许可证"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"
