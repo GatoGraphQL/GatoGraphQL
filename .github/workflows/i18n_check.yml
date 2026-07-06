@@ -1,0 +1,39 @@
+####################################################################################
+# GitHub Action:
+# Validate the i18n base translations:
+# - the base POT is up to date (all source strings have been extracted)
+# - every locale's master PO is complete (no untranslated/fuzzy entries)
+####################################################################################
+name: i18n check
+on:
+    push:
+        branches:
+            - master
+            - versions/*
+    pull_request: null
+env:
+    CHECKOUT_SUBMODULES: ""
+
+jobs:
+    main:
+        name: Check i18n
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v5
+                with:
+                    submodules: ${{ env.CHECKOUT_SUBMODULES }}
+
+            -   name: Set-up PHP
+                uses: shivammathur/setup-php@v2
+                with:
+                    php-version: 8.1
+                    coverage: none
+                env:
+                    COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+            -   name: Install Composer dependencies
+                uses: ramsey/composer-install@v4
+
+            -   name: Run i18n check
+                run: composer i18n-check
