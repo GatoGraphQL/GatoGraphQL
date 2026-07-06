@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.0.2 - DATE
+
+### Fixed
+
+- Fix link to My account page (https://store.gatoplugins.com/account)
+
 ## 19.0.1 - 06/07/2026
 
 ### Improvements

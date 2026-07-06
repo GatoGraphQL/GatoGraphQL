@@ -173,13 +173,7 @@ class ExtensionManager extends AbstractPluginManager
                     $mainPlugin->getPluginName(),
                     $mainPluginVersionConstraint,
                     $mainPlugin->getPluginVersion(),
-                    /**
-                     * Allow for standalone plugins to have their own Shop
-                     */
-                    sprintf(
-                        '%s/shop/my-orders',
-                        $mainPlugin->getPluginDomainURL()
-                    ),
+                    'https://store.gatoplugins.com/account',
                     HTMLCodes::OPEN_IN_NEW_WINDOW,
                 )
             );
