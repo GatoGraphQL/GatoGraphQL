@@ -8776,8 +8776,8 @@ msgid "Debug"
 msgstr "디버그"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "확장 기능 활성화"
+msgid "Activate Plugins and Extensions"
+msgstr "플러그인 및 확장 기능 활성화"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -8785,47 +8785,47 @@ msgstr "설정 초기화"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "%s에서 번들 및 확장 기능 활성화"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "%s에서 플러그인 및 확장 기능 활성화"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Gato GraphQL 설정을 기본값으로 복원"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "라이선스 키를 추가하면 <strong>제품이 활성화됩니다</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr "라이선스 키를 추가하면 <strong>플러그인이 활성화됩니다</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
 msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
-msgstr "기존 라이선스 키를 제거하면 <strong>제품이 비활성화됩니다</strong>"
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
+msgstr "기존 라이선스 키를 제거하면 <strong>플러그인이 비활성화됩니다</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"라이선스 키를 업데이트하면 먼저 (이전 라이선스 키를 사용하여) <strong>제품이 "
-"비활성화되고</strong>, 이후 (새 라이선스 키를 사용하여) <strong>제품이 다시 "
-"활성화됩니다</strong>"
+"라이선스 키를 업데이트하면 먼저 (이전 라이선스 키를 사용하여) <strong>플러그"
+"인이 비활성화되고</strong>, 이후 (새 라이선스 키를 사용하여) <strong>플러그인"
+"이 다시 활성화됩니다</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
-"라이선스 키를 업데이트하지 않으면 <strong>제품 상태가 검증됩니다</strong>"
+"라이선스 키를 업데이트하지 않으면 <strong>플러그인 상태가 검증됩니다</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"%s에서 구매한 제품의 라이선스 키를 입력하고 <strong>라이선스 활성화(또는 비활"
-"성화/검증)</strong>를 클릭합니다:"
+"%s의 라이선스 키를 입력하고 <strong>라이선스 활성화(또는 비활성화/검증)</"
+"strong>를 클릭합니다:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -8836,8 +8836,8 @@ msgstr ""
 "의 작업이 실행됩니다:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
-msgstr "(자세히 보기: 제품이 언제 활성화, 비활성화 또는 검증됩니까?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
+msgstr "(자세히 보기: 라이선스가 언제 활성화, 비활성화 또는 검증됩니까?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -8973,12 +8973,12 @@ msgid "Confirm: Reset Settings"
 msgstr "확인: 설정 초기화"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "확장 라이선스 활성화"
+msgid "Activate Licenses"
+msgstr "라이선스 활성화"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"
@@ -9775,29 +9775,7 @@ msgstr ""
 msgid "Documentation on using the Gato GraphQL"
 msgstr "Gato GraphQL 사용 문서"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:96
-msgid "Please rate Gato GraphQL ❤️"
-msgstr "Gato GraphQL을 평가해 주세요 ❤️"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:97
-msgid ""
-"We work really hard to deliver a plugin that converts the WordPress site "
-"into a full-fledged GraphQL server. It takes plenty of time and effort to "
-"develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
-"like what you see and appreciate our work, we ask you nothing more than to "
-"please rate the plugin in the directory. Thanks in advance!"
-msgstr ""
-"저희는 WordPress 사이트를 본격적인 GraphQL 서버로 전환하는 플러그인을 제공하"
-"기 위해 정말 열심히 노력합니다. 무료 Gato GraphQL 플러그인을 개발, 테스트 및 "
-"유지 관리하는 데는 많은 시간과 노력이 필요합니다. 따라서 저희 작업이 마음에 "
-"드신다면, 디렉토리에서 플러그인을 평가해 주시는 것 외에 다른 것은 바라지 않습"
-"니다. 미리 감사드립니다!"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:100
-msgid "Rate Plugin"
-msgstr "플러그인 평가하기"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:167
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:134
 #, php-format
 msgid ""
 "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</"
@@ -9808,7 +9786,7 @@ msgstr ""
 "되었습니다. <strong><a href=\"%s\" class=\"%s\">새로운 기능 확인하기</a></"
 "strong> | <a href=\"%s\">설정에서 이 관리자 알림 비활성화</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:283
 msgid "Go PRO"
 msgstr "PRO로 업그레이드"
 
@@ -9841,7 +9819,7 @@ msgstr "외부 서비스에서 데이터 처리"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "클래스 '%s'를 가진 확장이 아직 등록되지 않았습니다"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -9850,7 +9828,7 @@ msgstr ""
 "라이선스가 유효하지 않습니다. 활성화하려면 <a href=\"%s\">%s에서 새 라이선스 "
 "키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -9859,16 +9837,16 @@ msgstr ""
 "제공된 라이선스 키가 다른 확장에 속합니다. 활성화하려면 <a href=\"%s\">%s에"
 "서 올바른 라이선스 키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr "활성화하려면 <a href=\"%s\">%s에서 라이선스 키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr "라이선스가 유효하지 않습니다. 활성화하려면 새 라이선스 키를 입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -9876,16 +9854,16 @@ msgstr ""
 "제공된 라이선스 키가 다른 확장에 속합니다. 활성화하려면 올바른 라이선스 키를 "
 "입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "활성화하려면 라이선스 키를 입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
@@ -10429,88 +10407,84 @@ msgid "Website:"
 msgstr "웹사이트:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
-msgid "Plugin in WordPress.org:"
-msgstr "WordPress.org 플러그인:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "Source code:"
 msgstr "소스 코드:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "YouTube channel:"
 msgstr "YouTube 채널:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
 msgid "Contact:"
 msgstr "문의:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
 #, php-format
 msgid ""
 "<strong>Subscribe to our newsletter</strong> to receive timely updates about "
 "%s:"
 msgstr "<strong>뉴스레터를 구독</strong>하여 %s에 관한 최신 소식을 받아보세요:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
 msgid "Name:"
 msgstr "이름:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
 msgid "Email:"
 msgstr "이메일:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
 msgid "Subscribe"
 msgstr "구독"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
 msgid "Release Notes"
 msgstr "릴리스 노트"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
 msgid "New features released on each version:"
 msgstr "각 버전에서 출시된 새로운 기능:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
 msgid "current"
 msgstr "현재"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
 msgid "Support"
 msgstr "지원"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
 msgid ""
 "Support is provided to customers of any Gato GraphQL product with an active "
 "license."
 msgstr "지원은 활성 라이선스를 보유한 Gato GraphQL 제품 고객에게 제공됩니다."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
 msgid "Send your message to the Gato GraphQL Support team:"
 msgstr "Gato GraphQL 지원팀에 메시지를 보내세요:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
 msgid "Your name:"
 msgstr "이름:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
 msgid "Your email:"
 msgstr "이메일:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
 msgid "Subject:"
 msgstr "제목:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
 msgid "Message:"
 msgstr "메시지:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
 msgid "Send message"
 msgstr "메시지 보내기"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:161
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
 msgid "Attached extension license data"
 msgstr "첨부된 확장 프로그램 라이선스 데이터"
 
@@ -10941,12 +10915,12 @@ msgstr "'%s'에 대한 JSON 형식이 올바르지 않습니다. 이 매개변�
 #: GatoGraphQLForWP/plugins/gatographql/src/WPCLI/AbstractWPCLICommand.php:219
 #, php-format
 msgid "There are %d new log entries with severity %s"
-msgstr "심각도 %s의 새 로그 항목이 %d개 있습니다"
+msgstr "심각도 %2$s의 새 로그 항목이 %1$d개 있습니다"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/WPCLI/AbstractWPCLICommand.php:220
 #, php-format
 msgid "There is %d new log entry with severity %s"
-msgstr "심각도 %s의 새 로그 항목이 %d개 있습니다"
+msgstr "심각도 %2$s의 새 로그 항목이 %1$d개 있습니다"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/WPCLI/AbstractWPCLICommand.php:242
 #, php-format
@@ -12663,6 +12637,28 @@ msgstr "사용자 닉네임 슬러그 순으로 정렬"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "사용자 이메일 순으로 정렬"
+
+#~ msgid "Please rate Gato GraphQL ❤️"
+#~ msgstr "Gato GraphQL을 평가해 주세요 ❤️"
+
+#~ msgid ""
+#~ "We work really hard to deliver a plugin that converts the WordPress site "
+#~ "into a full-fledged GraphQL server. It takes plenty of time and effort to "
+#~ "develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
+#~ "like what you see and appreciate our work, we ask you nothing more than "
+#~ "to please rate the plugin in the directory. Thanks in advance!"
+#~ msgstr ""
+#~ "저희는 WordPress 사이트를 본격적인 GraphQL 서버로 전환하는 플러그인을 제공"
+#~ "하기 위해 정말 열심히 노력합니다. 무료 Gato GraphQL 플러그인을 개발, 테스"
+#~ "트 및 유지 관리하는 데는 많은 시간과 노력이 필요합니다. 따라서 저희 작업"
+#~ "이 마음에 드신다면, 디렉토리에서 플러그인을 평가해 주시는 것 외에 다른 것"
+#~ "은 바라지 않습니다. 미리 감사드립니다!"
+
+#~ msgid "Rate Plugin"
+#~ msgstr "플러그인 평가하기"
+
+#~ msgid "Plugin in WordPress.org:"
+#~ msgstr "WordPress.org 플러그인:"
 
 #~ msgid ""
 #~ "Translate content to multiple languages using the service provider of "

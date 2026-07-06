@@ -9446,8 +9446,8 @@ msgid "Debug"
 msgstr "Debug"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "Erweiterungen aktivieren"
+msgid "Activate Plugins and Extensions"
+msgstr "Plugins und Erweiterungen aktivieren"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -9455,54 +9455,52 @@ msgstr "Einstellungen zurücksetzen"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "Bundles und Erweiterungen aus dem %s aktivieren"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "Plugins und Erweiterungen aus dem %s aktivieren"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Die Gato GraphQL-Einstellungen auf Standardwerte zurücksetzen"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr ""
-"Das Hinzufügen eines Lizenzschlüssels wird <strong>das Produkt aktivieren</"
+"Das Hinzufügen eines Lizenzschlüssels wird <strong>das Plugin aktivieren</"
 "strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
 msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
-"Das Entfernen eines vorhandenen Lizenzschlüssels wird <strong>das Produkt "
+"Das Entfernen eines vorhandenen Lizenzschlüssels wird <strong>das Plugin "
 "deaktivieren</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"Das Aktualisieren eines Lizenzschlüssels wird zunächst <strong>das Produkt "
+"Das Aktualisieren eines Lizenzschlüssels wird zunächst <strong>das Plugin "
 "deaktivieren</strong> (mit dem vorherigen Lizenzschlüssel) und dann "
-"<strong>das Produkt erneut aktivieren</strong> (mit dem neuen "
-"Lizenzschlüssel)"
+"<strong>das Plugin erneut aktivieren</strong> (mit dem neuen Lizenzschlüssel)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
 "Das Nicht-Aktualisieren eines Lizenzschlüssels wird <strong>den Status des "
-"Produkts validieren</strong>"
+"Plugins validieren</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"Geben Sie die Lizenzschlüssel für die auf %s gekauften Produkte ein und "
-"klicken Sie auf <strong>Lizenzen aktivieren (oder Deaktivieren/Validieren)</"
-"strong>:"
+"Geben Sie die Lizenzschlüssel vom %s ein und klicken Sie auf "
+"<strong>Lizenzen aktivieren (oder Deaktivieren/Validieren)</strong>:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -9513,9 +9511,9 @@ msgstr ""
 "strong> wird eine der folgenden Aktionen ausgeführt:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
-"(Details anzeigen: Wann werden Produkte aktiviert, deaktiviert oder "
+"(Details anzeigen: Wann werden Lizenzen aktiviert, deaktiviert oder "
 "validiert?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
@@ -9658,12 +9656,12 @@ msgid "Confirm: Reset Settings"
 msgstr "Bestätigen: Einstellungen zurücksetzen"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "Erweiterungslizenzen aktivieren"
+msgid "Activate Licenses"
+msgstr "Lizenzen aktivieren"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"
@@ -10486,30 +10484,7 @@ msgstr ""
 msgid "Documentation on using the Gato GraphQL"
 msgstr "Dokumentation zur Verwendung von Gato GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:96
-msgid "Please rate Gato GraphQL ❤️"
-msgstr "Bitte bewerten Sie Gato GraphQL ❤️"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:97
-msgid ""
-"We work really hard to deliver a plugin that converts the WordPress site "
-"into a full-fledged GraphQL server. It takes plenty of time and effort to "
-"develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
-"like what you see and appreciate our work, we ask you nothing more than to "
-"please rate the plugin in the directory. Thanks in advance!"
-msgstr ""
-"Wir arbeiten sehr hart daran, ein Plugin bereitzustellen, das die WordPress-"
-"Seite in einen vollwertigen GraphQL-Server verwandelt. Es braucht viel Zeit "
-"und Aufwand, das kostenlose Gato GraphQL Plugin zu entwickeln, zu testen und "
-"zu pflegen. Wenn Ihnen gefällt, was Sie sehen, und Sie unsere Arbeit "
-"schätzen, bitten wir Sie daher nur darum, das Plugin im Verzeichnis zu "
-"bewerten. Vielen Dank im Voraus!"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:100
-msgid "Rate Plugin"
-msgstr "Plugin bewerten"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:167
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:134
 #, php-format
 msgid ""
 "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</"
@@ -10521,7 +10496,7 @@ msgstr ""
 "strong> | <a href=\"%s\">Diesen Admin-Hinweis in den Einstellungen "
 "deaktivieren</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:283
 msgid "Go PRO"
 msgstr "PRO werden"
 
@@ -10554,7 +10529,7 @@ msgstr "Daten von externen Diensten verarbeiten"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "Die Erweiterung mit der Klasse '%s' wurde noch nicht registriert"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10563,7 +10538,7 @@ msgstr ""
 "Die Lizenz ist ungültig. Bitte <a href=\"%s\">geben Sie einen neuen "
 "Lizenzschlüssel in %s ein</a>, um sie zu aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10573,20 +10548,20 @@ msgstr ""
 "href=\"%s\">geben Sie den richtigen Lizenzschlüssel in %s ein</a>, um sie zu "
 "aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Bitte <a href=\"%s\">geben Sie den Lizenzschlüssel in %s ein</a>, um sie zu "
 "aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "Die Lizenz ist ungültig. Bitte geben Sie einen neuen Lizenzschlüssel ein, um "
 "sie zu aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10594,16 +10569,16 @@ msgstr ""
 "Der angegebene Lizenzschlüssel gehört zu einer anderen Erweiterung. Bitte "
 "geben Sie den richtigen Lizenzschlüssel ein, um sie zu aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Bitte geben Sie den Lizenzschlüssel ein, um sie zu aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
@@ -11166,22 +11141,18 @@ msgid "Website:"
 msgstr "Website:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
-msgid "Plugin in WordPress.org:"
-msgstr "Plugin in WordPress.org:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "Source code:"
 msgstr "Quellcode:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "YouTube channel:"
 msgstr "YouTube-Kanal:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
 msgid "Contact:"
 msgstr "Kontakt:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
 #, php-format
 msgid ""
 "<strong>Subscribe to our newsletter</strong> to receive timely updates about "
@@ -11190,36 +11161,36 @@ msgstr ""
 "<strong>Abonnieren Sie unseren Newsletter</strong>, um zeitnahe Updates zu "
 "%s zu erhalten:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
 msgid "Name:"
 msgstr "Name:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
 msgid "Email:"
 msgstr "E-Mail:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
 msgid "Subscribe"
 msgstr "Abonnieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
 msgid "Release Notes"
 msgstr "Versionshinweise"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
 msgid "New features released on each version:"
 msgstr "Neue Funktionen, die in jeder Version veröffentlicht werden:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
 msgid "current"
 msgstr "aktuell"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
 msgid "Support"
 msgstr "Support"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
 msgid ""
 "Support is provided to customers of any Gato GraphQL product with an active "
 "license."
@@ -11227,31 +11198,31 @@ msgstr ""
 "Support wird Kunden jedes Gato GraphQL-Produkts mit einer aktiven Lizenz "
 "bereitgestellt."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
 msgid "Send your message to the Gato GraphQL Support team:"
 msgstr "Senden Sie Ihre Nachricht an das Gato GraphQL-Support-Team:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
 msgid "Your name:"
 msgstr "Ihr Name:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
 msgid "Your email:"
 msgstr "Ihre E-Mail-Adresse:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
 msgid "Subject:"
 msgstr "Betreff:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
 msgid "Message:"
 msgstr "Nachricht:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
 msgid "Send message"
 msgstr "Nachricht senden"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:161
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
 msgid "Attached extension license data"
 msgstr "Angehängte Lizenzdaten der Erweiterung"
 
@@ -13495,6 +13466,29 @@ msgstr "Sortieren nach dem Nicename des Benutzers"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortieren nach der E-Mail-Adresse des Benutzers"
+
+#~ msgid "Please rate Gato GraphQL ❤️"
+#~ msgstr "Bitte bewerten Sie Gato GraphQL ❤️"
+
+#~ msgid ""
+#~ "We work really hard to deliver a plugin that converts the WordPress site "
+#~ "into a full-fledged GraphQL server. It takes plenty of time and effort to "
+#~ "develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
+#~ "like what you see and appreciate our work, we ask you nothing more than "
+#~ "to please rate the plugin in the directory. Thanks in advance!"
+#~ msgstr ""
+#~ "Wir arbeiten sehr hart daran, ein Plugin bereitzustellen, das die "
+#~ "WordPress-Seite in einen vollwertigen GraphQL-Server verwandelt. Es "
+#~ "braucht viel Zeit und Aufwand, das kostenlose Gato GraphQL Plugin zu "
+#~ "entwickeln, zu testen und zu pflegen. Wenn Ihnen gefällt, was Sie sehen, "
+#~ "und Sie unsere Arbeit schätzen, bitten wir Sie daher nur darum, das "
+#~ "Plugin im Verzeichnis zu bewerten. Vielen Dank im Voraus!"
+
+#~ msgid "Rate Plugin"
+#~ msgstr "Plugin bewerten"
+
+#~ msgid "Plugin in WordPress.org:"
+#~ msgstr "Plugin in WordPress.org:"
 
 #~ msgid ""
 #~ "Translate content to multiple languages using the service provider of "

@@ -2,7 +2,6 @@
 /*
 Plugin Name: Gato GraphQL
 Plugin URI: https://gatographql.com
-GitHub Plugin URI: https://github.com/GatoGraphQL/GatoGraphQL
 Description: Powerful and flexible GraphQL server for WordPress.
 Version: 19.1.0-dev
 Requires at least: 6.1
@@ -16,6 +15,8 @@ Domain Path: /languages
 GitHub Plugin URI: GatoGraphQL/gatographql-dist
 */
 
+use GatoGraphQL\GatoGraphQL\Constants\ExtensionDataOptions;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\MarketplaceVersion;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use PoPIncludes\GatoGraphQL\Startup;
@@ -42,6 +43,7 @@ if (!defined('ABSPATH')) {
  */
 $pluginVersion = '19.1.0-dev';
 $pluginName = 'Gato GraphQL';
+$pluginProductName = 'Gato GraphQL';
 
 /**
  * If the plugin is already registered, halt loading
@@ -109,3 +111,22 @@ PluginApp::getMainPluginManager()->register(new Plugin(
     $pluginName,
     $commitHash
 ))->setup();
+
+// Validate the license
+$extensionManager = PluginApp::getExtensionManager();
+if (!$extensionManager->assertCommercialLicenseHasBeenActivated(
+    __FILE__,
+    $pluginProductName,
+    $pluginName,
+    $pluginVersion,
+    [
+        ExtensionDataOptions::CHANGELOG_URL => 'https://gatographql.com/changelog',
+        ExtensionDataOptions::HOMEPAGE_URL => 'https://gatographql.com',
+        ExtensionDataOptions::MARKETPLACE_PRODUCT_IDS => [
+            MarketplaceVersion::V2_FLUENTCART => 249,
+        ],
+        ExtensionDataOptions::IS_LICENSE_NEEDED => false,
+    ]
+)) {
+    return;
+}

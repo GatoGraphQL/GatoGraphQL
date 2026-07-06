@@ -9027,8 +9027,8 @@ msgid "Debug"
 msgstr "Hata Ayıklama"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
-msgid "Activate Extensions"
-msgstr "Uzantıları Etkinleştir"
+msgid "Activate Plugins and Extensions"
+msgstr "Eklentileri ve Uzantıları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
 msgid "Reset Settings"
@@ -9036,51 +9036,52 @@ msgstr "Ayarları Sıfırla"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 #, php-format
-msgid "Activate Bundles and Extensions from the %s"
-msgstr "%s'den Paket ve Uzantıları Etkinleştir"
+msgid "Activate Plugins and Extensions from the %s"
+msgstr "%s'den Eklentileri ve Uzantıları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Gato GraphQL Ayarlarını varsayılan değerlere geri yükle"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
-msgid "Adding a license key will <strong>activate the product</strong>"
-msgstr "Bir lisans anahtarı eklemek <strong>ürünü etkinleştirecektir</strong>"
+msgid "Adding a license key will <strong>activate the plugin</strong>"
+msgstr ""
+"Bir lisans anahtarı eklemek <strong>eklentiyi etkinleştirecektir</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
 msgid ""
-"Removing an existing license key will <strong>deactivate the product</strong>"
+"Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
-"Mevcut bir lisans anahtarını kaldırmak <strong>ürünü devre dışı "
+"Mevcut bir lisans anahtarını kaldırmak <strong>eklentiyi devre dışı "
 "bırakacaktır</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
 msgid ""
-"Updating a license key will first <strong>deactivate the product</strong> "
-"(using the previous license key) and then <strong>activate the product</"
+"Updating a license key will first <strong>deactivate the plugin</strong> "
+"(using the previous license key) and then <strong>activate the plugin</"
 "strong> again (using the new license key)"
 msgstr ""
-"Bir lisans anahtarını güncellemek önce <strong>ürünü devre dışı bırakacak</"
-"strong> (önceki lisans anahtarını kullanarak) ve ardından <strong>ürünü "
-"tekrar etkinleştirecektir</strong> (yeni lisans anahtarını kullanarak)"
+"Bir lisans anahtarını güncellemek önce <strong>eklentiyi devre dışı "
+"bırakacak</strong> (önceki lisans anahtarını kullanarak) ve ardından "
+"<strong>eklentiyi tekrar etkinleştirecektir</strong> (yeni lisans anahtarını "
+"kullanarak)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
 msgid ""
-"Not updating a license key will <strong>validate the status of the product</"
+"Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr ""
-"Bir lisans anahtarını güncellememek <strong>ürünün durumunu doğrulayacaktır</"
-"strong>"
+"Bir lisans anahtarını güncellememek <strong>eklentinin durumunu "
+"doğrulayacaktır</strong>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 #, php-format
 msgid ""
-"Enter the license keys for the products purchased on the %s, and click on "
-"<strong>Activate licenses (or Deactivate/Validate)</strong>:"
+"Enter the license keys from the %s, and click on <strong>Activate licenses "
+"(or Deactivate/Validate)</strong>:"
 msgstr ""
-"%s'de satın alınan ürünler için lisans anahtarlarını girin ve "
-"<strong>Lisansları etkinleştir (veya Devre Dışı Bırak/Doğrula)</strong> "
-"üzerine tıklayın:"
+"%s'den lisans anahtarlarını girin ve <strong>Lisansları etkinleştir (veya "
+"Devre Dışı Bırak/Doğrula)</strong> üzerine tıklayın:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
 msgid ""
@@ -9091,10 +9092,10 @@ msgstr ""
 "üzerine tıklandığında aşağıdaki işlemlerden biri gerçekleşecektir:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
-msgid "(Show details: When are products activated, deactivated or validated?)"
+msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
-"(Ayrıntıları göster: Ürünler ne zaman etkinleştirilir, devre dışı bırakılır "
-"veya doğrulanır?)"
+"(Ayrıntıları göster: Lisanslar ne zaman etkinleştirilir, devre dışı "
+"bırakılır veya doğrulanır?)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
 msgid "Activate licenses (or Deactivate/Validate)"
@@ -9235,12 +9236,12 @@ msgid "Confirm: Reset Settings"
 msgstr "Onayla: Ayarları Sıfırla"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
-msgid "Gato Shop"
-msgstr "Gato Shop"
+msgid "Gato Plugins Store"
+msgstr "Gato Plugins Store"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
-msgid "Activate Extension Licenses"
-msgstr "Uzantı Lisanslarını Etkinleştir"
+msgid "Activate Licenses"
+msgstr "Lisansları Etkinleştir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
 msgid "Schema Namespacing"
@@ -10050,30 +10051,7 @@ msgstr ""
 msgid "Documentation on using the Gato GraphQL"
 msgstr "Gato GraphQL kullanım belgeleri"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:96
-msgid "Please rate Gato GraphQL ❤️"
-msgstr "Lütfen Gato GraphQL'i derecelendirin ❤️"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:97
-msgid ""
-"We work really hard to deliver a plugin that converts the WordPress site "
-"into a full-fledged GraphQL server. It takes plenty of time and effort to "
-"develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
-"like what you see and appreciate our work, we ask you nothing more than to "
-"please rate the plugin in the directory. Thanks in advance!"
-msgstr ""
-"WordPress sitesini tam kapsamlı bir GraphQL sunucusuna dönüştüren bir "
-"eklenti sunmak için gerçekten çok çalışıyoruz. Ücretsiz Gato GraphQL "
-"eklentisini geliştirmek, test etmek ve sürdürmek çok zaman ve çaba "
-"gerektiriyor. Bu nedenle, gördüklerinizi beğeniyorsanız ve çalışmamızı "
-"takdir ediyorsanız, tek ricamız eklentiyi dizinde derecelendirmenizdir. "
-"Şimdiden teşekkürler!"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:100
-msgid "Rate Plugin"
-msgstr "Eklentiyi Derecelendir"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:167
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:134
 #, php-format
 msgid ""
 "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</"
@@ -10085,7 +10063,7 @@ msgstr ""
 "strong> | <a href=\"%s\">Bu yönetici bildirimini Ayarlar'dan devre dışı "
 "bırakın</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:283
 msgid "Go PRO"
 msgstr "PRO'ya Geç"
 
@@ -10118,7 +10096,7 @@ msgstr "Harici servislerden gelen verileri işleme"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "'%s' sınıfına sahip uzantı henüz kaydedilmedi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10127,7 +10105,7 @@ msgstr ""
 "Lisans geçersiz. Etkinleştirmek için lütfen <a href=\"%s\">%s içinde yeni "
 "bir lisans anahtarı girin</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:464
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10136,19 +10114,19 @@ msgstr ""
 "Sağlanan lisans anahtarı farklı bir uzantıya aittir. Etkinleştirmek için "
 "lütfen <a href=\"%s\">%s içinde doğru lisans anahtarını girin</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:465
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Etkinleştirmek için lütfen <a href=\"%s\">%s içinde lisans anahtarını girin</"
 "a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "Lisans geçersiz. Etkinleştirmek için lütfen yeni bir lisans anahtarı girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10156,16 +10134,16 @@ msgstr ""
 "Sağlanan lisans anahtarı farklı bir uzantıya aittir. Etkinleştirmek için "
 "lütfen doğru lisans anahtarını girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Please enter the license key to enable it"
 msgstr "Etkinleştirmek için lütfen lisans anahtarını girin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:496
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
@@ -10721,22 +10699,18 @@ msgid "Website:"
 msgstr "Web sitesi:"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
-msgid "Plugin in WordPress.org:"
-msgstr "WordPress.org'daki eklenti:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "Source code:"
 msgstr "Kaynak kodu:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "YouTube channel:"
 msgstr "YouTube kanalı:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
 msgid "Contact:"
 msgstr "İletişim:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
 #, php-format
 msgid ""
 "<strong>Subscribe to our newsletter</strong> to receive timely updates about "
@@ -10745,36 +10719,36 @@ msgstr ""
 "%s hakkında zamanında güncellemeler almak için <strong>bültenimize abone "
 "olun</strong>:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
 msgid "Name:"
 msgstr "Ad:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
 msgid "Email:"
 msgstr "E-posta:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
 msgid "Subscribe"
 msgstr "Abone ol"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
 msgid "Release Notes"
 msgstr "Sürüm Notları"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
 msgid "New features released on each version:"
 msgstr "Her sürümde yayımlanan yeni özellikler:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
 msgid "current"
 msgstr "mevcut"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
 msgid "Support"
 msgstr "Destek"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
 msgid ""
 "Support is provided to customers of any Gato GraphQL product with an active "
 "license."
@@ -10782,31 +10756,31 @@ msgstr ""
 "Destek, aktif lisansı olan herhangi bir Gato GraphQL ürününün müşterilerine "
 "sağlanmaktadır."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
 msgid "Send your message to the Gato GraphQL Support team:"
 msgstr "Gato GraphQL Destek ekibine mesajınızı gönderin:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
 msgid "Your name:"
 msgstr "Adınız:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
 msgid "Your email:"
 msgstr "E-posta adresiniz:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
 msgid "Subject:"
 msgstr "Konu:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
 msgid "Message:"
 msgstr "Mesaj:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
 msgid "Send message"
 msgstr "Mesaj gönder"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:161
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
 msgid "Attached extension license data"
 msgstr "Ekli uzantı lisans verileri"
 
@@ -13004,6 +12978,29 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid "Please rate Gato GraphQL ❤️"
+#~ msgstr "Lütfen Gato GraphQL'i derecelendirin ❤️"
+
+#~ msgid ""
+#~ "We work really hard to deliver a plugin that converts the WordPress site "
+#~ "into a full-fledged GraphQL server. It takes plenty of time and effort to "
+#~ "develop, test and maintain the free Gato GraphQL plugin. Therefore if you "
+#~ "like what you see and appreciate our work, we ask you nothing more than "
+#~ "to please rate the plugin in the directory. Thanks in advance!"
+#~ msgstr ""
+#~ "WordPress sitesini tam kapsamlı bir GraphQL sunucusuna dönüştüren bir "
+#~ "eklenti sunmak için gerçekten çok çalışıyoruz. Ücretsiz Gato GraphQL "
+#~ "eklentisini geliştirmek, test etmek ve sürdürmek çok zaman ve çaba "
+#~ "gerektiriyor. Bu nedenle, gördüklerinizi beğeniyorsanız ve çalışmamızı "
+#~ "takdir ediyorsanız, tek ricamız eklentiyi dizinde derecelendirmenizdir. "
+#~ "Şimdiden teşekkürler!"
+
+#~ msgid "Rate Plugin"
+#~ msgstr "Eklentiyi Derecelendir"
+
+#~ msgid "Plugin in WordPress.org:"
+#~ msgstr "WordPress.org'daki eklenti:"
 
 #~ msgid ""
 #~ "Translate content to multiple languages using the service provider of "

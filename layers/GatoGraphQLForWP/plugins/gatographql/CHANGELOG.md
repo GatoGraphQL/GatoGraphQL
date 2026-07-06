@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.0.1 - 06/07/2026
+
+### Improvements
+
+- Distribute Gato GraphQL plugin via the Gato Plugins store (instead of wordpress.org) (#3347)
+
 ## 19.0.0 - 29/06/2026
 
 ### Added

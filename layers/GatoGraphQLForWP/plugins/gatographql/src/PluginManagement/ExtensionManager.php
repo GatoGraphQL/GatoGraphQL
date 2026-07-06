@@ -386,13 +386,17 @@ class ExtensionManager extends AbstractPluginManager
             $options[ExtensionDataOptions::MARKETPLACE_PRODUCT_IDS] ?? [],
         );
 
+        $isLicenseNeeded = $options[ExtensionDataOptions::IS_LICENSE_NEEDED] ?? true;
+
         /**
          * Retrieve from the DB which licenses have been activated,
          * and check if this extension is in it
          */
         $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
         if (!isset($commercialExtensionActivatedLicenseObjectProperties[$extensionSlug])) {
-            $this->showAdminWarningNotice($extensionName);
+            if ($isLicenseNeeded) {
+                $this->showAdminWarningNotice($extensionName);
+            }
             $this->nonActivatedLicenseCommercialExtensionSlugDataEntries[$extensionSlug] = $extensionData;
             return false;
         }
