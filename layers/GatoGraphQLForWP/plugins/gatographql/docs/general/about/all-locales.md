@@ -20,14 +20,6 @@
   
   <p markdown=1>
 
-  **{wporg-plugin-label}** [wordpress.org/plugins/gatographql](https://wordpress.org/plugins/gatographql/)
-
-  </p>
-
-  <hr/>
-  
-  <p markdown=1>
-
   **{source-code-label}** [github.com/GatoGraphQL/GatoGraphQL](https://github.com/GatoGraphQL/GatoGraphQL)
 
   </p>
