@@ -22,13 +22,6 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
-add_action('init', function (): void {
-    if (!class_exists(\PoPIncludes\GatoGraphQL\Startup::class)) {
-        return;
-    }
-    \PoPIncludes\GatoGraphQL\Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
-}, PHP_INT_MIN);
-
 /**
  * Create and set-up the extension
  */
@@ -90,6 +83,10 @@ add_action(
         )) {
             return;
         }
+
+        add_action('init', function (): void {
+            \PoPIncludes\GatoGraphQL\Startup::loadTextdomainWithFallback(__DIR__ . '/languages/', basename(__FILE__, '.php') . '-');
+        }, PHP_INT_MIN);
 
         /**
          * The commit hash is added to the plugin version 
