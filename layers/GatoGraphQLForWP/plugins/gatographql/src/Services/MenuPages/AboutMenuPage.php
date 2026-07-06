@@ -139,7 +139,6 @@ class AboutMenuPage extends AbstractDocsMenuPage
             '{tagline}' => __('Powerful and flexible GraphQL server for WordPress.', 'gatographql'),
             '{our-channels-title}' => __('Our channels', 'gatographql'),
             '{website-label}' => __('Website:', 'gatographql'),
-            '{wporg-plugin-label}' => __('Plugin in WordPress.org:', 'gatographql'),
             '{source-code-label}' => __('Source code:', 'gatographql'),
             '{youtube-label}' => __('YouTube channel:', 'gatographql'),
             '{contact-label}' => __('Contact:', 'gatographql'),
