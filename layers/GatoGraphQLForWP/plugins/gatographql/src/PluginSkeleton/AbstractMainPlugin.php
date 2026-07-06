@@ -1223,9 +1223,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             function (string $classes): string {
                 $commercialExtensionActivatedLicenseObjectProperties = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
                 foreach ($commercialExtensionActivatedLicenseObjectProperties as $extensionSlug => $extensionCommercialExtensionActivatedLicenseObjectProperties) {
-                    if ($extensionCommercialExtensionActivatedLicenseObjectProperties === null) {
-                        continue;
-                    }
                     if ($extensionCommercialExtensionActivatedLicenseObjectProperties->status !== LicenseStatus::ACTIVE) {
                         continue;
                     }
