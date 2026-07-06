@@ -69,14 +69,6 @@ class Plugin extends AbstractMainPlugin
         }
         // All checks passed, show the release notes
         $this->showReleaseNotesInAdminNotice();
-
-        if ($this->enableShowingRatePluginBannerInAdminNotice()) {
-        }
-    }
-
-    protected function enableShowingRatePluginBannerInAdminNotice(): bool
-    {
-        return true;
     }
 
     /**
