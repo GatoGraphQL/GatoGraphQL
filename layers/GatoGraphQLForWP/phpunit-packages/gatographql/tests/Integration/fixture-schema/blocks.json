@@ -373,7 +373,7 @@
                     {
                         "name": "core\/cover",
                         "attributes": {
-                            "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                            "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                             "id": 1380,
                             "alt": "Dog not caring about anything",
                             "dimRatio": 50,
@@ -384,7 +384,7 @@
                             "backgroundType": "image",
                             "tagName": "div"
                         },
-                        "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
+                        "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/paragraph",
@@ -961,7 +961,7 @@
                     {
                         "name": "core\/cover",
                         "attributes": {
-                            "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                            "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                             "id": 1380,
                             "alt": "Dog not caring about anything",
                             "dimRatio": 50,
@@ -1504,7 +1504,7 @@
                     {
                         "name": "core\/cover",
                         "attributes": {
-                            "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                            "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                             "id": 1380,
                             "alt": "Dog not caring about anything",
                             "dimRatio": 50,
@@ -8520,7 +8520,7 @@
                 {
                     "name": "core\/cover",
                     "attributes": {
-                        "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                        "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                         "id": 1380,
                         "alt": "Dog not caring about anything",
                         "dimRatio": 50,
@@ -8531,7 +8531,7 @@
                         "backgroundType": "image",
                         "tagName": "div"
                     },
-                    "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
+                    "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
                     "innerBlocks": [
                         {
                             "name": "core\/paragraph",
@@ -9108,7 +9108,7 @@
                 {
                     "name": "core\/cover",
                     "attributes": {
-                        "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                        "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                         "id": 1380,
                         "alt": "Dog not caring about anything",
                         "dimRatio": 50,
@@ -9651,7 +9651,7 @@
                 {
                     "name": "core\/cover",
                     "attributes": {
-                        "url": "https:\/\/localhost:59610\/wp-content\/uploads\/Funny-Dog.jpg",
+                        "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg",
                         "id": 1380,
                         "alt": "Dog not caring about anything",
                         "dimRatio": 50,
