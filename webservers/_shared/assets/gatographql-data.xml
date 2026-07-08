@@ -1811,8 +1811,8 @@ https://wordpress.org/about/
 <!-- /wp:list-item --></ul>
 <!-- /wp:list -->
 
-<!-- wp:cover {"url":"https://localhost:59610/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
-<div class="wp-block-cover is-light"><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://localhost:59610/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg","id":1380,"alt":"Dog not caring about anything","dimRatio":50,"isDark":false} -->
+<div class="wp-block-cover is-light"><img class="wp-block-cover__image-background wp-image-1380" alt="Dog not caring about anything" src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">See if I care</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
@@ -2486,31 +2486,31 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
 <!-- /wp:image -->
 
-<!-- wp:cover {"url":"https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp","id":1362,"dimRatio":50,"layout":{"type":"constrained"}} -->
-<div class="wp-block-cover"><img class="wp-block-cover__image-background wp-image-1362" alt="" src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
+<!-- wp:cover {"url":"https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki.webp","id":1362,"dimRatio":50,"layout":{"type":"constrained"}} -->
+<div class="wp-block-cover"><img class="wp-block-cover__image-background wp-image-1362" alt="" src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki.webp" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:paragraph {"placeholder":"Write title…","style":{"typography":{"textAlign":"center"}},"fontSize":"large"} -->
 <p class="has-text-align-center has-large-font-size">Cover with media id 1362</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:cover -->
 
 <!-- wp:media-text {"align":"wide","mediaId":1380,"mediaType":"image"} -->
-<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
+<div class="wp-block-media-text alignwide is-stacked-on-mobile"><figure class="wp-block-media-text__media"><img src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380 size-full"/></figure><div class="wp-block-media-text__content"><!-- wp:paragraph {"placeholder":"Content…"} -->
 <p>Media-Text uses <code>mediaId</code> (here 1380).</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:media-text -->
 
 <!-- wp:audio {"id":99001} -->
-<figure class="wp-block-audio"><audio controls src="https://localhost:50666/wp-content/uploads/placeholder.mp3"></audio><figcaption class="wp-element-caption">Audio block — placeholder id 99001 (no audio available in dev DB).</figcaption></figure>
+<figure class="wp-block-audio"><audio controls src="https://gatographql.lndo.site/wp-content/uploads/placeholder.mp3"></audio><figcaption class="wp-element-caption">Audio block — placeholder id 99001 (no audio available in dev DB).</figcaption></figure>
 <!-- /wp:audio -->
 
 <!-- wp:video {"id":99002} -->
-<figure class="wp-block-video"><video controls src="https://localhost:50666/wp-content/uploads/placeholder.mp4"></video><figcaption class="wp-element-caption">Video block — placeholder id 99002 (no video available in dev DB).</figcaption></figure>
+<figure class="wp-block-video"><video controls src="https://gatographql.lndo.site/wp-content/uploads/placeholder.mp4"></video><figcaption class="wp-element-caption">Video block — placeholder id 99002 (no video available in dev DB).</figcaption></figure>
 <!-- /wp:video -->
 
-<!-- wp:file {"id":99003,"href":"https://localhost:50666/wp-content/uploads/placeholder.pdf"} -->
-<div class="wp-block-file"><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf">placeholder.pdf</a><a href="https://localhost:50666/wp-content/uploads/placeholder.pdf" class="wp-block-file__button wp-element-button" download>Download</a></div>
+<!-- wp:file {"id":99003,"href":"https://gatographql.lndo.site/wp-content/uploads/placeholder.pdf"} -->
+<div class="wp-block-file"><a href="https://gatographql.lndo.site/wp-content/uploads/placeholder.pdf">placeholder.pdf</a><a href="https://gatographql.lndo.site/wp-content/uploads/placeholder.pdf" class="wp-block-file__button wp-element-button" download>Download</a></div>
 <!-- /wp:file -->
 
 <!-- wp:heading -->
@@ -2519,15 +2519,15 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 
 <!-- wp:gallery {"ids":[1361,1362,1380],"linkTo":"none"} -->
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped"><!-- wp:image {"id":1361,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp" alt="" class="wp-image-1361"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":1362,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/GatoGraphQL-logo-suki.webp" alt="" class="wp-image-1362"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-suki.webp" alt="" class="wp-image-1362"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":1380,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://localhost:50666/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380"/></figure>
+<figure class="wp-block-image size-large"><img src="https://gatographql.lndo.site/wp-content/uploads/Funny-Dog.jpg" alt="" class="wp-image-1380"/></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 
@@ -2539,20 +2539,20 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <p>Stand-alone <code>core/navigation-link</code> blocks pointing at posts and pages (note: page id 1 does not exist in the dev DB; included as-is to fixture the attribute):</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:navigation-link {"label":"Customize the schema for each client","type":"post","id":1121,"url":"https://localhost:50666/customize-the-schema-for-each-client/","kind":"post-type"} /-->
+<!-- wp:navigation-link {"label":"Customize the schema for each client","type":"post","id":1121,"url":"https://gatographql.lndo.site/customize-the-schema-for-each-client/","kind":"post-type"} /-->
 
-<!-- wp:navigation-link {"label":"GraphQL or REST? Why not both?","type":"post","id":1123,"url":"https://localhost:50666/graphql-or-rest-you-can-have-both/","kind":"post-type"} /-->
+<!-- wp:navigation-link {"label":"GraphQL or REST? Why not both?","type":"post","id":1123,"url":"https://gatographql.lndo.site/graphql-or-rest-you-can-have-both/","kind":"post-type"} /-->
 
-<!-- wp:navigation-link {"label":"Sample Page","type":"page","id":2,"url":"https://localhost:50666/sample-page/","kind":"post-type"} /-->
+<!-- wp:navigation-link {"label":"Sample Page","type":"page","id":2,"url":"https://gatographql.lndo.site/sample-page/","kind":"post-type"} /-->
 
-<!-- wp:navigation-link {"label":"Page id 1 (404)","type":"page","id":1,"url":"https://localhost:50666/?page_id=1","kind":"post-type"} /-->
+<!-- wp:navigation-link {"label":"Page id 1 (404)","type":"page","id":1,"url":"https://gatographql.lndo.site/?page_id=1","kind":"post-type"} /-->
 
 <!-- wp:paragraph -->
 <p><code>core/navigation-submenu</code> referencing page 1705, with a child link to post 1125:</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:navigation-submenu {"label":"Page with parent only","type":"page","id":1705,"url":"https://localhost:50666/page-with-several-levels-of-children/page-with-parent-and-children/page-with-parent-only/","kind":"post-type"} -->
-<!-- wp:navigation-link {"label":"Public or Private API mode, for extra security","type":"post","id":1125,"url":"https://localhost:50666/public-or-private-api-mode-for-extra-security/","kind":"post-type"} /-->
+<!-- wp:navigation-submenu {"label":"Page with parent only","type":"page","id":1705,"url":"https://gatographql.lndo.site/page-with-several-levels-of-children/page-with-parent-and-children/page-with-parent-only/","kind":"post-type"} -->
+<!-- wp:navigation-link {"label":"Public or Private API mode, for extra security","type":"post","id":1125,"url":"https://gatographql.lndo.site/public-or-private-api-mode-for-extra-security/","kind":"post-type"} /-->
 <!-- /wp:navigation-submenu -->
 
 <!-- wp:paragraph -->
