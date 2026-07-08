@@ -44,6 +44,15 @@ while IFS= read -r locale; do
         echo "ERROR: $locale incomplete ($stats). Run: composer i18n-translate"
         fail=1
     fi
+    # Validate gettext correctness (format-spec / plural-header). GNU msgfmt on CI
+    # does this by default and fails when compiling; a lenient local msgfmt does
+    # not, so run it explicitly with --check to catch malformed translations up
+    # front, with the offending locale and line number.
+    if ! cerr=$(msgfmt --check -o /dev/null "$po" 2>&1); then
+        echo "ERROR: $locale has invalid gettext data:"
+        echo "$cerr"
+        fail=1
+    fi
 done < "$LOCALES_FILE"
 
 if [ "$fail" -eq 0 ]; then
