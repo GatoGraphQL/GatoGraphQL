@@ -9819,7 +9819,7 @@ msgstr "외부 서비스에서 데이터 처리"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "클래스 '%s'를 가진 확장이 아직 등록되지 않았습니다"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:461
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -9828,7 +9828,7 @@ msgstr ""
 "라이선스가 유효하지 않습니다. 활성화하려면 <a href=\"%s\">%s에서 새 라이선스 "
 "키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:462
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -9837,16 +9837,16 @@ msgstr ""
 "제공된 라이선스 키가 다른 확장에 속합니다. 활성화하려면 <a href=\"%s\">%s에"
 "서 올바른 라이선스 키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr "활성화하려면 <a href=\"%s\">%s에서 라이선스 키를 입력하세요</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:486
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr "라이선스가 유효하지 않습니다. 활성화하려면 새 라이선스 키를 입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:487
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -9854,16 +9854,16 @@ msgstr ""
 "제공된 라이선스 키가 다른 확장에 속합니다. 활성화하려면 올바른 라이선스 키를 "
 "입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
 msgid "Please enter the license key to enable it"
 msgstr "활성화하려면 라이선스 키를 입력하세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 

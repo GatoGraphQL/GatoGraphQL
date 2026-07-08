@@ -10195,7 +10195,7 @@ msgstr "Xử lý dữ liệu từ các dịch vụ bên ngoài"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "Tiện mở rộng với class '%s' chưa được đăng ký"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:467
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:461
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -10204,7 +10204,7 @@ msgstr ""
 "Giấy phép không hợp lệ. Vui lòng <a href=\"%s\">nhập khóa giấy phép mới "
 "trong %s</a> để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:468
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:462
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -10213,16 +10213,16 @@ msgstr ""
 "Khóa giấy phép được cung cấp thuộc về một tiện mở rộng khác. Vui lòng <a "
 "href=\"%s\">nhập khóa giấy phép đúng trong %s</a> để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:469
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr "Vui lòng <a href=\"%s\">nhập khóa giấy phép trong %s</a> để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:486
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr "Giấy phép không hợp lệ. Vui lòng nhập khóa giấy phép mới để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:493
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:487
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -10230,16 +10230,16 @@ msgstr ""
 "Khóa giấy phép được cung cấp thuộc về một tiện mở rộng khác. Vui lòng nhập "
 "khóa giấy phép đúng để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
 msgid "Please enter the license key to enable it"
 msgstr "Vui lòng nhập khóa giấy phép để kích hoạt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
