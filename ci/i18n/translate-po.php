@@ -208,8 +208,8 @@ function translateChunk(array $chunk, string $language, string $locale, string $
     $failed = [];
     foreach (array_values($chunk) as $i => $translation) {
         $key = (string) ($i + 1);
-        if (is_array($result) && isset($result[$key]) && (string) $result[$key] !== '') {
-            $translation->setTranslation((string) $result[$key]);
+        if (is_array($result) && isset($result[$key]) && is_string($result[$key]) && $result[$key] !== '') {
+            $translation->setTranslation($result[$key]);
             $done++;
         } else {
             $failed[] = $translation;
@@ -370,14 +370,28 @@ if ($limit === 0) {
         }
         foreach ($chunk as $i => $translation) {
             $key = (string) ($i + 1);
-            if (isset($result[$key]) && is_array($result[$key]) && count($result[$key]) >= $nplurals) {
-                $forms = array_values(array_map('strval', $result[$key]));
-                $translation->setTranslation($forms[0]);
-                if ($nplurals > 1) {
-                    $translation->setPluralTranslations(array_slice($forms, 1, $nplurals - 1));
-                }
-                $done++;
+            if (!isset($result[$key]) || !is_array($result[$key])) {
+                continue;
             }
+            $forms = array_slice(array_values($result[$key]), 0, $nplurals);
+            if (count($forms) < $nplurals) {
+                continue;
+            }
+            $allStrings = true;
+            foreach ($forms as $form) {
+                if (!is_string($form) || $form === '') {
+                    $allStrings = false;
+                    break;
+                }
+            }
+            if (!$allStrings) {
+                continue;
+            }
+            $translation->setTranslation($forms[0]);
+            if ($nplurals > 1) {
+                $translation->setPluralTranslations(array_slice($forms, 1, $nplurals - 1));
+            }
+            $done++;
         }
         $translations->toPoFile($poFile);
         printf("  plural batch %d: %d entries (%d total)\n", $chunkIndex + 1, count($chunk), $done);

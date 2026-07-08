@@ -32,6 +32,9 @@ jobs:
                 env:
                     COMPOSER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+            -   name: Install gettext (provides msgfmt)
+                run: sudo apt-get update && sudo apt-get install -y gettext
+
             -   name: Install Composer dependencies
                 uses: ramsey/composer-install@v4
 

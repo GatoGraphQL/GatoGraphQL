@@ -19,7 +19,10 @@ while IFS= read -r locale; do
     [ -z "$locale" ] && continue
     po="$LANG_DIR/gatographql-$locale.po"
     [ -f "$po" ] || continue
-    msgfmt "$po" -o "$LANG_DIR/gatographql-$locale.mo"
+    # --check mirrors GNU msgfmt's default-strict behavior on CI (format-spec
+    # and plural-header validation), so a lenient local msgfmt can't let a
+    # malformed catalog through that then fails when compiled on CI.
+    msgfmt --check "$po" -o "$LANG_DIR/gatographql-$locale.mo"
     wp_i18n i18n make-php "$po" "$LANG_DIR/" >/dev/null 2>&1 || true
     echo "  gatographql-$locale.mo"
 done < "$LOCALES_FILE"
