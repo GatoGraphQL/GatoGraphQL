@@ -11,7 +11,6 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHo
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Webserver\LandoAdapter;
 use WP_REST_Response;
 
 use function add_action;
@@ -48,7 +47,8 @@ class Plugin
         /**
          * Adapt the Lando webserver
          */
-        new LandoAdapter();
+        // Disable this adapter, as it's not needed after fixing the issue with the Lando proxy
+        // new LandoAdapter();
 
         /**
          * Executing `flush_rewrite_rules` at the end of the execution

@@ -24,12 +24,6 @@ class LandoAdapter
 {
     public function __construct()
     {
-        // Disable this adapter, as it's not needed after fixing the issue with the Lando proxy
-        $enable = false;
-        if (!$enable) {
-            return;
-        }
-
         \add_action(
             'init',
             function (): void {
