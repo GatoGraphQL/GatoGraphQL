@@ -12,7 +12,7 @@
         "path": [
           "(key: \"description\")",
           "description: metaValue(key: \"description\")",
-          "comments(pagination: {limit: 1}) { ... }",
+          "comments(pagination: {limit: 1, offset: 20}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Comment",
@@ -32,7 +32,7 @@
         "path": [
           "(keys: [\"description\"])",
           "meta(keys: [\"description\"])",
-          "comments(pagination: {limit: 1}) { ... }",
+          "comments(pagination: {limit: 1, offset: 20}, sort: {by: ID, order: ASC}) { ... }",
           "query { ... }"
         ],
         "type": "Comment",
