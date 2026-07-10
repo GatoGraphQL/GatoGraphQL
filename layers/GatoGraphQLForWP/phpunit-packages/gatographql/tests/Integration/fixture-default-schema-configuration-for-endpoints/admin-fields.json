@@ -11,7 +11,7 @@
             "extensions": {
                 "path": [
                     "email",
-                    "users(pagination: {limit: 3}) { ... }",
+                    "users(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
                     "query { ... }"
                 ],
                 "type": "User",
@@ -31,7 +31,7 @@
             "extensions": {
                 "path": [
                     "roleNames",
-                    "users(pagination: {limit: 3}) { ... }",
+                    "users(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
                     "query { ... }"
                 ],
                 "type": "User",
@@ -44,17 +44,17 @@
     "data": {
         "users": [
             {
-                "name": "Editor Smith",
+                "name": "admin",
                 "email": null,
                 "roleNames": null
             },
             {
-                "name": "Author Marquez",
+                "name": "Blogger Davenport",
                 "email": null,
                 "roleNames": null
             },
             {
-                "name": "Contributor Johnson",
+                "name": "Subscriber Bennett",
                 "email": null,
                 "roleNames": null
             }
