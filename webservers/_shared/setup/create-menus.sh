@@ -12,7 +12,7 @@ wp menu item add-post bottom-menu 2
 wp menu item add-custom bottom-menu Google https://google.com
 wp menu item add-custom bottom-menu Amazon https://amazon.com --parent-id=$(wp menu item add-post bottom-menu 1 --title="Ancestor post in Menu for testing" --porcelain)
 wp menu item add-custom bottom-menu BBC https://bbc.com --parent-id=$(wp menu item add-post bottom-menu 1 --title="Parent post in Menu for testing" --parent-id=$(wp menu item add-post bottom-menu 1 --title="Most ancestor post in Menu for testing" --porcelain) --porcelain)
-wp menu location assign bottom-menu footer
+wp menu location assign bottom-menu secondary
 
 wp menu create "Unassigned Menu"
 wp menu item add-custom unassigned-menu Yahoo https://yahoo.com
