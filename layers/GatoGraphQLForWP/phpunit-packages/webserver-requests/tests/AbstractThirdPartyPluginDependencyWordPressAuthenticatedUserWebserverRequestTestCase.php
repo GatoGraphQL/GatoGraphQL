@@ -34,6 +34,9 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
         $isPluginActiveByDefault = $this->isPluginActiveByDefault($dataName);
         $pluginName = $this->getPluginNameFromDataName($dataName);
         if ($isModuleEnabledByDefault && str_ends_with($dataName, ':disabled') && $isPluginActiveByDefault) {
+            foreach ($this->getPluginDeactivationPluginFileNamesToInclude($dataName) as $pluginFile) {
+                $this->executeRESTEndpointToEnableOrDisablePlugin($pluginFile, 'inactive');
+            }
             $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'inactive');
         } elseif ((!$isModuleEnabledByDefault || !$isPluginActiveByDefault) && str_ends_with($dataName, ':enabled')) {
             $this->executeRESTEndpointToEnableOrDisablePlugin($pluginName, 'active');
@@ -169,6 +172,14 @@ abstract class AbstractThirdPartyPluginDependencyWordPressAuthenticatedUserWebse
             Params::SKIP_DEACTIVATING_PLUGIN_FILES => $skipDeactivatingPluginFiles,
         ];
         $this->executeEndpointViaParamsAgainstWPAdmin($endpointParams);
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getPluginDeactivationPluginFileNamesToInclude(string $dataName): array
+    {
+        return [];
     }
 
     /**
