@@ -537,6 +537,10 @@ class Plugin
         register_nav_menus([
             'primary' => __('Header', 'bricks-child-playground'),
             'secondary' => __('Footer', 'bricks-child-playground'),
+
+            // Used for tests
+            'tertiary' => __('Tertiary', 'bricks-child-playground'),
+            'quaternary' => __('Quaternary', 'bricks-child-playground'),
         ]);
     }
 
