@@ -407,7 +407,7 @@
                 "slug": "bottom-menu",
                 "count": 7,
                 "locations": [
-                    "footer"
+                    "secondary"
                 ],
                 "itemDataEntries": [
                     {
@@ -1326,7 +1326,7 @@
             "slug": "bottom-menu",
             "count": 7,
             "locations": [
-                "footer"
+                "secondary"
             ],
             "itemDataEntries": [
                 {

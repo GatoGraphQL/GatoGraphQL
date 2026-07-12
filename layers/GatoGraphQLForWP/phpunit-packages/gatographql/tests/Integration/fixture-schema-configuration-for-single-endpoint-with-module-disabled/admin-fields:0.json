@@ -2,24 +2,24 @@
     "data": {
         "users": [
             {
-                "name": "Editor Smith",
-                "email": "editor@test.com",
+                "name": "admin",
+                "email": "admin@example.com",
+                "roleNames": [
+                    "administrator"
+                ]
+            },
+            {
+                "name": "Blogger Davenport",
+                "email": "blogger@test.com",
                 "roleNames": [
                     "editor"
                 ]
             },
             {
-                "name": "Author Marquez",
-                "email": "author@test.com",
+                "name": "Subscriber Bennett",
+                "email": "subscriber@test.com",
                 "roleNames": [
-                    "author"
-                ]
-            },
-            {
-                "name": "Contributor Johnson",
-                "email": "contributor@test.com",
-                "roleNames": [
-                    "contributor"
+                    "subscriber"
                 ]
             }
         ]

@@ -10394,7 +10394,23 @@
             {
                 "excerpt": "Pointing to homepage full. Pointing to homepage relative. Pointing to hello world full. Pointing to hello world relative. Pointing to media item. Pointing to category or same category with &#8220;-en&#8221;. Pointing to tag or same tag with &#8220;-en&#8221;. Pointing to non-existing internal link full. Pointing to non-existing internal link relative. Pointing to outside link. Pointing&hellip; <a class=\"more-link\" href=\"https:\/\/gatographql.lndo.site\/all-blocks-with-entity-references\/\">Continue reading <span class=\"screen-reader-text\">All blocks with entity references<\/span><\/a>",
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)",
-                "author": null
+                "author": {
+                    "name": "admin",
+                    "posts": [
+                        {
+                            "title": "Post with internal links, also in meta (entries starting with internal_link_)",
+                            "tags": []
+                        },
+                        {
+                            "title": "Post with corrupted non-breaking space",
+                            "tags": []
+                        },
+                        {
+                            "title": "Post with old format of the Gutenberg `core\/list` block",
+                            "tags": []
+                        }
+                    ]
+                }
             }
         ]
     }

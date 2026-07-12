@@ -15796,7 +15796,9 @@
                         "possibleValues": [
                             "footer",
                             "primary",
-                            "secondary"
+                            "quaternary",
+                            "secondary",
+                            "tertiary"
                         ]
                     },
                     "fields": null,

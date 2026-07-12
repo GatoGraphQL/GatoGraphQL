@@ -869,6 +869,423 @@
                         },
                         "contentSource": "<!-- wp:breadcrumbs {\"separator\":\"::\",\"prefersTaxonomy\":false,\"showHomeItem\":true,\"showCurrentItem\":true,\"showOnHomePage\":false} \/-->",
                         "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/search",
+                        "attributes": {
+                            "label": "Search the site",
+                            "placeholder": "Type your query here",
+                            "buttonText": "Go!",
+                            "showLabel": true,
+                            "buttonPosition": "button-outside",
+                            "buttonUseIcon": false,
+                            "query": [],
+                            "isSearchFieldHidden": false
+                        },
+                        "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"isSearchFieldHidden\":false} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/categories",
+                        "attributes": {
+                            "label": "Browse categories",
+                            "taxonomy": "category",
+                            "displayAsDropdown": false,
+                            "showHierarchy": false,
+                            "showPostCounts": false,
+                            "showOnlyTopLevel": false,
+                            "showEmpty": false,
+                            "showLabel": true
+                        },
+                        "contentSource": "<!-- wp:categories {\"label\":\"Browse categories\",\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/read-more",
+                        "attributes": {
+                            "content": "Read the full story",
+                            "linkTarget": "_self"
+                        },
+                        "contentSource": "<!-- wp:read-more {\"content\":\"Read the full story\",\"linkTarget\":\"_self\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/post-author",
+                        "attributes": {
+                            "byline": "Written by",
+                            "avatarSize": 48,
+                            "showAvatar": true,
+                            "isLink": false,
+                            "linkTarget": "_self"
+                        },
+                        "contentSource": "<!-- wp:post-author {\"byline\":\"Written by\",\"avatarSize\":48,\"showAvatar\":true,\"isLink\":false,\"linkTarget\":\"_self\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/post-excerpt",
+                        "attributes": {
+                            "moreText": "Continue reading",
+                            "showMoreOnNewLine": true,
+                            "excerptLength": 55
+                        },
+                        "contentSource": "<!-- wp:post-excerpt {\"moreText\":\"Continue reading\",\"showMoreOnNewLine\":true,\"excerptLength\":55} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/post-terms",
+                        "attributes": {
+                            "term": "category",
+                            "prefix": "Filed under: ",
+                            "suffix": " - thanks for reading!",
+                            "separator": ", "
+                        },
+                        "contentSource": "<!-- wp:post-terms {\"term\":\"category\",\"prefix\":\"Filed under: \",\"suffix\":\" - thanks for reading!\",\"separator\":\", \"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "type": "previous",
+                            "label": "Previous article",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        },
+                        "contentSource": "<!-- wp:post-navigation-link {\"type\":\"previous\",\"label\":\"Previous article\",\"showTitle\":false,\"linkLabel\":false,\"arrow\":\"none\",\"taxonomy\":\"\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "label": "Next article",
+                            "type": "next",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        },
+                        "contentSource": "<!-- wp:post-navigation-link {\"label\":\"Next article\",\"type\":\"next\",\"showTitle\":false,\"linkLabel\":false,\"arrow\":\"none\",\"taxonomy\":\"\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/details",
+                        "attributes": {
+                            "showContent": false,
+                            "summary": "Click to expand this disclosure summary"
+                        },
+                        "contentSource": "<!-- wp:details {\"showContent\":false,\"summary\":\"Click to expand this disclosure summary\"} -->\n<details class=\"wp-block-details\"><summary>Click to expand this disclosure summary<\/summary><!-- wp:paragraph {\"content\":\"Hidden content inside the details block.\",\"dropCap\":false} -->\n<p>Hidden content inside the details block.<\/p>\n<!-- \/wp:paragraph --><\/details>\n<!-- \/wp:details -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Hidden content inside the details block.",
+                                    "dropCap": false
+                                },
+                                "contentSource": "<!-- wp:paragraph {\"content\":\"Hidden content inside the details block.\",\"dropCap\":false} -->\n<p>Hidden content inside the details block.<\/p>\n<!-- \/wp:paragraph -->",
+                                "innerBlocks": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/accordion",
+                        "attributes": {
+                            "iconPosition": "right",
+                            "showIcon": true,
+                            "autoclose": false,
+                            "headingLevel": 3
+                        },
+                        "contentSource": "<!-- wp:accordion {\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/accordion-item",
+                                "attributes": {
+                                    "openByDefault": false
+                                },
+                                "contentSource": "<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/accordion-heading",
+                                        "attributes": {
+                                            "openByDefault": false,
+                                            "title": "This is the accordion title",
+                                            "iconPosition": "right",
+                                            "showIcon": true
+                                        },
+                                        "contentSource": "<!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->",
+                                        "innerBlocks": null
+                                    },
+                                    {
+                                        "name": "core\/accordion-panel",
+                                        "attributes": {
+                                            "templateLock": false
+                                        },
+                                        "contentSource": "<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel -->",
+                                        "innerBlocks": [
+                                            {
+                                                "name": "core\/paragraph",
+                                                "attributes": {
+                                                    "content": "We are inside the accordion here.",
+                                                    "dropCap": false
+                                                },
+                                                "contentSource": "<!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph -->",
+                                                "innerBlocks": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "core\/accordion-item",
+                                "attributes": {
+                                    "openByDefault": false
+                                },
+                                "contentSource": "<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/accordion-heading",
+                                        "attributes": {
+                                            "openByDefault": false,
+                                            "title": "This is another accordion title",
+                                            "iconPosition": "right",
+                                            "showIcon": true
+                                        },
+                                        "contentSource": "<!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->",
+                                        "innerBlocks": null
+                                    },
+                                    {
+                                        "name": "core\/accordion-panel",
+                                        "attributes": {
+                                            "templateLock": false
+                                        },
+                                        "contentSource": "<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel -->",
+                                        "innerBlocks": [
+                                            {
+                                                "name": "core\/paragraph",
+                                                "attributes": {
+                                                    "content": "We are inside the second accordion panel here.",
+                                                    "dropCap": false
+                                                },
+                                                "contentSource": "<!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph -->",
+                                                "innerBlocks": null
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/navigation",
+                        "attributes": {
+                            "showSubmenuIcon": true,
+                            "submenuVisibility": "hover",
+                            "overlayMenu": "mobile",
+                            "icon": "handle",
+                            "hasIcon": true,
+                            "maxNestingLevel": 5
+                        },
+                        "contentSource": "<!-- wp:navigation {\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/home-link",
+                                "attributes": {
+                                    "label": "Home page"
+                                },
+                                "contentSource": "<!-- wp:home-link {\"label\":\"Home page\"} \/-->",
+                                "innerBlocks": null
+                            },
+                            {
+                                "name": "core\/navigation-link",
+                                "attributes": {
+                                    "label": "About us",
+                                    "description": "Learn more about our company",
+                                    "url": "\/about",
+                                    "title": "Go to the About page",
+                                    "kind": "custom",
+                                    "opensInNewTab": false
+                                },
+                                "contentSource": "<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->",
+                                "innerBlocks": null
+                            },
+                            {
+                                "name": "core\/navigation-submenu",
+                                "attributes": {
+                                    "label": "Services",
+                                    "description": "Everything we offer",
+                                    "url": "\/services",
+                                    "title": "Browse our services",
+                                    "kind": "custom",
+                                    "opensInNewTab": false,
+                                    "isParentSubmenu": true
+                                },
+                                "contentSource": "<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/navigation-link",
+                                        "attributes": {
+                                            "label": "Consulting",
+                                            "url": "\/consulting",
+                                            "kind": "custom",
+                                            "opensInNewTab": false
+                                        },
+                                        "contentSource": "<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->",
+                                        "innerBlocks": null
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "core\/navigation-overlay-close",
+                                "attributes": {
+                                    "text": "Close menu",
+                                    "displayMode": "icon"
+                                },
+                                "contentSource": "<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->",
+                                "innerBlocks": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/social-links",
+                        "attributes": {
+                            "openInNewTab": false,
+                            "showLabels": false
+                        },
+                        "contentSource": "<!-- wp:social-links {\"openInNewTab\":false,\"showLabels\":false} -->\n<ul class=\"wp-block-social-links\"><!-- wp:social-link {\"url\":\"https:\/\/twitter.com\/gatographql\",\"service\":\"x\",\"label\":\"Follow us on X\"} \/--><\/ul>\n<!-- \/wp:social-links -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/social-link",
+                                "attributes": {
+                                    "url": "https:\/\/twitter.com\/gatographql",
+                                    "service": "x",
+                                    "label": "Follow us on X"
+                                },
+                                "contentSource": "<!-- wp:social-link {\"url\":\"https:\/\/twitter.com\/gatographql\",\"service\":\"x\",\"label\":\"Follow us on X\"} \/-->",
+                                "innerBlocks": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/widget-group",
+                        "attributes": {
+                            "title": "Footer widgets",
+                            "className": "wp-block-widget-group"
+                        },
+                        "contentSource": "<!-- wp:widget-group {\"title\":\"Footer widgets\",\"className\":\"wp-block-widget-group\"} -->\n<h2 class=\"widget-title\">Footer widgets<\/h2><div class=\"wp-widget-group__inner-blocks\"><!-- wp:paragraph {\"content\":\"Widget content.\",\"dropCap\":false} -->\n<p>Widget content.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:widget-group -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Widget content.",
+                                    "dropCap": false
+                                },
+                                "contentSource": "<!-- wp:paragraph {\"content\":\"Widget content.\",\"dropCap\":false} -->\n<p>Widget content.<\/p>\n<!-- \/wp:paragraph -->",
+                                "innerBlocks": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/query",
+                        "attributes": {
+                            "queryId": 42,
+                            "query": {
+                                "perPage": 3,
+                                "postType": "post"
+                            },
+                            "tagName": "div",
+                            "enhancedPagination": false
+                        },
+                        "contentSource": "<!-- wp:query {\"queryId\":42,\"query\":{\"perPage\":3,\"postType\":\"post\"},\"tagName\":\"div\",\"enhancedPagination\":false} -->\n<div class=\"wp-block-query\"><!-- wp:query-pagination {\"paginationArrow\":\"none\",\"showLabel\":true} -->\n<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->\n\n<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->\n<!-- \/wp:query-pagination --><\/div>\n<!-- \/wp:query -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/query-pagination",
+                                "attributes": {
+                                    "paginationArrow": "none",
+                                    "showLabel": true
+                                },
+                                "contentSource": "<!-- wp:query-pagination {\"paginationArrow\":\"none\",\"showLabel\":true} -->\n<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->\n\n<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->\n<!-- \/wp:query-pagination -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/query-pagination-previous",
+                                        "attributes": {
+                                            "label": "Newer posts"
+                                        },
+                                        "contentSource": "<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->",
+                                        "innerBlocks": null
+                                    },
+                                    {
+                                        "name": "core\/query-pagination-next",
+                                        "attributes": {
+                                            "label": "Older posts"
+                                        },
+                                        "contentSource": "<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->",
+                                        "innerBlocks": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/comments",
+                        "attributes": {
+                            "tagName": "div",
+                            "legacy": false
+                        },
+                        "contentSource": "<!-- wp:comments {\"tagName\":\"div\",\"legacy\":false} -->\n<div class=\"wp-block-comments\"><!-- wp:comments-pagination {\"paginationArrow\":\"none\"} -->\n<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->\n\n<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->\n<!-- \/wp:comments-pagination --><\/div>\n<!-- \/wp:comments -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/comments-pagination",
+                                "attributes": {
+                                    "paginationArrow": "none"
+                                },
+                                "contentSource": "<!-- wp:comments-pagination {\"paginationArrow\":\"none\"} -->\n<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->\n\n<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->\n<!-- \/wp:comments-pagination -->",
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/comments-pagination-previous",
+                                        "attributes": {
+                                            "label": "Older comments"
+                                        },
+                                        "contentSource": "<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->",
+                                        "innerBlocks": null
+                                    },
+                                    {
+                                        "name": "core\/comments-pagination-next",
+                                        "attributes": {
+                                            "label": "Newer comments"
+                                        },
+                                        "contentSource": "<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->",
+                                        "innerBlocks": null
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/terms-query",
+                        "attributes": {
+                            "termQuery": {
+                                "perPage": 10,
+                                "taxonomy": "category",
+                                "include": [
+                                    1
+                                ],
+                                "order": "asc",
+                                "orderBy": "name"
+                            },
+                            "tagName": "div"
+                        },
+                        "contentSource": "<!-- wp:terms-query {\"termQuery\":{\"perPage\":10,\"taxonomy\":\"category\",\"include\":[1],\"order\":\"asc\",\"orderBy\":\"name\"},\"tagName\":\"div\"} -->\n<div class=\"wp-block-terms-query\"><!-- wp:paragraph {\"content\":\"Terms query.\",\"dropCap\":false} -->\n<p>Terms query.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:terms-query -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Terms query.",
+                                    "dropCap": false
+                                },
+                                "contentSource": "<!-- wp:paragraph {\"content\":\"Terms query.\",\"dropCap\":false} -->\n<p>Terms query.<\/p>\n<!-- \/wp:paragraph -->",
+                                "innerBlocks": null
+                            }
+                        ]
                     }
                 ],
                 "blockDataItems": [
@@ -1387,6 +1804,360 @@
                             "showCurrentItem": true,
                             "showOnHomePage": false
                         }
+                    },
+                    {
+                        "name": "core\/search",
+                        "attributes": {
+                            "label": "Search the site",
+                            "placeholder": "Type your query here",
+                            "buttonText": "Go!",
+                            "showLabel": true,
+                            "buttonPosition": "button-outside",
+                            "buttonUseIcon": false,
+                            "query": [],
+                            "isSearchFieldHidden": false
+                        }
+                    },
+                    {
+                        "name": "core\/categories",
+                        "attributes": {
+                            "label": "Browse categories",
+                            "taxonomy": "category",
+                            "displayAsDropdown": false,
+                            "showHierarchy": false,
+                            "showPostCounts": false,
+                            "showOnlyTopLevel": false,
+                            "showEmpty": false,
+                            "showLabel": true
+                        }
+                    },
+                    {
+                        "name": "core\/read-more",
+                        "attributes": {
+                            "content": "Read the full story",
+                            "linkTarget": "_self"
+                        }
+                    },
+                    {
+                        "name": "core\/post-author",
+                        "attributes": {
+                            "byline": "Written by",
+                            "avatarSize": 48,
+                            "showAvatar": true,
+                            "isLink": false,
+                            "linkTarget": "_self"
+                        }
+                    },
+                    {
+                        "name": "core\/post-excerpt",
+                        "attributes": {
+                            "moreText": "Continue reading",
+                            "showMoreOnNewLine": true,
+                            "excerptLength": 55
+                        }
+                    },
+                    {
+                        "name": "core\/post-terms",
+                        "attributes": {
+                            "term": "category",
+                            "prefix": "Filed under: ",
+                            "suffix": " - thanks for reading!",
+                            "separator": ", "
+                        }
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "type": "previous",
+                            "label": "Previous article",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        }
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "label": "Next article",
+                            "type": "next",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        }
+                    },
+                    {
+                        "name": "core\/details",
+                        "attributes": {
+                            "showContent": false,
+                            "summary": "Click to expand this disclosure summary"
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Hidden content inside the details block.",
+                                    "dropCap": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/accordion",
+                        "attributes": {
+                            "iconPosition": "right",
+                            "showIcon": true,
+                            "autoclose": false,
+                            "headingLevel": 3
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/accordion-item",
+                                "attributes": {
+                                    "openByDefault": false
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/accordion-heading",
+                                        "attributes": {
+                                            "openByDefault": false,
+                                            "title": "This is the accordion title",
+                                            "iconPosition": "right",
+                                            "showIcon": true
+                                        }
+                                    },
+                                    {
+                                        "name": "core\/accordion-panel",
+                                        "attributes": {
+                                            "templateLock": false
+                                        },
+                                        "innerBlocks": [
+                                            {
+                                                "name": "core\/paragraph",
+                                                "attributes": {
+                                                    "content": "We are inside the accordion here.",
+                                                    "dropCap": false
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "core\/accordion-item",
+                                "attributes": {
+                                    "openByDefault": false
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/accordion-heading",
+                                        "attributes": {
+                                            "openByDefault": false,
+                                            "title": "This is another accordion title",
+                                            "iconPosition": "right",
+                                            "showIcon": true
+                                        }
+                                    },
+                                    {
+                                        "name": "core\/accordion-panel",
+                                        "attributes": {
+                                            "templateLock": false
+                                        },
+                                        "innerBlocks": [
+                                            {
+                                                "name": "core\/paragraph",
+                                                "attributes": {
+                                                    "content": "We are inside the second accordion panel here.",
+                                                    "dropCap": false
+                                                }
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/navigation",
+                        "attributes": {
+                            "showSubmenuIcon": true,
+                            "submenuVisibility": "hover",
+                            "overlayMenu": "mobile",
+                            "icon": "handle",
+                            "hasIcon": true,
+                            "maxNestingLevel": 5
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/home-link",
+                                "attributes": {
+                                    "label": "Home page"
+                                }
+                            },
+                            {
+                                "name": "core\/navigation-link",
+                                "attributes": {
+                                    "label": "About us",
+                                    "description": "Learn more about our company",
+                                    "url": "\/about",
+                                    "title": "Go to the About page",
+                                    "kind": "custom",
+                                    "opensInNewTab": false
+                                }
+                            },
+                            {
+                                "name": "core\/navigation-submenu",
+                                "attributes": {
+                                    "label": "Services",
+                                    "description": "Everything we offer",
+                                    "url": "\/services",
+                                    "title": "Browse our services",
+                                    "kind": "custom",
+                                    "opensInNewTab": false,
+                                    "isParentSubmenu": true
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/navigation-link",
+                                        "attributes": {
+                                            "label": "Consulting",
+                                            "url": "\/consulting",
+                                            "kind": "custom",
+                                            "opensInNewTab": false
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                "name": "core\/navigation-overlay-close",
+                                "attributes": {
+                                    "text": "Close menu",
+                                    "displayMode": "icon"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/social-links",
+                        "attributes": {
+                            "openInNewTab": false,
+                            "showLabels": false
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/social-link",
+                                "attributes": {
+                                    "url": "https:\/\/twitter.com\/gatographql",
+                                    "service": "x",
+                                    "label": "Follow us on X"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/widget-group",
+                        "attributes": {
+                            "title": "Footer widgets",
+                            "className": "wp-block-widget-group"
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Widget content.",
+                                    "dropCap": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/query",
+                        "attributes": {
+                            "queryId": 42,
+                            "query": {
+                                "perPage": 3,
+                                "postType": "post"
+                            },
+                            "tagName": "div",
+                            "enhancedPagination": false
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/query-pagination",
+                                "attributes": {
+                                    "paginationArrow": "none",
+                                    "showLabel": true
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/query-pagination-previous",
+                                        "attributes": {
+                                            "label": "Newer posts"
+                                        }
+                                    },
+                                    {
+                                        "name": "core\/query-pagination-next",
+                                        "attributes": {
+                                            "label": "Older posts"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/comments",
+                        "attributes": {
+                            "tagName": "div",
+                            "legacy": false
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/comments-pagination",
+                                "attributes": {
+                                    "paginationArrow": "none"
+                                },
+                                "innerBlocks": [
+                                    {
+                                        "name": "core\/comments-pagination-previous",
+                                        "attributes": {
+                                            "label": "Older comments"
+                                        }
+                                    },
+                                    {
+                                        "name": "core\/comments-pagination-next",
+                                        "attributes": {
+                                            "label": "Newer comments"
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/terms-query",
+                        "attributes": {
+                            "termQuery": {
+                                "perPage": 10,
+                                "taxonomy": "category",
+                                "include": [
+                                    1
+                                ],
+                                "order": "asc",
+                                "orderBy": "name"
+                            },
+                            "tagName": "div"
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "Terms query.",
+                                    "dropCap": false
+                                }
+                            }
+                        ]
                     }
                 ],
                 "blockFlattenedDataItems": [
@@ -2022,6 +2793,446 @@
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/search",
+                        "attributes": {
+                            "label": "Search the site",
+                            "placeholder": "Type your query here",
+                            "buttonText": "Go!",
+                            "showLabel": true,
+                            "buttonPosition": "button-outside",
+                            "buttonUseIcon": false,
+                            "query": [],
+                            "isSearchFieldHidden": false
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/categories",
+                        "attributes": {
+                            "label": "Browse categories",
+                            "taxonomy": "category",
+                            "displayAsDropdown": false,
+                            "showHierarchy": false,
+                            "showPostCounts": false,
+                            "showOnlyTopLevel": false,
+                            "showEmpty": false,
+                            "showLabel": true
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/read-more",
+                        "attributes": {
+                            "content": "Read the full story",
+                            "linkTarget": "_self"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/post-author",
+                        "attributes": {
+                            "byline": "Written by",
+                            "avatarSize": 48,
+                            "showAvatar": true,
+                            "isLink": false,
+                            "linkTarget": "_self"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/post-excerpt",
+                        "attributes": {
+                            "moreText": "Continue reading",
+                            "showMoreOnNewLine": true,
+                            "excerptLength": 55
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/post-terms",
+                        "attributes": {
+                            "term": "category",
+                            "prefix": "Filed under: ",
+                            "suffix": " - thanks for reading!",
+                            "separator": ", "
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "type": "previous",
+                            "label": "Previous article",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/post-navigation-link",
+                        "attributes": {
+                            "label": "Next article",
+                            "type": "next",
+                            "showTitle": false,
+                            "linkLabel": false,
+                            "arrow": "none",
+                            "taxonomy": ""
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/details",
+                        "attributes": {
+                            "showContent": false,
+                            "summary": "Click to expand this disclosure summary"
+                        },
+                        "innerBlockPositions": [
+                            61
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "Hidden content inside the details block.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 60,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/accordion",
+                        "attributes": {
+                            "iconPosition": "right",
+                            "showIcon": true,
+                            "autoclose": false,
+                            "headingLevel": 3
+                        },
+                        "innerBlockPositions": [
+                            63,
+                            67
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/accordion-item",
+                        "attributes": {
+                            "openByDefault": false
+                        },
+                        "parentBlockPosition": 62,
+                        "innerBlockPositions": [
+                            64,
+                            65
+                        ]
+                    },
+                    {
+                        "name": "core\/accordion-heading",
+                        "attributes": {
+                            "openByDefault": false,
+                            "title": "This is the accordion title",
+                            "iconPosition": "right",
+                            "showIcon": true
+                        },
+                        "parentBlockPosition": 63,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/accordion-panel",
+                        "attributes": {
+                            "templateLock": false
+                        },
+                        "parentBlockPosition": 63,
+                        "innerBlockPositions": [
+                            66
+                        ]
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "We are inside the accordion here.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 65,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/accordion-item",
+                        "attributes": {
+                            "openByDefault": false
+                        },
+                        "parentBlockPosition": 62,
+                        "innerBlockPositions": [
+                            68,
+                            69
+                        ]
+                    },
+                    {
+                        "name": "core\/accordion-heading",
+                        "attributes": {
+                            "openByDefault": false,
+                            "title": "This is another accordion title",
+                            "iconPosition": "right",
+                            "showIcon": true
+                        },
+                        "parentBlockPosition": 67,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/accordion-panel",
+                        "attributes": {
+                            "templateLock": false
+                        },
+                        "parentBlockPosition": 67,
+                        "innerBlockPositions": [
+                            70
+                        ]
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "We are inside the second accordion panel here.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 69,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/navigation",
+                        "attributes": {
+                            "showSubmenuIcon": true,
+                            "submenuVisibility": "hover",
+                            "overlayMenu": "mobile",
+                            "icon": "handle",
+                            "hasIcon": true,
+                            "maxNestingLevel": 5
+                        },
+                        "innerBlockPositions": [
+                            72,
+                            73,
+                            74,
+                            76
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/home-link",
+                        "attributes": {
+                            "label": "Home page"
+                        },
+                        "parentBlockPosition": 71,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/navigation-link",
+                        "attributes": {
+                            "label": "About us",
+                            "description": "Learn more about our company",
+                            "url": "\/about",
+                            "title": "Go to the About page",
+                            "kind": "custom",
+                            "opensInNewTab": false
+                        },
+                        "parentBlockPosition": 71,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/navigation-submenu",
+                        "attributes": {
+                            "label": "Services",
+                            "description": "Everything we offer",
+                            "url": "\/services",
+                            "title": "Browse our services",
+                            "kind": "custom",
+                            "opensInNewTab": false,
+                            "isParentSubmenu": true
+                        },
+                        "parentBlockPosition": 71,
+                        "innerBlockPositions": [
+                            75
+                        ]
+                    },
+                    {
+                        "name": "core\/navigation-link",
+                        "attributes": {
+                            "label": "Consulting",
+                            "url": "\/consulting",
+                            "kind": "custom",
+                            "opensInNewTab": false
+                        },
+                        "parentBlockPosition": 74,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/navigation-overlay-close",
+                        "attributes": {
+                            "text": "Close menu",
+                            "displayMode": "icon"
+                        },
+                        "parentBlockPosition": 71,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/social-links",
+                        "attributes": {
+                            "openInNewTab": false,
+                            "showLabels": false
+                        },
+                        "innerBlockPositions": [
+                            78
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/social-link",
+                        "attributes": {
+                            "url": "https:\/\/twitter.com\/gatographql",
+                            "service": "x",
+                            "label": "Follow us on X"
+                        },
+                        "parentBlockPosition": 77,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/widget-group",
+                        "attributes": {
+                            "title": "Footer widgets",
+                            "className": "wp-block-widget-group"
+                        },
+                        "innerBlockPositions": [
+                            80
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "Widget content.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 79,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/query",
+                        "attributes": {
+                            "queryId": 42,
+                            "query": {
+                                "perPage": 3,
+                                "postType": "post"
+                            },
+                            "tagName": "div",
+                            "enhancedPagination": false
+                        },
+                        "innerBlockPositions": [
+                            82
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/query-pagination",
+                        "attributes": {
+                            "paginationArrow": "none",
+                            "showLabel": true
+                        },
+                        "parentBlockPosition": 81,
+                        "innerBlockPositions": [
+                            83,
+                            84
+                        ]
+                    },
+                    {
+                        "name": "core\/query-pagination-previous",
+                        "attributes": {
+                            "label": "Newer posts"
+                        },
+                        "parentBlockPosition": 82,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/query-pagination-next",
+                        "attributes": {
+                            "label": "Older posts"
+                        },
+                        "parentBlockPosition": 82,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/comments",
+                        "attributes": {
+                            "tagName": "div",
+                            "legacy": false
+                        },
+                        "innerBlockPositions": [
+                            86
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/comments-pagination",
+                        "attributes": {
+                            "paginationArrow": "none"
+                        },
+                        "parentBlockPosition": 85,
+                        "innerBlockPositions": [
+                            87,
+                            88
+                        ]
+                    },
+                    {
+                        "name": "core\/comments-pagination-previous",
+                        "attributes": {
+                            "label": "Older comments"
+                        },
+                        "parentBlockPosition": 86,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/comments-pagination-next",
+                        "attributes": {
+                            "label": "Newer comments"
+                        },
+                        "parentBlockPosition": 86,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/terms-query",
+                        "attributes": {
+                            "termQuery": {
+                                "perPage": 10,
+                                "taxonomy": "category",
+                                "include": [
+                                    1
+                                ],
+                                "order": "asc",
+                                "orderBy": "name"
+                            },
+                            "tagName": "div"
+                        },
+                        "innerBlockPositions": [
+                            90
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "Terms query.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 89,
+                        "innerBlockPositions": null
                     }
                 ]
             },
@@ -9016,6 +10227,423 @@
                     },
                     "contentSource": "<!-- wp:breadcrumbs {\"separator\":\"::\",\"prefersTaxonomy\":false,\"showHomeItem\":true,\"showCurrentItem\":true,\"showOnHomePage\":false} \/-->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/search",
+                    "attributes": {
+                        "label": "Search the site",
+                        "placeholder": "Type your query here",
+                        "buttonText": "Go!",
+                        "showLabel": true,
+                        "buttonPosition": "button-outside",
+                        "buttonUseIcon": false,
+                        "query": [],
+                        "isSearchFieldHidden": false
+                    },
+                    "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"isSearchFieldHidden\":false} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/categories",
+                    "attributes": {
+                        "label": "Browse categories",
+                        "taxonomy": "category",
+                        "displayAsDropdown": false,
+                        "showHierarchy": false,
+                        "showPostCounts": false,
+                        "showOnlyTopLevel": false,
+                        "showEmpty": false,
+                        "showLabel": true
+                    },
+                    "contentSource": "<!-- wp:categories {\"label\":\"Browse categories\",\"taxonomy\":\"category\",\"displayAsDropdown\":false,\"showHierarchy\":false,\"showPostCounts\":false,\"showOnlyTopLevel\":false,\"showEmpty\":false,\"showLabel\":true} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/read-more",
+                    "attributes": {
+                        "content": "Read the full story",
+                        "linkTarget": "_self"
+                    },
+                    "contentSource": "<!-- wp:read-more {\"content\":\"Read the full story\",\"linkTarget\":\"_self\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/post-author",
+                    "attributes": {
+                        "byline": "Written by",
+                        "avatarSize": 48,
+                        "showAvatar": true,
+                        "isLink": false,
+                        "linkTarget": "_self"
+                    },
+                    "contentSource": "<!-- wp:post-author {\"byline\":\"Written by\",\"avatarSize\":48,\"showAvatar\":true,\"isLink\":false,\"linkTarget\":\"_self\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/post-excerpt",
+                    "attributes": {
+                        "moreText": "Continue reading",
+                        "showMoreOnNewLine": true,
+                        "excerptLength": 55
+                    },
+                    "contentSource": "<!-- wp:post-excerpt {\"moreText\":\"Continue reading\",\"showMoreOnNewLine\":true,\"excerptLength\":55} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/post-terms",
+                    "attributes": {
+                        "term": "category",
+                        "prefix": "Filed under: ",
+                        "suffix": " - thanks for reading!",
+                        "separator": ", "
+                    },
+                    "contentSource": "<!-- wp:post-terms {\"term\":\"category\",\"prefix\":\"Filed under: \",\"suffix\":\" - thanks for reading!\",\"separator\":\", \"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "type": "previous",
+                        "label": "Previous article",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    },
+                    "contentSource": "<!-- wp:post-navigation-link {\"type\":\"previous\",\"label\":\"Previous article\",\"showTitle\":false,\"linkLabel\":false,\"arrow\":\"none\",\"taxonomy\":\"\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "label": "Next article",
+                        "type": "next",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    },
+                    "contentSource": "<!-- wp:post-navigation-link {\"label\":\"Next article\",\"type\":\"next\",\"showTitle\":false,\"linkLabel\":false,\"arrow\":\"none\",\"taxonomy\":\"\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/details",
+                    "attributes": {
+                        "showContent": false,
+                        "summary": "Click to expand this disclosure summary"
+                    },
+                    "contentSource": "<!-- wp:details {\"showContent\":false,\"summary\":\"Click to expand this disclosure summary\"} -->\n<details class=\"wp-block-details\"><summary>Click to expand this disclosure summary<\/summary><!-- wp:paragraph {\"content\":\"Hidden content inside the details block.\",\"dropCap\":false} -->\n<p>Hidden content inside the details block.<\/p>\n<!-- \/wp:paragraph --><\/details>\n<!-- \/wp:details -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Hidden content inside the details block.",
+                                "dropCap": false
+                            },
+                            "contentSource": "<!-- wp:paragraph {\"content\":\"Hidden content inside the details block.\",\"dropCap\":false} -->\n<p>Hidden content inside the details block.<\/p>\n<!-- \/wp:paragraph -->",
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/accordion",
+                    "attributes": {
+                        "iconPosition": "right",
+                        "showIcon": true,
+                        "autoclose": false,
+                        "headingLevel": 3
+                    },
+                    "contentSource": "<!-- wp:accordion {\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/accordion-item",
+                            "attributes": {
+                                "openByDefault": false
+                            },
+                            "contentSource": "<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/accordion-heading",
+                                    "attributes": {
+                                        "openByDefault": false,
+                                        "title": "This is the accordion title",
+                                        "iconPosition": "right",
+                                        "showIcon": true
+                                    },
+                                    "contentSource": "<!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->",
+                                    "innerBlocks": null
+                                },
+                                {
+                                    "name": "core\/accordion-panel",
+                                    "attributes": {
+                                        "templateLock": false
+                                    },
+                                    "contentSource": "<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel -->",
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core\/paragraph",
+                                            "attributes": {
+                                                "content": "We are inside the accordion here.",
+                                                "dropCap": false
+                                            },
+                                            "contentSource": "<!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph -->",
+                                            "innerBlocks": null
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "core\/accordion-item",
+                            "attributes": {
+                                "openByDefault": false
+                            },
+                            "contentSource": "<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/accordion-heading",
+                                    "attributes": {
+                                        "openByDefault": false,
+                                        "title": "This is another accordion title",
+                                        "iconPosition": "right",
+                                        "showIcon": true
+                                    },
+                                    "contentSource": "<!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->",
+                                    "innerBlocks": null
+                                },
+                                {
+                                    "name": "core\/accordion-panel",
+                                    "attributes": {
+                                        "templateLock": false
+                                    },
+                                    "contentSource": "<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel -->",
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core\/paragraph",
+                                            "attributes": {
+                                                "content": "We are inside the second accordion panel here.",
+                                                "dropCap": false
+                                            },
+                                            "contentSource": "<!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph -->",
+                                            "innerBlocks": null
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/navigation",
+                    "attributes": {
+                        "showSubmenuIcon": true,
+                        "submenuVisibility": "hover",
+                        "overlayMenu": "mobile",
+                        "icon": "handle",
+                        "hasIcon": true,
+                        "maxNestingLevel": 5
+                    },
+                    "contentSource": "<!-- wp:navigation {\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/home-link",
+                            "attributes": {
+                                "label": "Home page"
+                            },
+                            "contentSource": "<!-- wp:home-link {\"label\":\"Home page\"} \/-->",
+                            "innerBlocks": null
+                        },
+                        {
+                            "name": "core\/navigation-link",
+                            "attributes": {
+                                "label": "About us",
+                                "description": "Learn more about our company",
+                                "url": "\/about",
+                                "title": "Go to the About page",
+                                "kind": "custom",
+                                "opensInNewTab": false
+                            },
+                            "contentSource": "<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->",
+                            "innerBlocks": null
+                        },
+                        {
+                            "name": "core\/navigation-submenu",
+                            "attributes": {
+                                "label": "Services",
+                                "description": "Everything we offer",
+                                "url": "\/services",
+                                "title": "Browse our services",
+                                "kind": "custom",
+                                "opensInNewTab": false,
+                                "isParentSubmenu": true
+                            },
+                            "contentSource": "<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/navigation-link",
+                                    "attributes": {
+                                        "label": "Consulting",
+                                        "url": "\/consulting",
+                                        "kind": "custom",
+                                        "opensInNewTab": false
+                                    },
+                                    "contentSource": "<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->",
+                                    "innerBlocks": null
+                                }
+                            ]
+                        },
+                        {
+                            "name": "core\/navigation-overlay-close",
+                            "attributes": {
+                                "text": "Close menu",
+                                "displayMode": "icon"
+                            },
+                            "contentSource": "<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->",
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/social-links",
+                    "attributes": {
+                        "openInNewTab": false,
+                        "showLabels": false
+                    },
+                    "contentSource": "<!-- wp:social-links {\"openInNewTab\":false,\"showLabels\":false} -->\n<ul class=\"wp-block-social-links\"><!-- wp:social-link {\"url\":\"https:\/\/twitter.com\/gatographql\",\"service\":\"x\",\"label\":\"Follow us on X\"} \/--><\/ul>\n<!-- \/wp:social-links -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/social-link",
+                            "attributes": {
+                                "url": "https:\/\/twitter.com\/gatographql",
+                                "service": "x",
+                                "label": "Follow us on X"
+                            },
+                            "contentSource": "<!-- wp:social-link {\"url\":\"https:\/\/twitter.com\/gatographql\",\"service\":\"x\",\"label\":\"Follow us on X\"} \/-->",
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/widget-group",
+                    "attributes": {
+                        "title": "Footer widgets",
+                        "className": "wp-block-widget-group"
+                    },
+                    "contentSource": "<!-- wp:widget-group {\"title\":\"Footer widgets\",\"className\":\"wp-block-widget-group\"} -->\n<h2 class=\"widget-title\">Footer widgets<\/h2><div class=\"wp-widget-group__inner-blocks\"><!-- wp:paragraph {\"content\":\"Widget content.\",\"dropCap\":false} -->\n<p>Widget content.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:widget-group -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Widget content.",
+                                "dropCap": false
+                            },
+                            "contentSource": "<!-- wp:paragraph {\"content\":\"Widget content.\",\"dropCap\":false} -->\n<p>Widget content.<\/p>\n<!-- \/wp:paragraph -->",
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/query",
+                    "attributes": {
+                        "queryId": 42,
+                        "query": {
+                            "perPage": 3,
+                            "postType": "post"
+                        },
+                        "tagName": "div",
+                        "enhancedPagination": false
+                    },
+                    "contentSource": "<!-- wp:query {\"queryId\":42,\"query\":{\"perPage\":3,\"postType\":\"post\"},\"tagName\":\"div\",\"enhancedPagination\":false} -->\n<div class=\"wp-block-query\"><!-- wp:query-pagination {\"paginationArrow\":\"none\",\"showLabel\":true} -->\n<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->\n\n<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->\n<!-- \/wp:query-pagination --><\/div>\n<!-- \/wp:query -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/query-pagination",
+                            "attributes": {
+                                "paginationArrow": "none",
+                                "showLabel": true
+                            },
+                            "contentSource": "<!-- wp:query-pagination {\"paginationArrow\":\"none\",\"showLabel\":true} -->\n<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->\n\n<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->\n<!-- \/wp:query-pagination -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/query-pagination-previous",
+                                    "attributes": {
+                                        "label": "Newer posts"
+                                    },
+                                    "contentSource": "<!-- wp:query-pagination-previous {\"label\":\"Newer posts\"} \/-->",
+                                    "innerBlocks": null
+                                },
+                                {
+                                    "name": "core\/query-pagination-next",
+                                    "attributes": {
+                                        "label": "Older posts"
+                                    },
+                                    "contentSource": "<!-- wp:query-pagination-next {\"label\":\"Older posts\"} \/-->",
+                                    "innerBlocks": null
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/comments",
+                    "attributes": {
+                        "tagName": "div",
+                        "legacy": false
+                    },
+                    "contentSource": "<!-- wp:comments {\"tagName\":\"div\",\"legacy\":false} -->\n<div class=\"wp-block-comments\"><!-- wp:comments-pagination {\"paginationArrow\":\"none\"} -->\n<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->\n\n<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->\n<!-- \/wp:comments-pagination --><\/div>\n<!-- \/wp:comments -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/comments-pagination",
+                            "attributes": {
+                                "paginationArrow": "none"
+                            },
+                            "contentSource": "<!-- wp:comments-pagination {\"paginationArrow\":\"none\"} -->\n<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->\n\n<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->\n<!-- \/wp:comments-pagination -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/comments-pagination-previous",
+                                    "attributes": {
+                                        "label": "Older comments"
+                                    },
+                                    "contentSource": "<!-- wp:comments-pagination-previous {\"label\":\"Older comments\"} \/-->",
+                                    "innerBlocks": null
+                                },
+                                {
+                                    "name": "core\/comments-pagination-next",
+                                    "attributes": {
+                                        "label": "Newer comments"
+                                    },
+                                    "contentSource": "<!-- wp:comments-pagination-next {\"label\":\"Newer comments\"} \/-->",
+                                    "innerBlocks": null
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/terms-query",
+                    "attributes": {
+                        "termQuery": {
+                            "perPage": 10,
+                            "taxonomy": "category",
+                            "include": [
+                                1
+                            ],
+                            "order": "asc",
+                            "orderBy": "name"
+                        },
+                        "tagName": "div"
+                    },
+                    "contentSource": "<!-- wp:terms-query {\"termQuery\":{\"perPage\":10,\"taxonomy\":\"category\",\"include\":[1],\"order\":\"asc\",\"orderBy\":\"name\"},\"tagName\":\"div\"} -->\n<div class=\"wp-block-terms-query\"><!-- wp:paragraph {\"content\":\"Terms query.\",\"dropCap\":false} -->\n<p>Terms query.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:terms-query -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Terms query.",
+                                "dropCap": false
+                            },
+                            "contentSource": "<!-- wp:paragraph {\"content\":\"Terms query.\",\"dropCap\":false} -->\n<p>Terms query.<\/p>\n<!-- \/wp:paragraph -->",
+                            "innerBlocks": null
+                        }
+                    ]
                 }
             ],
             "blockDataItems": [
@@ -9534,6 +11162,360 @@
                         "showCurrentItem": true,
                         "showOnHomePage": false
                     }
+                },
+                {
+                    "name": "core\/search",
+                    "attributes": {
+                        "label": "Search the site",
+                        "placeholder": "Type your query here",
+                        "buttonText": "Go!",
+                        "showLabel": true,
+                        "buttonPosition": "button-outside",
+                        "buttonUseIcon": false,
+                        "query": [],
+                        "isSearchFieldHidden": false
+                    }
+                },
+                {
+                    "name": "core\/categories",
+                    "attributes": {
+                        "label": "Browse categories",
+                        "taxonomy": "category",
+                        "displayAsDropdown": false,
+                        "showHierarchy": false,
+                        "showPostCounts": false,
+                        "showOnlyTopLevel": false,
+                        "showEmpty": false,
+                        "showLabel": true
+                    }
+                },
+                {
+                    "name": "core\/read-more",
+                    "attributes": {
+                        "content": "Read the full story",
+                        "linkTarget": "_self"
+                    }
+                },
+                {
+                    "name": "core\/post-author",
+                    "attributes": {
+                        "byline": "Written by",
+                        "avatarSize": 48,
+                        "showAvatar": true,
+                        "isLink": false,
+                        "linkTarget": "_self"
+                    }
+                },
+                {
+                    "name": "core\/post-excerpt",
+                    "attributes": {
+                        "moreText": "Continue reading",
+                        "showMoreOnNewLine": true,
+                        "excerptLength": 55
+                    }
+                },
+                {
+                    "name": "core\/post-terms",
+                    "attributes": {
+                        "term": "category",
+                        "prefix": "Filed under: ",
+                        "suffix": " - thanks for reading!",
+                        "separator": ", "
+                    }
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "type": "previous",
+                        "label": "Previous article",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    }
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "label": "Next article",
+                        "type": "next",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    }
+                },
+                {
+                    "name": "core\/details",
+                    "attributes": {
+                        "showContent": false,
+                        "summary": "Click to expand this disclosure summary"
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Hidden content inside the details block.",
+                                "dropCap": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/accordion",
+                    "attributes": {
+                        "iconPosition": "right",
+                        "showIcon": true,
+                        "autoclose": false,
+                        "headingLevel": 3
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/accordion-item",
+                            "attributes": {
+                                "openByDefault": false
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/accordion-heading",
+                                    "attributes": {
+                                        "openByDefault": false,
+                                        "title": "This is the accordion title",
+                                        "iconPosition": "right",
+                                        "showIcon": true
+                                    }
+                                },
+                                {
+                                    "name": "core\/accordion-panel",
+                                    "attributes": {
+                                        "templateLock": false
+                                    },
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core\/paragraph",
+                                            "attributes": {
+                                                "content": "We are inside the accordion here.",
+                                                "dropCap": false
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "name": "core\/accordion-item",
+                            "attributes": {
+                                "openByDefault": false
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/accordion-heading",
+                                    "attributes": {
+                                        "openByDefault": false,
+                                        "title": "This is another accordion title",
+                                        "iconPosition": "right",
+                                        "showIcon": true
+                                    }
+                                },
+                                {
+                                    "name": "core\/accordion-panel",
+                                    "attributes": {
+                                        "templateLock": false
+                                    },
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core\/paragraph",
+                                            "attributes": {
+                                                "content": "We are inside the second accordion panel here.",
+                                                "dropCap": false
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/navigation",
+                    "attributes": {
+                        "showSubmenuIcon": true,
+                        "submenuVisibility": "hover",
+                        "overlayMenu": "mobile",
+                        "icon": "handle",
+                        "hasIcon": true,
+                        "maxNestingLevel": 5
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/home-link",
+                            "attributes": {
+                                "label": "Home page"
+                            }
+                        },
+                        {
+                            "name": "core\/navigation-link",
+                            "attributes": {
+                                "label": "About us",
+                                "description": "Learn more about our company",
+                                "url": "\/about",
+                                "title": "Go to the About page",
+                                "kind": "custom",
+                                "opensInNewTab": false
+                            }
+                        },
+                        {
+                            "name": "core\/navigation-submenu",
+                            "attributes": {
+                                "label": "Services",
+                                "description": "Everything we offer",
+                                "url": "\/services",
+                                "title": "Browse our services",
+                                "kind": "custom",
+                                "opensInNewTab": false,
+                                "isParentSubmenu": true
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/navigation-link",
+                                    "attributes": {
+                                        "label": "Consulting",
+                                        "url": "\/consulting",
+                                        "kind": "custom",
+                                        "opensInNewTab": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "core\/navigation-overlay-close",
+                            "attributes": {
+                                "text": "Close menu",
+                                "displayMode": "icon"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/social-links",
+                    "attributes": {
+                        "openInNewTab": false,
+                        "showLabels": false
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/social-link",
+                            "attributes": {
+                                "url": "https:\/\/twitter.com\/gatographql",
+                                "service": "x",
+                                "label": "Follow us on X"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/widget-group",
+                    "attributes": {
+                        "title": "Footer widgets",
+                        "className": "wp-block-widget-group"
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Widget content.",
+                                "dropCap": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/query",
+                    "attributes": {
+                        "queryId": 42,
+                        "query": {
+                            "perPage": 3,
+                            "postType": "post"
+                        },
+                        "tagName": "div",
+                        "enhancedPagination": false
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/query-pagination",
+                            "attributes": {
+                                "paginationArrow": "none",
+                                "showLabel": true
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/query-pagination-previous",
+                                    "attributes": {
+                                        "label": "Newer posts"
+                                    }
+                                },
+                                {
+                                    "name": "core\/query-pagination-next",
+                                    "attributes": {
+                                        "label": "Older posts"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/comments",
+                    "attributes": {
+                        "tagName": "div",
+                        "legacy": false
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/comments-pagination",
+                            "attributes": {
+                                "paginationArrow": "none"
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core\/comments-pagination-previous",
+                                    "attributes": {
+                                        "label": "Older comments"
+                                    }
+                                },
+                                {
+                                    "name": "core\/comments-pagination-next",
+                                    "attributes": {
+                                        "label": "Newer comments"
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/terms-query",
+                    "attributes": {
+                        "termQuery": {
+                            "perPage": 10,
+                            "taxonomy": "category",
+                            "include": [
+                                1
+                            ],
+                            "order": "asc",
+                            "orderBy": "name"
+                        },
+                        "tagName": "div"
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "Terms query.",
+                                "dropCap": false
+                            }
+                        }
+                    ]
                 }
             ],
             "blockFlattenedDataItems": [
@@ -10169,6 +12151,446 @@
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/search",
+                    "attributes": {
+                        "label": "Search the site",
+                        "placeholder": "Type your query here",
+                        "buttonText": "Go!",
+                        "showLabel": true,
+                        "buttonPosition": "button-outside",
+                        "buttonUseIcon": false,
+                        "query": [],
+                        "isSearchFieldHidden": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/categories",
+                    "attributes": {
+                        "label": "Browse categories",
+                        "taxonomy": "category",
+                        "displayAsDropdown": false,
+                        "showHierarchy": false,
+                        "showPostCounts": false,
+                        "showOnlyTopLevel": false,
+                        "showEmpty": false,
+                        "showLabel": true
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/read-more",
+                    "attributes": {
+                        "content": "Read the full story",
+                        "linkTarget": "_self"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/post-author",
+                    "attributes": {
+                        "byline": "Written by",
+                        "avatarSize": 48,
+                        "showAvatar": true,
+                        "isLink": false,
+                        "linkTarget": "_self"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/post-excerpt",
+                    "attributes": {
+                        "moreText": "Continue reading",
+                        "showMoreOnNewLine": true,
+                        "excerptLength": 55
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/post-terms",
+                    "attributes": {
+                        "term": "category",
+                        "prefix": "Filed under: ",
+                        "suffix": " - thanks for reading!",
+                        "separator": ", "
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "type": "previous",
+                        "label": "Previous article",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/post-navigation-link",
+                    "attributes": {
+                        "label": "Next article",
+                        "type": "next",
+                        "showTitle": false,
+                        "linkLabel": false,
+                        "arrow": "none",
+                        "taxonomy": ""
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/details",
+                    "attributes": {
+                        "showContent": false,
+                        "summary": "Click to expand this disclosure summary"
+                    },
+                    "innerBlockPositions": [
+                        61
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "Hidden content inside the details block.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 60,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/accordion",
+                    "attributes": {
+                        "iconPosition": "right",
+                        "showIcon": true,
+                        "autoclose": false,
+                        "headingLevel": 3
+                    },
+                    "innerBlockPositions": [
+                        63,
+                        67
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/accordion-item",
+                    "attributes": {
+                        "openByDefault": false
+                    },
+                    "parentBlockPosition": 62,
+                    "innerBlockPositions": [
+                        64,
+                        65
+                    ]
+                },
+                {
+                    "name": "core\/accordion-heading",
+                    "attributes": {
+                        "openByDefault": false,
+                        "title": "This is the accordion title",
+                        "iconPosition": "right",
+                        "showIcon": true
+                    },
+                    "parentBlockPosition": 63,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/accordion-panel",
+                    "attributes": {
+                        "templateLock": false
+                    },
+                    "parentBlockPosition": 63,
+                    "innerBlockPositions": [
+                        66
+                    ]
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "We are inside the accordion here.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 65,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/accordion-item",
+                    "attributes": {
+                        "openByDefault": false
+                    },
+                    "parentBlockPosition": 62,
+                    "innerBlockPositions": [
+                        68,
+                        69
+                    ]
+                },
+                {
+                    "name": "core\/accordion-heading",
+                    "attributes": {
+                        "openByDefault": false,
+                        "title": "This is another accordion title",
+                        "iconPosition": "right",
+                        "showIcon": true
+                    },
+                    "parentBlockPosition": 67,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/accordion-panel",
+                    "attributes": {
+                        "templateLock": false
+                    },
+                    "parentBlockPosition": 67,
+                    "innerBlockPositions": [
+                        70
+                    ]
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "We are inside the second accordion panel here.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 69,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/navigation",
+                    "attributes": {
+                        "showSubmenuIcon": true,
+                        "submenuVisibility": "hover",
+                        "overlayMenu": "mobile",
+                        "icon": "handle",
+                        "hasIcon": true,
+                        "maxNestingLevel": 5
+                    },
+                    "innerBlockPositions": [
+                        72,
+                        73,
+                        74,
+                        76
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/home-link",
+                    "attributes": {
+                        "label": "Home page"
+                    },
+                    "parentBlockPosition": 71,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/navigation-link",
+                    "attributes": {
+                        "label": "About us",
+                        "description": "Learn more about our company",
+                        "url": "\/about",
+                        "title": "Go to the About page",
+                        "kind": "custom",
+                        "opensInNewTab": false
+                    },
+                    "parentBlockPosition": 71,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/navigation-submenu",
+                    "attributes": {
+                        "label": "Services",
+                        "description": "Everything we offer",
+                        "url": "\/services",
+                        "title": "Browse our services",
+                        "kind": "custom",
+                        "opensInNewTab": false,
+                        "isParentSubmenu": true
+                    },
+                    "parentBlockPosition": 71,
+                    "innerBlockPositions": [
+                        75
+                    ]
+                },
+                {
+                    "name": "core\/navigation-link",
+                    "attributes": {
+                        "label": "Consulting",
+                        "url": "\/consulting",
+                        "kind": "custom",
+                        "opensInNewTab": false
+                    },
+                    "parentBlockPosition": 74,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/navigation-overlay-close",
+                    "attributes": {
+                        "text": "Close menu",
+                        "displayMode": "icon"
+                    },
+                    "parentBlockPosition": 71,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/social-links",
+                    "attributes": {
+                        "openInNewTab": false,
+                        "showLabels": false
+                    },
+                    "innerBlockPositions": [
+                        78
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/social-link",
+                    "attributes": {
+                        "url": "https:\/\/twitter.com\/gatographql",
+                        "service": "x",
+                        "label": "Follow us on X"
+                    },
+                    "parentBlockPosition": 77,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/widget-group",
+                    "attributes": {
+                        "title": "Footer widgets",
+                        "className": "wp-block-widget-group"
+                    },
+                    "innerBlockPositions": [
+                        80
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "Widget content.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 79,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/query",
+                    "attributes": {
+                        "queryId": 42,
+                        "query": {
+                            "perPage": 3,
+                            "postType": "post"
+                        },
+                        "tagName": "div",
+                        "enhancedPagination": false
+                    },
+                    "innerBlockPositions": [
+                        82
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/query-pagination",
+                    "attributes": {
+                        "paginationArrow": "none",
+                        "showLabel": true
+                    },
+                    "parentBlockPosition": 81,
+                    "innerBlockPositions": [
+                        83,
+                        84
+                    ]
+                },
+                {
+                    "name": "core\/query-pagination-previous",
+                    "attributes": {
+                        "label": "Newer posts"
+                    },
+                    "parentBlockPosition": 82,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/query-pagination-next",
+                    "attributes": {
+                        "label": "Older posts"
+                    },
+                    "parentBlockPosition": 82,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/comments",
+                    "attributes": {
+                        "tagName": "div",
+                        "legacy": false
+                    },
+                    "innerBlockPositions": [
+                        86
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/comments-pagination",
+                    "attributes": {
+                        "paginationArrow": "none"
+                    },
+                    "parentBlockPosition": 85,
+                    "innerBlockPositions": [
+                        87,
+                        88
+                    ]
+                },
+                {
+                    "name": "core\/comments-pagination-previous",
+                    "attributes": {
+                        "label": "Older comments"
+                    },
+                    "parentBlockPosition": 86,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/comments-pagination-next",
+                    "attributes": {
+                        "label": "Newer comments"
+                    },
+                    "parentBlockPosition": 86,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/terms-query",
+                    "attributes": {
+                        "termQuery": {
+                            "perPage": 10,
+                            "taxonomy": "category",
+                            "include": [
+                                1
+                            ],
+                            "order": "asc",
+                            "orderBy": "name"
+                        },
+                        "tagName": "div"
+                    },
+                    "innerBlockPositions": [
+                        90
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "Terms query.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 89,
+                    "innerBlockPositions": null
                 }
             ]
         },

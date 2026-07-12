@@ -36340,7 +36340,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "MenuLocationEnumString",
-                    "description": "Menu Locations. Possible values: `footer`, `primary`, `secondary`.",
+                    "description": "Menu Locations. Possible values: `footer`, `primary`, `quaternary`, `secondary`, `tertiary`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,

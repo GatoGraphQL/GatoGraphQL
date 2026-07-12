@@ -4431,7 +4431,7 @@
           "namespacedName": "MenuLocationEnumString",
           "fields": null,
           "kind": "SCALAR",
-          "description": "Menu Locations. Possible values: `footer`, `primary`, `secondary`."
+          "description": "Menu Locations. Possible values: `footer`, `primary`, `quaternary`, `secondary`, `tertiary`."
         },
         {
           "name": "NullableListValueJSONObject",
