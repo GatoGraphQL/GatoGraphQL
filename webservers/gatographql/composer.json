@@ -49,7 +49,8 @@
         "init-server": "@start-server",
         "start-server": [
             "@purge-cache",
-            "lando start"
+            "lando start",
+            "@restart-lando-proxy"
         ],
         "destroy-server": "lando destroy -y",
         "reset-db": [
@@ -76,15 +77,18 @@
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
-            "lando rebuild appserver -y"
+            "lando rebuild appserver -y",
+            "@restart-lando-proxy"
         ],
         "rebuild-app-and-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "@update-deps",
-            "lando rebuild appserver -y"
+            "lando rebuild appserver -y",
+            "@restart-lando-proxy"
         ],
         "stop-server": "lando stop",
+        "restart-lando-proxy": "proxy=$(docker ps -q --filter name=landoproxyhyperion5000gandalfedition_proxy); if [ -n \"$proxy\" ]; then echo '>>> Restarting Lando shared proxy so Traefik re-scans running app containers (fixes *.lndo.site 404s; see .lando.yml header)...'; docker restart $proxy; else echo '>>> Lando shared proxy not running (proxy likely OFF in ~/.lando/config.yml); skipping proxy restart.'; fi",
         "symlink-vendor-for-gatographql-plugin": [
             "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/gatographql/composer.json', '../../layers/GatoGraphQLForWP/plugins/gatographql/composer.local.json');\"",
             "cd ../../ && vendor/bin/monorepo-builder symlink-local-package --config=config/monorepo-builder/symlink-local-package.php layers/GatoGraphQLForWP/plugins/gatographql/composer.local.json",

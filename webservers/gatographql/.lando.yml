@@ -1,3 +1,15 @@
+################################################################################
+# ⚠️ Troubleshooting: "404 page not found" at https://gatographql.lndo.site/
+# (only when `proxy: "ON"` in ~/.lando/config.yml)
+#
+# Fix is automated via `restart-lando-proxy` composer script.
+#
+# To do it by hand, run either of:
+#   composer restart-lando-proxy
+#   docker restart landoproxyhyperion5000gandalfedition_proxy_1
+# (A route is only registered for containers that are UP at restart time.)
+################################################################################
+
 name: gatographql
 recipe: wordpress
 config:
