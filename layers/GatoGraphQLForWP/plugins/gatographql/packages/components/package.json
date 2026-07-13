@@ -1,6 +1,6 @@
 {
     "name": "@gatographql/components",
-    "version": "19.0.2",
+    "version": "19.1.0-dev",
     "description": "Components used by Gato GraphQL",
     "repository": {
         "type": "git",
