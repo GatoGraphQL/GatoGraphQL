@@ -4,6 +4,8 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.1.0 - DATE
+
 ## 19.0.2 - 13/07/2026
 
 ### Fixed
