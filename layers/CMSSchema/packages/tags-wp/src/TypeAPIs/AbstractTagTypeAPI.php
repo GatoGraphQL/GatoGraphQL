@@ -149,7 +149,9 @@ abstract class AbstractTagTypeAPI extends AbstractTaxonomyTypeAPI implements Tag
             return [];
         }
 
-        $tags = get_tags($query);
+        $tags = $this->executeTermQueryWithStableOrder(
+            static fn () => get_tags($query)
+        );
         if ($tags instanceof WP_Error) {
             return [];
         }
