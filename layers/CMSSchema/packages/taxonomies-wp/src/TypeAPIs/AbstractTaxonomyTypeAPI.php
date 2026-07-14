@@ -15,17 +15,17 @@ use WP_Error;
 use WP_Post;
 use WP_Term;
 
-use function add_filter;
 use function esc_sql;
 use function get_term;
 use function get_term_by;
 use function get_term_link;
 use function get_terms;
-use function remove_filter;
 use function wp_get_post_terms;
 
 abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements TaxonomyTypeAPIInterface
 {
+    use StableTaxonomyTermOrderTrait;
+
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
@@ -354,47 +354,6 @@ abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements T
         }
 
         return (int) $count;
-    }
-
-    /**
-     * Execute a term-fetching callback with a deterministic secondary
-     * ordering by term ID, so that terms sharing the same primary sort
-     * value (eg: terms with a duplicate name) are always returned in a
-     * stable order, instead of relying on the database's arbitrary order
-     * for ties.
-     *
-     * The tiebreaker is applied via the `terms_clauses` filter, so it works
-     * for `get_terms()` and its wrappers (`get_categories()`, `get_tags()`),
-     * preserving the primary sort direction.
-     *
-     * @template T
-     * @param callable(): T $executeQueryCallback
-     * @return T
-     */
-    protected function executeTermQueryWithStableOrder(callable $executeQueryCallback): mixed
-    {
-        /**
-         * @param array<string,string> $clauses
-         * @return array<string,string>
-         */
-        $addTermIDTiebreaker = static function (array $clauses): array {
-            $orderby = $clauses['orderby'] ?? '';
-            if ($orderby === '' || str_contains($orderby, 't.term_id')) {
-                return $clauses;
-            }
-            $order = trim($clauses['order'] ?? '');
-            $columns = (string) preg_replace('/^ORDER BY\s+/i', '', $orderby);
-            $tiebreakerOrder = $order !== '' ? $order : 'ASC';
-            $clauses['orderby'] = sprintf('ORDER BY %s %s, t.term_id %s', $columns, $order, $tiebreakerOrder);
-            $clauses['order'] = '';
-            return $clauses;
-        };
-        add_filter('terms_clauses', $addTermIDTiebreaker);
-        try {
-            return $executeQueryCallback();
-        } finally {
-            remove_filter('terms_clauses', $addTermIDTiebreaker);
-        }
     }
 
     protected function getTaxonomyTerm(
