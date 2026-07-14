@@ -137,7 +137,9 @@ abstract class AbstractCategoryTypeAPI extends AbstractTaxonomyTypeAPI implement
             return [];
         }
 
-        return get_categories($query);
+        return $this->executeTermQueryWithStableOrder(
+            static fn () => get_categories($query)
+        );
     }
 
     /**

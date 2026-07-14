@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 19.1.0 - DATE
 
+### Fixed
+
+- Made the ordering of taxonomy terms (eg: categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (eg: a duplicate name) are always returned in a consistent order when sorting and paginating (#3354)
+
 ## 19.0.2 - 13/07/2026
 
 ### Fixed

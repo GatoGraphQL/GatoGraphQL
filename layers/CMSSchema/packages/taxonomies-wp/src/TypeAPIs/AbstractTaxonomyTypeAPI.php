@@ -24,6 +24,8 @@ use function wp_get_post_terms;
 
 abstract class AbstractTaxonomyTypeAPI extends AbstractBasicService implements TaxonomyTypeAPIInterface
 {
+    use StableTaxonomyTermOrderTrait;
+
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
 
