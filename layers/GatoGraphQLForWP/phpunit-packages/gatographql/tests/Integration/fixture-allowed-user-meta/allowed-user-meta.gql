@@ -2,6 +2,6 @@
   user(by: { id: 1 }) {
     lastName: metaValue(key: "last_name")
     meta(keys: ["last_name", "nickname", "first_name", "rich_editing", "wp_capabilities"])
-    metaKeys
+    metaKeys(filter: { exclude: ["_application_passwords", "session_tokens", "wp_user-settings-time", "wp_dashboard_quick_press_last_post_id"] })
   }
 }
