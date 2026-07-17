@@ -312,7 +312,7 @@
 		<content:encoded><![CDATA[<!-- wp:paragraph -->
 <p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>
 <!-- /wp:paragraph -->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Welcome to WordPress. This is your first post. Edit or delete it, then start writing!]]></excerpt:encoded>
 		<wp:post_id>1</wp:post_id>
 		<wp:post_date><![CDATA[2020-04-17 13:06:58]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-04-17 13:06:58]]></wp:post_date_gmt>
@@ -467,7 +467,7 @@
 <!-- wp:image {"id":1755} -->
 <figure class="wp-block-image"><img src="https://d.pr/i/8pTmgY+" alt="" class="wp-image-1755"/></figure>
 <!-- /wp:image -->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)]]></excerpt:encoded>
 		<wp:post_id>1113</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 03:56:13]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 03:56:13]]></wp:post_date_gmt>
@@ -562,7 +562,7 @@
 <!-- wp:heading -->
 <h2>Gallery Block</h2>
 <!-- /wp:heading -->]]></content:encoded>
-		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
+		<excerpt:encoded><![CDATA[Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block]]></excerpt:encoded>
 		<wp:post_id>1116</wp:post_id>
 		<wp:post_date><![CDATA[2020-12-12 03:59:07]]></wp:post_date>
 		<wp:post_date_gmt><![CDATA[2020-12-12 03:59:07]]></wp:post_date_gmt>
