@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType;
+
+class RootDeleteCommentMutationPayloadObjectTypeResolver extends AbstractCommentMutationPayloadObjectTypeResolver
+{
+    public function getTypeName(): string
+    {
+        return 'RootDeleteCommentMutationPayload';
+    }
+
+    public function getTypeDescription(): ?string
+    {
+        return $this->__('Payload of deleting a comment', 'gatographql');
+    }
+}
