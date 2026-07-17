@@ -14,7 +14,9 @@ use function get_comment;
 use function is_wp_error;
 use function user_can;
 use function wp_delete_comment;
+use function wp_insert_comment;
 use function wp_set_comment_status;
+use function wp_slash;
 use function wp_trash_comment;
 use function wp_update_comment;
 
@@ -66,7 +68,7 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
             $comment_data['comment_post_ID'] = $comment_data['customPostID'];
             unset($comment_data['customPostID']);
         }
-        $commentID = \wp_insert_comment($comment_data);
+        $commentID = wp_insert_comment(wp_slash($comment_data));
         if ($commentID === false) {
             throw new CommentCRUDMutationException(
                 $this->__('Could not create the comment', 'gatographql')
@@ -90,7 +92,7 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
         $comment_data = $this->convertCommentEditionArgs($comment_data);
         $comment_data['comment_ID'] = $commentID;
 
-        $resultOrError = wp_update_comment($comment_data, true);
+        $resultOrError = wp_update_comment(wp_slash($comment_data), true);
 
         if (is_wp_error($resultOrError)) {
             /** @var WP_Error */
