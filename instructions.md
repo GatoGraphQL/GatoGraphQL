@@ -40,7 +40,7 @@ Gato GraphQL is a WordPress plugin that provides a GraphQL server for WordPress.
 #### Rector
 
 - Downgrade source code
-  - Config file: `config/rector/plugins/{integration-plugin}/`
+  - Config file: `config/rector/downgrade/plugins/{plugin}/rector.php`
   - Source code: `src/Config/Rector/Downgrade/Configurators/Plugins/{Integration-plugin}ContainerConfigurationService.php`
 
 ### Gato GraphQL plugin
@@ -180,7 +180,7 @@ services:
 
 #### Updating monorepo config for new package
 
-1. Execute `composer update-monorepo` to regenerate `composer.json` at the monorepo root
+1. Execute `composer update-monorepo-config` to regenerate `composer.json` at the monorepo root
 2. Add the new package to the VSCode mapping
 3. Add the new package to the Lando webserver config
 
@@ -204,7 +204,7 @@ services:
 1. Plan and propose: Given the requirements, check for a similar plugin in the monorepo, and propose how to create the new integration, and how it will extend the GraphQL schema
 2. Create folders, files, and code for plugin and packages for the integration
 3. Execute `composer require --dev "wpackagist-plugin/{plugin}"` to add the 3rd-party plugin in `composer.json`
-4. Execute `composer update-monorepo` to regenerate `composer.json`
+4. Execute `composer update-monorepo-config` to regenerate `composer.json`
 5. Add the new plugin and packages to the VSCode mapping
 6. Add the new plugin and packages to the Lando webserver config
 7. Update the configuration in `PluginDataSource` to generate the new plugin
