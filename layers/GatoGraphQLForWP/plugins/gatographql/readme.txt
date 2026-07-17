@@ -248,6 +248,11 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 19.1.0 =
+* Added - Mutations to delete posts, pages and custom posts: `deletePost`, `deletePage` and `deleteCustomPost` (and their bulk versions), and the nested `delete` field on the `Post`, `Page` and `GenericCustomPost` types (#3358)
+* Added - Mutations to delete media items: `deleteMediaItem` and `deleteMediaItems`, and the nested `delete` field on the `Media` type (#3358)
+* Added - Mutations to delete menus: `deleteMenu` and `deleteMenus`, and the nested `delete` field on the `Menu` type (#3358)
+* Added - Mutations to update and moderate comments: `updateComment` and `updateComments`, and the nested `update` field on the `Comment` type. The comment is moderated via the `status` input, which can approve it, hold it for moderation, mark it as spam, or send it to the trash (#3358)
+* Added - Mutations to delete comments: `deleteComment` and `deleteComments`, and the nested `delete` field on the `Comment` type (#3358)
 * Improved - Updated WooCommerce docs with mutations (#3356)
 * Fixed - Made the ordering of taxonomy terms (eg: categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (eg: a duplicate name) are always returned in a consistent order when sorting and paginating (#3354)
 

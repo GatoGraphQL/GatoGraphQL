@@ -6,6 +6,14 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 19.1.0 - DATE
 
+### Added
+
+- Mutations to delete posts, pages and custom posts: `deletePost`, `deletePage` and `deleteCustomPost` (and their bulk versions), and the nested `delete` field on the `Post`, `Page` and `GenericCustomPost` types (#3358)
+- Mutations to delete media items: `deleteMediaItem` and `deleteMediaItems`, and the nested `delete` field on the `Media` type (#3358)
+- Mutations to delete menus: `deleteMenu` and `deleteMenus`, and the nested `delete` field on the `Menu` type (#3358)
+- Mutations to update and moderate comments: `updateComment` and `updateComments`, and the nested `update` field on the `Comment` type. The comment is moderated via the `status` input, which can approve it, hold it for moderation, mark it as spam, or send it to the trash (#3358)
+- Mutations to delete comments: `deleteComment` and `deleteComments`, and the nested `delete` field on the `Comment` type (#3358)
+
 ### Improvements
 
 - Updated WooCommerce docs with mutations (#3356)
