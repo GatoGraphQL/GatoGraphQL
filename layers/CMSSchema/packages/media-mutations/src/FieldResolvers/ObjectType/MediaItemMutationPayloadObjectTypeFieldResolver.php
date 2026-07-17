@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MediaMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\AbstractMediaItemMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\MediaUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootCreateMediaItemMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MediaMutations\TypeResolvers\ObjectType\RootUpdateMediaItemMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Media\TypeResolvers\ObjectType\MediaObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -30,7 +32,9 @@ class MediaItemMutationPayloadObjectTypeFieldResolver extends AbstractObjectMuta
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractMediaItemMutationPayloadObjectTypeResolver::class,
+            RootCreateMediaItemMutationPayloadObjectTypeResolver::class,
+            RootUpdateMediaItemMutationPayloadObjectTypeResolver::class,
+            MediaUpdateMutationPayloadObjectTypeResolver::class,
         ];
     }
 

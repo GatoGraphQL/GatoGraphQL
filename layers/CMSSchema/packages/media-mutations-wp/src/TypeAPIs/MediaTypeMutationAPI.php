@@ -12,6 +12,7 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Misc\GeneralUtils;
 use PoP\Root\Services\AbstractBasicService;
 use WP_Error;
+use WP_Post;
 
 use function add_filter;
 use function add_post_meta;
@@ -20,14 +21,17 @@ use function get_allowed_mime_types;
 use function get_attached_file;
 use function get_post;
 use function get_post_meta;
+use function get_post_status;
 use function is_wp_error;
 use function remove_filter;
 use function update_attached_file;
 use function update_post_meta;
 use function wp_check_filetype;
+use function wp_delete_attachment;
 use function wp_get_attachment_metadata;
 use function wp_insert_attachment;
 use function wp_slash;
+use function wp_trash_post;
 use function wp_update_attachment_metadata;
 
 class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMutationAPIInterface
@@ -511,5 +515,64 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string|int $mediaItemID,
     ): bool {
         return user_can((int)$userID, 'edit_post', $mediaItemID);
+    }
+
+    public function canUserDeleteMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
+    ): bool {
+        return user_can((int)$userID, 'delete_post', $mediaItemID);
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     */
+    public function trashMediaItem(
+        string|int $mediaItemID,
+    ): void {
+        $trashedMediaItem = wp_trash_post((int) $mediaItemID);
+        if (!($trashedMediaItem instanceof WP_Post)) {
+            throw new MediaItemCRUDMutationException(
+                sprintf(
+                    $this->__('The media item with ID \'%s\' could not be sent to the trash', 'gatographql'),
+                    $mediaItemID
+                )
+            );
+        }
+    }
+
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     */
+    public function deleteMediaItem(
+        string|int $mediaItemID,
+    ): void {
+        $deletedMediaItem = wp_delete_attachment((int) $mediaItemID, true);
+        if (!($deletedMediaItem instanceof WP_Post)) {
+            throw new MediaItemCRUDMutationException(
+                sprintf(
+                    $this->__('The media item with ID \'%s\' could not be deleted', 'gatographql'),
+                    $mediaItemID
+                )
+            );
+        }
+    }
+
+    /**
+     * WordPress only sends media items to the trash if constant
+     * `MEDIA_TRASH` is enabled, which is `false` by default.
+     */
+    public function doesMediaItemSupportTrash(): bool
+    {
+        if (EMPTY_TRASH_DAYS <= 0) {
+            return false;
+        }
+        return MEDIA_TRASH;
+    }
+
+    public function isMediaItemInTrash(
+        string|int $mediaItemID,
+    ): bool {
+        return get_post_status((int) $mediaItemID) === 'trash';
     }
 }
