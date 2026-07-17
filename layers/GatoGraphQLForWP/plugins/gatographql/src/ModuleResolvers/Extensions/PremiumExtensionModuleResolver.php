@@ -101,7 +101,7 @@ class PremiumExtensionModuleResolver extends AbstractExtensionModuleResolver
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::SELF_HOSTED_LLM_TRANSLATION => \__('Translate content to multiple languages using a Self-Hosted LLM provider.', 'gatographql'),
             self::TRANSLATION => \__('Translate content to multiple languages using any provider\'s API.', 'gatographql'),
-            self::WOOCOMMERCE => \__('Integration with WooCommerce, to fetch and mutate product data..', 'gatographql'),
+            self::WOOCOMMERCE => \__('Integration with WooCommerce, to fetch and mutate product data.', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
