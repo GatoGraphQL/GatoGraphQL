@@ -70,7 +70,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::TRANSLATION => \__('Translate content to multiple languages using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.', 'gatographql'),
-            self::WOOCOMMERCE => \__('Integration with WooCommerce, to fetch product data.', 'gatographql'),
+            self::WOOCOMMERCE => \__('Integration with WooCommerce, to fetch and mutate product data..', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
