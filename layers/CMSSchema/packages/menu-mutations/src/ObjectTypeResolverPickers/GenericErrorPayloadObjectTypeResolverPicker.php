@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\MenuMutations\ObjectTypeResolverPickers;
 
 use PoPCMSSchema\MenuMutations\TypeResolvers\UnionType\AbstractCreateMenuMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\MenuMutations\TypeResolvers\UnionType\AbstractDeleteMenuMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MenuMutations\TypeResolvers\UnionType\AbstractUpdateMenuMutationErrorPayloadUnionTypeResolver;
 use PoPSchema\SchemaCommons\ObjectTypeResolverPickers\AbstractGenericErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
@@ -19,6 +20,7 @@ class GenericErrorPayloadObjectTypeResolverPicker extends AbstractGenericErrorPa
         return [
             AbstractCreateMenuMutationErrorPayloadUnionTypeResolver::class,
             AbstractUpdateMenuMutationErrorPayloadUnionTypeResolver::class,
+            AbstractDeleteMenuMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }
