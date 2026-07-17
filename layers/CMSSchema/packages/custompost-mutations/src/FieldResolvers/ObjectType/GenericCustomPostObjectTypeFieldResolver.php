@@ -13,6 +13,8 @@ use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractCusto
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\GenericCustomPostUpdateInputObjectTypeResolver;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\ObjectType\GenericCustomPostUpdateMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\CustomPosts\TypeResolvers\ObjectType\GenericCustomPostObjectTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractDeleteCustomPostInputObjectTypeResolver;
+use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -27,6 +29,11 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
     private ?PayloadableUpdateGenericCustomPostMutationResolver $payloadableUpdateGenericCustomPostMutationResolver = null;
     private ?GenericCustomPostUpdateInputObjectTypeResolver $genericCustomPostUpdateInputObjectTypeResolver = null;
 
+    private ?GenericCustomPostDeleteMutationPayloadObjectTypeResolver $genericCustomPostDeleteMutationPayloadObjectTypeResolver = null;
+    private ?DeleteGenericCustomPostMutationResolver $deleteGenericCustomPostMutationResolver = null;
+    private ?PayloadableDeleteGenericCustomPostMutationResolver $payloadableDeleteGenericCustomPostMutationResolver = null;
+    private ?GenericCustomPostDeleteInputObjectTypeResolver $genericCustomPostDeleteInputObjectTypeResolver = null;
+    private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
     final protected function getGenericCustomPostObjectTypeResolver(): GenericCustomPostObjectTypeResolver
     {
         if ($this->genericCustomPostObjectTypeResolver === null) {
@@ -73,6 +80,52 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
         return $this->genericCustomPostUpdateInputObjectTypeResolver;
     }
 
+    final protected function getGenericCustomPostDeleteMutationPayloadObjectTypeResolver(): GenericCustomPostDeleteMutationPayloadObjectTypeResolver
+    {
+        if ($this->genericCustomPostDeleteMutationPayloadObjectTypeResolver === null) {
+            /** @var GenericCustomPostDeleteMutationPayloadObjectTypeResolver */
+            $genericCustomPostDeleteMutationPayloadObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostDeleteMutationPayloadObjectTypeResolver::class);
+            $this->genericCustomPostDeleteMutationPayloadObjectTypeResolver = $genericCustomPostDeleteMutationPayloadObjectTypeResolver;
+        }
+        return $this->genericCustomPostDeleteMutationPayloadObjectTypeResolver;
+    }
+    final protected function getDeleteGenericCustomPostMutationResolver(): DeleteGenericCustomPostMutationResolver
+    {
+        if ($this->deleteGenericCustomPostMutationResolver === null) {
+            /** @var DeleteGenericCustomPostMutationResolver */
+            $deleteGenericCustomPostMutationResolver = $this->instanceManager->getInstance(DeleteGenericCustomPostMutationResolver::class);
+            $this->deleteGenericCustomPostMutationResolver = $deleteGenericCustomPostMutationResolver;
+        }
+        return $this->deleteGenericCustomPostMutationResolver;
+    }
+    final protected function getPayloadableDeleteGenericCustomPostMutationResolver(): PayloadableDeleteGenericCustomPostMutationResolver
+    {
+        if ($this->payloadableDeleteGenericCustomPostMutationResolver === null) {
+            /** @var PayloadableDeleteGenericCustomPostMutationResolver */
+            $payloadableDeleteGenericCustomPostMutationResolver = $this->instanceManager->getInstance(PayloadableDeleteGenericCustomPostMutationResolver::class);
+            $this->payloadableDeleteGenericCustomPostMutationResolver = $payloadableDeleteGenericCustomPostMutationResolver;
+        }
+        return $this->payloadableDeleteGenericCustomPostMutationResolver;
+    }
+    final protected function getGenericCustomPostDeleteInputObjectTypeResolver(): GenericCustomPostDeleteInputObjectTypeResolver
+    {
+        if ($this->genericCustomPostDeleteInputObjectTypeResolver === null) {
+            /** @var GenericCustomPostDeleteInputObjectTypeResolver */
+            $genericCustomPostDeleteInputObjectTypeResolver = $this->instanceManager->getInstance(GenericCustomPostDeleteInputObjectTypeResolver::class);
+            $this->genericCustomPostDeleteInputObjectTypeResolver = $genericCustomPostDeleteInputObjectTypeResolver;
+        }
+        return $this->genericCustomPostDeleteInputObjectTypeResolver;
+    }
+    final protected function getBooleanScalarTypeResolver(): BooleanScalarTypeResolver
+    {
+        if ($this->booleanScalarTypeResolver === null) {
+            /** @var BooleanScalarTypeResolver */
+            $booleanScalarTypeResolver = $this->instanceManager->getInstance(BooleanScalarTypeResolver::class);
+            $this->booleanScalarTypeResolver = $booleanScalarTypeResolver;
+        }
+        return $this->booleanScalarTypeResolver;
+    }
+
     /**
      * @return array<class-string<ObjectTypeResolverInterface>>
      */
@@ -86,6 +139,11 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
     protected function getCustomPostUpdateInputObjectTypeResolver(): AbstractCustomPostUpdateInputObjectTypeResolver
     {
         return $this->getGenericCustomPostUpdateInputObjectTypeResolver();
+    }
+
+    protected function getCustomPostDeleteInputObjectTypeResolver(): AbstractDeleteCustomPostInputObjectTypeResolver
+    {
+        return $this->getGenericCustomPostDeleteInputObjectTypeResolver();
     }
 
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
@@ -105,6 +163,9 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
             'update' => [
                 'input' => $this->getGenericCustomPostUpdateInputObjectTypeResolver(),
             ],
+            'delete' => [
+                'input' => $this->getGenericCustomPostDeleteInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
@@ -118,6 +179,9 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
             'update' => $usePayloadableCustomPostMutations
                 ? $this->getPayloadableUpdateGenericCustomPostMutationResolver()
                 : $this->getUpdateGenericCustomPostMutationResolver(),
+            'delete' => $usePayloadableCustomPostMutations
+                ? $this->getPayloadableDeleteGenericCustomPostMutationResolver()
+                : $this->getDeleteGenericCustomPostMutationResolver(),
             default => parent::getFieldMutationResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -131,6 +195,9 @@ class GenericCustomPostObjectTypeFieldResolver extends AbstractCustomPostObjectT
             'update' => $usePayloadableCustomPostMutations
                 ? $this->getGenericCustomPostUpdateMutationPayloadObjectTypeResolver()
                 : $this->getGenericCustomPostObjectTypeResolver(),
+            'delete' => $usePayloadableCustomPostMutations
+                ? $this->getGenericCustomPostDeleteMutationPayloadObjectTypeResolver()
+                : $this->getBooleanScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
