@@ -2,7 +2,7 @@
 
 ## Improvements
 
-- Updated the WooCommerce docs with the mutations to manage the store's data (products, orders, customers, coupons, and more).
+- Updated WooCommerce docs with mutations ([#3356](https://github.com/GatoGraphQL/GatoGraphQL/pull/3356))
 
 ## Fixes
 
