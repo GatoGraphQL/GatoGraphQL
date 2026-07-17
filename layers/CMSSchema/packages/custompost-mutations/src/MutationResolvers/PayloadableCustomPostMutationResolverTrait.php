@@ -11,7 +11,6 @@ use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotExistErrorPay
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotHaveExpectedTypeErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostDoesNotSupportTrashErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\CustomPostHasAlreadyBeenTrashedErrorPayload;
-use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoDeletingCustomPostCapabilityErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoEditingCustomPostCapabilityErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload;
 use PoPCMSSchema\CustomPostMutations\ObjectModels\LoggedInUserHasNoPermissionToEditCustomPostErrorPayload;
@@ -104,12 +103,6 @@ trait PayloadableCustomPostMutationResolverTrait
                 MutationErrorFeedbackItemProvider::class,
                 MutationErrorFeedbackItemProvider::E14,
             ] => new LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload(
-                $feedbackItemResolution->getMessage(),
-            ),
-            [
-                MutationErrorFeedbackItemProvider::class,
-                MutationErrorFeedbackItemProvider::E15,
-            ] => new LoggedInUserHasNoDeletingCustomPostCapabilityErrorPayload(
                 $feedbackItemResolution->getMessage(),
             ),
             [

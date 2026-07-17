@@ -240,14 +240,4 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
     {
         return user_can((int)$userID, 'delete_post', $customPostID);
     }
-
-    public function canUserDeleteCustomPostType(string|int $userID, string $customPostType): bool
-    {
-        $customPostTypeObject = get_post_type_object($customPostType);
-        if ($customPostTypeObject === null) {
-            return false;
-        }
-
-        return isset($customPostTypeObject->cap->delete_posts) && user_can((int)$userID, $customPostTypeObject->cap->delete_posts);
-    }
 }

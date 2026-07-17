@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
+use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
 use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -39,10 +40,10 @@ trait PayloadableDeleteCustomPostMutationResolverTrait
             )->getID();
         }
 
-        $customPostID = null;
+        /** @var string|int */
+        $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
         try {
-            /** @var string|int */
-            $customPostID = $this->upstreamExecuteMutation(
+            $this->upstreamExecuteMutation(
                 $fieldDataAccessor,
                 $separateObjectTypeFieldResolutionFeedbackStore,
             );

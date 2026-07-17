@@ -43,5 +43,4 @@ interface CustomPostTypeMutationAPIInterface
     public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool;
     public function canUserEditCustomPostType(string|int $userID, string $customPostType): bool;
     public function canUserDeleteCustomPost(string|int $userID, string|int $customPostID): bool;
-    public function canUserDeleteCustomPostType(string|int $userID, string $customPostType): bool;
 }

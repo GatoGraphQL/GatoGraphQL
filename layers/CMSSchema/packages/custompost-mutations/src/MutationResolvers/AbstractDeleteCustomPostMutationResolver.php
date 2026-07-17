@@ -250,13 +250,13 @@ abstract class AbstractDeleteCustomPostMutationResolver extends AbstractMutation
     }
 
     /**
-     * @return string|int The ID of the deleted entity
+     * @return bool Whether the custom post was deleted
      * @throws CustomPostCRUDMutationException If there was an error (eg: Custom Post does not exist)
      */
     protected function delete(
         FieldDataAccessorInterface $fieldDataAccessor,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
-    ): string|int {
+    ): bool {
         /** @var string|int */
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
 
@@ -266,6 +266,6 @@ abstract class AbstractDeleteCustomPostMutationResolver extends AbstractMutation
             $this->getCustomPostTypeMutationAPI()->trashCustomPost($customPostID);
         }
 
-        return $customPostID;
+        return true;
     }
 }
