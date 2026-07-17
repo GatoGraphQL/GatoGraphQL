@@ -18,7 +18,14 @@ use PoP\ComponentModel\MutationResolvers\AbstractMutationResolver;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\Root\App;
 
-abstract class AbstractDeleteCustomPostMutationResolver extends AbstractMutationResolver implements CustomPostMutationResolverInterface
+/**
+ * This mutation resolver does not implement `CustomPostMutationResolverInterface`,
+ * as deleting a custom post does not need to know its custom post type: the ID
+ * already identifies it. `getTargetCustomPostType` is used only to validate that
+ * the custom post is of the expected type, and it is `null` when deleting a
+ * custom post of any type.
+ */
+abstract class AbstractDeleteCustomPostMutationResolver extends AbstractMutationResolver
 {
     use DeleteCustomPostMutationResolverTrait;
     use ValidateUserLoggedInMutationResolverTrait;

@@ -42,6 +42,11 @@ trait PayloadableDeleteCustomPostMutationResolverTrait
 
         /** @var string|int */
         $customPostID = $fieldDataAccessor->getValue(MutationInputProperties::ID);
+
+        /**
+         * Deleting the custom post either succeeds, or throws an exception.
+         * Hence there are no errors to collect after executing the mutation.
+         */
         try {
             $this->upstreamExecuteMutation(
                 $fieldDataAccessor,
@@ -55,17 +60,6 @@ trait PayloadableDeleteCustomPostMutationResolverTrait
             )->getID();
         }
 
-        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-            return $this->createFailureObjectMutationPayload(
-                array_map(
-                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
-                    $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
-                ),
-                $customPostID
-            )->getID();
-        }
-
-        /** @var string|int $customPostID */
         return $this->createSuccessObjectMutationPayload($customPostID)->getID();
     }
 }

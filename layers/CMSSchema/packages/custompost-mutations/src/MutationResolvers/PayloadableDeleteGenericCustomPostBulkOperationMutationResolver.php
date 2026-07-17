@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
 
-use PoPSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
+use PoPCMSSchema\SchemaCommons\MutationResolvers\AbstractBulkOperationDecoratorMutationResolver;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 
 class PayloadableDeleteGenericCustomPostBulkOperationMutationResolver extends AbstractBulkOperationDecoratorMutationResolver

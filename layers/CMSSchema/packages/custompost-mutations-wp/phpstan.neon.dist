@@ -2,3 +2,10 @@ parameters:
 	level: 8
 	paths:
 		- src
+	ignoreErrors:
+		# `MEDIA_TRASH` is always defined by WordPress, in `wp_initial_constants`.
+		# The bootstrap file from "szepeviktor/phpstan-wordpress" defines
+		# `EMPTY_TRASH_DAYS` but not `MEDIA_TRASH`, hence PHPStan can't find it.
+		-
+			message: '#^Constant MEDIA_TRASH not found\.$#'
+			path: src/TypeAPIs/CustomPostTypeMutationAPI.php
