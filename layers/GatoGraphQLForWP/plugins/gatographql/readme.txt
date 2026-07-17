@@ -80,7 +80,7 @@ The available premium extensions are:
 
 [Translation](https://gatographql.com/extensions/translation): Translate a field value using the service provider of your choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, self-hosted LLM (eg: via Ollama), DeepL, and Google Translate.
 
-[WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch and mutate product data..
+[WooCommerce](https://gatographql.com/extensions/woocommerce): Integration with WooCommerce, to fetch and mutate product data.
 
 == Built with Gato GraphQL ==
 
