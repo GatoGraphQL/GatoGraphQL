@@ -8232,8 +8232,9 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
-msgid "Integration with WooCommerce, to fetch product data."
-msgstr "Ürün verilerini getirmek için WooCommerce ile entegrasyon."
+msgid "Integration with WooCommerce, to fetch and mutate product data."
+msgstr ""
+"WooCommerce ile entegrasyon; ürün verilerini almak ve değiştirmek için."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "ChatGPT Translation"
@@ -12978,6 +12979,9 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid "Integration with WooCommerce, to fetch product data."
+#~ msgstr "Ürün verilerini getirmek için WooCommerce ile entegrasyon."
 
 #~ msgid "Please rate Gato GraphQL ❤️"
 #~ msgstr "Lütfen Gato GraphQL'i derecelendirin ❤️"

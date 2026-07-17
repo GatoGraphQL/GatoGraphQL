@@ -7768,8 +7768,8 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
-msgid "Integration with WooCommerce, to fetch product data."
-msgstr "与 WooCommerce 集成，用于获取产品数据。"
+msgid "Integration with WooCommerce, to fetch and mutate product data."
+msgstr "与 WooCommerce 集成，用于获取和修改产品数据。"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "ChatGPT Translation"
@@ -12286,6 +12286,9 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#~ msgid "Integration with WooCommerce, to fetch product data."
+#~ msgstr "与 WooCommerce 集成，用于获取产品数据。"
 
 #~ msgid "Please rate Gato GraphQL ❤️"
 #~ msgstr "请为 Gato GraphQL 评分 ❤️"

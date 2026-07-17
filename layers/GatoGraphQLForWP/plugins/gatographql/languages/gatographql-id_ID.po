@@ -8276,8 +8276,9 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
-msgid "Integration with WooCommerce, to fetch product data."
-msgstr "Integrasi dengan WooCommerce, untuk mengambil data produk."
+msgid "Integration with WooCommerce, to fetch and mutate product data."
+msgstr ""
+"Integrasi dengan WooCommerce, untuk mengambil dan memutasi data produk."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "ChatGPT Translation"
@@ -13015,6 +13016,9 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid "Integration with WooCommerce, to fetch product data."
+#~ msgstr "Integrasi dengan WooCommerce, untuk mengambil data produk."
 
 #~ msgid "Please rate Gato GraphQL ❤️"
 #~ msgstr "Mohon beri penilaian untuk Gato GraphQL ❤️"

@@ -8348,8 +8348,8 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
-msgid "Integration with WooCommerce, to fetch product data."
-msgstr "Tích hợp với WooCommerce để lấy dữ liệu sản phẩm."
+msgid "Integration with WooCommerce, to fetch and mutate product data."
+msgstr "Tích hợp với WooCommerce, để lấy và thay đổi dữ liệu sản phẩm."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "ChatGPT Translation"
@@ -13074,6 +13074,9 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid "Integration with WooCommerce, to fetch product data."
+#~ msgstr "Tích hợp với WooCommerce để lấy dữ liệu sản phẩm."
 
 #~ msgid "Please rate Gato GraphQL ❤️"
 #~ msgstr "Vui lòng đánh giá Gato GraphQL ❤️"
