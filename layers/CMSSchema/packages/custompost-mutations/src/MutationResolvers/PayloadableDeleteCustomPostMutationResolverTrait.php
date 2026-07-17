@@ -1,0 +1,70 @@
+<?php
+
+declare(strict_types=1);
+
+namespace PoPCMSSchema\CustomPostMutations\MutationResolvers;
+
+use PoPCMSSchema\CustomPostMutations\Exception\CustomPostCRUDMutationException;
+use PoPSchema\SchemaCommons\MutationResolvers\PayloadableMutationResolverTrait;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
+use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
+use PoP\Root\Exception\AbstractException;
+
+trait PayloadableDeleteCustomPostMutationResolverTrait
+{
+    use PayloadableMutationResolverTrait, DeleteCustomPostMutationResolverTrait {
+        DeleteCustomPostMutationResolverTrait::executeMutation as upstreamExecuteMutation;
+        PayloadableMutationResolverTrait::validate insteadof DeleteCustomPostMutationResolverTrait;
+    }
+    use PayloadableCustomPostMutationResolverTrait;
+
+    /**
+     * Validate the app-level errors when executing the mutation,
+     * return them in the Payload.
+     *
+     * @throws AbstractException In case of error
+     */
+    public function executeMutation(
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): mixed {
+        $separateObjectTypeFieldResolutionFeedbackStore = new ObjectTypeFieldResolutionFeedbackStore();
+        $this->validateDeleteErrors($fieldDataAccessor, $separateObjectTypeFieldResolutionFeedbackStore);
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return $this->createFailureObjectMutationPayload(
+                array_map(
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
+                )
+            )->getID();
+        }
+
+        $customPostID = null;
+        try {
+            /** @var string|int */
+            $customPostID = $this->upstreamExecuteMutation(
+                $fieldDataAccessor,
+                $separateObjectTypeFieldResolutionFeedbackStore,
+            );
+        } catch (CustomPostCRUDMutationException $customPostCRUDMutationException) {
+            return $this->createFailureObjectMutationPayload(
+                [
+                    $this->createGenericErrorPayloadFromPayloadClientException($customPostCRUDMutationException),
+                ]
+            )->getID();
+        }
+
+        if ($separateObjectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+            return $this->createFailureObjectMutationPayload(
+                array_map(
+                    $this->createErrorPayloadFromObjectTypeFieldResolutionFeedback(...),
+                    $separateObjectTypeFieldResolutionFeedbackStore->getErrors()
+                ),
+                $customPostID
+            )->getID();
+        }
+
+        /** @var string|int $customPostID */
+        return $this->createSuccessObjectMutationPayload($customPostID)->getID();
+    }
+}

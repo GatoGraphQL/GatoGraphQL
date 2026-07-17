@@ -76,12 +76,57 @@ abstract class AbstractDeleteCustomPostMutationResolver extends AbstractMutation
         /** @var string|int */
         $customPostID = $customPostID;
 
+        $targetCustomPostType = $this->getTargetCustomPostType();
+        if ($targetCustomPostType !== null) {
+            $this->validateIsCustomPostType($customPostID, $targetCustomPostType, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+            if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+                return;
+            }
+        }
+
         $this->validateCanLoggedInUserDeleteCustomPost($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
         if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
             return;
         }
 
         $this->validateCanCustomPostBeTrashed($customPostID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * The custom post type that the mutation can delete, or `null` when
+     * it can delete a custom post of any type.
+     */
+    protected function getTargetCustomPostType(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * Validate that the custom post is of the type handled by the mutation,
+     * so that (eg) `deletePost` cannot delete a page.
+     */
+    protected function validateIsCustomPostType(
+        string|int $customPostID,
+        string $customPostType,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        if ($this->getCustomPostTypeAPI()->getCustomPostType($customPostID) === $customPostType) {
+            return;
+        }
+        $objectTypeFieldResolutionFeedbackStore->addError(
+            new ObjectTypeFieldResolutionFeedback(
+                new FeedbackItemResolution(
+                    MutationErrorFeedbackItemProvider::class,
+                    MutationErrorFeedbackItemProvider::E5,
+                    [
+                        $customPostID,
+                        $customPostType,
+                    ]
+                ),
+                $fieldDataAccessor->getField(),
+            )
+        );
     }
 
     /**
