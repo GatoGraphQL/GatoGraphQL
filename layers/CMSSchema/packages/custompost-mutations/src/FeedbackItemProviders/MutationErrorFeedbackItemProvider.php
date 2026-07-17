@@ -20,6 +20,11 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E10 = 'e10';
     public final const E11 = 'e11';
     public final const E12 = 'e12';
+    public final const E13 = 'e13';
+    public final const E14 = 'e14';
+    public final const E15 = 'e15';
+    public final const E16 = 'e16';
+    public final const E17 = 'e17';
 
     /**
      * @return string[]
@@ -38,6 +43,11 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E10,
             self::E11,
             self::E12,
+            self::E13,
+            self::E14,
+            self::E15,
+            self::E16,
+            self::E17,
         ];
     }
 
@@ -55,6 +65,11 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E10 => $this->__('There is no custom post with slug path \'%s\' of type \'%s\'', 'gatographql'),
             self::E11 => $this->__('The custom post cannot have itself as parent', 'gatographql'),
             self::E12 => $this->__('The custom post with ID \'%s\' is an ancestor of the custom post with ID \'%s\'', 'gatographql'),
+            self::E13 => $this->__('You must be logged in to delete custom posts', 'gatographql'),
+            self::E14 => $this->__('You don\'t have permission to delete custom post with ID \'%s\'', 'gatographql'),
+            self::E15 => $this->__('Your user doesn\'t have permission for deleting custom posts.', 'gatographql'),
+            self::E16 => $this->__('The custom post with ID \'%s\' does not support being sent to the trash. Provide \'true\' in the \'force\' input to permanently delete it', 'gatographql'),
+            self::E17 => $this->__('The custom post with ID \'%s\' has already been sent to the trash. Provide \'true\' in the \'force\' input to permanently delete it', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

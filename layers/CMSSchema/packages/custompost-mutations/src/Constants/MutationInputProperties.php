@@ -16,6 +16,7 @@ class MutationInputProperties
     public final const CUSTOMPOST_TYPE = 'customPostType';
     public final const DATE = 'date';
     public final const GMT_DATE = 'gmtDate';
+    public final const FORCE = 'force';
 
     public final const HTML = 'html';
     public final const SLUG_PATH = 'slugPath';
