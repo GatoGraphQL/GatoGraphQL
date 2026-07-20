@@ -148,22 +148,26 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
         string|int $commentID,
         string $commentStatus,
     ): void {
-        $resultOrError = wp_set_comment_status((int) $commentID, $commentStatus, true);
+        $wpCommentStatus = match ($commentStatus) {
+            CommentStatus::APPROVE => 'approve',
+            CommentStatus::HOLD => 'hold',
+            CommentStatus::SPAM => 'spam',
+            CommentStatus::TRASH => 'trash',
+            default => throw new CommentCRUDMutationException(
+                sprintf(
+                    $this->__('Unsupported comment status \'%s\'', 'gatographql'),
+                    $commentStatus
+                )
+            ),
+        };
+
+        $resultOrError = wp_set_comment_status((int) $commentID, $wpCommentStatus, true);
 
         if (is_wp_error($resultOrError)) {
             /** @var WP_Error */
             $wpError = $resultOrError;
             throw new CommentCRUDMutationException(
                 $wpError->get_error_message()
-            );
-        }
-
-        if ($resultOrError === false) {
-            throw new CommentCRUDMutationException(
-                sprintf(
-                    $this->__('The status of the comment with ID \'%s\' could not be updated', 'gatographql'),
-                    $commentID
-                )
             );
         }
     }

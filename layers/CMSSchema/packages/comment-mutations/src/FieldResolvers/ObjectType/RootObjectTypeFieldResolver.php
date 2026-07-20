@@ -154,9 +154,6 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         return $this->payloadableAddCommentToCustomPostBulkOperationMutationResolver;
     }
 
-    /**
-     * @return array<class-string<ObjectTypeResolverInterface>>
-     */
     final protected function getRootUpdateCommentInputObjectTypeResolver(): RootUpdateCommentInputObjectTypeResolver
     {
         if ($this->rootUpdateCommentInputObjectTypeResolver === null) {

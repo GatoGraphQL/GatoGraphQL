@@ -71,7 +71,7 @@ abstract class AbstractEditCommentMutationResolver extends AbstractMutationResol
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E10,
                         [
-                            $commentID,
+                            $commentID ?? '',
                         ]
                     ),
                     $fieldDataAccessor->getField(),

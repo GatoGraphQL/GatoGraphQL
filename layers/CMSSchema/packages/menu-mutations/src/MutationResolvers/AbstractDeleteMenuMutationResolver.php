@@ -94,7 +94,7 @@ abstract class AbstractDeleteMenuMutationResolver extends AbstractMutationResolv
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E6,
                         [
-                            $menuID,
+                            $menuID ?? '',
                         ]
                     ),
                     $fieldDataAccessor->getField(),

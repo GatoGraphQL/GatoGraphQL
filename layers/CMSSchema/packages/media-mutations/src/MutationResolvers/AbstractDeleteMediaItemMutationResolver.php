@@ -99,7 +99,7 @@ abstract class AbstractDeleteMediaItemMutationResolver extends AbstractMutationR
                         MutationErrorFeedbackItemProvider::class,
                         MutationErrorFeedbackItemProvider::E6,
                         [
-                            $mediaItemID,
+                            $mediaItemID ?? '',
                         ]
                     ),
                     $fieldDataAccessor->getField(),
