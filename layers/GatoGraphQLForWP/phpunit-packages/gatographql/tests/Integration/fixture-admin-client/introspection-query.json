@@ -1120,6 +1120,78 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "CommentDoesNotSupportTrashErrorPayload",
+                    "description": "Error payload for: \"The comment does not support being sent to the trash\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "CommentHasAlreadyBeenTrashedErrorPayload",
+                    "description": "Error payload for: \"The comment has already been sent to the trash\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "CommentParentCommentDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The comment's parent does not exist\"",
                     "fields": [
@@ -1302,6 +1374,78 @@
                     "kind": "OBJECT",
                     "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
                     "description": "Error payload for: \"The requested custom post does not have the expected type\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                    "description": "Error payload for: \"The custom post does not support being sent to the trash\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                    "description": "Error payload for: \"The custom post has already been sent to the trash\"",
                     "fields": [
                         {
                             "name": "message",
@@ -4481,6 +4625,150 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                    "description": "Error payload for: \"The user has no permission to delete the comment\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                    "description": "Error payload for: \"The logged-in user has no permission to delete the requested custom post\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                    "description": "Error payload for: \"The user has no permission to delete the media item\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                    "description": "Error payload for: \"The user has no permission to delete the menu\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit the comment\"",
                     "fields": [
@@ -5445,6 +5733,78 @@
                     "kind": "OBJECT",
                     "name": "MediaItemDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested media item does not exist\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "MediaItemDoesNotSupportTrashErrorPayload",
+                    "description": "Error payload for: \"The media item does not support being sent to the trash\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+                    "description": "Error payload for: \"The media item has already been sent to the trash\"",
                     "fields": [
                         {
                             "name": "message",
@@ -8035,6 +8395,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteComment",
+                            "description": "Delete a comment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCommentInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteCommentInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteCommentMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteCommentMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteCommentMeta",
                             "description": "Delete meta from comment",
                             "args": [
@@ -8141,6 +8536,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteComments",
+                            "description": "Delete comments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteCommentInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteCommentInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteCommentInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteCommentInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteCommentMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteCommentMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCommentMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteCommentMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteCustomPost",
+                            "description": "Delete a custom post",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a custom post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCustomPostInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteCustomPostInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteCustomPostMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteCustomPostMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteCustomPostMeta",
                             "description": "Delete meta from custom post",
                             "args": [
@@ -8241,6 +8742,430 @@
                                             "ofType": null
                                         }
                                     }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteCustomPosts",
+                            "description": "Delete custom posts",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a custom post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteCustomPostInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteCustomPostInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteCustomPostInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteCustomPostInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteCustomPostMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteCustomPostMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCustomPostMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteCustomPostMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMediaItem",
+                            "description": "Delete an attachment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete an attachment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMediaItemInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteMediaItemInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteMediaItemMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteMediaItemMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMediaItems",
+                            "description": "Delete attachments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete an attachment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteMediaItemInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteMediaItemInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteMediaItemInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteMediaItemInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteMediaItemMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteMediaItemMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMediaItemMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteMediaItemMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMenu",
+                            "description": "Delete a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMenus",
+                            "description": "Delete menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteMenuMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePage",
+                            "description": "Delete a page",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a page",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePageInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeletePageInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeletePageMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeletePageMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePages",
+                            "description": "Delete pages",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a page",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeletePageInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeletePageInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeletePageInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeletePageInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeletePageMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeletePageMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePageMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeletePageMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePost",
+                            "description": "Delete a post",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePostInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeletePostInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeletePostMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeletePostMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
                                 }
                             },
                             "isDeprecated": false,
@@ -8661,6 +9586,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootDeletePostTagTermMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePosts",
+                            "description": "Delete posts",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeletePostInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeletePostInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeletePostInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeletePostInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeletePostMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeletePostMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePostMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeletePostMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -10738,6 +11734,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "updateComment",
+                            "description": "Update a comment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateCommentInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateCommentInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateCommentMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateCommentMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "updateCommentMeta",
                             "description": "Update meta from comment",
                             "args": [
@@ -10834,6 +11865,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootUpdateCommentMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateComments",
+                            "description": "Update comments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateCommentInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateCommentInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateCommentInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateCommentInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateCommentMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateCommentMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateCommentMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateCommentMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -21891,6 +22993,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteComment",
+                            "description": "Delete a comment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCommentInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteCommentInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteCommentMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteCommentMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteCommentMeta",
                             "description": "Delete meta from comment",
                             "args": [
@@ -21997,6 +23134,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteComments",
+                            "description": "Delete comments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteCommentInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteCommentInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteCommentInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteCommentInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteCommentMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteCommentMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCommentMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteCommentMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteCustomPost",
+                            "description": "Delete a custom post",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a custom post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCustomPostInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteCustomPostInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteCustomPostMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteCustomPostMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteCustomPostMeta",
                             "description": "Delete meta from custom post",
                             "args": [
@@ -22097,6 +23340,430 @@
                                             "ofType": null
                                         }
                                     }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteCustomPosts",
+                            "description": "Delete custom posts",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a custom post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteCustomPostInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteCustomPostInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteCustomPostInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteCustomPostInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteCustomPostMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteCustomPostMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteCustomPostMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteCustomPostMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMediaItem",
+                            "description": "Delete an attachment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete an attachment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMediaItemInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteMediaItemInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteMediaItemMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteMediaItemMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMediaItems",
+                            "description": "Delete attachments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete an attachment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteMediaItemInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteMediaItemInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteMediaItemInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteMediaItemInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteMediaItemMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteMediaItemMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMediaItemMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteMediaItemMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMenu",
+                            "description": "Delete a menu",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMenuInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteMenuInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteMenuMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteMenuMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteMenus",
+                            "description": "Delete menus",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a menu",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteMenuInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteMenuInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteMenuInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteMenuInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteMenuMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteMenuMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteMenuMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteMenuMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePage",
+                            "description": "Delete a page",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a page",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePageInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeletePageInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeletePageMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeletePageMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePages",
+                            "description": "Delete pages",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a page",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeletePageInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeletePageInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeletePageInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeletePageInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeletePageMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeletePageMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePageMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeletePageMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePost",
+                            "description": "Delete a post",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePostInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeletePostInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeletePostMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeletePostMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
                                 }
                             },
                             "isDeprecated": false,
@@ -22517,6 +24184,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootDeletePostTagTermMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deletePosts",
+                            "description": "Delete posts",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a post",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeletePostInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeletePostInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeletePostInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeletePostInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeletePostMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeletePostMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeletePostMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeletePostMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -26970,6 +28708,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "updateComment",
+                            "description": "Update a comment",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateCommentInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateCommentInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateCommentMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateCommentMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "updateCommentMeta",
                             "description": "Update meta from comment",
                             "args": [
@@ -27066,6 +28839,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootUpdateCommentMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateComments",
+                            "description": "Update comments",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a comment",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateCommentInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateCommentInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateCommentInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateCommentInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateCommentMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateCommentMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateCommentMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateCommentMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -30089,6 +31933,110 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "RootDeleteCommentMutationPayload",
+                    "description": "Payload of deleting a comment",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeleteCommentMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeleteCommentMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeleteCommentMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootDeleteCustomPostMutationPayload",
+                    "description": "Payload of executing a delete mutation on a custom post",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeleteCustomPostMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeleteCustomPostMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeleteCustomPostMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a category term",
                     "fields": [
@@ -30427,6 +32375,162 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "RootDeleteMediaItemMutationPayload",
+                    "description": "Payload of deleting an attachment",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeleteMediaItemMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeleteMediaItemMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeleteMediaItemMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootDeleteMenuMutationPayload",
+                    "description": "Payload of deleting a menu",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeleteMenuMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeleteMenuMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeleteMenuMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootDeletePageMutationPayload",
+                    "description": "Payload of executing a delete mutation on a page",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeletePageMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeletePageMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeletePageMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "RootDeletePostCategoryTermMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a post's category term",
                     "fields": [
@@ -30523,6 +32627,58 @@
                                     "ofType": {
                                         "kind": "UNION",
                                         "name": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootDeletePostMutationPayload",
+                    "description": "Payload of executing a delete mutation on a post",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeletePostMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeletePostMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeletePostMutationErrorPayloadUnion",
                                         "isOneOf": false,
                                         "ofType": null
                                     }
@@ -32057,6 +34213,84 @@
                                     "ofType": {
                                         "kind": "UNION",
                                         "name": "RootUpdateCommentMetaMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootUpdateCommentMutationPayload",
+                    "description": "Payload of updating a comment",
+                    "fields": [
+                        {
+                            "name": "comment",
+                            "description": "Object affected by the mutation, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "OBJECT",
+                                "name": "Comment",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "commentID",
+                            "description": "ID of the entity, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootUpdateCommentMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootUpdateCommentMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootUpdateCommentMutationErrorPayloadUnion",
                                         "isOneOf": false,
                                         "ofType": null
                                     }
@@ -37278,6 +39512,18 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "CommentDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CommentHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "CommentParentCommentDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -37309,6 +39555,18 @@
                         {
                             "kind": "OBJECT",
                             "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -37404,6 +39662,30 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -37447,6 +39729,18 @@
                         {
                             "kind": "OBJECT",
                             "name": "MediaItemDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MediaItemDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MediaItemHasAlreadyBeenTrashedErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -43673,6 +45967,49 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "RootDeleteCommentInput",
+                    "description": "Input to delete a comment",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "description": "Permanently delete the comment, bypassing the trash. Otherwise the comment is sent to the trash, from where it can be restored.",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "false"
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the comment to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "RootDeleteCommentMetaInput",
                     "description": "Input to delete an entity's meta entry",
                     "fields": null,
@@ -43717,6 +46054,49 @@
                                 "name": "AnyScalar",
                                 "isOneOf": false,
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootDeleteCustomPostInput",
+                    "description": "Input to delete a custom post",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "description": "Permanently delete the custom post, bypassing the trash. Otherwise the custom post is sent to the trash, from where it can be restored.",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "false"
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the custom post to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
                             },
                             "defaultValue": null
                         }
@@ -43857,6 +46237,119 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "RootDeleteMediaItemInput",
+                    "description": "Input to delete an attachment",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "description": "Permanently delete the media item, bypassing the trash. Otherwise the media item is sent to the trash, from where it can be restored; sending to the trash requires constant `MEDIA_TRASH` to be enabled, failing otherwise. Defaults to `true` unless the site sends media items to the trash.",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "true"
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the media item to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootDeleteMenuInput",
+                    "description": "Input to delete a menu",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "description": "The ID of the menu to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootDeletePageInput",
+                    "description": "Input to delete a page",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "description": "Permanently delete the custom post, bypassing the trash. Otherwise the custom post is sent to the trash, from where it can be restored.",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "false"
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the custom post to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "RootDeletePostCategoryInput",
                     "description": "Input to delete a category term",
                     "fields": null,
@@ -43885,6 +46378,49 @@
                                 "name": "PostCategoryTaxonomyEnumString",
                                 "isOneOf": false,
                                 "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootDeletePostInput",
+                    "description": "Input to delete a post",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "description": "Permanently delete the custom post, bypassing the trash. Otherwise the custom post is sent to the trash, from where it can be restored.",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Boolean!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Boolean",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": "false"
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the custom post to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
                             },
                             "defaultValue": null
                         }
@@ -46884,6 +49420,88 @@
                                     "isOneOf": false,
                                     "ofType": null
                                 }
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootUpdateCommentInput",
+                    "description": "Input to update a comment",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorEmail",
+                            "description": "The comment author's email",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Email",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "authorName",
+                            "description": "The comment author's name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "authorURL",
+                            "description": "The comment author's site URL",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "URL",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "commentAs",
+                            "description": "The new content for the comment",
+                            "type": {
+                                "kind": "INPUT_OBJECT",
+                                "name": "CommentContentInput",
+                                "isOneOf": true,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the comment to update",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Moderate the comment: approve it, hold it for moderation, mark it as spam, or send it to the trash",
+                            "type": {
+                                "kind": "ENUM",
+                                "name": "CommentStatusEnum",
+                                "isOneOf": false,
+                                "ofType": null
                             },
                             "defaultValue": null
                         }
@@ -51838,6 +54456,106 @@
                 },
                 {
                     "kind": "UNION",
+                    "name": "RootDeleteCommentMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a comment",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CommentDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CommentDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CommentHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootDeleteCustomPostMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a custom post",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
                     "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a category term",
                     "fields": null,
@@ -52061,6 +54779,141 @@
                 },
                 {
                     "kind": "UNION",
+                    "name": "RootDeleteMediaItemMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting an attachment",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MediaItemDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MediaItemDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootDeleteMenuMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a menu",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "MenuDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootDeletePageMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a page",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
                     "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a post's category term",
                     "fields": null,
@@ -52136,6 +54989,59 @@
                         {
                             "kind": "OBJECT",
                             "name": "LoggedInUserHasNoEditingTaxonomyTermsCapabilityErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootDeletePostMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a post",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -53076,6 +55982,41 @@
                         {
                             "kind": "OBJECT",
                             "name": "EntityMetaKeyWithValueDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootUpdateCommentMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when updating a comment",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CommentDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },

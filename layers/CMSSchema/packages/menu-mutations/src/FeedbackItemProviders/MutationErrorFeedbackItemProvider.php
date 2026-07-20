@@ -15,6 +15,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E7 = 'e7';
     public final const E8 = 'e8';
     public final const E9 = 'e9';
+    public final const E10 = 'e10';
+    public final const E11 = 'e11';
 
     /**
      * @return string[]
@@ -28,6 +30,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7,
             self::E8,
             self::E9,
+            self::E10,
+            self::E11,
         ];
     }
 
@@ -40,6 +44,8 @@ class MutationErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E7 => $this->__('There is no menu with slug \'%s\'', 'gatographql'),
             self::E8 => $this->__('You don\'t have permission to edit menu with id \'%s\'', 'gatographql'),
             self::E9 => $this->__('You don\'t have permission to edit menus', 'gatographql'),
+            self::E10 => $this->__('You must be logged in to delete menus', 'gatographql'),
+            self::E11 => $this->__('You don\'t have permission to delete menu with ID \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

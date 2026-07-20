@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MenuMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\MenuMutations\TypeResolvers\ObjectType\AbstractMenuMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MenuMutations\TypeResolvers\ObjectType\MenuUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MenuMutations\TypeResolvers\ObjectType\RootCreateMenuMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\MenuMutations\TypeResolvers\ObjectType\RootUpdateMenuMutationPayloadObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractTransientEntityOperationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 
@@ -21,7 +23,9 @@ class MenuMutationTransientEntityOperationPayloadObjectTypeFieldResolver extends
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractMenuMutationPayloadObjectTypeResolver::class,
+            RootCreateMenuMutationPayloadObjectTypeResolver::class,
+            RootUpdateMenuMutationPayloadObjectTypeResolver::class,
+            MenuUpdateMutationPayloadObjectTypeResolver::class,
         ];
     }
 }

@@ -19,6 +19,7 @@ class MutationInputProperties
     public final const FILENAME = 'filename';
 
     public final const ID = 'id';
+    public final const FORCE = 'force';
 
     public final const MEDIAITEM_BY = 'mediaItemBy';
     public final const URL = 'url';

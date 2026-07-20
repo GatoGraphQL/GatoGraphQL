@@ -43,10 +43,34 @@ interface MediaTypeMutationAPIInterface
         string|int $mediaItemID,
         array $mediaItemData,
     ): void;
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     */
+    public function trashMediaItem(
+        string|int $mediaItemID,
+    ): void;
+    /**
+     * @throws MediaItemCRUDMutationException In case of error
+     */
+    public function deleteMediaItem(
+        string|int $mediaItemID,
+    ): void;
+    /**
+     * Whether media items can be sent to the trash, or must
+     * always be deleted permanently.
+     */
+    public function doesMediaItemSupportTrash(): bool;
+    public function isMediaItemInTrash(
+        string|int $mediaItemID,
+    ): bool;
     public function canUserEditMediaItems(
         string|int $userID,
     ): bool;
     public function canUserEditMediaItem(
+        string|int $userID,
+        string|int $mediaItemID,
+    ): bool;
+    public function canUserDeleteMediaItem(
         string|int $userID,
         string|int $mediaItemID,
     ): bool;

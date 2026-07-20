@@ -8,6 +8,7 @@ use PoPCMSSchema\CustomPostMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CustomPostMutations\Module;
 use PoPCMSSchema\CustomPostMutations\ModuleConfiguration;
 use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractCustomPostUpdateInputObjectTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\InputObjectType\AbstractDeleteCustomPostInputObjectTypeResolver;
 use PoPCMSSchema\UserState\Checkpoints\UserLoggedInCheckpoint;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
@@ -17,6 +18,7 @@ use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use stdClass;
 
 abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
@@ -39,6 +41,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return [
             'update',
+            'delete',
         ];
     }
 
@@ -46,6 +49,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     {
         return match ($fieldName) {
             'update' => $this->__('Update the custom post', 'gatographql'),
+            'delete' => $this->__('Delete the custom post', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -58,11 +62,13 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         if (!$usePayloadableCustomPostMutations) {
             return match ($fieldName) {
                 'update' => SchemaTypeModifiers::NONE,
+                'delete' => SchemaTypeModifiers::NON_NULLABLE,
                 default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
             };
         }
         return match ($fieldName) {
-            'update' => SchemaTypeModifiers::NON_NULLABLE,
+            'update',
+            'delete' => SchemaTypeModifiers::NON_NULLABLE,
             default => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
     }
@@ -76,11 +82,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
             'update' => [
                 'input' => $this->getCustomPostUpdateInputObjectTypeResolver(),
             ],
+            'delete' => [
+                'input' => $this->getCustomPostDeleteInputObjectTypeResolver(),
+            ],
             default => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
     }
 
     abstract protected function getCustomPostUpdateInputObjectTypeResolver(): AbstractCustomPostUpdateInputObjectTypeResolver;
+
+    abstract protected function getCustomPostDeleteInputObjectTypeResolver(): AbstractDeleteCustomPostInputObjectTypeResolver;
 
     public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
     {
@@ -101,6 +112,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
     ): bool {
         switch ($fieldName) {
             case 'update':
+            case 'delete':
                 return true;
         }
         return parent::validateMutationOnObject($objectTypeResolver, $fieldName);
@@ -125,6 +137,16 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
         $customPost = $object;
         switch ($field->getName()) {
             case 'update':
+                $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($customPost);
+                break;
+            case 'delete':
+                /**
+                 * The "input" is optional, as it only carries the `force`
+                 * input field. Hence create it if it was not provided.
+                 */
+                if (!isset($fieldArgsForMutationForObject['input'])) {
+                    $fieldArgsForMutationForObject['input'] = new stdClass();
+                }
                 $fieldArgsForMutationForObject['input']->{MutationInputProperties::ID} = $objectTypeResolver->getID($customPost);
                 break;
         }
@@ -160,6 +182,7 @@ abstract class AbstractCustomPostObjectTypeFieldResolver extends AbstractObjectT
 
         switch ($fieldDataAccessor->getFieldName()) {
             case 'update':
+            case 'delete':
                 $validationCheckpoints[] = $this->getUserLoggedInCheckpoint();
                 break;
         }

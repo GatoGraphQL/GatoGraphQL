@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\PageMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\AbstractPageMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\PageUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\RootCreatePageMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\PageMutations\TypeResolvers\ObjectType\RootUpdatePageMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Pages\TypeResolvers\ObjectType\PageObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -30,7 +32,9 @@ class PageMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutationP
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractPageMutationPayloadObjectTypeResolver::class,
+            RootCreatePageMutationPayloadObjectTypeResolver::class,
+            RootUpdatePageMutationPayloadObjectTypeResolver::class,
+            PageUpdateMutationPayloadObjectTypeResolver::class,
         ];
     }
 

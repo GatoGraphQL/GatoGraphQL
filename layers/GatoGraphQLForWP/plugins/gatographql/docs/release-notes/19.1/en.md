@@ -1,5 +1,54 @@
 # Release Notes: 19.1
 
+## Added
+
+The schema can now delete entities, and moderate comments.
+
+### Deleting entities
+
+New mutations to delete posts, pages, custom posts, media items and menus ([#3358](https://github.com/GatoGraphQL/GatoGraphQL/pull/3358)):
+
+- On the `Root` type: `deletePost`, `deletePage`, `deleteCustomPost`, `deleteMediaItem`, `deleteMenu` and `deleteComment`, and their bulk versions (`deletePosts`, and so on).
+- On the entity types (for nested mutations): the `delete` field on `Post`, `Page`, `GenericCustomPost`, `Media`, `Menu` and `Comment`.
+
+The entity is sent to the trash by default, and permanently deleted when providing `true` in the `force` input:
+
+```graphql
+mutation {
+  deletePost(input: { id: 1, force: true }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+```
+
+Menus are always deleted permanently, as WordPress stores them as taxonomy terms, which have no trash. Media items also require `force: true` unless the `MEDIA_TRASH` constant is enabled, as WordPress does not send attachments to the trash by default.
+
+The user must be logged-in and have the capability to delete the entity, which WordPress resolves taking into account the entity's ownership and status.
+
+### Updating and moderating comments
+
+New mutations `updateComment` and `updateComments` on the `Root` type, and the nested `update` field on the `Comment` type ([#3358](https://github.com/GatoGraphQL/GatoGraphQL/pull/3358)).
+
+The comment is moderated via the `status` input, which can approve it, hold it for moderation, mark it as spam, or send it to the trash. All input fields are optional: only the provided ones are applied.
+
+```graphql
+mutation {
+  updateComment(input: { id: 1, status: spam }) {
+    status
+    comment {
+      id
+      status
+    }
+  }
+}
+```
+
 ## Improvements
 
 - Updated WooCommerce docs with mutations ([#3356](https://github.com/GatoGraphQL/GatoGraphQL/pull/3356))

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMediaMutations\ObjectTypeResolverPickers;
 
-use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractRootCreateCustomPostMutationErrorPayloadUnionTypeResolver;
+use PoPCMSSchema\CustomPostMutations\TypeResolvers\UnionType\AbstractRootUpdateCustomPostMutationErrorPayloadUnionTypeResolver;
 use PoPCMSSchema\MediaMutations\ObjectTypeResolverPickers\AbstractMediaItemDoesNotExistErrorPayloadObjectTypeResolverPicker;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 
@@ -16,7 +18,9 @@ class CreateOrUpdateCustomPostMediaItemDoesNotExistErrorPayloadObjectTypeResolve
     public function getUnionTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootCreateCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            AbstractRootUpdateCustomPostMutationErrorPayloadUnionTypeResolver::class,
+            AbstractCustomPostUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

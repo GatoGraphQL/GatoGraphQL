@@ -15,8 +15,10 @@ use WP_Post;
 
 use function get_post_type_object;
 use function user_can;
+use function wp_delete_post;
 use function wp_insert_post;
 use function wp_slash;
+use function wp_trash_post;
 use function wp_update_post;
 
 /**
@@ -164,6 +166,61 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
         return $postID;
     }
 
+    /**
+     * Send the custom post to the trash, from where it can be restored.
+     *
+     * @throws CustomPostCRUDMutationException If there was an error (eg: the custom post could not be trashed)
+     */
+    public function trashCustomPost(string|int $customPostID): void
+    {
+        $trashedPost = wp_trash_post((int)$customPostID);
+        if (!($trashedPost instanceof WP_Post)) {
+            throw new CustomPostCRUDMutationException(
+                sprintf(
+                    $this->__('The custom post with ID \'%s\' could not be sent to the trash', 'gatographql'),
+                    $customPostID
+                )
+            );
+        }
+    }
+
+    /**
+     * Permanently delete the custom post, bypassing the trash.
+     *
+     * @throws CustomPostCRUDMutationException If there was an error (eg: the custom post could not be deleted)
+     */
+    public function deleteCustomPost(string|int $customPostID): void
+    {
+        $deletedPost = wp_delete_post((int)$customPostID, true);
+        if (!($deletedPost instanceof WP_Post)) {
+            throw new CustomPostCRUDMutationException(
+                sprintf(
+                    $this->__('The custom post with ID \'%s\' could not be deleted', 'gatographql'),
+                    $customPostID
+                )
+            );
+        }
+    }
+
+    /**
+     * Whether the custom post type can be sent to the trash, or must
+     * be permanently deleted.
+     *
+     * Mirrors the logic in WordPress' REST API: the trash must be enabled
+     * on the site, and media items additionally require `MEDIA_TRASH`,
+     * which is disabled by default.
+     */
+    public function doesCustomPostTypeSupportTrash(string $customPostType): bool
+    {
+        if (EMPTY_TRASH_DAYS <= 0) {
+            return false;
+        }
+        if ($customPostType === 'attachment') {
+            return MEDIA_TRASH;
+        }
+        return true;
+    }
+
     public function canUserEditCustomPost(string|int $userID, string|int $customPostID): bool
     {
         return user_can((int)$userID, 'edit_post', $customPostID);
@@ -177,5 +234,10 @@ class CustomPostTypeMutationAPI extends AbstractBasicService implements CustomPo
         }
 
         return isset($customPostTypeObject->cap->edit_posts) && user_can((int)$userID, $customPostTypeObject->cap->edit_posts);
+    }
+
+    public function canUserDeleteCustomPost(string|int $userID, string|int $customPostID): bool
+    {
+        return user_can((int)$userID, 'delete_post', $customPostID);
     }
 }

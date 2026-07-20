@@ -550,6 +550,46 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CommentDoesNotSupportTrashErrorPayload",
+                    "extensions": {
+                        "elementName": "CommentDoesNotSupportTrashErrorPayload",
+                        "namespacedName": "CommentDoesNotSupportTrashErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "CommentHasAlreadyBeenTrashedErrorPayload",
+                    "extensions": {
+                        "elementName": "CommentHasAlreadyBeenTrashedErrorPayload",
+                        "namespacedName": "CommentHasAlreadyBeenTrashedErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "CommentParentCommentDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "CommentParentCommentDoesNotExistErrorPayload",
@@ -654,6 +694,46 @@
                     "extensions": {
                         "elementName": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
                         "namespacedName": "CustomPostDoesNotHaveExpectedTypeErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "CustomPostDoesNotSupportTrashErrorPayload",
+                    "extensions": {
+                        "elementName": "CustomPostDoesNotSupportTrashErrorPayload",
+                        "namespacedName": "CustomPostDoesNotSupportTrashErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                    "extensions": {
+                        "elementName": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                        "namespacedName": "CustomPostHasAlreadyBeenTrashedErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -2134,6 +2214,86 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
@@ -2601,6 +2761,46 @@
                     "extensions": {
                         "elementName": "MediaItemDoesNotExistErrorPayload",
                         "namespacedName": "MediaItemDoesNotExistErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "MediaItemDoesNotSupportTrashErrorPayload",
+                    "extensions": {
+                        "elementName": "MediaItemDoesNotSupportTrashErrorPayload",
+                        "namespacedName": "MediaItemDoesNotSupportTrashErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+                    "extensions": {
+                        "elementName": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+                        "namespacedName": "MediaItemHasAlreadyBeenTrashedErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -3574,6 +3774,21 @@
                             ]
                         },
                         {
+                            "name": "deleteComment",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteCommentMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -3610,6 +3825,42 @@
                             ]
                         },
                         {
+                            "name": "deleteComments",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteCustomPostMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -3639,6 +3890,150 @@
                                 },
                                 {
                                     "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMenus",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePage",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -3770,6 +4165,27 @@
                         },
                         {
                             "name": "deletePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePosts",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -4497,6 +4913,21 @@
                             ]
                         },
                         {
+                            "name": "updateComment",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateCommentMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -4513,6 +4944,27 @@
                         },
                         {
                             "name": "updateCommentMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateComments",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -9057,6 +9509,21 @@
                             ]
                         },
                         {
+                            "name": "deleteComment",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteCommentMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -9093,6 +9560,42 @@
                             ]
                         },
                         {
+                            "name": "deleteComments",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCustomPost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteCustomPostMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -9122,6 +9625,150 @@
                                 },
                                 {
                                     "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteCustomPosts",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMediaItem",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMediaItems",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMenu",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteMenus",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePage",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePages",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePost",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -9253,6 +9900,27 @@
                         },
                         {
                             "name": "deletePostTags",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deletePosts",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -11031,6 +11699,21 @@
                             ]
                         },
                         {
+                            "name": "updateComment",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateCommentMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -11047,6 +11730,27 @@
                         },
                         {
                             "name": "updateCommentMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateComments",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -12433,6 +13137,62 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteCommentMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteCommentMutationPayload",
+                        "namespacedName": "RootDeleteCommentMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteCustomPostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteCustomPostMutationPayload",
+                        "namespacedName": "RootDeleteCustomPostMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteGenericCategoryTermMetaMutationPayload",
@@ -12621,6 +13381,90 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteMediaItemMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteMediaItemMutationPayload",
+                        "namespacedName": "RootDeleteMediaItemMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteMenuMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteMenuMutationPayload",
+                        "namespacedName": "RootDeleteMenuMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePageMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeletePageMutationPayload",
+                        "namespacedName": "RootDeletePageMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeletePostCategoryTermMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMetaMutationPayload",
@@ -12669,6 +13513,34 @@
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMutationPayload",
                         "namespacedName": "RootDeletePostCategoryTermMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeletePostMutationPayload",
+                        "namespacedName": "RootDeletePostMutationPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -13517,6 +14389,50 @@
                     "extensions": {
                         "elementName": "RootUpdateCommentMetaMutationPayload",
                         "namespacedName": "RootUpdateCommentMetaMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "comment",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "commentID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCommentMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateCommentMutationPayload",
+                        "namespacedName": "RootUpdateCommentMutationPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -19454,6 +20370,30 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteCommentInput",
+                    "extensions": {
+                        "elementName": "RootDeleteCommentInput",
+                        "namespacedName": "RootDeleteCommentInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeleteCommentMetaInput",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaInput",
@@ -19476,6 +20416,30 @@
                         },
                         {
                             "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteCustomPostInput",
+                    "extensions": {
+                        "elementName": "RootDeleteCustomPostInput",
+                        "namespacedName": "RootDeleteCustomPostInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -19562,6 +20526,72 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteMediaItemInput",
+                    "extensions": {
+                        "elementName": "RootDeleteMediaItemInput",
+                        "namespacedName": "RootDeleteMediaItemInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteMenuInput",
+                    "extensions": {
+                        "elementName": "RootDeleteMenuInput",
+                        "namespacedName": "RootDeleteMenuInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePageInput",
+                    "extensions": {
+                        "elementName": "RootDeletePageInput",
+                        "namespacedName": "RootDeletePageInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeletePostCategoryInput",
                     "extensions": {
                         "elementName": "RootDeletePostCategoryInput",
@@ -19578,6 +20608,30 @@
                         },
                         {
                             "name": "taxonomy",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostInput",
+                    "extensions": {
+                        "elementName": "RootDeletePostInput",
+                        "namespacedName": "RootDeletePostInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "force",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -20892,6 +21946,54 @@
                         },
                         {
                             "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCommentInput",
+                    "extensions": {
+                        "elementName": "RootUpdateCommentInput",
+                        "namespacedName": "RootUpdateCommentInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "authorEmail",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "authorName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "authorURL",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "commentAs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "status",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -23693,6 +24795,28 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteCommentMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteCommentMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteCommentMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteCustomPostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteCustomPostMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteCustomPostMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
@@ -23748,6 +24872,39 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootDeleteMediaItemMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteMediaItemMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteMediaItemMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteMenuMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteMenuMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteMenuMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePageMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeletePageMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePageMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
@@ -23763,6 +24920,17 @@
                     "extensions": {
                         "elementName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
                         "namespacedName": "RootDeletePostCategoryTermMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeletePostMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeletePostMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeletePostMutationErrorPayloadUnion",
                         "possibleValues": null
                     },
                     "fields": null,
@@ -23983,6 +25151,17 @@
                     "extensions": {
                         "elementName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdateCommentMetaMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateCommentMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateCommentMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateCommentMutationErrorPayloadUnion",
                         "possibleValues": null
                     },
                     "fields": null,

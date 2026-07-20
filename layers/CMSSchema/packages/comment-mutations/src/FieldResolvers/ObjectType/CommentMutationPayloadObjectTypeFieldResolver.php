@@ -4,7 +4,12 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMutations\FieldResolvers\ObjectType;
 
-use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\AbstractCommentMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentReplyMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CommentUpdateMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\CustomPostAddCommentMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootAddCommentToCustomPostMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootReplyCommentMutationPayloadObjectTypeResolver;
+use PoPCMSSchema\CommentMutations\TypeResolvers\ObjectType\RootUpdateCommentMutationPayloadObjectTypeResolver;
 use PoPCMSSchema\Comments\TypeResolvers\ObjectType\CommentObjectTypeResolver;
 use PoPSchema\SchemaCommons\FieldResolvers\ObjectType\AbstractObjectMutationPayloadObjectTypeFieldResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -30,7 +35,12 @@ class CommentMutationPayloadObjectTypeFieldResolver extends AbstractObjectMutati
     public function getObjectTypeResolverClassesToAttachTo(): array
     {
         return [
-            AbstractCommentMutationPayloadObjectTypeResolver::class,
+            RootAddCommentToCustomPostMutationPayloadObjectTypeResolver::class,
+            CustomPostAddCommentMutationPayloadObjectTypeResolver::class,
+            RootReplyCommentMutationPayloadObjectTypeResolver::class,
+            CommentReplyMutationPayloadObjectTypeResolver::class,
+            RootUpdateCommentMutationPayloadObjectTypeResolver::class,
+            CommentUpdateMutationPayloadObjectTypeResolver::class,
         ];
     }
 

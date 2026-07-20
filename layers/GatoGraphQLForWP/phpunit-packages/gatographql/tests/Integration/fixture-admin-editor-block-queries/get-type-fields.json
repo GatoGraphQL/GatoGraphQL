@@ -202,6 +202,28 @@
           "description": "Error payload for: \"The comment does not exist\""
         },
         {
+          "name": "CommentDoesNotSupportTrashErrorPayload",
+          "namespacedName": "CommentDoesNotSupportTrashErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment does not support being sent to the trash\""
+        },
+        {
+          "name": "CommentHasAlreadyBeenTrashedErrorPayload",
+          "namespacedName": "CommentHasAlreadyBeenTrashedErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The comment has already been sent to the trash\""
+        },
+        {
           "name": "CommentParentCommentDoesNotExistErrorPayload",
           "namespacedName": "CommentParentCommentDoesNotExistErrorPayload",
           "fields": [
@@ -266,6 +288,28 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The requested custom post does not have the expected type\""
+        },
+        {
+          "name": "CustomPostDoesNotSupportTrashErrorPayload",
+          "namespacedName": "CustomPostDoesNotSupportTrashErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The custom post does not support being sent to the trash\""
+        },
+        {
+          "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+          "namespacedName": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The custom post has already been sent to the trash\""
         },
         {
           "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
@@ -729,6 +773,50 @@
           "description": "Error payload for: \"The logged-in user has no permission to edit taxonomy terms\""
         },
         {
+          "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to delete the comment\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The logged-in user has no permission to delete the requested custom post\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to delete the media item\""
+        },
+        {
+          "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+          "namespacedName": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The user has no permission to delete the menu\""
+        },
+        {
           "name": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
           "namespacedName": "LoggedInUserHasNoPermissionToEditCommentErrorPayload",
           "fields": [
@@ -901,6 +989,28 @@
           ],
           "kind": "OBJECT",
           "description": "Error payload for: \"The requested media item does not exist\""
+        },
+        {
+          "name": "MediaItemDoesNotSupportTrashErrorPayload",
+          "namespacedName": "MediaItemDoesNotSupportTrashErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The media item does not support being sent to the trash\""
+        },
+        {
+          "name": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+          "namespacedName": "MediaItemHasAlreadyBeenTrashedErrorPayload",
+          "fields": [
+            {
+              "name": "message"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Error payload for: \"The media item has already been sent to the trash\""
         },
         {
           "name": "Menu",
@@ -1126,16 +1236,49 @@
               "name": "deleteCategoryMetas"
             },
             {
+              "name": "deleteComment"
+            },
+            {
               "name": "deleteCommentMeta"
             },
             {
               "name": "deleteCommentMetas"
             },
             {
+              "name": "deleteComments"
+            },
+            {
+              "name": "deleteCustomPost"
+            },
+            {
               "name": "deleteCustomPostMeta"
             },
             {
               "name": "deleteCustomPostMetas"
+            },
+            {
+              "name": "deleteCustomPosts"
+            },
+            {
+              "name": "deleteMediaItem"
+            },
+            {
+              "name": "deleteMediaItems"
+            },
+            {
+              "name": "deleteMenu"
+            },
+            {
+              "name": "deleteMenus"
+            },
+            {
+              "name": "deletePage"
+            },
+            {
+              "name": "deletePages"
+            },
+            {
+              "name": "deletePost"
             },
             {
               "name": "deletePostCategories"
@@ -1160,6 +1303,9 @@
             },
             {
               "name": "deletePostTags"
+            },
+            {
+              "name": "deletePosts"
             },
             {
               "name": "deleteTag"
@@ -1282,10 +1428,16 @@
               "name": "updateCategoryMetas"
             },
             {
+              "name": "updateComment"
+            },
+            {
               "name": "updateCommentMeta"
             },
             {
               "name": "updateCommentMetas"
+            },
+            {
+              "name": "updateComments"
             },
             {
               "name": "updateCustomPost"
@@ -2172,16 +2324,49 @@
               "name": "deleteCategoryMetas"
             },
             {
+              "name": "deleteComment"
+            },
+            {
               "name": "deleteCommentMeta"
             },
             {
               "name": "deleteCommentMetas"
             },
             {
+              "name": "deleteComments"
+            },
+            {
+              "name": "deleteCustomPost"
+            },
+            {
               "name": "deleteCustomPostMeta"
             },
             {
               "name": "deleteCustomPostMetas"
+            },
+            {
+              "name": "deleteCustomPosts"
+            },
+            {
+              "name": "deleteMediaItem"
+            },
+            {
+              "name": "deleteMediaItems"
+            },
+            {
+              "name": "deleteMenu"
+            },
+            {
+              "name": "deleteMenus"
+            },
+            {
+              "name": "deletePage"
+            },
+            {
+              "name": "deletePages"
+            },
+            {
+              "name": "deletePost"
             },
             {
               "name": "deletePostCategories"
@@ -2206,6 +2391,9 @@
             },
             {
               "name": "deletePostTags"
+            },
+            {
+              "name": "deletePosts"
             },
             {
               "name": "deleteTag"
@@ -2499,10 +2687,16 @@
               "name": "updateCategoryMetas"
             },
             {
+              "name": "updateComment"
+            },
+            {
               "name": "updateCommentMeta"
             },
             {
               "name": "updateCommentMetas"
+            },
+            {
+              "name": "updateComments"
             },
             {
               "name": "updateCustomPost"
@@ -2965,6 +3159,34 @@
           "description": "Payload of executing a delete meta mutation on a comment"
         },
         {
+          "name": "RootDeleteCommentMutationPayload",
+          "namespacedName": "RootDeleteCommentMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of deleting a comment"
+        },
+        {
+          "name": "RootDeleteCustomPostMutationPayload",
+          "namespacedName": "RootDeleteCustomPostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a custom post"
+        },
+        {
           "name": "RootDeleteGenericCategoryTermMetaMutationPayload",
           "namespacedName": "RootDeleteGenericCategoryTermMetaMutationPayload",
           "fields": [
@@ -3053,6 +3275,48 @@
           "description": "Payload of executing a delete mutation on a tag term"
         },
         {
+          "name": "RootDeleteMediaItemMutationPayload",
+          "namespacedName": "RootDeleteMediaItemMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of deleting an attachment"
+        },
+        {
+          "name": "RootDeleteMenuMutationPayload",
+          "namespacedName": "RootDeleteMenuMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of deleting a menu"
+        },
+        {
+          "name": "RootDeletePageMutationPayload",
+          "namespacedName": "RootDeletePageMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a page"
+        },
+        {
           "name": "RootDeletePostCategoryTermMetaMutationPayload",
           "namespacedName": "RootDeletePostCategoryTermMetaMutationPayload",
           "fields": [
@@ -3085,6 +3349,20 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing a delete mutation on a post category term"
+        },
+        {
+          "name": "RootDeletePostMutationPayload",
+          "namespacedName": "RootDeletePostMutationPayload",
+          "fields": [
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of executing a delete mutation on a post"
         },
         {
           "name": "RootDeletePostTagTermMetaMutationPayload",
@@ -3479,6 +3757,26 @@
           ],
           "kind": "OBJECT",
           "description": "Payload of executing an update meta mutation on a comment"
+        },
+        {
+          "name": "RootUpdateCommentMutationPayload",
+          "namespacedName": "RootUpdateCommentMutationPayload",
+          "fields": [
+            {
+              "name": "comment"
+            },
+            {
+              "name": "commentID"
+            },
+            {
+              "name": "errors"
+            },
+            {
+              "name": "status"
+            }
+          ],
+          "kind": "OBJECT",
+          "description": "Payload of updating a comment"
         },
         {
           "name": "RootUpdateCustomPostMutationPayload",
@@ -5284,11 +5582,25 @@
           "description": "Input to delete a category term's meta entry"
         },
         {
+          "name": "RootDeleteCommentInput",
+          "namespacedName": "RootDeleteCommentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a comment"
+        },
+        {
           "name": "RootDeleteCommentMetaInput",
           "namespacedName": "RootDeleteCommentMetaInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete an entity's meta entry"
+        },
+        {
+          "name": "RootDeleteCustomPostInput",
+          "namespacedName": "RootDeleteCustomPostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a custom post"
         },
         {
           "name": "RootDeleteCustomPostMetaInput",
@@ -5312,11 +5624,39 @@
           "description": "Input to delete a tag term"
         },
         {
+          "name": "RootDeleteMediaItemInput",
+          "namespacedName": "RootDeleteMediaItemInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete an attachment"
+        },
+        {
+          "name": "RootDeleteMenuInput",
+          "namespacedName": "RootDeleteMenuInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a menu"
+        },
+        {
+          "name": "RootDeletePageInput",
+          "namespacedName": "RootDeletePageInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a page"
+        },
+        {
           "name": "RootDeletePostCategoryInput",
           "namespacedName": "RootDeletePostCategoryInput",
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to delete a category term"
+        },
+        {
+          "name": "RootDeletePostInput",
+          "namespacedName": "RootDeletePostInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to delete a post"
         },
         {
           "name": "RootDeletePostTagInput",
@@ -5527,6 +5867,13 @@
           "fields": null,
           "kind": "INPUT_OBJECT",
           "description": "Input to update a category term's meta"
+        },
+        {
+          "name": "RootUpdateCommentInput",
+          "namespacedName": "RootUpdateCommentInput",
+          "fields": null,
+          "kind": "INPUT_OBJECT",
+          "description": "Input to update a comment"
         },
         {
           "name": "RootUpdateCommentMetaInput",
@@ -6033,6 +6380,20 @@
           "description": "Union of 'Error Payload' types when deleting meta on a comment"
         },
         {
+          "name": "RootDeleteCommentMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteCommentMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a comment"
+        },
+        {
+          "name": "RootDeleteCustomPostMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteCustomPostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a custom post"
+        },
+        {
           "name": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
           "namespacedName": "RootDeleteGenericCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
@@ -6068,6 +6429,27 @@
           "description": "Union of 'Error Payload' types when deleting a tag term"
         },
         {
+          "name": "RootDeleteMediaItemMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteMediaItemMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting an attachment"
+        },
+        {
+          "name": "RootDeleteMenuMutationErrorPayloadUnion",
+          "namespacedName": "RootDeleteMenuMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a menu"
+        },
+        {
+          "name": "RootDeletePageMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePageMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a page"
+        },
+        {
           "name": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
           "namespacedName": "RootDeletePostCategoryTermMetaMutationErrorPayloadUnion",
           "fields": null,
@@ -6080,6 +6462,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when deleting a post category term"
+        },
+        {
+          "name": "RootDeletePostMutationErrorPayloadUnion",
+          "namespacedName": "RootDeletePostMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when deleting a post"
         },
         {
           "name": "RootDeletePostTagTermMetaMutationErrorPayloadUnion",
@@ -6220,6 +6609,13 @@
           "fields": null,
           "kind": "UNION",
           "description": "Union of 'Error Payload' types when updating meta on a comment"
+        },
+        {
+          "name": "RootUpdateCommentMutationErrorPayloadUnion",
+          "namespacedName": "RootUpdateCommentMutationErrorPayloadUnion",
+          "fields": null,
+          "kind": "UNION",
+          "description": "Union of 'Error Payload' types when updating a comment"
         },
         {
           "name": "RootUpdateCustomPostMutationErrorPayloadUnion",

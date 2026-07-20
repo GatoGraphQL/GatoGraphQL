@@ -13,6 +13,7 @@ use PoP\ComponentModel\App;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use WP_Error;
+use WP_Term;
 
 use function esc_url_raw;
 use function get_post_type;
@@ -26,6 +27,7 @@ use function sanitize_textarea_field;
 use function sanitize_title;
 use function set_theme_mod;
 use function user_can;
+use function wp_delete_nav_menu;
 use function wp_delete_post;
 use function wp_get_nav_menu_items;
 use function wp_insert_term;
@@ -505,6 +507,50 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         }
 
         return user_can((int) $userID, 'edit_term', (int) $menuID);
+    }
+
+    public function canUserDeleteMenu(
+        string|int $userID,
+        string|int $menuID,
+    ): bool {
+        $menuTerm = get_term((int) $menuID, 'nav_menu');
+        if (
+            !($menuTerm instanceof WP_Term)
+            || $menuTerm->taxonomy !== 'nav_menu'
+        ) {
+            return false;
+        }
+
+        return user_can((int) $userID, 'delete_term', (int) $menuID);
+    }
+
+    /**
+     * Menus are stored as terms in the `nav_menu` taxonomy, hence they
+     * are always deleted permanently: there is no trash for them.
+     *
+     * @throws MenuCRUDMutationException In case of error
+     */
+    public function deleteMenu(
+        string|int $menuID,
+    ): void {
+        $deletedOrError = wp_delete_nav_menu((int) $menuID);
+
+        if (is_wp_error($deletedOrError)) {
+            /** @var WP_Error */
+            $wpError = $deletedOrError;
+            throw new MenuCRUDMutationException(
+                $wpError->get_error_message()
+            );
+        }
+
+        if ($deletedOrError === false) {
+            throw new MenuCRUDMutationException(
+                sprintf(
+                    $this->__('The menu with ID \'%s\' could not be deleted', 'gatographql'),
+                    $menuID
+                )
+            );
+        }
     }
 
     /**
