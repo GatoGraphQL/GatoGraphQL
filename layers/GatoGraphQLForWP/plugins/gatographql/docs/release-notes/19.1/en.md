@@ -55,4 +55,5 @@ mutation {
 
 ## Fixes
 
+- The "payload types for mutations" schema configuration (its "Do not use payload types for mutations" and "Use payload types for mutations, and add fields to query those payload objects" options) now also applies to the meta, taxonomy term (category and tag) and menu mutations. Previously only the post, page, custom post, media, comment and user-state mutations honored this setting, so meta/taxonomy/menu mutations always used payload types and never exposed their `...MutationPayloadObjects` query fields.
 - Made the ordering of taxonomy terms (such as categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (such as a duplicate name) are always returned in a consistent order when sorting and paginating.
