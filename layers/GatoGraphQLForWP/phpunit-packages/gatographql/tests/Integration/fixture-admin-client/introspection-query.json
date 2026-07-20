@@ -46243,7 +46243,7 @@
                     "inputFields": [
                         {
                             "name": "force",
-                            "description": "Permanently delete the media item, bypassing the trash. Otherwise the media item is sent to the trash, from where it can be restored.",
+                            "description": "Permanently delete the media item, bypassing the trash. Otherwise the media item is sent to the trash, from where it can be restored; sending to the trash requires constant `MEDIA_TRASH` to be enabled, failing otherwise. Defaults to `true` unless the site sends media items to the trash.",
                             "type": {
                                 "kind": "NON_NULL",
                                 "name": "Boolean!",
@@ -46255,7 +46255,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "false"
+                            "defaultValue": "true"
                         },
                         {
                             "name": "id",
