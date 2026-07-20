@@ -438,65 +438,111 @@ msgstr ""
 msgid "Input to update a category term's meta"
 msgstr "Entrada para actualizar el meta de un término de categoría"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:62
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:74
 msgid "Could not create the comment"
 msgstr "No se pudo crear el comentario"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:108
+#, php-format
+msgid "The comment with ID '%s' could not be updated"
+msgstr "El comentario con ID '%s' no pudo actualizarse"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:158
+#, php-format
+msgid "Unsupported comment status '%s'"
+msgstr "Estado de comentario '%s' no admitido"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:184
+#, php-format
+msgid "The comment with ID '%s' could not be sent to the trash"
+msgstr "El comentario con ID '%s' no pudo enviarse a la papelera"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:200
+#, php-format
+msgid "The comment with ID '%s' could not be deleted"
+msgstr "El comentario con ID '%s' no pudo eliminarse"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
 #: CMSSchema/packages/user-state-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
 msgid "You are not logged in"
 msgstr "No has iniciado sesión"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
 msgid "The comment author's name is missing"
 msgstr "Falta el nombre del autor del comentario"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 msgid "The comment author's email is missing"
 msgstr "Falta el correo electrónico del autor del comentario"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
 msgid "The custom post ID is missing"
 msgstr "Falta el ID del tipo de entrada personalizado"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
 msgid "The comment is empty"
 msgstr "El comentario está vacío"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
 #, php-format
 msgid "There is no (parent) comment with ID '%s'"
 msgstr "No existe ningún comentario (padre) con ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
 #, php-format
 msgid "There is no custom post with ID '%s'"
 msgstr "No existe ningún tipo de entrada personalizado con ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
 #, php-format
 msgid "Comments are not supported for custom post type '%s'"
 msgstr ""
 "Los comentarios no son compatibles con el tipo de entrada personalizado '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:61
 #, php-format
 msgid "Comments are not open for custom post with ID '%s'"
 msgstr "Los comentarios no están abiertos para el custom post con ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:62
 #, php-format
 msgid "There is no comment with ID '%s'"
 msgstr "No existe ningún comentario con ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:63
 #, php-format
 msgid ""
 "The logged-in user doesn't have the ability to edit comment with ID '%s'"
 msgstr ""
 "El usuario conectado no tiene permiso para editar el comentario con ID '%s'"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:64
+#, php-format
+msgid ""
+"The logged-in user doesn't have the ability to delete comment with ID '%s'"
+msgstr ""
+"El usuario con sesión iniciada no tiene la capacidad de eliminar el "
+"comentario con ID '%s'"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:65
+#, php-format
+msgid ""
+"The comment with ID '%s' does not support being sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"El comentario con ID '%s' no admite ser enviado a la papelera. Proporciona "
+"'true' en el input 'force' para eliminarlo permanentemente"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:66
+#, php-format
+msgid ""
+"The comment with ID '%s' has already been sent to the trash. Provide 'true' "
+"in the 'force' input to permanently delete it"
+msgstr ""
+"El comentario con ID '%s' ya ha sido enviado a la papelera. Proporciona "
+"'true' en el input 'force' para eliminarlo permanentemente"
 
 #: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/AbstractAddCommentToCustomPostObjectTypeFieldResolver.php:133
 msgid "Add comments to the custom post"
@@ -506,28 +552,36 @@ msgstr "Añadir comentarios al custom post"
 msgid "Add a comment to the custom post"
 msgstr "Añadir un comentario al custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:140
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:173
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:239
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:320
 msgid "Reply a comment with another comment"
 msgstr "Responder a un comentario con otro comentario"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:141
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:240
 msgid "Reply a comment with other comments"
 msgstr "Responder a un comentario con otros comentarios"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:171
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:241
+msgid "Update the comment"
+msgstr "Actualizar el comentario"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:242
+msgid "Delete the comment"
+msgstr "Eliminar el comentario"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:318
 msgid "Add a comment to a custom post"
 msgstr "Añadir un comentario a un custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:172
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:319
 msgid "Add comments to a custom post"
 msgstr "Añadir comentarios a un custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:174
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:321
 msgid "Reply comment with other comments"
 msgstr "Responder a un comentario con otros comentarios"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:175
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:322
 msgid ""
 "Retrieve the payload objects from a recently-executed "
 "`addCommentToCustomPost` mutation"
@@ -535,11 +589,43 @@ msgstr ""
 "Recuperar los objetos payload de una mutación `addCommentToCustomPost` "
 "ejecutada recientemente"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:176
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:323
 msgid ""
 "Retrieve the payload objects from a recently-executed `replyComment` mutation"
 msgstr ""
 "Recuperar los objetos payload de una mutación `replyComment` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:324
+msgid "Update a comment"
+msgstr "Actualizar un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:325
+msgid "Update comments"
+msgstr "Actualizar comentarios"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:326
+msgid "Delete a comment"
+msgstr "Eliminar un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:327
+msgid "Delete comments"
+msgstr "Eliminar comentarios"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:328
+msgid ""
+"Retrieve the payload objects from a recently-executed `updateComment` "
+"mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `updateComment` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:329
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteComment` "
+"mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deleteComment` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/UserStateRootObjectTypeFieldResolver.php:165
@@ -567,24 +653,74 @@ msgid "The ID of the custom post to add a comment to"
 msgstr "El ID del custom post al que añadir un comentario"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:108
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:127
 msgid "The comment author's name"
 msgstr "El nombre del autor del comentario"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:109
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:128
 msgid "The comment author's email"
 msgstr "El correo electrónico del autor del comentario"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:110
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:129
 msgid "The comment author's site URL"
 msgstr "La URL del sitio del autor del comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:41
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootDeleteCommentInputObjectTypeResolver.php:21
+msgid "Input to delete a comment"
+msgstr "Input para eliminar un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:64
+msgid "The ID of the comment to delete"
+msgstr "El ID del comentario a eliminar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:65
+msgid ""
+"Permanently delete the comment, bypassing the trash. Otherwise the comment "
+"is sent to the trash, from where it can be restored."
+msgstr ""
+"Eliminar permanentemente el comentario, sin pasar por la papelera. De lo "
+"contrario, el comentario se envía a la papelera, desde donde puede "
+"restaurarse."
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:83
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootUpdateCommentInputObjectTypeResolver.php:21
+msgid "Input to update a comment"
+msgstr "Input para actualizar un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:124
+msgid "The ID of the comment to update"
+msgstr "El ID del comentario a actualizar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:125
+msgid "The new content for the comment"
+msgstr "El nuevo contenido para el comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:126
+msgid ""
+"Moderate the comment: approve it, hold it for moderation, mark it as spam, "
+"or send it to the trash"
+msgstr ""
+"Moderar el comentario: aprobarlo, retenerlo para moderación, marcarlo como "
+"spam o enviarlo a la papelera"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentAsOneofInputObjectTypeResolver.php:47
 msgid "Use HTML as content for the comment"
 msgstr "Usar HTML como contenido del comentario"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentDeleteInputObjectTypeResolver.php:21
+msgid "Input to delete a comment (nested mutations)"
+msgstr "Input para eliminar un comentario (mutaciones anidadas)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentReplyInputObjectTypeResolver.php:16
 msgid "Input to reply to a comment"
 msgstr "Input para responder a un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentUpdateInputObjectTypeResolver.php:21
+msgid "Input to update a comment (nested mutations)"
+msgstr "Input para actualizar un comentario (mutaciones anidadas)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CustomPostAddCommentInputObjectTypeResolver.php:16
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootAddCommentToCustomPostInputObjectTypeResolver.php:16
@@ -606,9 +742,24 @@ msgstr ""
 msgid "Error payload for: \"The comment's author name is missing\""
 msgstr "Payload de error para: \"Falta el nombre del autor del comentario\""
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a comment (nested mutations)"
+msgstr "Payload de eliminar un comentario (mutaciones anidadas)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The comment does not exist\""
 msgstr "Payload de error para: \"El comentario no existe\""
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The comment does not support being sent to the trash\""
+msgstr ""
+"Payload de error para: \"El comentario no admite ser enviado a la papelera\""
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The comment has already been sent to the trash\""
+msgstr ""
+"Payload de error para: \"El comentario ya ha sido enviado a la papelera\""
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The comment's parent does not exist\""
@@ -631,10 +782,20 @@ msgstr ""
 "Payload de error para: \"Los comentarios no son compatibles con el tipo de "
 "custom post\""
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentUpdateMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a comment (nested mutations)"
+msgstr "Payload de actualizar un comentario (mutaciones anidadas)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CustomPostAddCommentMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of adding a comment to a custom post (using nested mutations)"
 msgstr ""
 "Payload de añadir un comentario a un custom post (usando mutaciones anidadas)"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteCommentErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user has no permission to delete the comment\""
+msgstr ""
+"Payload de error para: \"El usuario no tiene permiso para eliminar el "
+"comentario\""
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditCommentErrorPayloadObjectTypeResolver.php:32
 msgid ""
@@ -648,9 +809,24 @@ msgstr ""
 msgid "Payload of adding a comment to a custom post"
 msgstr "Payload de añadir un comentario a un custom post"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootDeleteCommentMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a comment"
+msgstr "Payload de eliminar un comentario"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootReplyCommentMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of replying to a comment"
 msgstr "Payload de respuesta a un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootUpdateCommentMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a comment"
+msgstr "Payload de actualizar un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when deleting a comment (nested mutations)"
+msgstr ""
+"Unión de tipos 'Error Payload' al eliminar un comentario (mutaciones "
+"anidadas)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentReplyMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -659,6 +835,13 @@ msgid ""
 msgstr ""
 "Unión de tipos 'Error Payload' al responder a un comentario (usando "
 "mutaciones anidadas)"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentUpdateMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when updating a comment (nested mutations)"
+msgstr ""
+"Unión de tipos 'Error Payload' al actualizar un comentario (mutaciones "
+"anidadas)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CustomPostAddCommentMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -673,9 +856,17 @@ msgid "Union of 'Error Payload' types when adding a comment to a custom post"
 msgstr ""
 "Unión de tipos 'Error Payload' al añadir un comentario a un custom post"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootDeleteCommentMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a comment"
+msgstr "Unión de tipos 'Error Payload' al eliminar un comentario"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootReplyCommentMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when replying to a comment"
 msgstr "Unión de tipos 'Error Payload' al responder a un comentario"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootUpdateCommentMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when updating a comment"
+msgstr "Unión de tipos 'Error Payload' al actualizar un comentario"
 
 #: CMSSchema/packages/commentmeta-mutations/src/FieldResolvers/ObjectType/AbstractCommentObjectTypeFieldResolver.php:183
 msgid "Add a comment meta entry"
@@ -1509,46 +1700,56 @@ msgid "Union of 'Error Payload' types when updating meta on a category term"
 msgstr ""
 "Unión de tipos 'Error Payload' al actualizar meta en un término de categoría"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/custompost-mutations-wp/src/TypeAPIs/CustomPostTypeMutationAPI.php:180
+#, php-format
+msgid "The custom post with ID '%s' could not be sent to the trash"
+msgstr "El custom post con ID '%s' no pudo enviarse a la papelera"
+
+#: CMSSchema/packages/custompost-mutations-wp/src/TypeAPIs/CustomPostTypeMutationAPI.php:198
+#, php-format
+msgid "The custom post with ID '%s' could not be deleted"
+msgstr "El custom post con ID '%s' no pudo eliminarse"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 msgid "You must be logged in to create or update custom posts"
 msgstr ""
 "Debes estar autenticado para crear o actualizar entradas personalizadas"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
 msgid "Your user doesn't have permission for editing custom posts."
 msgstr "Tu usuario no tiene permiso para editar entradas personalizadas."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
 msgid "Your user doesn't have permission for publishing custom posts."
 msgstr "Tu usuario no tiene permiso para publicar entradas personalizadas."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
 #, php-format
 msgid "The custom post with ID '%s' is not of type '%s'."
 msgstr "La entrada personalizada con ID '%s' no es del tipo '%s'."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:61
 #, php-format
 msgid "You don't have permission to edit custom post with ID '%s'"
 msgstr "No tienes permiso para editar la entrada personalizada con ID '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:62
 #, php-format
 msgid "You don't have permission to edit custom post type '%s'"
 msgstr "No tienes permiso para editar el tipo de entrada personalizada '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:63
 #, php-format
 msgid "There is no custom post with slug path '%s' of type '%s'"
 msgstr ""
 "No existe ninguna entrada personalizada con la ruta de slug '%s' del tipo "
 "'%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:64
 msgid "The custom post cannot have itself as parent"
 msgstr "La entrada personalizada no puede ser su propio padre"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:65
 #, php-format
 msgid ""
 "The custom post with ID '%s' is an ancestor of the custom post with ID '%s'"
@@ -1556,16 +1757,47 @@ msgstr ""
 "La entrada personalizada con ID '%s' es un ancestro de la entrada "
 "personalizada con ID '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:48
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:66
+msgid "You must be logged in to delete custom posts"
+msgstr "Debes haber iniciado sesión para eliminar custom posts"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:67
+#, php-format
+msgid "You don't have permission to delete custom post with ID '%s'"
+msgstr "No tienes permiso para eliminar el custom post con ID '%s'"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:68
+#, php-format
+msgid ""
+"The custom post with ID '%s' does not support being sent to the trash. "
+"Provide 'true' in the 'force' input to permanently delete it"
+msgstr ""
+"El custom post con ID '%s' no admite ser enviado a la papelera. Proporciona "
+"'true' en el input 'force' para eliminarlo permanentemente"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:69
+#, php-format
+msgid ""
+"The custom post with ID '%s' has already been sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"El contenido personalizado con ID '%s' ya ha sido enviado a la papelera. "
+"Proporciona 'true' en el input 'force' para eliminarlo permanentemente"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:51
 msgid "Update the custom post"
 msgstr "Actualizar la entrada personalizada"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/GenericCustomPostObjectTypeFieldResolver.php:94
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:52
+msgid "Delete the custom post"
+msgstr "Eliminar el contenido personalizado"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/GenericCustomPostObjectTypeFieldResolver.php:156
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:156
 msgid "Update the post"
 msgstr "Actualizar la entrada"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid ""
 "Create a custom post. This mutation accepts the data that is common to all "
 "custom posts (title, content, excerpt, slug, etc), but no custom data (such "
@@ -1581,7 +1813,7 @@ msgstr ""
 "requieren datos para sus propios campos personalizados (para esos, "
 "necesitarás usar una mutación más específica para ese CPT)"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid ""
 "Create custom posts. This mutation accepts the data that is common to all "
 "custom posts (title, content, excerpt, slug, etc), but no custom data (such "
@@ -1597,15 +1829,15 @@ msgstr ""
 "requieren datos para sus propios campos personalizados (para esos, "
 "necesitarás usar una mutación más específica para ese CPT)"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a custom post"
 msgstr "Actualizar una entrada personalizada"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update custom posts"
 msgstr "Actualizar entradas personalizadas"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createCustomPost` "
 "mutation"
@@ -1613,12 +1845,28 @@ msgstr ""
 "Obtener los objetos payload de una mutación `createCustomPost` ejecutada "
 "recientemente"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateCustomPost` "
 "mutation"
 msgstr ""
 "Obtener los objetos payload de una mutación `updateCustomPost` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete a custom post"
+msgstr "Eliminar un contenido personalizado"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete custom posts"
+msgstr "Eliminar contenidos personalizados"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteCustomPost` "
+"mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deleteCustomPost` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:149
@@ -1684,6 +1932,25 @@ msgstr "El tipo de entrada personalizada"
 msgid "Use HTML as content for the custom post"
 msgstr "Usar HTML como contenido de la entrada personalizada"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:41
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/GenericCustomPostDeleteInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootDeleteCustomPostInputObjectTypeResolver.php:16
+msgid "Input to delete a custom post"
+msgstr "Input para eliminar un contenido personalizado"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:64
+msgid "The ID of the custom post to delete"
+msgstr "El ID del contenido personalizado a eliminar"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:65
+msgid ""
+"Permanently delete the custom post, bypassing the trash. Otherwise the "
+"custom post is sent to the trash, from where it can be restored."
+msgstr ""
+"Eliminar permanentemente el contenido personalizado, sin pasar por la "
+"papelera. De lo contrario, el contenido personalizado se envía a la "
+"papelera, desde donde puede restaurarse."
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/CustomPostParentByOneofInputObjectTypeResolver.php:45
 msgid "Oneof input to specify the custom post parent"
 msgstr "Entrada oneof para especificar el padre de la entrada personalizada"
@@ -1724,6 +1991,28 @@ msgstr ""
 "Payload de error para: \"El custom post solicitado no tiene el tipo "
 "esperado\""
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/CustomPostDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The custom post does not support being sent to the "
+"trash\""
+msgstr ""
+"Payload de error para: \"El contenido personalizado no admite ser enviado a "
+"la papelera\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/CustomPostHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The custom post has already been sent to the trash\""
+msgstr ""
+"Payload de error para: \"El contenido personalizado ya ha sido enviado a la "
+"papelera\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/GenericCustomPostDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/RootDeleteGenericCustomPostMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a custom post"
+msgstr ""
+"Payload de la ejecución de una mutación de eliminación en un contenido "
+"personalizado"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/GenericCustomPostUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a generic custom post"
 msgstr ""
@@ -1737,6 +2026,14 @@ msgid ""
 msgstr ""
 "Payload de error para: \"El usuario autenticado no tiene permiso para editar "
 "custom posts\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The logged-in user has no permission to delete the "
+"requested custom post\""
+msgstr ""
+"Payload de error para: \"El usuario con la sesión iniciada no tiene permiso "
+"para eliminar el contenido personalizado solicitado\""
 
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver.php:32
 msgid ""
@@ -1761,6 +2058,11 @@ msgstr "Payload de creación de un custom post"
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a custom post"
 msgstr "Payload de ejecutar una mutación de actualización en un custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/GenericCustomPostDeleteMutationErrorPayloadUnionTypeResolver.php:31
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/RootDeleteGenericCustomPostMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a custom post"
+msgstr "Unión de tipos 'Error Payload' al eliminar un contenido personalizado"
 
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver.php:32
 msgid ""
@@ -2682,14 +2984,24 @@ msgstr ""
 msgid "Union of 'custom post' type resolvers"
 msgstr "Unión de los resolutores de tipo 'publicación personalizada'"
 
-#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:121
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:125
 #, php-format
 msgid "Mime type '%s' is not allowed"
 msgstr "El tipo MIME '%s' no está permitido"
 
-#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:410
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:414
 msgid "The file's mime type is not allowed"
 msgstr "El tipo MIME del archivo no está permitido"
+
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:537
+#, php-format
+msgid "The media item with ID '%s' could not be sent to the trash"
+msgstr "El elemento multimedia con ID '%s' no pudo enviarse a la papelera"
+
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:554
+#, php-format
+msgid "The media item with ID '%s' could not be deleted"
+msgstr "El elemento multimedia con ID '%s' no pudo eliminarse"
 
 #: CMSSchema/packages/media-mutations/src/ConditionalOnModule/CustomPostMutations/Hooks/MutationResolverHookSet.php:188
 msgid "ID of the custom post under which to upload the attachment"
@@ -2699,64 +3011,95 @@ msgstr "ID de la publicación personalizada en la que subir el adjunto"
 msgid "Custom post under which to upload the attachment"
 msgstr "Publicación personalizada en la que subir el adjunto"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
 msgid "You must be logged in to upload files or edit media items"
 msgstr "Debe iniciar sesión para subir archivos o editar elementos multimedia"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
 msgid "You don't have permission to upload files"
 msgstr "No tiene permiso para subir archivos"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:43
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
 msgid "You don't have permission to upload files for other users"
 msgstr "No tiene permiso para subir archivos en nombre de otros usuarios"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:44
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
 #: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:33
 #, php-format
 msgid "There is no user with ID '%s'"
 msgstr "No existe ningún usuario con ID '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:45
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
 #, php-format
 msgid "There is no media item with ID '%s'"
 msgstr "No existe ningún elemento multimedia con ID '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:46
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
 #, php-format
 msgid "There is no media item with slug '%s'"
 msgstr "No existe ningún elemento multimedia con slug '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 #, php-format
 msgid "You don't have permission to edit media item with id '%s'"
 msgstr "No tiene permiso para editar el elemento multimedia con ID '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
 msgid "You don't have permission to edit media items"
 msgstr "No tiene permiso para editar elementos multimedia"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:117
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+msgid "You must be logged in to delete media items"
+msgstr "Debes iniciar sesión para eliminar elementos multimedia"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
+#, php-format
+msgid "You don't have permission to delete media item with ID '%s'"
+msgstr "No tienes permiso para eliminar el elemento multimedia con ID '%s'"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
+#, php-format
+msgid ""
+"The media item with ID '%s' does not support being sent to the trash. "
+"Provide 'true' in the 'force' input to permanently delete it"
+msgstr ""
+"El elemento multimedia con ID '%s' no admite ser enviado a la papelera. "
+"Proporciona 'true' en el input 'force' para eliminarlo permanentemente"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
+#, php-format
+msgid ""
+"The media item with ID '%s' has already been sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"El elemento multimedia con ID '%s' ya ha sido enviado a la papelera. "
+"Proporciona 'true' en el input 'force' para eliminarlo permanentemente"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:173
 msgid "Update the media item"
 msgstr "Actualizar el elemento multimedia"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:174
+msgid "Delete the media item"
+msgstr "Eliminar el elemento multimedia"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Upload an attachment"
 msgstr "Subir un adjunto"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Upload attachments"
 msgstr "Subir adjuntos"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update the metadata for an attachment"
 msgstr "Actualizar los metadatos de un adjunto"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update the metadata for attachments"
 msgstr "Actualizar los metadatos de adjuntos"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createMediaItem` "
 "mutation"
@@ -2764,12 +3107,28 @@ msgstr ""
 "Recuperar los objetos de payload de una mutación `createMediaItem` ejecutada "
 "recientemente"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateMediaItem` "
 "mutation"
 msgstr ""
 "Recuperar los objetos de payload de una mutación `updateMediaItem` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete an attachment"
+msgstr "Eliminar un adjunto"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete attachments"
+msgstr "Eliminar adjuntos"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteMediaItem` "
+"mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deleteMediaItem` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/UserStateRootObjectTypeFieldResolver.php:163
@@ -2833,6 +3192,28 @@ msgstr "Fecha a usar para el adjunto"
 msgid "GMT date to use for the attachment"
 msgstr "Fecha GMT a usar para el adjunto"
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:53
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/RootDeleteMediaItemInputObjectTypeResolver.php:21
+msgid "Input to delete an attachment"
+msgstr "Input para eliminar un adjunto"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:76
+msgid "The ID of the media item to delete"
+msgstr "El ID del elemento multimedia a eliminar"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:77
+msgid ""
+"Permanently delete the media item, bypassing the trash. Otherwise the media "
+"item is sent to the trash, from where it can be restored; sending to the "
+"trash requires constant `MEDIA_TRASH` to be enabled, failing otherwise. "
+"Defaults to `true` unless the site sends media items to the trash."
+msgstr ""
+"Elimina permanentemente el elemento multimedia, sin pasar por la papelera. "
+"De lo contrario, el elemento multimedia se envía a la papelera, desde donde "
+"puede restaurarse; enviarlo a la papelera requiere que la constante "
+"`MEDIA_TRASH` esté habilitada, fallando en caso contrario. Por defecto es "
+"`true`, salvo que el sitio envíe los elementos multimedia a la papelera."
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/CreateMediaItemFromContentInputObjectTypeResolver.php:34
 msgid "Provide the data to create and upload the attachment"
 msgstr "Proporcionar los datos para crear y subir el adjunto"
@@ -2869,6 +3250,10 @@ msgstr "Nombre de archivo (para reemplazar el de la fuente URL)"
 msgid "URL source"
 msgstr "Fuente URL"
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/MediaDeleteInputObjectTypeResolver.php:21
+msgid "Input to delete an attachment (nested mutations)"
+msgstr "Input para eliminar un adjunto (mutaciones anidadas)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/MediaUpdateInputObjectTypeResolver.php:21
 msgid "Input to update the metadata for an attachment (nested mutations)"
 msgstr ""
@@ -2891,6 +3276,13 @@ msgid "Error payload for: \"The user cannot edit media items\""
 msgstr ""
 "Payload de error para: \"El usuario no puede editar elementos multimedia\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The user has no permission to delete the media item\""
+msgstr ""
+"Payload de error para: \"El usuario no tiene permiso para eliminar el "
+"elemento multimedia\""
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver.php:32
 msgid ""
 "Error payload for: \"The user has no permission to edit the media item\""
@@ -2898,9 +3290,28 @@ msgstr ""
 "Payload de error para: \"El usuario no tiene permiso para editar el elemento "
 "multimedia\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting an attachment (nested mutations)"
+msgstr "Payload de la eliminación de un adjunto (mutaciones anidadas)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The requested media item does not exist\""
 msgstr "Payload de error para: \"El elemento multimedia solicitado no existe\""
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The media item does not support being sent to the "
+"trash\""
+msgstr ""
+"Payload de error para: \"El elemento multimedia no admite ser enviado a la "
+"papelera\""
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The media item has already been sent to the trash\""
+msgstr ""
+"Payload de error para: \"El elemento multimedia ya ha sido enviado a la "
+"papelera\""
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating the metadata for an attachment (nested mutations)"
@@ -2910,6 +3321,10 @@ msgstr ""
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootCreateMediaItemMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of uploading an attachment"
 msgstr "Payload de subida de un adjunto"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootDeleteMediaItemMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting an attachment"
+msgstr "Payload de la eliminación de un adjunto"
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootUpdateMediaItemMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating the metadata for an attachment"
@@ -2933,6 +3348,12 @@ msgstr ""
 "Payload de error para: \"El usuario no tiene permiso para subir archivos "
 "para otros usuarios\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/MediaDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when deleting an attachment (nested mutations)"
+msgstr ""
+"Unión de tipos 'Error Payload' al eliminar un adjunto (mutaciones anidadas)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/MediaUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
 "Union of 'Error Payload' types when updating the metadata for an attachment "
@@ -2944,6 +3365,10 @@ msgstr ""
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootCreateMediaItemMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when uploading an attachment"
 msgstr "Unión de tipos 'Error Payload' al subir un adjunto"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootDeleteMediaItemMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting an attachment"
+msgstr "Unión de tipos 'Error Payload' al eliminar un adjunto"
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootUpdateMediaItemMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -3101,11 +3526,11 @@ msgstr ""
 "Elementos multimedia (como imágenes, vídeos, etc.), adjuntos a una entrada o "
 "independientes"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:86
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:88
 msgid "The menu name cannot be empty"
 msgstr "El nombre del menú no puede estar vacío"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:389
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:391
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3113,7 +3538,7 @@ msgstr ""
 "Para los elementos de menú de tipo \"post_type\", tanto \"objectType\" como "
 "\"objectID\" son obligatorios"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:410
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:412
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3121,65 +3546,98 @@ msgstr ""
 "Para los elementos de menú de tipo \"taxonomy\", tanto \"objectType\" como "
 "\"objectID\" son obligatorios"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:37
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:549
+#, php-format
+msgid "The menu with ID '%s' could not be deleted"
+msgstr "El menú con ID '%s' no pudo eliminarse"
+
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
 msgid "You must be logged in to create menus or edit menus"
 msgstr "Debes estar conectado para crear o editar menús"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
 msgid "You don't have permission to create menus"
 msgstr "No tienes permiso para crear menús"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:39
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:43
 #, php-format
 msgid "There is no menu with ID '%s'"
 msgstr "No existe ningún menú con ID '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:40
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:44
 #, php-format
 msgid "There is no menu with slug '%s'"
 msgstr "No existe ningún menú con slug '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:45
 #, php-format
 msgid "You don't have permission to edit menu with id '%s'"
 msgstr "No tienes permiso para editar el menú con id '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:46
 msgid "You don't have permission to edit menus"
 msgstr "No tienes permiso para editar menús"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:117
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+msgid "You must be logged in to delete menus"
+msgstr "Debes iniciar sesión para eliminar menús"
+
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#, php-format
+msgid "You don't have permission to delete menu with ID '%s'"
+msgstr "No tienes permiso para eliminar el menú con ID '%s'"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:162
 msgid "Update the menu"
 msgstr "Actualizar el menú"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:163
+msgid "Delete the menu"
+msgstr "Eliminar el menú"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a menu"
 msgstr "Crear un menú"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create menus"
 msgstr "Crear menús"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a menu"
 msgstr "Actualizar un menú"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update menus"
 msgstr "Actualizar menús"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createMenu` mutation"
 msgstr ""
 "Obtener los objetos de payload de una mutación `createMenu` ejecutada "
 "recientemente"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateMenu` mutation"
 msgstr ""
 "Obtener los objetos de payload de una mutación `updateMenu` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete a menu"
+msgstr "Eliminar un menú"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete menus"
+msgstr "Eliminar menús"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteMenu` mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deleteMenu` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:32
@@ -3213,6 +3671,15 @@ msgstr "Elementos del menú"
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateMenuInputObjectTypeResolver.php:109
 msgid "Menu locations to assign the menu to"
 msgstr "Ubicaciones del menú a las que asignar el menú"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMenuInputObjectTypeResolver.php:29
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/RootDeleteMenuInputObjectTypeResolver.php:16
+msgid "Input to delete a menu"
+msgstr "Input para eliminar un menú"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMenuInputObjectTypeResolver.php:45
+msgid "The ID of the menu to delete"
+msgstr "El ID del menú a eliminar"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:69
 msgid "Input for a Menu Item"
@@ -3289,10 +3756,19 @@ msgstr "Entrada para actualizar un menú"
 msgid "Error payload for: \"The user cannot edit menus\""
 msgstr "Payload de error para: \"El usuario no puede editar menús\""
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteMenuErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user has no permission to delete the menu\""
+msgstr ""
+"Payload de error para: \"El usuario no tiene permiso para eliminar el menú\""
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditMenuErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The user has no permission to edit the menu\""
 msgstr ""
 "Payload de error para: \"El usuario no tiene permiso para editar el menú\""
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/MenuDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a menu (nested mutations)"
+msgstr "Payload de eliminar un menú (mutaciones anidadas)"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/MenuDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The requested menu does not exist\""
@@ -3306,6 +3782,10 @@ msgstr "Payload de actualización de un menú (mutaciones anidadas)"
 msgid "Payload of creating a menu"
 msgstr "Payload de creación de un menú"
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/RootDeleteMenuMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a menu"
+msgstr "Payload de eliminar un menú"
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/RootUpdateMenuMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating a menu"
 msgstr "Payload de actualización de un menú"
@@ -3315,6 +3795,11 @@ msgid "Error payload for: \"The user has no permission to create menus\""
 msgstr ""
 "Payload de error para: \"El usuario no tiene permiso para crear menús\""
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/MenuDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a menu (nested mutations)"
+msgstr ""
+"Unión de tipos 'Error Payload' al eliminar un menú (mutaciones anidadas)"
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/MenuUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when updating a menu (nested mutations)"
 msgstr ""
@@ -3323,6 +3808,10 @@ msgstr ""
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootCreateMenuMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when creating a menu"
 msgstr "Unión de tipos 'Error Payload' al crear un menú"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootDeleteMenuMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a menu"
+msgstr "Unión de tipos 'Error Payload' al eliminar un menú"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootUpdateMenuMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when updating a menu"
@@ -3678,38 +4167,57 @@ msgstr "Tu usuario no tiene permiso para editar páginas."
 msgid "Your user doesn't have permission for publishing pages."
 msgstr "Tu usuario no tiene permiso para publicar páginas."
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:156
 msgid "Update the page"
 msgstr "Actualizar la página"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:157
+msgid "Delete the page"
+msgstr "Eliminar la página"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a page"
 msgstr "Crear una página"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create pages"
 msgstr "Crear páginas"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a page"
 msgstr "Actualizar una página"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update pages"
 msgstr "Actualizar páginas"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
+msgid "Delete a page"
+msgstr "Eliminar una página"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
+msgid "Delete pages"
+msgstr "Eliminar páginas"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
 msgid ""
 "Retrieve the payload objects from a recently-executed `createPage` mutation"
 msgstr ""
 "Recuperar los objetos payload de una mutación `createPage` ejecutada "
 "recientemente"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
 msgid ""
 "Retrieve the payload objects from a recently-executed `updatePage` mutation"
 msgstr ""
 "Recuperar los objetos payload de una mutación `updatePage` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deletePage` mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deletePage` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:162
@@ -3727,6 +4235,11 @@ msgstr "Recuperar una página del usuario conectado"
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/PageContentAsOneofInputObjectTypeResolver.php:20
 msgid "Use HTML as content for the page"
 msgstr "Usar HTML como contenido de la página"
+
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/PageDeleteInputObjectTypeResolver.php:18
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/RootDeletePageInputObjectTypeResolver.php:18
+msgid "Input to delete a page"
+msgstr "Input para eliminar una página"
 
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/RootMyPagesFilterInputObjectTypeResolver.php:19
 msgid "Input to filter the logged-in user's pages"
@@ -3746,6 +4259,11 @@ msgstr ""
 "Payload de error para: \"El usuario conectado no tiene permiso para publicar "
 "páginas\""
 
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/PageDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/RootDeletePageMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a page"
+msgstr "Payload de ejecutar una mutación de eliminación en una página"
+
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/PageUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a page"
 msgstr ""
@@ -3758,6 +4276,11 @@ msgstr "Payload de crear una página"
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/RootUpdatePageMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a page"
 msgstr "Payload de ejecutar una mutación de actualización en una página"
+
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/PageDeleteMutationErrorPayloadUnionTypeResolver.php:32
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/RootDeletePageMutationErrorPayloadUnionTypeResolver.php:32
+msgid "Union of 'Error Payload' types when deleting a page"
+msgstr "Unión de tipos 'Error Payload' al eliminar una página"
 
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/PageUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -4256,34 +4779,53 @@ msgstr ""
 msgid "Add a comment to the post"
 msgstr "Agregar un comentario al post"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:157
+msgid "Delete the post"
+msgstr "Eliminar el post"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a post"
 msgstr "Crear un post"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create posts"
 msgstr "Crear posts"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a post"
 msgstr "Actualizar un post"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update posts"
 msgstr "Actualizar posts"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
+msgid "Delete a post"
+msgstr "Eliminar un post"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
+msgid "Delete posts"
+msgstr "Eliminar posts"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
 msgid ""
 "Retrieve the payload objects from a recently-executed `createPost` mutation"
 msgstr ""
 "Recuperar los objetos payload de una mutación `createPost` ejecutada "
 "recientemente"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
 msgid ""
 "Retrieve the payload objects from a recently-executed `updatePost` mutation"
 msgstr ""
 "Recuperar los objetos payload de una mutación `updatePost` ejecutada "
+"recientemente"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deletePost` mutation"
+msgstr ""
+"Recuperar los objetos payload de una mutación `deletePost` ejecutada "
 "recientemente"
 
 #: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:162
@@ -4302,9 +4844,19 @@ msgstr "Recuperar un post individual del usuario conectado"
 msgid "Use HTML as content for the post"
 msgstr "Usar HTML como contenido del post"
 
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/PostDeleteInputObjectTypeResolver.php:18
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/RootDeletePostInputObjectTypeResolver.php:18
+msgid "Input to delete a post"
+msgstr "Input para eliminar un post"
+
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/RootMyPostsFilterInputObjectTypeResolver.php:19
 msgid "Input to filter the logged-in user's posts"
 msgstr "Entrada para filtrar las entradas del usuario conectado"
+
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/PostDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/RootDeletePostMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a post"
+msgstr "Payload de ejecutar una mutación de eliminación en un post"
 
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/PostUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a post"
@@ -4318,6 +4870,11 @@ msgstr "Payload de crear una entrada"
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/RootUpdatePostMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a post"
 msgstr "Payload de ejecutar una mutación de actualización en una entrada"
+
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/PostDeleteMutationErrorPayloadUnionTypeResolver.php:32
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/RootDeletePostMutationErrorPayloadUnionTypeResolver.php:32
+msgid "Union of 'Error Payload' types when deleting a post"
+msgstr "Unión de tipos 'Error Payload' al eliminar un post"
 
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/PostUpdateMutationErrorPayloadUnionTypeResolver.php:32
 msgid ""
@@ -13370,6 +13927,18 @@ msgstr "Ordenar por el nicename del usuario"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordenar por el email del usuario"
+
+#, php-format
+#~ msgid "The status of the comment with ID '%s' could not be updated"
+#~ msgstr "El estado del comentario con ID '%s' no pudo actualizarse"
+
+#~ msgid ""
+#~ "Permanently delete the media item, bypassing the trash. Otherwise the "
+#~ "media item is sent to the trash, from where it can be restored."
+#~ msgstr ""
+#~ "Eliminar permanentemente el elemento multimedia, sin pasar por la "
+#~ "papelera. De lo contrario, el elemento multimedia se envía a la papelera, "
+#~ "desde donde puede restaurarse."
 
 #~ msgid "Integration with WooCommerce, to fetch product data."
 #~ msgstr "Integración con WooCommerce para obtener datos de productos."

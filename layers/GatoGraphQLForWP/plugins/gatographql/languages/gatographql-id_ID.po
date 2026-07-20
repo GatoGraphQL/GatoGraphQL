@@ -434,65 +434,111 @@ msgstr "Input untuk mengatur entri meta term kategori"
 msgid "Input to update a category term's meta"
 msgstr "Input untuk memperbarui meta term kategori"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:62
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:74
 msgid "Could not create the comment"
 msgstr "Tidak dapat membuat komentar"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:108
+#, php-format
+msgid "The comment with ID '%s' could not be updated"
+msgstr "Komentar dengan ID '%s' tidak dapat diperbarui"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:158
+#, php-format
+msgid "Unsupported comment status '%s'"
+msgstr "Status komentar '%s' tidak didukung"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:184
+#, php-format
+msgid "The comment with ID '%s' could not be sent to the trash"
+msgstr "Komentar dengan ID '%s' tidak dapat dikirim ke tempat sampah"
+
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:200
+#, php-format
+msgid "The comment with ID '%s' could not be deleted"
+msgstr "Komentar dengan ID '%s' tidak dapat dihapus"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
 #: CMSSchema/packages/user-state-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
 msgid "You are not logged in"
 msgstr "Anda belum masuk"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
 msgid "The comment author's name is missing"
 msgstr "Nama penulis komentar tidak ada"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 msgid "The comment author's email is missing"
 msgstr "Email penulis komentar tidak ada"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
 msgid "The custom post ID is missing"
 msgstr "ID custom post tidak ada"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
 msgid "The comment is empty"
 msgstr "Komentar kosong"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
 #, php-format
 msgid "There is no (parent) comment with ID '%s'"
 msgstr "Tidak ada komentar (induk) dengan ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
 #, php-format
 msgid "There is no custom post with ID '%s'"
 msgstr "Tidak ada custom post dengan ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
 #, php-format
 msgid "Comments are not supported for custom post type '%s'"
 msgstr "Komentar tidak didukung untuk tipe custom post '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:61
 #, php-format
 msgid "Comments are not open for custom post with ID '%s'"
 msgstr "Komentar tidak dibuka untuk custom post dengan ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:62
 #, php-format
 msgid "There is no comment with ID '%s'"
 msgstr "Tidak ada komentar dengan ID '%s'"
 
-#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:63
 #, php-format
 msgid ""
 "The logged-in user doesn't have the ability to edit comment with ID '%s'"
 msgstr ""
 "Pengguna yang masuk tidak memiliki kemampuan untuk mengedit komentar dengan "
 "ID '%s'"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:64
+#, php-format
+msgid ""
+"The logged-in user doesn't have the ability to delete comment with ID '%s'"
+msgstr ""
+"Pengguna yang sedang login tidak memiliki kemampuan untuk menghapus komentar "
+"dengan ID '%s'"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:65
+#, php-format
+msgid ""
+"The comment with ID '%s' does not support being sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"Komentar dengan ID '%s' tidak mendukung pengiriman ke tempat sampah. Berikan "
+"'true' pada input 'force' untuk menghapusnya secara permanen"
+
+#: CMSSchema/packages/comment-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:66
+#, php-format
+msgid ""
+"The comment with ID '%s' has already been sent to the trash. Provide 'true' "
+"in the 'force' input to permanently delete it"
+msgstr ""
+"Komentar dengan ID '%s' sudah dikirim ke tempat sampah. Berikan 'true' pada "
+"input 'force' untuk menghapusnya secara permanen"
 
 #: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/AbstractAddCommentToCustomPostObjectTypeFieldResolver.php:133
 msgid "Add comments to the custom post"
@@ -502,28 +548,36 @@ msgstr "Tambahkan komentar-komentar ke custom post"
 msgid "Add a comment to the custom post"
 msgstr "Tambahkan komentar ke custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:140
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:173
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:239
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:320
 msgid "Reply a comment with another comment"
 msgstr "Balas komentar dengan komentar lain"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:141
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:240
 msgid "Reply a comment with other comments"
 msgstr "Balas komentar dengan komentar-komentar lain"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:171
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:241
+msgid "Update the comment"
+msgstr "Perbarui komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/CommentObjectTypeFieldResolver.php:242
+msgid "Delete the comment"
+msgstr "Hapus komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:318
 msgid "Add a comment to a custom post"
 msgstr "Tambahkan komentar ke sebuah custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:172
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:319
 msgid "Add comments to a custom post"
 msgstr "Tambahkan komentar-komentar ke sebuah custom post"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:174
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:321
 msgid "Reply comment with other comments"
 msgstr "Balas komentar dengan komentar-komentar lain"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:175
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:322
 msgid ""
 "Retrieve the payload objects from a recently-executed "
 "`addCommentToCustomPost` mutation"
@@ -531,11 +585,41 @@ msgstr ""
 "Ambil objek payload dari mutasi `addCommentToCustomPost` yang baru saja "
 "dieksekusi"
 
-#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:176
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:323
 msgid ""
 "Retrieve the payload objects from a recently-executed `replyComment` mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `replyComment` yang baru saja dieksekusi"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:324
+msgid "Update a comment"
+msgstr "Perbarui sebuah komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:325
+msgid "Update comments"
+msgstr "Perbarui komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:326
+msgid "Delete a comment"
+msgstr "Hapus sebuah komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:327
+msgid "Delete comments"
+msgstr "Hapus komentar"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:328
+msgid ""
+"Retrieve the payload objects from a recently-executed `updateComment` "
+"mutation"
+msgstr ""
+"Ambil objek payload dari mutasi `updateComment` yang baru saja dijalankan"
+
+#: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:329
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteComment` "
+"mutation"
+msgstr ""
+"Ambil objek payload dari mutasi `deleteComment` yang baru saja dijalankan"
 
 #: CMSSchema/packages/comment-mutations/src/FieldResolvers/ObjectType/UserStateRootObjectTypeFieldResolver.php:165
 msgid "Comment by the logged-in user on the site with a specific ID"
@@ -562,24 +646,74 @@ msgid "The ID of the custom post to add a comment to"
 msgstr "ID custom post yang akan ditambahkan komentar"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:108
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:127
 msgid "The comment author's name"
 msgstr "Nama penulis komentar"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:109
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:128
 msgid "The comment author's email"
 msgstr "Email penulis komentar"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractAddCommentToCustomPostInputObjectTypeResolver.php:110
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:129
 msgid "The comment author's site URL"
 msgstr "URL situs penulis komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:41
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootDeleteCommentInputObjectTypeResolver.php:21
+msgid "Input to delete a comment"
+msgstr "Input untuk menghapus komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:64
+msgid "The ID of the comment to delete"
+msgstr "ID komentar yang akan dihapus"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCommentInputObjectTypeResolver.php:65
+msgid ""
+"Permanently delete the comment, bypassing the trash. Otherwise the comment "
+"is sent to the trash, from where it can be restored."
+msgstr ""
+"Hapus komentar secara permanen, tanpa melalui tempat sampah. Jika tidak, "
+"komentar akan dikirim ke tempat sampah, dari mana komentar tersebut dapat "
+"dipulihkan."
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:83
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootUpdateCommentInputObjectTypeResolver.php:21
+msgid "Input to update a comment"
+msgstr "Input untuk memperbarui komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:124
+msgid "The ID of the comment to update"
+msgstr "ID komentar yang akan diperbarui"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:125
+msgid "The new content for the comment"
+msgstr "Konten baru untuk komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/AbstractUpdateCommentInputObjectTypeResolver.php:126
+msgid ""
+"Moderate the comment: approve it, hold it for moderation, mark it as spam, "
+"or send it to the trash"
+msgstr ""
+"Moderasi komentar: setujui, tahan untuk moderasi, tandai sebagai spam, atau "
+"kirim ke tempat sampah"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentAsOneofInputObjectTypeResolver.php:47
 msgid "Use HTML as content for the comment"
 msgstr "Gunakan HTML sebagai konten komentar"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentDeleteInputObjectTypeResolver.php:21
+msgid "Input to delete a comment (nested mutations)"
+msgstr "Input untuk menghapus komentar (mutasi bersarang)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentReplyInputObjectTypeResolver.php:16
 msgid "Input to reply to a comment"
 msgstr "Input untuk membalas komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CommentUpdateInputObjectTypeResolver.php:21
+msgid "Input to update a comment (nested mutations)"
+msgstr "Input untuk memperbarui komentar (mutasi bersarang)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/CustomPostAddCommentInputObjectTypeResolver.php:16
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/InputObjectType/RootAddCommentToCustomPostInputObjectTypeResolver.php:16
@@ -599,9 +733,24 @@ msgstr "Payload kesalahan untuk: \"Email penulis komentar tidak ada\""
 msgid "Error payload for: \"The comment's author name is missing\""
 msgstr "Payload kesalahan untuk: \"Nama penulis komentar tidak ada\""
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a comment (nested mutations)"
+msgstr "Payload penghapusan komentar (mutasi bersarang)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The comment does not exist\""
 msgstr "Payload kesalahan untuk: \"Komentar tidak ada\""
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The comment does not support being sent to the trash\""
+msgstr ""
+"Payload kesalahan untuk: \"Komentar tidak mendukung pengiriman ke tempat "
+"sampah\""
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The comment has already been sent to the trash\""
+msgstr "Payload kesalahan untuk: \"Komentar sudah dikirim ke tempat sampah\""
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentParentCommentDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The comment's parent does not exist\""
@@ -621,11 +770,21 @@ msgid ""
 msgstr ""
 "Payload kesalahan untuk: \"Komentar tidak didukung oleh custom post type\""
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CommentUpdateMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a comment (nested mutations)"
+msgstr "Payload pembaruan komentar (mutasi bersarang)"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/CustomPostAddCommentMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of adding a comment to a custom post (using nested mutations)"
 msgstr ""
 "Payload dari menambahkan komentar ke custom post (menggunakan nested "
 "mutations)"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteCommentErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user has no permission to delete the comment\""
+msgstr ""
+"Payload kesalahan untuk: \"Pengguna tidak memiliki izin untuk menghapus "
+"komentar\""
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditCommentErrorPayloadObjectTypeResolver.php:32
 msgid ""
@@ -639,9 +798,23 @@ msgstr ""
 msgid "Payload of adding a comment to a custom post"
 msgstr "Payload dari menambahkan komentar ke custom post"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootDeleteCommentMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a comment"
+msgstr "Payload penghapusan komentar"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootReplyCommentMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of replying to a comment"
 msgstr "Payload dari membalas komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/ObjectType/RootUpdateCommentMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a comment"
+msgstr "Payload pembaruan komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when deleting a comment (nested mutations)"
+msgstr ""
+"Gabungan jenis 'Payload Kesalahan' saat menghapus komentar (mutasi bersarang)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentReplyMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -650,6 +823,13 @@ msgid ""
 msgstr ""
 "Union dari tipe 'Error Payload' saat membalas komentar (menggunakan nested "
 "mutations)"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CommentUpdateMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when updating a comment (nested mutations)"
+msgstr ""
+"Gabungan jenis 'Payload Kesalahan' saat memperbarui komentar (mutasi "
+"bersarang)"
 
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/CustomPostAddCommentMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -664,9 +844,17 @@ msgid "Union of 'Error Payload' types when adding a comment to a custom post"
 msgstr ""
 "Union dari tipe 'Error Payload' saat menambahkan komentar ke custom post"
 
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootDeleteCommentMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a comment"
+msgstr "Gabungan jenis 'Payload Kesalahan' saat menghapus komentar"
+
 #: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootReplyCommentMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when replying to a comment"
 msgstr "Union dari tipe 'Error Payload' saat membalas komentar"
+
+#: CMSSchema/packages/comment-mutations/src/TypeResolvers/UnionType/RootUpdateCommentMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when updating a comment"
+msgstr "Gabungan jenis 'Payload Kesalahan' saat memperbarui komentar"
 
 #: CMSSchema/packages/commentmeta-mutations/src/FieldResolvers/ObjectType/AbstractCommentObjectTypeFieldResolver.php:183
 msgid "Add a comment meta entry"
@@ -1445,59 +1633,100 @@ msgid "Union of 'Error Payload' types when updating meta on a category term"
 msgstr ""
 "Union dari tipe 'Error Payload' saat memperbarui meta pada term kategori"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/custompost-mutations-wp/src/TypeAPIs/CustomPostTypeMutationAPI.php:180
+#, php-format
+msgid "The custom post with ID '%s' could not be sent to the trash"
+msgstr "Pos khusus dengan ID '%s' tidak dapat dikirim ke tempat sampah"
+
+#: CMSSchema/packages/custompost-mutations-wp/src/TypeAPIs/CustomPostTypeMutationAPI.php:198
+#, php-format
+msgid "The custom post with ID '%s' could not be deleted"
+msgstr "Pos khusus dengan ID '%s' tidak dapat dihapus"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 msgid "You must be logged in to create or update custom posts"
 msgstr "Anda harus masuk untuk membuat atau memperbarui custom post"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
 msgid "Your user doesn't have permission for editing custom posts."
 msgstr "Pengguna Anda tidak memiliki izin untuk mengedit custom post."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
 msgid "Your user doesn't have permission for publishing custom posts."
 msgstr "Pengguna Anda tidak memiliki izin untuk mempublikasikan custom post."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
 #, php-format
 msgid "The custom post with ID '%s' is not of type '%s'."
 msgstr "Custom post dengan ID '%s' bukan bertipe '%s'."
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:61
 #, php-format
 msgid "You don't have permission to edit custom post with ID '%s'"
 msgstr "Anda tidak memiliki izin untuk mengedit custom post dengan ID '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:62
 #, php-format
 msgid "You don't have permission to edit custom post type '%s'"
 msgstr "Anda tidak memiliki izin untuk mengedit tipe custom post '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:63
 #, php-format
 msgid "There is no custom post with slug path '%s' of type '%s'"
 msgstr "Tidak ada custom post dengan jalur slug '%s' bertipe '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:64
 msgid "The custom post cannot have itself as parent"
 msgstr "Custom post tidak dapat menjadi induk dari dirinya sendiri"
 
-#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:65
 #, php-format
 msgid ""
 "The custom post with ID '%s' is an ancestor of the custom post with ID '%s'"
 msgstr ""
 "Custom post dengan ID '%s' adalah leluhur dari custom post dengan ID '%s'"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:48
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:66
+msgid "You must be logged in to delete custom posts"
+msgstr "Anda harus login untuk menghapus pos khusus"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:67
+#, php-format
+msgid "You don't have permission to delete custom post with ID '%s'"
+msgstr "Anda tidak memiliki izin untuk menghapus pos khusus dengan ID '%s'"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:68
+#, php-format
+msgid ""
+"The custom post with ID '%s' does not support being sent to the trash. "
+"Provide 'true' in the 'force' input to permanently delete it"
+msgstr ""
+"Pos khusus dengan ID '%s' tidak mendukung pengiriman ke tempat sampah. "
+"Berikan 'true' pada input 'force' untuk menghapusnya secara permanen"
+
+#: CMSSchema/packages/custompost-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:69
+#, php-format
+msgid ""
+"The custom post with ID '%s' has already been sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"Custom post dengan ID '%s' sudah dipindahkan ke sampah. Berikan 'true' pada "
+"input 'force' untuk menghapusnya secara permanen"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:51
 msgid "Update the custom post"
 msgstr "Perbarui custom post"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/GenericCustomPostObjectTypeFieldResolver.php:94
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/AbstractCustomPostObjectTypeFieldResolver.php:52
+msgid "Delete the custom post"
+msgstr "Hapus custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/GenericCustomPostObjectTypeFieldResolver.php:156
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:156
 msgid "Update the post"
 msgstr "Perbarui post"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid ""
 "Create a custom post. This mutation accepts the data that is common to all "
 "custom posts (title, content, excerpt, slug, etc), but no custom data (such "
@@ -1513,7 +1742,7 @@ msgstr ""
 "khususnya sendiri (untuk yang tersebut, Anda perlu menggunakan mutasi yang "
 "lebih spesifik untuk CPT tersebut)"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid ""
 "Create custom posts. This mutation accepts the data that is common to all "
 "custom posts (title, content, excerpt, slug, etc), but no custom data (such "
@@ -1529,27 +1758,42 @@ msgstr ""
 "khususnya sendiri (untuk yang tersebut, Anda perlu menggunakan mutasi yang "
 "lebih spesifik untuk CPT tersebut)"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a custom post"
 msgstr "Perbarui sebuah custom post"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update custom posts"
 msgstr "Perbarui custom post"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createCustomPost` "
 "mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `createCustomPost` yang baru saja dieksekusi"
 
-#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateCustomPost` "
 "mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `updateCustomPost` yang baru saja dijalankan"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete a custom post"
+msgstr "Hapus sebuah custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete custom posts"
+msgstr "Hapus custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteCustomPost` "
+"mutation"
+msgstr ""
+"Ambil objek payload dari mutasi `deleteCustomPost` yang baru saja dieksekusi"
 
 #: CMSSchema/packages/custompost-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:149
 msgid "Custom posts by the logged-in user"
@@ -1613,6 +1857,24 @@ msgstr "Tipe custom post"
 msgid "Use HTML as content for the custom post"
 msgstr "Gunakan HTML sebagai konten untuk custom post"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:41
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/GenericCustomPostDeleteInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootDeleteCustomPostInputObjectTypeResolver.php:16
+msgid "Input to delete a custom post"
+msgstr "Input untuk menghapus sebuah custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:64
+msgid "The ID of the custom post to delete"
+msgstr "ID dari custom post yang akan dihapus"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteCustomPostInputObjectTypeResolver.php:65
+msgid ""
+"Permanently delete the custom post, bypassing the trash. Otherwise the "
+"custom post is sent to the trash, from where it can be restored."
+msgstr ""
+"Hapus custom post secara permanen, melewati sampah. Jika tidak, custom post "
+"akan dipindahkan ke sampah, dari mana ia dapat dipulihkan."
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/CustomPostParentByOneofInputObjectTypeResolver.php:45
 msgid "Oneof input to specify the custom post parent"
 msgstr "Input oneof untuk menentukan induk custom post"
@@ -1650,6 +1912,23 @@ msgstr ""
 "Payload error untuk: \"Custom post yang diminta tidak memiliki tipe yang "
 "diharapkan\""
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/CustomPostDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The custom post does not support being sent to the "
+"trash\""
+msgstr ""
+"Error payload untuk: \"Custom post tidak mendukung pemindahan ke sampah\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/CustomPostHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The custom post has already been sent to the trash\""
+msgstr "Error payload untuk: \"Custom post sudah dipindahkan ke sampah\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/GenericCustomPostDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/RootDeleteGenericCustomPostMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a custom post"
+msgstr "Payload dari eksekusi mutasi delete pada sebuah custom post"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/GenericCustomPostUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a generic custom post"
 msgstr ""
@@ -1662,6 +1941,14 @@ msgid ""
 msgstr ""
 "Payload error untuk: \"Pengguna yang sedang login tidak memiliki izin untuk "
 "mengedit custom post\""
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteCustomPostErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The logged-in user has no permission to delete the "
+"requested custom post\""
+msgstr ""
+"Error payload untuk: \"Pengguna yang sedang login tidak memiliki izin untuk "
+"menghapus custom post yang diminta\""
 
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditCustomPostErrorPayloadObjectTypeResolver.php:32
 msgid ""
@@ -1686,6 +1973,11 @@ msgstr "Payload dari pembuatan custom post"
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/ObjectType/RootUpdateGenericCustomPostMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a custom post"
 msgstr "Payload dari eksekusi mutation pembaruan pada custom post"
+
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/GenericCustomPostDeleteMutationErrorPayloadUnionTypeResolver.php:31
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/RootDeleteGenericCustomPostMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a custom post"
+msgstr "Union dari tipe-tipe 'Error Payload' saat menghapus sebuah custom post"
 
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/UnionType/GenericCustomPostUpdateMutationErrorPayloadUnionTypeResolver.php:32
 msgid ""
@@ -2547,14 +2839,24 @@ msgstr "Sebuah custom post yang tidak memiliki tipe tersendiri dalam skema"
 msgid "Union of 'custom post' type resolvers"
 msgstr "Union dari resolver tipe 'custom post'"
 
-#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:121
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:125
 #, php-format
 msgid "Mime type '%s' is not allowed"
 msgstr "Mime type '%s' tidak diizinkan"
 
-#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:410
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:414
 msgid "The file's mime type is not allowed"
 msgstr "Mime type file tidak diizinkan"
+
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:537
+#, php-format
+msgid "The media item with ID '%s' could not be sent to the trash"
+msgstr "Item media dengan ID '%s' tidak dapat dipindahkan ke sampah"
+
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:554
+#, php-format
+msgid "The media item with ID '%s' could not be deleted"
+msgstr "Item media dengan ID '%s' tidak dapat dihapus"
 
 #: CMSSchema/packages/media-mutations/src/ConditionalOnModule/CustomPostMutations/Hooks/MutationResolverHookSet.php:188
 msgid "ID of the custom post under which to upload the attachment"
@@ -2564,76 +2866,122 @@ msgstr "ID custom post tempat attachment akan diunggah"
 msgid "Custom post under which to upload the attachment"
 msgstr "Custom post tempat attachment akan diunggah"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:49
 msgid "You must be logged in to upload files or edit media items"
 msgstr "Anda harus masuk untuk mengunggah file atau mengedit item media"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:50
 msgid "You don't have permission to upload files"
 msgstr "Anda tidak memiliki izin untuk mengunggah file"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:43
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:51
 msgid "You don't have permission to upload files for other users"
 msgstr "Anda tidak memiliki izin untuk mengunggah file untuk pengguna lain"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:44
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
 #: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:33
 #, php-format
 msgid "There is no user with ID '%s'"
 msgstr "Tidak ada pengguna dengan ID '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:45
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
 #, php-format
 msgid "There is no media item with ID '%s'"
 msgstr "Tidak ada item media dengan ID '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:46
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
 #, php-format
 msgid "There is no media item with slug '%s'"
 msgstr "Tidak ada item media dengan slug '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 #, php-format
 msgid "You don't have permission to edit media item with id '%s'"
 msgstr "Anda tidak memiliki izin untuk mengedit item media dengan id '%s'"
 
-#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
 msgid "You don't have permission to edit media items"
 msgstr "Anda tidak memiliki izin untuk mengedit item media"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:117
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+msgid "You must be logged in to delete media items"
+msgstr "Anda harus login untuk menghapus item media"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
+#, php-format
+msgid "You don't have permission to delete media item with ID '%s'"
+msgstr "Anda tidak memiliki izin untuk menghapus item media dengan ID '%s'"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
+#, php-format
+msgid ""
+"The media item with ID '%s' does not support being sent to the trash. "
+"Provide 'true' in the 'force' input to permanently delete it"
+msgstr ""
+"Item media dengan ID '%s' tidak mendukung pemindahan ke sampah. Berikan "
+"'true' pada input 'force' untuk menghapusnya secara permanen"
+
+#: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
+#, php-format
+msgid ""
+"The media item with ID '%s' has already been sent to the trash. Provide "
+"'true' in the 'force' input to permanently delete it"
+msgstr ""
+"Item media dengan ID '%s' sudah dipindahkan ke sampah. Berikan 'true' pada "
+"input 'force' untuk menghapusnya secara permanen"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:173
 msgid "Update the media item"
 msgstr "Perbarui item media"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/MediaObjectTypeFieldResolver.php:174
+msgid "Delete the media item"
+msgstr "Hapus item media"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Upload an attachment"
 msgstr "Unggah sebuah attachment"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Upload attachments"
 msgstr "Unggah beberapa attachment"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update the metadata for an attachment"
 msgstr "Perbarui metadata untuk sebuah attachment"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update the metadata for attachments"
 msgstr "Perbarui metadata untuk beberapa attachment"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createMediaItem` "
 "mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `createMediaItem` yang baru saja dieksekusi"
 
-#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateMediaItem` "
 "mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `updateMediaItem` yang baru saja dieksekusi"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete an attachment"
+msgstr "Hapus sebuah attachment"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete attachments"
+msgstr "Hapus attachment"
+
+#: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteMediaItem` "
+"mutation"
+msgstr ""
+"Ambil objek payload dari mutasi `deleteMediaItem` yang baru saja dieksekusi"
 
 #: CMSSchema/packages/media-mutations/src/FieldResolvers/ObjectType/UserStateRootObjectTypeFieldResolver.php:163
 msgid "Media item by the logged-in user on the site with a specific ID"
@@ -2696,6 +3044,28 @@ msgstr "Tanggal yang digunakan untuk lampiran"
 msgid "GMT date to use for the attachment"
 msgstr "Tanggal GMT yang digunakan untuk lampiran"
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:53
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/RootDeleteMediaItemInputObjectTypeResolver.php:21
+msgid "Input to delete an attachment"
+msgstr "Input untuk menghapus sebuah attachment"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:76
+msgid "The ID of the media item to delete"
+msgstr "ID dari item media yang akan dihapus"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMediaItemInputObjectTypeResolver.php:77
+msgid ""
+"Permanently delete the media item, bypassing the trash. Otherwise the media "
+"item is sent to the trash, from where it can be restored; sending to the "
+"trash requires constant `MEDIA_TRASH` to be enabled, failing otherwise. "
+"Defaults to `true` unless the site sends media items to the trash."
+msgstr ""
+"Hapus item media secara permanen, tanpa melalui sampah. Jika tidak, item "
+"media akan dikirim ke sampah, dari mana item tersebut dapat dipulihkan; "
+"mengirim ke sampah memerlukan konstanta `MEDIA_TRASH` diaktifkan, jika tidak "
+"akan gagal. Defaultnya adalah `true` kecuali situs mengirim item media ke "
+"sampah."
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/CreateMediaItemFromContentInputObjectTypeResolver.php:34
 msgid "Provide the data to create and upload the attachment"
 msgstr "Berikan data untuk membuat dan mengunggah lampiran"
@@ -2732,6 +3102,10 @@ msgstr "Nama file (untuk menggantikan nama dari sumber URL)"
 msgid "URL source"
 msgstr "Sumber URL"
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/MediaDeleteInputObjectTypeResolver.php:21
+msgid "Input to delete an attachment (nested mutations)"
+msgstr "Input untuk menghapus sebuah attachment (nested mutations)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/InputObjectType/MediaUpdateInputObjectTypeResolver.php:21
 msgid "Input to update the metadata for an attachment (nested mutations)"
 msgstr "Input untuk memperbarui metadata lampiran (mutasi bertingkat)"
@@ -2752,6 +3126,13 @@ msgstr "Input untuk memperbarui metadata lampiran"
 msgid "Error payload for: \"The user cannot edit media items\""
 msgstr "Payload kesalahan untuk: \"Pengguna tidak dapat mengedit item media\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteMediaItemErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The user has no permission to delete the media item\""
+msgstr ""
+"Error payload untuk: \"Pengguna tidak memiliki izin untuk menghapus item "
+"media\""
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditMediaItemErrorPayloadObjectTypeResolver.php:32
 msgid ""
 "Error payload for: \"The user has no permission to edit the media item\""
@@ -2759,9 +3140,25 @@ msgstr ""
 "Payload kesalahan untuk: \"Pengguna tidak memiliki izin untuk mengedit item "
 "media\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting an attachment (nested mutations)"
+msgstr "Payload dari penghapusan sebuah attachment (nested mutations)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The requested media item does not exist\""
 msgstr "Payload kesalahan untuk: \"Item media yang diminta tidak ada\""
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemDoesNotSupportTrashErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The media item does not support being sent to the "
+"trash\""
+msgstr ""
+"Error payload untuk: \"Item media tidak mendukung pemindahan ke sampah\""
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaItemHasAlreadyBeenTrashedErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The media item has already been sent to the trash\""
+msgstr "Error payload untuk: \"Item media sudah dipindahkan ke sampah\""
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/MediaUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating the metadata for an attachment (nested mutations)"
@@ -2770,6 +3167,10 @@ msgstr "Payload pembaruan metadata untuk lampiran (mutasi bertingkat)"
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootCreateMediaItemMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of uploading an attachment"
 msgstr "Payload pengunggahan lampiran"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootDeleteMediaItemMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting an attachment"
+msgstr "Payload dari penghapusan sebuah attachment"
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/ObjectType/RootUpdateMediaItemMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating the metadata for an attachment"
@@ -2794,6 +3195,13 @@ msgstr ""
 "Payload kesalahan untuk: \"Pengguna tidak memiliki izin untuk mengunggah "
 "file atas nama pengguna lain\""
 
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/MediaDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid ""
+"Union of 'Error Payload' types when deleting an attachment (nested mutations)"
+msgstr ""
+"Union dari tipe-tipe 'Error Payload' saat menghapus sebuah attachment "
+"(nested mutations)"
+
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/MediaUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
 "Union of 'Error Payload' types when updating the metadata for an attachment "
@@ -2805,6 +3213,10 @@ msgstr ""
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootCreateMediaItemMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when uploading an attachment"
 msgstr "Union dari tipe 'Error Payload' saat mengunggah lampiran"
+
+#: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootDeleteMediaItemMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting an attachment"
+msgstr "Union dari tipe-tipe 'Error Payload' saat menghapus sebuah attachment"
 
 #: CMSSchema/packages/media-mutations/src/TypeResolvers/UnionType/RootUpdateMediaItemMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -2961,11 +3373,11 @@ msgstr ""
 "Elemen media (seperti gambar, video, dll), yang dilampirkan ke sebuah post "
 "atau berdiri sendiri"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:86
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:88
 msgid "The menu name cannot be empty"
 msgstr "Nama menu tidak boleh kosong"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:389
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:391
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -2973,7 +3385,7 @@ msgstr ""
 "Untuk item menu bertipe \"post_type\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:410
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:412
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -2981,62 +3393,93 @@ msgstr ""
 "Untuk item menu bertipe \"taxonomy\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:37
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:549
+#, php-format
+msgid "The menu with ID '%s' could not be deleted"
+msgstr "Menu dengan ID '%s' tidak dapat dihapus"
+
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
 msgid "You must be logged in to create menus or edit menus"
 msgstr "Anda harus masuk untuk membuat atau mengedit menu"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
 msgid "You don't have permission to create menus"
 msgstr "Anda tidak memiliki izin untuk membuat menu"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:39
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:43
 #, php-format
 msgid "There is no menu with ID '%s'"
 msgstr "Tidak ada menu dengan ID '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:40
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:44
 #, php-format
 msgid "There is no menu with slug '%s'"
 msgstr "Tidak ada menu dengan slug '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:41
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:45
 #, php-format
 msgid "You don't have permission to edit menu with id '%s'"
 msgstr "Anda tidak memiliki izin untuk mengedit menu dengan id '%s'"
 
-#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:42
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:46
 msgid "You don't have permission to edit menus"
 msgstr "Anda tidak memiliki izin untuk mengedit menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:117
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:47
+msgid "You must be logged in to delete menus"
+msgstr "Anda harus login untuk menghapus menu"
+
+#: CMSSchema/packages/menu-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:48
+#, php-format
+msgid "You don't have permission to delete menu with ID '%s'"
+msgstr "Anda tidak memiliki izin untuk menghapus menu dengan ID '%s'"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:162
 msgid "Update the menu"
 msgstr "Perbarui menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/MenuObjectTypeFieldResolver.php:163
+msgid "Delete the menu"
+msgstr "Hapus menu"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a menu"
 msgstr "Buat sebuah menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create menus"
 msgstr "Buat menu-menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a menu"
 msgstr "Perbarui sebuah menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update menus"
 msgstr "Perbarui menu-menu"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
 msgid ""
 "Retrieve the payload objects from a recently-executed `createMenu` mutation"
 msgstr "Ambil objek payload dari mutasi `createMenu` yang baru saja dieksekusi"
 
-#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
 msgid ""
 "Retrieve the payload objects from a recently-executed `updateMenu` mutation"
 msgstr "Ambil objek payload dari mutasi `updateMenu` yang baru saja dieksekusi"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid "Delete a menu"
+msgstr "Hapus sebuah menu"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid "Delete menus"
+msgstr "Hapus menu"
+
+#: CMSSchema/packages/menu-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteMenu` mutation"
+msgstr "Ambil objek payload dari mutasi `deleteMenu` yang baru saja dieksekusi"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:32
 msgid "Custom link menu item"
@@ -3069,6 +3512,15 @@ msgstr "Item menu"
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateMenuInputObjectTypeResolver.php:109
 msgid "Menu locations to assign the menu to"
 msgstr "Lokasi menu untuk menetapkan menu"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMenuInputObjectTypeResolver.php:29
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/RootDeleteMenuInputObjectTypeResolver.php:16
+msgid "Input to delete a menu"
+msgstr "Input untuk menghapus menu"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteMenuInputObjectTypeResolver.php:45
+msgid "The ID of the menu to delete"
+msgstr "ID menu yang akan dihapus"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:69
 msgid "Input for a Menu Item"
@@ -3145,10 +3597,19 @@ msgstr "Input untuk memperbarui menu"
 msgid "Error payload for: \"The user cannot edit menus\""
 msgstr "Payload error untuk: \"Pengguna tidak dapat mengedit menu\""
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteMenuErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user has no permission to delete the menu\""
+msgstr ""
+"Payload error untuk: \"Pengguna tidak memiliki izin untuk menghapus menu\""
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditMenuErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The user has no permission to edit the menu\""
 msgstr ""
 "Payload error untuk: \"Pengguna tidak memiliki izin untuk mengedit menu\""
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/MenuDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a menu (nested mutations)"
+msgstr "Payload penghapusan menu (mutasi bersarang)"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/MenuDoesNotExistErrorPayloadObjectTypeResolver.php:32
 msgid "Error payload for: \"The requested menu does not exist\""
@@ -3162,6 +3623,10 @@ msgstr "Payload pembaruan menu (mutasi bersarang)"
 msgid "Payload of creating a menu"
 msgstr "Payload pembuatan menu"
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/RootDeleteMenuMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a menu"
+msgstr "Payload penghapusan menu"
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/ObjectType/RootUpdateMenuMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of updating a menu"
 msgstr "Payload pembaruan menu"
@@ -3171,6 +3636,10 @@ msgid "Error payload for: \"The user has no permission to create menus\""
 msgstr ""
 "Payload error untuk: \"Pengguna tidak memiliki izin untuk membuat menu\""
 
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/MenuDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a menu (nested mutations)"
+msgstr "Gabungan tipe 'Error Payload' saat menghapus menu (mutasi bersarang)"
+
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/MenuUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when updating a menu (nested mutations)"
 msgstr "Union tipe 'Error Payload' saat memperbarui menu (mutasi bersarang)"
@@ -3178,6 +3647,10 @@ msgstr "Union tipe 'Error Payload' saat memperbarui menu (mutasi bersarang)"
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootCreateMenuMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when creating a menu"
 msgstr "Union tipe 'Error Payload' saat membuat menu"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootDeleteMenuMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a menu"
+msgstr "Gabungan tipe 'Error Payload' saat menghapus menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/UnionType/RootUpdateMenuMutationErrorPayloadUnionTypeResolver.php:31
 msgid "Union of 'Error Payload' types when updating a menu"
@@ -3528,37 +4001,54 @@ msgstr "Pengguna Anda tidak memiliki izin untuk mengedit halaman."
 msgid "Your user doesn't have permission for publishing pages."
 msgstr "Pengguna Anda tidak memiliki izin untuk menerbitkan halaman."
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:156
 msgid "Update the page"
 msgstr "Perbarui halaman"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/PageObjectTypeFieldResolver.php:157
+msgid "Delete the page"
+msgstr "Hapus halaman"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a page"
 msgstr "Buat halaman"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create pages"
 msgstr "Buat halaman-halaman"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a page"
 msgstr "Perbarui sebuah halaman"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update pages"
 msgstr "Perbarui halaman-halaman"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
+msgid "Delete a page"
+msgstr "Hapus sebuah halaman"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
+msgid "Delete pages"
+msgstr "Hapus beberapa halaman"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
 msgid ""
 "Retrieve the payload objects from a recently-executed `createPage` mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `createPage` yang baru-baru ini dieksekusi"
 
-#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
 msgid ""
 "Retrieve the payload objects from a recently-executed `updatePage` mutation"
 msgstr ""
 "Ambil objek payload dari mutasi `updatePage` yang baru-baru ini dieksekusi"
+
+#: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deletePage` mutation"
+msgstr "Ambil objek payload dari mutasi `deletePage` yang baru saja dieksekusi"
 
 #: CMSSchema/packages/page-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:162
 msgid "Pages by the logged-in user"
@@ -3575,6 +4065,11 @@ msgstr "Ambil satu halaman oleh pengguna yang masuk"
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/PageContentAsOneofInputObjectTypeResolver.php:20
 msgid "Use HTML as content for the page"
 msgstr "Gunakan HTML sebagai konten untuk halaman"
+
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/PageDeleteInputObjectTypeResolver.php:18
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/RootDeletePageInputObjectTypeResolver.php:18
+msgid "Input to delete a page"
+msgstr "Input untuk menghapus halaman"
 
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/InputObjectType/RootMyPagesFilterInputObjectTypeResolver.php:19
 msgid "Input to filter the logged-in user's pages"
@@ -3594,6 +4089,11 @@ msgstr ""
 "Payload kesalahan untuk: \"Pengguna yang masuk tidak memiliki izin untuk "
 "menerbitkan halaman\""
 
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/PageDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/RootDeletePageMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a page"
+msgstr "Payload dari eksekusi mutasi delete pada halaman"
+
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/PageUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a page"
 msgstr "Payload dari eksekusi mutasi bersarang pembaruan pada halaman"
@@ -3605,6 +4105,11 @@ msgstr "Payload dari pembuatan halaman"
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/ObjectType/RootUpdatePageMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a page"
 msgstr "Payload dari eksekusi mutasi pembaruan pada halaman"
+
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/PageDeleteMutationErrorPayloadUnionTypeResolver.php:32
+#: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/RootDeletePageMutationErrorPayloadUnionTypeResolver.php:32
+msgid "Union of 'Error Payload' types when deleting a page"
+msgstr "Gabungan tipe 'Error Payload' saat menghapus halaman"
 
 #: CMSSchema/packages/page-mutations/src/TypeResolvers/UnionType/PageUpdateMutationErrorPayloadUnionTypeResolver.php:31
 msgid ""
@@ -4084,31 +4589,48 @@ msgstr ""
 msgid "Add a comment to the post"
 msgstr "Tambahkan komentar pada postingan"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:228
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/PostObjectTypeFieldResolver.php:157
+msgid "Delete the post"
+msgstr "Hapus pos"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
 msgid "Create a post"
 msgstr "Buat sebuah postingan"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:229
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
 msgid "Create posts"
 msgstr "Buat postingan"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:230
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
 msgid "Update a post"
 msgstr "Perbarui sebuah postingan"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:231
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
 msgid "Update posts"
 msgstr "Perbarui postingan"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:232
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
+msgid "Delete a post"
+msgstr "Hapus sebuah pos"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
+msgid "Delete posts"
+msgstr "Hapus beberapa pos"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
 msgid ""
 "Retrieve the payload objects from a recently-executed `createPost` mutation"
 msgstr "Ambil objek payload dari mutasi `createPost` yang baru saja dieksekusi"
 
-#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:233
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
 msgid ""
 "Retrieve the payload objects from a recently-executed `updatePost` mutation"
 msgstr "Ambil objek payload dari mutasi `updatePost` yang baru saja dieksekusi"
+
+#: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deletePost` mutation"
+msgstr "Ambil objek payload dari mutasi `deletePost` yang baru saja dieksekusi"
 
 #: CMSSchema/packages/post-mutations/src/FieldResolvers/ObjectType/RootQueryableObjectTypeFieldResolver.php:162
 msgid "Posts by the logged-in user"
@@ -4126,9 +4648,19 @@ msgstr "Ambil satu postingan oleh pengguna yang sedang masuk"
 msgid "Use HTML as content for the post"
 msgstr "Gunakan HTML sebagai konten untuk postingan"
 
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/PostDeleteInputObjectTypeResolver.php:18
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/RootDeletePostInputObjectTypeResolver.php:18
+msgid "Input to delete a post"
+msgstr "Input untuk menghapus pos"
+
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/InputObjectType/RootMyPostsFilterInputObjectTypeResolver.php:19
 msgid "Input to filter the logged-in user's posts"
 msgstr "Input untuk memfilter postingan pengguna yang sedang masuk"
+
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/PostDeleteMutationPayloadObjectTypeResolver.php:16
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/RootDeletePostMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of executing a delete mutation on a post"
+msgstr "Payload dari eksekusi mutasi delete pada pos"
 
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/PostUpdateMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update nested mutation on a post"
@@ -4141,6 +4673,11 @@ msgstr "Payload dari pembuatan sebuah postingan"
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/ObjectType/RootUpdatePostMutationPayloadObjectTypeResolver.php:16
 msgid "Payload of executing an update mutation on a post"
 msgstr "Payload dari eksekusi mutasi pembaruan pada postingan"
+
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/PostDeleteMutationErrorPayloadUnionTypeResolver.php:32
+#: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/RootDeletePostMutationErrorPayloadUnionTypeResolver.php:32
+msgid "Union of 'Error Payload' types when deleting a post"
+msgstr "Gabungan tipe 'Error Payload' saat menghapus pos"
 
 #: CMSSchema/packages/post-mutations/src/TypeResolvers/UnionType/PostUpdateMutationErrorPayloadUnionTypeResolver.php:32
 msgid ""
@@ -13016,6 +13553,17 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#, php-format
+#~ msgid "The status of the comment with ID '%s' could not be updated"
+#~ msgstr "Status komentar dengan ID '%s' tidak dapat diperbarui"
+
+#~ msgid ""
+#~ "Permanently delete the media item, bypassing the trash. Otherwise the "
+#~ "media item is sent to the trash, from where it can be restored."
+#~ msgstr ""
+#~ "Hapus item media secara permanen, melewati sampah. Jika tidak, item media "
+#~ "akan dipindahkan ke sampah, dari mana ia dapat dipulihkan."
 
 #~ msgid "Integration with WooCommerce, to fetch product data."
 #~ msgstr "Integrasi dengan WooCommerce, untuk mengambil data produk."
