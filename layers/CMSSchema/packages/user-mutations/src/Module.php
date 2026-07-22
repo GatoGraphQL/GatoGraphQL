@@ -20,6 +20,7 @@ class Module extends AbstractModule
     public function getDependedModuleClasses(): array
     {
         return [
+            \PoPCMSSchema\Users\Module::class,
             \PoPCMSSchema\UserStateMutations\Module::class,
         ];
     }

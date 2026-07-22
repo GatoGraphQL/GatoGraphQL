@@ -2,7 +2,34 @@
 
 ## Added
 
-The schema can now delete entities, and moderate comments.
+The schema can now manage users, delete entities, and moderate comments.
+
+### Managing users
+
+New mutations to create, update and delete users ([#3362](https://github.com/GatoGraphQL/GatoGraphQL/pull/3362)):
+
+- On the `Root` type: `createUser`, `updateUser` and `deleteUser`, and their bulk versions `createUsers`, `updateUsers` and `deleteUsers`.
+- On the `User` type (for nested mutations): the `update` and `delete` fields.
+
+Every failure mode is returned as a typed error payload (missing capability, user does not exist, username/email already exists, role does not exist, reassign-user does not exist, and cannot-delete-yourself). Capabilities follow WordPress core: `create_users` to create, `edit_users`/`edit_user` to update, `delete_users`/`delete_user` to delete, and `promote_users` to assign roles. These mutations run on single-site installs.
+
+```graphql
+mutation {
+  createUser(input: { username: "newuser", email: "newuser@example.com", roles: ["editor"] }) {
+    status
+    user {
+      id
+      name
+    }
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+  }
+}
+```
 
 ### Deleting entities
 

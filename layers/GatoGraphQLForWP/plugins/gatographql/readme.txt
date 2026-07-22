@@ -248,6 +248,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 19.1.0 =
+* Added - Mutations to create, update and delete users: `createUser`, `updateUser` and `deleteUser` (and their bulk versions `createUsers`, `updateUsers` and `deleteUsers`), and the nested `update` and `delete` fields on the `User` type (#3362)
 * Added - Mutations to delete posts, pages and custom posts: `deletePost`, `deletePage` and `deleteCustomPost` (and their bulk versions), and the nested `delete` field on the `Post`, `Page` and `GenericCustomPost` types (#3358)
 * Added - Mutations to delete media items: `deleteMediaItem` and `deleteMediaItems`, and the nested `delete` field on the `Media` type (#3358)
 * Added - Mutations to delete menus: `deleteMenu` and `deleteMenus`, and the nested `delete` field on the `Menu` type (#3358)
