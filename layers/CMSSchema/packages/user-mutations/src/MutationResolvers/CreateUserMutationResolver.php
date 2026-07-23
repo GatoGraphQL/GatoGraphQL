@@ -6,7 +6,6 @@ namespace PoPCMSSchema\UserMutations\MutationResolvers;
 
 use PoPCMSSchema\UserMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\UserMutations\Constants\UserCRUDHookNames;
-use PoPCMSSchema\UserMutations\Exception\UserCRUDMutationException;
 use PoPCMSSchema\UserMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
