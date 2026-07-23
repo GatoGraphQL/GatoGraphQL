@@ -408,7 +408,7 @@ msgstr ""
 #: CMSSchema/packages/commentmeta-mutations/src/SchemaHooks/AbstractCommentMutationResolverHookSet.php:78
 #: CMSSchema/packages/custompostmeta-mutations/src/SchemaHooks/AbstractCustomPostMutationResolverHookSet.php:80
 #: CMSSchema/packages/tagmeta-mutations/src/SchemaHooks/AbstractTagMutationResolverHookSet.php:80
-#: CMSSchema/packages/usermeta-mutations/src/SchemaHooks/AbstractUserMutationResolverHookSet.php:82
+#: CMSSchema/packages/usermeta-mutations/src/SchemaHooks/AbstractUserMutationResolverHookSet.php:80
 msgid "The meta to set"
 msgstr "Il meta da impostare"
 
@@ -3016,7 +3016,7 @@ msgid "You don't have permission to upload files for other users"
 msgstr "Non hai il permesso di caricare file per altri utenti"
 
 #: CMSSchema/packages/media-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:52
-#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:33
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:53
 #, php-format
 msgid "There is no user with ID '%s'"
 msgstr "Non esiste nessun utente con ID '%s'"
@@ -6105,21 +6105,252 @@ msgstr "Dimensione dell'avatar"
 msgid "User avatar"
 msgstr "Avatar utente"
 
-#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:34
+#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:162
+#, php-format
+msgid "The user with ID '%s' could not be deleted"
+msgstr "Impossibile eliminare l'utente con ID '%s'"
+
+#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:181
+msgid "User mutations are not supported on a multisite network"
+msgstr "Le mutation degli utenti non sono supportate su una rete multisito"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:54
 #, php-format
 msgid "There is no user with username '%s'"
 msgstr "Non esiste nessun utente con nome utente '%s'"
 
-#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:35
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:55
 #, php-format
 msgid "There is no user with email '%s'"
 msgstr "Non esiste nessun utente con email '%s'"
 
-#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:36
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:56
 #, php-format
 msgid "The logged-in user doesn't have the ability to edit user with ID '%s'"
 msgstr ""
 "L'utente autenticato non ha la capacità di modificare l'utente con ID '%s'"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:57
+msgid "You must be logged in to perform this action"
+msgstr "Devi aver effettuato l'accesso per eseguire questa azione"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:58
+msgid "You don't have permission to create users"
+msgstr "Non hai il permesso di creare utenti"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:59
+#, php-format
+msgid "You don't have permission to delete user with ID '%s'"
+msgstr "Non hai il permesso di eliminare l'utente con ID '%s'"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:60
+msgid "You don't have permission to edit user roles"
+msgstr "Non hai il permesso di modificare i ruoli utente"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:61
+#, php-format
+msgid "The username '%s' already exists"
+msgstr "Il nome utente '%s' esiste già"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:62
+#, php-format
+msgid "The email '%s' already belongs to another user"
+msgstr "L'email '%s' appartiene già a un altro utente"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:63
+#, php-format
+msgid "The email '%s' is not valid"
+msgstr "L'email '%s' non è valida"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:64
+#, php-format
+msgid "The user role '%s' does not exist"
+msgstr "Il ruolo utente '%s' non esiste"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:65
+#, php-format
+msgid "There is no user with ID '%s' to reassign the content to"
+msgstr "Non esiste alcun utente con ID '%s' a cui riassegnare il contenuto"
+
+#: CMSSchema/packages/user-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:66
+msgid "You cannot delete your own user account"
+msgstr "Non puoi eliminare il tuo stesso account utente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:308
+msgid "Create a user"
+msgstr "Crea un utente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:309
+msgid "Create users"
+msgstr "Crea utenti"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:310
+msgid "Update a user"
+msgstr "Aggiorna un utente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:311
+msgid "Update users"
+msgstr "Aggiorna utenti"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:312
+msgid "Delete a user"
+msgstr "Elimina un utente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:313
+msgid "Delete users"
+msgstr "Elimina utenti"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:314
+msgid ""
+"Retrieve the payload objects from a recently-executed `createUser` mutation"
+msgstr ""
+"Recupera gli oggetti payload da una mutation `createUser` eseguita di recente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:315
+msgid ""
+"Retrieve the payload objects from a recently-executed `updateUser` mutation"
+msgstr ""
+"Recupera gli oggetti payload da una mutation `updateUser` eseguita di recente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:316
+msgid ""
+"Retrieve the payload objects from a recently-executed `deleteUser` mutation"
+msgstr ""
+"Recupera gli oggetti payload da una mutation `deleteUser` eseguita di recente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:171
+msgid "Update the user"
+msgstr "Aggiorna l'utente"
+
+#: CMSSchema/packages/user-mutations/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:172
+msgid "Delete the user"
+msgstr "Elimina l'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:121
+msgid "The ID of the user to update"
+msgstr "L'ID dell'utente da aggiornare"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:122
+msgid "The username (login). It cannot be changed once the user is created"
+msgstr ""
+"Il nome utente (login). Non può essere modificato dopo la creazione "
+"dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:123
+msgid "The user's email address"
+msgstr "L'indirizzo email dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:124
+msgid ""
+"The user's password. When creating a user, if not provided a random password "
+"is generated"
+msgstr ""
+"La password dell'utente. Se non fornita durante la creazione di un utente, "
+"viene generata una password casuale"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:125
+msgid "The roles assigned to the user"
+msgstr "I ruoli assegnati all'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:126
+msgid "The user's first name"
+msgstr "Il nome dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:127
+msgid "The user's last name"
+msgstr "Il cognome dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:128
+msgid "The user's nickname"
+msgstr "Il nickname dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:129
+msgid "The name to display for the user on the site"
+msgstr "Il nome da visualizzare per l'utente sul sito"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:130
+msgid "The URL-friendly slug (nicename) for the user"
+msgstr "Lo slug (nicename) ottimizzato per URL dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:131
+msgid "The user's website URL"
+msgstr "L'URL del sito web dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:132
+msgid "The user's biographical description"
+msgstr "La descrizione biografica dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:133
+msgid "The user's locale"
+msgstr "La lingua dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:134
+msgid "The date the user registered"
+msgstr "La data di registrazione dell'utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractCreateOrUpdateUserInputObjectTypeResolver.php:135
+msgid "Whether to send the new user an email about their account"
+msgstr "Se inviare al nuovo utente un'email riguardo al proprio account"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteUserInputObjectTypeResolver.php:47
+msgid "The ID of the user to delete"
+msgstr "L'ID dell'utente da eliminare"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/AbstractDeleteUserInputObjectTypeResolver.php:48
+msgid ""
+"The ID of the user to reassign the deleted user's content to. If not "
+"provided, the content is deleted"
+msgstr ""
+"L'ID dell'utente a cui riassegnare i contenuti dell'utente eliminato. Se non "
+"fornito, il contenuto viene eliminato"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/RootCreateUserInputObjectTypeResolver.php:16
+msgid "Input to create a user"
+msgstr "Input per creare un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/RootDeleteUserInputObjectTypeResolver.php:21
+msgid "Input to delete a user"
+msgstr "Input per eliminare un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/RootUpdateUserInputObjectTypeResolver.php:16
+msgid "Input to update a user"
+msgstr "Input per aggiornare un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/UserDeleteInputObjectTypeResolver.php:21
+msgid "Input to delete a user (nested mutations)"
+msgstr "Input per eliminare un utente (mutazioni annidate)"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/InputObjectType/UserUpdateInputObjectTypeResolver.php:21
+msgid "Input to update a user (nested mutations)"
+msgstr "Input per aggiornare un utente (mutazioni annidate)"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/CannotDeleteYourselfErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user cannot delete themselves\""
+msgstr "Payload di errore per: \"L'utente non può eliminare se stesso\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/EmailAlreadyExistsErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The email already exists\""
+msgstr "Payload di errore per: \"L'email esiste già\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/InvalidEmailErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The email is invalid\""
+msgstr "Payload di errore per: \"L'email non è valida\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToCreateUsersErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The logged-in user does not have permission to create "
+"users\""
+msgstr ""
+"Payload di errore per: \"L'utente che ha eseguito l'accesso non ha il "
+"permesso di creare utenti\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToDeleteUserErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The logged-in user does not have permission to delete "
+"the user\""
+msgstr ""
+"Payload di errore per: \"L'utente che ha eseguito l'accesso non ha il "
+"permesso di eliminare l'utente\""
 
 #: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditUserErrorPayloadObjectTypeResolver.php:32
 msgid ""
@@ -6127,6 +6358,72 @@ msgid ""
 msgstr ""
 "Payload di errore per: \"L'utente autenticato non ha il permesso di "
 "modificare l'utente\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/LoggedInUserHasNoPermissionToEditUserRolesErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The logged-in user does not have permission to edit the "
+"user roles\""
+msgstr ""
+"Payload di errore per: \"L'utente che ha eseguito l'accesso non ha il "
+"permesso di modificare i ruoli utente\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/ReassignUserDoesNotExistErrorPayloadObjectTypeResolver.php:32
+msgid ""
+"Error payload for: \"The user to reassign the content to does not exist\""
+msgstr ""
+"Payload di errore per: \"L'utente a cui riassegnare i contenuti non esiste\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/RootCreateUserMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of creating a user"
+msgstr "Payload di creazione di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/RootDeleteUserMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a user"
+msgstr "Payload di eliminazione di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/RootUpdateUserMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a user"
+msgstr "Payload di aggiornamento di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/UserDeleteMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of deleting a user (nested mutations)"
+msgstr "Payload di eliminazione di un utente (mutazioni annidate)"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/UsernameAlreadyExistsErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The username already exists\""
+msgstr "Payload di errore per: \"Il nome utente esiste già\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/UserRoleDoesNotExistErrorPayloadObjectTypeResolver.php:32
+msgid "Error payload for: \"The user role does not exist\""
+msgstr "Payload di errore per: \"Il ruolo utente non esiste\""
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/ObjectType/UserUpdateMutationPayloadObjectTypeResolver.php:16
+msgid "Payload of updating a user (nested mutations)"
+msgstr "Payload di aggiornamento di un utente (mutazioni annidate)"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/UnionType/RootCreateUserMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when creating a user"
+msgstr "Unione di tipi 'Payload di errore' per la creazione di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/UnionType/RootDeleteUserMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a user"
+msgstr "Unione di tipi 'Payload di errore' per l'eliminazione di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/UnionType/RootUpdateUserMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when updating a user"
+msgstr "Unione di tipi 'Payload di errore' per l'aggiornamento di un utente"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/UnionType/UserDeleteMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when deleting a user (nested mutations)"
+msgstr ""
+"Unione di tipi 'Payload di errore' per l'eliminazione di un utente "
+"(mutazioni annidate)"
+
+#: CMSSchema/packages/user-mutations/src/TypeResolvers/UnionType/UserUpdateMutationErrorPayloadUnionTypeResolver.php:31
+msgid "Union of 'Error Payload' types when updating a user (nested mutations)"
+msgstr ""
+"Unione di tipi 'Payload di errore' per l'aggiornamento di un utente "
+"(mutazioni annidate)"
 
 #: CMSSchema/packages/user-roles-wp/src/FieldResolvers/ObjectType/RootRolesObjectTypeFieldResolver.php:93
 msgid "All user role names"
@@ -9383,245 +9680,253 @@ msgstr "Nega accesso"
 msgid "%s meta keys"
 msgstr "Chiavi meta %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:380
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:388
 msgid "User State Mutations"
 msgstr "Mutazioni dello Stato Utente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:381
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:389
+msgid "User Mutations"
+msgstr "Mutazioni Utente"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:390
 msgid "Meta Mutations"
 msgstr "Mutazioni Meta"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:391
 msgid "User Meta Mutations"
 msgstr "Mutazioni Meta Utente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:383
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:392
 msgid "Custom Post Mutations"
 msgstr "Mutazioni Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:384
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:393
 msgid "Custom Post Meta Mutations"
 msgstr "Mutazioni Meta Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:385
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:394
 msgid "Page Mutations"
 msgstr "Mutazioni Pagina"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:386
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:395
 msgid "Post Mutations"
 msgstr "Mutazioni Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:396
 msgid "Post Meta Mutations"
 msgstr "Mutazioni Meta Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:388
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:397
 msgid "Page Meta Mutations"
 msgstr "Mutazioni Meta Pagina"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:389
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:398
 msgid "Media Mutations"
 msgstr "Mutazioni Media"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:390
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:399
 msgid "Menu Mutations"
 msgstr "Mutazioni Menu"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:391
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:400
 msgid "Custom Post Media Mutations"
 msgstr "Mutazioni Media Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:392
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:401
 msgid "Page Media Mutations"
 msgstr "Mutazioni Media Pagina"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:393
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:402
 msgid "Post Media Mutations"
 msgstr "Mutazioni Media Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:394
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:403
 msgid "Custom Post User Mutations"
 msgstr "Mutazioni Utente Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:395
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:404
 msgid "Tag Mutations"
 msgstr "Mutazioni Tag"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:396
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:405
 msgid "Custom Post Tag Mutations"
 msgstr "Mutazioni Tag Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:397
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:406
 msgid "Post Tag Mutations"
 msgstr "Mutazioni Tag Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:398
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:407
 msgid "Category Mutations"
 msgstr "Mutazioni Categoria"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:399
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:408
 msgid "Custom Post Category Mutations"
 msgstr "Mutazioni Categoria Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:400
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:409
 msgid "Post Category Mutations"
 msgstr "Mutazioni Categoria Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:401
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:410
 msgid "Category Meta Mutations"
 msgstr "Mutazioni Meta Categoria"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:411
 msgid "Custom Post Category Meta Mutations"
 msgstr "Mutazioni Meta Categoria Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:403
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:412
 msgid "Post Category Meta Mutations"
 msgstr "Mutazioni Meta Categoria Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:404
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:413
 msgid "Tag Meta Mutations"
 msgstr "Mutazioni Meta Tag"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:405
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:414
 msgid "Custom Post Tag Meta Mutations"
 msgstr "Mutazioni Meta Tag Post Personalizzato"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:406
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:415
 msgid "Post Tag Meta Mutations"
 msgstr "Mutazioni Meta Tag Post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:407
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:416
 msgid "Comment Mutations"
 msgstr "Mutazioni Commento"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:408
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:417
 msgid "Comment Meta Mutations"
 msgstr "Mutazioni Meta dei Commenti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:416
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:425
 msgid "Have the user log-in, and be able to perform mutations"
 msgstr "Consenti all'utente di accedere ed eseguire mutazioni"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:417
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:426
+msgid "Create, update and delete users"
+msgstr "Crea, aggiorna ed elimina utenti"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:427
 msgid "Mutate meta"
 msgstr "Muta i meta"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:418
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:428
 msgid "Mutate user meta"
 msgstr "Muta i meta dell'utente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:419
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:429
 msgid "Base functionality to mutate custom posts"
 msgstr "Funzionalità di base per mutare i custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:420
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:430
 msgid "Mutate custom post meta"
 msgstr "Muta i meta dei custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:421
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:431
 msgid "Execute mutations on pages"
 msgstr "Esegui mutazioni sulle pagine"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:422
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:432
 msgid "Execute mutations on posts"
 msgstr "Esegui mutazioni sui post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:423
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:433
 msgid "Mutate post meta"
 msgstr "Muta i meta dei post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:424
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:434
 msgid "Mutate page meta"
 msgstr "Muta i meta delle pagine"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:425
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:435
 msgid "Execute mutations concerning media items"
 msgstr "Esegui mutazioni riguardanti gli elementi multimediali"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:426
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:436
 msgid "Execute mutations concerning menus"
 msgstr "Esegui mutazioni riguardanti i menu"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:427
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:437
 msgid "Execute mutations concerning media items on custom posts"
 msgstr "Esegui mutazioni riguardanti gli elementi multimediali sui custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:428
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:438
 msgid "Execute mutations concerning media items on pages"
 msgstr "Esegui mutazioni riguardanti gli elementi multimediali sulle pagine"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:429
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:439
 msgid "Execute mutations concerning media items on posts"
 msgstr "Esegui mutazioni riguardanti gli elementi multimediali sui post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:430
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:440
 msgid "Input user data when creating/updating custom posts"
 msgstr ""
 "Inserisci dati utente durante la creazione/aggiornamento dei custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:431
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:441
 msgid "Add tags"
 msgstr "Aggiungi tag"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:432
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:442
 msgid "Add tags to custom posts"
 msgstr "Aggiungi tag ai custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:433
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:443
 msgid "Add tags to posts"
 msgstr "Aggiungi tag ai post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:434
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:444
 msgid "Add categories"
 msgstr "Aggiungi categorie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:435
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:445
 msgid "Add categories to custom posts"
 msgstr "Aggiungi categorie ai custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:436
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:446
 msgid "Add categories to posts"
 msgstr "Aggiungi categorie ai post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:437
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:447
 msgid "Mutate category meta"
 msgstr "Muta i meta delle categorie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:438
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:448
 msgid "Mutate category meta on custom posts"
 msgstr "Muta i meta delle categorie sui custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:439
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:449
 msgid "Mutate category meta on posts"
 msgstr "Muta i meta delle categorie sui post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:440
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:450
 msgid "Add tag meta"
 msgstr "Aggiungi meta dei tag"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:441
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:451
 msgid "Add tag meta on custom posts"
 msgstr "Aggiungi meta dei tag sui custom post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:442
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:452
 msgid "Add tag meta on posts"
 msgstr "Aggiungi meta dei tag sui post"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:443
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:453
 msgid "Create comments"
 msgstr "Crea commenti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:444
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:454
 msgid "Mutate comment meta"
 msgstr "Muta i meta dei commenti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:512
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:522
 #, php-format
 msgid "Treat the %s as “sensitive” data"
 msgstr "Tratta il %s come dati “sensibili”"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:513
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:523
 #, php-format
 msgid ""
 "If checked, the <strong>%s</strong> is exposed in the schema only if the "
@@ -9632,18 +9937,18 @@ msgstr ""
 "Configurazione dello Schema ha l'opzione <code>Expose Sensitive Data in the "
 "Schema</code> abilitata"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:524
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:528
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:534
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:538
 msgid "<code>authorID</code> input (when creating/updating custom posts)"
 msgstr ""
 "<code>authorID</code> input (durante la creazione/aggiornamento dei custom "
 "post)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:540
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:550
 msgid "Reject unsafe URLs"
 msgstr "Rifiuta URL non sicuri"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:541
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:551
 msgid ""
 "Do not allow creating media items from unsafe URLs (such as <code>https://"
 "testing-site.local</code>)"
