@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoPCMSSchema\UserMetaMutations\SchemaHooks;
 
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolverInterface;
+use PoPCMSSchema\UserMutations\TypeResolvers\InputObjectType\CreateUserInputObjectTypeResolverInterface;
+use PoPCMSSchema\UserMutations\TypeResolvers\InputObjectType\UpdateUserInputObjectTypeResolverInterface;
 use PoPCMSSchema\MetaMutations\Constants\MutationInputProperties;
 use PoPSchema\ExtendedSchemaCommons\TypeResolvers\ScalarType\NullableListValueJSONObjectScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\HookNames;
@@ -59,15 +61,11 @@ abstract class AbstractUserMutationResolverHookSet extends AbstractHookSet
         return $inputFieldNameTypeResolvers;
     }
 
-    // @todo Re-enable when adding User Mutations
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        // @todo Remove temp code when adding User Mutations
-        return false;
-        // @todo Re-enable when adding User Mutations
-        // return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
-        //     || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
     }
 
     public function maybeAddInputFieldDescription(

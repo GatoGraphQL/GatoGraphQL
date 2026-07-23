@@ -18,6 +18,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     }
 
     public final const SCHEMA_USER_STATE_MUTATIONS = Plugin::NAMESPACE . '\schema-user-state-mutations';
+    public final const SCHEMA_USER_MUTATIONS = Plugin::NAMESPACE . '\schema-user-mutations';
     public final const SCHEMA_META_MUTATIONS = Plugin::NAMESPACE . '\schema-meta-mutations';
     public final const SCHEMA_USER_META_MUTATIONS = Plugin::NAMESPACE . '\schema-user-meta-mutations';
     public final const SCHEMA_CUSTOMPOST_MUTATIONS = Plugin::NAMESPACE . '\schema-custompost-mutations';
@@ -72,6 +73,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return [
             self::SCHEMA_USER_STATE_MUTATIONS,
+            self::SCHEMA_USER_MUTATIONS,
             self::SCHEMA_META_MUTATIONS,
             self::SCHEMA_USER_META_MUTATIONS,
             self::SCHEMA_CUSTOMPOST_MUTATIONS,
@@ -126,13 +128,19 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                         self::SCHEMA_USER_STATE_MUTATIONS,
                     ],
                 ];
+            case self::SCHEMA_USER_MUTATIONS:
+                return [
+                    [
+                        SchemaTypeModuleResolver::SCHEMA_USERS,
+                    ],
+                    [
+                        self::SCHEMA_USER_STATE_MUTATIONS,
+                    ],
+                ];
             case self::SCHEMA_USER_META_MUTATIONS:
                 return [
                     [
-                        // @todo Re-enable when adding User Mutations
-                        // self::SCHEMA_USER_MUTATIONS,
-                        // @todo Remove temp code when adding User Mutations
-                        SchemaTypeModuleResolver::SCHEMA_USERS,
+                        self::SCHEMA_USER_MUTATIONS,
                     ],
                     [
                         self::SCHEMA_META_MUTATIONS,
@@ -378,6 +386,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_USER_STATE_MUTATIONS => \__('User State Mutations', 'gatographql'),
+            self::SCHEMA_USER_MUTATIONS => \__('User Mutations', 'gatographql'),
             self::SCHEMA_META_MUTATIONS => \__('Meta Mutations', 'gatographql'),
             self::SCHEMA_USER_META_MUTATIONS => \__('User Meta Mutations', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Custom Post Mutations', 'gatographql'),
@@ -414,6 +423,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         return match ($module) {
             self::SCHEMA_USER_STATE_MUTATIONS => \__('Have the user log-in, and be able to perform mutations', 'gatographql'),
+            self::SCHEMA_USER_MUTATIONS => \__('Create, update and delete users', 'gatographql'),
             self::SCHEMA_META_MUTATIONS => \__('Mutate meta', 'gatographql'),
             self::SCHEMA_USER_META_MUTATIONS => \__('Mutate user meta', 'gatographql'),
             self::SCHEMA_CUSTOMPOST_MUTATIONS => \__('Base functionality to mutate custom posts', 'gatographql'),

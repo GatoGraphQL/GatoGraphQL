@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaMutations\SchemaHooks;
 
+use PoPCMSSchema\UserMutations\TypeResolvers\InputObjectType\CreateUserInputObjectTypeResolverInterface;
+use PoPCMSSchema\UserMutations\TypeResolvers\InputObjectType\UpdateUserInputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 
 trait UserMutationResolverHookSetTrait
@@ -11,10 +13,7 @@ trait UserMutationResolverHookSetTrait
     protected function isInputObjectTypeResolver(
         InputObjectTypeResolverInterface $inputObjectTypeResolver,
     ): bool {
-        // @todo Remove temp code when adding User Mutations
-        return false;
-        // @todo Re-enable when adding User Mutations
-        // return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
-        //     || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
+        return $inputObjectTypeResolver instanceof CreateUserInputObjectTypeResolverInterface
+            || $inputObjectTypeResolver instanceof UpdateUserInputObjectTypeResolverInterface;
     }
 }

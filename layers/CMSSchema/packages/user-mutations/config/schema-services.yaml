@@ -3,8 +3,17 @@ services:
         public: true
         autowire: true
 
+    PoPCMSSchema\UserMutations\FieldResolvers\:
+        resource: '../src/FieldResolvers/*'
+
+    PoPCMSSchema\UserMutations\MutationResolvers\:
+        resource: '../src/MutationResolvers/*'
+
     PoPCMSSchema\UserMutations\TypeResolvers\:
         resource: '../src/TypeResolvers/*'
 
     PoPCMSSchema\UserMutations\RelationalTypeDataLoaders\:
         resource: '../src/RelationalTypeDataLoaders/*'
+
+    PoPCMSSchema\UserMutations\ObjectTypeResolverPickers\:
+        resource: '../src/ObjectTypeResolverPickers/*'

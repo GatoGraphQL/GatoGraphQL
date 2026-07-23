@@ -8,6 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
+- Mutations to create, update and delete users: `createUser`, `updateUser` and `deleteUser` (and their bulk versions `createUsers`, `updateUsers` and `deleteUsers`), and the nested `update` and `delete` fields on the `User` type; `createUser` and `updateUser` (and their nested and bulk versions) also accept a `meta` input to set the user's custom meta; the "payload types for mutations" schema configuration also applies to them (#3362)
 - Mutations to delete posts, pages and custom posts: `deletePost`, `deletePage` and `deleteCustomPost` (and their bulk versions), and the nested `delete` field on the `Post`, `Page` and `GenericCustomPost` types (#3358)
 - Mutations to delete media items: `deleteMediaItem` and `deleteMediaItems`, and the nested `delete` field on the `Media` type (#3358)
 - Mutations to delete menus: `deleteMenu` and `deleteMenus`, and the nested `delete` field on the `Menu` type (#3358)
