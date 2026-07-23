@@ -1,0 +1,13 @@
+{
+  "data": {
+    "optionNames": [
+      "blogdescription",
+      "blogname",
+      "home",
+      "siteurl"
+    ],
+    "blogname": {
+      "blogname": "Gato GraphQL"
+    }
+  }
+}

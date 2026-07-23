@@ -1,0 +1,4 @@
+{
+  optionNames
+  blogname: options(names: ["blogname"])
+}

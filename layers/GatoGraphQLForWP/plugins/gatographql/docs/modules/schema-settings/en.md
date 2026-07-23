@@ -1,6 +1,6 @@
 # Settings
 
-Retrieve the settings from the site (stored in table `wp_options`), by querying fields `optionValue`, `optionValues` and `optionObjectValue`.
+Retrieve the settings from the site (stored in table `wp_options`), by querying fields `optionValue`, `optionValues`, `optionObjectValue`, `optionNames` and `options`.
 
 For security reasons, which options can be queried must be explicitly configured.
 
@@ -17,6 +17,45 @@ For instance, this query retrieves the site's URL:
 ```graphql
 {
   homeURL: optionValue(name: "home")
+}
+```
+
+## Listing the allowed option names
+
+Field `optionNames: [String!]!` returns the list of the allowed option names that are stored in the DB (any option that cannot be accessed is omitted from the list):
+
+```graphql
+{
+  optionNames
+}
+```
+
+It can receive an `IncludeExcludeFilterInput` argument `filterBy` to filter the returned names by those containing (`include`) or not containing (`exclude`) some string. For instance, this query returns all the allowed option names that contain `"blog"` in their name (such as `"blogname"` and `"blogdescription"`):
+
+```graphql
+{
+  optionNames(filterBy: { include: "blog" })
+}
+```
+
+## Retrieving multiple options at once
+
+Field `options(names: [String!]!): JSONObject` returns a JSON object, with the option name as key and the option value as value, for the provided (allowed) option names:
+
+```graphql
+{
+  options(names: ["blogname", "blogdescription"])
+}
+```
+
+If any of the provided names cannot be accessed, an error is returned.
+
+Both fields can be combined, feeding the result from `optionNames` as input to `options` (via the `$__optionNames` dynamic variable provided by the "Field to Input" module):
+
+```graphql
+{
+  optionNames
+  options(names: $__optionNames)
 }
 ```
 

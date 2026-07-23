@@ -358,6 +358,42 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "CannotDeleteYourselfErrorPayload",
+                    "description": "Error payload for: \"The user cannot delete themselves\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested category does not exist\"",
                     "fields": [
@@ -1446,6 +1482,42 @@
                     "kind": "OBJECT",
                     "name": "CustomPostHasAlreadyBeenTrashedErrorPayload",
                     "description": "Error payload for: \"The custom post has already been sent to the trash\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "EmailAlreadyExistsErrorPayload",
+                    "description": "Error payload for: \"The email already exists\"",
                     "fields": [
                         {
                             "name": "message",
@@ -4301,6 +4373,42 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "InvalidEmailErrorPayload",
+                    "description": "Error payload for: \"The email is invalid\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "InvalidUserEmailErrorPayload",
                     "description": "Error payload for: \"No user is registered with the provided email\"",
                     "fields": [
@@ -4625,6 +4733,42 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                    "description": "Error payload for: \"The logged-in user does not have permission to create users\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
                     "description": "Error payload for: \"The user has no permission to delete the comment\"",
                     "fields": [
@@ -4735,6 +4879,42 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
                     "description": "Error payload for: \"The user has no permission to delete the menu\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
+                    "description": "Error payload for: \"The logged-in user does not have permission to delete the user\"",
                     "fields": [
                         {
                             "name": "message",
@@ -4915,6 +5095,42 @@
                     "kind": "OBJECT",
                     "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                     "description": "Error payload for: \"The logged-in user has no permission to edit the user\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
+                    "description": "Error payload for: \"The logged-in user does not have permission to edit the user roles\"",
                     "fields": [
                         {
                             "name": "message",
@@ -8183,6 +8399,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "createUser",
+                            "description": "Create a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to create a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootCreateUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootCreateUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootCreateUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "createUsers",
+                            "description": "Create users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to create a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootCreateUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootCreateUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootCreateUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootCreateUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootCreateUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootCreateUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootCreateUserMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteCategories",
                             "description": "Delete categories",
                             "args": [
@@ -9879,6 +10201,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteUser",
+                            "description": "Delete a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteUserMeta",
                             "description": "Delete meta from user",
                             "args": [
@@ -9975,6 +10332,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootDeleteUserMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteUsers",
+                            "description": "Delete users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteUserMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -13218,6 +13646,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "updateUser",
+                            "description": "Update a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "updateUserMeta",
                             "description": "Update meta from user",
                             "args": [
@@ -13314,6 +13777,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootUpdateUserMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateUsers",
+                            "description": "Update users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateUserMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -18860,6 +19394,46 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "optionNames",
+                            "description": "List of the allowed option names saved in the DB.",
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "description": "Filter the option names to be retrieved",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeExcludeFilterInput",
+                                        "isOneOf": true,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[String!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[String!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "optionObjectValue",
                             "description": "Object-value option saved in the DB, or `null` if entry does not exist",
                             "args": [
@@ -18982,6 +19556,51 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "AnyBuiltInScalar",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "options",
+                            "description": "JSON object, with the option name as key and the option value as value, for the provided option names.",
+                            "args": [
+                                {
+                                    "name": "names",
+                                    "description": "The option names",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "JSONObject!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
                                     "isOneOf": false,
                                     "ofType": null
                                 }
@@ -20348,6 +20967,42 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "ReassignUserDoesNotExistErrorPayload",
+                    "description": "Error payload for: \"The user to reassign the content to does not exist\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         }
@@ -22607,6 +23262,112 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "createUser",
+                            "description": "Create a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to create a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootCreateUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootCreateUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootCreateUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "createUsers",
+                            "description": "Create users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to create a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootCreateUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootCreateUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootCreateUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootCreateUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootCreateUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootCreateUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootCreateUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootCreateUserMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "customPost",
                             "description": "Query a custom post by different properties",
                             "args": [
@@ -24477,6 +25238,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "deleteUser",
+                            "description": "Delete a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to delete a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootDeleteUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootDeleteUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootDeleteUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "deleteUserMeta",
                             "description": "Delete meta from user",
                             "args": [
@@ -24573,6 +25369,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootDeleteUserMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "deleteUsers",
+                            "description": "Delete users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to delete a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootDeleteUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootDeleteUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootDeleteUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootDeleteUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootDeleteUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootDeleteUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootDeleteUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootDeleteUserMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -25746,6 +26613,46 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "optionNames",
+                            "description": "List of the allowed option names saved in the DB.",
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "description": "Filter the option names to be retrieved",
+                                    "type": {
+                                        "kind": "INPUT_OBJECT",
+                                        "name": "IncludeExcludeFilterInput",
+                                        "isOneOf": true,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[String!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[String!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "String!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "optionObjectValue",
                             "description": "Object-value option saved in the DB, or `null` if entry does not exist",
                             "args": [
@@ -25868,6 +26775,51 @@
                                 "ofType": {
                                     "kind": "SCALAR",
                                     "name": "AnyBuiltInScalar",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "options",
+                            "description": "JSON object, with the option name as key and the option value as value, for the provided option names.",
+                            "args": [
+                                {
+                                    "name": "names",
+                                    "description": "The option names",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[String!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[String!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "String!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "SCALAR",
+                                                    "name": "String",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "JSONObject!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "JSONObject",
                                     "isOneOf": false,
                                     "ofType": null
                                 }
@@ -30192,6 +31144,41 @@
                             "deprecationReason": null
                         },
                         {
+                            "name": "updateUser",
+                            "description": "Update a user",
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "description": "Input to update a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateUserInput!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "INPUT_OBJECT",
+                                            "name": "RootUpdateUserInput",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "RootUpdateUserMutationPayload!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "OBJECT",
+                                    "name": "RootUpdateUserMutationPayload",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
                             "name": "updateUserMeta",
                             "description": "Update meta from user",
                             "args": [
@@ -30288,6 +31275,77 @@
                                         "ofType": {
                                             "kind": "OBJECT",
                                             "name": "RootUpdateUserMetaMutationPayload",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "updateUsers",
+                            "description": "Update users",
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "description": "Input to update a user",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "[RootUpdateUserInput!]!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "LIST",
+                                            "name": "[RootUpdateUserInput!]",
+                                            "isOneOf": false,
+                                            "ofType": {
+                                                "kind": "NON_NULL",
+                                                "name": "RootUpdateUserInput!",
+                                                "isOneOf": false,
+                                                "ofType": {
+                                                    "kind": "INPUT_OBJECT",
+                                                    "name": "RootUpdateUserInput",
+                                                    "isOneOf": false,
+                                                    "ofType": null
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "defaultValue": null
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "description": "The Boolean scalar type represents `true` or `false`.",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": "Boolean!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "Boolean",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": "false"
+                                }
+                            ],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "[RootUpdateUserMutationPayload!]!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "LIST",
+                                    "name": "[RootUpdateUserMutationPayload!]",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "NON_NULL",
+                                        "name": "RootUpdateUserMutationPayload!",
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "OBJECT",
+                                            "name": "RootUpdateUserMutationPayload",
                                             "isOneOf": false,
                                             "ofType": null
                                         }
@@ -31855,6 +32913,84 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "RootCreateUserMutationPayload",
+                    "description": "Payload of creating a user",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootCreateUserMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootCreateUserMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootCreateUserMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "user",
+                            "description": "Object affected by the mutation, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "OBJECT",
+                                "name": "User",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "userID",
+                            "description": "ID of the entity, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "RootDeleteCommentMetaMutationPayload",
                     "description": "Payload of executing a delete meta mutation on a comment",
                     "fields": [
@@ -32909,6 +34045,58 @@
                                 "name": "ID",
                                 "isOneOf": false,
                                 "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "RootDeleteUserMutationPayload",
+                    "description": "Payload of deleting a user",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootDeleteUserMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootDeleteUserMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootDeleteUserMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
@@ -35495,6 +36683,84 @@
                 },
                 {
                     "kind": "OBJECT",
+                    "name": "RootUpdateUserMutationPayload",
+                    "description": "Payload of updating a user",
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "description": "List of error data, if the operation failed",
+                            "args": [],
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[RootUpdateUserMutationErrorPayloadUnion!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "RootUpdateUserMutationErrorPayloadUnion!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "UNION",
+                                        "name": "RootUpdateUserMutationErrorPayloadUnion",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "status",
+                            "description": "Status of the operation",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "OperationStatusEnum!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "ENUM",
+                                    "name": "OperationStatusEnum",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "user",
+                            "description": "Object affected by the mutation, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "OBJECT",
+                                "name": "User",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "userID",
+                            "description": "ID of the entity, if the operation was successful",
+                            "args": [],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
                     "name": "TagTermDoesNotExistErrorPayload",
                     "description": "Error payload for: \"The requested tag does not exist\"",
                     "fields": [
@@ -36957,6 +38223,78 @@
                         {
                             "kind": "INTERFACE",
                             "name": "IdentifiableObject",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "UserRoleDoesNotExistErrorPayload",
+                    "description": "Error payload for: \"The user role does not exist\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ],
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "OBJECT",
+                    "name": "UsernameAlreadyExistsErrorPayload",
+                    "description": "Error payload for: \"The username already exists\"",
+                    "fields": [
+                        {
+                            "name": "message",
+                            "description": "Error message",
+                            "args": [],
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        }
+                    ],
+                    "inputFields": null,
+                    "interfaces": [
+                        {
+                            "kind": "INTERFACE",
+                            "name": "ErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         }
@@ -39488,6 +40826,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "CannotDeleteYourselfErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "CategoryTermDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -39572,6 +40916,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "EmailAlreadyExistsErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "EntityMetaAlreadyHasSingleEntryErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -39603,6 +40953,12 @@
                         {
                             "kind": "OBJECT",
                             "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "InvalidEmailErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -39662,6 +41018,12 @@
                         },
                         {
                             "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
                             "isOneOf": false,
                             "ofType": null
@@ -39681,6 +41043,12 @@
                         {
                             "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -39711,6 +41079,12 @@
                         {
                             "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -39753,6 +41127,12 @@
                         {
                             "kind": "OBJECT",
                             "name": "PasswordIsIncorrectErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "ReassignUserDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -39801,6 +41181,18 @@
                         {
                             "kind": "OBJECT",
                             "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserRoleDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UsernameAlreadyExistsErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         }
@@ -45689,6 +47081,202 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "RootCreateUserInput",
+                    "description": "Input to create a user",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "description": "The user's biographical description",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "displayName",
+                            "description": "The name to display for the user on the site",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "email",
+                            "description": "The user's email address",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "Email!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "Email",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "firstName",
+                            "description": "The user's first name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "lastName",
+                            "description": "The user's last name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "locale",
+                            "description": "The user's locale",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "meta",
+                            "description": "The meta to set",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "NullableListValueJSONObject",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "nickname",
+                            "description": "The user's nickname",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "password",
+                            "description": "The user's password. When creating a user, if not provided a random password is generated",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "registeredDate",
+                            "description": "The date the user registered",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "DateTime",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "roles",
+                            "description": "The roles assigned to the user",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "sendEmailNotification",
+                            "description": "Whether to send the new user an email about their account",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Boolean",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": "false"
+                        },
+                        {
+                            "name": "slug",
+                            "description": "The URL-friendly slug (nicename) for the user",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "username",
+                            "description": "The username (login). It cannot be changed once the user is created",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "String!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "String",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "websiteURL",
+                            "description": "The user's website URL",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "URL",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "RootCustomPostsFilterInput",
                     "description": "Input to filter custom posts",
                     "fields": null,
@@ -46511,6 +48099,44 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "AnyScalar",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
+                    "name": "RootDeleteUserInput",
+                    "description": "Input to delete a user",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "description": "The ID of the user to delete",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "reassignAuthorContentTo",
+                            "description": "The ID of the user to reassign the deleted user's content to. If not provided, the content is deleted",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
                                 "isOneOf": false,
                                 "ofType": null
                             },
@@ -50844,6 +52470,186 @@
                 },
                 {
                     "kind": "INPUT_OBJECT",
+                    "name": "RootUpdateUserInput",
+                    "description": "Input to update a user",
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "description": "The user's biographical description",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "displayName",
+                            "description": "The name to display for the user on the site",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "email",
+                            "description": "The user's email address",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "Email",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "firstName",
+                            "description": "The user's first name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "id",
+                            "description": "The ID of the user to update",
+                            "type": {
+                                "kind": "NON_NULL",
+                                "name": "ID!",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "SCALAR",
+                                    "name": "ID",
+                                    "isOneOf": false,
+                                    "ofType": null
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "lastName",
+                            "description": "The user's last name",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "locale",
+                            "description": "The user's locale",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "meta",
+                            "description": "The meta to set",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "NullableListValueJSONObject",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "nickname",
+                            "description": "The user's nickname",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "password",
+                            "description": "The user's password. When creating a user, if not provided a random password is generated",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "registeredDate",
+                            "description": "The date the user registered",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "DateTime",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "roles",
+                            "description": "The roles assigned to the user",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[String!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "String!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "String",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "slug",
+                            "description": "The URL-friendly slug (nicename) for the user",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "String",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "websiteURL",
+                            "description": "The user's website URL",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "URL",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        }
+                    ],
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": null
+                },
+                {
+                    "kind": "INPUT_OBJECT",
                     "name": "RootUpdateUserMetaInput",
                     "description": "Input to update a user's meta",
                     "fields": null,
@@ -54409,6 +56215,71 @@
                 },
                 {
                     "kind": "UNION",
+                    "name": "RootCreateUserMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when creating a user",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "EmailAlreadyExistsErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "InvalidEmailErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserRoleDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UsernameAlreadyExistsErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
                     "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
                     "description": "Union of 'Error Payload' types when deleting meta on a comment",
                     "fields": null,
@@ -55171,6 +57042,53 @@
                         {
                             "kind": "OBJECT",
                             "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootDeleteUserMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when deleting a user",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "CannotDeleteYourselfErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "ReassignUserDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         },
@@ -56950,6 +58868,71 @@
                         {
                             "kind": "OBJECT",
                             "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        }
+                    ]
+                },
+                {
+                    "kind": "UNION",
+                    "name": "RootUpdateUserMutationErrorPayloadUnion",
+                    "description": "Union of 'Error Payload' types when updating a user",
+                    "fields": null,
+                    "inputFields": null,
+                    "interfaces": null,
+                    "enumValues": null,
+                    "possibleTypes": [
+                        {
+                            "kind": "OBJECT",
+                            "name": "AccessToMetaKeyIsNotAllowedErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "EmailAlreadyExistsErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "GenericErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "InvalidEmailErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserDoesNotExistErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserIsNotLoggedInErrorPayload",
+                            "isOneOf": false,
+                            "ofType": null
+                        },
+                        {
+                            "kind": "OBJECT",
+                            "name": "UserRoleDoesNotExistErrorPayload",
                             "isOneOf": false,
                             "ofType": null
                         }

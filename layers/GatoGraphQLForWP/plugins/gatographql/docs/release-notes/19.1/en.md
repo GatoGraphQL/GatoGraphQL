@@ -78,6 +78,22 @@ mutation {
 }
 ```
 
+### Querying the site's options
+
+The Settings module gains two new fields to query the site's options (i.e. the settings, stored in table `wp_options`) in bulk ([#3364](https://github.com/GatoGraphQL/GatoGraphQL/pull/3364)):
+
+- `optionNames: [String!]!` returns the list of the allowed option names stored in the DB. It accepts a `filterBy` input to include or exclude the names containing some string.
+- `options(names: [String!]!): JSONObject` returns a JSON object, with the option name as key and the option value as value, for the provided (allowed) option names.
+
+As with the existing `optionValue` field, only the options explicitly configured as accessible can be queried; any option that cannot be accessed is omitted from `optionNames`, and providing it to `options` returns an error.
+
+```graphql
+{
+  optionNames(filterBy: { include: "blog" })
+  options(names: $__optionNames)
+}
+```
+
 ## Improvements
 
 - Updated WooCommerce docs with mutations ([#3356](https://github.com/GatoGraphQL/GatoGraphQL/pull/3356))

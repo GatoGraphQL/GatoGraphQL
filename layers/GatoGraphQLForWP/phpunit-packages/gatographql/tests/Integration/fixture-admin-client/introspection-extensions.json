@@ -184,6 +184,26 @@
                     "enumValues": null
                 },
                 {
+                    "name": "CannotDeleteYourselfErrorPayload",
+                    "extensions": {
+                        "elementName": "CannotDeleteYourselfErrorPayload",
+                        "namespacedName": "CannotDeleteYourselfErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "CategoryTermDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "CategoryTermDoesNotExistErrorPayload",
@@ -734,6 +754,26 @@
                     "extensions": {
                         "elementName": "CustomPostHasAlreadyBeenTrashedErrorPayload",
                         "namespacedName": "CustomPostHasAlreadyBeenTrashedErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "EmailAlreadyExistsErrorPayload",
+                    "extensions": {
+                        "elementName": "EmailAlreadyExistsErrorPayload",
+                        "namespacedName": "EmailAlreadyExistsErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -2034,6 +2074,26 @@
                     "enumValues": null
                 },
                 {
+                    "name": "InvalidEmailErrorPayload",
+                    "extensions": {
+                        "elementName": "InvalidEmailErrorPayload",
+                        "namespacedName": "InvalidEmailErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "InvalidUserEmailErrorPayload",
                     "extensions": {
                         "elementName": "InvalidUserEmailErrorPayload",
@@ -2214,6 +2274,26 @@
                     "enumValues": null
                 },
                 {
+                    "name": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload",
@@ -2278,6 +2358,26 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -2378,6 +2478,26 @@
                     "extensions": {
                         "elementName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
                         "namespacedName": "LoggedInUserHasNoPermissionToEditUserErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
+                    "extensions": {
+                        "elementName": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
+                        "namespacedName": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload",
                         "possibleValues": null
                     },
                     "fields": [
@@ -3702,6 +3822,42 @@
                             ]
                         },
                         {
+                            "name": "createUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createUsers",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteCategories",
                             "extensions": {
                                 "isMutation": true,
@@ -4278,6 +4434,21 @@
                             ]
                         },
                         {
+                            "name": "deleteUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteUserMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -4294,6 +4465,27 @@
                         },
                         {
                             "name": "deleteUserMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteUsers",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -5417,6 +5609,21 @@
                             ]
                         },
                         {
+                            "name": "updateUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateUserMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -5433,6 +5640,27 @@
                         },
                         {
                             "name": "updateUserMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateUsers",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -7882,6 +8110,21 @@
                             ]
                         },
                         {
+                            "name": "optionNames",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "optionObjectValue",
                             "extensions": {
                                 "isMutation": false,
@@ -7935,6 +8178,21 @@
                             "args": [
                                 {
                                     "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "options",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "names",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -8548,6 +8806,26 @@
                                     }
                                 }
                             ]
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "ReassignUserDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "ReassignUserDoesNotExistErrorPayload",
+                        "namespacedName": "ReassignUserDoesNotExistErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
                         }
                     ],
                     "inputFields": null,
@@ -9368,6 +9646,42 @@
                             ]
                         },
                         {
+                            "name": "createUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "createUsers",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "customPost",
                             "extensions": {
                                 "isMutation": false,
@@ -10013,6 +10327,21 @@
                             ]
                         },
                         {
+                            "name": "deleteUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "deleteUserMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -10029,6 +10358,27 @@
                         },
                         {
                             "name": "deleteUserMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "deleteUsers",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -10557,6 +10907,21 @@
                             ]
                         },
                         {
+                            "name": "optionNames",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "filterBy",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "optionObjectValue",
                             "extensions": {
                                 "isMutation": false,
@@ -10610,6 +10975,21 @@
                             "args": [
                                 {
                                     "name": "name",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "options",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "names",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -12203,6 +12583,21 @@
                             ]
                         },
                         {
+                            "name": "updateUser",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "input",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
                             "name": "updateUserMeta",
                             "extensions": {
                                 "isMutation": true,
@@ -12219,6 +12614,27 @@
                         },
                         {
                             "name": "updateUserMetas",
+                            "extensions": {
+                                "isMutation": true,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "inputs",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "stopExecutingMutationItemsOnFirstError",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "updateUsers",
                             "extensions": {
                                 "isMutation": true,
                                 "isSensitiveDataElement": false
@@ -13093,6 +13509,50 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateUserMutationPayload",
+                    "extensions": {
+                        "elementName": "RootCreateUserMutationPayload",
+                        "namespacedName": "RootCreateUserMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "user",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "userID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeleteCommentMetaMutationPayload",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaMutationPayload",
@@ -13670,6 +14130,34 @@
                         },
                         {
                             "name": "userID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteUserMutationPayload",
+                    "extensions": {
+                        "elementName": "RootDeleteUserMutationPayload",
+                        "namespacedName": "RootDeleteUserMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -15133,6 +15621,50 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateUserMutationPayload",
+                    "extensions": {
+                        "elementName": "RootUpdateUserMutationPayload",
+                        "namespacedName": "RootUpdateUserMutationPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "errors",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "status",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "user",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
+                            "name": "userID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "TagTermDoesNotExistErrorPayload",
                     "extensions": {
                         "elementName": "TagTermDoesNotExistErrorPayload",
@@ -15800,6 +16332,46 @@
                         },
                         {
                             "name": "self",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UserRoleDoesNotExistErrorPayload",
+                    "extensions": {
+                        "elementName": "UserRoleDoesNotExistErrorPayload",
+                        "namespacedName": "UserRoleDoesNotExistErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        }
+                    ],
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "UsernameAlreadyExistsErrorPayload",
+                    "extensions": {
+                        "elementName": "UsernameAlreadyExistsErrorPayload",
+                        "namespacedName": "UsernameAlreadyExistsErrorPayload",
+                        "possibleValues": null
+                    },
+                    "fields": [
+                        {
+                            "name": "message",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -20250,6 +20822,108 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateUserInput",
+                    "extensions": {
+                        "elementName": "RootCreateUserInput",
+                        "namespacedName": "RootCreateUserInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "displayName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "email",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "firstName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "lastName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "locale",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "nickname",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "password",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "registeredDate",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "roles",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "sendEmailNotification",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "username",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "websiteURL",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootCustomPostsFilterInput",
                     "extensions": {
                         "elementName": "RootCustomPostsFilterInput",
@@ -20686,6 +21360,30 @@
                         },
                         {
                             "name": "value",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteUserInput",
+                    "extensions": {
+                        "elementName": "RootDeleteUserInput",
+                        "namespacedName": "RootDeleteUserInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "reassignAuthorContentTo",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
@@ -22746,6 +23444,102 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootUpdateUserInput",
+                    "extensions": {
+                        "elementName": "RootUpdateUserInput",
+                        "namespacedName": "RootUpdateUserInput",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": [
+                        {
+                            "name": "description",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "displayName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "email",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "firstName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "id",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "lastName",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "locale",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "meta",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "nickname",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "password",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "registeredDate",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "roles",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "slug",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "websiteURL",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ],
+                    "enumValues": null
+                },
+                {
                     "name": "RootUpdateUserMetaInput",
                     "extensions": {
                         "elementName": "RootUpdateUserMetaInput",
@@ -24784,6 +25578,17 @@
                     "enumValues": null
                 },
                 {
+                    "name": "RootCreateUserMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootCreateUserMutationErrorPayloadUnion",
+                        "namespacedName": "RootCreateUserMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
                     "name": "RootDeleteCommentMetaMutationErrorPayloadUnion",
                     "extensions": {
                         "elementName": "RootDeleteCommentMetaMutationErrorPayloadUnion",
@@ -24964,6 +25769,17 @@
                     "extensions": {
                         "elementName": "RootDeleteUserMetaMutationErrorPayloadUnion",
                         "namespacedName": "RootDeleteUserMetaMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootDeleteUserMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootDeleteUserMutationErrorPayloadUnion",
+                        "namespacedName": "RootDeleteUserMutationErrorPayloadUnion",
                         "possibleValues": null
                     },
                     "fields": null,
@@ -25327,6 +26143,17 @@
                     "extensions": {
                         "elementName": "RootUpdateUserMetaMutationErrorPayloadUnion",
                         "namespacedName": "RootUpdateUserMetaMutationErrorPayloadUnion",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": null
+                },
+                {
+                    "name": "RootUpdateUserMutationErrorPayloadUnion",
+                    "extensions": {
+                        "elementName": "RootUpdateUserMutationErrorPayloadUnion",
+                        "namespacedName": "RootUpdateUserMutationErrorPayloadUnion",
                         "possibleValues": null
                     },
                     "fields": null,
