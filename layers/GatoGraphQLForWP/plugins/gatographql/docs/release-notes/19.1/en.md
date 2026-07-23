@@ -10,6 +10,7 @@ New mutations to create, update and delete users ([#3362](https://github.com/Gat
 
 - On the `Root` type: `createUser`, `updateUser` and `deleteUser`, and their bulk versions `createUsers`, `updateUsers` and `deleteUsers`.
 - On the `User` type (for nested mutations): the `update` and `delete` fields.
+- `createUser` and `updateUser` (and their nested and bulk versions) accept a `meta` input to set the user's custom meta.
 
 Every failure mode is returned as a typed error payload (missing capability, user does not exist, username/email already exists, role does not exist, reassign-user does not exist, and cannot-delete-yourself). Capabilities follow WordPress core: `create_users` to create, `edit_users`/`edit_user` to update, `delete_users`/`delete_user` to delete, and `promote_users` to assign roles. These mutations run on single-site installs.
 

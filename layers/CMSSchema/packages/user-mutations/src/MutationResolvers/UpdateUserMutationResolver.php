@@ -77,6 +77,7 @@ class UpdateUserMutationResolver extends AbstractCreateOrUpdateUserMutationResol
 
         // Allow for additional operations
         $this->additionals($userID, $fieldDataAccessor);
+        $this->triggerExecuteCreateOrUpdateHook($userID, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
 
         return $userID;
     }

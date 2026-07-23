@@ -19,10 +19,6 @@ class EntityMetaEntryAlreadyHasValueErrorPayloadObjectTypeResolverPicker extends
         return [
             AbstractRootUpdateUserMetaMutationErrorPayloadUnionTypeResolver::class,
             AbstractUserUpdateMetaMutationErrorPayloadUnionTypeResolver::class,
-            // @todo Re-enable when adding User Mutations
-            // RootCreateUserMutationErrorPayloadUnionTypeResolver::class,
-            // RootUpdateUserMutationErrorPayloadUnionTypeResolver::class,
-            // UserUpdateMutationErrorPayloadUnionTypeResolver::class,
         ];
     }
 }

@@ -203,7 +203,19 @@ abstract class AbstractCreateOrUpdateUserMutationResolver extends AbstractMutati
 
     protected function additionals(string|int $userID, FieldDataAccessorInterface $fieldDataAccessor): void
     {
-        App::doAction(UserCRUDHookNames::CREATE_OR_UPDATE_USER, $userID, $fieldDataAccessor);
+    }
+
+    protected function triggerExecuteCreateOrUpdateHook(
+        string|int $userID,
+        FieldDataAccessorInterface $fieldDataAccessor,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        App::doAction(
+            UserCRUDHookNames::CREATE_OR_UPDATE_USER,
+            $userID,
+            $fieldDataAccessor,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
     }
 
     /**
