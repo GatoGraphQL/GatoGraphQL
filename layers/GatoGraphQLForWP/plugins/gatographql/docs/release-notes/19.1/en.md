@@ -119,6 +119,7 @@ The `customPosts` query can now be filtered by the parent custom post, using the
 
 ## Fixes
 
+- The `defaultValue` of input values (field and directive arguments, and input object fields) in the introspection query is now encoded using the GraphQL language, as required by the GraphQL spec, and not as JSON. Enum default values were previously quoted as strings (such as `["approve"]` instead of `[approve]`), so GraphQL clients (such as GraphiQL) discarded the default value and, for non-nullable arguments, wrongly reported that the argument is required.
 - Corrected the `parentID` and `parentIDs` filter input descriptions (on the custom posts and pages filters), which had the singular/plural wording swapped.
 - The "payload types for mutations" schema configuration (its "Do not use payload types for mutations" and "Use payload types for mutations, and add fields to query those payload objects" options) now also applies to the meta, taxonomy term (category and tag) and menu mutations. Previously only the post, page, custom post, media, comment and user-state mutations honored this setting, so meta/taxonomy/menu mutations always used payload types and never exposed their `...MutationPayloadObjects` query fields.
 - Made the ordering of taxonomy terms (such as categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (such as a duplicate name) are always returned in a consistent order when sorting and paginating.
