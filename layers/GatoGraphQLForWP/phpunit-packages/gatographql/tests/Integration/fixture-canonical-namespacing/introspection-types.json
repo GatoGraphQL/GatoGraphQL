@@ -16,6 +16,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "CannotDeleteYourselfErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "CategoryTermDoesNotExistErrorPayload"
         },
         {
@@ -76,6 +80,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "EmailAlreadyExistsErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "EntityMetaAlreadyHasSingleEntryErrorPayload"
         },
         {
@@ -116,6 +124,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "InvalidEmailErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "InvalidUserEmailErrorPayload"
         },
         {
@@ -152,6 +164,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToCreateUsersErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToDeleteCommentErrorPayload"
         },
         {
@@ -165,6 +181,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToDeleteMenuErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToDeleteUserErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -185,6 +205,10 @@
         {
           "kind": "OBJECT",
           "name": "LoggedInUserHasNoPermissionToEditUserErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "LoggedInUserHasNoPermissionToEditUserRolesErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -249,6 +273,10 @@
         {
           "kind": "OBJECT",
           "name": "QueryRoot"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "ReassignUserDoesNotExistErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -324,6 +352,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootCreateUserMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "RootDeleteCommentMetaMutationPayload"
         },
         {
@@ -389,6 +421,10 @@
         {
           "kind": "OBJECT",
           "name": "RootDeleteUserMetaMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "RootDeleteUserMutationPayload"
         },
         {
           "kind": "OBJECT",
@@ -524,6 +560,10 @@
         },
         {
           "kind": "OBJECT",
+          "name": "RootUpdateUserMutationPayload"
+        },
+        {
+          "kind": "OBJECT",
           "name": "TagTermDoesNotExistErrorPayload"
         },
         {
@@ -565,6 +605,14 @@
         {
           "kind": "OBJECT",
           "name": "UserRole"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UserRoleDoesNotExistErrorPayload"
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UsernameAlreadyExistsErrorPayload"
         },
         {
           "kind": "OBJECT",
@@ -1076,6 +1124,10 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "RootCreateUserInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "RootCustomPostsFilterInput"
         },
         {
@@ -1133,6 +1185,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootDeleteTagMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootDeleteUserInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1297,6 +1353,10 @@
         {
           "kind": "INPUT_OBJECT",
           "name": "RootUpdateTagMetaInput"
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "RootUpdateUserInput"
         },
         {
           "kind": "INPUT_OBJECT",
@@ -1536,6 +1596,10 @@
         },
         {
           "kind": "UNION",
+          "name": "RootCreateUserMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
           "name": "RootDeleteCommentMetaMutationErrorPayloadUnion"
         },
         {
@@ -1601,6 +1665,10 @@
         {
           "kind": "UNION",
           "name": "RootDeleteUserMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootDeleteUserMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
@@ -1733,6 +1801,10 @@
         {
           "kind": "UNION",
           "name": "RootUpdateUserMetaMutationErrorPayloadUnion"
+        },
+        {
+          "kind": "UNION",
+          "name": "RootUpdateUserMutationErrorPayloadUnion"
         },
         {
           "kind": "UNION",
