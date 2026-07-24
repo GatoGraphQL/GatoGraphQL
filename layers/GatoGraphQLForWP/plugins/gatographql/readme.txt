@@ -248,6 +248,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 19.1.0 =
+* Added - Filter custom posts by their parent: the `customPosts` query gains the `parentID`, `parentIDs` and `excludeParentIDs` filter inputs (as already available on the `pages` query), mapping to WordPress' `post_parent`, `post_parent__in` and `post_parent__not_in` query args (#3366)
 * Added - Fields to query the site's options (i.e. the settings) in bulk: `optionNames` returns the list of the allowed option names stored in the DB (with a `filterBy` input to include/exclude the names containing some string), and `options` returns a JSON object with the option name and value for the provided (allowed) option names (#3364)
 * Added - Mutations to create, update and delete users: `createUser`, `updateUser` and `deleteUser` (and their bulk versions `createUsers`, `updateUsers` and `deleteUsers`), and the nested `update` and `delete` fields on the `User` type; `createUser` and `updateUser` (and their nested and bulk versions) also accept a `meta` input to set the user's custom meta; the "payload types for mutations" schema configuration also applies to them (#3362)
 * Added - Mutations to delete posts, pages and custom posts: `deletePost`, `deletePage` and `deleteCustomPost` (and their bulk versions), and the nested `delete` field on the `Post`, `Page` and `GenericCustomPost` types (#3358)
@@ -256,6 +257,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Mutations to update and moderate comments: `updateComment` and `updateComments`, and the nested `update` field on the `Comment` type. The comment is moderated via the `status` input, which can approve it, hold it for moderation, mark it as spam, or send it to the trash (#3358)
 * Added - Mutations to delete comments: `deleteComment` and `deleteComments`, and the nested `delete` field on the `Comment` type (#3358)
 * Improved - Updated WooCommerce docs with mutations (#3356)
+* Fixed - Corrected the `parentID` and `parentIDs` filter input descriptions (on the custom posts and pages filters), which had the singular/plural wording swapped (#3366)
 * Fixed - The "payload types for mutations" schema configuration (its "Do not use payload types for mutations" and "Use payload types for mutations, and add fields to query those payload objects" options) now also applies to the meta, taxonomy term (category and tag) and menu mutations; previously only the post, page, custom post, media, comment and user-state mutations honored it, so meta/taxonomy/menu mutations always used payload types and never exposed their `...MutationPayloadObjects` query fields (#3359)
 * Fixed - Made the ordering of taxonomy terms (eg: categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (eg: a duplicate name) are always returned in a consistent order when sorting and paginating (#3354)
 

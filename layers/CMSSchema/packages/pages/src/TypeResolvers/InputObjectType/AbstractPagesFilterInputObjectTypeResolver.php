@@ -11,8 +11,8 @@ abstract class AbstractPagesFilterInputObjectTypeResolver extends AbstractWithPa
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'parentID' => $this->__('Filter pages with the given parent IDs. \'0\' means \'no parent\'', 'gatographql'),
-            'parentIDs' => $this->__('Filter pages with the given parent ID. \'0\' means \'no parent\'', 'gatographql'),
+            'parentID' => $this->__('Filter pages with the given parent ID. \'0\' means \'no parent\'', 'gatographql'),
+            'parentIDs' => $this->__('Filter pages with the given parent IDs. \'0\' means \'no parent\'', 'gatographql'),
             'excludeParentIDs' => $this->__('Exclude pages with the given parent IDs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };

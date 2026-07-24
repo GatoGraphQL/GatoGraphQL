@@ -94,11 +94,31 @@ As with the existing `optionValue` field, only the options explicitly configured
 }
 ```
 
+### Filtering custom posts by parent
+
+The `customPosts` query can now be filtered by the parent custom post, using the same inputs already available on the `pages` query ([#3366](https://github.com/GatoGraphQL/GatoGraphQL/pull/3366)):
+
+- `parentID: ID` returns the custom posts with the given parent (`'0'` means "no parent").
+- `parentIDs: [ID!]` returns the custom posts with any of the given parents.
+- `excludeParentIDs: [ID!]` excludes the custom posts with any of the given parents.
+
+```graphql
+{
+  customPosts(filter: { parentIDs: [1, 5] }) {
+    id
+    ... on CustomPost {
+      title
+    }
+  }
+}
+```
+
 ## Improvements
 
 - Updated WooCommerce docs with mutations ([#3356](https://github.com/GatoGraphQL/GatoGraphQL/pull/3356))
 
 ## Fixes
 
+- Corrected the `parentID` and `parentIDs` filter input descriptions (on the custom posts and pages filters), which had the singular/plural wording swapped.
 - The "payload types for mutations" schema configuration (its "Do not use payload types for mutations" and "Use payload types for mutations, and add fields to query those payload objects" options) now also applies to the meta, taxonomy term (category and tag) and menu mutations. Previously only the post, page, custom post, media, comment and user-state mutations honored this setting, so meta/taxonomy/menu mutations always used payload types and never exposed their `...MutationPayloadObjects` query fields.
 - Made the ordering of taxonomy terms (such as categories and tags) deterministic by adding a stable secondary sort by term ID, so that terms sharing the same primary sort value (such as a duplicate name) are always returned in a consistent order when sorting and paginating.

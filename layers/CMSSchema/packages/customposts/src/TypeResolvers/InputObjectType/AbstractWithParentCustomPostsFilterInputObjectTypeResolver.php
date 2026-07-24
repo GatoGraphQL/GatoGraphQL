@@ -66,8 +66,8 @@ abstract class AbstractWithParentCustomPostsFilterInputObjectTypeResolver extend
     public function getInputFieldDescription(string $inputFieldName): ?string
     {
         return match ($inputFieldName) {
-            'parentID' => $this->__('Filter custom posts with the given parent IDs. \'0\' means \'no parent\'', 'gatographql'),
-            'parentIDs' => $this->__('Filter custom posts with the given parent ID. \'0\' means \'no parent\'', 'gatographql'),
+            'parentID' => $this->__('Filter custom posts with the given parent ID. \'0\' means \'no parent\'', 'gatographql'),
+            'parentIDs' => $this->__('Filter custom posts with the given parent IDs. \'0\' means \'no parent\'', 'gatographql'),
             'excludeParentIDs' => $this->__('Exclude custom posts with the given parent IDs', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
