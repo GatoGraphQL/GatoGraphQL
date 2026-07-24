@@ -19,12 +19,15 @@ use PoP\ComponentModel\TypeResolvers\ScalarType\AnyBuiltInScalarScalarTypeResolv
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
 use PoP\Engine\TypeResolvers\ObjectType\RootObjectTypeResolver;
 use PoP\Engine\TypeResolvers\ScalarType\JSONObjectScalarTypeResolver;
+use PoPSchema\SchemaCommons\TypeResolvers\InputObjectType\IncludeExcludeFilterInputObjectTypeResolver;
+use stdClass;
 
 class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
 {
     private ?AnyBuiltInScalarScalarTypeResolver $anyBuiltInScalarScalarTypeResolver = null;
     private ?JSONObjectScalarTypeResolver $jsonObjectScalarTypeResolver = null;
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
+    private ?IncludeExcludeFilterInputObjectTypeResolver $includeExcludeFilterInputObjectTypeResolver = null;
     private ?SettingsTypeAPIInterface $settingsTypeAPI = null;
 
     final protected function getAnyBuiltInScalarScalarTypeResolver(): AnyBuiltInScalarScalarTypeResolver
@@ -53,6 +56,15 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             $this->stringScalarTypeResolver = $stringScalarTypeResolver;
         }
         return $this->stringScalarTypeResolver;
+    }
+    final protected function getIncludeExcludeFilterInputObjectTypeResolver(): IncludeExcludeFilterInputObjectTypeResolver
+    {
+        if ($this->includeExcludeFilterInputObjectTypeResolver === null) {
+            /** @var IncludeExcludeFilterInputObjectTypeResolver */
+            $includeExcludeFilterInputObjectTypeResolver = $this->instanceManager->getInstance(IncludeExcludeFilterInputObjectTypeResolver::class);
+            $this->includeExcludeFilterInputObjectTypeResolver = $includeExcludeFilterInputObjectTypeResolver;
+        }
+        return $this->includeExcludeFilterInputObjectTypeResolver;
     }
     final protected function getSettingsTypeAPI(): SettingsTypeAPIInterface
     {
@@ -84,6 +96,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValues',
             'optionObjectValue',
             'optionObjectValues',
+            'optionNames',
+            'options',
         ];
     }
 
@@ -94,6 +108,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValues' => $this->__('Array-value option saved in the DB, of any built-in scalar type, or `null` if entry does not exist', 'gatographql'),
             'optionObjectValue' => $this->__('Object-value option saved in the DB, or `null` if entry does not exist', 'gatographql'),
             'optionObjectValues' => $this->__('Array of object-value options saved in the DB, or `null` if entry does not exist', 'gatographql'),
+            'optionNames' => $this->__('List of the allowed option names saved in the DB.', 'gatographql'),
+            'options' => $this->__('JSON object, with the option name as key and the option value as value, for the provided option names.', 'gatographql'),
             default => parent::getFieldDescription($objectTypeResolver, $fieldName),
         };
     }
@@ -105,6 +121,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValues' => $this->getAnyBuiltInScalarScalarTypeResolver(),
             'optionObjectValue' => $this->getJSONObjectScalarTypeResolver(),
             'optionObjectValues' => $this->getJSONObjectScalarTypeResolver(),
+            'optionNames' => $this->getStringScalarTypeResolver(),
+            'options' => $this->getJSONObjectScalarTypeResolver(),
             default => parent::getFieldTypeResolver($objectTypeResolver, $fieldName),
         };
     }
@@ -115,6 +133,10 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             'optionValues',
             'optionObjectValues'
                 => SchemaTypeModifiers::IS_ARRAY,
+            'optionNames'
+                => SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY | SchemaTypeModifiers::NON_NULLABLE,
+            'options'
+                => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),
         };
@@ -133,6 +155,14 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                 => [
                     'name' => $this->getStringScalarTypeResolver(),
                 ],
+            'optionNames'
+                => [
+                    'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
+                ],
+            'options'
+                => [
+                    'names' => $this->getStringScalarTypeResolver(),
+                ],
             default
                 => parent::getFieldArgNameTypeResolvers($objectTypeResolver, $fieldName),
         };
@@ -142,6 +172,8 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldArgName) {
             'name' => $this->__('The option name', 'gatographql'),
+            'names' => $this->__('The option names', 'gatographql'),
+            'filterBy' => $this->__('Filter the option names to be retrieved', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -150,6 +182,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     {
         return match ($fieldArgName) {
             'name' => SchemaTypeModifiers::MANDATORY,
+            'names' => SchemaTypeModifiers::MANDATORY | SchemaTypeModifiers::IS_ARRAY | SchemaTypeModifiers::IS_NON_NULLABLE_ITEMS_IN_ARRAY,
             default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -184,6 +217,47 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     );
                 }
                 break;
+            case 'options':
+                $nonAllowedNames = [];
+                /** @var string[] */
+                $names = $fieldDataAccessor->getValue('names');
+                foreach ($names as $name) {
+                    if ($this->getSettingsTypeAPI()->validateIsOptionAllowed($name)) {
+                        continue;
+                    }
+                    $nonAllowedNames[] = $name;
+                }
+                if ($nonAllowedNames !== []) {
+                    $field = $fieldDataAccessor->getField();
+                    if (count($nonAllowedNames) === 1) {
+                        $objectTypeFieldResolutionFeedbackStore->addError(
+                            new ObjectTypeFieldResolutionFeedback(
+                                new FeedbackItemResolution(
+                                    FeedbackItemProvider::class,
+                                    FeedbackItemProvider::E1,
+                                    [
+                                        $nonAllowedNames[0],
+                                    ]
+                                ),
+                                $field->getArgument('names') ?? $field,
+                            )
+                        );
+                        break;
+                    }
+                    $objectTypeFieldResolutionFeedbackStore->addError(
+                        new ObjectTypeFieldResolutionFeedback(
+                            new FeedbackItemResolution(
+                                FeedbackItemProvider::class,
+                                FeedbackItemProvider::E2,
+                                [
+                                    implode($this->__('\', \'', 'gatographql'), $nonAllowedNames),
+                                ]
+                            ),
+                            $field->getArgument('names') ?? $field,
+                        )
+                    );
+                }
+                break;
         }
     }
 
@@ -213,8 +287,68 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
                     return array_values(array_map(fn (mixed $valueItem) => is_array($valueItem) ? (object) $valueItem : $valueItem, $value));
                 }
                 return $value;
+            case 'optionNames':
+                $optionNames = [];
+                $settingsTypeAPI = $this->getSettingsTypeAPI();
+                foreach ($settingsTypeAPI->getOptionNames() as $optionName) {
+                    if (!$settingsTypeAPI->validateIsOptionAllowed($optionName)) {
+                        continue;
+                    }
+                    $optionNames[] = $optionName;
+                }
+                /** @var stdClass|null */
+                $filterBy = $fieldDataAccessor->getValue('filterBy');
+                return $this->filterOptionNames($optionNames, $filterBy);
+            case 'options':
+                $options = [];
+                /** @var string[] */
+                $names = $fieldDataAccessor->getValue('names');
+                foreach ($names as $name) {
+                    $options[$name] = $this->getSettingsTypeAPI()->getOption($name);
+                }
+                return (object) $options;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * @param string[] $optionNames
+     * @return string[]
+     */
+    protected function filterOptionNames(array $optionNames, ?stdClass $filterBy): array
+    {
+        if ($filterBy === null) {
+            return $optionNames;
+        }
+        if (isset($filterBy->include)) {
+            /** @var string[] */
+            $include = $filterBy->include;
+            $optionNames = array_values(array_filter(
+                $optionNames,
+                fn (string $optionName) => $this->optionNameContainsAnyString($optionName, $include)
+            ));
+        } elseif (isset($filterBy->exclude)) {
+            /** @var string[] */
+            $exclude = $filterBy->exclude;
+            $optionNames = array_values(array_filter(
+                $optionNames,
+                fn (string $optionName) => !$this->optionNameContainsAnyString($optionName, $exclude)
+            ));
+        }
+        return $optionNames;
+    }
+
+    /**
+     * @param string[] $strings
+     */
+    protected function optionNameContainsAnyString(string $optionName, array $strings): bool
+    {
+        foreach ($strings as $string) {
+            if (str_contains($optionName, $string)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

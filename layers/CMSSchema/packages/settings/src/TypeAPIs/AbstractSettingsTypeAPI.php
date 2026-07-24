@@ -87,4 +87,11 @@ abstract class AbstractSettingsTypeAPI extends AbstractBasicService implements S
      * Otherwise, return the value.
      */
     abstract protected function doGetOption(string $name): mixed;
+
+    /**
+     * List of all the option names stored in the DB.
+     *
+     * @return string[]
+     */
+    abstract public function getOptionNames(): array;
 }

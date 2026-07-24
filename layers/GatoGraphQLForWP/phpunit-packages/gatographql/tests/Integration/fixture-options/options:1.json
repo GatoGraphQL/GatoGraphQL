@@ -1,0 +1,30 @@
+{
+  "errors": [
+    {
+      "message": "There is no option with name 'blogname'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 21
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(names: [\"blogname\"])",
+          "blogname: options(names: [\"blogname\"])",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "blogname: options(names: [\"blogname\"])",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    }
+  ],
+  "data": {
+    "optionNames": [
+      "home",
+      "siteurl"
+    ],
+    "blogname": null
+  }
+}

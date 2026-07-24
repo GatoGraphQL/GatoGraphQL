@@ -16,4 +16,14 @@ class SettingsTypeAPI extends AbstractSettingsTypeAPI
     {
         return \get_option($name, null);
     }
+
+    /**
+     * @return string[]
+     */
+    public function getOptionNames(): array
+    {
+        global $wpdb;
+        /** @var string[] */
+        return $wpdb->get_col("SELECT option_name FROM {$wpdb->options}");
+    }
 }

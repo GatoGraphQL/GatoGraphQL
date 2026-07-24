@@ -1,0 +1,12 @@
+{
+  "data": {
+    "optionNames": [
+      "date_format",
+      "home",
+      "posts_per_page",
+      "siteurl",
+      "stylesheet",
+      "template"
+    ]
+  }
+}
