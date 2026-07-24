@@ -2629,12 +2629,12 @@ msgid "Filter custom posts of given types"
 msgstr "筛选指定类型的自定义文章"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr "按指定父级ID筛选自定义文章，'0'表示'无父级'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr "根据给定的父 ID 过滤自定义文章。'0' 表示'无父级'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr "按指定父级ID筛选自定义文章，'0'表示'无父级'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4007,11 +4007,11 @@ msgid "page id:"
 msgstr "页面 id："
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr "按给定的父级 ID 筛选页面。'0' 表示'无父级'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
-msgid "Filter pages with the given parent ID. '0' means 'no parent'"
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
 msgstr "按给定的父级 ID 筛选页面。'0' 表示'无父级'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16

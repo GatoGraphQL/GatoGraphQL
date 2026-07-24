@@ -2697,14 +2697,14 @@ msgid "Filter custom posts of given types"
 msgstr "지정된 유형의 커스텀 포스트 필터링"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"지정된 상위 ID를 가진 커스텀 포스트 필터링. '0'은 '상위 없음'을 의미합니다"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "주어진 상위 ID로 커스텀 게시물을 필터링합니다. '0'은 '상위 없음'을 의미합니다"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"지정된 상위 ID를 가진 커스텀 포스트 필터링. '0'은 '상위 없음'을 의미합니다"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4098,11 +4098,11 @@ msgid "page id:"
 msgstr "페이지 ID:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr "지정된 상위 ID로 페이지 필터링. '0'은 '상위 없음'을 의미"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
-msgid "Filter pages with the given parent ID. '0' means 'no parent'"
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
 msgstr "지정된 상위 ID로 페이지 필터링. '0'은 '상위 없음'을 의미"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16

@@ -2826,16 +2826,16 @@ msgid "Filter custom posts of given types"
 msgstr "Filtruj niestandardowe wpisy podanych typów"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Filtruj niestandardowe wpisy z podanymi ID rodziców. '0' oznacza 'brak "
-"rodzica'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filtruj niestandardowe wpisy z podanym identyfikatorem rodzica. '0' oznacza "
 "'brak rodzica'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Filtruj niestandardowe wpisy z podanymi ID rodziców. '0' oznacza 'brak "
+"rodzica'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4282,15 +4282,15 @@ msgid "page id:"
 msgstr "id strony:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
+msgid "Filter pages with the given parent ID. '0' means 'no parent'"
+msgstr ""
+"Filtruj strony o podanym identyfikatorze rodzica. '0' oznacza 'brak rodzica'"
+
+#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
 msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
 msgstr ""
 "Filtruj strony o podanych identyfikatorach rodzica. '0' oznacza 'brak "
 "rodzica'"
-
-#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
-msgid "Filter pages with the given parent ID. '0' means 'no parent'"
-msgstr ""
-"Filtruj strony o podanym identyfikatorze rodzica. '0' oznacza 'brak rodzica'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16
 msgid "Exclude pages with the given parent IDs"

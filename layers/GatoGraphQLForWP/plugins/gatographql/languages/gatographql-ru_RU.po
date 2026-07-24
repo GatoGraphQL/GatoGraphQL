@@ -2916,16 +2916,16 @@ msgid "Filter custom posts of given types"
 msgstr "Фильтрация произвольных записей указанных типов"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Фильтрация произвольных записей с указанными ID родителей. '0' означает 'без "
-"родителя'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Фильтровать произвольные записи с указанным родительским ID. '0' означает "
 "'без родителя'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Фильтрация произвольных записей с указанными ID родителей. '0' означает 'без "
+"родителя'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4392,14 +4392,14 @@ msgid "page id:"
 msgstr "id страницы:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Фильтровать страницы с указанными ID родителей. '0' означает 'без родителя'"
-
-#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
 msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Фильтровать страницы с указанным ID родителя. '0' означает 'без родителя'"
+
+#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Фильтровать страницы с указанными ID родителей. '0' означает 'без родителя'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16
 msgid "Exclude pages with the given parent IDs"

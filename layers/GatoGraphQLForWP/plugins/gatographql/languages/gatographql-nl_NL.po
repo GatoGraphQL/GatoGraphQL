@@ -2943,16 +2943,16 @@ msgid "Filter custom posts of given types"
 msgstr "Aangepaste berichten filteren op gegeven types"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Aangepaste berichten filteren op de gegeven bovenliggende ID's. '0' betekent "
-"'geen bovenliggend'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filter aangepaste berichten met het opgegeven bovenliggende ID. '0' betekent "
 "'geen bovenliggende'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Aangepaste berichten filteren op de gegeven bovenliggende ID's. '0' betekent "
+"'geen bovenliggend'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4434,15 +4434,15 @@ msgid "page id:"
 msgstr "pagina-id:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Pagina's filteren met de opgegeven bovenliggende ID's. '0' betekent 'geen "
-"bovenliggende'"
-
-#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
 msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Pagina's filteren met het opgegeven bovenliggende ID. '0' betekent 'geen "
+"bovenliggende'"
+
+#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Pagina's filteren met de opgegeven bovenliggende ID's. '0' betekent 'geen "
 "bovenliggende'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16
