@@ -8712,7 +8712,7 @@ msgstr ""
 "Cette URL est obsolète ou invalide. Veuillez <a href=\"%s\">cliquer ici pour "
 "recharger la page</a>, et réessayer"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Afficher les détails"
 

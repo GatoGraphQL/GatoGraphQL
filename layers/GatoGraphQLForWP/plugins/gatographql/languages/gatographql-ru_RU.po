@@ -8430,7 +8430,7 @@ msgstr ""
 "Этот URL устарел или недействителен. Пожалуйста, <a href=\"%s\">нажмите "
 "здесь, чтобы перезагрузить страницу</a>, и повторите попытку"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Показать подробности"
 

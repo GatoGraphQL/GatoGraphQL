@@ -7138,7 +7138,7 @@ msgstr ""
 msgid "This URL is either stale or not valid. Please <a href=\"%s\">click here to reload the page</a>, and try again"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr ""
 

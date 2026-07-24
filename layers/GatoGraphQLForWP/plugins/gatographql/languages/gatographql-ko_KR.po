@@ -7937,7 +7937,7 @@ msgstr ""
 "이 URL은 만료되었거나 유효하지 않습니다. <a href=\"%s\">여기를 클릭하여 페이"
 "지를 새로고침</a>한 후 다시 시도해 주세요"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "세부 정보 표시"
 

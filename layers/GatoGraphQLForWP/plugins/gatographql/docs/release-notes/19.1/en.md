@@ -115,6 +115,7 @@ The `customPosts` query can now be filtered by the parent custom post, using the
 
 ## Improvements
 
+- The collapsible "Show details" descriptions in the plugin settings are now printed using the native HTML `<details>`/`<summary>` elements, instead of a JavaScript-driven show/hide link ([#3368](https://github.com/GatoGraphQL/GatoGraphQL/pull/3368))
 - Updated WooCommerce docs with mutations ([#3356](https://github.com/GatoGraphQL/GatoGraphQL/pull/3356))
 
 ## Fixes

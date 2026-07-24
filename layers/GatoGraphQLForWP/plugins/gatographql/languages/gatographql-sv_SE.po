@@ -8263,7 +8263,7 @@ msgstr ""
 "Den här URL:en är föråldrad eller ogiltig. Vänligen <a href=\"%s\">klicka "
 "här för att ladda om sidan</a>, och försök igen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Visa detaljer"
 

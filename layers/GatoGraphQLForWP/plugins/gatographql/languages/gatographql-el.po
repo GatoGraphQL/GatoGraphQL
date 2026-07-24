@@ -8488,7 +8488,7 @@ msgstr ""
 "href=\"%s\">κάντε κλικ εδώ για να φορτώσετε ξανά τη σελίδα</a> και δοκιμάστε "
 "ξανά"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Εμφάνιση λεπτομερειών"
 

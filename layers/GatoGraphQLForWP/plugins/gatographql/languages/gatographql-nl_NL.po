@@ -8518,7 +8518,7 @@ msgstr ""
 "Deze URL is verouderd of niet geldig. <a href=\"%s\">Klik hier om de pagina "
 "te herladen</a> en probeer het opnieuw"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Details weergeven"
 

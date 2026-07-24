@@ -256,6 +256,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Mutations to delete menus: `deleteMenu` and `deleteMenus`, and the nested `delete` field on the `Menu` type (#3358)
 * Added - Mutations to update and moderate comments: `updateComment` and `updateComments`, and the nested `update` field on the `Comment` type. The comment is moderated via the `status` input, which can approve it, hold it for moderation, mark it as spam, or send it to the trash (#3358)
 * Added - Mutations to delete comments: `deleteComment` and `deleteComments`, and the nested `delete` field on the `Comment` type (#3358)
+* Improved - The collapsible "Show details" descriptions in the plugin settings are now printed using the native HTML `<details>`/`<summary>` elements, instead of a JavaScript-driven show/hide link (#3368)
 * Improved - Updated WooCommerce docs with mutations (#3356)
 * Fixed - The `defaultValue` of input values (field and directive arguments, and input object fields) in the introspection query is now encoded using the GraphQL language, as required by the GraphQL spec, and not as JSON. Enum default values were previously quoted as strings (eg: `["approve"]` instead of `[approve]`), so GraphQL clients (such as GraphiQL) discarded the default value and, for non-nullable arguments, wrongly reported that the argument is required (#3367)
 * Fixed - Corrected the `parentID` and `parentIDs` filter input descriptions (on the custom posts and pages filters), which had the singular/plural wording swapped (#3366)

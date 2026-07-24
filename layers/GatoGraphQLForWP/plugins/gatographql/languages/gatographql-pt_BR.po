@@ -8416,7 +8416,7 @@ msgstr ""
 "Esta URL está desatualizada ou não é válida. Por favor, <a "
 "href=\"%s\">clique aqui para recarregar a página</a> e tente novamente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Mostrar detalhes"
 
