@@ -3608,6 +3608,7 @@ msgstr "ID 为 '%s' 的实体已存在元数据键 '%s' 且值为 '%s' 的条目
 
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
@@ -4916,39 +4917,63 @@ msgstr "排序方向"
 msgid "Property to order by"
 msgstr "排序属性"
 
-#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:27
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
 #: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "不存在名为 '%s' 的选项"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:93
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:30
+#, php-format
+msgid "There are no options with names '%s'"
+msgstr "不存在名称为 '%s' 的选项"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:107
 msgid ""
 "Single-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
 msgstr ""
 "保存在数据库中的单值选项，可为任意内置标量类型，若条目不存在则为 `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:108
 msgid ""
 "Array-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
 msgstr ""
 "保存在数据库中的数组值选项，可为任意内置标量类型，若条目不存在则为 `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:95
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:109
 msgid "Object-value option saved in the DB, or `null` if entry does not exist"
 msgstr "保存在数据库中的对象值选项，若条目不存在则为 `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:96
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:110
 msgid ""
 "Array of object-value options saved in the DB, or `null` if entry does not "
 "exist"
 msgstr "保存在数据库中的对象值选项数组，若条目不存在则为 `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:144
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:111
+msgid "List of the allowed option names saved in the DB."
+msgstr "保存在数据库中的允许的选项名称列表。"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:112
+msgid ""
+"JSON object, with the option name as key and the option value as value, for "
+"the provided option names."
+msgstr ""
+"一个 JSON 对象，以选项名称作为键，以选项值作为值，对应所提供的选项名称。"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:174
 msgid "The option name"
 msgstr "选项名称"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:175
+msgid "The option names"
+msgstr "选项名称"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:176
+msgid "Filter the option names to be retrieved"
+msgstr "筛选要获取的选项名称"
 
 #: CMSSchema/packages/tag-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:37
 msgid "You must be logged in to mutate tag terms"

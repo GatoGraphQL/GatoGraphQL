@@ -3786,6 +3786,7 @@ msgstr ""
 
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
@@ -5204,13 +5205,18 @@ msgstr "Sıralama yönü"
 msgid "Property to order by"
 msgstr "Sıralama ölçütü özellik"
 
-#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:27
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
 #: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "'%s' adında bir seçenek yok"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:93
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:30
+#, php-format
+msgid "There are no options with names '%s'"
+msgstr "'%s' isimli seçenekler bulunamadı"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:107
 msgid ""
 "Single-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
@@ -5218,7 +5224,7 @@ msgstr ""
 "Veritabanına kaydedilen tek değerli seçenek; herhangi bir yerleşik skaler "
 "türde veya giriş mevcut değilse `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:108
 msgid ""
 "Array-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
@@ -5226,13 +5232,13 @@ msgstr ""
 "Veritabanına kaydedilen dizi değerli seçenek; herhangi bir yerleşik skaler "
 "türde veya giriş mevcut değilse `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:95
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:109
 msgid "Object-value option saved in the DB, or `null` if entry does not exist"
 msgstr ""
 "Veritabanına kaydedilen nesne değerli seçenek veya giriş mevcut değilse "
 "`null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:96
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:110
 msgid ""
 "Array of object-value options saved in the DB, or `null` if entry does not "
 "exist"
@@ -5240,9 +5246,29 @@ msgstr ""
 "Veritabanına kaydedilen nesne değerli seçenekler dizisi veya giriş mevcut "
 "değilse `null`"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:144
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:111
+msgid "List of the allowed option names saved in the DB."
+msgstr "Veritabanında kaydedilmiş olan izin verilen seçenek adlarının listesi."
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:112
+msgid ""
+"JSON object, with the option name as key and the option value as value, for "
+"the provided option names."
+msgstr ""
+"Sağlanan seçenek adları için, seçenek adının anahtar ve seçenek değerinin "
+"değer olduğu JSON nesnesi."
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:174
 msgid "The option name"
 msgstr "Seçenek adı"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:175
+msgid "The option names"
+msgstr "Seçenek adları"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:176
+msgid "Filter the option names to be retrieved"
+msgstr "Alınacak seçenek adlarını filtrele"
 
 #: CMSSchema/packages/tag-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:37
 msgid "You must be logged in to mutate tag terms"
