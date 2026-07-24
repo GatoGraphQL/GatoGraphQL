@@ -7726,7 +7726,7 @@ msgid ""
 "reload the page</a>, and try again"
 msgstr "此URL已过期或无效。请<a href=\"%s\">点击此处重新加载页面</a>，然后重试"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "显示详情"
 

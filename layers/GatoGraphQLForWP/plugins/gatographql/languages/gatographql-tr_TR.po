@@ -8169,7 +8169,7 @@ msgstr ""
 "Bu URL eski veya geçersiz. Lütfen <a href=\"%s\">sayfayı yeniden yüklemek "
 "için buraya tıklayın</a> ve tekrar deneyin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Ayrıntıları göster"
 

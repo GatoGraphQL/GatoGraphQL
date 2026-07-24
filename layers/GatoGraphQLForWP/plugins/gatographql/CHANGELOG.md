@@ -19,6 +19,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Improvements
 
+- The collapsible "Show details" descriptions in the plugin settings are now printed using the native HTML `<details>`/`<summary>` elements, instead of a JavaScript-driven show/hide link (#3368)
 - Updated WooCommerce docs with mutations (#3356)
 
 ### Fixed

@@ -8245,7 +8245,7 @@ msgstr ""
 "Ten adres URL jest nieaktualny lub nieprawidłowy. Proszę <a "
 "href=\"%s\">kliknąć tutaj, aby odświeżyć stronę</a> i spróbować ponownie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Pokaż szczegóły"
 

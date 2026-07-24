@@ -8276,7 +8276,7 @@ msgstr ""
 "URL này đã hết hạn hoặc không hợp lệ. Vui lòng <a href=\"%s\">nhấp vào đây "
 "để tải lại trang</a>, và thử lại"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Hiển thị chi tiết"
 

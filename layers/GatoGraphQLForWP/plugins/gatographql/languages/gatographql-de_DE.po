@@ -8603,7 +8603,7 @@ msgstr ""
 "Diese URL ist veraltet oder ungültig. Bitte <a href=\"%s\">klicken Sie hier, "
 "um die Seite neu zu laden</a>, und versuchen Sie es erneut"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Details anzeigen"
 

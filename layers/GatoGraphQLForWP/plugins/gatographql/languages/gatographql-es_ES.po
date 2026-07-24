@@ -8521,7 +8521,7 @@ msgstr ""
 "Esta URL ha caducado o no es válida. Por favor, <a href=\"%s\">haz clic aquí "
 "para recargar la página</a> e inténtalo de nuevo"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "Mostrar detalles"
 

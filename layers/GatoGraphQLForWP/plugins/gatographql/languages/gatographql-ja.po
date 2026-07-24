@@ -8228,7 +8228,7 @@ msgstr ""
 "このURLは古いか無効です。<a href=\"%s\">こちらをクリックしてページを再読み込"
 "み</a>してから、もう一度お試しください"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "詳細を表示"
 

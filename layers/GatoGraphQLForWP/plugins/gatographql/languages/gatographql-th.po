@@ -7882,7 +7882,7 @@ msgid ""
 msgstr ""
 "URL นี้อาจล้าสมัยหรือไม่ถูกต้อง โปรด<a href=\"%s\">คลิกที่นี่เพื่อโหลดหน้าใหม่</a> แล้วลองอีกครั้ง"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:15
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentPrinters/CollapsibleContentPrinterTrait.php:17
 msgid "Show details"
 msgstr "แสดงรายละเอียด"
 
