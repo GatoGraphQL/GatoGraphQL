@@ -17989,7 +17989,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"approve\"]"
+                                    "defaultValue": "[approve]"
                                 },
                                 {
                                     "name": "by",
@@ -18137,7 +18137,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "customPostTypes",
@@ -18163,7 +18163,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                                    "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -18681,7 +18681,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"approve\"]"
+                                    "defaultValue": "[approve]"
                                 },
                                 {
                                     "name": "by",
@@ -18829,7 +18829,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "customPostTypes",
@@ -18855,7 +18855,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                                    "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19125,7 +19125,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -19273,7 +19273,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -19636,7 +19636,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -19812,7 +19812,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -22187,7 +22187,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"approve\"]"
+                                    "defaultValue": "[approve]"
                                 },
                                 {
                                     "name": "by",
@@ -23395,7 +23395,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "customPostTypes",
@@ -23421,7 +23421,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                                    "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -25900,7 +25900,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"approve\"]"
+                                    "defaultValue": "[approve]"
                                 },
                                 {
                                     "name": "by",
@@ -26048,7 +26048,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "customPostTypes",
@@ -26074,7 +26074,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                                    "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -26344,7 +26344,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -26492,7 +26492,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -26855,7 +26855,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -27031,7 +27031,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"publish\"]"
+                                    "defaultValue": "[publish]"
                                 },
                                 {
                                     "name": "by",
@@ -42337,7 +42337,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"AND\""
+                            "defaultValue": "AND"
                         },
                         {
                             "name": "type",
@@ -42353,7 +42353,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"CHAR\""
+                            "defaultValue": "CHAR"
                         }
                     ],
                     "interfaces": null,
@@ -42513,7 +42513,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"approve\"]"
+                            "defaultValue": "[approve]"
                         },
                         {
                             "name": "types",
@@ -42534,7 +42534,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"comment\"]"
+                            "defaultValue": "[comment]"
                         }
                     ],
                     "interfaces": null,
@@ -42556,7 +42556,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DATE\""
+                            "defaultValue": "DATE"
                         },
                         {
                             "name": "order",
@@ -42567,7 +42567,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -43071,7 +43071,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"approve\"]"
+                            "defaultValue": "[approve]"
                         },
                         {
                             "name": "types",
@@ -43092,7 +43092,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"comment\"]"
+                            "defaultValue": "[comment]"
                         }
                     ],
                     "interfaces": null,
@@ -43173,7 +43173,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"AND\""
+                            "defaultValue": "AND"
                         },
                         {
                             "name": "type",
@@ -43189,7 +43189,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"CHAR\""
+                            "defaultValue": "CHAR"
                         }
                     ],
                     "interfaces": null,
@@ -43277,7 +43277,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DATE\""
+                            "defaultValue": "DATE"
                         },
                         {
                             "name": "order",
@@ -43288,7 +43288,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -44216,7 +44216,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DATE\""
+                            "defaultValue": "DATE"
                         },
                         {
                             "name": "order",
@@ -44227,7 +44227,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -44477,7 +44477,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DATE\""
+                            "defaultValue": "DATE"
                         },
                         {
                             "name": "order",
@@ -44488,7 +44488,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -44568,7 +44568,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"IN\""
+                            "defaultValue": "IN"
                         },
                         {
                             "name": "value",
@@ -44676,7 +44676,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"EXISTS\""
+                            "defaultValue": "EXISTS"
                         }
                     ],
                     "interfaces": null,
@@ -44703,7 +44703,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"EQUALS\""
+                            "defaultValue": "EQUALS"
                         },
                         {
                             "name": "value",
@@ -44746,7 +44746,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"EQUALS\""
+                            "defaultValue": "EQUALS"
                         },
                         {
                             "name": "value",
@@ -45801,7 +45801,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "customPostTypes",
@@ -45822,7 +45822,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -46012,7 +46012,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"approve\"]"
+                            "defaultValue": "[approve]"
                         },
                         {
                             "name": "types",
@@ -46033,7 +46033,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"comment\"]"
+                            "defaultValue": "[comment]"
                         }
                     ],
                     "interfaces": null,
@@ -47322,7 +47322,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -47534,7 +47534,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "tags",
@@ -48621,7 +48621,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "customPostTypes",
@@ -48642,7 +48642,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -48832,7 +48832,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"approve\"]"
+                            "defaultValue": "[approve]"
                         },
                         {
                             "name": "types",
@@ -48853,7 +48853,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"comment\"]"
+                            "defaultValue": "[comment]"
                         }
                     ],
                     "interfaces": null,
@@ -48885,7 +48885,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49044,7 +49044,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         }
                     ],
                     "interfaces": null,
@@ -49203,7 +49203,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49362,7 +49362,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         }
                     ],
                     "interfaces": null,
@@ -49405,7 +49405,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49564,7 +49564,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "tags",
@@ -49809,7 +49809,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         }
                     ],
                     "interfaces": null,
@@ -50267,7 +50267,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "tags",
@@ -52959,7 +52959,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -53118,7 +53118,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         }
                     ],
                     "interfaces": null,
@@ -53177,7 +53177,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"AND\""
+                            "defaultValue": "AND"
                         },
                         {
                             "name": "type",
@@ -53193,7 +53193,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"CHAR\""
+                            "defaultValue": "CHAR"
                         }
                     ],
                     "interfaces": null,
@@ -53215,7 +53215,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"NAME\""
+                            "defaultValue": "NAME"
                         },
                         {
                             "name": "order",
@@ -53226,7 +53226,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -53435,7 +53435,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\",\"dummy-cpt-four\",\"dummy-cpt-three\",\"dummy-cpt-two\",\"page\",\"post\",\"wp_block\"]"
+                            "defaultValue": "[\"dummy-cpt\", \"dummy-cpt-four\", \"dummy-cpt-three\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -53594,7 +53594,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         },
                         {
                             "name": "tags",
@@ -53664,7 +53664,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"AND\""
+                            "defaultValue": "AND"
                         },
                         {
                             "name": "type",
@@ -53680,7 +53680,7 @@
                                     "ofType": null
                                 }
                             },
-                            "defaultValue": "\"CHAR\""
+                            "defaultValue": "CHAR"
                         }
                     ],
                     "interfaces": null,
@@ -53778,7 +53778,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"ID\""
+                            "defaultValue": "ID"
                         },
                         {
                             "name": "order",
@@ -53789,7 +53789,7 @@
                                 "isOneOf": false,
                                 "ofType": null
                             },
-                            "defaultValue": "\"DESC\""
+                            "defaultValue": "DESC"
                         }
                     ],
                     "interfaces": null,
@@ -54075,7 +54075,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"publish\"]"
+                            "defaultValue": "[publish]"
                         }
                     ],
                     "interfaces": null,

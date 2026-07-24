@@ -60,4 +60,52 @@ class GraphQLSchemaHelpers
             $typeName
         );
     }
+
+    /**
+     * Encode a value using the GraphQL language, as to print it
+     * in the schema (eg: as the default value for an input).
+     *
+     * The JSON and GraphQL language encodings coincide for `Int`,
+     * `Float`, `Boolean` and `String`, and lists of them, but not
+     * for enum values (which must not be quoted) nor for input
+     * objects (whose keys must not be quoted).
+     *
+     * @todo The values within an input object are always encoded as
+     *   non-enum values, as their own type is not known here.
+     */
+    public static function encodeValueUsingGraphQLLanguage(
+        mixed $value,
+        bool $isEnumType,
+    ): string {
+        if (is_array($value)) {
+            if (array_values($value) === $value) {
+                return sprintf(
+                    '[%s]',
+                    implode(
+                        ', ',
+                        array_map(
+                            fn (mixed $listItemValue) => self::encodeValueUsingGraphQLLanguage($listItemValue, $isEnumType),
+                            $value
+                        )
+                    )
+                );
+            }
+            $inputObjectFieldEntries = [];
+            foreach ($value as $inputFieldName => $inputFieldValue) {
+                $inputObjectFieldEntries[] = sprintf(
+                    '%s: %s',
+                    $inputFieldName,
+                    self::encodeValueUsingGraphQLLanguage($inputFieldValue, false)
+                );
+            }
+            return sprintf(
+                '{%s}',
+                implode(', ', $inputObjectFieldEntries)
+            );
+        }
+        if ($isEnumType && is_string($value)) {
+            return $value;
+        }
+        return (string)json_encode($value);
+    }
 }
