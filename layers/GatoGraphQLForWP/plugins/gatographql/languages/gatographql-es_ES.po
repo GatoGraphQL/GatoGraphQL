@@ -3987,6 +3987,7 @@ msgstr ""
 
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
@@ -5473,13 +5474,18 @@ msgstr "Dirección de ordenación"
 msgid "Property to order by"
 msgstr "Propiedad por la que ordenar"
 
-#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:27
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
 #: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "No existe ninguna opción con el nombre '%s'"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:93
+#: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:30
+#, php-format
+msgid "There are no options with names '%s'"
+msgstr "No existen opciones con los nombres '%s'"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:107
 msgid ""
 "Single-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
@@ -5487,7 +5493,7 @@ msgstr ""
 "Opción de valor único guardada en la BD, de cualquier tipo escalar "
 "integrado, o `null` si la entrada no existe"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:94
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:108
 msgid ""
 "Array-value option saved in the DB, of any built-in scalar type, or `null` "
 "if entry does not exist"
@@ -5495,12 +5501,12 @@ msgstr ""
 "Opción de valor de array guardada en la BD, de cualquier tipo escalar "
 "integrado, o `null` si la entrada no existe"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:95
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:109
 msgid "Object-value option saved in the DB, or `null` if entry does not exist"
 msgstr ""
 "Opción de valor de objeto guardada en la BD, o `null` si la entrada no existe"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:96
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:110
 msgid ""
 "Array of object-value options saved in the DB, or `null` if entry does not "
 "exist"
@@ -5508,9 +5514,29 @@ msgstr ""
 "Array de opciones de valor de objeto guardadas en la BD, o `null` si la "
 "entrada no existe"
 
-#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:144
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:111
+msgid "List of the allowed option names saved in the DB."
+msgstr "Lista de los nombres de opción permitidos guardados en la BD."
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:112
+msgid ""
+"JSON object, with the option name as key and the option value as value, for "
+"the provided option names."
+msgstr ""
+"Objeto JSON, con el nombre de la opción como clave y el valor de la opción "
+"como valor, para los nombres de opción proporcionados."
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:174
 msgid "The option name"
 msgstr "El nombre de la opción"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:175
+msgid "The option names"
+msgstr "Los nombres de las opciones"
+
+#: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:176
+msgid "Filter the option names to be retrieved"
+msgstr "Filtrar los nombres de las opciones a recuperar"
 
 #: CMSSchema/packages/tag-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:37
 msgid "You must be logged in to mutate tag terms"
