@@ -47367,6 +47367,27 @@
                             "defaultValue": null
                         },
                         {
+                            "name": "excludeParentIDs",
+                            "description": "Exclude custom posts with the given parent IDs",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[ID!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "ID!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "ID",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
                             "name": "hasPassword",
                             "description": "Indicate if to include custom posts which are password-protected. Pass `null` to fetch both with\/out password",
                             "type": {
@@ -47412,6 +47433,38 @@
                                     "ofType": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostMetaQueryInput",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    }
+                                }
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentID",
+                            "description": "Filter custom posts with the given parent ID. '0' means 'no parent'",
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "defaultValue": null
+                        },
+                        {
+                            "name": "parentIDs",
+                            "description": "Filter custom posts with the given parent IDs. '0' means 'no parent'",
+                            "type": {
+                                "kind": "LIST",
+                                "name": "[ID!]",
+                                "isOneOf": false,
+                                "ofType": {
+                                    "kind": "NON_NULL",
+                                    "name": "ID!",
+                                    "isOneOf": false,
+                                    "ofType": {
+                                        "kind": "SCALAR",
+                                        "name": "ID",
                                         "isOneOf": false,
                                         "ofType": null
                                     }
@@ -49664,7 +49717,7 @@
                         },
                         {
                             "name": "parentID",
-                            "description": "Filter pages with the given parent IDs. '0' means 'no parent'",
+                            "description": "Filter pages with the given parent ID. '0' means 'no parent'",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "ID",
@@ -49675,7 +49728,7 @@
                         },
                         {
                             "name": "parentIDs",
-                            "description": "Filter pages with the given parent ID. '0' means 'no parent'",
+                            "description": "Filter pages with the given parent IDs. '0' means 'no parent'",
                             "type": {
                                 "kind": "LIST",
                                 "name": "[ID!]",

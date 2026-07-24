@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPosts\TypeResolvers\InputObjectType;
 
-class RootCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFilterInputObjectTypeResolver implements CustomPostsFilterInputObjectTypeResolverInterface
+class RootCustomPostsFilterInputObjectTypeResolver extends AbstractWithParentCustomPostsFilterInputObjectTypeResolver implements CustomPostsFilterInputObjectTypeResolverInterface
 {
     public function getTypeName(): string
     {
@@ -17,6 +17,11 @@ class RootCustomPostsFilterInputObjectTypeResolver extends AbstractCustomPostsFi
     }
 
     protected function addCustomPostInputFields(): bool
+    {
+        return true;
+    }
+
+    protected function addParentInputFields(): bool
     {
         return true;
     }

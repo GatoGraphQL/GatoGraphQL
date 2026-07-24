@@ -2793,15 +2793,15 @@ msgid "Filter custom posts of given types"
 msgstr "Filter custom post berdasarkan tipe yang diberikan"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Filter custom post dengan ID induk yang diberikan. '0' berarti 'tanpa induk'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filter custom post dengan ID induk yang diberikan. '0' berarti 'tidak ada "
 "induk'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Filter custom post dengan ID induk yang diberikan. '0' berarti 'tanpa induk'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4249,12 +4249,12 @@ msgid "page id:"
 msgstr "id halaman:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filter halaman dengan ID induk yang diberikan. '0' berarti 'tidak ada induk'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
-msgid "Filter pages with the given parent ID. '0' means 'no parent'"
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
 msgstr ""
 "Filter halaman dengan ID induk yang diberikan. '0' berarti 'tidak ada induk'"
 

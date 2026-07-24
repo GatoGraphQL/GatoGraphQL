@@ -2826,15 +2826,15 @@ msgid "Filter custom posts of given types"
 msgstr "Filtrera anpassade inlägg av angivna typer"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Filtrera anpassade inlägg med de angivna förälder-ID:n. '0' betyder 'ingen "
-"förälder'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filtrera anpassade inlägg med det angivna förälder-ID:t. '0' betyder 'ingen "
+"förälder'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Filtrera anpassade inlägg med de angivna förälder-ID:n. '0' betyder 'ingen "
 "förälder'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
@@ -4273,14 +4273,14 @@ msgid "page id:"
 msgstr "sid-id:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Filtrera sidor med de angivna förälder-ID:n. '0' betyder 'ingen förälder'"
-
-#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
 msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Filtrera sidor med det angivna förälder-ID:t. '0' betyder 'ingen förälder'"
+
+#: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Filtrera sidor med de angivna förälder-ID:n. '0' betyder 'ingen förälder'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16
 msgid "Exclude pages with the given parent IDs"

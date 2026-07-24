@@ -403,6 +403,18 @@
                 "title": "Welcome to a single post full of blocks!"
             }
         ],
+        "customPostsByExcludeParentIDs": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1682,
+                "title": "Dummy CPT with several levels of children"
+            },
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1688,
+                "title": "Dummy CPT with parent only"
+            }
+        ],
         "customPostsByHasPassword": [],
         "emptyCustomPostsByIds": [],
         "customPostsByIds": [
@@ -467,6 +479,25 @@
                 "__typename": "GenericCustomPost",
                 "id": 1639,
                 "title": "Quaerat repudiandae voluptatem voluptas aut ab molestiae"
+            }
+        ],
+        "customPostsByParentID": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1684,
+                "title": "Dummy CPT with parent and children"
+            }
+        ],
+        "customPostsByParentIDs": [
+            {
+                "__typename": "GenericCustomPost",
+                "id": 1684,
+                "title": "Dummy CPT with parent and children"
+            },
+            {
+                "__typename": "Page",
+                "id": 1703,
+                "title": "Page with parent and children"
             }
         ],
         "customPostsByPassword": [],

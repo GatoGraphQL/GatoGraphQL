@@ -20963,6 +20963,12 @@
                             }
                         },
                         {
+                            "name": "excludeParentIDs",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
                             "name": "hasPassword",
                             "extensions": {
                                 "isSensitiveDataElement": true
@@ -20976,6 +20982,18 @@
                         },
                         {
                             "name": "metaQuery",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentID",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "parentIDs",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }

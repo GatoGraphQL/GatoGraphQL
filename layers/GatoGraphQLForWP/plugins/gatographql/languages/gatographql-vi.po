@@ -2831,14 +2831,14 @@ msgid "Filter custom posts of given types"
 msgstr "Lọc các bài đăng tùy chỉnh theo các loại đã cho"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:69
-msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
-msgstr ""
-"Lọc các bài đăng tùy chỉnh với các ID cha đã cho. '0' nghĩa là 'không có cha'"
-
-#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
 msgid "Filter custom posts with the given parent ID. '0' means 'no parent'"
 msgstr ""
 "Lọc các bài đăng tùy chỉnh có ID cha đã cho. '0' nghĩa là 'không có cha'"
+
+#: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:70
+msgid "Filter custom posts with the given parent IDs. '0' means 'no parent'"
+msgstr ""
+"Lọc các bài đăng tùy chỉnh với các ID cha đã cho. '0' nghĩa là 'không có cha'"
 
 #: CMSSchema/packages/customposts/src/TypeResolvers/InputObjectType/AbstractWithParentCustomPostsFilterInputObjectTypeResolver.php:71
 msgid "Exclude custom posts with the given parent IDs"
@@ -4280,11 +4280,11 @@ msgid "page id:"
 msgstr "id trang:"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:14
-msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
+msgid "Filter pages with the given parent ID. '0' means 'no parent'"
 msgstr "Lọc các trang có ID cha đã cho. '0' nghĩa là 'không có cha'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:15
-msgid "Filter pages with the given parent ID. '0' means 'no parent'"
+msgid "Filter pages with the given parent IDs. '0' means 'no parent'"
 msgstr "Lọc các trang có ID cha đã cho. '0' nghĩa là 'không có cha'"
 
 #: CMSSchema/packages/pages/src/TypeResolvers/InputObjectType/AbstractPagesFilterInputObjectTypeResolver.php:16
