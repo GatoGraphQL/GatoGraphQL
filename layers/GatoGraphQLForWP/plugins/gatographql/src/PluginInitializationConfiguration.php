@@ -1044,6 +1044,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     GraphQLParserModule::class => [
                         // No need for these, then directly disable them to have a clear state on the config
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => false,
+                        GraphQLParserEnvironment::ENABLE_START_END_HELPER_DIRECTIVES => false,
                         GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES => false,
                     ],
                     ComponentModelModule::class => [
