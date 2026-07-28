@@ -25,6 +25,14 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
     public final const E14 = '14';
     public final const E15 = '15';
     public final const E16 = '16';
+    public final const E17 = '17';
+    public final const E18 = '18';
+    public final const E19 = '19';
+    public final const E20 = '20';
+    public final const E21 = '21';
+    public final const E22 = '22';
+    public final const E23 = '23';
+    public final const E24 = '24';
     public final const E_5_8_3 = '5.8.3';
 
     protected function getNamespace(): string
@@ -54,6 +62,14 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E14,
             self::E15,
             self::E16,
+            self::E17,
+            self::E18,
+            self::E19,
+            self::E20,
+            self::E21,
+            self::E22,
+            self::E23,
+            self::E24,
             self::E_5_8_3,
         ];
     }
@@ -77,6 +93,14 @@ class GraphQLExtendedSpecErrorFeedbackItemProvider extends AbstractFeedbackItemP
             self::E14 => $this->__('There is no operation with name \'%s\'', 'gatographql'),
             self::E15 => $this->__('Dependency on operation \'%s\' forms a loop', 'gatographql'),
             self::E16 => $this->__('No current object ID has been set on the Application State, hence the Promise concerning the \'Object Resolved Dynamic Variable "%s"\' cannot be resolved. Most likely the dynamic variable is not supported at that AST node', 'gatographql'),
+            self::E17 => $this->__('Directive \'@%s\' must be placed right after a meta directive', 'gatographql'),
+            self::E18 => $this->__('Directive \'%1$s\' is not a meta directive, hence it cannot nest directives via \'@%2$s\' and \'@%3$s\'', 'gatographql'),
+            self::E19 => $this->__('Directive \'@%1$s\' does not have a matching \'@%2$s\'', 'gatographql'),
+            self::E20 => $this->__('Directive \'@%1$s\' after meta directive \'%2$s\' does not have a matching \'@%3$s\'', 'gatographql'),
+            self::E21 => $this->__('There are no directives between \'@%2$s\' and \'@%3$s\' for meta directive \'%1$s\'', 'gatographql'),
+            self::E22 => $this->__('Meta directive \'%1$s\' cannot indicate the directives to affect via both argument \'%2$s\' and directives \'@%3$s\' and \'@%4$s\'', 'gatographql'),
+            self::E23 => $this->__('Meta directive \'%2$s\' cannot affect the directive in relative position \'%1$s\', as it is not within the same \'@%3$s\' and \'@%4$s\' block', 'gatographql'),
+            self::E24 => $this->__('Directive \'@%s\' cannot receive arguments', 'gatographql'),
             self::E_5_8_3 => $this->__('No value has been exported for dynamic variable \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };

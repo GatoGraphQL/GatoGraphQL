@@ -252,7 +252,10 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         if ($moduleConfiguration->enableComposableDirectives()) {
-            $directives = $this->addMetaDirectiveList($directives);
+            $directives = $this->addMetaDirectiveList(
+                $directives,
+                $moduleConfiguration->enableStartEndHelperDirectives(),
+            );
         }
 
         return $directives;
@@ -343,8 +346,40 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
      * @param Directive[] $directives
      * @return Directive[]
      */
-    protected function addMetaDirectiveList(array $directives): array
-    {
+    protected function addMetaDirectiveList(
+        array $directives,
+        bool $enableStartEndHelperDirectives = false,
+    ): array {
+        /**
+         * [key]: position of the directive, [value]: ID of the innermost
+         * `@start`/`@end` block containing it (0 => within no block)
+         * @var array<int,int>
+         */
+        $directiveBlockIDs = [];
+        /**
+         * [key]: block ID, [value]: position of the meta directive owning the block
+         * @var array<int,int>
+         */
+        $blockOwnerDirectivePositions = [];
+        /**
+         * [key]: block ID, [value]: position of the last directive within the block
+         * @var array<int,int>
+         */
+        $blockLastDirectivePositions = [];
+        if ($enableStartEndHelperDirectives) {
+            $directives = $this->extractMetaDirectiveBlocks(
+                $directives,
+                $directiveBlockIDs,
+                $blockOwnerDirectivePositions,
+                $blockLastDirectivePositions,
+            );
+        }
+        /**
+         * [key]: position of the meta directive owning a block, [value]: block ID
+         * @var array<int,int>
+         */
+        $blockOwnerDirectivePositionBlockIDs = array_flip($blockOwnerDirectivePositions);
+
         /**
          * For each directive, indicate which meta-directive is composing it
          * by indicating their relative position (as a negative int)
@@ -356,6 +391,15 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         while ($directivePos < $directiveCount) {
             $directive = $directives[$directivePos];
             if (!$this->isMetaDirective($directive->getName())) {
+                $directivePos++;
+                continue;
+            }
+            /**
+             * Meta directives owning a `@start`/`@end` block are resolved
+             * afterwards, as they affect whichever directives within the
+             * block have not been affected by any other meta directive.
+             */
+            if (isset($blockOwnerDirectivePositionBlockIDs[$directivePos])) {
                 $directivePos++;
                 continue;
             }
@@ -374,6 +418,34 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                 : $this->getAffectDirectivesUnderPosArgumentDefaultValue($directive);
 
             foreach ($affectDirectivesUnderPositions as $affectDirectiveUnderPosition) {
+                $nestedDirectivePos = $directivePos + $affectDirectiveUnderPosition;
+                /**
+                 * `@start` and `@end` establish a boundary which cannot be crossed:
+                 * a meta directive can only affect directives placed within
+                 * its same block.
+                 *
+                 * Eg: This query is not valid (@strUpperCase is outside of the block):
+                 *
+                 *   { groupCapabilities @underEachArrayItem @start @underJSONObjectProperty(key: "someKey") @end @strUpperCase }
+                 */
+                if (
+                    $nestedDirectivePos < $directiveCount
+                    && ($directiveBlockIDs[$nestedDirectivePos] ?? 0) !== ($directiveBlockIDs[$directivePos] ?? 0)
+                ) {
+                    throw new LogicErrorParserException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E23,
+                            [
+                                $affectDirectiveUnderPosition,
+                                $directive->getName(),
+                                QuerySyntax::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME,
+                                QuerySyntax::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME,
+                            ]
+                        ),
+                        $directive
+                    );
+                }
                 /**
                  * Every directive can be referenced only once.
                  *
@@ -381,7 +453,7 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                  *
                  *   { groupCapabilities @underEachArrayItem(affectDirectivesUnderPos: [1,2]) @underJSONObjectProperty(key: "someKey") @strUpperCase }
                  */
-                if (isset($composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition])) {
+                if (isset($composingMetaDirectiveRelativePosition[$nestedDirectivePos])) {
                     throw new LogicErrorParserException(
                         new FeedbackItemResolution(
                             GraphQLExtendedSpecErrorFeedbackItemProvider::class,
@@ -393,9 +465,37 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                         $directive
                     );
                 }
-                $composingMetaDirectiveRelativePosition[$directivePos + $affectDirectiveUnderPosition] = $affectDirectiveUnderPosition;
+                $composingMetaDirectiveRelativePosition[$nestedDirectivePos] = $affectDirectiveUnderPosition;
             }
             $directivePos++;
+        }
+
+        /**
+         * A meta directive with a `@start`/`@end` block affects all the
+         * directives directly under that block (i.e. not under any of its
+         * nested blocks) which have not already been affected by another
+         * meta directive placed within the same block.
+         *
+         * Eg: `@unless` affects `@default`, hence `@underEachArrayItem`
+         * affects `@applyField` and `@unless` only:
+         *
+         *   @underEachArrayItem @start @applyField(...) @unless(...) @default(...) @end
+         */
+        foreach ($blockOwnerDirectivePositions as $blockID => $blockOwnerDirectivePosition) {
+            $blockLastDirectivePosition = $blockLastDirectivePositions[$blockID];
+            for (
+                $nestedDirectivePos = $blockOwnerDirectivePosition + 1;
+                $nestedDirectivePos <= $blockLastDirectivePosition;
+                $nestedDirectivePos++
+            ) {
+                if ($directiveBlockIDs[$nestedDirectivePos] !== $blockID) {
+                    continue;
+                }
+                if (isset($composingMetaDirectiveRelativePosition[$nestedDirectivePos])) {
+                    continue;
+                }
+                $composingMetaDirectiveRelativePosition[$nestedDirectivePos] = $nestedDirectivePos - $blockOwnerDirectivePosition;
+            }
         }
 
         /**
@@ -444,6 +544,195 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
             $rootDirectives[] = $metaDirectives[$rootDirectivePosition] ?? $directives[$rootDirectivePosition];
         }
         return $rootDirectives;
+    }
+
+    /**
+     * Remove the `@start` and `@end` helper directives from the directive
+     * list, and register the blocks they define.
+     *
+     * These helper directives are an alternative to argument
+     * `affectDirectivesUnderPos` to indicate which directives are
+     * affected by a meta directive:
+     *
+     *   someField @underEachArrayItem @start @strTitleCase @strTrim @end
+     *
+     * @param Directive[] $directives
+     * @param array<int,int> $directiveBlockIDs [key]: position of the directive, [value]: ID of the innermost block containing it (0 => within no block)
+     * @param array<int,int> $blockOwnerDirectivePositions [key]: block ID, [value]: position of the meta directive owning the block
+     * @param array<int,int> $blockLastDirectivePositions [key]: block ID, [value]: position of the last directive within the block
+     * @return Directive[]
+     * @throws LogicErrorParserException
+     */
+    protected function extractMetaDirectiveBlocks(
+        array $directives,
+        array &$directiveBlockIDs,
+        array &$blockOwnerDirectivePositions,
+        array &$blockLastDirectivePositions,
+    ): array {
+        $startDirectiveName = QuerySyntax::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME;
+        $endDirectiveName = QuerySyntax::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME;
+
+        /** @var Directive[] */
+        $extractedDirectives = [];
+        /**
+         * Stack of the IDs of the blocks which have not been closed yet
+         * @var int[]
+         */
+        $openBlockIDs = [];
+        /**
+         * [key]: block ID, [value]: the `@start` directive which opened it
+         * @var array<int,Directive>
+         */
+        $blockStartDirectives = [];
+        $blockCount = 0;
+        /**
+         * The directive placed immediately before the one being iterated on
+         */
+        $previousDirective = null;
+        $previousDirectiveIsBlockDelimiter = false;
+
+        foreach ($directives as $directive) {
+            $directiveName = $directive->getName();
+            if ($directiveName !== $startDirectiveName && $directiveName !== $endDirectiveName) {
+                $directiveBlockIDs[count($extractedDirectives)] = $openBlockIDs === [] ? 0 : $openBlockIDs[count($openBlockIDs) - 1];
+                $extractedDirectives[] = $directive;
+                $previousDirective = $directive;
+                $previousDirectiveIsBlockDelimiter = false;
+                continue;
+            }
+
+            if ($directive->getArguments() !== []) {
+                throw new LogicErrorParserException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E24,
+                        [
+                            $directiveName,
+                        ]
+                    ),
+                    $directive
+                );
+            }
+
+            if ($directiveName === $startDirectiveName) {
+                /**
+                 * `@start` must be applied to a meta directive
+                 */
+                if ($previousDirective === null || $previousDirectiveIsBlockDelimiter) {
+                    throw new LogicErrorParserException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E17,
+                            [
+                                $startDirectiveName,
+                            ]
+                        ),
+                        $directive
+                    );
+                }
+                if (!$this->isMetaDirective($previousDirective->getName())) {
+                    throw new LogicErrorParserException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E18,
+                            [
+                                $previousDirective->getName(),
+                                $startDirectiveName,
+                                $endDirectiveName,
+                            ]
+                        ),
+                        $directive
+                    );
+                }
+                /**
+                 * The affected directives must be indicated in one way only
+                 */
+                $affectDirectivesUnderPosArgument = $this->getAffectDirectivesUnderPosArgument($previousDirective);
+                if ($affectDirectivesUnderPosArgument !== null) {
+                    throw new LogicErrorParserException(
+                        new FeedbackItemResolution(
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                            GraphQLExtendedSpecErrorFeedbackItemProvider::E22,
+                            [
+                                $previousDirective->getName(),
+                                $affectDirectivesUnderPosArgument->getName(),
+                                $startDirectiveName,
+                                $endDirectiveName,
+                            ]
+                        ),
+                        $directive
+                    );
+                }
+                $blockCount++;
+                $blockOwnerDirectivePositions[$blockCount] = count($extractedDirectives) - 1;
+                $blockStartDirectives[$blockCount] = $directive;
+                $openBlockIDs[] = $blockCount;
+                $previousDirective = $directive;
+                $previousDirectiveIsBlockDelimiter = true;
+                continue;
+            }
+
+            /**
+             * `@end` must close a previously-opened `@start`
+             */
+            if ($openBlockIDs === []) {
+                throw new LogicErrorParserException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E19,
+                        [
+                            $endDirectiveName,
+                            $startDirectiveName,
+                        ]
+                    ),
+                    $directive
+                );
+            }
+            /** @var int */
+            $blockID = array_pop($openBlockIDs);
+            $blockLastDirectivePosition = count($extractedDirectives) - 1;
+            /**
+             * There must be at least one directive within the block
+             */
+            if ($blockLastDirectivePosition === $blockOwnerDirectivePositions[$blockID]) {
+                throw new LogicErrorParserException(
+                    new FeedbackItemResolution(
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                        GraphQLExtendedSpecErrorFeedbackItemProvider::E21,
+                        [
+                            $extractedDirectives[$blockOwnerDirectivePositions[$blockID]]->getName(),
+                            $startDirectiveName,
+                            $endDirectiveName,
+                        ]
+                    ),
+                    $directive
+                );
+            }
+            $blockLastDirectivePositions[$blockID] = $blockLastDirectivePosition;
+            $previousDirective = $directive;
+            $previousDirectiveIsBlockDelimiter = true;
+        }
+
+        /**
+         * Every `@start` must have been closed by an `@end`
+         */
+        if ($openBlockIDs !== []) {
+            $blockID = $openBlockIDs[count($openBlockIDs) - 1];
+            throw new LogicErrorParserException(
+                new FeedbackItemResolution(
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::class,
+                    GraphQLExtendedSpecErrorFeedbackItemProvider::E20,
+                    [
+                        $startDirectiveName,
+                        $extractedDirectives[$blockOwnerDirectivePositions[$blockID]]->getName(),
+                        $endDirectiveName,
+                    ]
+                ),
+                $blockStartDirectives[$blockID]
+            );
+        }
+
+        return $extractedDirectives;
     }
 
     abstract protected function isMetaDirective(string $directiveName): bool;
