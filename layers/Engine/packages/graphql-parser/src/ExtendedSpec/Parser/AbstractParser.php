@@ -440,8 +440,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             [
                                 $affectDirectiveUnderPosition,
                                 $directive->getName(),
-                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME,
-                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME,
+                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START,
+                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END,
                             ]
                         ),
                         $directive
@@ -570,8 +570,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array &$blockOwnerDirectivePositions,
         array &$blockLastDirectivePositions,
     ): array {
-        $startDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME;
-        $endDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME;
+        $startDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START;
+        $endDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END;
 
         /** @var Directive[] */
         $extractedDirectives = [];

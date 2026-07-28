@@ -13,6 +13,6 @@ class ReservedDirectiveNames
      *
      * Eg: @underEachArrayItem @start @strUpperCase @strTrim @end
      */
-    const META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME = 'start';
-    const META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME = 'end';
+    const META_DIRECTIVE_BLOCK_START = 'start';
+    const META_DIRECTIVE_BLOCK_END = 'end';
 }
