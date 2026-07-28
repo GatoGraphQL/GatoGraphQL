@@ -9,6 +9,7 @@ use PoP\GraphQLParser\Exception\Parser\LogicErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\SyntaxErrorParserException;
 use PoP\GraphQLParser\Exception\Parser\UnsupportedSyntaxErrorParserException;
 use PoP\GraphQLParser\ExtendedSpec\Constants\QuerySyntax;
+use PoP\GraphQLParser\ExtendedSpec\Constants\ReservedDirectiveNames;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\AbstractDocument;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DocumentDynamicVariableReference;
 use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\ObjectResolvedDynamicVariableReference;
@@ -439,8 +440,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
                             [
                                 $affectDirectiveUnderPosition,
                                 $directive->getName(),
-                                QuerySyntax::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME,
-                                QuerySyntax::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME,
+                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME,
+                                ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME,
                             ]
                         ),
                         $directive
@@ -569,8 +570,8 @@ abstract class AbstractParser extends UpstreamParser implements ParserInterface
         array &$blockOwnerDirectivePositions,
         array &$blockLastDirectivePositions,
     ): array {
-        $startDirectiveName = QuerySyntax::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME;
-        $endDirectiveName = QuerySyntax::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME;
+        $startDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_START_DIRECTIVE_NAME;
+        $endDirectiveName = ReservedDirectiveNames::META_DIRECTIVE_BLOCK_END_DIRECTIVE_NAME;
 
         /** @var Directive[] */
         $extractedDirectives = [];
