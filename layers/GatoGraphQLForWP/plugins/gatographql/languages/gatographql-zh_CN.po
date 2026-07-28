@@ -7114,97 +7114,97 @@ msgstr "表示任意结构 JSON 对象的自定义标量"
 msgid "Before executing `%s`, must call `validateAndInitialize`"
 msgstr "在执行 `%s` 之前，必须调用 `validateAndInitialize`"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:64
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
 #, php-format
 msgid ""
 "Meta directive '%s' is nesting a directive already nested by another meta-"
 "directive"
 msgstr "元指令 '%s' 正在嵌套一个已被另一个元指令嵌套的指令"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:65
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:81
 #, php-format
 msgid "Argument '%1$s' in directive '%2$s' cannot be null or empty"
 msgstr "指令 '%2$s' 中的参数 '%1$s' 不能为 null 或空"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:66
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:82
 #, php-format
 msgid ""
 "Argument '%1$s' in directive '%2$s' must be an array of positive integers, "
 "array item '%3$s' is not allowed"
 msgstr "指令 '%2$s' 中的参数 '%1$s' 必须是正整数数组，数组项 '%3$s' 不被允许"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:67
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:83
 #, php-format
 msgid ""
 "There is no directive in relative position '%1$s' from meta directive "
 "'%2$s', as indicated in argument '%3$s'"
 msgstr "在元指令 '%2$s' 的相对位置 '%1$s' 处没有指令，如参数 '%3$s' 所示"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:68
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:84
 #, php-format
 msgid ""
 "There is no field in relative position '%1$s' from directive '%2$s', as "
 "indicated in argument '%3$s'"
 msgstr "在指令 '%2$s' 的相对位置 '%1$s' 处没有字段，如参数 '%3$s' 所示"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:69
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:85
 #, php-format
 msgid ""
 "The element in relative position '%1$s' from directive '%2$s' (as indicated "
 "in argument '%3$s') is not a field"
 msgstr "指令 '%2$s' 的相对位置 '%1$s' 处的元素（如参数 '%3$s' 所示）不是字段"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:70
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:86
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with a (static) variable"
 msgstr "动态变量 '%1$s' 不能与（静态）变量共享相同名称"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:71
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:87
 #, php-format
 msgid ""
 "The reference to the Resolved Field Value '%1$s' cannot share the same name "
 "with the variable '%1$s'"
 msgstr "对已解析字段值 '%1$s' 的引用不能与变量 '%1$s' 共享相同名称"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:72
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:88
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with the reference to the "
 "Resolved Field Value '%2$s'"
 msgstr "动态变量 '%1$s' 不能与对已解析字段值 '%2$s' 的引用共享相同名称"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:73
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:89
 #, php-format
 msgid ""
 "No value has been exported for dynamic variable '%s' for object with ID '%s'"
 msgstr "未为 ID 为 '%s' 的对象的动态变量 '%s' 导出任何值"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:74
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:90
 #, php-format
 msgid "The reference to field '%s' cannot be resolved"
 msgstr "对字段 '%s' 的引用无法解析"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:75
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:91
 msgid "The name of the operation must be a literal string"
 msgstr "操作名称必须是字面字符串"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:76
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:92
 #, php-format
 msgid "The name of the operation must be a string, but '%s' was provided"
 msgstr "操作名称必须是字符串，但提供的是 '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:77
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:93
 #, php-format
 msgid "There is no operation with name '%s'"
 msgstr "不存在名为'%s'的操作"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:78
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:94
 #, php-format
 msgid "Dependency on operation '%s' forms a loop"
 msgstr "对操作'%s'的依赖形成了循环"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:79
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:95
 #, php-format
 msgid ""
 "No current object ID has been set on the Application State, hence the "
@@ -7214,7 +7214,60 @@ msgstr ""
 "应用状态中未设置当前对象ID，因此无法解析有关'对象已解析动态变量\"%s\"'的"
 "Promise。该动态变量很可能不受该AST节点支持"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:96
+#, php-format
+msgid "Directive '@%s' must be placed right after a meta directive"
+msgstr "指令 '@%s' 必须紧跟在元指令之后"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:97
+#, php-format
+msgid ""
+"Directive '%1$s' is not a meta directive, hence it cannot nest directives "
+"via '@%2$s' and '@%3$s'"
+msgstr "指令 '%1$s' 不是元指令，因此它无法通过 '@%2$s' 和 '@%3$s' 来嵌套指令"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:98
+#, php-format
+msgid "Directive '@%1$s' does not have a matching '@%2$s'"
+msgstr "指令 '@%1$s' 没有匹配的 '@%2$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:99
+#, php-format
+msgid ""
+"Directive '@%1$s' after meta directive '%2$s' does not have a matching "
+"'@%3$s'"
+msgstr "元指令 '%2$s' 之后的指令 '@%1$s' 没有匹配的 '@%3$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:100
+#, php-format
+msgid ""
+"There are no directives between '@%2$s' and '@%3$s' for meta directive '%1$s'"
+msgstr "在元指令 '%1$s' 的 '@%2$s' 和 '@%3$s' 之间没有指令"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:101
+#, php-format
+msgid ""
+"Meta directive '%1$s' cannot indicate the directives to affect via both "
+"argument '%2$s' and directives '@%3$s' and '@%4$s'"
+msgstr ""
+"元指令 '%1$s' 不能同时通过参数 '%2$s' 和指令 '@%3$s' 与 '@%4$s' 来指示要影响"
+"的指令"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:102
+#, php-format
+msgid ""
+"Meta directive '%2$s' cannot affect the directive in relative position "
+"'%1$s', as it is not within the same '@%3$s' and '@%4$s' block"
+msgstr ""
+"元指令 '%2$s' 无法影响相对位置为 '%1$s' 的指令，因为它不在同一个 '@%3$s' 和 "
+"'@%4$s' 块内"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:103
+#, php-format
+msgid "Directive '@%s' cannot receive arguments"
+msgstr "指令 '@%s' 不能接收参数"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:104
 #, php-format
 msgid "No value has been exported for dynamic variable '%s'"
 msgstr "动态变量'%s'未导出任何值"
