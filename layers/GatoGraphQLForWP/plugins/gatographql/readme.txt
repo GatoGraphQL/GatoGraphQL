@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.2.0 =
+* Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
+
 = 19.1.0 =
 * Added - Filter custom posts by their parent: the `customPosts` query gains the `parentID`, `parentIDs` and `excludeParentIDs` filter inputs (as already available on the `pages` query), mapping to WordPress' `post_parent`, `post_parent__in` and `post_parent__not_in` query args (#3366)
 * Added - Fields to query the site's options (i.e. the settings) in bulk: `optionNames` returns the list of the allowed option names stored in the DB (with a `filterBy` input to include/exclude the names containing some string), and `options` returns a JSON object with the option name and value for the provided (allowed) option names (#3364)

@@ -48,6 +48,24 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
+    /**
+     * Only makes sense when composable directives are enabled.
+     *
+     * @see \PoP\GraphQLParser\ExtendedSpec\Parser\AbstractParser::parseDirectiveList()
+     */
+    public function enableStartEndHelperDirectives(): bool
+    {
+        $envVariable = Environment::ENABLE_START_END_HELPER_DIRECTIVES;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
     public function enableDynamicVariables(): bool
     {
         $envVariable = Environment::ENABLE_DYNAMIC_VARIABLES;
