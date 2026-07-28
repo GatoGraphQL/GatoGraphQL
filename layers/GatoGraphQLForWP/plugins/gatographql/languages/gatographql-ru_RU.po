@@ -7777,7 +7777,7 @@ msgstr "Пользовательский скаляр, представляющ�
 msgid "Before executing `%s`, must call `validateAndInitialize`"
 msgstr "Перед выполнением `%s` необходимо вызвать `validateAndInitialize`"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:64
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
 #, php-format
 msgid ""
 "Meta directive '%s' is nesting a directive already nested by another meta-"
@@ -7786,12 +7786,12 @@ msgstr ""
 "Мета-директива '%s' вкладывает директиву, уже вложенную другой мета-"
 "директивой"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:65
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:81
 #, php-format
 msgid "Argument '%1$s' in directive '%2$s' cannot be null or empty"
 msgstr "Аргумент '%1$s' в директиве '%2$s' не может быть null или пустым"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:66
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:82
 #, php-format
 msgid ""
 "Argument '%1$s' in directive '%2$s' must be an array of positive integers, "
@@ -7800,7 +7800,7 @@ msgstr ""
 "Аргумент '%1$s' в директиве '%2$s' должен быть массивом положительных целых "
 "чисел, элемент массива '%3$s' недопустим"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:67
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:83
 #, php-format
 msgid ""
 "There is no directive in relative position '%1$s' from meta directive "
@@ -7809,7 +7809,7 @@ msgstr ""
 "Нет директивы в относительной позиции '%1$s' от мета-директивы '%2$s', как "
 "указано в аргументе '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:68
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:84
 #, php-format
 msgid ""
 "There is no field in relative position '%1$s' from directive '%2$s', as "
@@ -7818,7 +7818,7 @@ msgstr ""
 "Нет поля в относительной позиции '%1$s' от директивы '%2$s', как указано в "
 "аргументе '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:69
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:85
 #, php-format
 msgid ""
 "The element in relative position '%1$s' from directive '%2$s' (as indicated "
@@ -7827,7 +7827,7 @@ msgstr ""
 "Элемент в относительной позиции '%1$s' от директивы '%2$s' (как указано в "
 "аргументе '%3$s') не является полем"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:70
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:86
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with a (static) variable"
@@ -7835,7 +7835,7 @@ msgstr ""
 "Динамическая переменная '%1$s' не может иметь то же имя, что и (статическая) "
 "переменная"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:71
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:87
 #, php-format
 msgid ""
 "The reference to the Resolved Field Value '%1$s' cannot share the same name "
@@ -7844,7 +7844,7 @@ msgstr ""
 "Ссылка на значение разрешённого поля '%1$s' не может иметь то же имя, что и "
 "переменная '%1$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:72
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:88
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with the reference to the "
@@ -7853,7 +7853,7 @@ msgstr ""
 "Динамическая переменная '%1$s' не может иметь то же имя, что и ссылка на "
 "значение разрешённого поля '%2$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:73
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:89
 #, php-format
 msgid ""
 "No value has been exported for dynamic variable '%s' for object with ID '%s'"
@@ -7861,31 +7861,31 @@ msgstr ""
 "Для динамической переменной '%s' не было экспортировано значение для объекта "
 "с ID '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:74
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:90
 #, php-format
 msgid "The reference to field '%s' cannot be resolved"
 msgstr "Ссылка на поле '%s' не может быть разрешена"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:75
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:91
 msgid "The name of the operation must be a literal string"
 msgstr "Имя операции должно быть строковым литералом"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:76
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:92
 #, php-format
 msgid "The name of the operation must be a string, but '%s' was provided"
 msgstr "Имя операции должно быть строкой, но было предоставлено '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:77
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:93
 #, php-format
 msgid "There is no operation with name '%s'"
 msgstr "Операция с именем '%s' не найдена"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:78
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:94
 #, php-format
 msgid "Dependency on operation '%s' forms a loop"
 msgstr "Зависимость от операции '%s' образует цикл"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:79
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:95
 #, php-format
 msgid ""
 "No current object ID has been set on the Application State, hence the "
@@ -7897,7 +7897,64 @@ msgstr ""
 "разрешён. Скорее всего, динамическая переменная не поддерживается в данном "
 "узле AST"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:96
+#, php-format
+msgid "Directive '@%s' must be placed right after a meta directive"
+msgstr "Директива «@%s» должна быть размещена сразу после мета-директивы"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:97
+#, php-format
+msgid ""
+"Directive '%1$s' is not a meta directive, hence it cannot nest directives "
+"via '@%2$s' and '@%3$s'"
+msgstr ""
+"Директива «%1$s» не является мета-директивой, поэтому она не может "
+"вкладывать директивы через «@%2$s» и «@%3$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:98
+#, php-format
+msgid "Directive '@%1$s' does not have a matching '@%2$s'"
+msgstr "Директива «@%1$s» не имеет соответствующей «@%2$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:99
+#, php-format
+msgid ""
+"Directive '@%1$s' after meta directive '%2$s' does not have a matching "
+"'@%3$s'"
+msgstr ""
+"Директива «@%1$s» после мета-директивы «%2$s» не имеет соответствующей "
+"«@%3$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:100
+#, php-format
+msgid ""
+"There are no directives between '@%2$s' and '@%3$s' for meta directive '%1$s'"
+msgstr "Между «@%2$s» и «@%3$s» нет директив для мета-директивы «%1$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:101
+#, php-format
+msgid ""
+"Meta directive '%1$s' cannot indicate the directives to affect via both "
+"argument '%2$s' and directives '@%3$s' and '@%4$s'"
+msgstr ""
+"Мета-директива «%1$s» не может указывать директивы, на которые нужно "
+"повлиять, одновременно через аргумент «%2$s» и директивы «@%3$s» и «@%4$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:102
+#, php-format
+msgid ""
+"Meta directive '%2$s' cannot affect the directive in relative position "
+"'%1$s', as it is not within the same '@%3$s' and '@%4$s' block"
+msgstr ""
+"Мета-директива «%2$s» не может повлиять на директиву в относительной позиции "
+"«%1$s», так как та находится не в том же блоке «@%3$s» и «@%4$s»"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:103
+#, php-format
+msgid "Directive '@%s' cannot receive arguments"
+msgstr "Директива «@%s» не может принимать аргументы"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:104
 #, php-format
 msgid "No value has been exported for dynamic variable '%s'"
 msgstr "Для динамической переменной '%s' не было экспортировано значение"
