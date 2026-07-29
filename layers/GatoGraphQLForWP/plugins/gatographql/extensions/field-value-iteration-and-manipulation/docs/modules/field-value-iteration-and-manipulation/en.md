@@ -6,7 +6,8 @@ Addition of meta directives to the GraphQL schema, for iterating and manipulatin
 2. `@underJSONObjectProperty`
 3. `@underEachArrayItem`
 4. `@underEachJSONObjectProperty`
-5. `@objectClone`
+5. `@underDynamicVariable`
+6. `@objectClone`
 
 <!-- ## Description
 
@@ -18,7 +19,8 @@ This module introduces these meta-directives into the GraphQL schema:
 2. `@underJSONObjectProperty`
 3. `@underEachArrayItem`
 4. `@underEachJSONObjectProperty`
-5. `@objectClone` -->
+5. `@underDynamicVariable`
+6. `@objectClone` -->
 
 ## `@underArrayItem`
 
@@ -415,6 +417,118 @@ This query:
   }
 }
 ``` -->
+
+## `@underDynamicVariable`
+
+The meta-directives above all execute their nested directives on the value of the field. `@underDynamicVariable` executes them on the value of a dynamic variable instead, restoring the value of the field afterwards.
+
+This is needed whenever some value that is not the field's value must be iterated: a property extracted from a JSON object, the result of a function, or the item from an outer iteration.
+
+Without it, the value must be moved into the field (via `@applyField(setResultInResponse: true)`), iterated, and then moved back by hand:
+
+```graphql
+{
+  posts {
+    blockFlattenedDataItems
+      @underEachArrayItem(passValueOnwardsAs: "block") @start
+        @applyField(
+          name: "_objectProperty"
+          arguments: { object: $block, by: { key: "innerBlocks" } }
+          passOnwardsAs: "innerBlocks"
+        )
+        # Move the dynamic variable's value into the field...
+        @applyField(
+          name: "_echo"
+          arguments: { value: $innerBlocks }
+          setResultInResponse: true
+        )
+        @underEachArrayItem(passValueOnwardsAs: "innerBlock") @start
+          @exportFrom(
+            scopedDynamicVariable: $innerBlock
+            as: "innerBlocks"
+            type: DICTIONARY
+          )
+        @end
+        # ...and restore it afterwards
+        @applyField(
+          name: "_echo"
+          arguments: { value: $block }
+          setResultInResponse: true
+        )
+      @end
+  }
+}
+```
+
+`@underDynamicVariable` replaces both steps, and the value of the field is restored automatically:
+
+```graphql
+{
+  posts {
+    blockFlattenedDataItems
+      @underEachArrayItem(passValueOnwardsAs: "block") @start
+        @applyField(
+          name: "_objectProperty"
+          arguments: { object: $block, by: { key: "innerBlocks" } }
+          passOnwardsAs: "innerBlocks"
+        )
+        @underDynamicVariable(scopedDynamicVariable: $innerBlocks) @start
+          @underEachArrayItem(passValueOnwardsAs: "innerBlock") @start
+            @exportFrom(
+              scopedDynamicVariable: $innerBlock
+              as: "innerBlocks"
+              type: DICTIONARY
+            )
+          @end
+        @end
+      @end
+  }
+}
+```
+
+The dynamic variable can be produced by any directive that exports one, such as `@applyField(passOnwardsAs: "...")`, `@passOnwards(as: "...")`, or the `passValueOnwardsAs` / `passKeyOnwardsAs` / `passIndexOnwardsAs` arguments of the meta-directives above.
+
+### The block provides a read-only view
+
+The nested directives receive the value of the dynamic variable, but any modification they perform on it is discarded: when the block ends, the field recovers the value it had before.
+
+In the query below, `@strUpperCase` is applied on the value of `$list`, and `@strTitleCase` on the (restored) value of the field:
+
+```graphql
+{
+  _echo(value: ["original", "values"])
+    @applyField(
+      name: "_echo"
+      arguments: { value: ["hello", "world"] }
+      passOnwardsAs: "list"
+    )
+    @underDynamicVariable(scopedDynamicVariable: $list) @start
+      @underEachArrayItem @strUpperCase
+    @end
+    @underEachArrayItem @strTitleCase
+}
+```
+
+...producing:
+
+```json
+{
+  "data": {
+    "_echo": [
+      "Original",
+      "Values"
+    ]
+  }
+}
+```
+
+To keep a value computed inside the block, export it via `@exportFrom` (as in the examples above), which is unaffected by the restoration.
+
+### Handling of `null` and of errors
+
+If the dynamic variable's value is `null`, the block is still executed, with the field temporarily holding `null`. (Use `@if` to skip the block instead.)
+
+If any nested directive produces an error, the error is added to the response, and the field still recovers its original value. The failure is contained within the block: any directive composed after the block is still executed, on the restored value.
 
 ## `@objectClone`
 

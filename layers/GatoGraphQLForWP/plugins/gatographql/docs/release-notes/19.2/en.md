@@ -58,3 +58,7 @@ The benefit grows with the size of the query, as the relative positions must oth
 As shown above, `@start` and `@end` can be omitted when the meta directive affects a single directive (as with `@unless` and `@default`).
 
 Both methods can be combined within the same query, but not on the same meta directive. The query is validated while parsing it, returning an error whenever `@start` has no matching `@end` (or the other way around), the block contains no directives, `@start` is not placed right after a meta directive, or a meta directive affects a directive placed outside of its `@start`/`@end` block.
+
+## Improvements
+
+- Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive ([#3371](https://github.com/GatoGraphQL/GatoGraphQL/pull/3371))
