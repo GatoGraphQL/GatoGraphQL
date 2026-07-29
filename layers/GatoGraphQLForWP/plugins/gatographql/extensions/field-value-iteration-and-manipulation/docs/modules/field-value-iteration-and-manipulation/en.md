@@ -448,14 +448,14 @@ Without it, the value must be moved into the field (via `@applyField(setResultIn
             as: "innerBlocks"
             type: DICTIONARY
           )
-        @end # <!-- @underEachArrayItem -->
+        @end
         # ...and restore it afterwards
         @applyField(
           name: "_echo"
           arguments: { value: $block }
           setResultInResponse: true
         )
-      @end # <!-- @underEachArrayItem -->
+      @end
   }
 }
 ```
@@ -479,9 +479,9 @@ Without it, the value must be moved into the field (via `@applyField(setResultIn
               as: "innerBlocks"
               type: DICTIONARY
             )
-          @end # <!-- @underEachArrayItem -->
-        @end # <!-- @underDynamicVariable -->
-      @end # <!-- @underEachArrayItem -->
+          @end
+        @end
+      @end
   }
 }
 ```
@@ -504,7 +504,7 @@ In the query below, `@strUpperCase` is applied on the value of `$list`, and `@st
     )
     @underDynamicVariable(scopedDynamicVariable: $list) @start
       @underEachArrayItem @strUpperCase
-    @end # <!-- @underDynamicVariable -->
+    @end
     @underEachArrayItem @strTitleCase
 }
 ```
