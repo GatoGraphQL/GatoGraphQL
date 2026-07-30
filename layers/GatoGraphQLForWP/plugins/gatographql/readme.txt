@@ -250,6 +250,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 19.2.0 =
 * Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
 * Improved - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
+* Fixed - Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date. This happens whenever a meta directive overrides the value of the field while keeping its type (eg: via `@underDynamicVariable`, or `@applyField` with `setResultInResponse: true`), and made the request fail with a 500 response instead of returning a GraphQL error. Such a value is now serialized as any other scalar would be (#3372)
 
 = 19.1.0 =
 * Added - Filter custom posts by their parent: the `customPosts` query gains the `parentID`, `parentIDs` and `excludeParentIDs` filter inputs (as already available on the `pages` query), mapping to WordPress' `post_parent`, `post_parent__in` and `post_parent__not_in` query args (#3366)
