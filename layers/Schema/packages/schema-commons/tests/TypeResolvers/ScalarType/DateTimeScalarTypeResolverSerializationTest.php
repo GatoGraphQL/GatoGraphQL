@@ -6,7 +6,6 @@ namespace PoPSchema\SchemaCommons\TypeResolvers\ScalarType;
 
 use DateTime;
 use DateTimeImmutable;
-use DateTimeInterface;
 use PoP\ComponentModel\AbstractTestCase;
 use stdClass;
 
