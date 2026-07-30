@@ -62,3 +62,26 @@ Both methods can be combined within the same query, but not on the same meta dir
 ## Improvements
 
 - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive ([#3371](https://github.com/GatoGraphQL/GatoGraphQL/pull/3371))
+
+## Fixed
+
+- Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date ([#3372](https://github.com/GatoGraphQL/GatoGraphQL/pull/3372)).
+
+  A meta directive can override the value of a field while keeping its type, as in:
+
+  ```graphql
+  {
+    post(by: { id: 1 }) {
+      date
+        @underDynamicVariable(scopedDynamicVariable: $someList) @start
+          @underEachArrayItem(passValueOnwardsAs: "item") @start
+            @exportFrom(scopedDynamicVariable: $item, as: "items", type: DICTIONARY)
+          @end
+        @end
+    }
+  }
+  ```
+
+  Field `date` is of type `DateTime`, but the value being processed is not a date. Serializing it formatted the value as a date regardless, producing a PHP error which made the whole request fail with a 500 response, instead of returning a GraphQL error.
+
+  Such a value is now serialized as any other scalar would be, and only an actual date is formatted as a date.
