@@ -17,6 +17,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date. This happens whenever a meta directive overrides the value of the field while keeping its type (eg: via `@underDynamicVariable`, or `@applyField` with `setResultInResponse: true`), and made the request fail with a 500 response instead of returning a GraphQL error. Such a value is now serialized as any other scalar would be (#3372)
+- Running a WP-CLI command that loads WordPress no longer prints `Symfony\Component\Finder\Finder` deprecation notices on PHP 8.1 and above (on sites with `WP_DEBUG` enabled). While compiling the service container, Symfony's Config component checks whether the Finder component is installed; as the plugin did not ship it, the class was resolved against WP-CLI's own bundled copy, which is Symfony 3.4 and predates PHP 8.1's tentative return types. The plugin now requires `symfony/finder` (#3373)
 
 ## 19.1.0 - 27/07/2026
 
