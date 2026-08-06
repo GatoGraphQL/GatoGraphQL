@@ -85,3 +85,16 @@ Both methods can be combined within the same query, but not on the same meta dir
   Field `date` is of type `DateTime`, but the value being processed is not a date. Serializing it formatted the value as a date regardless, producing a PHP error which made the whole request fail with a 500 response, instead of returning a GraphQL error.
 
   Such a value is now serialized as any other scalar would be, and only an actual date is formatted as a date.
+
+- Running a WP-CLI command that loads WordPress no longer prints `Symfony\Component\Finder\Finder` deprecation notices on PHP 8.1 and above ([#3373](https://github.com/GatoGraphQL/GatoGraphQL/pull/3373)).
+
+  On sites with `WP_DEBUG` enabled, the first WP-CLI command run after the service container cache was purged printed:
+
+  ```
+  PHP Deprecated:  Return type of Symfony\Component\Finder\Finder::getIterator() should either be compatible with IteratorAggregate::getIterator(): Traversable, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in phar:///usr/local/bin/wp/vendor/symfony/finder/Finder.php on line 566
+  PHP Deprecated:  Return type of Symfony\Component\Finder\Finder::count() should either be compatible with Countable::count(): int, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice in phar:///usr/local/bin/wp/vendor/symfony/finder/Finder.php on line 637
+  ```
+
+  While compiling the service container, Symfony's Config component checks whether the Finder component is installed, to decide how to resolve the glob patterns in the `services.yaml` files. As the plugin did not ship Finder, that class was instead resolved against the copy bundled inside the WP-CLI `.phar`, which is Symfony 3.4 (still supporting PHP 5.6, and hence predating PHP 8.1's tentative return types).
+
+  The plugin now requires `symfony/finder` itself, so its own (current) copy of the component is used.
