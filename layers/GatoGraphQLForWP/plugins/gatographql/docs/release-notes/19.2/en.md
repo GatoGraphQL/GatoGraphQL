@@ -62,6 +62,7 @@ Both methods can be combined within the same query, but not on the same meta dir
 ## Improvements
 
 - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive ([#3371](https://github.com/GatoGraphQL/GatoGraphQL/pull/3371))
+- Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches ([#3374](https://github.com/GatoGraphQL/GatoGraphQL/pull/3374))
 
 ## Fixed
 

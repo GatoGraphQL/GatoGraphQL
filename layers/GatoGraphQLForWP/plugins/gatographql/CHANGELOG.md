@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
+- Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches (#3374)
 
 ### Fixed
 
