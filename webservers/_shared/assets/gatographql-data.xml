@@ -1786,7 +1786,7 @@ https://wordpress.org/about/
 <!-- /wp:separator -->
 
 <!-- wp:image {"id":33,"align":"wide"} -->
-<figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
+<figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" title="The dog stuck in the fence" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading {"level":3,"anchor":"i-love-these-veggies"} -->
@@ -1874,7 +1874,7 @@ https://wordpress.org/about/
 <!-- /wp:columns -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/">Do some duck duck search online</a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/" title="Opens the DuckDuckGo search engine">Do some duck duck search online</a></div>
 <!-- /wp:button -->
 
 <!-- wp:heading {"level":3,"anchor":"this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not"} -->
@@ -1888,7 +1888,7 @@ https://wordpress.org/about/
 
 <!-- wp:image {"id":31,"linkDestination":"none"} -->
 <figure class="wp-block-image"><img src="https://i.pinimg.com/originals/85/a7/f5/85a7f5cee4c93cb3995d1b51e3a0289f.jpg" alt="Even funnier dog" class="wp-image-31"/><figcaption class="wp-element-caption">Anyone having chips? Don't leave me alone!</figcaption></figure>
-<!-- /wp:image --></figure>
+<!-- /wp:image --><figcaption class="blocks-gallery-caption wp-element-caption">Two dogs asking for chips</figcaption></figure>
 <!-- /wp:gallery -->
 
 <!-- wp:quote -->
@@ -1919,8 +1919,8 @@ https://wordpress.org/about/
 <figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">"Broke for free" song</figcaption></figure>
 <!-- /wp:audio -->
 
-<!-- wp:video {"id":132} -->
-<figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
+<!-- wp:video {"id":132,"tracks":[{"src":"https://download.samplelib.com/vtt/road-en.vtt","kind":"subtitles","srcLang":"en","label":"English subtitles"}]} -->
+<figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"><track src="https://download.samplelib.com/vtt/road-en.vtt" kind="subtitles" srclang="en" label="English subtitles"/></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
 <!-- /wp:video -->
 
 <!-- wp:preformatted -->
@@ -1971,7 +1971,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
-<!-- wp:accordion -->
+<!-- wp:accordion {"ariaLabel":"Frequently asked questions"} -->
 <div role="group" class="wp-block-accordion"><!-- wp:accordion-item -->
 <div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
 <h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">This is the accordion title</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
@@ -1997,7 +1997,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:accordion-item --></div>
 <!-- /wp:accordion -->
 
-<!-- wp:navigation -->
+<!-- wp:navigation {"ariaLabel":"Main site navigation"} -->
 <!-- wp:home-link {"label":"Home page"} /-->
 
 <!-- wp:navigation-link {"label":"About us","description":"Learn more about our company","url":"/about","title":"Go to the About page","kind":"custom"} /-->
@@ -2039,7 +2039,37 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <div class="wp-block-terms-query"><!-- wp:paragraph -->
 <p>Terms query.</p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:terms-query -->]]></content:encoded>
+<!-- /wp:terms-query -->
+
+<!-- wp:file {"href":"https://gatographql.com/assets/GatoGraphQL-logo.webp"} -->
+<div class="wp-block-file"><a id="wp-block-file--media-1140" href="https://gatographql.com/assets/GatoGraphQL-logo.webp">The Gato GraphQL logo</a><a href="https://gatographql.com/assets/GatoGraphQL-logo.webp" class="wp-block-file__button wp-element-button" download aria-describedby="wp-block-file--media-1140">Download the logo</a></div>
+<!-- /wp:file -->
+
+<!-- wp:more {"customText":"Keep reading this story"} -->
+<!--more Keep reading this story-->
+<!-- /wp:more -->
+
+<!-- wp:group {"ariaLabel":"Highlighted notes","layout":{"type":"constrained"}} -->
+<div class="wp-block-group" aria-label="Highlighted notes"><!-- wp:paragraph -->
+<p>A note worth highlighting.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>A quote stored the legacy way, with its text inside the blockquote.</p><cite>An older citation</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:text-columns {"columns":2} -->
+<div class="wp-block-text-columns alignundefined has-2-columns"><div class="wp-block-column"><p>The left column of text.</p></div><div class="wp-block-column"><p>The right column of text.</p></div></div>
+<!-- /wp:text-columns -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$greeting = "Good morning"; // greet the visitor</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:shortcode -->
+Here are the pictures: [caption id="attachment_31" align="alignright" width="300" caption="Our favourite dog picture"]<img src="https://i.pinimg.com/originals/85/a7/f5/85a7f5cee4c93cb3995d1b51e3a0289f.jpg" alt="Sleeping dog" /> The dog resting after lunch[/caption] Enjoy them!
+<!-- /wp:shortcode -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>
