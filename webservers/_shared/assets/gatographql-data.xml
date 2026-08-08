@@ -2059,8 +2059,8 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <blockquote class="wp-block-quote"><p>A quote stored the legacy way, with its text inside the blockquote.</p><cite>An older citation</cite></blockquote>
 <!-- /wp:quote -->
 
-<!-- wp:text-columns {"columns":2} -->
-<div class="wp-block-text-columns alignundefined has-2-columns"><div class="wp-block-column"><p>The left column of text.</p></div><div class="wp-block-column"><p>The right column of text.</p></div></div>
+<!-- wp:text-columns {"className":"has-2-columns"} -->
+<div class="wp-block-text-columns alignundefined columns-2 has-2-columns"><div class="wp-block-column"><p>The left column of text.</p></div><div class="wp-block-column"><p>The right column of text.</p></div></div>
 <!-- /wp:text-columns -->
 
 <!-- wp:code -->

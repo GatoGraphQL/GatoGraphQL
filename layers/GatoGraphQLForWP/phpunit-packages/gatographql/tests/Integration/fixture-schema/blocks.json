@@ -1390,7 +1390,7 @@
                     {
                         "name": "core\/text-columns",
                         "attributes": {
-                            "columns": 2,
+                            "className": "has-2-columns",
                             "content": [
                                 {
                                     "children": "The left column of text."
@@ -1398,9 +1398,10 @@
                                 {
                                     "children": "The right column of text."
                                 }
-                            ]
+                            ],
+                            "columns": 2
                         },
-                        "contentSource": "<!-- wp:text-columns {\"columns\":2,\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}]} -->\n<div class=\"wp-block-text-columns alignundefined has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
+                        "contentSource": "<!-- wp:text-columns {\"className\":\"has-2-columns\",\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}],\"columns\":2} -->\n<div class=\"wp-block-text-columns alignundefined columns-2 has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
                         "innerBlocks": null
                     },
                     {
@@ -2385,7 +2386,7 @@
                     {
                         "name": "core\/text-columns",
                         "attributes": {
-                            "columns": 2,
+                            "className": "has-2-columns",
                             "content": [
                                 {
                                     "children": "The left column of text."
@@ -2393,7 +2394,8 @@
                                 {
                                     "children": "The right column of text."
                                 }
-                            ]
+                            ],
+                            "columns": 2
                         }
                     },
                     {
@@ -3587,7 +3589,7 @@
                     {
                         "name": "core\/text-columns",
                         "attributes": {
-                            "columns": 2,
+                            "className": "has-2-columns",
                             "content": [
                                 {
                                     "children": "The left column of text."
@@ -3595,7 +3597,8 @@
                                 {
                                     "children": "The right column of text."
                                 }
-                            ]
+                            ],
+                            "columns": 2
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -11130,7 +11133,7 @@
                 {
                     "name": "core\/text-columns",
                     "attributes": {
-                        "columns": 2,
+                        "className": "has-2-columns",
                         "content": [
                             {
                                 "children": "The left column of text."
@@ -11138,9 +11141,10 @@
                             {
                                 "children": "The right column of text."
                             }
-                        ]
+                        ],
+                        "columns": 2
                     },
-                    "contentSource": "<!-- wp:text-columns {\"columns\":2,\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}]} -->\n<div class=\"wp-block-text-columns alignundefined has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
+                    "contentSource": "<!-- wp:text-columns {\"className\":\"has-2-columns\",\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}],\"columns\":2} -->\n<div class=\"wp-block-text-columns alignundefined columns-2 has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
                     "innerBlocks": null
                 },
                 {
@@ -12125,7 +12129,7 @@
                 {
                     "name": "core\/text-columns",
                     "attributes": {
-                        "columns": 2,
+                        "className": "has-2-columns",
                         "content": [
                             {
                                 "children": "The left column of text."
@@ -12133,7 +12137,8 @@
                             {
                                 "children": "The right column of text."
                             }
-                        ]
+                        ],
+                        "columns": 2
                     }
                 },
                 {
@@ -13327,7 +13332,7 @@
                 {
                     "name": "core\/text-columns",
                     "attributes": {
-                        "columns": 2,
+                        "className": "has-2-columns",
                         "content": [
                             {
                                 "children": "The left column of text."
@@ -13335,7 +13340,8 @@
                             {
                                 "children": "The right column of text."
                             }
-                        ]
+                        ],
+                        "columns": 2
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
