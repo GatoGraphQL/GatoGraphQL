@@ -770,7 +770,24 @@
                             "className": "has-fixed-layout",
                             "hasFixedLayout": true,
                             "caption": "Some items to consider for new year's resolution?",
-                            "head": [],
+                            "head": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Category",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "First option",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "Second option",
+                                            "tag": "th"
+                                        }
+                                    ]
+                                }
+                            ],
                             "body": [
                                 {
                                     "cells": [
@@ -821,9 +838,26 @@
                                     ]
                                 }
                             ],
-                            "foot": []
+                            "foot": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Summary",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Everyday joys",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Weekend plans",
+                                            "tag": "td"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
-                        "contentSource": "<!-- wp:table {\"align\":\"wide\",\"className\":\"has-fixed-layout\",\"hasFixedLayout\":true,\"caption\":\"Some items to consider for new year's resolution?\",\"head\":[],\"body\":[{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I like\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f\",\"tag\":\"td\"},{\"content\":\"Riding my bike in the mountain\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I have\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Not much, just enough to \\u003ca href=\\u0022https:\/\/keepmegoing.com\\u0022\\u003ekeep me going on\\u003c\/a\\u003e\",\"tag\":\"td\"},{\"content\":\"A \\u003cmark style=\\u0022background-color:rgba(0, 0, 0, 0);color:#c22a2a\\u0022 class=\\u0022has-inline-color\\u0022\\u003ebalcony with plants\\u003c\/mark\\u003e\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I desire\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Attending \\u003cstrong\\u003econferences\\u003c\/strong\\u003e and meeting plenty of \\u003cstrong\\u003einteresting folks\\u003c\/strong\\u003e from the community\",\"tag\":\"td\"},{\"content\":\"To be able to focus on the important things of life\",\"tag\":\"td\"}]}],\"foot\":[]} -->\n<figure class=\"wp-block-table alignwide has-fixed-layout\"><table class=\"has-fixed-layout\"><tbody><tr><td><strong>What I like<\/strong><\/td><td>Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f<\/td><td>Riding my bike in the mountain<\/td><\/tr><tr><td><strong>What I have<\/strong><\/td><td>Not much, just enough to <a href=\"https:\/\/keepmegoing.com\">keep me going on<\/a><\/td><td>A <mark style=\"background-color:rgba(0, 0, 0, 0);color:#c22a2a\" class=\"has-inline-color\">balcony with plants<\/mark><\/td><\/tr><tr><td><strong>What I desire<\/strong><\/td><td>Attending <strong>conferences<\/strong> and meeting plenty of <strong>interesting folks<\/strong> from the community<\/td><td>To be able to focus on the important things of life<\/td><\/tr><\/tbody><\/table><figcaption class=\"wp-element-caption\">Some items to consider for new year's resolution?<\/figcaption><\/figure>\n<!-- \/wp:table -->",
+                        "contentSource": "<!-- wp:table {\"align\":\"wide\",\"className\":\"has-fixed-layout\",\"hasFixedLayout\":true,\"caption\":\"Some items to consider for new year's resolution?\",\"head\":[{\"cells\":[{\"content\":\"Category\",\"tag\":\"th\"},{\"content\":\"First option\",\"tag\":\"th\"},{\"content\":\"Second option\",\"tag\":\"th\"}]}],\"body\":[{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I like\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f\",\"tag\":\"td\"},{\"content\":\"Riding my bike in the mountain\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I have\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Not much, just enough to \\u003ca href=\\u0022https:\/\/keepmegoing.com\\u0022\\u003ekeep me going on\\u003c\/a\\u003e\",\"tag\":\"td\"},{\"content\":\"A \\u003cmark style=\\u0022background-color:rgba(0, 0, 0, 0);color:#c22a2a\\u0022 class=\\u0022has-inline-color\\u0022\\u003ebalcony with plants\\u003c\/mark\\u003e\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I desire\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Attending \\u003cstrong\\u003econferences\\u003c\/strong\\u003e and meeting plenty of \\u003cstrong\\u003einteresting folks\\u003c\/strong\\u003e from the community\",\"tag\":\"td\"},{\"content\":\"To be able to focus on the important things of life\",\"tag\":\"td\"}]}],\"foot\":[{\"cells\":[{\"content\":\"Summary\",\"tag\":\"td\"},{\"content\":\"Everyday joys\",\"tag\":\"td\"},{\"content\":\"Weekend plans\",\"tag\":\"td\"}]}]} -->\n<figure class=\"wp-block-table alignwide has-fixed-layout\"><table class=\"has-fixed-layout\"><thead><tr><th>Category<\/th><th>First option<\/th><th>Second option<\/th><\/tr><\/thead><tbody><tr><td><strong>What I like<\/strong><\/td><td>Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f<\/td><td>Riding my bike in the mountain<\/td><\/tr><tr><td><strong>What I have<\/strong><\/td><td>Not much, just enough to <a href=\"https:\/\/keepmegoing.com\">keep me going on<\/a><\/td><td>A <mark style=\"background-color:rgba(0, 0, 0, 0);color:#c22a2a\" class=\"has-inline-color\">balcony with plants<\/mark><\/td><\/tr><tr><td><strong>What I desire<\/strong><\/td><td>Attending <strong>conferences<\/strong> and meeting plenty of <strong>interesting folks<\/strong> from the community<\/td><td>To be able to focus on the important things of life<\/td><\/tr><\/tbody><tfoot><tr><td>Summary<\/td><td>Everyday joys<\/td><td>Weekend plans<\/td><\/tr><\/tfoot><\/table><figcaption class=\"wp-element-caption\">Some items to consider for new year's resolution?<\/figcaption><\/figure>\n<!-- \/wp:table -->",
                         "innerBlocks": null
                     },
                     {
@@ -1715,7 +1749,24 @@
                             "className": "has-fixed-layout",
                             "hasFixedLayout": true,
                             "caption": "Some items to consider for new year's resolution?",
-                            "head": [],
+                            "head": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Category",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "First option",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "Second option",
+                                            "tag": "th"
+                                        }
+                                    ]
+                                }
+                            ],
                             "body": [
                                 {
                                     "cells": [
@@ -1766,7 +1817,24 @@
                                     ]
                                 }
                             ],
-                            "foot": []
+                            "foot": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Summary",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Everyday joys",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Weekend plans",
+                                            "tag": "td"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     },
                     {
@@ -2694,7 +2762,24 @@
                             "className": "has-fixed-layout",
                             "hasFixedLayout": true,
                             "caption": "Some items to consider for new year's resolution?",
-                            "head": [],
+                            "head": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Category",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "First option",
+                                            "tag": "th"
+                                        },
+                                        {
+                                            "content": "Second option",
+                                            "tag": "th"
+                                        }
+                                    ]
+                                }
+                            ],
                             "body": [
                                 {
                                     "cells": [
@@ -2745,7 +2830,24 @@
                                     ]
                                 }
                             ],
-                            "foot": []
+                            "foot": [
+                                {
+                                    "cells": [
+                                        {
+                                            "content": "Summary",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Everyday joys",
+                                            "tag": "td"
+                                        },
+                                        {
+                                            "content": "Weekend plans",
+                                            "tag": "td"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -10128,7 +10230,24 @@
                         "className": "has-fixed-layout",
                         "hasFixedLayout": true,
                         "caption": "Some items to consider for new year's resolution?",
-                        "head": [],
+                        "head": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Category",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "First option",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "Second option",
+                                        "tag": "th"
+                                    }
+                                ]
+                            }
+                        ],
                         "body": [
                             {
                                 "cells": [
@@ -10179,9 +10298,26 @@
                                 ]
                             }
                         ],
-                        "foot": []
+                        "foot": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Summary",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Everyday joys",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Weekend plans",
+                                        "tag": "td"
+                                    }
+                                ]
+                            }
+                        ]
                     },
-                    "contentSource": "<!-- wp:table {\"align\":\"wide\",\"className\":\"has-fixed-layout\",\"hasFixedLayout\":true,\"caption\":\"Some items to consider for new year's resolution?\",\"head\":[],\"body\":[{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I like\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f\",\"tag\":\"td\"},{\"content\":\"Riding my bike in the mountain\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I have\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Not much, just enough to \\u003ca href=\\u0022https:\/\/keepmegoing.com\\u0022\\u003ekeep me going on\\u003c\/a\\u003e\",\"tag\":\"td\"},{\"content\":\"A \\u003cmark style=\\u0022background-color:rgba(0, 0, 0, 0);color:#c22a2a\\u0022 class=\\u0022has-inline-color\\u0022\\u003ebalcony with plants\\u003c\/mark\\u003e\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I desire\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Attending \\u003cstrong\\u003econferences\\u003c\/strong\\u003e and meeting plenty of \\u003cstrong\\u003einteresting folks\\u003c\/strong\\u003e from the community\",\"tag\":\"td\"},{\"content\":\"To be able to focus on the important things of life\",\"tag\":\"td\"}]}],\"foot\":[]} -->\n<figure class=\"wp-block-table alignwide has-fixed-layout\"><table class=\"has-fixed-layout\"><tbody><tr><td><strong>What I like<\/strong><\/td><td>Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f<\/td><td>Riding my bike in the mountain<\/td><\/tr><tr><td><strong>What I have<\/strong><\/td><td>Not much, just enough to <a href=\"https:\/\/keepmegoing.com\">keep me going on<\/a><\/td><td>A <mark style=\"background-color:rgba(0, 0, 0, 0);color:#c22a2a\" class=\"has-inline-color\">balcony with plants<\/mark><\/td><\/tr><tr><td><strong>What I desire<\/strong><\/td><td>Attending <strong>conferences<\/strong> and meeting plenty of <strong>interesting folks<\/strong> from the community<\/td><td>To be able to focus on the important things of life<\/td><\/tr><\/tbody><\/table><figcaption class=\"wp-element-caption\">Some items to consider for new year's resolution?<\/figcaption><\/figure>\n<!-- \/wp:table -->",
+                    "contentSource": "<!-- wp:table {\"align\":\"wide\",\"className\":\"has-fixed-layout\",\"hasFixedLayout\":true,\"caption\":\"Some items to consider for new year's resolution?\",\"head\":[{\"cells\":[{\"content\":\"Category\",\"tag\":\"th\"},{\"content\":\"First option\",\"tag\":\"th\"},{\"content\":\"Second option\",\"tag\":\"th\"}]}],\"body\":[{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I like\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f\",\"tag\":\"td\"},{\"content\":\"Riding my bike in the mountain\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I have\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Not much, just enough to \\u003ca href=\\u0022https:\/\/keepmegoing.com\\u0022\\u003ekeep me going on\\u003c\/a\\u003e\",\"tag\":\"td\"},{\"content\":\"A \\u003cmark style=\\u0022background-color:rgba(0, 0, 0, 0);color:#c22a2a\\u0022 class=\\u0022has-inline-color\\u0022\\u003ebalcony with plants\\u003c\/mark\\u003e\",\"tag\":\"td\"}]},{\"cells\":[{\"content\":\"\\u003cstrong\\u003eWhat I desire\\u003c\/strong\\u003e\",\"tag\":\"td\"},{\"content\":\"Attending \\u003cstrong\\u003econferences\\u003c\/strong\\u003e and meeting plenty of \\u003cstrong\\u003einteresting folks\\u003c\/strong\\u003e from the community\",\"tag\":\"td\"},{\"content\":\"To be able to focus on the important things of life\",\"tag\":\"td\"}]}],\"foot\":[{\"cells\":[{\"content\":\"Summary\",\"tag\":\"td\"},{\"content\":\"Everyday joys\",\"tag\":\"td\"},{\"content\":\"Weekend plans\",\"tag\":\"td\"}]}]} -->\n<figure class=\"wp-block-table alignwide has-fixed-layout\"><table class=\"has-fixed-layout\"><thead><tr><th>Category<\/th><th>First option<\/th><th>Second option<\/th><\/tr><\/thead><tbody><tr><td><strong>What I like<\/strong><\/td><td>Petting my 3 cats \ud83d\ude3a\ud83d\ude3a\ud83d\ude3a in the morning \u2600\ufe0f<\/td><td>Riding my bike in the mountain<\/td><\/tr><tr><td><strong>What I have<\/strong><\/td><td>Not much, just enough to <a href=\"https:\/\/keepmegoing.com\">keep me going on<\/a><\/td><td>A <mark style=\"background-color:rgba(0, 0, 0, 0);color:#c22a2a\" class=\"has-inline-color\">balcony with plants<\/mark><\/td><\/tr><tr><td><strong>What I desire<\/strong><\/td><td>Attending <strong>conferences<\/strong> and meeting plenty of <strong>interesting folks<\/strong> from the community<\/td><td>To be able to focus on the important things of life<\/td><\/tr><\/tbody><tfoot><tr><td>Summary<\/td><td>Everyday joys<\/td><td>Weekend plans<\/td><\/tr><\/tfoot><\/table><figcaption class=\"wp-element-caption\">Some items to consider for new year's resolution?<\/figcaption><\/figure>\n<!-- \/wp:table -->",
                     "innerBlocks": null
                 },
                 {
@@ -11073,7 +11209,24 @@
                         "className": "has-fixed-layout",
                         "hasFixedLayout": true,
                         "caption": "Some items to consider for new year's resolution?",
-                        "head": [],
+                        "head": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Category",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "First option",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "Second option",
+                                        "tag": "th"
+                                    }
+                                ]
+                            }
+                        ],
                         "body": [
                             {
                                 "cells": [
@@ -11124,7 +11277,24 @@
                                 ]
                             }
                         ],
-                        "foot": []
+                        "foot": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Summary",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Everyday joys",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Weekend plans",
+                                        "tag": "td"
+                                    }
+                                ]
+                            }
+                        ]
                     }
                 },
                 {
@@ -12052,7 +12222,24 @@
                         "className": "has-fixed-layout",
                         "hasFixedLayout": true,
                         "caption": "Some items to consider for new year's resolution?",
-                        "head": [],
+                        "head": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Category",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "First option",
+                                        "tag": "th"
+                                    },
+                                    {
+                                        "content": "Second option",
+                                        "tag": "th"
+                                    }
+                                ]
+                            }
+                        ],
                         "body": [
                             {
                                 "cells": [
@@ -12103,7 +12290,24 @@
                                 ]
                             }
                         ],
-                        "foot": []
+                        "foot": [
+                            {
+                                "cells": [
+                                    {
+                                        "content": "Summary",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Everyday joys",
+                                        "tag": "td"
+                                    },
+                                    {
+                                        "content": "Weekend plans",
+                                        "tag": "td"
+                                    }
+                                ]
+                            }
+                        ]
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null

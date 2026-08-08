@@ -59,9 +59,17 @@ query InitializeEmptyVariables {
     @export(as: "coreTableCaptionReplacementsFrom")
     @export(as: "coreTableCaptionReplacementsTo")
 
+    @export(as: "coreTableHeadCellsContentItems")
+    @export(as: "coreTableHeadCellsContentReplacementsFrom")
+    @export(as: "coreTableHeadCellsContentReplacementsTo")
+
     @export(as: "coreTableBodyCellsContentItems")
     @export(as: "coreTableBodyCellsContentReplacementsFrom")
     @export(as: "coreTableBodyCellsContentReplacementsTo")
+
+    @export(as: "coreTableFootCellsContentItems")
+    @export(as: "coreTableFootCellsContentReplacementsFrom")
+    @export(as: "coreTableFootCellsContentReplacementsTo")
 
     @export(as: "coreListItemContentItems")
     @export(as: "coreListItemContentReplacementsFrom")
@@ -192,7 +200,7 @@ query FetchData($postID: ID!)
       @underEachArrayItem
         @underJSONObjectProperty(
           by: { key: "attributes" }
-          affectDirectivesUnderPos: [1, 3]
+          affectDirectivesUnderPos: [1, 3, 9, 15]
         )
           @underJSONObjectProperty(
             by: { key: "caption" }
@@ -202,6 +210,22 @@ query FetchData($postID: ID!)
               as: "coreTableCaptionItems"
             )
     
+          @underJSONObjectProperty(
+            by: { key: "head" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @underEachArrayItem
+              @underJSONObjectProperty(
+                by: { key: "cells" }
+              )
+                @underEachArrayItem
+                  @underJSONObjectProperty(
+                    by: { key: "content" }
+                  )
+                    @export(
+                      as: "coreTableHeadCellsContentItems"
+                    )
+
           @underJSONObjectProperty(
             by: { key: "body" }
             failIfNonExistingKeyOrPath: false
@@ -216,6 +240,22 @@ query FetchData($postID: ID!)
                   )
                     @export(
                       as: "coreTableBodyCellsContentItems"
+                    )
+
+          @underJSONObjectProperty(
+            by: { key: "foot" }
+            failIfNonExistingKeyOrPath: false
+          )
+            @underEachArrayItem
+              @underJSONObjectProperty(
+                by: { key: "cells" }
+              )
+                @underEachArrayItem
+                  @underJSONObjectProperty(
+                    by: { key: "content" }
+                  )
+                    @export(
+                      as: "coreTableFootCellsContentItems"
                     )
 
     
@@ -396,9 +436,17 @@ query TransformData(
       from: $coreTableCaptionItems,
       to: $coreTableCaptionItems,
     },
+    coreTableHeadCellsContent: {
+      from: $coreTableHeadCellsContentItems,
+      to: $coreTableHeadCellsContentItems,
+    },
     coreTableBodyCellsContent: {
       from: $coreTableBodyCellsContentItems,
       to: $coreTableBodyCellsContentItems,
+    },
+    coreTableFootCellsContent: {
+      from: $coreTableFootCellsContentItems,
+      to: $coreTableFootCellsContentItems,
     },
     coreListItemContent: {
       from: $coreListItemContentItems,
@@ -675,6 +723,35 @@ query CreateRegexReplacements
   
   
     @underJSONObjectProperty(
+      by: { key: "coreTableHeadCellsContent" }
+      affectDirectivesUnderPos: [1, 5]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 3],
+      )
+        @underEachArrayItem(
+          passValueOnwardsAs: "value"
+        )
+          @applyField(
+            name: "_sprintf",
+            arguments: {
+              string: "#(<!-- wp:table .*?-->\\n?.*<thead ?.*?>.*)%s(.*</thead>.*\\n?<!-- /wp:table -->)#",
+              values: [$value]
+            },
+            setResultInResponse: true
+          )
+        @export(
+          as: "coreTableHeadCellsContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreTableHeadCellsContentReplacementsTo",
+        )
+
+    @underJSONObjectProperty(
       by: { key: "coreTableBodyCellsContent" }
       affectDirectivesUnderPos: [1, 5]
     )
@@ -688,7 +765,7 @@ query CreateRegexReplacements
           @applyField(
             name: "_sprintf",
             arguments: {
-              string: "#(<!-- wp:table .*?-->\\n?.*<table ?.*?>.*)%s(.*</table>.*\\n?<!-- /wp:table -->)#",
+              string: "#(<!-- wp:table .*?-->\\n?.*<tbody ?.*?>.*)%s(.*</tbody>.*\\n?<!-- /wp:table -->)#",
               values: [$value]
             },
             setResultInResponse: true
@@ -701,6 +778,35 @@ query CreateRegexReplacements
       )
         @export(
           as: "coreTableBodyCellsContentReplacementsTo",
+        )
+
+    @underJSONObjectProperty(
+      by: { key: "coreTableFootCellsContent" }
+      affectDirectivesUnderPos: [1, 5]
+    )
+      @underJSONObjectProperty(
+        by: { key: "from" }
+        affectDirectivesUnderPos: [1, 3],
+      )
+        @underEachArrayItem(
+          passValueOnwardsAs: "value"
+        )
+          @applyField(
+            name: "_sprintf",
+            arguments: {
+              string: "#(<!-- wp:table .*?-->\\n?.*<tfoot ?.*?>.*)%s(.*</tfoot>.*\\n?<!-- /wp:table -->)#",
+              values: [$value]
+            },
+            setResultInResponse: true
+          )
+        @export(
+          as: "coreTableFootCellsContentReplacementsFrom",
+        )
+      @underJSONObjectProperty(
+        by: { key: "to" }
+      )
+        @export(
+          as: "coreTableFootCellsContentReplacementsTo",
         )
 
 
@@ -1070,8 +1176,22 @@ query ExecuteRegexReplacements
     )
     @strRegexReplaceMultiple(
       limit: 1,
+      searchRegex: $coreTableHeadCellsContentReplacementsFrom,
+      replaceWith: $coreTableHeadCellsContentReplacementsTo
+    )
+
+
+    @strRegexReplaceMultiple(
+      limit: 1,
       searchRegex: $coreTableBodyCellsContentReplacementsFrom,
       replaceWith: $coreTableBodyCellsContentReplacementsTo
+    )
+
+
+    @strRegexReplaceMultiple(
+      limit: 1,
+      searchRegex: $coreTableFootCellsContentReplacementsFrom,
+      replaceWith: $coreTableFootCellsContentReplacementsTo
     )
     @strRegexReplaceMultiple(
       limit: 1,
