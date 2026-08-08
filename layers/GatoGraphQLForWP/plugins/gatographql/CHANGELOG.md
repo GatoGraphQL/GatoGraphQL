@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
 - Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches (#3374)
+- The tutorials on translating block content to a different language now also translate the header and footer cells of a `core/table` block, which the query extracted for the body rows and the caption only (#3375)
 
 ### Fixed
 
