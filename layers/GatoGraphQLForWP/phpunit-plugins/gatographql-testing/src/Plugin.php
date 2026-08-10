@@ -844,7 +844,9 @@ class Plugin
                 'columns' => '1',
                 'size' => 'medium',
                 'class' => '',
-                'orderby' => '',
+                'note' => '',
+                'credit' => '',
+                'strapline' => '',
                 'url' => '',
                 'title' => '',
                 'subtitle' => '',
@@ -862,6 +864,9 @@ class Plugin
         $columns = (string) $atts['columns'];
         $size = (string) $atts['size'];
         $class = (string) $atts['class'];
+        $note = (string) $atts['note'];
+        $credit = (string) $atts['credit'];
+        $strapline = (string) $atts['strapline'];
         $url = (string) $atts['url'];
         $title = (string) $atts['title'];
         $subtitle = (string) $atts['subtitle'];
@@ -871,7 +876,7 @@ class Plugin
         $buttonText = (string) $atts['button_text'];
         $tooltip = (string) $atts['tooltip'];
 
-        $imageURL = $id !== '' ? wp_get_attachment_image_url((int) $id, 'medium') : false;
+        $imageURL = $id !== '' ? wp_get_attachment_image_url((int) $id, $size !== '' ? $size : 'medium') : false;
 
         $parts = [
             $title !== ''
@@ -879,6 +884,9 @@ class Plugin
                 : '',
             $subtitle !== ''
                 ? sprintf('<p class="gato-photo-card__subtitle">%s</p>', esc_html($subtitle))
+                : '',
+            $strapline !== ''
+                ? sprintf('<p class="gato-photo-card__strapline">%s</p>', esc_html($strapline))
                 : '',
             $imageURL !== false
                 ? sprintf(
@@ -896,6 +904,12 @@ class Plugin
             $content !== null && $content !== ''
                 ? sprintf('<div class="gato-photo-card__body">%s</div>', wp_kses_post(do_shortcode($content)))
                 : '',
+            $note !== ''
+                ? sprintf('<p class="gato-photo-card__note">%s</p>', esc_html($note))
+                : '',
+            $credit !== ''
+                ? sprintf('<p class="gato-photo-card__credit">%s</p>', esc_html($credit))
+                : '',
             $buttonText !== ''
                 ? sprintf(
                     '<a class="gato-photo-card__button" href="%s">%s</a>',
@@ -906,8 +920,8 @@ class Plugin
         ];
 
         return sprintf(
-            '<figure class="gato-photo-card gato-photo-card--cols-%s" title="%s">%s</figure>',
-            esc_attr($columns),
+            '<figure class="%s" title="%s">%s</figure>',
+            esc_attr(trim('gato-photo-card gato-photo-card--cols-' . $columns . ' ' . $class)),
             esc_attr($tooltip),
             implode('', $parts)
         );

@@ -2074,7 +2074,7 @@ Here are the pictures: [caption id="attachment_31" align="alignright" width="300
 <!-- /wp:shortcode -->
 
 <!-- wp:shortcode -->
-[gato_photo_card id="32" columns="2" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
+[gato_photo_card id="32" columns="2" size="medium" class="is-rounded" note="Hello there my friend, this sentence is not translated" credit="Neither is this one, because its attribute name is not on the list" strapline="This one is translated, because a filter added its name to the list" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
 <!-- /wp:shortcode -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
