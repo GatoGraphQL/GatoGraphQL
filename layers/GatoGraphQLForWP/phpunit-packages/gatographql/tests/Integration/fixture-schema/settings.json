@@ -168,6 +168,15 @@
             }
         ],
         "nonExistingObjects": null,
+        "valueWithQuotes": "It's a \"quoted\" value",
+        "arrayWithQuotes": [
+            "It's the first",
+            "She said \"the second\""
+        ],
+        "objectWithQuotes": {
+            "label": "It's an object",
+            "quote": "She said \"hello\""
+        },
         "isGutenbergEditorEnabled": true,
         "isGutenbergEditorEnabledForPost": true,
         "isGutenbergEditorEnabledForDummyCPT": true

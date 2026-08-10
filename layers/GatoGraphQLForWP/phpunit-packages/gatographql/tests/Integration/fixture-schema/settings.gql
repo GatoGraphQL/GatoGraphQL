@@ -7,6 +7,9 @@
   nonExistingObject: optionObjectValue(name: "nonExisting")
   existingObjects: optionObjectValues(name: "list_of_objects")
   nonExistingObjects: optionObjectValues(name: "nonExisting")
+  valueWithQuotes: optionValue(name: "value_with_quotes")
+  arrayWithQuotes: optionValues(name: "list_of_values_with_quotes")
+  objectWithQuotes: optionObjectValue(name: "object_with_quotes")
   isGutenbergEditorEnabled
   isGutenbergEditorEnabledForPost: useGutenbergEditorWithCustomPostType(customPostType: "post")
   isGutenbergEditorEnabledForDummyCPT: useGutenbergEditorWithCustomPostType(customPostType: "dummy-cpt")
