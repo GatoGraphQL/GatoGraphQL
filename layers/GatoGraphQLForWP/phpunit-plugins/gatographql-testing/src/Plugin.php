@@ -14,10 +14,18 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
 use WP_REST_Response;
 
 use function add_action;
+use function add_shortcode;
 use function delete_option;
+use function do_shortcode;
+use function esc_attr;
+use function esc_html;
+use function esc_url;
 use function flush_rewrite_rules;
 use function get_option;
 use function register_nav_menus;
+use function shortcode_atts;
+use function wp_get_attachment_image_url;
+use function wp_kses_post;
 
 class Plugin
 {
@@ -65,6 +73,7 @@ class Plugin
         add_action('init', $this->registerTestingTaxonomies(...));
         add_action('init', $this->registerRESTFields(...));
         add_action('init', $this->registerTestingPHPOnlyBlocks(...));
+        add_action('init', $this->registerTestingShortcodes(...));
         add_action('after_setup_theme', $this->registerMenuLocations(...));
     }
 
@@ -809,6 +818,93 @@ class Plugin
             \esc_html($user->display_name),
             $bio,
             $email
+        );
+    }
+
+    /**
+     * Register the shortcodes referenced from the `core/shortcode`
+     * blocks in the seed data.
+     */
+    protected function registerTestingShortcodes(): void
+    {
+        add_shortcode('gato_photo_card', $this->renderPhotoCardShortcode(...));
+    }
+
+    /**
+     * A shortcode carrying several text-holding attributes (translatable
+     * by name) alongside structural ones which must survive untouched.
+     *
+     * @param array<string,string>|string $attributes
+     */
+    public function renderPhotoCardShortcode(array|string $attributes, ?string $content = null): string
+    {
+        $atts = shortcode_atts(
+            [
+                'id' => '',
+                'columns' => '1',
+                'url' => '',
+                'title' => '',
+                'subtitle' => '',
+                'caption' => '',
+                'alt' => '',
+                'description' => '',
+                'button_text' => '',
+                'tooltip' => '',
+            ],
+            is_array($attributes) ? $attributes : [],
+            'gato_photo_card'
+        );
+
+        $id = (string) $atts['id'];
+        $columns = (string) $atts['columns'];
+        $url = (string) $atts['url'];
+        $title = (string) $atts['title'];
+        $subtitle = (string) $atts['subtitle'];
+        $caption = (string) $atts['caption'];
+        $alt = (string) $atts['alt'];
+        $description = (string) $atts['description'];
+        $buttonText = (string) $atts['button_text'];
+        $tooltip = (string) $atts['tooltip'];
+
+        $imageURL = $id !== '' ? wp_get_attachment_image_url((int) $id, 'medium') : false;
+
+        $parts = [
+            $title !== ''
+                ? sprintf('<h3 class="gato-photo-card__title">%s</h3>', esc_html($title))
+                : '',
+            $subtitle !== ''
+                ? sprintf('<p class="gato-photo-card__subtitle">%s</p>', esc_html($subtitle))
+                : '',
+            $imageURL !== false
+                ? sprintf(
+                    '<img class="gato-photo-card__image" src="%s" alt="%s">',
+                    esc_url($imageURL),
+                    esc_attr($alt)
+                )
+                : '',
+            $caption !== ''
+                ? sprintf('<figcaption class="gato-photo-card__caption">%s</figcaption>', esc_html($caption))
+                : '',
+            $description !== ''
+                ? sprintf('<p class="gato-photo-card__description">%s</p>', esc_html($description))
+                : '',
+            $content !== null && $content !== ''
+                ? sprintf('<div class="gato-photo-card__body">%s</div>', wp_kses_post(do_shortcode($content)))
+                : '',
+            $buttonText !== ''
+                ? sprintf(
+                    '<a class="gato-photo-card__button" href="%s">%s</a>',
+                    esc_url($url),
+                    esc_html($buttonText)
+                )
+                : '',
+        ];
+
+        return sprintf(
+            '<figure class="gato-photo-card gato-photo-card--cols-%s" title="%s">%s</figure>',
+            esc_attr($columns),
+            esc_attr($tooltip),
+            implode('', $parts)
         );
     }
 }

@@ -2069,6 +2069,10 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 
 <!-- wp:shortcode -->
 Here are the pictures: [caption id="attachment_31" align="alignright" width="300" caption="Our favourite dog picture"]<img src="https://i.pinimg.com/originals/85/a7/f5/85a7f5cee4c93cb3995d1b51e3a0289f.jpg" alt="Sleeping dog" /> The dog resting after lunch[/caption] Enjoy them!
+<!-- /wp:shortcode -->
+
+<!-- wp:shortcode -->
+[gato_photo_card id="32" columns="2" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
 <!-- /wp:shortcode -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>

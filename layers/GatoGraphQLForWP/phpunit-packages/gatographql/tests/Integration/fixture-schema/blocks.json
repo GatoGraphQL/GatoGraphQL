@@ -1419,6 +1419,14 @@
                         },
                         "contentSource": "<!-- wp:shortcode {\"text\":\"Here are the pictures: [caption id=\\u0022attachment_31\\u0022 align=\\u0022alignright\\u0022 width=\\u0022300\\u0022 caption=\\u0022Our favourite dog picture\\u0022]\\u003cimg src=\\u0022https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\\u0022 alt=\\u0022Sleeping dog\\u0022\\u003e The dog resting after lunch[\/caption] Enjoy them!\"} -->\nHere are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\" \/> The dog resting after lunch[\/caption] Enjoy them!\n<!-- \/wp:shortcode -->",
                         "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                        },
+                        "contentSource": "<!-- wp:shortcode {\"text\":\"[gato_photo_card id=\\u002232\\u0022 columns=\\u00222\\u0022 url=\\u0022\/gallery\/cats\\u0022 title=\\u0022Our favourite cat picture\\u0022 subtitle=\\u0022Taken last summer\\u0022 caption=\\u0022The cat resting after lunch\\u0022 alt=\\u0022A ginger cat asleep on a sofa\\u0022 description=\\u0022One of the pictures our readers sent in\\u0022 button_text=\\u0022See the whole album\\u0022 tooltip=\\u0022Opens the full gallery\\u0022]A short note about the photograph.[\/gato_photo_card]\"} -->\n[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]\n<!-- \/wp:shortcode -->",
+                        "innerBlocks": null
                     }
                 ],
                 "blockDataItems": [
@@ -2408,6 +2416,12 @@
                         "name": "core\/shortcode",
                         "attributes": {
                             "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                        }
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
                         }
                     }
                 ],
@@ -3615,6 +3629,14 @@
                         "name": "core\/shortcode",
                         "attributes": {
                             "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -11162,6 +11184,14 @@
                     },
                     "contentSource": "<!-- wp:shortcode {\"text\":\"Here are the pictures: [caption id=\\u0022attachment_31\\u0022 align=\\u0022alignright\\u0022 width=\\u0022300\\u0022 caption=\\u0022Our favourite dog picture\\u0022]\\u003cimg src=\\u0022https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\\u0022 alt=\\u0022Sleeping dog\\u0022\\u003e The dog resting after lunch[\/caption] Enjoy them!\"} -->\nHere are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\" \/> The dog resting after lunch[\/caption] Enjoy them!\n<!-- \/wp:shortcode -->",
                     "innerBlocks": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                    },
+                    "contentSource": "<!-- wp:shortcode {\"text\":\"[gato_photo_card id=\\u002232\\u0022 columns=\\u00222\\u0022 url=\\u0022\/gallery\/cats\\u0022 title=\\u0022Our favourite cat picture\\u0022 subtitle=\\u0022Taken last summer\\u0022 caption=\\u0022The cat resting after lunch\\u0022 alt=\\u0022A ginger cat asleep on a sofa\\u0022 description=\\u0022One of the pictures our readers sent in\\u0022 button_text=\\u0022See the whole album\\u0022 tooltip=\\u0022Opens the full gallery\\u0022]A short note about the photograph.[\/gato_photo_card]\"} -->\n[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]\n<!-- \/wp:shortcode -->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -12151,6 +12181,12 @@
                     "name": "core\/shortcode",
                     "attributes": {
                         "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                    }
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
                     }
                 }
             ],
@@ -13358,6 +13394,14 @@
                     "name": "core\/shortcode",
                     "attributes": {
                         "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
