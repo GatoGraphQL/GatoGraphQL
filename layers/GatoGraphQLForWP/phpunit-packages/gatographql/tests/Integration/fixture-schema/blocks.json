@@ -1379,6 +1379,15 @@
                         ]
                     },
                     {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        },
+                        "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
                         "name": "core\/quote",
                         "attributes": {
                             "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
@@ -2383,6 +2392,13 @@
                                 }
                             }
                         ]
+                    },
+                    {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        }
                     },
                     {
                         "name": "core\/quote",
@@ -3590,6 +3606,15 @@
                         },
                         "parentBlockPosition": 93,
                         "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
                     },
                     {
                         "name": "core\/quote",
@@ -11144,6 +11169,15 @@
                     ]
                 },
                 {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    },
+                    "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
                     "name": "core\/quote",
                     "attributes": {
                         "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
@@ -12148,6 +12182,13 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    }
                 },
                 {
                     "name": "core\/quote",
@@ -13355,6 +13396,15 @@
                     },
                     "parentBlockPosition": 93,
                     "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
                 },
                 {
                     "name": "core\/quote",

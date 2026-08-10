@@ -842,6 +842,9 @@ class Plugin
             [
                 'id' => '',
                 'columns' => '1',
+                'size' => 'medium',
+                'class' => '',
+                'orderby' => '',
                 'url' => '',
                 'title' => '',
                 'subtitle' => '',
@@ -857,6 +860,8 @@ class Plugin
 
         $id = (string) $atts['id'];
         $columns = (string) $atts['columns'];
+        $size = (string) $atts['size'];
+        $class = (string) $atts['class'];
         $url = (string) $atts['url'];
         $title = (string) $atts['title'];
         $subtitle = (string) $atts['subtitle'];

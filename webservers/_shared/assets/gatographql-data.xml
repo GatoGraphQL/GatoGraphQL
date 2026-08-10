@@ -2055,6 +2055,8 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
+<!-- wp:icon {"icon":"core/audio","ariaLabel":"An icon representing audio content"} /-->
+
 <!-- wp:quote -->
 <blockquote class="wp-block-quote"><p>A quote stored the legacy way, with its text inside the blockquote.</p><cite>An older citation</cite></blockquote>
 <!-- /wp:quote -->
@@ -2072,7 +2074,7 @@ Here are the pictures: [caption id="attachment_31" align="alignright" width="300
 <!-- /wp:shortcode -->
 
 <!-- wp:shortcode -->
-[gato_photo_card id="32" columns="2" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
+[gato_photo_card id="32" columns="2" size="medium" class="is-rounded" orderby="date" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
 <!-- /wp:shortcode -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
@@ -2642,10 +2644,10 @@ Here are the pictures: [caption id="attachment_31" align="alignright" width="300
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>This <code>core/query</code> uses <code>taxQuery</code> to filter by categories [2, 3] AND tags [9, 11, 13]. <strong>Note:</strong> <code>taxQuery</code> has a per-taxonomy nested shape (<code>{category: [...], post_tag: [...]}</code>) that doesn't fit the current "attribute path → IDs" map — it's intentionally excluded from <code>BlockTypeAttributeValues</code>. Included here as a fixture for the tag IDs and so future work can decide how to extract it.</p>
+<p>This <code>core/query</code> uses <code>taxQuery</code> to include categories [2, 3] and tags [9, 11, 13], and to exclude categories [4, 6] and tags [14, 17]. The two halves reference different terms on purpose: <code>taxQuery</code> nests its IDs per taxonomy under <code>include</code> and <code>exclude</code>, so a fixture reusing the same IDs on both sides could not tell a rewrite of the wrong half from a correct one. The custom taxonomies alongside them (<code>additional-post-category</code>, <code>additional-post-tag</code>) stay untouched, since only <code>category</code> and <code>post_tag</code> are mapped.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
+<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"category":[4,6],"post_tag":[14,17],"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
 <div class="wp-block-query"><!-- wp:post-template -->
 <!-- wp:post-title {"isLink":true} /-->
 
