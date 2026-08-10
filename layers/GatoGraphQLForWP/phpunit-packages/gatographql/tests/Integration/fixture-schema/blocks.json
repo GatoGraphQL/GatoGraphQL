@@ -313,9 +313,10 @@
                             "align": "wide",
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
-                            "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                            "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                            "title": "The dog stuck in the fence"
                         },
-                        "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                        "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                         "innerBlocks": null
                     },
                     {
@@ -569,9 +570,10 @@
                             "tagName": "a",
                             "type": "button",
                             "url": "https:\/\/duckduckgo.com\/",
+                            "title": "Opens the DuckDuckGo search engine",
                             "text": "Do some duck duck search online"
                         },
-                        "contentSource": "<!-- wp:button {\"className\":\"is-style-outline\",\"tagName\":\"a\",\"type\":\"button\",\"url\":\"https:\/\/duckduckgo.com\/\",\"text\":\"Do some duck duck search online\"} -->\n<div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link wp-element-button\" href=\"https:\/\/duckduckgo.com\/\">Do some duck duck search online<\/a><\/div>\n<!-- \/wp:button -->",
+                        "contentSource": "<!-- wp:button {\"className\":\"is-style-outline\",\"tagName\":\"a\",\"type\":\"button\",\"url\":\"https:\/\/duckduckgo.com\/\",\"title\":\"Opens the DuckDuckGo search engine\",\"text\":\"Do some duck duck search online\"} -->\n<div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link wp-element-button\" href=\"https:\/\/duckduckgo.com\/\" title=\"Opens the DuckDuckGo search engine\">Do some duck duck search online<\/a><\/div>\n<!-- \/wp:button -->",
                         "innerBlocks": null
                     },
                     {
@@ -595,6 +597,7 @@
                             "ids": [],
                             "navigationButtonType": "icon",
                             "shortCodeTransforms": [],
+                            "caption": "Two dogs asking for chips",
                             "imageCrop": true,
                             "randomOrder": false,
                             "fixedHeight": true,
@@ -602,7 +605,7 @@
                             "allowResize": false,
                             "aspectRatio": "auto"
                         },
-                        "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><\/figure>\n<!-- \/wp:gallery -->",
+                        "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/image",
@@ -738,13 +741,20 @@
                         "name": "core\/video",
                         "attributes": {
                             "id": 132,
+                            "tracks": [
+                                {
+                                    "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                    "kind": "subtitles",
+                                    "srcLang": "en",
+                                    "label": "English subtitles"
+                                }
+                            ],
                             "caption": "Test video of a road in a city",
                             "controls": "",
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                            "tracks": []
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                         },
-                        "contentSource": "<!-- wp:video {\"id\":132,\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                        "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                         "innerBlocks": null
                     },
                     {
@@ -1024,12 +1034,13 @@
                     {
                         "name": "core\/accordion",
                         "attributes": {
+                            "ariaLabel": "Frequently asked questions",
                             "iconPosition": "right",
                             "showIcon": true,
                             "autoclose": false,
                             "headingLevel": 3
                         },
-                        "contentSource": "<!-- wp:accordion {\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
+                        "contentSource": "<!-- wp:accordion {\"ariaLabel\":\"Frequently asked questions\",\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" aria-label=\"Frequently asked questions\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/accordion-item",
@@ -1112,6 +1123,7 @@
                     {
                         "name": "core\/navigation",
                         "attributes": {
+                            "ariaLabel": "Main site navigation",
                             "showSubmenuIcon": true,
                             "submenuVisibility": "hover",
                             "overlayMenu": "mobile",
@@ -1119,7 +1131,7 @@
                             "hasIcon": true,
                             "maxNestingLevel": 5
                         },
-                        "contentSource": "<!-- wp:navigation {\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                        "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/home-link",
@@ -1320,6 +1332,110 @@
                                 "innerBlocks": null
                             }
                         ]
+                    },
+                    {
+                        "name": "core\/file",
+                        "attributes": {
+                            "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "fileId": "wp-block-file--media-1140",
+                            "fileName": "The Gato GraphQL logo",
+                            "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "showDownloadButton": true,
+                            "downloadButtonText": "Download the logo",
+                            "previewHeight": 600
+                        },
+                        "contentSource": "<!-- wp:file {\"href\":\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\",\"fileId\":\"wp-block-file\\u002d\\u002dmedia-1140\",\"fileName\":\"The Gato GraphQL logo\",\"textLinkHref\":\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\",\"showDownloadButton\":true,\"downloadButtonText\":\"Download the logo\",\"previewHeight\":600} -->\n<div class=\"wp-block-file\"><a id=\"wp-block-file--media-1140\" href=\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\">The Gato GraphQL logo<\/a><a href=\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\" class=\"wp-block-file__button wp-element-button\" download aria-describedby=\"wp-block-file--media-1140\">Download the logo<\/a><\/div>\n<!-- \/wp:file -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/more",
+                        "attributes": {
+                            "customText": "Keep reading this story",
+                            "noTeaser": false
+                        },
+                        "contentSource": "<!-- wp:more {\"customText\":\"Keep reading this story\",\"noTeaser\":false} -->\n<!--more Keep reading this story-->\n<!-- \/wp:more -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "ariaLabel": "Highlighted notes",
+                            "layout": {
+                                "type": "constrained"
+                            },
+                            "tagName": "div"
+                        },
+                        "contentSource": "<!-- wp:group {\"ariaLabel\":\"Highlighted notes\",\"layout\":{\"type\":\"constrained\"},\"tagName\":\"div\"} -->\n<div class=\"wp-block-group\" aria-label=\"Highlighted notes\"><!-- wp:paragraph {\"content\":\"A note worth highlighting.\",\"dropCap\":false} -->\n<p>A note worth highlighting.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:group -->",
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "A note worth highlighting.",
+                                    "dropCap": false
+                                },
+                                "contentSource": "<!-- wp:paragraph {\"content\":\"A note worth highlighting.\",\"dropCap\":false} -->\n<p>A note worth highlighting.<\/p>\n<!-- \/wp:paragraph -->",
+                                "innerBlocks": null
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        },
+                        "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/quote",
+                        "attributes": {
+                            "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                            "citation": "An older citation"
+                        },
+                        "contentSource": "<!-- wp:quote {\"value\":\"\\u003cp\\u003eA quote stored the legacy way, with its text inside the blockquote.\\u003c\/p\\u003e\",\"citation\":\"An older citation\"} -->\n<blockquote class=\"wp-block-quote\"><p>A quote stored the legacy way, with its text inside the blockquote.<\/p><cite>An older citation<\/cite><\/blockquote>\n<!-- \/wp:quote -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/text-columns",
+                        "attributes": {
+                            "className": "has-2-columns",
+                            "content": [
+                                {
+                                    "children": "The left column of text."
+                                },
+                                {
+                                    "children": "The right column of text."
+                                }
+                            ],
+                            "columns": 2
+                        },
+                        "contentSource": "<!-- wp:text-columns {\"className\":\"has-2-columns\",\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}],\"columns\":2} -->\n<div class=\"wp-block-text-columns alignundefined columns-2 has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/code",
+                        "attributes": {
+                            "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                        },
+                        "contentSource": "<!-- wp:code {\"content\":\"$greeting = \\u0022Good morning\\u0022; \/\/ greet the visitor\"} -->\n<pre class=\"wp-block-code\"><code>$greeting = \"Good morning\"; \/\/ greet the visitor<\/code><\/pre>\n<!-- \/wp:code -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                        },
+                        "contentSource": "<!-- wp:shortcode {\"text\":\"Here are the pictures: [caption id=\\u0022attachment_31\\u0022 align=\\u0022alignright\\u0022 width=\\u0022300\\u0022 caption=\\u0022Our favourite dog picture\\u0022]\\u003cimg src=\\u0022https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\\u0022 alt=\\u0022Sleeping dog\\u0022\\u003e The dog resting after lunch[\/caption] Enjoy them!\"} -->\nHere are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\" \/> The dog resting after lunch[\/caption] Enjoy them!\n<!-- \/wp:shortcode -->",
+                        "innerBlocks": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                        },
+                        "contentSource": "<!-- wp:shortcode {\"text\":\"[gato_photo_card id=\\u002232\\u0022 columns=\\u00222\\u0022 size=\\u0022medium\\u0022 class=\\u0022is-rounded\\u0022 note=\\u0022Hello there my friend, this sentence is not translated\\u0022 credit=\\u0022Neither is this one, because its attribute name is not on the list\\u0022 strapline=\\u0022This one is translated, because a filter added its name to the list\\u0022 url=\\u0022\/gallery\/cats\\u0022 title=\\u0022Our favourite cat picture\\u0022 subtitle=\\u0022Taken last summer\\u0022 caption=\\u0022The cat resting after lunch\\u0022 alt=\\u0022A ginger cat asleep on a sofa\\u0022 description=\\u0022One of the pictures our readers sent in\\u0022 button_text=\\u0022See the whole album\\u0022 tooltip=\\u0022Opens the full gallery\\u0022]A short note about the photograph.[\/gato_photo_card]\"} -->\n[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]\n<!-- \/wp:shortcode -->",
+                        "innerBlocks": null
                     }
                 ],
                 "blockDataItems": [
@@ -1365,7 +1481,8 @@
                             "align": "wide",
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
-                            "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                            "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                            "title": "The dog stuck in the fence"
                         }
                     },
                     {
@@ -1577,6 +1694,7 @@
                             "tagName": "a",
                             "type": "button",
                             "url": "https:\/\/duckduckgo.com\/",
+                            "title": "Opens the DuckDuckGo search engine",
                             "text": "Do some duck duck search online"
                         }
                     },
@@ -1599,6 +1717,7 @@
                             "ids": [],
                             "navigationButtonType": "icon",
                             "shortCodeTransforms": [],
+                            "caption": "Two dogs asking for chips",
                             "imageCrop": true,
                             "randomOrder": false,
                             "fixedHeight": true,
@@ -1723,11 +1842,18 @@
                         "name": "core\/video",
                         "attributes": {
                             "id": 132,
+                            "tracks": [
+                                {
+                                    "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                    "kind": "subtitles",
+                                    "srcLang": "en",
+                                    "label": "English subtitles"
+                                }
+                            ],
                             "caption": "Test video of a road in a city",
                             "controls": "",
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                            "tracks": []
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                         }
                     },
                     {
@@ -1974,6 +2100,7 @@
                     {
                         "name": "core\/accordion",
                         "attributes": {
+                            "ariaLabel": "Frequently asked questions",
                             "iconPosition": "right",
                             "showIcon": true,
                             "autoclose": false,
@@ -2049,6 +2176,7 @@
                     {
                         "name": "core\/navigation",
                         "attributes": {
+                            "ariaLabel": "Main site navigation",
                             "showSubmenuIcon": true,
                             "submenuVisibility": "hover",
                             "overlayMenu": "mobile",
@@ -2226,6 +2354,91 @@
                                 }
                             }
                         ]
+                    },
+                    {
+                        "name": "core\/file",
+                        "attributes": {
+                            "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "fileId": "wp-block-file--media-1140",
+                            "fileName": "The Gato GraphQL logo",
+                            "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "showDownloadButton": true,
+                            "downloadButtonText": "Download the logo",
+                            "previewHeight": 600
+                        }
+                    },
+                    {
+                        "name": "core\/more",
+                        "attributes": {
+                            "customText": "Keep reading this story",
+                            "noTeaser": false
+                        }
+                    },
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "ariaLabel": "Highlighted notes",
+                            "layout": {
+                                "type": "constrained"
+                            },
+                            "tagName": "div"
+                        },
+                        "innerBlocks": [
+                            {
+                                "name": "core\/paragraph",
+                                "attributes": {
+                                    "content": "A note worth highlighting.",
+                                    "dropCap": false
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        }
+                    },
+                    {
+                        "name": "core\/quote",
+                        "attributes": {
+                            "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                            "citation": "An older citation"
+                        }
+                    },
+                    {
+                        "name": "core\/text-columns",
+                        "attributes": {
+                            "className": "has-2-columns",
+                            "content": [
+                                {
+                                    "children": "The left column of text."
+                                },
+                                {
+                                    "children": "The right column of text."
+                                }
+                            ],
+                            "columns": 2
+                        }
+                    },
+                    {
+                        "name": "core\/code",
+                        "attributes": {
+                            "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                        }
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                        }
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                        }
                     }
                 ],
                 "blockFlattenedDataItems": [
@@ -2279,7 +2492,8 @@
                             "align": "wide",
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
-                            "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                            "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                            "title": "The dog stuck in the fence"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2555,6 +2769,7 @@
                             "tagName": "a",
                             "type": "button",
                             "url": "https:\/\/duckduckgo.com\/",
+                            "title": "Opens the DuckDuckGo search engine",
                             "text": "Do some duck duck search online"
                         },
                         "innerBlockPositions": null,
@@ -2581,6 +2796,7 @@
                             "ids": [],
                             "navigationButtonType": "icon",
                             "shortCodeTransforms": [],
+                            "caption": "Two dogs asking for chips",
                             "imageCrop": true,
                             "randomOrder": false,
                             "fixedHeight": true,
@@ -2730,11 +2946,18 @@
                         "name": "core\/video",
                         "attributes": {
                             "id": 132,
+                            "tracks": [
+                                {
+                                    "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                    "kind": "subtitles",
+                                    "srcLang": "en",
+                                    "label": "English subtitles"
+                                }
+                            ],
                             "caption": "Test video of a road in a city",
                             "controls": "",
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                            "tracks": []
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -3017,6 +3240,7 @@
                     {
                         "name": "core\/accordion",
                         "attributes": {
+                            "ariaLabel": "Frequently asked questions",
                             "iconPosition": "right",
                             "showIcon": true,
                             "autoclose": false,
@@ -3113,6 +3337,7 @@
                     {
                         "name": "core\/navigation",
                         "attributes": {
+                            "ariaLabel": "Main site navigation",
                             "showSubmenuIcon": true,
                             "submenuVisibility": "hover",
                             "overlayMenu": "mobile",
@@ -3335,6 +3560,111 @@
                         },
                         "parentBlockPosition": 89,
                         "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/file",
+                        "attributes": {
+                            "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "fileId": "wp-block-file--media-1140",
+                            "fileName": "The Gato GraphQL logo",
+                            "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                            "showDownloadButton": true,
+                            "downloadButtonText": "Download the logo",
+                            "previewHeight": 600
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/more",
+                        "attributes": {
+                            "customText": "Keep reading this story",
+                            "noTeaser": false
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/group",
+                        "attributes": {
+                            "ariaLabel": "Highlighted notes",
+                            "layout": {
+                                "type": "constrained"
+                            },
+                            "tagName": "div"
+                        },
+                        "innerBlockPositions": [
+                            94
+                        ],
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/paragraph",
+                        "attributes": {
+                            "content": "A note worth highlighting.",
+                            "dropCap": false
+                        },
+                        "parentBlockPosition": 93,
+                        "innerBlockPositions": null
+                    },
+                    {
+                        "name": "core\/icon",
+                        "attributes": {
+                            "icon": "core\/audio",
+                            "ariaLabel": "An icon representing audio content"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/quote",
+                        "attributes": {
+                            "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                            "citation": "An older citation"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/text-columns",
+                        "attributes": {
+                            "className": "has-2-columns",
+                            "content": [
+                                {
+                                    "children": "The left column of text."
+                                },
+                                {
+                                    "children": "The right column of text."
+                                }
+                            ],
+                            "columns": 2
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/code",
+                        "attributes": {
+                            "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
+                    },
+                    {
+                        "name": "core\/shortcode",
+                        "attributes": {
+                            "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                        },
+                        "innerBlockPositions": null,
+                        "parentBlockPosition": null
                     }
                 ]
             },
@@ -9773,9 +10103,10 @@
                         "align": "wide",
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
-                        "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                        "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                        "title": "The dog stuck in the fence"
                     },
-                    "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                    "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                     "innerBlocks": null
                 },
                 {
@@ -10029,9 +10360,10 @@
                         "tagName": "a",
                         "type": "button",
                         "url": "https:\/\/duckduckgo.com\/",
+                        "title": "Opens the DuckDuckGo search engine",
                         "text": "Do some duck duck search online"
                     },
-                    "contentSource": "<!-- wp:button {\"className\":\"is-style-outline\",\"tagName\":\"a\",\"type\":\"button\",\"url\":\"https:\/\/duckduckgo.com\/\",\"text\":\"Do some duck duck search online\"} -->\n<div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link wp-element-button\" href=\"https:\/\/duckduckgo.com\/\">Do some duck duck search online<\/a><\/div>\n<!-- \/wp:button -->",
+                    "contentSource": "<!-- wp:button {\"className\":\"is-style-outline\",\"tagName\":\"a\",\"type\":\"button\",\"url\":\"https:\/\/duckduckgo.com\/\",\"title\":\"Opens the DuckDuckGo search engine\",\"text\":\"Do some duck duck search online\"} -->\n<div class=\"wp-block-button is-style-outline\"><a class=\"wp-block-button__link wp-element-button\" href=\"https:\/\/duckduckgo.com\/\" title=\"Opens the DuckDuckGo search engine\">Do some duck duck search online<\/a><\/div>\n<!-- \/wp:button -->",
                     "innerBlocks": null
                 },
                 {
@@ -10055,6 +10387,7 @@
                         "ids": [],
                         "navigationButtonType": "icon",
                         "shortCodeTransforms": [],
+                        "caption": "Two dogs asking for chips",
                         "imageCrop": true,
                         "randomOrder": false,
                         "fixedHeight": true,
@@ -10062,7 +10395,7 @@
                         "allowResize": false,
                         "aspectRatio": "auto"
                     },
-                    "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><\/figure>\n<!-- \/wp:gallery -->",
+                    "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
                     "innerBlocks": [
                         {
                             "name": "core\/image",
@@ -10198,13 +10531,20 @@
                     "name": "core\/video",
                     "attributes": {
                         "id": 132,
+                        "tracks": [
+                            {
+                                "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                "kind": "subtitles",
+                                "srcLang": "en",
+                                "label": "English subtitles"
+                            }
+                        ],
                         "caption": "Test video of a road in a city",
                         "controls": "",
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                        "tracks": []
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                     },
-                    "contentSource": "<!-- wp:video {\"id\":132,\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                    "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                     "innerBlocks": null
                 },
                 {
@@ -10484,12 +10824,13 @@
                 {
                     "name": "core\/accordion",
                     "attributes": {
+                        "ariaLabel": "Frequently asked questions",
                         "iconPosition": "right",
                         "showIcon": true,
                         "autoclose": false,
                         "headingLevel": 3
                     },
-                    "contentSource": "<!-- wp:accordion {\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
+                    "contentSource": "<!-- wp:accordion {\"ariaLabel\":\"Frequently asked questions\",\"iconPosition\":\"right\",\"showIcon\":true,\"autoclose\":false,\"headingLevel\":3} -->\n<div role=\"group\" aria-label=\"Frequently asked questions\" class=\"wp-block-accordion\"><!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is the accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is the accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the accordion here.\",\"dropCap\":false} -->\n<p>We are inside the accordion here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item -->\n\n<!-- wp:accordion-item {\"openByDefault\":false} -->\n<div class=\"wp-block-accordion-item\"><!-- wp:accordion-heading {\"openByDefault\":false,\"title\":\"This is another accordion title\",\"iconPosition\":\"right\",\"showIcon\":true} -->\n<h3 class=\"wp-block-accordion-heading\"><button type=\"button\" class=\"wp-block-accordion-heading__toggle\"><span class=\"wp-block-accordion-heading__toggle-title\">This is another accordion title<\/span><span class=\"wp-block-accordion-heading__toggle-icon\" aria-hidden=\"true\">+<\/span><\/button><\/h3>\n<!-- \/wp:accordion-heading -->\n\n<!-- wp:accordion-panel {\"templateLock\":false} -->\n<div role=\"region\" class=\"wp-block-accordion-panel\"><!-- wp:paragraph {\"content\":\"We are inside the second accordion panel here.\",\"dropCap\":false} -->\n<p>We are inside the second accordion panel here.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:accordion-panel --><\/div>\n<!-- \/wp:accordion-item --><\/div>\n<!-- \/wp:accordion -->",
                     "innerBlocks": [
                         {
                             "name": "core\/accordion-item",
@@ -10572,6 +10913,7 @@
                 {
                     "name": "core\/navigation",
                     "attributes": {
+                        "ariaLabel": "Main site navigation",
                         "showSubmenuIcon": true,
                         "submenuVisibility": "hover",
                         "overlayMenu": "mobile",
@@ -10579,7 +10921,7 @@
                         "hasIcon": true,
                         "maxNestingLevel": 5
                     },
-                    "contentSource": "<!-- wp:navigation {\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                    "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
                     "innerBlocks": [
                         {
                             "name": "core\/home-link",
@@ -10780,6 +11122,110 @@
                             "innerBlocks": null
                         }
                     ]
+                },
+                {
+                    "name": "core\/file",
+                    "attributes": {
+                        "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "fileId": "wp-block-file--media-1140",
+                        "fileName": "The Gato GraphQL logo",
+                        "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "showDownloadButton": true,
+                        "downloadButtonText": "Download the logo",
+                        "previewHeight": 600
+                    },
+                    "contentSource": "<!-- wp:file {\"href\":\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\",\"fileId\":\"wp-block-file\\u002d\\u002dmedia-1140\",\"fileName\":\"The Gato GraphQL logo\",\"textLinkHref\":\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\",\"showDownloadButton\":true,\"downloadButtonText\":\"Download the logo\",\"previewHeight\":600} -->\n<div class=\"wp-block-file\"><a id=\"wp-block-file--media-1140\" href=\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\">The Gato GraphQL logo<\/a><a href=\"https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp\" class=\"wp-block-file__button wp-element-button\" download aria-describedby=\"wp-block-file--media-1140\">Download the logo<\/a><\/div>\n<!-- \/wp:file -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/more",
+                    "attributes": {
+                        "customText": "Keep reading this story",
+                        "noTeaser": false
+                    },
+                    "contentSource": "<!-- wp:more {\"customText\":\"Keep reading this story\",\"noTeaser\":false} -->\n<!--more Keep reading this story-->\n<!-- \/wp:more -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/group",
+                    "attributes": {
+                        "ariaLabel": "Highlighted notes",
+                        "layout": {
+                            "type": "constrained"
+                        },
+                        "tagName": "div"
+                    },
+                    "contentSource": "<!-- wp:group {\"ariaLabel\":\"Highlighted notes\",\"layout\":{\"type\":\"constrained\"},\"tagName\":\"div\"} -->\n<div class=\"wp-block-group\" aria-label=\"Highlighted notes\"><!-- wp:paragraph {\"content\":\"A note worth highlighting.\",\"dropCap\":false} -->\n<p>A note worth highlighting.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:group -->",
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "A note worth highlighting.",
+                                "dropCap": false
+                            },
+                            "contentSource": "<!-- wp:paragraph {\"content\":\"A note worth highlighting.\",\"dropCap\":false} -->\n<p>A note worth highlighting.<\/p>\n<!-- \/wp:paragraph -->",
+                            "innerBlocks": null
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    },
+                    "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/quote",
+                    "attributes": {
+                        "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                        "citation": "An older citation"
+                    },
+                    "contentSource": "<!-- wp:quote {\"value\":\"\\u003cp\\u003eA quote stored the legacy way, with its text inside the blockquote.\\u003c\/p\\u003e\",\"citation\":\"An older citation\"} -->\n<blockquote class=\"wp-block-quote\"><p>A quote stored the legacy way, with its text inside the blockquote.<\/p><cite>An older citation<\/cite><\/blockquote>\n<!-- \/wp:quote -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/text-columns",
+                    "attributes": {
+                        "className": "has-2-columns",
+                        "content": [
+                            {
+                                "children": "The left column of text."
+                            },
+                            {
+                                "children": "The right column of text."
+                            }
+                        ],
+                        "columns": 2
+                    },
+                    "contentSource": "<!-- wp:text-columns {\"className\":\"has-2-columns\",\"content\":[{\"children\":\"The left column of text.\"},{\"children\":\"The right column of text.\"}],\"columns\":2} -->\n<div class=\"wp-block-text-columns alignundefined columns-2 has-2-columns\"><div class=\"wp-block-column\"><p>The left column of text.<\/p><\/div><div class=\"wp-block-column\"><p>The right column of text.<\/p><\/div><\/div>\n<!-- \/wp:text-columns -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/code",
+                    "attributes": {
+                        "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                    },
+                    "contentSource": "<!-- wp:code {\"content\":\"$greeting = \\u0022Good morning\\u0022; \/\/ greet the visitor\"} -->\n<pre class=\"wp-block-code\"><code>$greeting = \"Good morning\"; \/\/ greet the visitor<\/code><\/pre>\n<!-- \/wp:code -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                    },
+                    "contentSource": "<!-- wp:shortcode {\"text\":\"Here are the pictures: [caption id=\\u0022attachment_31\\u0022 align=\\u0022alignright\\u0022 width=\\u0022300\\u0022 caption=\\u0022Our favourite dog picture\\u0022]\\u003cimg src=\\u0022https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\\u0022 alt=\\u0022Sleeping dog\\u0022\\u003e The dog resting after lunch[\/caption] Enjoy them!\"} -->\nHere are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\" \/> The dog resting after lunch[\/caption] Enjoy them!\n<!-- \/wp:shortcode -->",
+                    "innerBlocks": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                    },
+                    "contentSource": "<!-- wp:shortcode {\"text\":\"[gato_photo_card id=\\u002232\\u0022 columns=\\u00222\\u0022 size=\\u0022medium\\u0022 class=\\u0022is-rounded\\u0022 note=\\u0022Hello there my friend, this sentence is not translated\\u0022 credit=\\u0022Neither is this one, because its attribute name is not on the list\\u0022 strapline=\\u0022This one is translated, because a filter added its name to the list\\u0022 url=\\u0022\/gallery\/cats\\u0022 title=\\u0022Our favourite cat picture\\u0022 subtitle=\\u0022Taken last summer\\u0022 caption=\\u0022The cat resting after lunch\\u0022 alt=\\u0022A ginger cat asleep on a sofa\\u0022 description=\\u0022One of the pictures our readers sent in\\u0022 button_text=\\u0022See the whole album\\u0022 tooltip=\\u0022Opens the full gallery\\u0022]A short note about the photograph.[\/gato_photo_card]\"} -->\n[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]\n<!-- \/wp:shortcode -->",
+                    "innerBlocks": null
                 }
             ],
             "blockDataItems": [
@@ -10825,7 +11271,8 @@
                         "align": "wide",
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
-                        "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                        "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                        "title": "The dog stuck in the fence"
                     }
                 },
                 {
@@ -11037,6 +11484,7 @@
                         "tagName": "a",
                         "type": "button",
                         "url": "https:\/\/duckduckgo.com\/",
+                        "title": "Opens the DuckDuckGo search engine",
                         "text": "Do some duck duck search online"
                     }
                 },
@@ -11059,6 +11507,7 @@
                         "ids": [],
                         "navigationButtonType": "icon",
                         "shortCodeTransforms": [],
+                        "caption": "Two dogs asking for chips",
                         "imageCrop": true,
                         "randomOrder": false,
                         "fixedHeight": true,
@@ -11183,11 +11632,18 @@
                     "name": "core\/video",
                     "attributes": {
                         "id": 132,
+                        "tracks": [
+                            {
+                                "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                "kind": "subtitles",
+                                "srcLang": "en",
+                                "label": "English subtitles"
+                            }
+                        ],
                         "caption": "Test video of a road in a city",
                         "controls": "",
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                        "tracks": []
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                     }
                 },
                 {
@@ -11434,6 +11890,7 @@
                 {
                     "name": "core\/accordion",
                     "attributes": {
+                        "ariaLabel": "Frequently asked questions",
                         "iconPosition": "right",
                         "showIcon": true,
                         "autoclose": false,
@@ -11509,6 +11966,7 @@
                 {
                     "name": "core\/navigation",
                     "attributes": {
+                        "ariaLabel": "Main site navigation",
                         "showSubmenuIcon": true,
                         "submenuVisibility": "hover",
                         "overlayMenu": "mobile",
@@ -11686,6 +12144,91 @@
                             }
                         }
                     ]
+                },
+                {
+                    "name": "core\/file",
+                    "attributes": {
+                        "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "fileId": "wp-block-file--media-1140",
+                        "fileName": "The Gato GraphQL logo",
+                        "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "showDownloadButton": true,
+                        "downloadButtonText": "Download the logo",
+                        "previewHeight": 600
+                    }
+                },
+                {
+                    "name": "core\/more",
+                    "attributes": {
+                        "customText": "Keep reading this story",
+                        "noTeaser": false
+                    }
+                },
+                {
+                    "name": "core\/group",
+                    "attributes": {
+                        "ariaLabel": "Highlighted notes",
+                        "layout": {
+                            "type": "constrained"
+                        },
+                        "tagName": "div"
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core\/paragraph",
+                            "attributes": {
+                                "content": "A note worth highlighting.",
+                                "dropCap": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    }
+                },
+                {
+                    "name": "core\/quote",
+                    "attributes": {
+                        "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                        "citation": "An older citation"
+                    }
+                },
+                {
+                    "name": "core\/text-columns",
+                    "attributes": {
+                        "className": "has-2-columns",
+                        "content": [
+                            {
+                                "children": "The left column of text."
+                            },
+                            {
+                                "children": "The right column of text."
+                            }
+                        ],
+                        "columns": 2
+                    }
+                },
+                {
+                    "name": "core\/code",
+                    "attributes": {
+                        "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                    }
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                    }
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                    }
                 }
             ],
             "blockFlattenedDataItems": [
@@ -11739,7 +12282,8 @@
                         "align": "wide",
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
-                        "caption": "My owner doesn't give me a hat, so I gotta do a hack"
+                        "caption": "My owner doesn't give me a hat, so I gotta do a hack",
+                        "title": "The dog stuck in the fence"
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12015,6 +12559,7 @@
                         "tagName": "a",
                         "type": "button",
                         "url": "https:\/\/duckduckgo.com\/",
+                        "title": "Opens the DuckDuckGo search engine",
                         "text": "Do some duck duck search online"
                     },
                     "innerBlockPositions": null,
@@ -12041,6 +12586,7 @@
                         "ids": [],
                         "navigationButtonType": "icon",
                         "shortCodeTransforms": [],
+                        "caption": "Two dogs asking for chips",
                         "imageCrop": true,
                         "randomOrder": false,
                         "fixedHeight": true,
@@ -12190,11 +12736,18 @@
                     "name": "core\/video",
                     "attributes": {
                         "id": 132,
+                        "tracks": [
+                            {
+                                "src": "https:\/\/download.samplelib.com\/vtt\/road-en.vtt",
+                                "kind": "subtitles",
+                                "srcLang": "en",
+                                "label": "English subtitles"
+                            }
+                        ],
                         "caption": "Test video of a road in a city",
                         "controls": "",
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
-                        "tracks": []
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12477,6 +13030,7 @@
                 {
                     "name": "core\/accordion",
                     "attributes": {
+                        "ariaLabel": "Frequently asked questions",
                         "iconPosition": "right",
                         "showIcon": true,
                         "autoclose": false,
@@ -12573,6 +13127,7 @@
                 {
                     "name": "core\/navigation",
                     "attributes": {
+                        "ariaLabel": "Main site navigation",
                         "showSubmenuIcon": true,
                         "submenuVisibility": "hover",
                         "overlayMenu": "mobile",
@@ -12795,6 +13350,111 @@
                     },
                     "parentBlockPosition": 89,
                     "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/file",
+                    "attributes": {
+                        "href": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "fileId": "wp-block-file--media-1140",
+                        "fileName": "The Gato GraphQL logo",
+                        "textLinkHref": "https:\/\/gatographql.com\/assets\/GatoGraphQL-logo.webp",
+                        "showDownloadButton": true,
+                        "downloadButtonText": "Download the logo",
+                        "previewHeight": 600
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/more",
+                    "attributes": {
+                        "customText": "Keep reading this story",
+                        "noTeaser": false
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/group",
+                    "attributes": {
+                        "ariaLabel": "Highlighted notes",
+                        "layout": {
+                            "type": "constrained"
+                        },
+                        "tagName": "div"
+                    },
+                    "innerBlockPositions": [
+                        94
+                    ],
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/paragraph",
+                    "attributes": {
+                        "content": "A note worth highlighting.",
+                        "dropCap": false
+                    },
+                    "parentBlockPosition": 93,
+                    "innerBlockPositions": null
+                },
+                {
+                    "name": "core\/icon",
+                    "attributes": {
+                        "icon": "core\/audio",
+                        "ariaLabel": "An icon representing audio content"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/quote",
+                    "attributes": {
+                        "value": "<p>A quote stored the legacy way, with its text inside the blockquote.<\/p>",
+                        "citation": "An older citation"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/text-columns",
+                    "attributes": {
+                        "className": "has-2-columns",
+                        "content": [
+                            {
+                                "children": "The left column of text."
+                            },
+                            {
+                                "children": "The right column of text."
+                            }
+                        ],
+                        "columns": 2
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/code",
+                    "attributes": {
+                        "content": "$greeting = \"Good morning\"; \/\/ greet the visitor"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "Here are the pictures: [caption id=\"attachment_31\" align=\"alignright\" width=\"300\" caption=\"Our favourite dog picture\"]<img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Sleeping dog\"> The dog resting after lunch[\/caption] Enjoy them!"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
+                },
+                {
+                    "name": "core\/shortcode",
+                    "attributes": {
+                        "text": "[gato_photo_card id=\"32\" columns=\"2\" size=\"medium\" class=\"is-rounded\" note=\"Hello there my friend, this sentence is not translated\" credit=\"Neither is this one, because its attribute name is not on the list\" strapline=\"This one is translated, because a filter added its name to the list\" url=\"\/gallery\/cats\" title=\"Our favourite cat picture\" subtitle=\"Taken last summer\" caption=\"The cat resting after lunch\" alt=\"A ginger cat asleep on a sofa\" description=\"One of the pictures our readers sent in\" button_text=\"See the whole album\" tooltip=\"Opens the full gallery\"]A short note about the photograph.[\/gato_photo_card]"
+                    },
+                    "innerBlockPositions": null,
+                    "parentBlockPosition": null
                 }
             ]
         },
