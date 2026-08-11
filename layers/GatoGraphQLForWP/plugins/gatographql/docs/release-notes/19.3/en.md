@@ -42,3 +42,23 @@ mutation CreateProduct {
 ```
 
 Subscriptions can be paused, resumed, cancelled and edited, for those FluentCart bills through its own invoice engine; one backed by a payment gateway is refused rather than silently diverging from the gateway.
+
+When **FluentCart Pro** is installed, its licensing and inventory data joins the schema too: licences, the sites they are activated on, and the stock adjustment log.
+
+```graphql
+{
+  fluentCartLicenses(filter: { status: "active" }) {
+    licenseKey
+    remainingActivations
+    isExpired
+    product { title }
+    customer { fullName }
+    activations {
+      status
+      site { siteURL }
+    }
+  }
+}
+```
+
+Every foreign key is now exposed twice throughout the extension: as an ID, and as the entity it points at, so `order.customer` and `orderItem.product` no longer need a second query.

@@ -10,6 +10,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - New "FluentCart" extension, adding fields to the schema to fetch data from a FluentCart store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration (#3379)
 - The "FluentCart" extension gains mutations: create, update and delete store data, and pause, resume, cancel or edit store-billed subscriptions (#3380)
+- The "FluentCart" extension exposes the FluentCart Pro licensing and inventory data &mdash; licenses, their activations and the sites they are activated on, and the stock adjustment log &mdash; when the FluentCart Pro plugin is installed (#3381)
 
 ## 19.2.0 - 11/08/2026
 

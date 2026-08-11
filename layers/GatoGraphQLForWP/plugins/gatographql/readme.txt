@@ -250,6 +250,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 19.3.0 =
 * Added - New "FluentCart" extension, adding fields to the schema to fetch data from a FluentCart store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration (#3379)
 * Added - The "FluentCart" extension gains mutations: create, update and delete store data, and pause, resume, cancel or edit store-billed subscriptions (#3380)
+* Added - The "FluentCart" extension exposes the FluentCart Pro licensing and inventory data &mdash; licenses, their activations and the sites they are activated on, and the stock adjustment log &mdash; when the FluentCart Pro plugin is installed (#3381)
 
 = 19.2.0 =
 * Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
