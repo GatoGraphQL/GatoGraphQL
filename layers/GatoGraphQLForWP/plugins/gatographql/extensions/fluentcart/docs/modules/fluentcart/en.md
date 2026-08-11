@@ -9,7 +9,7 @@ The GraphQL schema is provided with fields to fetch FluentCart data: products an
 ```graphql
 {
   fluentCartProducts(
-    filter: { status: [ "publish" ] }
+    filter: { status: [ PUBLISH ] }
     sort: { by: TITLE, order: ASC }
   ) {
     id
@@ -93,6 +93,48 @@ FluentCart stores every monetary amount in the currency's minor units &mdash; `2
   }
 }
 ```
+
+## Mutations
+
+Every entity that can be written is available as a mutation, in three forms: the root mutation, its bulk counterpart taking a list of the same inputs, and &mdash; on an endpoint with nested mutations enabled &mdash; a field on the entity's own type.
+
+| Entity | Mutations |
+| --- | --- |
+| Products, variations, categories, brands | create, update, delete |
+| Attribute groups and terms | create, update, delete |
+| Orders, line items, addresses | create, update, delete |
+| Customers and their addresses | create, update, delete |
+| Coupons, labels | create, update, delete |
+| Shipping zones, methods, classes | create, update, delete |
+| Tax classes and rates | create, update, delete |
+| Subscriptions | update, pause, resume, cancel |
+
+```graphql
+mutation {
+  fluentCartCreateCoupon(input: {
+    code: "SUMMER"
+    title: "Summer sale"
+    type: PERCENTAGE
+    amount: 15
+    status: ACTIVE
+    conditions: { min_purchase_amount: 5000 }
+  }) {
+    status
+    errors {
+      __typename
+      message
+    }
+    coupon {
+      id
+      code
+    }
+  }
+}
+```
+
+A failure is returned as payload data rather than as a top-level GraphQL error, with the `__typename` distinguishing whether the caller was not logged in, lacked the permission, named an entity that does not exist, supplied a value that is already taken, or asked for something FluentCart refuses.
+
+Statuses and types are enums throughout, and orders, customers, subscriptions, products and variations accept a `meta` input.
 
 ## Access control
 
