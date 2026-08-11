@@ -17,3 +17,28 @@ Every monetary field is available both as a decimal and as the exact integer Flu
   }
 }
 ```
+
+The extension also provides mutations, to create, update and delete store data:
+
+```graphql
+mutation CreateProduct {
+  fluentCartCreateProduct(input: {
+    title: "Gato Cap"
+    slug: "gato-cap"
+    status: "publish"
+    fulfillmentType: "physical"
+  }) {
+    status
+    errors {
+      __typename
+      message
+    }
+    product {
+      id
+      title
+    }
+  }
+}
+```
+
+Subscriptions can be paused, resumed, cancelled and edited, for those FluentCart bills through its own invoice engine; one backed by a payment gateway is refused rather than silently diverging from the gateway.
