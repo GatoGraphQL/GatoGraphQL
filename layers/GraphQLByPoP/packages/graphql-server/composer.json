@@ -14,11 +14,11 @@
     ],
     "require": {
         "php": "^8.1",
-        "graphql-by-pop/graphql-request": "^19.2"
+        "graphql-by-pop/graphql-request": "^19.3"
     },
     "require-dev": {
-        "getpop/access-control": "^19.2",
-        "getpop/cache-control": "^19.2",
+        "getpop/access-control": "^19.3",
+        "getpop/cache-control": "^19.3",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^2.1",
@@ -46,7 +46,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "19.2-dev"
+            "dev-master": "19.3-dev"
         }
     },
     "config": {
