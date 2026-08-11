@@ -7249,7 +7249,7 @@ msgstr "Custom scalar ที่แทน JSON Object ที่มีรูปร
 msgid "Before executing `%s`, must call `validateAndInitialize`"
 msgstr "ก่อนดำเนินการ `%s` ต้องเรียก `validateAndInitialize` ก่อน"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:64
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
 #, php-format
 msgid ""
 "Meta directive '%s' is nesting a directive already nested by another meta-"
@@ -7258,12 +7258,12 @@ msgstr ""
 "Meta directive '%s' กำลัง nesting directive ที่ถูก nest โดย meta-directive "
 "อื่นอยู่แล้ว"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:65
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:81
 #, php-format
 msgid "Argument '%1$s' in directive '%2$s' cannot be null or empty"
 msgstr "อาร์กิวเมนต์ '%1$s' ใน directive '%2$s' ต้องไม่เป็น null หรือว่างเปล่า"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:66
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:82
 #, php-format
 msgid ""
 "Argument '%1$s' in directive '%2$s' must be an array of positive integers, "
@@ -7272,7 +7272,7 @@ msgstr ""
 "อาร์กิวเมนต์ '%1$s' ใน directive '%2$s' ต้องเป็น array ของจำนวนเต็มบวก โดย array "
 "item '%3$s' ไม่ได้รับอนุญาต"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:67
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:83
 #, php-format
 msgid ""
 "There is no directive in relative position '%1$s' from meta directive "
@@ -7281,7 +7281,7 @@ msgstr ""
 "ไม่มี directive ในตำแหน่งสัมพัทธ์ '%1$s' จาก meta directive '%2$s' "
 "ตามที่ระบุในอาร์กิวเมนต์ '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:68
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:84
 #, php-format
 msgid ""
 "There is no field in relative position '%1$s' from directive '%2$s', as "
@@ -7289,7 +7289,7 @@ msgid ""
 msgstr ""
 "ไม่มีฟิลด์ในตำแหน่งสัมพัทธ์ '%1$s' จาก directive '%2$s' ตามที่ระบุในอาร์กิวเมนต์ '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:69
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:85
 #, php-format
 msgid ""
 "The element in relative position '%1$s' from directive '%2$s' (as indicated "
@@ -7298,13 +7298,13 @@ msgstr ""
 "องค์ประกอบในตำแหน่งสัมพัทธ์ '%1$s' จาก directive '%2$s' (ตามที่ระบุในอาร์กิวเมนต์ "
 "'%3$s') ไม่ใช่ฟิลด์"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:70
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:86
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with a (static) variable"
 msgstr "Dynamic variable '%1$s' ไม่สามารถใช้ชื่อเดียวกับ (static) variable ได้"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:71
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:87
 #, php-format
 msgid ""
 "The reference to the Resolved Field Value '%1$s' cannot share the same name "
@@ -7312,7 +7312,7 @@ msgid ""
 msgstr ""
 "การอ้างอิงถึง Resolved Field Value '%1$s' ไม่สามารถใช้ชื่อเดียวกับ variable '%1$s' ได้"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:72
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:88
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with the reference to the "
@@ -7321,37 +7321,37 @@ msgstr ""
 "Dynamic variable '%1$s' ไม่สามารถใช้ชื่อเดียวกับการอ้างอิงถึง Resolved Field Value "
 "'%2$s' ได้"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:73
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:89
 #, php-format
 msgid ""
 "No value has been exported for dynamic variable '%s' for object with ID '%s'"
 msgstr "ไม่มีค่าที่ถูก export สำหรับ dynamic variable '%s' สำหรับออบเจ็กต์ที่มี ID '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:74
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:90
 #, php-format
 msgid "The reference to field '%s' cannot be resolved"
 msgstr "การอ้างอิงถึงฟิลด์ '%s' ไม่สามารถ resolve ได้"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:75
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:91
 msgid "The name of the operation must be a literal string"
 msgstr "ชื่อของ operation ต้องเป็น literal string"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:76
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:92
 #, php-format
 msgid "The name of the operation must be a string, but '%s' was provided"
 msgstr "ชื่อของ operation ต้องเป็น string แต่ได้รับ '%s' มาแทน"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:77
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:93
 #, php-format
 msgid "There is no operation with name '%s'"
 msgstr "ไม่มี operation ที่มีชื่อว่า '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:78
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:94
 #, php-format
 msgid "Dependency on operation '%s' forms a loop"
 msgstr "การพึ่งพา operation '%s' ก่อให้เกิดการวนซ้ำ"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:79
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:95
 #, php-format
 msgid ""
 "No current object ID has been set on the Application State, hence the "
@@ -7362,7 +7362,62 @@ msgstr ""
 "Resolved Dynamic Variable \"%s\"' จึงไม่สามารถแก้ไขได้ มีแนวโน้มสูงที่ dynamic "
 "variable นี้ไม่รองรับที่ AST node นั้น"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:96
+#, php-format
+msgid "Directive '@%s' must be placed right after a meta directive"
+msgstr "ไดเรกทีฟ '@%s' ต้องถูกวางไว้ทันทีหลังไดเรกทีฟเมตา"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:97
+#, php-format
+msgid ""
+"Directive '%1$s' is not a meta directive, hence it cannot nest directives "
+"via '@%2$s' and '@%3$s'"
+msgstr ""
+"ไดเรกทีฟ '%1$s' ไม่ใช่ไดเรกทีฟเมตา ดังนั้นจึงไม่สามารถซ้อนไดเรกทีฟผ่าน '@%2$s' และ "
+"'@%3$s' ได้"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:98
+#, php-format
+msgid "Directive '@%1$s' does not have a matching '@%2$s'"
+msgstr "ไดเรกทีฟ '@%1$s' ไม่มี '@%2$s' ที่ตรงกัน"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:99
+#, php-format
+msgid ""
+"Directive '@%1$s' after meta directive '%2$s' does not have a matching "
+"'@%3$s'"
+msgstr "ไดเรกทีฟ '@%1$s' ที่อยู่หลังไดเรกทีฟเมตา '%2$s' ไม่มี '@%3$s' ที่ตรงกัน"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:100
+#, php-format
+msgid ""
+"There are no directives between '@%2$s' and '@%3$s' for meta directive '%1$s'"
+msgstr "ไม่มีไดเรกทีฟใดๆ ระหว่าง '@%2$s' และ '@%3$s' สำหรับไดเรกทีฟเมตา '%1$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:101
+#, php-format
+msgid ""
+"Meta directive '%1$s' cannot indicate the directives to affect via both "
+"argument '%2$s' and directives '@%3$s' and '@%4$s'"
+msgstr ""
+"ไดเรกทีฟเมตา '%1$s' ไม่สามารถระบุไดเรกทีฟที่จะส่งผลถึงผ่านทั้งอาร์กิวเมนต์ '%2$s' "
+"และไดเรกทีฟ '@%3$s' กับ '@%4$s' พร้อมกันได้"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:102
+#, php-format
+msgid ""
+"Meta directive '%2$s' cannot affect the directive in relative position "
+"'%1$s', as it is not within the same '@%3$s' and '@%4$s' block"
+msgstr ""
+"ไดเรกทีฟเมตา '%2$s' ไม่สามารถส่งผลถึงไดเรกทีฟในตำแหน่งสัมพัทธ์ '%1$s' ได้ "
+"เนื่องจากไม่ได้อยู่ในบล็อก '@%3$s' และ '@%4$s' เดียวกัน"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:103
+#, php-format
+msgid "Directive '@%s' cannot receive arguments"
+msgstr "ไดเรกทีฟ '@%s' ไม่สามารถรับอาร์กิวเมนต์ได้"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:104
 #, php-format
 msgid "No value has been exported for dynamic variable '%s'"
 msgstr "ไม่มีการ export ค่าสำหรับ dynamic variable '%s'"

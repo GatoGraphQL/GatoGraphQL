@@ -229,6 +229,14 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
+            // `@start` and `@end` are helper directives to compose
+            // directives, hence they follow the same setting
+            [
+                'class' => GraphQLParserModule::class,
+                'envVariable' => GraphQLParserEnvironment::ENABLE_START_END_HELPER_DIRECTIVES,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::COMPOSABLE_DIRECTIVES,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
             // Use namespacing?
             [
                 'class' => ComponentModelModule::class,
@@ -1036,6 +1044,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     GraphQLParserModule::class => [
                         // No need for these, then directly disable them to have a clear state on the config
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => false,
+                        GraphQLParserEnvironment::ENABLE_START_END_HELPER_DIRECTIVES => false,
                         GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES => false,
                     ],
                     ComponentModelModule::class => [
@@ -1107,6 +1116,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     ],
                     GraphQLParserModule::class => [
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => true,
+                        GraphQLParserEnvironment::ENABLE_START_END_HELPER_DIRECTIVES => true,
                         GraphQLParserEnvironment::ENABLE_MULTIFIELD_DIRECTIVES => true,
                     ],
                     GraphQLServerModule::class => [

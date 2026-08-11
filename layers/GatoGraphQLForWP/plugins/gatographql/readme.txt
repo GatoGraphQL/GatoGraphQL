@@ -247,6 +247,14 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.2.0 =
+* Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
+* Improved - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
+* Improved - Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches (#3374)
+* Improved - The tutorials on translating block content to a different language now also translate the header and footer cells of a `core/table` block, which the query extracted for the body rows and the caption only (#3375)
+* Fixed - Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date. This happens whenever a meta directive overrides the value of the field while keeping its type (eg: via `@underDynamicVariable`, or `@applyField` with `setResultInResponse: true`), and made the request fail with a 500 response instead of returning a GraphQL error. Such a value is now serialized as any other scalar would be (#3372)
+* Fixed - Running a WP-CLI command that loads WordPress no longer prints `Symfony\Component\Finder\Finder` deprecation notices on PHP 8.1 and above (on sites with `WP_DEBUG` enabled). While compiling the service container, Symfony's Config component checks whether the Finder component is installed; as the plugin did not ship it, the class was resolved against WP-CLI's own bundled copy, which is Symfony 3.4 and predates PHP 8.1's tentative return types. The plugin now requires `symfony/finder` (#3373)
+
 = 19.1.0 =
 * Added - Filter custom posts by their parent: the `customPosts` query gains the `parentID`, `parentIDs` and `excludeParentIDs` filter inputs (as already available on the `pages` query), mapping to WordPress' `post_parent`, `post_parent__in` and `post_parent__not_in` query args (#3366)
 * Added - Fields to query the site's options (i.e. the settings) in bulk: `optionNames` returns the list of the allowed option names stored in the DB (with a `filterBy` input to include/exclude the names containing some string), and `options` returns a JSON object with the option name and value for the provided (allowed) option names (#3364)

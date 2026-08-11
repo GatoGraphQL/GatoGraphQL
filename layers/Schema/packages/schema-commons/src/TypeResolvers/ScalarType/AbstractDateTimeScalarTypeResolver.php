@@ -105,7 +105,17 @@ abstract class AbstractDateTimeScalarTypeResolver extends AbstractScalarTypeReso
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
-        /** @var DateTimeInterface $scalarValue */
+        /**
+         * The value is not necessarily a DateTime: a meta directive can
+         * override the value of the field while keeping its type, as in
+         * `@underDynamicVariable` or `@applyField(setResultInResponse: true)`.
+         *
+         * Then serialize it as any other scalar would, instead of calling
+         * `->format(...)` on it (which produces an uncaught PHP Error).
+         */
+        if (!($scalarValue instanceof DateTimeInterface)) {
+            return parent::serialize($scalarValue);
+        }
         return $scalarValue->format($this->getDateTimeFormat());
     }
 

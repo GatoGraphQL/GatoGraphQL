@@ -80,8 +80,10 @@ The following entities are supported:
 | Coupons | `woocommerceCreateCoupon`, `woocommerceUpdateCoupon`, `woocommerceDeleteCoupon` |
 | Orders | `woocommerceCreateOrder`, `woocommerceUpdateOrder`, `woocommerceDeleteOrder`, `woocommerceUpdateOrderStatus` |
 | Order refunds | `woocommerceCreateOrderRefund`, `woocommerceDeleteOrderRefund` |
+| Order notes | `woocommerceCreateOrderNote`, `woocommerceDeleteOrderNote` |
 | Customers | `woocommerceCreateCustomer`, `woocommerceUpdateCustomer`, `woocommerceDeleteCustomer` |
 | Product reviews | `woocommerceCreateReview`, `woocommerceUpdateReview`, `woocommerceDeleteReview` |
+| Store settings | `woocommerceUpdateStoreSettings` |
 
 For instance, create a product:
 
@@ -199,6 +201,53 @@ mutation {
       ...on ErrorPayload {
         message
       }
+    }
+  }
+}
+```
+
+## Store configuration
+
+Field `woocommerceStoreSettings` reads the store's configuration, and mutation `woocommerceUpdateStoreSettings` writes it back. The mutation writes only the settings it is given, leaving the rest of the configuration alone.
+
+Both require the capability to manage WooCommerce, on the reasoning that this is configuration rather than shop data: whoever may change the store's settings may read them.
+
+```graphql
+{
+  woocommerceStoreSettings {
+    city
+    countryCode
+    stateCode
+    currencyCode
+    currencySymbol
+    numberOfDecimals
+    weightUnit
+    taxesEnabled
+    guestCheckoutEnabled
+    shopPageID
+  }
+}
+```
+
+```graphql
+mutation {
+  woocommerceUpdateStoreSettings(input: {
+    city: "Berlin"
+    countryCode: "DE"
+    stateCode: ""
+    currencyCode: "EUR"
+  }) {
+    status
+    errors {
+      __typename
+      ...on ErrorPayload {
+        message
+      }
+    }
+    storeSettings {
+      city
+      countryCode
+      currencyCode
     }
   }
 }

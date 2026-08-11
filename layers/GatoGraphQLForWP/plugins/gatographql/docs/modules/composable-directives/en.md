@@ -64,7 +64,16 @@ query {
 
 ## Using meta directives
 
-Every meta directive can affect (or "nest") multiple directives at once. Which directives are affected is indicated via argument `affectDirectivesUnderPos`, which receives an array of positive integers, each of them defining the affected directive's relative position.
+Every meta directive can affect (or "nest") multiple directives at once. There are two ways to indicate which directives are affected:
+
+- Via argument `affectDirectivesUnderPos`, indicating the relative position of each affected directive
+- Via the helper directives `@start` and `@end`, wrapping the affected directives
+
+Both methods are equivalent, and can be combined within the same query (but not on the same meta directive).
+
+### Indicating the affected directives via `affectDirectivesUnderPos`
+
+Argument `affectDirectivesUnderPos` receives an array of positive integers, each of them defining the affected directive's relative position.
 
 By default, argument `affectDirectivesUnderPos` has default value `[1]`, meaning that it will affect the directive right next to it.
 
@@ -132,6 +141,125 @@ The response is:
       }
     ]
   }
+}
+```
+
+### Indicating the affected directives via `@start` and `@end`
+
+Calculating the relative position of every affected directive can become tricky in large queries. As an alternative, the affected directives can be wrapped between the helper directives `@start` and `@end`, placed right after the meta directive:
+
+```graphql
+{
+  someField
+    @underEachArrayItem @start
+      @strTrim
+      @strUpperCase
+    @end
+}
+```
+
+...which is equivalent to:
+
+```graphql
+{
+  someField
+    @underEachArrayItem(affectDirectivesUnderPos: [1, 2])
+      @strTrim
+      @strUpperCase
+}
+```
+
+`@start` and `@end` are pure syntax: they are removed from the query while parsing it, and never reach the GraphQL schema.
+
+Meta directives with a `@start`/`@end` block can be nested within each other:
+
+```graphql
+{
+  someField
+    @underEachArrayItem @start
+      @underJSONObjectProperty(by: { key: "text" }) @start
+        @strTitleCase
+        @strUpperCase
+      @end
+      @strTrim
+    @end
+}
+```
+
+`@start` and `@end` can be omitted when the meta directive affects a single directive. In the query below, `@unless` affects `@default` only, hence `@underEachArrayItem` affects `@applyField`, `@if` and `@unless`:
+
+```graphql
+{
+  _echo(value: ["one two", "three four", null, "five six"])
+    @underEachArrayItem(passValueOnwardsAs: "value") @start
+      @applyField(
+        name: "_notNull"
+        arguments: { value: $value }
+        passOnwardsAs: "isNotNullValue"
+      )
+      @if(condition: $isNotNullValue) @start
+        @strTitleCase
+        @strReplace(
+          search: " "
+          replaceWith: "-"
+        )
+      @end
+      @unless(condition: $isNotNullValue)
+        @default(value: "Added by @default only on `null` value")
+    @end
+}
+```
+
+Whitespace is irrelevant, so the query above can also be indented like this:
+
+```graphql
+{
+  _echo(value: ["one two", "three four", null, "five six"])
+    @underEachArrayItem(passValueOnwardsAs: "value")
+      @start
+        @applyField(
+          name: "_notNull"
+          arguments: { value: $value }
+          passOnwardsAs: "isNotNullValue"
+        )
+        @if(condition: $isNotNullValue)
+          @start
+            @strTitleCase
+            @strReplace(
+              search: " "
+              replaceWith: "-"
+            )
+          @end
+        @unless(condition: $isNotNullValue)
+          @start
+            @default(value: "Added by @default only on `null` value")
+          @end
+      @end
+}
+```
+
+#### Validation
+
+The query is invalid, and an error is returned, whenever:
+
+- `@start` is not placed right after a meta directive (including when applied directly to a field)
+- `@start` is placed after a directive which is not a meta directive
+- `@start` has no matching `@end`
+- `@end` has no matching `@start`
+- There are no directives between `@start` and `@end`
+- `@start` and `@end` are provided to a meta directive which also has argument `affectDirectivesUnderPos`
+- `@start` or `@end` receive arguments
+- A meta directive affects a directive which is not placed within its same `@start`/`@end` block
+
+For instance, in the query below `@underJSONObjectProperty` affects the directive right next to it, but that directive (`@strUpperCase`) is placed outside of the block, so an error is returned:
+
+```graphql
+{
+  someField
+    @underEachArrayItem @start
+      @underJSONObjectProperty(by: { key: "text" })
+    @end
+    @strUpperCase
 }
 ```
 

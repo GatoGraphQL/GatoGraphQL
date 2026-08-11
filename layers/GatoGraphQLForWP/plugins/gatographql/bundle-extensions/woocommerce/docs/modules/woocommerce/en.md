@@ -58,3 +58,9 @@ Fetch product data from your WooCommerce store.
   }
 }
 ```
+
+---
+
+Beyond products, the extension reaches the store's orders (with their notes, line items, and tax, shipping, fee and coupon lines), refunds, coupons, customers (with the files they may download), reviews, shipping zones, tax rates, payment gateways, webhooks, and the store's own configuration.
+
+It also provides `create`, `update` and `delete` mutations for those entities, writing through WooCommerce's own data layer, so they are compatible with High-Performance Order Storage (HPOS).

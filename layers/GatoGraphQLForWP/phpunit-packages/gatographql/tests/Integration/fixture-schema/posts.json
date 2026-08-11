@@ -466,6 +466,10 @@
                 "title": "Post with internal links, also in meta (entries starting with internal_link_)"
             },
             {
+                "id": 1140,
+                "title": "Welcome to a single post full of blocks!"
+            },
+            {
                 "id": 1,
                 "title": "Hello world!"
             }

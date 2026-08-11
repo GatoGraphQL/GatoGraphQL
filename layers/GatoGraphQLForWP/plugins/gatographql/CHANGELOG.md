@@ -4,6 +4,23 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.2.0 - 11/08/2026
+
+### Added
+
+- Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
+
+### Improvements
+
+- Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
+- Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches (#3374)
+- The tutorials on translating block content to a different language now also translate the header and footer cells of a `core/table` block, which the query extracted for the body rows and the caption only (#3375)
+
+### Fixed
+
+- Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date. This happens whenever a meta directive overrides the value of the field while keeping its type (eg: via `@underDynamicVariable`, or `@applyField` with `setResultInResponse: true`), and made the request fail with a 500 response instead of returning a GraphQL error. Such a value is now serialized as any other scalar would be (#3372)
+- Running a WP-CLI command that loads WordPress no longer prints `Symfony\Component\Finder\Finder` deprecation notices on PHP 8.1 and above (on sites with `WP_DEBUG` enabled). While compiling the service container, Symfony's Config component checks whether the Finder component is installed; as the plugin did not ship it, the class was resolved against WP-CLI's own bundled copy, which is Symfony 3.4 and predates PHP 8.1's tentative return types. The plugin now requires `symfony/finder` (#3373)
+
 ## 19.1.0 - 27/07/2026
 
 ### Added

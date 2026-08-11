@@ -1786,7 +1786,7 @@ https://wordpress.org/about/
 <!-- /wp:separator -->
 
 <!-- wp:image {"id":33,"align":"wide"} -->
-<figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
+<figure class="wp-block-image alignwide"><img src="https://i.ytimg.com/vi/z4KKd2nGlEM/maxresdefault.jpg" alt="Ooops, I got stuck" title="The dog stuck in the fence" class="wp-image-33"/><figcaption class="wp-element-caption">My owner doesn't give me a hat, so I gotta do a hack</figcaption></figure>
 <!-- /wp:image -->
 
 <!-- wp:heading {"level":3,"anchor":"i-love-these-veggies"} -->
@@ -1874,7 +1874,7 @@ https://wordpress.org/about/
 <!-- /wp:columns -->
 
 <!-- wp:button {"className":"is-style-outline"} -->
-<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/">Do some duck duck search online</a></div>
+<div class="wp-block-button is-style-outline"><a class="wp-block-button__link wp-element-button" href="https://duckduckgo.com/" title="Opens the DuckDuckGo search engine">Do some duck duck search online</a></div>
 <!-- /wp:button -->
 
 <!-- wp:heading {"level":3,"anchor":"this-heading-h3-is-boring-regex-test-1-1-but-these-guys-are-not"} -->
@@ -1888,7 +1888,7 @@ https://wordpress.org/about/
 
 <!-- wp:image {"id":31,"linkDestination":"none"} -->
 <figure class="wp-block-image"><img src="https://i.pinimg.com/originals/85/a7/f5/85a7f5cee4c93cb3995d1b51e3a0289f.jpg" alt="Even funnier dog" class="wp-image-31"/><figcaption class="wp-element-caption">Anyone having chips? Don't leave me alone!</figcaption></figure>
-<!-- /wp:image --></figure>
+<!-- /wp:image --><figcaption class="blocks-gallery-caption wp-element-caption">Two dogs asking for chips</figcaption></figure>
 <!-- /wp:gallery -->
 
 <!-- wp:quote -->
@@ -1919,8 +1919,8 @@ https://wordpress.org/about/
 <figure class="wp-block-audio"><audio controls src="https://freemusicarchive.org/file/music/WFMU/Broke_For_Free/Directionless_EP/Broke_For_Free_-_01_-_Night_Owl.mp3"></audio><figcaption class="wp-element-caption">"Broke for free" song</figcaption></figure>
 <!-- /wp:audio -->
 
-<!-- wp:video {"id":132} -->
-<figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
+<!-- wp:video {"id":132,"tracks":[{"src":"https://download.samplelib.com/vtt/road-en.vtt","kind":"subtitles","srcLang":"en","label":"English subtitles"}]} -->
+<figure class="wp-block-video"><video controls src="https://download.samplelib.com/mp4/sample-5s.mp4"><track src="https://download.samplelib.com/vtt/road-en.vtt" kind="subtitles" srclang="en" label="English subtitles"/></video><figcaption class="wp-element-caption">Test video of a road in a city</figcaption></figure>
 <!-- /wp:video -->
 
 <!-- wp:preformatted -->
@@ -1932,7 +1932,7 @@ https://wordpress.org/about/
 <!-- /wp:verse -->
 
 <!-- wp:table {"align":"wide","className":"has-fixed-layout"} -->
-<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><tbody><tr><td><strong>What I like</strong></td><td>Petting my 3 cats 😺😺😺 in the morning ☀️</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to <a href="https://keepmegoing.com">keep me going on</a></td><td>A <mark style="background-color:rgba(0, 0, 0, 0);color:#c22a2a" class="has-inline-color">balcony with plants</mark></td></tr><tr><td><strong>What I desire</strong></td><td>Attending <strong>conferences</strong> and meeting plenty of <strong>interesting folks</strong> from the community</td><td>To be able to focus on the important things of life</td></tr></tbody></table><figcaption class="wp-element-caption">Some items to consider for new year's resolution?</figcaption></figure>
+<figure class="wp-block-table alignwide has-fixed-layout"><table class="has-fixed-layout"><thead><tr><th>Category</th><th>First option</th><th>Second option</th></tr></thead><tbody><tr><td><strong>What I like</strong></td><td>Petting my 3 cats 😺😺😺 in the morning ☀️</td><td>Riding my bike in the mountain</td></tr><tr><td><strong>What I have</strong></td><td>Not much, just enough to <a href="https://keepmegoing.com">keep me going on</a></td><td>A <mark style="background-color:rgba(0, 0, 0, 0);color:#c22a2a" class="has-inline-color">balcony with plants</mark></td></tr><tr><td><strong>What I desire</strong></td><td>Attending <strong>conferences</strong> and meeting plenty of <strong>interesting folks</strong> from the community</td><td>To be able to focus on the important things of life</td></tr></tbody><tfoot><tr><td>Summary</td><td>Everyday joys</td><td>Weekend plans</td></tr></tfoot></table><figcaption class="wp-element-caption">Some items to consider for new year's resolution?</figcaption></figure>
 <!-- /wp:table -->
 
 <!-- wp:embed {"url":"https://www.youtube.com/watch?v=7Nmz3IjtPh0","type":"video","providerNameSlug":"youtube","responsive":true,"className":"wp-embed-aspect-16-9 wp-has-aspect-ratio"} -->
@@ -1971,8 +1971,8 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:paragraph --></details>
 <!-- /wp:details -->
 
-<!-- wp:accordion -->
-<div role="group" class="wp-block-accordion"><!-- wp:accordion-item -->
+<!-- wp:accordion {"ariaLabel":"Frequently asked questions"} -->
+<div role="group" aria-label="Frequently asked questions" class="wp-block-accordion"><!-- wp:accordion-item -->
 <div class="wp-block-accordion-item"><!-- wp:accordion-heading -->
 <h3 class="wp-block-accordion-heading"><button type="button" class="wp-block-accordion-heading__toggle"><span class="wp-block-accordion-heading__toggle-title">This is the accordion title</span><span class="wp-block-accordion-heading__toggle-icon" aria-hidden="true">+</span></button></h3>
 <!-- /wp:accordion-heading -->
@@ -1997,7 +1997,7 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:accordion-item --></div>
 <!-- /wp:accordion -->
 
-<!-- wp:navigation -->
+<!-- wp:navigation {"ariaLabel":"Main site navigation"} -->
 <!-- wp:home-link {"label":"Home page"} /-->
 
 <!-- wp:navigation-link {"label":"About us","description":"Learn more about our company","url":"/about","title":"Go to the About page","kind":"custom"} /-->
@@ -2039,7 +2039,43 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <div class="wp-block-terms-query"><!-- wp:paragraph -->
 <p>Terms query.</p>
 <!-- /wp:paragraph --></div>
-<!-- /wp:terms-query -->]]></content:encoded>
+<!-- /wp:terms-query -->
+
+<!-- wp:file {"href":"https://gatographql.com/assets/GatoGraphQL-logo.webp"} -->
+<div class="wp-block-file"><a id="wp-block-file--media-1140" href="https://gatographql.com/assets/GatoGraphQL-logo.webp">The Gato GraphQL logo</a><a href="https://gatographql.com/assets/GatoGraphQL-logo.webp" class="wp-block-file__button wp-element-button" download aria-describedby="wp-block-file--media-1140">Download the logo</a></div>
+<!-- /wp:file -->
+
+<!-- wp:more {"customText":"Keep reading this story"} -->
+<!--more Keep reading this story-->
+<!-- /wp:more -->
+
+<!-- wp:group {"ariaLabel":"Highlighted notes","layout":{"type":"constrained"}} -->
+<div class="wp-block-group" aria-label="Highlighted notes"><!-- wp:paragraph -->
+<p>A note worth highlighting.</p>
+<!-- /wp:paragraph --></div>
+<!-- /wp:group -->
+
+<!-- wp:icon {"icon":"core/audio","ariaLabel":"An icon representing audio content"} /-->
+
+<!-- wp:quote -->
+<blockquote class="wp-block-quote"><p>A quote stored the legacy way, with its text inside the blockquote.</p><cite>An older citation</cite></blockquote>
+<!-- /wp:quote -->
+
+<!-- wp:text-columns {"className":"has-2-columns"} -->
+<div class="wp-block-text-columns alignundefined columns-2 has-2-columns"><div class="wp-block-column"><p>The left column of text.</p></div><div class="wp-block-column"><p>The right column of text.</p></div></div>
+<!-- /wp:text-columns -->
+
+<!-- wp:code -->
+<pre class="wp-block-code"><code>$greeting = "Good morning"; // greet the visitor</code></pre>
+<!-- /wp:code -->
+
+<!-- wp:shortcode -->
+Here are the pictures: [caption id="attachment_31" align="alignright" width="300" caption="Our favourite dog picture"]<img src="https://i.pinimg.com/originals/85/a7/f5/85a7f5cee4c93cb3995d1b51e3a0289f.jpg" alt="Sleeping dog" /> The dog resting after lunch[/caption] Enjoy them!
+<!-- /wp:shortcode -->
+
+<!-- wp:shortcode -->
+[gato_photo_card id="32" columns="2" size="medium" class="is-rounded" note="Hello there my friend, this sentence is not translated" credit="Neither is this one, because its attribute name is not on the list" strapline="This one is translated, because a filter added its name to the list" url="/gallery/cats" title="Our favourite cat picture" subtitle="Taken last summer" caption="The cat resting after lunch" alt="A ginger cat asleep on a sofa" description="One of the pictures our readers sent in" button_text="See the whole album" tooltip="Opens the full gallery"]A short note about the photograph.[/gato_photo_card]
+<!-- /wp:shortcode -->]]></content:encoded>
 		<excerpt:encoded><![CDATA[]]></excerpt:encoded>
 		<wp:post_id>1140</wp:post_id>
 		<wp:post_date><![CDATA[2023-06-12 09:20:44]]></wp:post_date>
@@ -2608,10 +2644,10 @@ https://www.youtube.com/watch?v=7Nmz3IjtPh0
 <!-- /wp:heading -->
 
 <!-- wp:paragraph -->
-<p>This <code>core/query</code> uses <code>taxQuery</code> to filter by categories [2, 3] AND tags [9, 11, 13]. <strong>Note:</strong> <code>taxQuery</code> has a per-taxonomy nested shape (<code>{category: [...], post_tag: [...]}</code>) that doesn't fit the current "attribute path → IDs" map — it's intentionally excluded from <code>BlockTypeAttributeValues</code>. Included here as a fixture for the tag IDs and so future work can decide how to extract it.</p>
+<p>This <code>core/query</code> uses <code>taxQuery</code> to include categories [2, 3] and tags [9, 11, 13], and to exclude categories [4, 6] and tags [14, 17]. The two halves reference different terms on purpose: <code>taxQuery</code> nests its IDs per taxonomy under <code>include</code> and <code>exclude</code>, so a fixture reusing the same IDs on both sides could not tell a rewrite of the wrong half from a correct one. The custom taxonomies alongside them (<code>additional-post-category</code>, <code>additional-post-tag</code>) stay untouched, since only <code>category</code> and <code>post_tag</code> are mapped.</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
+<!-- wp:query {"queryId":2,"query":{"perPage":5,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","taxQuery":{"include":{"category":[2,3],"post_tag":[9,11,13]},"exclude":{"category":[4,6],"post_tag":[14,17],"additional-post-category":[33, 41],"additional-post-tag":[36]}}}} -->
 <div class="wp-block-query"><!-- wp:post-template -->
 <!-- wp:post-title {"isLink":true} /-->
 

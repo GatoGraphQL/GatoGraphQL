@@ -7824,7 +7824,7 @@ msgid "Before executing `%s`, must call `validateAndInitialize`"
 msgstr ""
 "Πριν την εκτέλεση του `%s`, πρέπει να κληθεί το `validateAndInitialize`"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:64
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
 #, php-format
 msgid ""
 "Meta directive '%s' is nesting a directive already nested by another meta-"
@@ -7833,12 +7833,12 @@ msgstr ""
 "Η meta οδηγία '%s' φωλιάζει μια οδηγία που ήδη φωλιάζεται από άλλη meta-"
 "οδηγία"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:65
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:81
 #, php-format
 msgid "Argument '%1$s' in directive '%2$s' cannot be null or empty"
 msgstr "Το όρισμα '%1$s' στην οδηγία '%2$s' δεν μπορεί να είναι null ή κενό"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:66
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:82
 #, php-format
 msgid ""
 "Argument '%1$s' in directive '%2$s' must be an array of positive integers, "
@@ -7847,7 +7847,7 @@ msgstr ""
 "Το όρισμα '%1$s' στην οδηγία '%2$s' πρέπει να είναι πίνακας θετικών "
 "ακεραίων, το στοιχείο πίνακα '%3$s' δεν επιτρέπεται"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:67
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:83
 #, php-format
 msgid ""
 "There is no directive in relative position '%1$s' from meta directive "
@@ -7856,7 +7856,7 @@ msgstr ""
 "Δεν υπάρχει οδηγία στη σχετική θέση '%1$s' από τη meta οδηγία '%2$s', όπως "
 "υποδεικνύεται στο όρισμα '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:68
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:84
 #, php-format
 msgid ""
 "There is no field in relative position '%1$s' from directive '%2$s', as "
@@ -7865,7 +7865,7 @@ msgstr ""
 "Δεν υπάρχει πεδίο στη σχετική θέση '%1$s' από την οδηγία '%2$s', όπως "
 "υποδεικνύεται στο όρισμα '%3$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:69
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:85
 #, php-format
 msgid ""
 "The element in relative position '%1$s' from directive '%2$s' (as indicated "
@@ -7874,7 +7874,7 @@ msgstr ""
 "Το στοιχείο στη σχετική θέση '%1$s' από την οδηγία '%2$s' (όπως "
 "υποδεικνύεται στο όρισμα '%3$s') δεν είναι πεδίο"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:70
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:86
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with a (static) variable"
@@ -7882,7 +7882,7 @@ msgstr ""
 "Η δυναμική μεταβλητή '%1$s' δεν μπορεί να έχει το ίδιο όνομα με μια "
 "(στατική) μεταβλητή"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:71
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:87
 #, php-format
 msgid ""
 "The reference to the Resolved Field Value '%1$s' cannot share the same name "
@@ -7891,7 +7891,7 @@ msgstr ""
 "Η αναφορά στην Επιλυμένη Τιμή Πεδίου '%1$s' δεν μπορεί να έχει το ίδιο όνομα "
 "με τη μεταβλητή '%1$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:72
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:88
 #, php-format
 msgid ""
 "Dynamic variable '%1$s' cannot share the same name with the reference to the "
@@ -7900,7 +7900,7 @@ msgstr ""
 "Η δυναμική μεταβλητή '%1$s' δεν μπορεί να έχει το ίδιο όνομα με την αναφορά "
 "στην Επιλυμένη Τιμή Πεδίου '%2$s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:73
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:89
 #, php-format
 msgid ""
 "No value has been exported for dynamic variable '%s' for object with ID '%s'"
@@ -7908,32 +7908,32 @@ msgstr ""
 "Δεν έχει εξαχθεί τιμή για τη δυναμική μεταβλητή '%s' για το αντικείμενο με "
 "ID '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:74
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:90
 #, php-format
 msgid "The reference to field '%s' cannot be resolved"
 msgstr "Η αναφορά στο πεδίο '%s' δεν μπορεί να επιλυθεί"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:75
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:91
 msgid "The name of the operation must be a literal string"
 msgstr "Το όνομα της λειτουργίας πρέπει να είναι μια κυριολεκτική συμβολοσειρά"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:76
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:92
 #, php-format
 msgid "The name of the operation must be a string, but '%s' was provided"
 msgstr ""
 "Το όνομα της λειτουργίας πρέπει να είναι συμβολοσειρά, αλλά δόθηκε '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:77
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:93
 #, php-format
 msgid "There is no operation with name '%s'"
 msgstr "Δεν υπάρχει πράξη με όνομα '%s'"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:78
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:94
 #, php-format
 msgid "Dependency on operation '%s' forms a loop"
 msgstr "Η εξάρτηση στην πράξη '%s' σχηματίζει βρόχο"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:79
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:95
 #, php-format
 msgid ""
 "No current object ID has been set on the Application State, hence the "
@@ -7945,7 +7945,64 @@ msgstr ""
 "δεν μπορεί να επιλυθεί. Πιθανότατα η δυναμική μεταβλητή δεν υποστηρίζεται σε "
 "αυτόν τον κόμβο AST"
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:80
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:96
+#, php-format
+msgid "Directive '@%s' must be placed right after a meta directive"
+msgstr "Η οδηγία '@%s' πρέπει να τοποθετείται αμέσως μετά από μια μετα-οδηγία"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:97
+#, php-format
+msgid ""
+"Directive '%1$s' is not a meta directive, hence it cannot nest directives "
+"via '@%2$s' and '@%3$s'"
+msgstr ""
+"Η οδηγία '%1$s' δεν είναι μετα-οδηγία, συνεπώς δεν μπορεί να ενσωματώσει "
+"οδηγίες μέσω των '@%2$s' και '@%3$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:98
+#, php-format
+msgid "Directive '@%1$s' does not have a matching '@%2$s'"
+msgstr "Η οδηγία '@%1$s' δεν έχει αντίστοιχη '@%2$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:99
+#, php-format
+msgid ""
+"Directive '@%1$s' after meta directive '%2$s' does not have a matching "
+"'@%3$s'"
+msgstr ""
+"Η οδηγία '@%1$s' μετά τη μετα-οδηγία '%2$s' δεν έχει αντίστοιχη '@%3$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:100
+#, php-format
+msgid ""
+"There are no directives between '@%2$s' and '@%3$s' for meta directive '%1$s'"
+msgstr ""
+"Δεν υπάρχουν οδηγίες μεταξύ των '@%2$s' και '@%3$s' για τη μετα-οδηγία '%1$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:101
+#, php-format
+msgid ""
+"Meta directive '%1$s' cannot indicate the directives to affect via both "
+"argument '%2$s' and directives '@%3$s' and '@%4$s'"
+msgstr ""
+"Η μετα-οδηγία '%1$s' δεν μπορεί να υποδεικνύει τις οδηγίες που θα επηρεάσει "
+"τόσο μέσω του ορίσματος '%2$s' όσο και μέσω των οδηγιών '@%3$s' και '@%4$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:102
+#, php-format
+msgid ""
+"Meta directive '%2$s' cannot affect the directive in relative position "
+"'%1$s', as it is not within the same '@%3$s' and '@%4$s' block"
+msgstr ""
+"Η μετα-οδηγία '%2$s' δεν μπορεί να επηρεάσει την οδηγία στη σχετική θέση "
+"'%1$s', καθώς δεν βρίσκεται εντός του ίδιου μπλοκ '@%3$s' και '@%4$s'"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:103
+#, php-format
+msgid "Directive '@%s' cannot receive arguments"
+msgstr "Η οδηγία '@%s' δεν μπορεί να λαμβάνει ορίσματα"
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLExtendedSpecErrorFeedbackItemProvider.php:104
 #, php-format
 msgid "No value has been exported for dynamic variable '%s'"
 msgstr "Δεν έχει εξαχθεί τιμή για τη δυναμική μεταβλητή '%s'"
