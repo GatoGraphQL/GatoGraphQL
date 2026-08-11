@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 19.3.0 - DATE
 
+### Added
+
+- New "FluentCart" extension, adding fields to the schema to fetch data from a FluentCart store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration (#3379)
+
 ## 19.2.0 - 11/08/2026
 
 ### Added

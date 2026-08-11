@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.3.0 =
+* Added - New "FluentCart" extension, adding fields to the schema to fetch data from a FluentCart store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration (#3379)
+
 = 19.2.0 =
 * Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)
 * Improved - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive (#3371)
