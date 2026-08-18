@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 19.3.0 - DATE
 
+### Added
+
+- Documentation for the FluentCart integration (#3379)
+
 ## 19.2.0 - 11/08/2026
 
 ### Added

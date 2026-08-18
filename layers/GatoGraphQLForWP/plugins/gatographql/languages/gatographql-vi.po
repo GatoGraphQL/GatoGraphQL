@@ -9132,52 +9132,57 @@ msgstr ""
 "Cấp quyền cho các người dùng khác ngoài quản trị viên để chỉnh sửa schema "
 "GraphQL."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:49
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:62
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:51
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "Automation"
 msgstr "Tự động hóa"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:50
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:63
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:52
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:65
 msgid "Bricks"
 msgstr "Bricks"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:51
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:68
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:53
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:70
 msgid "Elementor"
 msgstr "Elementor"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:52
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:69
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:54
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:71
 msgid "Events Manager"
 msgstr "Events Manager"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:53
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:55
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:72
+msgid "FluentCart"
+msgstr "FluentCart"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:56
 msgid "JetEngine"
 msgstr "JetEngine"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:54
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:74
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:77
 msgid "MultilingualPress"
 msgstr "MultilingualPress"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:55
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:76
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:58
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:79
 msgid "Polylang"
 msgstr "Polylang"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:56
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:78
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:59
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:81
 msgid "Translation"
 msgstr "Dịch thuật"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:57
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:79
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:60
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:82
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:65
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:87
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:68
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:90
 msgid ""
 "Use GraphQL to automate tasks in your app: Execute queries when some event "
 "happens, chain queries, and schedule and trigger queries via WP-Cron. (The "
@@ -9187,8 +9192,8 @@ msgstr ""
 "các truy vấn khi có sự kiện xảy ra, xâu chuỗi các truy vấn, lên lịch và kích "
 "hoạt truy vấn qua WP-Cron. (Yêu cầu extension Internal GraphQL Server)."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:66
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:88
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:69
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:91
 msgid ""
 "Integration with plugin \"Bricks\", adding fields to parse and update data "
 "in Bricks pages and templates."
@@ -9196,8 +9201,8 @@ msgstr ""
 "Tích hợp với plugin \"Bricks\", thêm các trường để phân tích và cập nhật dữ "
 "liệu trong các trang và template của Bricks."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:67
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:70
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:96
 msgid ""
 "Integration with plugin \"Elementor\", adding fields to parse and update "
 "data in Elementor pages and templates."
@@ -9205,8 +9210,8 @@ msgstr ""
 "Tích hợp với plugin \"Elementor\", thêm các trường để phân tích và cập nhật "
 "dữ liệu trong các trang và template của Elementor."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:68
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:94
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:71
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:97
 msgid ""
 "Integration with plugin \"Events Manager\", adding fields to the schema to "
 "fetch event data."
@@ -9214,8 +9219,16 @@ msgstr ""
 "Tích hợp với plugin \"Events Manager\", thêm các trường vào schema để lấy dữ "
 "liệu sự kiện."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:69
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:97
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
+msgid ""
+"Integration with plugin \"FluentCart\", adding fields to the schema to "
+"interact with the e-commerce store."
+msgstr ""
+"Tích hợp với plugin \"FluentCart\", thêm các trường vào schema để tương tác "
+"với cửa hàng thương mại điện tử."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:101
 msgid ""
 "Integration with plugin \"JetEngine\", adding fields to the schema to fetch "
 "Custom Content Type data."
@@ -9223,8 +9236,8 @@ msgstr ""
 "Tích hợp với plugin \"JetEngine\", thêm các trường vào schema để lấy dữ liệu "
 "Custom Content Type."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:70
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:99
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:74
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:103
 msgid ""
 "Integration with plugin \"MultilingualPress\", adding fields to the schema "
 "to fetch multilingual data."
@@ -9232,8 +9245,8 @@ msgstr ""
 "Tích hợp với plugin \"MultilingualPress\", thêm các trường vào schema để lấy "
 "dữ liệu đa ngôn ngữ."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:71
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:75
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:105
 msgid ""
 "Integration with plugin \"Polylang\", adding fields to the schema to fetch "
 "multilingual data."
@@ -9241,7 +9254,7 @@ msgstr ""
 "Tích hợp với plugin \"Polylang\", thêm các trường vào schema để lấy dữ liệu "
 "đa ngôn ngữ."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:76
 msgid ""
 "Translate content to multiple languages using the service provider of your "
 "choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
@@ -9251,89 +9264,97 @@ msgstr ""
 "gồm ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, LLM tự lưu "
 "trữ (ví dụ: qua Ollama), DeepL và Google Translate."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:77
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:108
 msgid "Integration with WooCommerce, to fetch and mutate product data."
 msgstr "Tích hợp với WooCommerce, để lấy và thay đổi dữ liệu sản phẩm."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:66
 msgid "ChatGPT Translation"
 msgstr "Dịch thuật bằng ChatGPT"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:65
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:67
 msgid "Claude Translation"
 msgstr "Dịch thuật bằng Claude"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:66
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:68
 msgid "DeepL"
 msgstr "DeepL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:67
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:69
 msgid "DeepSeek"
 msgstr "DeepSeek"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:70
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:73
 msgid "Gemini Translation"
 msgstr "Dịch thuật bằng Gemini"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:71
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:74
 msgid "Google Translate"
 msgstr "Google Translate"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:72
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:75
 msgid "JetEngine CCTs"
 msgstr "JetEngine CCTs"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:73
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:76
 msgid "Mistral AI Translation"
 msgstr "Dịch thuật bằng Mistral AI"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:75
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:78
 msgid "OpenRouter Translation"
 msgstr "Dịch thuật bằng OpenRouter"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:77
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:80
 msgid "Self-Hosted LLM Translation"
 msgstr "Dịch thuật bằng LLM tự lưu trữ"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:89
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:92
 msgid "Translate content to multiple languages using the ChatGPT API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng ChatGPT API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:90
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:93
 msgid "Translate content to multiple languages using the Claude API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng Claude API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:91
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:94
 msgid "Translate content to multiple languages using the DeepL API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng DeepL API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:92
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:95
 msgid "Translate content to multiple languages using the DeepSeek API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng DeepSeek API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:95
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:98
+msgid ""
+"Integration with FluentCart, to fetch store data: products, orders, "
+"customers, subscriptions and more."
+msgstr ""
+"Tích hợp với FluentCart, để lấy dữ liệu cửa hàng: sản phẩm, đơn hàng, khách "
+"hàng, gói đăng ký và nhiều hơn nữa."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:99
 msgid "Translate content to multiple languages using the Gemini API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng Gemini API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:96
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:100
 msgid "Translate content to multiple languages using the Google Translate API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng Google Translate API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:98
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:102
 msgid "Translate content to multiple languages using the Mistral AI API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng API Mistral AI."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:100
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
 msgid "Translate content to multiple languages using the OpenRouter API."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng API OpenRouter."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:106
 msgid ""
 "Translate content to multiple languages using a Self-Hosted LLM provider."
 msgstr "Dịch nội dung sang nhiều ngôn ngữ bằng nhà cung cấp LLM tự lưu trữ."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:103
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:107
 msgid "Translate content to multiple languages using any provider's API."
 msgstr ""
 "Dịch nội dung sang nhiều ngôn ngữ bằng API của bất kỳ nhà cung cấp nào."

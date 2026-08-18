@@ -240,6 +240,8 @@ class PowerBundleExtensionModuleResolver extends AbstractBundleExtensionModuleRe
                 PremiumExtensionModuleResolver::DEEPSEEK_TRANSLATION,
                 PremiumExtensionModuleResolver::ELEMENTOR,
                 PremiumExtensionModuleResolver::EVENTS_MANAGER,
+                PremiumExtensionModuleResolver::FLUENTCART,
+                PremiumExtensionModuleResolver::GEMINI_TRANSLATION,
                 PremiumExtensionModuleResolver::GOOGLE_TRANSLATE,
                 PremiumExtensionModuleResolver::JETENGINE_CCTS,
                 PremiumExtensionModuleResolver::MISTRALAI_TRANSLATION,

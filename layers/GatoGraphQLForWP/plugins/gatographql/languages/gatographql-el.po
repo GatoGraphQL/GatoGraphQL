@@ -9356,52 +9356,57 @@ msgstr ""
 "Παραχωρήστε πρόσβαση σε χρήστες εκτός διαχειριστών για επεξεργασία του "
 "σχήματος GraphQL."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:49
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:62
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:51
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
 msgid "Automation"
 msgstr "Αυτοματισμός"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:50
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:63
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:52
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:65
 msgid "Bricks"
 msgstr "Bricks"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:51
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:68
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:53
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:70
 msgid "Elementor"
 msgstr "Elementor"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:52
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:69
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:54
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:71
 msgid "Events Manager"
 msgstr "Events Manager"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:53
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:55
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:72
+msgid "FluentCart"
+msgstr "FluentCart"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:56
 msgid "JetEngine"
 msgstr "JetEngine"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:54
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:74
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:77
 msgid "MultilingualPress"
 msgstr "MultilingualPress"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:55
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:76
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:58
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:79
 msgid "Polylang"
 msgstr "Polylang"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:56
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:78
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:59
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:81
 msgid "Translation"
 msgstr "Μετάφραση"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:57
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:79
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:60
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:82
 msgid "WooCommerce"
 msgstr "WooCommerce"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:65
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:87
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:68
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:90
 msgid ""
 "Use GraphQL to automate tasks in your app: Execute queries when some event "
 "happens, chain queries, and schedule and trigger queries via WP-Cron. (The "
@@ -9412,8 +9417,8 @@ msgstr ""
 "και προγραμματίστε και ενεργοποιήστε ερωτήματα μέσω WP-Cron. (Απαιτείται η "
 "επέκταση Internal GraphQL Server)."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:66
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:88
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:69
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:91
 msgid ""
 "Integration with plugin \"Bricks\", adding fields to parse and update data "
 "in Bricks pages and templates."
@@ -9421,8 +9426,8 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"Bricks\", προσθέτοντας πεδία για ανάλυση και "
 "ενημέρωση δεδομένων σε σελίδες και πρότυπα Bricks."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:67
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:70
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:96
 msgid ""
 "Integration with plugin \"Elementor\", adding fields to parse and update "
 "data in Elementor pages and templates."
@@ -9430,8 +9435,8 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"Elementor\", προσθέτοντας πεδία για ανάλυση και "
 "ενημέρωση δεδομένων σε σελίδες και πρότυπα Elementor."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:68
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:94
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:71
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:97
 msgid ""
 "Integration with plugin \"Events Manager\", adding fields to the schema to "
 "fetch event data."
@@ -9439,8 +9444,16 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"Events Manager\", προσθέτοντας πεδία στο σχήμα για "
 "ανάκτηση δεδομένων εκδηλώσεων."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:69
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:97
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
+msgid ""
+"Integration with plugin \"FluentCart\", adding fields to the schema to "
+"interact with the e-commerce store."
+msgstr ""
+"Ενσωμάτωση με το πρόσθετο \"FluentCart\", προσθέτοντας πεδία στο σχήμα για "
+"αλληλεπίδραση με το κατάστημα ηλεκτρονικού εμπορίου."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:101
 msgid ""
 "Integration with plugin \"JetEngine\", adding fields to the schema to fetch "
 "Custom Content Type data."
@@ -9448,8 +9461,8 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"JetEngine\", προσθέτοντας πεδία στο σχήμα για "
 "ανάκτηση δεδομένων Custom Content Type."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:70
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:99
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:74
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:103
 msgid ""
 "Integration with plugin \"MultilingualPress\", adding fields to the schema "
 "to fetch multilingual data."
@@ -9457,8 +9470,8 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"MultilingualPress\", προσθέτοντας πεδία στο σχήμα "
 "για ανάκτηση πολύγλωσσων δεδομένων."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:71
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:75
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:105
 msgid ""
 "Integration with plugin \"Polylang\", adding fields to the schema to fetch "
 "multilingual data."
@@ -9466,7 +9479,7 @@ msgstr ""
 "Ενσωμάτωση με το plugin \"Polylang\", προσθέτοντας πεδία στο σχήμα για "
 "ανάκτηση πολύγλωσσων δεδομένων."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:72
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:76
 msgid ""
 "Translate content to multiple languages using the service provider of your "
 "choice, among ChatGPT, Claude, Gemini, DeepSeek, Mistral AI, OpenRouter, "
@@ -9477,101 +9490,109 @@ msgstr ""
 "Mistral AI, OpenRouter, αυτο-φιλοξενούμενο LLM (π.χ. μέσω Ollama), DeepL και "
 "Google Translate."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:73
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumBundleExtensionModuleResolver.php:77
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:108
 msgid "Integration with WooCommerce, to fetch and mutate product data."
 msgstr ""
 "Ενσωμάτωση με το WooCommerce, για ανάκτηση και τροποποίηση δεδομένων "
 "προϊόντων."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:64
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:66
 msgid "ChatGPT Translation"
 msgstr "Μετάφραση ChatGPT"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:65
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:67
 msgid "Claude Translation"
 msgstr "Μετάφραση Claude"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:66
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:68
 msgid "DeepL"
 msgstr "DeepL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:67
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:69
 msgid "DeepSeek"
 msgstr "DeepSeek"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:70
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:73
 msgid "Gemini Translation"
 msgstr "Μετάφραση Gemini"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:71
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:74
 msgid "Google Translate"
 msgstr "Google Translate"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:72
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:75
 msgid "JetEngine CCTs"
 msgstr "JetEngine CCTs"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:73
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:76
 msgid "Mistral AI Translation"
 msgstr "Μετάφραση Mistral AI"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:75
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:78
 msgid "OpenRouter Translation"
 msgstr "Μετάφραση OpenRouter"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:77
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:80
 msgid "Self-Hosted LLM Translation"
 msgstr "Μετάφραση Self-Hosted LLM"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:89
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:92
 msgid "Translate content to multiple languages using the ChatGPT API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το ChatGPT API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:90
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:93
 msgid "Translate content to multiple languages using the Claude API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το Claude API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:91
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:94
 msgid "Translate content to multiple languages using the DeepL API."
 msgstr "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το DeepL API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:92
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:95
 msgid "Translate content to multiple languages using the DeepSeek API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το DeepSeek API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:95
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:98
+msgid ""
+"Integration with FluentCart, to fetch store data: products, orders, "
+"customers, subscriptions and more."
+msgstr ""
+"Ενσωμάτωση με το FluentCart, για ανάκτηση δεδομένων καταστήματος: προϊόντα, "
+"παραγγελίες, πελάτες, συνδρομές και άλλα."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:99
 msgid "Translate content to multiple languages using the Gemini API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το Gemini API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:96
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:100
 msgid "Translate content to multiple languages using the Google Translate API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το Google Translate "
 "API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:98
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:102
 msgid "Translate content to multiple languages using the Mistral AI API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το Mistral AI API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:100
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:104
 msgid "Translate content to multiple languages using the OpenRouter API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το OpenRouter API."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:106
 msgid ""
 "Translate content to multiple languages using a Self-Hosted LLM provider."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας έναν πάροχο LLM "
 "αυτο-φιλοξενούμενο."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:103
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PremiumExtensionModuleResolver.php:107
 msgid "Translate content to multiple languages using any provider's API."
 msgstr ""
 "Μεταφράστε περιεχόμενο σε πολλές γλώσσες χρησιμοποιώντας το API οποιουδήποτε "

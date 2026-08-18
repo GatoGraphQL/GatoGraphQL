@@ -16,6 +16,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
     public const BRICKS = Plugin::NAMESPACE . '\\bundle-extensions\\bricks';
     public const ELEMENTOR = Plugin::NAMESPACE . '\\bundle-extensions\\elementor';
     public const EVENTS_MANAGER = Plugin::NAMESPACE . '\\bundle-extensions\\events-manager';
+    public const FLUENTCART = Plugin::NAMESPACE . '\\bundle-extensions\\fluentcart';
     public const JETENGINE = Plugin::NAMESPACE . '\\bundle-extensions\\jetengine';
     public const MULTILINGUALPRESS = Plugin::NAMESPACE . '\\bundle-extensions\\multilingualpress';
     public const POLYLANG = Plugin::NAMESPACE . '\\bundle-extensions\\polylang';
@@ -35,6 +36,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::BRICKS,
             self::ELEMENTOR,
             self::EVENTS_MANAGER,
+            self::FLUENTCART,
             self::JETENGINE,
             self::MULTILINGUALPRESS,
             self::POLYLANG,
@@ -50,6 +52,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::BRICKS => \__('Bricks', 'gatographql'),
             self::ELEMENTOR => \__('Elementor', 'gatographql'),
             self::EVENTS_MANAGER => \__('Events Manager', 'gatographql'),
+            self::FLUENTCART => \__('FluentCart', 'gatographql'),
             self::JETENGINE => \__('JetEngine', 'gatographql'),
             self::MULTILINGUALPRESS => \__('MultilingualPress', 'gatographql'),
             self::POLYLANG => \__('Polylang', 'gatographql'),
@@ -66,6 +69,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::BRICKS => \__('Integration with plugin "Bricks", adding fields to parse and update data in Bricks pages and templates.', 'gatographql'),
             self::ELEMENTOR => \__('Integration with plugin "Elementor", adding fields to parse and update data in Elementor pages and templates.', 'gatographql'),
             self::EVENTS_MANAGER => \__('Integration with plugin "Events Manager", adding fields to the schema to fetch event data.', 'gatographql'),
+            self::FLUENTCART => \__('Integration with plugin "FluentCart", adding fields to the schema to interact with the e-commerce store.', 'gatographql'),
             self::JETENGINE => \__('Integration with plugin "JetEngine", adding fields to the schema to fetch Custom Content Type data.', 'gatographql'),
             self::MULTILINGUALPRESS => \__('Integration with plugin "MultilingualPress", adding fields to the schema to fetch multilingual data.', 'gatographql'),
             self::POLYLANG => \__('Integration with plugin "Polylang", adding fields to the schema to fetch multilingual data.', 'gatographql'),
@@ -89,6 +93,7 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             self::BRICKS => $imagePathURL . '/bricks.svg',
             self::ELEMENTOR => $imagePathURL . '/elementor.svg',
             self::EVENTS_MANAGER => $imagePathURL . '/events-manager.webp',
+            self::FLUENTCART => $imagePathURL . '/fluentcart.svg',
             self::JETENGINE => $imagePathURL . '/jetengine.svg',
             self::MULTILINGUALPRESS => $imagePathURL . '/multilingualpress.webp',
             self::POLYLANG => $imagePathURL . '/polylang.webp',
@@ -115,6 +120,9 @@ class PremiumBundleExtensionModuleResolver extends AbstractBundleExtensionModule
             ],
             self::EVENTS_MANAGER => [
                 PremiumExtensionModuleResolver::EVENTS_MANAGER,
+            ],
+            self::FLUENTCART => [
+                PremiumExtensionModuleResolver::FLUENTCART,
             ],
             self::JETENGINE => [
                 PremiumExtensionModuleResolver::JETENGINE_CCTS,
