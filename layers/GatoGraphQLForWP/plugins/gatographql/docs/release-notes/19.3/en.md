@@ -4,7 +4,9 @@
 
 ### FluentCart extension
 
-The new **FluentCart** extension adds fields to the GraphQL schema to fetch data from a [FluentCart](https://wordpress.org/plugins/fluent-cart/) store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration.
+The plugin docs now cover the new **FluentCart integration** ([#3379](https://github.com/GatoGraphQL/GatoGraphQL/pull/3379)).
+
+The FluentCart extension adds fields to the GraphQL schema to fetch data from a [FluentCart](https://wordpress.org/plugins/fluent-cart/) store: products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the shipping and tax configuration.
 
 Every monetary field is available both as a decimal and as the exact integer FluentCart stores, since it keeps amounts in the currency's minor units:
 
@@ -60,5 +62,3 @@ When **FluentCart Pro** is installed, its licensing and inventory data joins the
   }
 }
 ```
-
-Every foreign key is now exposed twice throughout the extension: as an ID, and as the entity it points at, so `order.customer` and `orderItem.product` no longer need a second query.
