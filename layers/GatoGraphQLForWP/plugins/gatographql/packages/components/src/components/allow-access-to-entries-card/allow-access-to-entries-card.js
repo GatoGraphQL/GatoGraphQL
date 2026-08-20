@@ -19,8 +19,8 @@ const AllowAccessToEntriesCard = ( props ) => {
 		isSelected,
 		setAttributes,
 		attributes,
-		entriesAttributeName = "entries",
-		behaviorAttributeName = "behavior",
+		entriesAttributeName = 'entries',
+		behaviorAttributeName = 'behavior',
 		entriesHeader,
 		entriesLabelDescIntro,
 		labelExampleItem,
@@ -30,21 +30,24 @@ const AllowAccessToEntriesCard = ( props ) => {
 	const behavior = attributes[ behaviorAttributeName ];
 	const options = [
 		{
-			label: __('Allow access', 'gatographql'),
+			label: __( 'Allow access', 'gatographql' ),
 			value: ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
 		},
 		{
-			label: __('Deny access', 'gatographql'),
+			label: __( 'Deny access', 'gatographql' ),
 			value: ATTRIBUTE_VALUE_BEHAVIOR_DENY,
 		},
 	];
-	const entriesLabelDescRegex = __('Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).', 'gatographql');
-	const entriesLabelDescExamples = __('For example, "%1$s" is matched by any of the following entries: %2$s.', 'gatographql')
-		.replace('%1$s', labelExampleItem)
-		.replace(
-			'%2$s',
-			`"${ labelExampleEntries.join('", "') }"`
-		);
+	const entriesLabelDescRegex = __(
+		'Entries surrounded with "/" or "#" are evaluated as regex (regular expressions).',
+		'gatographql'
+	);
+	const entriesLabelDescExamples = __(
+		'For example, "%1$s" is matched by any of the following entries: %2$s.',
+		'gatographql'
+	)
+		.replace( '%1$s', labelExampleItem )
+		.replace( '%2$s', `"${ labelExampleEntries.join( '", "' ) }"` );
 	const entriesLabel = `${ entriesLabelDescIntro } ${ entriesLabelDescRegex } ${ entriesLabelDescExamples }`;
 	return (
 		<>
@@ -57,41 +60,48 @@ const AllowAccessToEntriesCard = ( props ) => {
 					attributeName={ entriesAttributeName }
 					values={ entries }
 					help={ entriesLabel }
-					rows='10'
+					rows="10"
 				/>
 			</div>
 			<div>
-				<em>{ __('Behavior:', 'gatographql') }</em>
+				<em>{ __( 'Behavior:', 'gatographql' ) }</em>
 				<InfoTooltip
 					{ ...props }
-					text={ __('If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies', 'gatographql') }
+					text={ __(
+						'If "Allow access" is selected, only the configured entries can be accessed, and no other can; with "Deny access", the reverse applies',
+						'gatographql'
+					) }
 				/>
-				{ !isSelected && (
+				{ ! isSelected && (
 					<>
 						<br />
-						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_ALLOW &&
-							<span>✅ { __('Allow access', 'gatographql') }</span>
-						}
-						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_DENY &&
-							<span>❌ { __('Deny access', 'gatographql') }</span>
-						}
+						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_ALLOW && (
+							<span>
+								✅ { __( 'Allow access', 'gatographql' ) }
+							</span>
+						) }
+						{ behavior == ATTRIBUTE_VALUE_BEHAVIOR_DENY && (
+							<span>
+								❌ { __( 'Deny access', 'gatographql' ) }
+							</span>
+						) }
 					</>
 				) }
-				{ isSelected &&
+				{ isSelected && (
 					<RadioControl
 						{ ...props }
 						options={ options }
 						selected={ behavior }
-						onChange={ newValue => (
+						onChange={ ( newValue ) =>
 							setAttributes( {
-								[ behaviorAttributeName ]: newValue
+								[ behaviorAttributeName ]: newValue,
 							} )
-						)}
+						}
 					/>
-				}
+				) }
 			</div>
 		</>
 	);
-}
+};
 
 export default AllowAccessToEntriesCard;

@@ -18,57 +18,74 @@ const SchemaElementsTabPanel = ( props ) => {
 		enableDirectives,
 	} = props;
 	const tabs = [
-		...( enableOperations ? [ {
-			name: 'tabOperations',
-			title: __('Operations', 'gatographql'),
-			className: 'tab tab-operations',
-		} ] : [] ),
-		...( enableTypeFields ? [ {
-			name: 'tabTypeFields',
-			title: __('Fields', 'gatographql'),
-			className: 'tab tab-fields tab-standard-fields',
-		} ] : [] ),
-		...( enableGlobalFields ? [ {
-			name: 'tabGlobalFields',
-			title: __('Global Fields', 'gatographql'),
-			className: 'tab tab-fields tab-global-fields',
-		} ] : [] ),
-		...( enableDirectives ? [ {
-			name: 'tabDirectives',
-			title: __('Directives', 'gatographql'),
-			className: 'tab tab-directives',
-		} ] : [] ),
-	]
+		...( enableOperations
+			? [
+					{
+						name: 'tabOperations',
+						title: __( 'Operations', 'gatographql' ),
+						className: 'tab tab-operations',
+					},
+			  ]
+			: [] ),
+		...( enableTypeFields
+			? [
+					{
+						name: 'tabTypeFields',
+						title: __( 'Fields', 'gatographql' ),
+						className: 'tab tab-fields tab-standard-fields',
+					},
+			  ]
+			: [] ),
+		...( enableGlobalFields
+			? [
+					{
+						name: 'tabGlobalFields',
+						title: __( 'Global Fields', 'gatographql' ),
+						className: 'tab tab-fields tab-global-fields',
+					},
+			  ]
+			: [] ),
+		...( enableDirectives
+			? [
+					{
+						name: 'tabDirectives',
+						title: __( 'Directives', 'gatographql' ),
+						className: 'tab tab-directives',
+					},
+			  ]
+			: [] ),
+	];
 	return (
 		<TabPanel
 			className={ className + '__tab_panel' }
 			activeClass="active-tab"
 			tabs={ tabs }
 		>
-			{
-				( tab ) =>
-					tab.name == 'tabOperations' ?
-						<OperationMultiSelectControl
-							{ ...props }
-							selectedItems={ operations }
-						/> :
-					tab.name == 'tabTypeFields' ?
-						<TypeFieldMultiSelectControl
-							{ ...props }
-							selectedItems={ typeFields }
-						/> :
-					tab.name == 'tabGlobalFields' ?
-						<GlobalFieldMultiSelectControl
-							{ ...props }
-							selectedItems={ globalFields }
-						/> :
-						<DirectiveMultiSelectControl
-							{ ...props }
-							selectedItems={ directives }
-						/>
+			{ ( tab ) =>
+				tab.name == 'tabOperations' ? (
+					<OperationMultiSelectControl
+						{ ...props }
+						selectedItems={ operations }
+					/>
+				) : tab.name == 'tabTypeFields' ? (
+					<TypeFieldMultiSelectControl
+						{ ...props }
+						selectedItems={ typeFields }
+					/>
+				) : tab.name == 'tabGlobalFields' ? (
+					<GlobalFieldMultiSelectControl
+						{ ...props }
+						selectedItems={ globalFields }
+					/>
+				) : (
+					<DirectiveMultiSelectControl
+						{ ...props }
+						selectedItems={ directives }
+					/>
+				)
 			}
 		</TabPanel>
 	);
-}
+};
 
 export default SchemaElementsTabPanel;

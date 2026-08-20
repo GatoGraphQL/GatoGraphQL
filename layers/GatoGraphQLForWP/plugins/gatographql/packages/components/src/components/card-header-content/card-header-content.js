@@ -8,17 +8,15 @@ const CardHeaderContent = ( props ) => {
 		tooltip,
 		isSelected,
 		getMarkdownContentCallback,
-		documentationTitle = sprintf( __( 'Documentation for: "%s"', 'gatographql' ), header )
+		documentationTitle = sprintf(
+			__( 'Documentation for: "%s"', 'gatographql' ),
+			header
+		),
 	} = props;
 	return (
 		<span>
 			{ header }
-			{ !! tooltip &&
-				<InfoTooltip
-					{ ...props }
-					text={ tooltip }
-				/>
-			}
+			{ !! tooltip && <InfoTooltip { ...props } text={ tooltip } /> }
 			{ !! getMarkdownContentCallback && isSelected && (
 				<MarkdownInfoModalButton
 					{ ...props }
@@ -27,8 +25,7 @@ const CardHeaderContent = ( props ) => {
 				/>
 			) }
 		</span>
-	)
-}
+	);
+};
 
 export default CardHeaderContent;
-

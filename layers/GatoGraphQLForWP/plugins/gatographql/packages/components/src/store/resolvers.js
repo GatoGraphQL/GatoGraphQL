@@ -9,7 +9,7 @@ import {
 	fetchDirectives,
 	receiveDirectives,
 } from './actions';
-import parameters from './parameters'
+import parameters from './parameters';
 import { maybeGetErrorMessage } from './utils';
 import { fetchGraphQLQuery } from '@gatographql/api-fetch';
 
@@ -23,14 +23,16 @@ export const getTypeFields =
 				parameters.typeFields.query,
 				variables
 			);
-			
+
 			/**
 			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
-			const maybeErrorMessage = maybeGetErrorMessage(response);
-			if (maybeErrorMessage) {
-				dispatch( receiveTypeFields( variables, [], maybeErrorMessage ) );
-				return
+			const maybeErrorMessage = maybeGetErrorMessage( response );
+			if ( maybeErrorMessage ) {
+				dispatch(
+					receiveTypeFields( variables, [], maybeErrorMessage )
+				);
+				return;
 			}
 
 			/**
@@ -41,13 +43,19 @@ export const getTypeFields =
 			 *   "fields": array|null (where currently is "type.fields.name")
 			 * }
 			 */
-			const results = response.data?.__schema?.types?.map(element => ({
-				typeName: element.name,
-				typeNamespacedName: element.namespacedName,
-				typeKind: element.kind,
-				typeDescription: element.description,
-				fields: element.fields == null ? null : element.fields.map(subelement => subelement.name),
-			})) || [];
+			const results =
+				response.data?.__schema?.types?.map( ( element ) => ( {
+					typeName: element.name,
+					typeNamespacedName: element.namespacedName,
+					typeKind: element.kind,
+					typeDescription: element.description,
+					fields:
+						element.fields == null
+							? null
+							: element.fields.map(
+									( subelement ) => subelement.name
+							  ),
+				} ) ) || [];
 			dispatch( receiveTypeFields( variables, results ) );
 		} catch {}
 	};
@@ -62,20 +70,25 @@ export const getGlobalFields =
 				parameters.globalFields.query,
 				variables
 			);
-			
+
 			/**
 			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
-			const maybeErrorMessage = maybeGetErrorMessage(response);
-			if (maybeErrorMessage) {
-				dispatch( receiveGlobalFields( variables, [], maybeErrorMessage ) );
-				return
+			const maybeErrorMessage = maybeGetErrorMessage( response );
+			if ( maybeErrorMessage ) {
+				dispatch(
+					receiveGlobalFields( variables, [], maybeErrorMessage )
+				);
+				return;
 			}
 
 			/**
 			 * Flatten the response to an array containing the global field name directly (extracting them from under the "name" key)
 			 */
-			const results = response.data?.__schema?.globalFields?.map(element => element.name) || [];
+			const results =
+				response.data?.__schema?.globalFields?.map(
+					( element ) => element.name
+				) || [];
 			dispatch( receiveGlobalFields( variables, results ) );
 		} catch {}
 	};
@@ -90,20 +103,25 @@ export const getDirectives =
 				parameters.directives.query,
 				variables
 			);
-			
+
 			/**
 			 * If there were errors when executing the query, return an empty list, and keep the error in the state
 			 */
-			const maybeErrorMessage = maybeGetErrorMessage(response);
-			if (maybeErrorMessage) {
-				dispatch( receiveDirectives( variables, [], maybeErrorMessage ) );
-				return
+			const maybeErrorMessage = maybeGetErrorMessage( response );
+			if ( maybeErrorMessage ) {
+				dispatch(
+					receiveDirectives( variables, [], maybeErrorMessage )
+				);
+				return;
 			}
 
 			/**
 			 * Flatten the response to an array containing the directive name directly (extracting them from under the "name" key)
 			 */
-			const results = response.data?.__schema?.directives?.map(element => element.name) || [];
+			const results =
+				response.data?.__schema?.directives?.map(
+					( element ) => element.name
+				) || [];
 			dispatch( receiveDirectives( variables, results ) );
 		} catch {}
 	};

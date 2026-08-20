@@ -1,1 +1,1 @@
-export { default as withEditableOnFocus } from './with-editable-on-focus' ;
+export { default as withEditableOnFocus } from './with-editable-on-focus';

@@ -1,4 +1,4 @@
-import parameters from './parameters'
+import parameters from './parameters';
 
 /**
  * WordPress dependencies
@@ -18,14 +18,18 @@ export const typeFields = ( state = {}, action ) => {
 		case 'FETCH_TYPE_FIELDS':
 			return {
 				...state,
-				[ ( action.variables || parameters.typeFields.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.typeFields.defaultVariables
+				).toString() ]: {
 					isRequesting: true,
 				},
 			};
 		case 'RECEIVE_TYPE_FIELDS':
 			return {
 				...state,
-				[ ( action.variables || parameters.typeFields.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.typeFields.defaultVariables
+				).toString() ]: {
 					results: action.typeFields,
 					errorMessage: action.errorMessage,
 					isRequesting: false,
@@ -48,14 +52,18 @@ export const globalFields = ( state = {}, action ) => {
 		case 'FETCH_GLOBAL_FIELDS':
 			return {
 				...state,
-				[ ( action.variables || parameters.globalFields.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.globalFields.defaultVariables
+				).toString() ]: {
 					isRequesting: true,
 				},
 			};
 		case 'RECEIVE_GLOBAL_FIELDS':
 			return {
 				...state,
-				[ ( action.variables || parameters.globalFields.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.globalFields.defaultVariables
+				).toString() ]: {
 					results: action.globalFields,
 					errorMessage: action.errorMessage,
 					isRequesting: false,
@@ -78,14 +86,18 @@ export const directives = ( state = {}, action ) => {
 		case 'FETCH_DIRECTIVES':
 			return {
 				...state,
-				[ ( action.variables || parameters.directives.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.directives.defaultVariables
+				).toString() ]: {
 					isRequesting: true,
 				},
 			};
 		case 'RECEIVE_DIRECTIVES':
 			return {
 				...state,
-				[ ( action.variables || parameters.directives.defaultVariables ).toString() ]: {
+				[ (
+					action.variables || parameters.directives.defaultVariables
+				).toString() ]: {
 					results: action.directives,
 					errorMessage: action.errorMessage,
 					isRequesting: false,

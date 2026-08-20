@@ -8,9 +8,10 @@ import { __, sprintf } from '@wordpress/i18n';
  *
  * @param {int} id
  */
-const getLabelForNotFoundElement = ( id ) => sprintf(
-	__('(Undefined or unpublished item with ID \'%s\')', 'gatographql'),
-	id
-);
+const getLabelForNotFoundElement = ( id ) =>
+	sprintf(
+		__( "(Undefined or unpublished item with ID '%s')", 'gatographql' ),
+		id
+	);
 
 export default getLabelForNotFoundElement;

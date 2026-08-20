@@ -1,1 +1,1 @@
-export { default as withCard } from './with-card' ;
+export { default as withCard } from './with-card';

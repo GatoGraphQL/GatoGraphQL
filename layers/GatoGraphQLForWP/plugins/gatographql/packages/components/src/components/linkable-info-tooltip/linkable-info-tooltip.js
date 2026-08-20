@@ -8,7 +8,6 @@ import { Tooltip, Icon, ExternalLink } from '@wordpress/components';
  */
 import './style.scss';
 
-
 const LinkableInfoTooltip = ( props ) => {
 	const {
 		text,
@@ -16,12 +15,14 @@ const LinkableInfoTooltip = ( props ) => {
 		href,
 		iconSize = 24,
 		onlyIfIsSelected = true,
-		isSelected
+		isSelected,
 	} = props;
-	if (onlyIfIsSelected && !isSelected) {
+	if ( onlyIfIsSelected && ! isSelected ) {
 		return '';
 	}
-	const linkClassName = ( className ? ( className+'__link' ) : '' ) + 'linkable-info-tooltip__link';
+	const linkClassName =
+		( className ? className + '__link' : '' ) +
+		'linkable-info-tooltip__link';
 	return (
 		<span className={ className }>
 			<Tooltip text={ text }>
@@ -31,13 +32,12 @@ const LinkableInfoTooltip = ( props ) => {
 						<ExternalLink
 							className={ linkClassName }
 							href={ href }
-						>
-						</ExternalLink>
+						></ExternalLink>
 					</sup>
 				</span>
 			</Tooltip>
 		</span>
 	);
-}
+};
 
 export default LinkableInfoTooltip;

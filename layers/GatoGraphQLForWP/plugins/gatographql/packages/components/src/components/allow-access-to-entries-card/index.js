@@ -1,2 +1,1 @@
-export { default as AllowAccessToEntriesCard } from './allow-access-to-entries-card' ;
-
+export { default as AllowAccessToEntriesCard } from './allow-access-to-entries-card';

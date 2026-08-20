@@ -6,46 +6,45 @@ import { TextareaControl } from '@wordpress/components';
 import './style.scss';
 
 const EditableArrayTextareaControl = ( props ) => {
-	const {
-		values,
-		className,
-		setAttributes,
-		isSelected,
-		attributeName
-	} = props;
+	const { values, className, setAttributes, isSelected, attributeName } =
+		props;
 	const componentClassName = 'gatographql-textarea-control';
 	return (
 		<>
-			{ isSelected &&
+			{ isSelected && (
 				<TextareaControl
 					{ ...props }
-					value={ values.join('\n') }
-					onChange={ value =>
+					value={ values.join( '\n' ) }
+					onChange={ ( value ) =>
 						setAttributes( {
-							[ attributeName ]: value.split('\n')
+							[ attributeName ]: value.split( '\n' ),
 						} )
 					}
 				/>
-			}
-			{ !isSelected && !!values.length && (
-				<div className={ `${ className }__value-group ${ componentClassName }__value-group` }>
-					{ values.map( val =>
-						<div className={ `${ className }__value-item ${ componentClassName }__value-item ` }>
-							{ !!val && val }
-							{ !val && (
-								<>&nbsp;</>
-							) }
+			) }
+			{ ! isSelected && !! values.length && (
+				<div
+					className={ `${ className }__value-group ${ componentClassName }__value-group` }
+				>
+					{ values.map( ( val ) => (
+						<div
+							className={ `${ className }__value-item ${ componentClassName }__value-item ` }
+						>
+							{ !! val && val }
+							{ ! val && <>&nbsp;</> }
 						</div>
-					) }
+					) ) }
 				</div>
 			) }
-			{ !isSelected && !values.length && (
-				<div className={ `${ className }__not-set ${ componentClassName }__not-set` }>
-					<em>{ __('(not set)', 'gatographql') }</em>
+			{ ! isSelected && ! values.length && (
+				<div
+					className={ `${ className }__not-set ${ componentClassName }__not-set` }
+				>
+					<em>{ __( '(not set)', 'gatographql' ) }</em>
 				</div>
 			) }
 		</>
-	)
-}
+	);
+};
 
 export default EditableArrayTextareaControl;

@@ -24,24 +24,24 @@ function MultiSelectControlGroup( {
 	setAttributes,
 	attributeName,
 } ) {
-	const checkedItems = intersection(
-		map( items, 'value' ),
-		selectedItems
-	);
+	const checkedItems = intersection( map( items, 'value' ), selectedItems );
 	const toggleVisible = ( itemValue, nextIsChecked ) => {
 		setAttributes( {
-			[ attributeName ]: nextIsChecked ? [...selectedItems, itemValue] : without(selectedItems, itemValue)
+			[ attributeName ]: nextIsChecked
+				? [ ...selectedItems, itemValue ]
+				: without( selectedItems, itemValue ),
 		} );
 	};
 	const toggleAllVisible = ( nextIsChecked ) => {
 		const itemValues = map( items, 'value' );
 		setAttributes( {
-			[ attributeName ]: nextIsChecked ? [...selectedItems, ...itemValues] : without(selectedItems, ...itemValues)
+			[ attributeName ]: nextIsChecked
+				? [ ...selectedItems, ...itemValues ]
+				: without( selectedItems, ...itemValues ),
 		} );
 	};
 
-	const titleId =
-		'multi-select-control__category-title-' + instanceId;
+	const titleId = 'multi-select-control__category-title-' + instanceId;
 
 	const isAllChecked = checkedItems.length === items.length;
 
@@ -54,13 +54,9 @@ function MultiSelectControlGroup( {
 		ariaChecked = 'false';
 	}
 
-	const className = `multi-select-control__category ${ groupKind }`
+	const className = `multi-select-control__category ${ groupKind }`;
 	return (
-		<div
-			role="group"
-			aria-labelledby={ titleId }
-			className={ className }
-		>
+		<div role="group" aria-labelledby={ titleId } className={ className }>
 			<CheckboxControl
 				checked={ isAllChecked }
 				onChange={ toggleAllVisible }
@@ -78,6 +74,4 @@ function MultiSelectControlGroup( {
 	);
 }
 
-export default compose( [
-	withInstanceId,
-] )( MultiSelectControlGroup );
+export default compose( [ withInstanceId ] )( MultiSelectControlGroup );

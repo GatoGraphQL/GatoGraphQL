@@ -33,19 +33,22 @@ function MultiSelectControl( props ) {
 	// value reference on each call.
 	// If the type matches the search, return all fields. Otherwise, return all fields that match the search
 	const filteredItems = items.filter(
-		( item ) => !search || item.group.toLowerCase().includes(search.toLowerCase()) || item.title.toLowerCase().includes(search.toLowerCase())
+		( item ) =>
+			! search ||
+			item.group.toLowerCase().includes( search.toLowerCase() ) ||
+			item.title.toLowerCase().includes( search.toLowerCase() )
 	);
 	/**
 	 * Create a dictionary of the unique groups,
 	 * and also their groupKinds if available
 	 * Use group as key, and groupKind as the value
 	 */
-	let uniqueFilteredItems = {};
-	filteredItems.forEach(function( item ) {
+	const uniqueFilteredItems = {};
+	filteredItems.forEach( function ( item ) {
 		uniqueFilteredItems[ item.group ] = {
 			kind: item.groupKind || '',
-			description: item.groupDescription || ''
-		}			
+			description: item.groupDescription || '',
+		};
 	} );
 	return (
 		<div className="multi-select-control__content">
@@ -54,17 +57,19 @@ function MultiSelectControl( props ) {
 					<Button
 						isSmall
 						icon={ searchIcon }
-						onClick={
-							() => setState( {
-								showSearch: !showSearch
+						onClick={ () =>
+							setState( {
+								showSearch: ! showSearch,
 							} )
 						}
 					>
-						{ showSearch ? __( 'Hide search', 'gatographql' ) : __( 'Show search', 'gatographql' ) }
+						{ showSearch
+							? __( 'Hide search', 'gatographql' )
+							: __( 'Show search', 'gatographql' ) }
 					</Button>
 				) }
 			</div>
-			{ ( !showSearchBtn || showSearch ) &&
+			{ ( ! showSearchBtn || showSearch ) && (
 				<TextControl
 					type="search"
 					label={ __( 'Search', 'gatographql' ) }
@@ -76,7 +81,7 @@ function MultiSelectControl( props ) {
 					}
 					className="multi-select-control__search"
 				/>
-			}
+			) }
 			<div
 				tabIndex="0"
 				role="region"
@@ -88,15 +93,17 @@ function MultiSelectControl( props ) {
 						{ __( 'No items found.', 'gatographql' ) }
 					</p>
 				) }
-				{ Object.keys(uniqueFilteredItems).map( ( group ) => (
+				{ Object.keys( uniqueFilteredItems ).map( ( group ) => (
 					<MultiSelectControlGroup
 						{ ...props }
 						key={ group }
 						group={ group }
-						groupKind={ uniqueFilteredItems[group].kind }
-						groupDescription={ uniqueFilteredItems[group].description }
+						groupKind={ uniqueFilteredItems[ group ].kind }
+						groupDescription={
+							uniqueFilteredItems[ group ].description
+						}
 						items={ filter( filteredItems, {
-							group: group,
+							group,
 						} ) }
 					/>
 				) ) }
@@ -111,5 +118,4 @@ export default compose( [
 	withErrorMessage(),
 ] )( MultiSelectControl );
 
-export { default as AddUndefinedSelectedItemIDs } from './add-undefined-selected-item-ids' ;
-
+export { default as AddUndefinedSelectedItemIDs } from './add-undefined-selected-item-ids';
