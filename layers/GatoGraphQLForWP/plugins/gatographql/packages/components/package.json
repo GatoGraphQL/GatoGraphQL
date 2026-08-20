@@ -21,6 +21,8 @@
         "packages-update": "wp-scripts packages-update"
     },
     "devDependencies": {
+        "@emotion/cache": "^10.0.9",
+        "@emotion/core": "^10.0.9",
         "@gatographql/api-fetch": "file:../api-fetch",
         "@wordpress/base-styles": "^4.49.0",
         "@wordpress/components": "^27.6.0",

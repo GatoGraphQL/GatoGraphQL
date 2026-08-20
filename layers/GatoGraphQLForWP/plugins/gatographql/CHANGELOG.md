@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Tested up to WordPress 7.1 (#aa2cdc8d)
 
+### Fixed
+
+- The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 (#3380)
+
 ## 19.2.0 - 11/08/2026
 
 ### Added

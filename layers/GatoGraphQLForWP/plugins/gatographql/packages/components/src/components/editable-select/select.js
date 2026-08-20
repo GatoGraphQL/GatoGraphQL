@@ -2,12 +2,15 @@
  * WordPress dependencies
  */
 import { compose } from '@wordpress/compose';
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
  * External dependencies
  */
 import Select from 'react-select';
+import { CacheProvider } from '@emotion/core';
+import createCache from '@emotion/cache';
 
 /**
  * Internal dependencies
@@ -16,6 +19,31 @@ import { withErrorMessage, withSpinner } from '../loading';
 import './style.scss';
 
 const GetLabelForNotFoundValue = ( val ) => val;
+
+/**
+ * react-select styles itself with Emotion, which inserts its rules into the
+ * document where its module was loaded. Since WordPress 7.1 the post editor
+ * canvas is always an iframe, so those rules never reach the rendered dropdown
+ * and it shows up unstyled. WordPress' own `StyleProvider` redirects Emotion 11
+ * only, while react-select v3 is on Emotion 10, so it needs its own cache
+ * pointing at the document the dropdown is rendered in.
+ */
+const emotionCachesByDocument = new WeakMap();
+
+const getEmotionCache = ( ownerDocument ) => {
+	if ( ! ownerDocument || ownerDocument === document ) {
+		return null;
+	}
+	let cache = emotionCachesByDocument.get( ownerDocument );
+	if ( ! cache ) {
+		cache = createCache( {
+			key: 'gatographql-select',
+			container: ownerDocument.head,
+		} );
+		emotionCachesByDocument.set( ownerDocument, cache );
+	}
+	return cache;
+};
 
 const EditableSelect = ( props ) => {
 	const {
@@ -65,22 +93,35 @@ const EditableSelect = ( props ) => {
 	} );
 	const componentClassName = 'gatographql-select-card';
 	const multiOrSingleClass = isMulti ? 'multi' : 'single';
+	const [ selectAnchor, setSelectAnchor ] = useState( null );
+	const emotionCache = getEmotionCache( selectAnchor && selectAnchor.ownerDocument );
+	const selectElement = (
+		<Select
+			defaultValue={ defaultValue }
+			options={ options }
+			isMulti={ isMulti }
+			closeMenuOnSelect={ closeMenuOnSelect }
+			onChange={ selected =>
+				setAttributes( {
+					[ attributeName ]: isMulti ?
+						(selected || []).map(option => option.value) :
+						selected.value
+				} )
+			}
+		/>
+	);
 	return (
 		<>
 			{ isSelected &&
-				<Select
-					defaultValue={ defaultValue }
-					options={ options }
-					isMulti={ isMulti }
-					closeMenuOnSelect={ closeMenuOnSelect }
-					onChange={ selected =>
-						setAttributes( {
-							[ attributeName ]: isMulti ?
-								(selected || []).map(option => option.value) :
-								selected.value
-						} )
-					}
-				/>
+				<>
+					<span ref={ setSelectAnchor } style={ { display: 'none' } } />
+					{ selectAnchor && ( emotionCache ?
+						<CacheProvider value={ emotionCache }>
+							{ selectElement }
+						</CacheProvider>
+						: selectElement
+					) }
+				</>
 			}
 			{ !isSelected && !!value.length && (
 				<div className={ `${ className }__label-group ${ componentClassName }__label-group ${ multiOrSingleClass }` }>
