@@ -428,6 +428,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/symplify-easy-testing.git"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-smart-file-system.git"
         }
     ],
     "replace": {
