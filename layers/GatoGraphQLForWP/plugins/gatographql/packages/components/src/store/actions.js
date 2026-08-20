@@ -14,13 +14,17 @@ export function fetchTypeFields( graphQLVariables ) {
  * Returns an action object used in signalling that the type fields
  * have been updated.
  *
- * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} typeFields Type fields.
- * @param {string|null} errorMessage Error message if fetching the objects failed
+ * @param {Array}       graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ * @param {Array}       typeFields       Type fields.
+ * @param {string|null} errorMessage     Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveTypeFields( graphQLVariables, typeFields, errorMessage ) {
+export function receiveTypeFields(
+	graphQLVariables,
+	typeFields,
+	errorMessage
+) {
 	return {
 		type: 'RECEIVE_TYPE_FIELDS',
 		graphQLVariables,
@@ -45,13 +49,17 @@ export function fetchGlobalFields( graphQLVariables ) {
  * Returns an action object used in signalling that the global fields
  * have been updated.
  *
- * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} globalFields Global fields.
- * @param {string|null} errorMessage Error message if fetching the objects failed
+ * @param {Array}       graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ * @param {Array}       globalFields     Global fields.
+ * @param {string|null} errorMessage     Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveGlobalFields( graphQLVariables, globalFields, errorMessage ) {
+export function receiveGlobalFields(
+	graphQLVariables,
+	globalFields,
+	errorMessage
+) {
 	return {
 		type: 'RECEIVE_GLOBAL_FIELDS',
 		graphQLVariables,
@@ -76,13 +84,17 @@ export function fetchDirectives( graphQLVariables ) {
  * Returns an action object used in signalling that the directives
  * have been updated.
  *
- * @param {Array} graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
- * @param {Array} directives Directives.
- * @param {string|null} errorMessage Error message if fetching the objects failed
+ * @param {Array}       graphQLVariables Variables to customize the result of executing the GraphQL query (if any is needed).
+ * @param {Array}       directives       Directives.
+ * @param {string|null} errorMessage     Error message if fetching the objects failed
  *
  * @return {Object} Action object.
  */
-export function receiveDirectives( graphQLVariables, directives, errorMessage ) {
+export function receiveDirectives(
+	graphQLVariables,
+	directives,
+	errorMessage
+) {
 	return {
 		type: 'RECEIVE_DIRECTIVES',
 		graphQLVariables,

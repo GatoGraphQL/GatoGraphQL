@@ -10,6 +10,18 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Documentation for the FluentCart integration (#3379)
 
+## 19.2.1 - 20/08/2026
+
+### Improvements
+
+- Tested up to WordPress 7.1 (#aa2cdc8d)
+- The read-only lists of selected schema elements are spaced out, instead of having their items sit flush against each other (#3382)
+
+### Fixed
+
+- The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 (#3380)
+- The checkmarks in the read-only lists of selected schema elements are no longer greyed out under WordPress 7.1 (#3381)
+
 ## 19.2.0 - 11/08/2026
 
 ### Added

@@ -21,12 +21,19 @@ import { InfoModalButton } from '../info-modal';
 const DEFAULT_DOC_LANG = 'en';
 
 const getEnglishDocNoticeHTML = () => {
-	const lang = ( document.documentElement.lang || '' ).split( '-' )[ 0 ].toLowerCase();
+	const lang = ( document.documentElement.lang || '' )
+		.split( '-' )[ 0 ]
+		.toLowerCase();
 	const websiteURL = window.gatoGraphQLDocsWebsiteURL;
 	// Only show the notice for languages the website is actually translated to
 	// (the same set the plugin is translated to), exposed from PHP.
 	const translatedLanguages = window.gatoGraphQLDocsTranslatedLanguages || [];
-	if ( ! lang || lang === DEFAULT_DOC_LANG || ! websiteURL || ! translatedLanguages.includes( lang ) ) {
+	if (
+		! lang ||
+		lang === DEFAULT_DOC_LANG ||
+		! websiteURL ||
+		! translatedLanguages.includes( lang )
+	) {
 		return '';
 	}
 	// Prefix the language as a subdomain: https://gatographql.com -> https://es.gatographql.com
@@ -37,27 +44,22 @@ const getEnglishDocNoticeHTML = () => {
 	} catch ( e ) {}
 	const link = `<a href="${ localizedURL }" target="_blank">${ host }</a>`;
 	return `<div class="notice notice-warning" style="margin-bottom: 1.5em;"><p>${ sprintf(
-		__( 'This documentation is in English. You can read it in your language at %s.', 'gatographql' ),
+		__(
+			'This documentation is in English. You can read it in your language at %s.',
+			'gatographql'
+		),
 		link
 	) }</p></div>`;
 };
 
 const MarkdownInfoModalButton = ( props ) => {
-	const {
-		pageFilename,
-		getMarkdownContentCallback,
-	} = props;
-	const [ page, setPage ] = useState([]);
-	useEffect(() => {
-		getMarkdownContentCallback( pageFilename ).then( value => {
-			setPage( getEnglishDocNoticeHTML() + value )
-		});
-	}, []);
-	return (
-		<InfoModalButton
-			{ ...props }
-			content={ page }
-		/>
-	);
+	const { pageFilename, getMarkdownContentCallback } = props;
+	const [ page, setPage ] = useState( [] );
+	useEffect( () => {
+		getMarkdownContentCallback( pageFilename ).then( ( value ) => {
+			setPage( getEnglishDocNoticeHTML() + value );
+		} );
+	}, [] );
+	return <InfoModalButton { ...props } content={ page } />;
 };
 export default MarkdownInfoModalButton;

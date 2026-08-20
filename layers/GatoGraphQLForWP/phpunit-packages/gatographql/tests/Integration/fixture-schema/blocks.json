@@ -314,9 +314,10 @@
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
                             "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                            "title": "The dog stuck in the fence"
+                            "title": "The dog stuck in the fence",
+                            "isDecorative": false
                         },
-                        "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                        "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                         "innerBlocks": null
                     },
                     {
@@ -383,9 +384,17 @@
                             "hasParallax": false,
                             "isRepeated": false,
                             "backgroundType": "image",
-                            "tagName": "div"
+                            "tagName": "div",
+                            "allowedVideoProviders": [
+                                "youtube",
+                                "vimeo",
+                                "videopress",
+                                "animoto",
+                                "tiktok",
+                                "wordpress-tv"
+                            ]
                         },
-                        "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
+                        "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\",\"allowedVideoProviders\":[\"youtube\",\"vimeo\",\"videopress\",\"animoto\",\"tiktok\",\"wordpress-tv\"]} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/paragraph",
@@ -605,7 +614,7 @@
                             "allowResize": false,
                             "aspectRatio": "auto"
                         },
-                        "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
+                        "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/image",
@@ -614,9 +623,10 @@
                                     "linkDestination": "none",
                                     "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                                     "alt": "Funny dog in couch",
-                                    "caption": "Bring me the chips please"
+                                    "caption": "Bring me the chips please",
+                                    "isDecorative": false
                                 },
-                                "contentSource": "<!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                                "contentSource": "<!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                                 "innerBlocks": null
                             },
                             {
@@ -626,9 +636,10 @@
                                     "linkDestination": "none",
                                     "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                                     "alt": "Even funnier dog",
-                                    "caption": "Anyone having chips? Don't leave me alone!"
+                                    "caption": "Anyone having chips? Don't leave me alone!",
+                                    "isDecorative": false
                                 },
-                                "contentSource": "<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                                "contentSource": "<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                                 "innerBlocks": null
                             }
                         ]
@@ -887,10 +898,8 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                        },
-                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {},
+                        "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -924,9 +933,9 @@
                             "buttonPosition": "button-outside",
                             "buttonUseIcon": false,
                             "query": [],
-                            "isSearchFieldHidden": false
+                            "tagName": ""
                         },
-                        "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"isSearchFieldHidden\":false} \/-->",
+                        "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"tagName\":\"\"} \/-->",
                         "innerBlocks": null
                     },
                     {
@@ -1131,14 +1140,15 @@
                             "hasIcon": true,
                             "maxNestingLevel": 5
                         },
-                        "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                        "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/home-link",
                                 "attributes": {
-                                    "label": "Home page"
+                                    "label": "Home page",
+                                    "opensInNewTab": false
                                 },
-                                "contentSource": "<!-- wp:home-link {\"label\":\"Home page\"} \/-->",
+                                "contentSource": "<!-- wp:home-link {\"label\":\"Home page\",\"opensInNewTab\":false} \/-->",
                                 "innerBlocks": null
                             },
                             {
@@ -1382,9 +1392,12 @@
                         "name": "core\/icon",
                         "attributes": {
                             "icon": "core\/audio",
-                            "ariaLabel": "An icon representing audio content"
+                            "ariaLabel": "An icon representing audio content",
+                            "flipHorizontal": false,
+                            "flipVertical": false,
+                            "rotation": 0
                         },
-                        "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                        "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\",\"flipHorizontal\":false,\"flipVertical\":false,\"rotation\":0} \/-->",
                         "innerBlocks": null
                     },
                     {
@@ -1482,7 +1495,8 @@
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
                             "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                            "title": "The dog stuck in the fence"
+                            "title": "The dog stuck in the fence",
+                            "isDecorative": false
                         }
                     },
                     {
@@ -1538,7 +1552,15 @@
                             "hasParallax": false,
                             "isRepeated": false,
                             "backgroundType": "image",
-                            "tagName": "div"
+                            "tagName": "div",
+                            "allowedVideoProviders": [
+                                "youtube",
+                                "vimeo",
+                                "videopress",
+                                "animoto",
+                                "tiktok",
+                                "wordpress-tv"
+                            ]
                         },
                         "innerBlocks": [
                             {
@@ -1733,7 +1755,8 @@
                                     "linkDestination": "none",
                                     "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                                     "alt": "Funny dog in couch",
-                                    "caption": "Bring me the chips please"
+                                    "caption": "Bring me the chips please",
+                                    "isDecorative": false
                                 }
                             },
                             {
@@ -1743,7 +1766,8 @@
                                     "linkDestination": "none",
                                     "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                                     "alt": "Even funnier dog",
-                                    "caption": "Anyone having chips? Don't leave me alone!"
+                                    "caption": "Anyone having chips? Don't leave me alone!",
+                                    "isDecorative": false
                                 }
                             }
                         ]
@@ -1978,9 +2002,7 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                        }
+                        "attributes": {}
                     },
                     {
                         "name": "core\/block",
@@ -2009,7 +2031,7 @@
                             "buttonPosition": "button-outside",
                             "buttonUseIcon": false,
                             "query": [],
-                            "isSearchFieldHidden": false
+                            "tagName": ""
                         }
                     },
                     {
@@ -2188,7 +2210,8 @@
                             {
                                 "name": "core\/home-link",
                                 "attributes": {
-                                    "label": "Home page"
+                                    "label": "Home page",
+                                    "opensInNewTab": false
                                 }
                             },
                             {
@@ -2397,7 +2420,10 @@
                         "name": "core\/icon",
                         "attributes": {
                             "icon": "core\/audio",
-                            "ariaLabel": "An icon representing audio content"
+                            "ariaLabel": "An icon representing audio content",
+                            "flipHorizontal": false,
+                            "flipVertical": false,
+                            "rotation": 0
                         }
                     },
                     {
@@ -2493,7 +2519,8 @@
                             "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                             "alt": "Ooops, I got stuck",
                             "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                            "title": "The dog stuck in the fence"
+                            "title": "The dog stuck in the fence",
+                            "isDecorative": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2566,7 +2593,15 @@
                             "hasParallax": false,
                             "isRepeated": false,
                             "backgroundType": "image",
-                            "tagName": "div"
+                            "tagName": "div",
+                            "allowedVideoProviders": [
+                                "youtube",
+                                "vimeo",
+                                "videopress",
+                                "animoto",
+                                "tiktok",
+                                "wordpress-tv"
+                            ]
                         },
                         "innerBlockPositions": [
                             12
@@ -2817,7 +2852,8 @@
                             "linkDestination": "none",
                             "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                             "alt": "Funny dog in couch",
-                            "caption": "Bring me the chips please"
+                            "caption": "Bring me the chips please",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 33,
                         "innerBlockPositions": null
@@ -2829,7 +2865,8 @@
                             "linkDestination": "none",
                             "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                             "alt": "Even funnier dog",
-                            "caption": "Anyone having chips? Don't leave me alone!"
+                            "caption": "Anyone having chips? Don't leave me alone!",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 33,
                         "innerBlockPositions": null
@@ -3092,9 +3129,7 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                        },
+                        "attributes": {},
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -3129,7 +3164,7 @@
                             "buttonPosition": "button-outside",
                             "buttonUseIcon": false,
                             "query": [],
-                            "isSearchFieldHidden": false
+                            "tagName": ""
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -3356,7 +3391,8 @@
                     {
                         "name": "core\/home-link",
                         "attributes": {
-                            "label": "Home page"
+                            "label": "Home page",
+                            "opensInNewTab": false
                         },
                         "parentBlockPosition": 71,
                         "innerBlockPositions": null
@@ -3611,7 +3647,10 @@
                         "name": "core\/icon",
                         "attributes": {
                             "icon": "core\/audio",
-                            "ariaLabel": "An icon representing audio content"
+                            "ariaLabel": "An icon representing audio content",
+                            "flipHorizontal": false,
+                            "flipVertical": false,
+                            "rotation": 0
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -3713,23 +3752,19 @@
                             "excerptLength": 55,
                             "displayAuthor": false,
                             "displayPostDate": false,
-                            "postLayout": "list",
-                            "columns": 3,
                             "order": "desc",
                             "orderBy": "date",
                             "displayFeaturedImage": false,
                             "featuredImageSizeSlug": "thumbnail",
                             "addLinkToFeaturedImage": false
                         },
-                        "contentSource": "<!-- wp:latest-posts {\"postsToShow\":5,\"displayPostContent\":false,\"displayPostContentRadio\":\"excerpt\",\"excerptLength\":55,\"displayAuthor\":false,\"displayPostDate\":false,\"postLayout\":\"list\",\"columns\":3,\"order\":\"desc\",\"orderBy\":\"date\",\"displayFeaturedImage\":false,\"featuredImageSizeSlug\":\"thumbnail\",\"addLinkToFeaturedImage\":false} \/-->",
+                        "contentSource": "<!-- wp:latest-posts {\"postsToShow\":5,\"displayPostContent\":false,\"displayPostContentRadio\":\"excerpt\",\"excerptLength\":55,\"displayAuthor\":false,\"displayPostDate\":false,\"order\":\"desc\",\"orderBy\":\"date\",\"displayFeaturedImage\":false,\"featuredImageSizeSlug\":\"thumbnail\",\"addLinkToFeaturedImage\":false} \/-->",
                         "innerBlocks": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                        },
-                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                        "attributes": {},
+                        "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -3819,8 +3854,6 @@
                             "excerptLength": 55,
                             "displayAuthor": false,
                             "displayPostDate": false,
-                            "postLayout": "list",
-                            "columns": 3,
                             "order": "desc",
                             "orderBy": "date",
                             "displayFeaturedImage": false,
@@ -3830,9 +3863,7 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                        }
+                        "attributes": {}
                     },
                     {
                         "name": "core\/code",
@@ -3919,8 +3950,6 @@
                             "excerptLength": 55,
                             "displayAuthor": false,
                             "displayPostDate": false,
-                            "postLayout": "list",
-                            "columns": 3,
                             "order": "desc",
                             "orderBy": "date",
                             "displayFeaturedImage": false,
@@ -3932,9 +3961,7 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                        },
+                        "attributes": {},
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -4369,18 +4396,14 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<strong>This is a HTML block.<\/strong>"
-                        },
-                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cstrong\\u003eThis is a HTML block.\\u003c\/strong\\u003e\"} -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
+                        "attributes": {},
+                        "contentSource": "<!-- wp:html -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
-                        },
-                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eNode 1\\u003c\/p\\u003e\\u003cp\\u003eNode 2\\u003c\/p\\u003e\"} -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {},
+                        "contentSource": "<!-- wp:html -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -4441,15 +4464,11 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<strong>This is a HTML block.<\/strong>"
-                        }
+                        "attributes": {}
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
-                        }
+                        "attributes": {}
                     },
                     {
                         "name": "core\/heading",
@@ -4515,17 +4534,13 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<strong>This is a HTML block.<\/strong>"
-                        },
+                        "attributes": {},
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
-                        },
+                        "attributes": {},
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -4921,12 +4936,12 @@
                         "attributes": {
                             "isStackedOnMobile": true
                         },
-                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                 "innerBlocks": [
                                     {
                                         "name": "core\/image",
@@ -4934,9 +4949,10 @@
                                             "id": 1701,
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                            "alt": ""
+                                            "alt": "",
+                                            "isDecorative": false
                                         },
-                                        "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                        "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                         "innerBlocks": null
                                     }
                                 ]
@@ -4974,12 +4990,12 @@
                         "attributes": {
                             "isStackedOnMobile": true
                         },
-                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                         "innerBlocks": [
                             {
                                 "name": "core\/column",
                                 "attributes": {},
-                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                                 "innerBlocks": [
                                     {
                                         "name": "core\/image",
@@ -4987,9 +5003,10 @@
                                             "id": 1701,
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                            "alt": ""
+                                            "alt": "",
+                                            "isDecorative": false
                                         },
-                                        "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                        "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                         "innerBlocks": null
                                     },
                                     {
@@ -4997,7 +5014,7 @@
                                         "attributes": {
                                             "isStackedOnMobile": true
                                         },
-                                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                         "innerBlocks": [
                                             {
                                                 "name": "core\/column",
@@ -5032,7 +5049,7 @@
                                                 "attributes": {
                                                     "width": "66.66%"
                                                 },
-                                                "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                                                "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                                                 "innerBlocks": [
                                                     {
                                                         "name": "core\/paragraph",
@@ -5048,12 +5065,12 @@
                                                         "attributes": {
                                                             "isStackedOnMobile": true
                                                         },
-                                                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                                        "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                                         "innerBlocks": [
                                                             {
                                                                 "name": "core\/column",
                                                                 "attributes": {},
-                                                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                                 "innerBlocks": [
                                                                     {
                                                                         "name": "core\/image",
@@ -5062,9 +5079,10 @@
                                                                             "sizeSlug": "large",
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                            "alt": ""
+                                                                            "alt": "",
+                                                                            "isDecorative": false
                                                                         },
-                                                                        "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                        "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                         "innerBlocks": null
                                                                     }
                                                                 ]
@@ -5078,7 +5096,7 @@
                                                             {
                                                                 "name": "core\/column",
                                                                 "attributes": {},
-                                                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                                "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                                 "innerBlocks": [
                                                                     {
                                                                         "name": "core\/image",
@@ -5087,9 +5105,10 @@
                                                                             "sizeSlug": "large",
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                            "alt": ""
+                                                                            "alt": "",
+                                                                            "isDecorative": false
                                                                         },
-                                                                        "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                        "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                         "innerBlocks": null
                                                                     }
                                                                 ]
@@ -5196,7 +5215,8 @@
                                             "id": 1701,
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                            "alt": ""
+                                            "alt": "",
+                                            "isDecorative": false
                                         }
                                     }
                                 ]
@@ -5240,7 +5260,8 @@
                                             "id": 1701,
                                             "className": "layout-column-1",
                                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                            "alt": ""
+                                            "alt": "",
+                                            "isDecorative": false
                                         }
                                     },
                                     {
@@ -5302,7 +5323,8 @@
                                                                             "sizeSlug": "large",
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                            "alt": ""
+                                                                            "alt": "",
+                                                                            "isDecorative": false
                                                                         }
                                                                     }
                                                                 ]
@@ -5322,7 +5344,8 @@
                                                                             "sizeSlug": "large",
                                                                             "linkDestination": "none",
                                                                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                            "alt": ""
+                                                                            "alt": "",
+                                                                            "isDecorative": false
                                                                         }
                                                                     }
                                                                 ]
@@ -5444,7 +5467,8 @@
                             "id": 1701,
                             "className": "layout-column-1",
                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                            "alt": ""
+                            "alt": "",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 5,
                         "innerBlockPositions": null
@@ -5501,7 +5525,8 @@
                             "id": 1701,
                             "className": "layout-column-1",
                             "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                            "alt": ""
+                            "alt": "",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 11,
                         "innerBlockPositions": null
@@ -5594,7 +5619,8 @@
                             "sizeSlug": "large",
                             "linkDestination": "none",
                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                            "alt": ""
+                            "alt": "",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 20,
                         "innerBlockPositions": null
@@ -5620,7 +5646,8 @@
                             "sizeSlug": "large",
                             "linkDestination": "none",
                             "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                            "alt": ""
+                            "alt": "",
+                            "isDecorative": false
                         },
                         "parentBlockPosition": 23,
                         "innerBlockPositions": null
@@ -6430,12 +6457,12 @@
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -6443,9 +6470,10 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     },
-                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                     "innerBlocks": null
                                 }
                             ]
@@ -6474,12 +6502,12 @@
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -6487,9 +6515,10 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     },
-                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                     "innerBlocks": null
                                 },
                                 {
@@ -6497,7 +6526,7 @@
                                     "attributes": {
                                         "isStackedOnMobile": true
                                     },
-                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\">\n\n<\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                     "innerBlocks": [
                                         {
                                             "name": "core\/column",
@@ -6512,7 +6541,7 @@
                                             "attributes": {
                                                 "width": "66.66%"
                                             },
-                                            "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                                            "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/paragraph",
@@ -6528,12 +6557,12 @@
                                                     "attributes": {
                                                         "isStackedOnMobile": true
                                                     },
-                                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                                     "innerBlocks": [
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -6542,9 +6571,10 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     },
-                                                                    "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                    "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                     "innerBlocks": null
                                                                 }
                                                             ]
@@ -6558,7 +6588,7 @@
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -6567,9 +6597,10 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     },
-                                                                    "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                    "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                     "innerBlocks": null
                                                                 }
                                                             ]
@@ -6661,7 +6692,8 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     }
                                 }
                             ]
@@ -6698,7 +6730,8 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     }
                                 },
                                 {
@@ -6743,7 +6776,8 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     }
                                                                 }
                                                             ]
@@ -6763,7 +6797,8 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     }
                                                                 }
                                                             ]
@@ -6853,7 +6888,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -6884,7 +6920,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -6929,7 +6966,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -6947,7 +6985,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7146,7 +7185,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7171,7 +7211,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7204,7 +7245,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7222,7 +7264,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7417,7 +7460,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7434,7 +7478,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7451,7 +7496,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7461,7 +7507,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7690,7 +7737,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7713,7 +7761,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7742,7 +7791,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -7752,7 +7802,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -8159,12 +8210,12 @@
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:paragraph {\"className\":\"layout-column-2\",\"content\":\"Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.\",\"dropCap\":false} -->\n<p class=\"layout-column-2\">Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24\/365 communities.<\/p>\n<!-- \/wp:paragraph --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -8172,9 +8223,10 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     },
-                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                     "innerBlocks": null
                                 }
                             ]
@@ -8212,12 +8264,12 @@
                     "attributes": {
                         "isStackedOnMobile": true
                     },
-                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                     "innerBlocks": [
                         {
                             "name": "core\/column",
                             "attributes": {},
-                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                             "innerBlocks": [
                                 {
                                     "name": "core\/image",
@@ -8225,9 +8277,10 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     },
-                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
+                                    "contentSource": "<!-- wp:image {\"id\":1701,\"className\":\"layout-column-1\",\"url\":\"https:\/\/d.pr\/i\/fW6V3V+\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image layout-column-1\"><img src=\"https:\/\/d.pr\/i\/fW6V3V+\" alt=\"\" class=\"wp-image-1701\"\/><\/figure>\n<!-- \/wp:image -->",
                                     "innerBlocks": null
                                 },
                                 {
@@ -8235,7 +8288,7 @@
                                     "attributes": {
                                         "isStackedOnMobile": true
                                     },
-                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column {\"width\":\"33.33%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:33.33%\"><!-- wp:heading {\"fontSize\":\"large\",\"content\":\"Life is so rich\",\"level\":2} -->\n<h2 class=\"wp-block-heading has-large-font-size\">Life is so rich<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:heading {\"level\":3,\"content\":\"Life is so dynamic\"} -->\n<h3 class=\"wp-block-heading\">Life is so dynamic<\/h3>\n<!-- \/wp:heading --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                     "innerBlocks": [
                                         {
                                             "name": "core\/column",
@@ -8270,7 +8323,7 @@
                                             "attributes": {
                                                 "width": "66.66%"
                                             },
-                                            "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
+                                            "contentSource": "<!-- wp:column {\"width\":\"66.66%\"} -->\n<div class=\"wp-block-column\" style=\"flex-basis:66.66%\"><!-- wp:paragraph {\"content\":\"This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.\",\"dropCap\":false} -->\n<p>This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.<\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns --><\/div>\n<!-- \/wp:column -->",
                                             "innerBlocks": [
                                                 {
                                                     "name": "core\/paragraph",
@@ -8286,12 +8339,12 @@
                                                     "attributes": {
                                                         "isStackedOnMobile": true
                                                     },
-                                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
+                                                    "contentSource": "<!-- wp:columns {\"isStackedOnMobile\":true} -->\n<div class=\"wp-block-columns\"><!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><\/div>\n<!-- \/wp:column -->\n\n<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column --><\/div>\n<!-- \/wp:columns -->",
                                                     "innerBlocks": [
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -8300,9 +8353,10 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     },
-                                                                    "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                    "contentSource": "<!-- wp:image {\"id\":1361,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg\" alt=\"\" class=\"wp-image-1361\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                     "innerBlocks": null
                                                                 }
                                                             ]
@@ -8316,7 +8370,7 @@
                                                         {
                                                             "name": "core\/column",
                                                             "attributes": {},
-                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
+                                                            "contentSource": "<!-- wp:column -->\n<div class=\"wp-block-column\"><!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image --><\/div>\n<!-- \/wp:column -->",
                                                             "innerBlocks": [
                                                                 {
                                                                     "name": "core\/image",
@@ -8325,9 +8379,10 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     },
-                                                                    "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\"} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
+                                                                    "contentSource": "<!-- wp:image {\"id\":1362,\"sizeSlug\":\"large\",\"linkDestination\":\"none\",\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\",\"alt\":\"\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image size-large\"><img src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp\" alt=\"\" class=\"wp-image-1362\"\/><\/figure>\n<!-- \/wp:image -->",
                                                                     "innerBlocks": null
                                                                 }
                                                             ]
@@ -8425,7 +8480,8 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     }
                                 }
                             ]
@@ -8469,7 +8525,8 @@
                                         "id": 1701,
                                         "className": "layout-column-1",
                                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                                        "alt": ""
+                                        "alt": "",
+                                        "isDecorative": false
                                     }
                                 },
                                 {
@@ -8531,7 +8588,8 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     }
                                                                 }
                                                             ]
@@ -8551,7 +8609,8 @@
                                                                         "sizeSlug": "large",
                                                                         "linkDestination": "none",
                                                                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                                                                        "alt": ""
+                                                                        "alt": "",
+                                                                        "isDecorative": false
                                                                     }
                                                                 }
                                                             ]
@@ -8666,7 +8725,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 5,
                     "innerBlockPositions": null
@@ -8723,7 +8783,8 @@
                         "id": 1701,
                         "className": "layout-column-1",
                         "url": "https:\/\/d.pr\/i\/fW6V3V+",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 11,
                     "innerBlockPositions": null
@@ -8816,7 +8877,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-1024x622.jpg",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 20,
                     "innerBlockPositions": null
@@ -8842,7 +8904,8 @@
                         "sizeSlug": "large",
                         "linkDestination": "none",
                         "url": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo-suki-1024x598.webp",
-                        "alt": ""
+                        "alt": "",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 23,
                     "innerBlockPositions": null
@@ -9772,23 +9835,19 @@
                         "excerptLength": 55,
                         "displayAuthor": false,
                         "displayPostDate": false,
-                        "postLayout": "list",
-                        "columns": 3,
                         "order": "desc",
                         "orderBy": "date",
                         "displayFeaturedImage": false,
                         "featuredImageSizeSlug": "thumbnail",
                         "addLinkToFeaturedImage": false
                     },
-                    "contentSource": "<!-- wp:latest-posts {\"postsToShow\":5,\"displayPostContent\":false,\"displayPostContentRadio\":\"excerpt\",\"excerptLength\":55,\"displayAuthor\":false,\"displayPostDate\":false,\"postLayout\":\"list\",\"columns\":3,\"order\":\"desc\",\"orderBy\":\"date\",\"displayFeaturedImage\":false,\"featuredImageSizeSlug\":\"thumbnail\",\"addLinkToFeaturedImage\":false} \/-->",
+                    "contentSource": "<!-- wp:latest-posts {\"postsToShow\":5,\"displayPostContent\":false,\"displayPostContentRadio\":\"excerpt\",\"excerptLength\":55,\"displayAuthor\":false,\"displayPostDate\":false,\"order\":\"desc\",\"orderBy\":\"date\",\"displayFeaturedImage\":false,\"featuredImageSizeSlug\":\"thumbnail\",\"addLinkToFeaturedImage\":false} \/-->",
                     "innerBlocks": null
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                    },
-                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                    "attributes": {},
+                    "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -9878,8 +9937,6 @@
                         "excerptLength": 55,
                         "displayAuthor": false,
                         "displayPostDate": false,
-                        "postLayout": "list",
-                        "columns": 3,
                         "order": "desc",
                         "orderBy": "date",
                         "displayFeaturedImage": false,
@@ -9889,9 +9946,7 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                    }
+                    "attributes": {}
                 },
                 {
                     "name": "core\/code",
@@ -9978,8 +10033,6 @@
                         "excerptLength": 55,
                         "displayAuthor": false,
                         "displayPostDate": false,
-                        "postLayout": "list",
-                        "columns": 3,
                         "order": "desc",
                         "orderBy": "date",
                         "displayFeaturedImage": false,
@@ -9991,9 +10044,7 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                    },
+                    "attributes": {},
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },
@@ -10104,9 +10155,10 @@
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
                         "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                        "title": "The dog stuck in the fence"
+                        "title": "The dog stuck in the fence",
+                        "isDecorative": false
                     },
-                    "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\"} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                    "contentSource": "<!-- wp:image {\"id\":33,\"align\":\"wide\",\"url\":\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\",\"alt\":\"Ooops, I got stuck\",\"caption\":\"My owner doesn't give me a hat, so I gotta do a hack\",\"title\":\"The dog stuck in the fence\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg\" alt=\"Ooops, I got stuck\" title=\"The dog stuck in the fence\" class=\"wp-image-33\"\/><figcaption class=\"wp-element-caption\">My owner doesn't give me a hat, so I gotta do a hack<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                     "innerBlocks": null
                 },
                 {
@@ -10173,9 +10225,17 @@
                         "hasParallax": false,
                         "isRepeated": false,
                         "backgroundType": "image",
-                        "tagName": "div"
+                        "tagName": "div",
+                        "allowedVideoProviders": [
+                            "youtube",
+                            "vimeo",
+                            "videopress",
+                            "animoto",
+                            "tiktok",
+                            "wordpress-tv"
+                        ]
                     },
-                    "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\"} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
+                    "contentSource": "<!-- wp:cover {\"url\":\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\",\"id\":1380,\"alt\":\"Dog not caring about anything\",\"dimRatio\":50,\"isDark\":false,\"useFeaturedImage\":false,\"hasParallax\":false,\"isRepeated\":false,\"backgroundType\":\"image\",\"tagName\":\"div\",\"allowedVideoProviders\":[\"youtube\",\"vimeo\",\"videopress\",\"animoto\",\"tiktok\",\"wordpress-tv\"]} -->\n<div class=\"wp-block-cover is-light\"><img class=\"wp-block-cover__image-background wp-image-1380\" alt=\"Dog not caring about anything\" src=\"https:\/\/gatographql.lndo.site\/wp-content\/uploads\/Funny-Dog.jpg\" data-object-fit=\"cover\"\/><span aria-hidden=\"true\" class=\"wp-block-cover__background has-background-dim\"><\/span><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"placeholder\":\"Write title\u2026\",\"style\":{\"typography\":{\"textAlign\":\"center\"}},\"fontSize\":\"large\",\"content\":\"See if I care\",\"dropCap\":false} -->\n<p class=\"has-text-align-center has-large-font-size\">See if I care<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->",
                     "innerBlocks": [
                         {
                             "name": "core\/paragraph",
@@ -10395,7 +10455,7 @@
                         "allowResize": false,
                         "aspectRatio": "auto"
                     },
-                    "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
+                    "contentSource": "<!-- wp:gallery {\"columns\":3,\"linkTo\":\"none\",\"align\":\"wide\",\"className\":\"alignnone\",\"images\":[],\"ids\":[],\"navigationButtonType\":\"icon\",\"shortCodeTransforms\":[],\"caption\":\"Two dogs asking for chips\",\"imageCrop\":true,\"randomOrder\":false,\"fixedHeight\":true,\"sizeSlug\":\"large\",\"allowResize\":false,\"aspectRatio\":\"auto\"} -->\n<figure class=\"wp-block-gallery alignwide has-nested-images columns-3 is-cropped alignnone\"><!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image --><figcaption class=\"blocks-gallery-caption wp-element-caption\">Two dogs asking for chips<\/figcaption><\/figure>\n<!-- \/wp:gallery -->",
                     "innerBlocks": [
                         {
                             "name": "core\/image",
@@ -10404,9 +10464,10 @@
                                 "linkDestination": "none",
                                 "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                                 "alt": "Funny dog in couch",
-                                "caption": "Bring me the chips please"
+                                "caption": "Bring me the chips please",
+                                "isDecorative": false
                             },
-                            "contentSource": "<!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                            "contentSource": "<!-- wp:image {\"id\":32,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\",\"alt\":\"Funny dog in couch\",\"caption\":\"Bring me the chips please\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.insider.com\/5f44388342f43f001ddfec52\" alt=\"Funny dog in couch\" class=\"wp-image-32\"\/><figcaption class=\"wp-element-caption\">Bring me the chips please<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                             "innerBlocks": null
                         },
                         {
@@ -10416,9 +10477,10 @@
                                 "linkDestination": "none",
                                 "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                                 "alt": "Even funnier dog",
-                                "caption": "Anyone having chips? Don't leave me alone!"
+                                "caption": "Anyone having chips? Don't leave me alone!",
+                                "isDecorative": false
                             },
-                            "contentSource": "<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\"} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image -->",
+                            "contentSource": "<!-- wp:image {\"id\":31,\"linkDestination\":\"none\",\"url\":\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\",\"alt\":\"Even funnier dog\",\"caption\":\"Anyone having chips? Don't leave me alone!\",\"isDecorative\":false} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg\" alt=\"Even funnier dog\" class=\"wp-image-31\"\/><figcaption class=\"wp-element-caption\">Anyone having chips? Don't leave me alone!<\/figcaption><\/figure>\n<!-- \/wp:image -->",
                             "innerBlocks": null
                         }
                     ]
@@ -10677,10 +10739,8 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                    },
-                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                    "attributes": {},
+                    "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -10714,9 +10774,9 @@
                         "buttonPosition": "button-outside",
                         "buttonUseIcon": false,
                         "query": [],
-                        "isSearchFieldHidden": false
+                        "tagName": ""
                     },
-                    "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"isSearchFieldHidden\":false} \/-->",
+                    "contentSource": "<!-- wp:search {\"label\":\"Search the site\",\"placeholder\":\"Type your query here\",\"buttonText\":\"Go!\",\"showLabel\":true,\"buttonPosition\":\"button-outside\",\"buttonUseIcon\":false,\"query\":[],\"tagName\":\"\"} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -10921,14 +10981,15 @@
                         "hasIcon": true,
                         "maxNestingLevel": 5
                     },
-                    "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\"} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
+                    "contentSource": "<!-- wp:navigation {\"ariaLabel\":\"Main site navigation\",\"showSubmenuIcon\":true,\"submenuVisibility\":\"hover\",\"overlayMenu\":\"mobile\",\"icon\":\"handle\",\"hasIcon\":true,\"maxNestingLevel\":5} -->\n<!-- wp:home-link {\"label\":\"Home page\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-link {\"label\":\"About us\",\"description\":\"Learn more about our company\",\"url\":\"\/about\",\"title\":\"Go to the About page\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n\n<!-- wp:navigation-submenu {\"label\":\"Services\",\"description\":\"Everything we offer\",\"url\":\"\/services\",\"title\":\"Browse our services\",\"kind\":\"custom\",\"opensInNewTab\":false,\"isParentSubmenu\":true} -->\n<!-- wp:navigation-link {\"label\":\"Consulting\",\"url\":\"\/consulting\",\"kind\":\"custom\",\"opensInNewTab\":false} \/-->\n<!-- \/wp:navigation-submenu -->\n\n<!-- wp:navigation-overlay-close {\"text\":\"Close menu\",\"displayMode\":\"icon\"} \/-->\n<!-- \/wp:navigation -->",
                     "innerBlocks": [
                         {
                             "name": "core\/home-link",
                             "attributes": {
-                                "label": "Home page"
+                                "label": "Home page",
+                                "opensInNewTab": false
                             },
-                            "contentSource": "<!-- wp:home-link {\"label\":\"Home page\"} \/-->",
+                            "contentSource": "<!-- wp:home-link {\"label\":\"Home page\",\"opensInNewTab\":false} \/-->",
                             "innerBlocks": null
                         },
                         {
@@ -11172,9 +11233,12 @@
                     "name": "core\/icon",
                     "attributes": {
                         "icon": "core\/audio",
-                        "ariaLabel": "An icon representing audio content"
+                        "ariaLabel": "An icon representing audio content",
+                        "flipHorizontal": false,
+                        "flipVertical": false,
+                        "rotation": 0
                     },
-                    "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\"} \/-->",
+                    "contentSource": "<!-- wp:icon {\"icon\":\"core\/audio\",\"ariaLabel\":\"An icon representing audio content\",\"flipHorizontal\":false,\"flipVertical\":false,\"rotation\":0} \/-->",
                     "innerBlocks": null
                 },
                 {
@@ -11272,7 +11336,8 @@
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
                         "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                        "title": "The dog stuck in the fence"
+                        "title": "The dog stuck in the fence",
+                        "isDecorative": false
                     }
                 },
                 {
@@ -11328,7 +11393,15 @@
                         "hasParallax": false,
                         "isRepeated": false,
                         "backgroundType": "image",
-                        "tagName": "div"
+                        "tagName": "div",
+                        "allowedVideoProviders": [
+                            "youtube",
+                            "vimeo",
+                            "videopress",
+                            "animoto",
+                            "tiktok",
+                            "wordpress-tv"
+                        ]
                     },
                     "innerBlocks": [
                         {
@@ -11523,7 +11596,8 @@
                                 "linkDestination": "none",
                                 "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                                 "alt": "Funny dog in couch",
-                                "caption": "Bring me the chips please"
+                                "caption": "Bring me the chips please",
+                                "isDecorative": false
                             }
                         },
                         {
@@ -11533,7 +11607,8 @@
                                 "linkDestination": "none",
                                 "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                                 "alt": "Even funnier dog",
-                                "caption": "Anyone having chips? Don't leave me alone!"
+                                "caption": "Anyone having chips? Don't leave me alone!",
+                                "isDecorative": false
                             }
                         }
                     ]
@@ -11768,9 +11843,7 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                    }
+                    "attributes": {}
                 },
                 {
                     "name": "core\/block",
@@ -11799,7 +11872,7 @@
                         "buttonPosition": "button-outside",
                         "buttonUseIcon": false,
                         "query": [],
-                        "isSearchFieldHidden": false
+                        "tagName": ""
                     }
                 },
                 {
@@ -11978,7 +12051,8 @@
                         {
                             "name": "core\/home-link",
                             "attributes": {
-                                "label": "Home page"
+                                "label": "Home page",
+                                "opensInNewTab": false
                             }
                         },
                         {
@@ -12187,7 +12261,10 @@
                     "name": "core\/icon",
                     "attributes": {
                         "icon": "core\/audio",
-                        "ariaLabel": "An icon representing audio content"
+                        "ariaLabel": "An icon representing audio content",
+                        "flipHorizontal": false,
+                        "flipVertical": false,
+                        "rotation": 0
                     }
                 },
                 {
@@ -12283,7 +12360,8 @@
                         "url": "https:\/\/i.ytimg.com\/vi\/z4KKd2nGlEM\/maxresdefault.jpg",
                         "alt": "Ooops, I got stuck",
                         "caption": "My owner doesn't give me a hat, so I gotta do a hack",
-                        "title": "The dog stuck in the fence"
+                        "title": "The dog stuck in the fence",
+                        "isDecorative": false
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12356,7 +12434,15 @@
                         "hasParallax": false,
                         "isRepeated": false,
                         "backgroundType": "image",
-                        "tagName": "div"
+                        "tagName": "div",
+                        "allowedVideoProviders": [
+                            "youtube",
+                            "vimeo",
+                            "videopress",
+                            "animoto",
+                            "tiktok",
+                            "wordpress-tv"
+                        ]
                     },
                     "innerBlockPositions": [
                         12
@@ -12607,7 +12693,8 @@
                         "linkDestination": "none",
                         "url": "https:\/\/i.insider.com\/5f44388342f43f001ddfec52",
                         "alt": "Funny dog in couch",
-                        "caption": "Bring me the chips please"
+                        "caption": "Bring me the chips please",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 33,
                     "innerBlockPositions": null
@@ -12619,7 +12706,8 @@
                         "linkDestination": "none",
                         "url": "https:\/\/i.pinimg.com\/originals\/85\/a7\/f5\/85a7f5cee4c93cb3995d1b51e3a0289f.jpg",
                         "alt": "Even funnier dog",
-                        "caption": "Anyone having chips? Don't leave me alone!"
+                        "caption": "Anyone having chips? Don't leave me alone!",
+                        "isDecorative": false
                     },
                     "parentBlockPosition": 33,
                     "innerBlockPositions": null
@@ -12882,9 +12970,7 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {
-                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
-                    },
+                    "attributes": {},
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },
@@ -12919,7 +13005,7 @@
                         "buttonPosition": "button-outside",
                         "buttonUseIcon": false,
                         "query": [],
-                        "isSearchFieldHidden": false
+                        "tagName": ""
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -13146,7 +13232,8 @@
                 {
                     "name": "core\/home-link",
                     "attributes": {
-                        "label": "Home page"
+                        "label": "Home page",
+                        "opensInNewTab": false
                     },
                     "parentBlockPosition": 71,
                     "innerBlockPositions": null
@@ -13401,7 +13488,10 @@
                     "name": "core\/icon",
                     "attributes": {
                         "icon": "core\/audio",
-                        "ariaLabel": "An icon representing audio content"
+                        "ariaLabel": "An icon representing audio content",
+                        "flipHorizontal": false,
+                        "flipVertical": false,
+                        "rotation": 0
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null

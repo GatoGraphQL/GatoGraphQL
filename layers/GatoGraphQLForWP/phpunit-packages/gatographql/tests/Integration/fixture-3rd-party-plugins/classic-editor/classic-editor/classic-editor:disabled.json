@@ -42,8 +42,6 @@
                             "excerptLength": 55,
                             "displayAuthor": false,
                             "displayPostDate": false,
-                            "postLayout": "list",
-                            "columns": 3,
                             "order": "desc",
                             "orderBy": "date",
                             "displayFeaturedImage": false,
@@ -54,9 +52,7 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {
-                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
-                        },
+                        "attributes": {},
                         "innerBlocks": null
                     },
                     {

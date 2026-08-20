@@ -2,8 +2,8 @@
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
-Tested up to: 7.0
-Stable tag: 19.2.0
+Tested up to: 7.1
+Stable tag: 19.2.1
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -249,6 +249,12 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
+
+= 19.2.1 =
+* Improved - Tested up to WordPress 7.1 (#aa2cdc8d)
+* Fixed - The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 (#3380)
+* Fixed - The checkmarks in the read-only lists of selected schema elements are no longer greyed out under WordPress 7.1 (#3381)
+* Improved - The read-only lists of selected schema elements are spaced out, instead of having their items sit flush against each other (#3382)
 
 = 19.2.0 =
 * Added - Helper directives `@start` and `@end` to indicate which directives are affected by a meta directive, as an alternative to argument `affectDirectivesUnderPos`: the affected directives are wrapped between `@start` and `@end` (placed right after the meta directive), removing the need to calculate their relative positions, which is error prone in large queries. Both methods produce the same result, and can be combined within the same query (but not on the same meta directive) (#3369)

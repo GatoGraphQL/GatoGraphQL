@@ -2,7 +2,12 @@
  * Internal dependencies
  */
 import { compose } from '@wordpress/compose';
-import { Card, CardHeader, CardBody, CheckboxControl } from '@wordpress/components';
+import {
+	Card,
+	CardHeader,
+	CardBody,
+	CheckboxControl,
+} from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import withSpinner from '../../components/loading/with-spinner';
 import withErrorMessage from '../../components/loading/with-error-message';
@@ -23,35 +28,32 @@ const PostListPrintoutBody = ( props ) => {
 	/**
 	 * Create a dictionary, with ID as key (stored under `value`), and title as the value
 	 */
-	let itemsDictionary = {};
-	items.forEach(function(item) {
+	const itemsDictionary = {};
+	items.forEach( function ( item ) {
 		itemsDictionary[ item.value ] = item.title;
 	} );
 	return (
 		<>
 			{ !! selectedItems.length && (
-				<ul class="checkbox-list">
-					{ selectedItems.map( selectedItemID =>
-						<li
-							key={ selectedItemID }
-						>
+				<ul className="checkbox-list">
+					{ selectedItems.map( ( selectedItemID ) => (
+						<li key={ selectedItemID }>
 							<CheckboxControl
-								label={ itemsDictionary[selectedItemID] || getLabelForNotFoundElement(selectedItemID) }
+								label={
+									itemsDictionary[ selectedItemID ] ||
+									getLabelForNotFoundElement( selectedItemID )
+								}
 								checked={ true }
 								disabled={ true }
 							/>
 						</li>
-					) }
+					) ) }
 				</ul>
 			) }
-			{ !selectedItems.length && (
-				<em>
-					{ noItemsSelectedLabel }
-				</em>
-			) }
+			{ ! selectedItems.length && <em>{ noItemsSelectedLabel }</em> }
 		</>
 	);
-}
+};
 
 /**
  * Add a spinner when loading the post titles and the post list is not empty
@@ -70,14 +72,10 @@ const WithSpinnerPostListPrintoutBody = compose( [
 const MaybeWithSpinnerPostListPrintout = ( props ) => {
 	const { selectedItems } = props;
 	if ( !! selectedItems.length ) {
-		return (
-			<WithSpinnerPostListPrintoutBody { ...props } />
-		)
+		return <WithSpinnerPostListPrintoutBody { ...props } />;
 	}
-	return (
-		<PostListPrintoutBody { ...props } />
-	);
-}
+	return <PostListPrintoutBody { ...props } />;
+};
 
 /**
  * Print the selected Access Control Lists.
@@ -90,13 +88,11 @@ const PostListPrintoutCard = ( props ) => {
 		<Card { ...props }>
 			<CardHeader isShady>{ header }</CardHeader>
 			<CardBody>
-				<MaybeWithSpinnerPostListPrintout
-					{ ...props }
-				/>
+				<MaybeWithSpinnerPostListPrintout { ...props } />
 			</CardBody>
 		</Card>
 	);
-}
+};
 
 export { MaybeWithSpinnerPostListPrintout };
 export default PostListPrintoutCard;

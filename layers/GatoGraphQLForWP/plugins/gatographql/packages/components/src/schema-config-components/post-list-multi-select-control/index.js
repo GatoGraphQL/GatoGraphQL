@@ -1,1 +1,4 @@
-export { MaybeWithSpinnerPostListPrintout, default as PostListPrintoutCard } from './post-list-printout' ;
+export {
+	MaybeWithSpinnerPostListPrintout,
+	default as PostListPrintoutCard,
+} from './post-list-printout';

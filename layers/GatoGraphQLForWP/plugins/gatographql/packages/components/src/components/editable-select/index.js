@@ -1,1 +1,1 @@
-export { default as EditableSelect } from './select' ;
+export { default as EditableSelect } from './select';
