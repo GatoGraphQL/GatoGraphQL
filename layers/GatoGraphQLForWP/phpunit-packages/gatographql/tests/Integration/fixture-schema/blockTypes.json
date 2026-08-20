@@ -182,6 +182,14 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "core\/playlist",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/playlist-track",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "core\/post-author",
                 "hasRenderCallback": true
             },
@@ -306,6 +314,18 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "core\/tab-list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tab-panel",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tabs",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "core\/tag-cloud",
                 "hasRenderCallback": true
             },
@@ -419,6 +439,10 @@
             },
             {
                 "name": "core\/spacer",
+                "hasRenderCallback": false
+            },
+            {
+                "name": "core\/tab-panels",
                 "hasRenderCallback": false
             },
             {
@@ -1244,6 +1268,10 @@
                 "hasRenderCallback": false
             },
             {
+                "name": "core\/tab-panels",
+                "hasRenderCallback": false
+            },
+            {
                 "name": "core\/table",
                 "hasRenderCallback": false
             },
@@ -1430,6 +1458,14 @@
                 "hasRenderCallback": true
             },
             {
+                "name": "core\/playlist",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/playlist-track",
+                "hasRenderCallback": true
+            },
+            {
                 "name": "core\/post-author",
                 "hasRenderCallback": true
             },
@@ -1551,6 +1587,18 @@
             },
             {
                 "name": "core\/social-link",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tab-list",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tab-panel",
+                "hasRenderCallback": true
+            },
+            {
+                "name": "core\/tabs",
                 "hasRenderCallback": true
             },
             {

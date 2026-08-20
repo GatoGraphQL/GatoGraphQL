@@ -21,6 +21,8 @@
         "packages-update": "wp-scripts packages-update"
     },
     "devDependencies": {
+        "@emotion/cache": "^10.0.9",
+        "@emotion/core": "^10.0.9",
         "@gatographql/api-fetch": "file:../api-fetch",
         "@wordpress/base-styles": "^4.49.0",
         "@wordpress/components": "^27.6.0",
@@ -28,8 +30,15 @@
         "@wordpress/data": "^9.28.0",
         "@wordpress/edit-post": "^7.35.0",
         "@wordpress/scripts": "^27.9.0",
-        "prettier": "npm:wp-prettier@2.0.5",
+        "prettier": "npm:wp-prettier@^3.0.3",
         "raw-loader": "^4.0.2",
         "react-select": "^3.0.8"
+    },
+    "overrides": {
+        "typescript": "^5.4.5",
+        "react-select": {
+            "react": "^18.0.0",
+            "react-dom": "^18.0.0"
+        }
     }
 }

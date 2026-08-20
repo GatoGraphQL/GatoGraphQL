@@ -2,12 +2,15 @@
  * WordPress dependencies
  */
 import { compose } from '@wordpress/compose';
+import { useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 
 /**
  * External dependencies
  */
 import Select from 'react-select';
+import { CacheProvider } from '@emotion/core';
+import createCache from '@emotion/cache';
 
 /**
  * Internal dependencies
@@ -17,6 +20,31 @@ import './style.scss';
 
 const GetLabelForNotFoundValue = ( val ) => val;
 
+/**
+ * react-select styles itself with Emotion, which inserts its rules into the
+ * document where its module was loaded. Since WordPress 7.1 the post editor
+ * canvas is always an iframe, so those rules never reach the rendered dropdown
+ * and it shows up unstyled. WordPress' own `StyleProvider` redirects Emotion 11
+ * only, while react-select v3 is on Emotion 10, so it needs its own cache
+ * pointing at the document the dropdown is rendered in.
+ */
+const emotionCachesByDocument = new WeakMap();
+
+const getEmotionCache = ( ownerDocument ) => {
+	if ( ! ownerDocument || ownerDocument === document ) {
+		return null;
+	}
+	let cache = emotionCachesByDocument.get( ownerDocument );
+	if ( ! cache ) {
+		cache = createCache( {
+			key: 'gatographql-select',
+			container: ownerDocument.head,
+		} );
+		emotionCachesByDocument.set( ownerDocument, cache );
+	}
+	return cache;
+};
+
 const EditableSelect = ( props ) => {
 	const {
 		options,
@@ -25,7 +53,7 @@ const EditableSelect = ( props ) => {
 		setAttributes,
 		isSelected,
 		attributes,
-		attributeName
+		attributeName,
 	} = props;
 	/**
 	 * Optional props
@@ -34,71 +62,106 @@ const EditableSelect = ( props ) => {
 	/**
 	 * By default, if not defined, use the opposite value to isMulti
 	 */
-	const closeMenuOnSelect = props.closeMenuOnSelect != undefined ? props.closeMenuOnSelect : !isMulti;
+	const closeMenuOnSelect =
+		props.closeMenuOnSelect != undefined
+			? props.closeMenuOnSelect
+			: ! isMulti;
 	/**
 	 * The attribute to update is passed through `attributeName`
 	 * For either isMulti or not, make value always be an array
 	 */
-	const value = isMulti ? attributes[ attributeName ] : ( attributes[ attributeName ] != null ? [ attributes[ attributeName ] ] : [] )
+	const value = isMulti
+		? attributes[ attributeName ]
+		: attributes[ attributeName ] != null
+		? [ attributes[ attributeName ] ]
+		: [];
 	/**
 	 * If the defaultValue is not found in the options, either display the value,
 	 * or display a value containing the error message
 	 */
-	const getLabelForNotFoundValueCallback = props.getLabelForNotFoundValueCallback || GetLabelForNotFoundValue;
+	const getLabelForNotFoundValueCallback =
+		props.getLabelForNotFoundValueCallback || GetLabelForNotFoundValue;
 	/**
 	 * Create a dictionary, with value as key, and label as the value
 	 * The options may be grouped, in that case extract the options from within them
 	 * To find out, check if the first element itself has entry "options",then it's grouped
 	 */
-	const maybeUngroupedOptions = (options || []).length ?
-		(options[0].options != undefined ?
-			options.map( option => option.options).flat()
+	const maybeUngroupedOptions = ( options || [] ).length
+		? options[ 0 ].options != undefined
+			? options.map( ( option ) => option.options ).flat()
 			: options
-		)
 		: [];
-	let valueLabelDictionary = {};
-	value.forEach( function( val ) {
-		var entry = (maybeUngroupedOptions.filter( option => option.value == val )).shift();
-		valueLabelDictionary[ val ] = entry ?
-			entry.label
+	const valueLabelDictionary = {};
+	value.forEach( function ( val ) {
+		const entry = maybeUngroupedOptions
+			.filter( ( option ) => option.value == val )
+			.shift();
+		valueLabelDictionary[ val ] = entry
+			? entry.label
 			: getLabelForNotFoundValueCallback( val );
 	} );
 	const componentClassName = 'gatographql-select-card';
 	const multiOrSingleClass = isMulti ? 'multi' : 'single';
+	const [ selectAnchor, setSelectAnchor ] = useState( null );
+	const emotionCache = getEmotionCache(
+		selectAnchor && selectAnchor.ownerDocument
+	);
+	const selectElement = (
+		<Select
+			defaultValue={ defaultValue }
+			options={ options }
+			isMulti={ isMulti }
+			closeMenuOnSelect={ closeMenuOnSelect }
+			onChange={ ( selected ) =>
+				setAttributes( {
+					[ attributeName ]: isMulti
+						? ( selected || [] ).map( ( option ) => option.value )
+						: selected.value,
+				} )
+			}
+		/>
+	);
 	return (
 		<>
-			{ isSelected &&
-				<Select
-					defaultValue={ defaultValue }
-					options={ options }
-					isMulti={ isMulti }
-					closeMenuOnSelect={ closeMenuOnSelect }
-					onChange={ selected =>
-						setAttributes( {
-							[ attributeName ]: isMulti ?
-								(selected || []).map(option => option.value) :
-								selected.value
-						} )
-					}
-				/>
-			}
-			{ !isSelected && !!value.length && (
-				<div className={ `${ className }__label-group ${ componentClassName }__label-group ${ multiOrSingleClass }` }>
-					{ value.map( val =>
-						<div className={ `${ className }__label-item ${ componentClassName }__label-item ${ multiOrSingleClass } ` }>
+			{ isSelected && (
+				<>
+					<span
+						ref={ setSelectAnchor }
+						style={ { display: 'none' } }
+					/>
+					{ selectAnchor &&
+						( emotionCache ? (
+							<CacheProvider value={ emotionCache }>
+								{ selectElement }
+							</CacheProvider>
+						) : (
+							selectElement
+						) ) }
+				</>
+			) }
+			{ ! isSelected && !! value.length && (
+				<div
+					className={ `${ className }__label-group ${ componentClassName }__label-group ${ multiOrSingleClass }` }
+				>
+					{ value.map( ( val ) => (
+						<div
+							className={ `${ className }__label-item ${ componentClassName }__label-item ${ multiOrSingleClass } ` }
+						>
 							{ valueLabelDictionary[ val ] }
 						</div>
-					) }
+					) ) }
 				</div>
 			) }
-			{ !isSelected && !value.length && (
-				<div className={ `${ className }__not-set ${ componentClassName }__not-set` }>
-					<em>{ __('(not set)', 'gatographql') }</em>
+			{ ! isSelected && ! value.length && (
+				<div
+					className={ `${ className }__not-set ${ componentClassName }__not-set` }
+				>
+					<em>{ __( '(not set)', 'gatographql' ) }</em>
 				</div>
 			) }
 		</>
-	)
-}
+	);
+};
 
 const WithDataLoadingEditableSelect = compose( [
 	withSpinner(),
@@ -113,13 +176,9 @@ const WithDataLoadingEditableSelect = compose( [
 const MaybeWithDataLoadingEditableSelect = ( props ) => {
 	const { maybeShowSpinnerOrError } = props;
 	if ( maybeShowSpinnerOrError ) {
-		return (
-			<WithDataLoadingEditableSelect { ...props } />
-		)
+		return <WithDataLoadingEditableSelect { ...props } />;
 	}
-	return (
-		<EditableSelect { ...props } />
-	);
-}
+	return <EditableSelect { ...props } />;
+};
 
 export default MaybeWithDataLoadingEditableSelect;

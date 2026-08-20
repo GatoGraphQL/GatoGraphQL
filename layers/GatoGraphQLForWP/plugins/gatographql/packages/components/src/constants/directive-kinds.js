@@ -3,7 +3,7 @@
  * but converted to uppercase as done by PoP\ComponentModel\TypeResolvers\EnumType\DirectiveKindEnumTypeResolver
  */
 const DIRECTIVE_KINDS = {
-    QUERY: 'QUERY',
-}
+	QUERY: 'QUERY',
+};
 
 export { DIRECTIVE_KINDS };

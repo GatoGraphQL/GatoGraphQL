@@ -49,8 +49,9 @@ const existingStore = select( STORE_NAME );
  *
  * @type {Object}
  */
-export const store = existingStore || createReduxStore( STORE_NAME, storeConfig );
+export const store =
+	existingStore || createReduxStore( STORE_NAME, storeConfig );
 
-if ( ! existingStore ) { 
+if ( ! existingStore ) {
 	register( store );
 }

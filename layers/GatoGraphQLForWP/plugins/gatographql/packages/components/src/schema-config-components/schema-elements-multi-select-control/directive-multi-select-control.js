@@ -18,18 +18,16 @@ const DirectiveMultiSelectControl = compose( [
 			getDirectives,
 			isRequestingDirectives,
 			getRetrievingDirectivesErrorMessage,
-		} = select ( 'gatographql/components' );
+		} = select( 'gatographql/components' );
 		/**
 		 * Convert the directives array to this structure:
 		 * [{group:"Directives",title:"directiveName",value:"directiveName"},...]
 		 */
-		const items = getDirectives().map( directive => (
-			{
-				group: __('Directives', 'gatographql'),
-				title: `${ directive }`,//`@${ directive }`,
-				value: directive,
-			}
-		) );
+		const items = getDirectives().map( ( directive ) => ( {
+			group: __( 'Directives', 'gatographql' ),
+			title: `${ directive }`, //`@${ directive }`,
+			value: directive,
+		} ) );
 		return {
 			items,
 			isRequestingItems: isRequestingDirectives(),

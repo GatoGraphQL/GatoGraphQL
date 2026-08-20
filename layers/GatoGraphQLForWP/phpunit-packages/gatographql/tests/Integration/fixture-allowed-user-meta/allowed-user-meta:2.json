@@ -51,6 +51,7 @@
         "description",
         "rich_editing",
         "syntax_highlighting",
+        "infinite_scrolling",
         "comment_shortcuts",
         "admin_color",
         "use_ssl",

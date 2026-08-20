@@ -1,4 +1,4 @@
-export { 
+export {
 	ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
 	ATTRIBUTE_VALUE_BEHAVIOR_DENY,
-} from './behaviors' ;
+} from './behaviors';

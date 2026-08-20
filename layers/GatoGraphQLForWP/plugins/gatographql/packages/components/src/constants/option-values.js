@@ -3,6 +3,4 @@
  */
 const ATTRIBUTE_NO_VALUE_ID = 0;
 
-export {
-	ATTRIBUTE_NO_VALUE_ID,
-};
+export { ATTRIBUTE_NO_VALUE_ID };
