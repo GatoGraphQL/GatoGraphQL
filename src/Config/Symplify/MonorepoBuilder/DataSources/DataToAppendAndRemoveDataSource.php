@@ -47,6 +47,14 @@ class DataToAppendAndRemoveDataSource
                     'type' => 'vcs',
                     'url' => 'https://github.com/leoloso/symplify-smart-file-system.git',
                 ],
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/symplify-symplify-kernel.git',
+                ],
+                [
+                    'type' => 'vcs',
+                    'url' => 'https://github.com/leoloso/symplify-autowire-array-parameter.git',
+                ],
                 /**
                  * Also override "symplify/package-builder" because its dependency
                  * of "sebastian/diff" is on "^4.0", which does not let PHPUnit v10
