@@ -13,6 +13,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 (#3380)
+- The checkmarks in the read-only lists of selected schema elements are no longer greyed out under WordPress 7.1 (#3381)
 
 ## 19.2.0 - 11/08/2026
 

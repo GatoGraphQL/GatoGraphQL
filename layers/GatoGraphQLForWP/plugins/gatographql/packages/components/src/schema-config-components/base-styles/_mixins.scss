@@ -10,5 +10,22 @@
 		// padding-right: 0;
 		margin: 0;
 		padding: 0;
+
+		// The checkboxes in this list are `disabled` because they print the saved
+		// selection read-only, not because the control is unavailable. WordPress
+		// 7.1 began rendering a disabled checked checkbox in grey (it guards the
+		// accent rule with `:not(:disabled)`, and fills the checkmark with the
+		// grey-400 token), which reads as "not selected". Keep the accent colour.
+		$accent: var(--wp-components-color-accent, var(--wp-admin-theme-color, #3858e9));
+
+		.components-checkbox-control__input[type="checkbox"]:disabled:is(:checked, :indeterminate) {
+			background: $accent;
+			border-color: $accent;
+		}
+
+		.components-checkbox-control:has(:disabled) svg.components-checkbox-control__checked,
+		.components-checkbox-control:has(:disabled) svg.components-checkbox-control__indeterminate {
+			fill: #fff;
+		}
 	}
 }
