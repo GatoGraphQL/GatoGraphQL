@@ -11,21 +11,21 @@ import globalFieldsGraphQLQuery from '../../graphql-documents/global-fields.gql'
  */
 import directivesGraphQLQuery from '../../graphql-documents/directives.gql';
 
-import { DIRECTIVE_KINDS } from '../constants/directive-kinds'
+import { DIRECTIVE_KINDS } from '../constants/directive-kinds';
 
 export default {
 	typeFields: {
 		query: typeFieldsGraphQLQuery,
-		defaultVariables: {}
+		defaultVariables: {},
 	},
 	globalFields: {
 		query: globalFieldsGraphQLQuery,
-		defaultVariables: {}
+		defaultVariables: {},
 	},
 	directives: {
 		query: directivesGraphQLQuery,
 		defaultVariables: {
-			directiveKinds: [ DIRECTIVE_KINDS.QUERY ]
-		}
-	}
-}
+			directiveKinds: [ DIRECTIVE_KINDS.QUERY ],
+		},
+	},
+};

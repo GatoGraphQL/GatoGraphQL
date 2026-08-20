@@ -12,25 +12,25 @@ import './style.scss';
  */
 
 const InfoModalButton = ( props ) => {
-	const { 
-		icon = "editor-help",
-		variant = "tertiary",
+	const {
+		icon = 'editor-help',
+		variant = 'tertiary',
 		isSmall = true,
-		className = "gatographql-info-modal-button"
+		className = 'gatographql-info-modal-button',
 	} = props;
 	const [ isOpen, setOpen ] = useState( false );
 	return (
 		<>
 			<Button
 				{ ...props }
-				variant={ variant } 
+				variant={ variant }
 				icon={ icon }
-				isSmall={ isSmall } 
+				isSmall={ isSmall }
 				onClick={ () => setOpen( true ) }
 				className={ className }
 			/>
 			{ isOpen && (
-				<InfoModal 
+				<InfoModal
 					{ ...props }
 					onRequestClose={ () => setOpen( false ) }
 				/>

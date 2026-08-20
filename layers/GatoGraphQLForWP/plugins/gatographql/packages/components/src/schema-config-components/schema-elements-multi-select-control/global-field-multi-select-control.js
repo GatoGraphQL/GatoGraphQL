@@ -18,18 +18,16 @@ const GlobalFieldMultiSelectControl = compose( [
 			getGlobalFields,
 			isRequestingGlobalFields,
 			getRetrievingGlobalFieldsErrorMessage,
-		} = select ( 'gatographql/components' );
+		} = select( 'gatographql/components' );
 		/**
 		 * Convert the global fields array to this structure:
 		 * [{group:"Global Fields",title:"globalFieldName",value:"globalFieldName"},...]
 		 */
-		const items = getGlobalFields().map( globalField => (
-			{
-				group: __('Global Fields', 'gatographql'),
-				title: `${ globalField }`,
-				value: globalField,
-			}
-		) );
+		const items = getGlobalFields().map( ( globalField ) => ( {
+			group: __( 'Global Fields', 'gatographql' ),
+			title: `${ globalField }`,
+			value: globalField,
+		} ) );
 		return {
 			items,
 			isRequestingItems: isRequestingGlobalFields(),

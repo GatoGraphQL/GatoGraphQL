@@ -1,1 +1,1 @@
-export { default as LinkableInfoTooltip } from './linkable-info-tooltip' ;
+export { default as LinkableInfoTooltip } from './linkable-info-tooltip';

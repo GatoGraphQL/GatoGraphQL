@@ -1,1 +1,1 @@
-export { default as withCustomizableConfiguration } from './with-customizable-configuration' ;
+export { default as withCustomizableConfiguration } from './with-customizable-configuration';

@@ -1,1 +1,1 @@
-export { default as EditableArrayTextareaControl } from './editable-array-textarea-control' ;
+export { default as EditableArrayTextareaControl } from './editable-array-textarea-control';

@@ -24,12 +24,23 @@ export { EditableSelect } from './components/editable-select';
 export { EditableArrayTextareaControl } from './components/editable-array-textarea-control';
 export { withEditableOnFocus } from './components/editable-on-focus';
 export { getLabelForNotFoundElement } from './components/helpers';
-export { ATTRIBUTE_VALUE_BEHAVIOR_ALLOW, ATTRIBUTE_VALUE_BEHAVIOR_DENY } from './components/behaviors';
+export {
+	ATTRIBUTE_VALUE_BEHAVIOR_ALLOW,
+	ATTRIBUTE_VALUE_BEHAVIOR_DENY,
+} from './components/behaviors';
 export { AllowAccessToEntriesCard } from './components/allow-access-to-entries-card';
 export { SchemaConfigMetaCard } from './components/schema-configuration-meta-card';
 export { maybeGetErrorMessage } from './store/utils';
-export { NO_ITEMS_SELECTED_LABEL, SETTINGS_VALUE_LABEL, GROUP_FIELDS_UNDER_TYPE_FOR_PRINT } from './default-configuration';
-export { ATTRIBUTE_VALUE_DEFAULT, ATTRIBUTE_VALUE_ENABLED, ATTRIBUTE_VALUE_DISABLED } from './constants/enabled-disabled-values';
+export {
+	NO_ITEMS_SELECTED_LABEL,
+	SETTINGS_VALUE_LABEL,
+	GROUP_FIELDS_UNDER_TYPE_FOR_PRINT,
+} from './default-configuration';
+export {
+	ATTRIBUTE_VALUE_DEFAULT,
+	ATTRIBUTE_VALUE_ENABLED,
+	ATTRIBUTE_VALUE_DISABLED,
+} from './constants/enabled-disabled-values';
 export { ATTRIBUTE_NO_VALUE_ID } from './constants/option-values';
 
 /**
