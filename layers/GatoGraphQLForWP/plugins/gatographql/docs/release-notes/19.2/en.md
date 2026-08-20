@@ -68,6 +68,8 @@ Both methods can be combined within the same query, but not on the same meta dir
 
 ## Fixed
 
+- The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 ([#3380](https://github.com/GatoGraphQL/GatoGraphQL/pull/3380)) (`v19.2.1`).
+
 - Serializing the value of a field of type `Date` or `DateTime` no longer produces an uncaught PHP error when that value is not a date ([#3372](https://github.com/GatoGraphQL/GatoGraphQL/pull/3372)).
 
   A meta directive can override the value of a field while keeping its type, as in:
