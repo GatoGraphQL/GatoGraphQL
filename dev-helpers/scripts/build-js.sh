@@ -28,7 +28,7 @@ BASE_DIR="$PWD/$1"
 # Pass the command to execute:
 # - BUILD_PROD: run `npm build` for all blocks
 # - COMPILE_DEV: run `npm start` for all blocks in a new tab
-# - INSTALL_DEPS: run `npm install --legacy-peers` for all blocks
+# - INSTALL_DEPS: run `npm install --legacy-peer-deps` for all blocks
 COMMAND="$2"
 ########################################################################
 
@@ -72,6 +72,15 @@ runCommand(){
                 ttab 'npm start'
             elif [ $COMMAND = "INSTALL_DEPS" ]
             then
+                # Do not remove `--legacy-peer-deps`. Without it, npm resolves
+                # the peer dependencies of the `@wordpress/scripts` toolchain,
+                # which installs `typescript` at its latest major (via the
+                # open-ended peer range of `ts-api-utils`) and Playwright.
+                # `ts-api-utils` cannot read that version of TypeScript, so
+                # `npm run lint-js` then fails to load the `@typescript-eslint`
+                # plugin in every package that does not pin `typescript` under
+                # `overrides` in its `package.json` — which is most of them. It
+                # also adds ~45 MB of unused Playwright to each package.
                 npm install --legacy-peer-deps
             fi
             cd ..
