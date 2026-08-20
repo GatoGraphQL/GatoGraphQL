@@ -62,6 +62,7 @@ Both methods can be combined within the same query, but not on the same meta dir
 ## Improvements
 
 - Tested up to WordPress 7.1 ([#aa2cdc8d](https://github.com/GatoGraphQL/GatoGraphQL/commit/aa2cdc8d))
+- The read-only lists of selected schema elements are spaced out, instead of having their items sit flush against each other ([#3382](https://github.com/GatoGraphQL/GatoGraphQL/pull/3382)) (`v19.2.1`).
 - Updated "Field Value Iteration and Manipulation" docs with the `@underDynamicVariable` meta directive ([#3371](https://github.com/GatoGraphQL/GatoGraphQL/pull/3371))
 - Updated the WooCommerce docs with the store configuration, and brought the bundle teaser in line with what the extension reaches ([#3374](https://github.com/GatoGraphQL/GatoGraphQL/pull/3374))
 - The tutorials on translating block content to a different language now also translate the header and footer cells of a `core/table` block, which the query extracted for the body rows and the caption only ([#3375](https://github.com/GatoGraphQL/GatoGraphQL/pull/3375))

@@ -27,5 +27,20 @@
 		.components-checkbox-control:has(:disabled) svg.components-checkbox-control__indeterminate {
 			fill: #fff;
 		}
+
+		li + li {
+			margin-top: 6px;
+		}
+	}
+
+	// The fields are grouped under a `<strong>` with the type name. Separate each
+	// group from the list of the previous one, and its title from its own items.
+	.editor-styles-wrapper ul.checkbox-list + strong {
+		display: inline-block;
+		margin-top: 14px;
+	}
+
+	.editor-styles-wrapper strong + ul.checkbox-list {
+		margin-top: 6px;
 	}
 }

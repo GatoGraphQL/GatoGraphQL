@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Improvements
 
 - Tested up to WordPress 7.1 (#aa2cdc8d)
+- The read-only lists of selected schema elements are spaced out, instead of having their items sit flush against each other (#3382)
 
 ### Fixed
 
