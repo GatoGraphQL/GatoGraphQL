@@ -337,7 +337,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
         $storedPluginVersions = get_option($option, []);
         unset($storedPluginVersions[$pluginBaseName]);
-        update_option($option, $storedPluginVersions);
+        update_option($option, $storedPluginVersions, false);
     }
 
 
@@ -694,7 +694,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                          *
                          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/2631
                          */
-                        update_option($option, $storedPluginVersions);
+                        update_option($option, $storedPluginVersions, false);
 
                         if ($isMainPluginJustActivated) {
                             $this->pluginJustActivated();

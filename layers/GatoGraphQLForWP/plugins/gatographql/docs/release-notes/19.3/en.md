@@ -8,6 +8,8 @@ WordPress loads the options marked as "autoload" on every single request, front-
 
 None of them is read outside the wp-admin, the WP-CLI commands, or a translation being run, and the AI model data in particular can run to hundreds of kilobytes on a site with several AI services configured. They are now read where they are used instead.
 
+The same goes for the record of which version of the plugin and of each extension is installed, which is only consulted in the wp-admin to notice that one of them has just been activated or updated ([#3388](https://github.com/GatoGraphQL/GatoGraphQL/pull/3388)).
+
 Nothing needs doing on an existing site: each option stops being autoloaded the next time it is written.
 
 ## Added

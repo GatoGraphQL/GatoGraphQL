@@ -428,7 +428,7 @@ abstract class AbstractPlugin implements PluginInterface
         $option = $optionNamespacer->namespaceOption(PluginOptions::PLUGIN_VERSIONS);
         $pluginVersions = get_option($option, []);
         unset($pluginVersions[$this->pluginBaseName]);
-        \update_option($option, $pluginVersions);
+        \update_option($option, $pluginVersions, false);
     }
 
     /**
