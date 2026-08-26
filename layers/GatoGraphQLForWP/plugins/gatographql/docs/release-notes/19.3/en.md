@@ -1,5 +1,15 @@
 # Release Notes: 19.3
 
+## Improvements
+
+### Fewer options loaded on every request
+
+WordPress loads the options marked as "autoload" on every single request, front-end ones included. Three of the plugin's own were marked that way and had no business being: the cached list of models retrieved from the AI services, the log entry counts, and the internal flags kept between one request and the next ([#3387](https://github.com/GatoGraphQL/GatoGraphQL/pull/3387)).
+
+None of them is read outside the wp-admin, the WP-CLI commands, or a translation being run, and the AI model data in particular can run to hundreds of kilobytes on a site with several AI services configured. They are now read where they are used instead.
+
+Nothing needs doing on an existing site: each option stops being autoloaded the next time it is written.
+
 ## Added
 
 ### FluentCart extension

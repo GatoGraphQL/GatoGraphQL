@@ -10,6 +10,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Documentation for the FluentCart integration (#3379)
 
+### Improvements
+
+- The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
+
 ## 19.2.1 - 20/08/2026
 
 ### Improvements

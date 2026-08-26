@@ -249,6 +249,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
+* Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 
 = 19.2.1 =
 * Improved - Tested up to WordPress 7.1 (#aa2cdc8d)
