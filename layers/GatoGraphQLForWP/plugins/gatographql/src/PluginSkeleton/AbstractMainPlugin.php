@@ -838,6 +838,33 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     }
 
     /**
+     * Execute logic after the plugin has just been activated
+     *
+     * The migration below runs here as well as on an update, because the
+     * common way of updating never reaches the update path.
+     *
+     * Deactivating removes the plugin's entry from the stored versions, so
+     * the deactivate/replace/activate sequence — which is how a plugin
+     * uploaded as a zip is installed — comes back with nothing to compare
+     * against and is read as a first activation rather than as an update.
+     * The autoload flags were then never migrated on exactly the sites that
+     * had the most to gain from it, and no later run would try again:
+     * `update_option()` returns at its "the value is the same" check before
+     * it looks at the flag, so an option whose value has settled keeps
+     * whatever it was first written with, indefinitely.
+     *
+     * It is cheap and it is idempotent, so running it on both paths costs a
+     * site nothing and is the difference between a fix that lands and one
+     * that only lands sometimes.
+     */
+    public function pluginJustActivated(): void
+    {
+        parent::pluginJustActivated();
+
+        $this->stopAutoloadingTheOptionsThatNeedNotBe();
+    }
+
+    /**
      * The options this plugin writes with `$autoload` set to `false` are
      * only written that way when their value changes, and that is not the
      * same as their being migrated.
