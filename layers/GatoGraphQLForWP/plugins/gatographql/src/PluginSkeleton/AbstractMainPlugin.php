@@ -39,11 +39,13 @@ use WP_Upgrader;
 use function __;
 use function add_action;
 use function do_action;
+use function function_exists;
 use function get_called_class;
 use function get_option;
 use function is_admin;
 use function update_option;
 use function wp_enqueue_style;
+use function wp_set_option_autoload;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
@@ -831,7 +833,44 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     {
         parent::pluginJustUpdated($newVersion, $previousVersion);
 
+        $this->stopAutoloadingTheOptionsThatNeedNotBe();
         $this->revalidateCommercialExtensionActivatedLicenses();
+    }
+
+    /**
+     * The options this plugin writes with `$autoload` set to `false` are
+     * only written that way when their value changes, and that is not the
+     * same as their being migrated.
+     *
+     * `update_option()` returns at its "the value is the same" check before
+     * it ever looks at the autoload argument, so passing `false` never flips
+     * a row already stored as autoloaded unless the value happens to change
+     * at the same moment. The one that matters most is the AI model
+     * catalogue: it is refetched every few days, and when the provider's
+     * list has not changed the array written back is identical — so the
+     * hundreds of kilobytes stayed autoloaded on every page load of the site,
+     * indefinitely, while the release note said they would stop.
+     *
+     * `wp_set_option_autoload()` sets the flag whatever the value is. It
+     * arrived in WordPress 6.4 and this plugin supports older, so a site
+     * without it keeps the previous behaviour rather than failing.
+     */
+    protected function stopAutoloadingTheOptionsThatNeedNotBe(): void
+    {
+        if (!function_exists('wp_set_option_autoload')) {
+            return;
+        }
+
+        $optionNamespacer = OptionNamespacerFacade::getInstance();
+        $options = [
+            Options::JSON_DATA,
+            Options::LOG_COUNTS,
+            Options::TRANSIENTS,
+            PluginOptions::PLUGIN_VERSIONS,
+        ];
+        foreach ($options as $option) {
+            wp_set_option_autoload($optionNamespacer->namespaceOption($option), false);
+        }
     }
 
     /**
