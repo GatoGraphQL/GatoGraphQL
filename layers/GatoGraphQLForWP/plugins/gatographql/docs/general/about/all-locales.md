@@ -81,7 +81,8 @@
 
 {release-notes-intro}
 
-- **[19.3](../../release-notes/19.3/en.md)** ({current})
+- **[20.0](../../release-notes/20.0/en.md)** ({current})
+- [19.3](../../release-notes/19.3/en.md)
 - [19.2](../../release-notes/19.2/en.md)
 - [19.1](../../release-notes/19.1/en.md)
 - [19.0](../../release-notes/19.0/en.md)
