@@ -24,6 +24,11 @@ while IFS= read -r locale; do
     if ! php ci/i18n/translate-po.php "$po" --locale="$locale" "$@"; then
         failed=1
     fi
+    if msgcat "$po" -o "$po.rewrap"; then
+        mv "$po.rewrap" "$po"
+    else
+        rm -f "$po.rewrap"
+    fi
 done < "$LOCALES_FILE"
 
 if [ "$failed" -ne 0 ]; then
