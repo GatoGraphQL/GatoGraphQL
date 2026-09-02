@@ -249,8 +249,8 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 19.2.2 =
 * Security - Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
-* Security - Protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) can no longer be written through the custom post, comment and taxonomy meta mutations either (#3390)
-* Security - Reading site options (fields <code>optionValue</code>, <code>optionValues</code>, <code>optionNames</code> and their variants) is now restricted to administrators unless the option is added to the settings allowlist, closing an information disclosure where any user could read arbitrary options; the "Settings" allow/deny default is now an empty allowlist (#3391)
+* Security - Protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) can no longer be written through the custom post, comment and taxonomy meta mutations either (#3389)
+* Security - Reading site options (fields <code>optionValue</code>, <code>optionValues</code>, <code>optionNames</code> and their variants) is now restricted to administrators unless the option is added to the settings allowlist, closing an information disclosure where any user could read arbitrary options; the "Settings" allow/deny default is now an empty allowlist (#3389)
 
 = 19.2.1 =
 * Improved - Tested up to WordPress 7.1 (#aa2cdc8d)

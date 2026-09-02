@@ -8,11 +8,11 @@ Writing a protected user meta key (the role/capabilities key, the user level, se
 
 Previously, because editing one's own account authorized writing any meta key on it, a logged-in user could set their own capabilities key and escalate to a higher role. Assigning roles remains available through the `updateUser` mutation's `roles` input, which is gated by the `promote_users` capability.
 
-The same protection is applied to the custom post, comment and taxonomy meta mutations, which now reject WordPress protected meta keys (those flagged by `is_protected_meta`, such as keys prefixed with `_`) ([#3390](https://github.com/GatoGraphQL/GatoGraphQL/pull/3390)).
+The same protection is applied to the custom post, comment and taxonomy meta mutations, which now reject WordPress protected meta keys (those flagged by `is_protected_meta`, such as keys prefixed with `_`) ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
 
 ### Reading site options is restricted to administrators
 
-The fields to read site options (`optionValue`, `optionValues`, `optionNames`, `optionObjectValue` and `optionObjectValues`) previously allowed any user, including anonymous visitors, to read the value of any option in the database, because the "Settings" allow/deny list defaulted to an empty denylist. This could expose sensitive options such as API keys stored by other plugins ([#3391](https://github.com/GatoGraphQL/GatoGraphQL/pull/3391)).
+The fields to read site options (`optionValue`, `optionValues`, `optionNames`, `optionObjectValue` and `optionObjectValues`) previously allowed any user, including anonymous visitors, to read the value of any option in the database, because the "Settings" allow/deny list defaulted to an empty denylist. This could expose sensitive options such as API keys stored by other plugins ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
 
 Now, administrators can read any option, while every other user can only read the options explicitly added to the settings allowlist, whose default is empty. To expose specific options publicly, add them under Settings.
 
