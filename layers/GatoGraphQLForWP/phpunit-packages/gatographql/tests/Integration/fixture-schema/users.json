@@ -1,46 +1,4 @@
 {
-  "errors": [
-    {
-      "message": "There is no key with name 'wp_capabilities'",
-      "locations": [
-        {
-          "line": 29,
-          "column": 27
-        }
-      ],
-      "extensions": {
-        "path": [
-          "(key: \"wp_capabilities\")",
-          "metaValue2: metaValue(key: \"wp_capabilities\")",
-          "users(pagination: {limit: 3}) { ... }",
-          "query { ... }"
-        ],
-        "type": "User",
-        "field": "metaValue2: metaValue(key: \"wp_capabilities\")",
-        "code": "PoPCMSSchema/Meta@e1"
-      }
-    },
-    {
-      "message": "There is no key with name 'wp_capabilities'",
-      "locations": [
-        {
-          "line": 30,
-          "column": 10
-        }
-      ],
-      "extensions": {
-        "path": [
-          "(keys: [\"nickname\", \"wp_capabilities\"])",
-          "meta(keys: [\"nickname\", \"wp_capabilities\"])",
-          "users(pagination: {limit: 3}) { ... }",
-          "query { ... }"
-        ],
-        "type": "User",
-        "field": "meta(keys: [\"nickname\", \"wp_capabilities\"])",
-        "code": "PoPCMSSchema/Meta@e1"
-      }
-    }
-  ],
   "data": {
     "users": [
       {
@@ -125,8 +83,15 @@
         "lastName": "Smith",
         "locale": "en_US",
         "metaValue": "editor",
-        "metaValue2": null,
-        "meta": null,
+        "metaValue2": "Editor",
+        "meta": {
+          "nickname": [
+            "editor"
+          ],
+          "first_name": [
+            "Editor"
+          ]
+        },
         "metaKeys": [
           "nickname",
           "first_name",
@@ -144,10 +109,10 @@
           "wp_dashboard_quick_press_last_post_id"
         ],
         "includingMetaKeys": [
-          "nickname"
+          "nickname",
+          "first_name"
         ],
         "excludingMetaKeys": [
-          "first_name",
           "last_name",
           "description",
           "rich_editing",
@@ -314,8 +279,15 @@
         "lastName": "Marquez",
         "locale": "en_US",
         "metaValue": "author",
-        "metaValue2": null,
-        "meta": null,
+        "metaValue2": "Author",
+        "meta": {
+          "nickname": [
+            "author"
+          ],
+          "first_name": [
+            "Author"
+          ]
+        },
         "metaKeys": [
           "nickname",
           "first_name",
@@ -333,10 +305,10 @@
           "wp_dashboard_quick_press_last_post_id"
         ],
         "includingMetaKeys": [
-          "nickname"
+          "nickname",
+          "first_name"
         ],
         "excludingMetaKeys": [
-          "first_name",
           "last_name",
           "description",
           "rich_editing",
@@ -425,8 +397,15 @@
         "lastName": "Johnson",
         "locale": "en_US",
         "metaValue": "contributor",
-        "metaValue2": null,
-        "meta": null,
+        "metaValue2": "Contributor",
+        "meta": {
+          "nickname": [
+            "contributor"
+          ],
+          "first_name": [
+            "Contributor"
+          ]
+        },
         "metaKeys": [
           "nickname",
           "first_name",
@@ -444,10 +423,10 @@
           "wp_dashboard_quick_press_last_post_id"
         ],
         "includingMetaKeys": [
-          "nickname"
+          "nickname",
+          "first_name"
         ],
         "excludingMetaKeys": [
-          "first_name",
           "last_name",
           "description",
           "rich_editing",
