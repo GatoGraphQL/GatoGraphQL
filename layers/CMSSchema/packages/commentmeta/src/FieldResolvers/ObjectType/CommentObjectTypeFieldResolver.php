@@ -88,9 +88,13 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValue = $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $comment,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     true
                 );
                 // If it's an array, it must be a JSON object
@@ -99,9 +103,13 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                 }
                 return $metaValue;
             case 'metaValues':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValues = $this->getCommentMetaTypeAPI()->getCommentMeta(
                     $comment,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     false
                 );
                 if (!is_array($metaValues)) {
@@ -122,6 +130,9 @@ class CommentObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldReso
                 $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
                     if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    if (!$this->isMetaKeyReadable($key)) {
                         continue;
                     }
                     $meta[$key] = $allMeta[$key];

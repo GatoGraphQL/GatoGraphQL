@@ -93,9 +93,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValue = $this->getLogicalCustomPostMetaTypeAPI()->getCustomPostMeta(
                     $customPost,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     true
                 );
                 // If it's an array, it must be a JSON object
@@ -104,9 +108,13 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                 }
                 return $metaValue;
             case 'metaValues':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValues = $this->getLogicalCustomPostMetaTypeAPI()->getCustomPostMeta(
                     $customPost,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     false
                 );
                 if (!is_array($metaValues)) {
@@ -127,6 +135,9 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                 $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
                     if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    if (!$this->isMetaKeyReadable($key)) {
                         continue;
                     }
                     $meta[$key] = $allMeta[$key];

@@ -88,9 +88,13 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValue = $this->getUserMetaTypeAPI()->getUserMeta(
                     $user,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     true
                 );
                 // If it's an array, it must be a JSON object
@@ -99,9 +103,13 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                 }
                 return $metaValue;
             case 'metaValues':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValues = $this->getUserMetaTypeAPI()->getUserMeta(
                     $user,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     false
                 );
                 if (!is_array($metaValues)) {
@@ -122,6 +130,9 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                 $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
                     if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    if (!$this->isMetaKeyReadable($key)) {
                         continue;
                     }
                     $meta[$key] = $allMeta[$key];

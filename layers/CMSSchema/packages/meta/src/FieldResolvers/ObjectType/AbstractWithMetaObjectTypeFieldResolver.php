@@ -55,6 +55,22 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
     abstract protected function getMetaTypeAPI(): MetaTypeAPIInterface;
 
     /**
+     * Whether the meta key can be read: it must be allowed by the
+     * allow/denylist and not be protected from reading.
+     *
+     * This is enforced during validation, and again while resolving the
+     * value as a fail-closed safety net, so that protected meta is never
+     * returned even if the value is resolved without going through the
+     * field validation.
+     */
+    protected function isMetaKeyReadable(string $key): bool
+    {
+        $metaTypeAPI = $this->getMetaTypeAPI();
+        return $metaTypeAPI->validateIsMetaKeyAllowed($key)
+            && !$metaTypeAPI->isMetaKeyProtectedFromReading($key);
+    }
+
+    /**
      * Custom validations
      */
     public function validateFieldKeyValues(
