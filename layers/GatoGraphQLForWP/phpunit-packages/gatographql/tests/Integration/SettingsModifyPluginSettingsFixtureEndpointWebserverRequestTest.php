@@ -5,9 +5,10 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PoPSchema\SchemaCommons\Constants\Behaviors;
 
-class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected static function getEndpoint(): string
     {
@@ -31,6 +32,16 @@ class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return Behaviors::ALLOW;
+        return Behaviors::DENY;
+    }
+
+    protected function getDifferentLoginUsername(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserUsername();
+    }
+
+    protected function getDifferentLoginPassword(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserPassword();
     }
 }

@@ -100,6 +100,8 @@ There are 2 behaviors, "Allow access" and "Deny access":
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
+Administrators (users with the `manage_options` capability) can always access every option, regardless of this configuration. The allow/deny list applies to all other users.
+
 <div class="img-width-1024" markdown=1>
 
 ![Defining the access behavior](../../images/schema-configuration-settings-behavior.webp "Defining the access behavior")
@@ -108,7 +110,9 @@ There are 2 behaviors, "Allow access" and "Deny access":
 
 ## Default options
 
-When the plugin is installed, the following options are pre-defined to be accessible:
+By default, non-administrators cannot access any option (the allowlist is empty); administrators can always access every option.
+
+When the plugin's "restrictive defaults" behavior is enabled (under Settings &rarr; Reset Settings), the following options are instead pre-defined to be accessible to everyone:
 
 - `"siteurl"`
 - `"home"`

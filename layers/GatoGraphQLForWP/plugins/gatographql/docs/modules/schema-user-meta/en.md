@@ -60,6 +60,8 @@ There are 2 behaviors, "Allow access" and "Deny access":
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
+Protected user meta keys (the roles/capabilities keys, session tokens, application passwords, and other keys prefixed with `_`) are never accessible to non-administrators, regardless of this configuration; administrators can always access them.
+
 <div class="img-width-1024" markdown=1>
 
 ![Defining the access behavior](../../images/schema-configuration-user-meta-behavior.webp "Defining the access behavior")

@@ -1,26 +1,5 @@
 {
-  "errors": [
-    {
-      "message": "There is no option with name 'admin_email'",
-      "locations": [
-        {
-          "line": 2,
-          "column": 27
-        }
-      ],
-      "extensions": {
-        "type": "QueryRoot",
-        "field": "adminEmail: optionValue(name: \"admin_email\")",
-        "path": [
-          "(name: \"admin_email\")",
-          "adminEmail: optionValue(name: \"admin_email\")",
-          "query { ... }"
-        ],
-        "code": "PoPCMSSchema/Settings@e1"
-      }
-    }
-  ],
   "data": {
-    "adminEmail": null
+    "adminEmail": "wordpress@example.com"
   }
 }

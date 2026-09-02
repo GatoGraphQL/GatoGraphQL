@@ -26,12 +26,12 @@ query {
     lastName
     locale
     metaValue(key: "nickname")
-    metaValue2: metaValue(key: "wp_capabilities")
-    meta(keys: ["nickname", "wp_capabilities"])
+    metaValue2: metaValue(key: "first_name")
+    meta(keys: ["nickname", "first_name"])
     metaKeys
-    includingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"] })
-    excludingMetaKeys: metaKeys(filter: { exclude: ["nickname", "wp_capabilities"] })
-    includingAndExcludingMetaKeys: metaKeys(filter: { include: ["nickname", "wp_capabilities"], exclude: ["wp_capabilities"] })
+    includingMetaKeys: metaKeys(filter: { include: ["nickname", "first_name"] })
+    excludingMetaKeys: metaKeys(filter: { exclude: ["nickname", "first_name"] })
+    includingAndExcludingMetaKeys: metaKeys(filter: { include: ["nickname", "first_name"], exclude: ["first_name"] })
     name
     nicename
     nickname

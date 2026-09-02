@@ -19,7 +19,7 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
  * returns every option stored in the DB). Hence this test case modifies both
  * settings at once, instead of only one as `AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase`.
  */
-abstract class AbstractOptionsModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+abstract class AbstractOptionsModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected function getSettingsKey(): string
     {

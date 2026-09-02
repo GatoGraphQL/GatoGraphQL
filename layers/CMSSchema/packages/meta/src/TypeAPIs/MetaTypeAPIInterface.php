@@ -7,6 +7,8 @@ namespace PoPCMSSchema\Meta\TypeAPIs;
 interface MetaTypeAPIInterface
 {
     public function validateIsMetaKeyAllowed(string $key): bool;
+    public function isMetaKeyProtected(string $key): bool;
+    public function isMetaKeyProtectedFromReading(string $key): bool;
     /**
      * @return string[]
      */

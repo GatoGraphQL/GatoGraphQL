@@ -7,10 +7,20 @@ namespace PoPCMSSchema\CommentMetaWP\TypeAPIs;
 use PoPCMSSchema\CommentMeta\TypeAPIs\AbstractCommentMetaTypeAPI;
 use WP_Comment;
 
+use function current_user_can;
 use function get_comment_meta;
+use function is_protected_meta;
 
 class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 {
+    public function isMetaKeyProtected(string $key): bool
+    {
+        if (current_user_can('manage_options')) {
+            return false;
+        }
+        return is_protected_meta($key, 'comment');
+    }
+
     /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
