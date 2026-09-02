@@ -3944,6 +3944,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "L'entità con ID '%s' ha già una voce meta per la chiave '%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "La chiave meta '%s' non è consentita"
@@ -3971,7 +3972,7 @@ msgid ""
 msgstr ""
 "L'entità con ID '%s' ha già una voce con chiave meta '%s' e valore '%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -4119,7 +4120,7 @@ msgstr ""
 "Oggetto JSON, con chiave uguale alla chiave meta e valore uguale a un array "
 "di valori (un valore scalare viene restituito come array con 1 elemento)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5478,7 +5479,7 @@ msgid "Property to order by"
 msgstr "Proprietà per ordinare"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Non esiste un'opzione con il nome '%s'"
@@ -10443,12 +10444,14 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Impostazioni da <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Tutte le opzioni sono interrogabili"
+msgid "No options are queryable by non-administrators"
+msgstr "Nessuna opzione è interrogabile dagli utenti non amministratori"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Solo alcune opzioni predefinite sono interrogabili"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Solo alcune opzioni predefinite sono interrogabili dagli utenti non "
+"amministratori"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -14297,6 +14300,12 @@ msgstr "Ordina per nicename dell'utente"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordina per email dell'utente"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Tutte le opzioni sono interrogabili"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Solo alcune opzioni predefinite sono interrogabili"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

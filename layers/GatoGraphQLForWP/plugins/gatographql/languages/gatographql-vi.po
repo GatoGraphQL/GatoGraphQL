@@ -3825,6 +3825,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "Thực thể có ID '%s' đã có mục meta cho khóa '%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "Khóa meta '%s' không được phép"
@@ -3851,7 +3852,7 @@ msgid ""
 "The entity with ID '%s' already has entry with meta key '%s' and value '%s'"
 msgstr "Thực thể có ID '%s' đã có mục với khóa meta '%s' và giá trị '%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3994,7 +3995,7 @@ msgstr ""
 "Đối tượng JSON, với khóa là khóa meta và giá trị là một mảng các giá trị "
 "(giá trị vô hướng được trả về dưới dạng mảng có 1 phần tử)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5298,7 +5299,7 @@ msgid "Property to order by"
 msgstr "Thuộc tính để sắp xếp theo"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Không có tùy chọn nào có tên '%s'"
@@ -10175,12 +10176,16 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Cài đặt từ <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Tất cả các tùy chọn đều có thể truy vấn"
+msgid "No options are queryable by non-administrators"
+msgstr ""
+"Không tùy chọn (option) nào có thể được truy vấn bởi người dùng không phải "
+"quản trị viên"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Chỉ một số tùy chọn được xác định trước có thể truy vấn"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Chỉ một số ít tùy chọn (option) được định nghĩa trước là có thể được truy "
+"vấn bởi người dùng không phải quản trị viên"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13987,6 +13992,12 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Tất cả các tùy chọn đều có thể truy vấn"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Chỉ một số tùy chọn được xác định trước có thể truy vấn"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

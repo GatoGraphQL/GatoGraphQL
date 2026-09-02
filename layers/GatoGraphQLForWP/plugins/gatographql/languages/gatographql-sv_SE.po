@@ -3823,6 +3823,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "Entiteten med ID '%s' har redan en metapost för nyckeln '%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "Metanyckel '%s' är inte tillåten"
@@ -3850,7 +3851,7 @@ msgid ""
 msgstr ""
 "Entiteten med ID '%s' har redan en post med metanyckeln '%s' och värdet '%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3994,7 +3995,7 @@ msgstr ""
 "JSON-objekt, med nyckeln som metanyckel och värdet som en array av värden "
 "(ett skalärt värde returneras som en array med 1 element)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5279,7 +5280,7 @@ msgid "Property to order by"
 msgstr "Egenskap att sortera efter"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Det finns inget alternativ med namnet '%s'"
@@ -10156,12 +10157,13 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Inställningar från <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Alla alternativ är frågebara"
+msgid "No options are queryable by non-administrators"
+msgstr "Inga alternativ kan sökas av icke-administratörer"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Endast ett fåtal fördefinierade alternativ är frågebara"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Endast ett fåtal fördefinierade alternativ kan sökas av icke-administratörer"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13975,6 +13977,12 @@ msgstr "Sortera efter användarens nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortera efter användarens e-postadress"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Alla alternativ är frågebara"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Endast ett fåtal fördefinierade alternativ är frågebara"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

@@ -3756,6 +3756,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "'%s' ID'li varlık, '%s' anahtarı için zaten bir meta girişine sahip"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "'%s' meta anahtarına izin verilmiyor"
@@ -3784,7 +3785,7 @@ msgstr ""
 "'%s' ID'li varlık, '%s' meta anahtarı ve '%s' değeriyle zaten bir girişe "
 "sahip"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3930,7 +3931,7 @@ msgstr ""
 "JSON nesnesi; anahtar meta anahtarı, değer ise bir değerler dizisidir "
 "(skaler bir değer, 1 öğeli dizi olarak döndürülür)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5206,7 +5207,7 @@ msgid "Property to order by"
 msgstr "Sıralama ölçütü özellik"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "'%s' adında bir seçenek yok"
@@ -10083,12 +10084,14 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "<code>wp_options</code>'dan Ayarlar"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Tüm seçenekler sorgulanabilir"
+msgid "No options are queryable by non-administrators"
+msgstr "Yönetici olmayan kullanıcılar hiçbir seçeneği sorgulayamaz"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Yalnızca birkaç önceden tanımlanmış seçenek sorgulanabilir"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Yönetici olmayan kullanıcılar yalnızca birkaç önceden tanımlanmış seçeneği "
+"sorgulayabilir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13900,6 +13903,12 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Tüm seçenekler sorgulanabilir"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Yalnızca birkaç önceden tanımlanmış seçenek sorgulanabilir"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

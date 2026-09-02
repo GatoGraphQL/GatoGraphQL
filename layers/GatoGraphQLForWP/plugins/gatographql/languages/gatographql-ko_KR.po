@@ -3663,6 +3663,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "ID '%s'인 엔티티에 이미 키 '%s'에 대한 메타 항목이 존재합니다"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "메타 키 '%s'은(는) 허용되지 않습니다"
@@ -3689,7 +3690,7 @@ msgid ""
 msgstr ""
 "ID '%s'인 엔티티에 이미 메타 키 '%s' 및 값 '%s'에 해당하는 항목이 존재합니다"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3828,7 +3829,7 @@ msgstr ""
 "JSON 객체로, 키는 메타 키이고 값은 값의 배열입니다 (스칼라 값은 항목이 1개인 "
 "배열로 반환됩니다)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5039,7 +5040,7 @@ msgid "Property to order by"
 msgstr "정렬 기준 속성"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "이름이 '%s'인 옵션이 없습니다"
@@ -9791,12 +9792,12 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "<code>wp_options</code>의 설정"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "모든 옵션을 쿼리할 수 있음"
+msgid "No options are queryable by non-administrators"
+msgstr "관리자가 아닌 사용자는 어떤 옵션도 조회할 수 없습니다"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "미리 정의된 일부 옵션만 쿼리할 수 있음"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr "관리자가 아닌 사용자는 미리 정의된 몇 가지 옵션만 조회할 수 있습니다"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13527,6 +13528,12 @@ msgstr "사용자 닉네임 슬러그 순으로 정렬"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "사용자 이메일 순으로 정렬"
+
+#~ msgid "All options are queryable"
+#~ msgstr "모든 옵션을 쿼리할 수 있음"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "미리 정의된 일부 옵션만 쿼리할 수 있음"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

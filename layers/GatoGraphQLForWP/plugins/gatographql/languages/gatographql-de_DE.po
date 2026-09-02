@@ -4023,6 +4023,7 @@ msgstr ""
 "'%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "Meta-Schlüssel '%s' ist nicht zulässig"
@@ -4053,7 +4054,7 @@ msgstr ""
 "Die Entität mit der ID '%s' hat bereits einen Eintrag mit dem Meta-Schlüssel "
 "'%s' und dem Wert '%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -4203,7 +4204,7 @@ msgstr ""
 "JSON-Objekt mit dem Meta-Schlüssel als Schlüssel und einem Array von Werten "
 "als Wert (ein skalarer Wert wird als Array mit 1 Element zurückgegeben)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5555,7 +5556,7 @@ msgid "Property to order by"
 msgstr "Eigenschaft, nach der sortiert werden soll"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Es gibt keine Option mit dem Namen '%s'"
@@ -10546,12 +10547,13 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Einstellungen aus <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Alle Optionen sind abfragbar"
+msgid "No options are queryable by non-administrators"
+msgstr "Keine Optionen sind für Nicht-Administratoren abfragbar"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Nur einige vordefinierte Optionen sind abfragbar"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Nur wenige vordefinierte Optionen sind für Nicht-Administratoren abfragbar"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -14432,6 +14434,12 @@ msgstr "Sortieren nach dem Nicename des Benutzers"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortieren nach der E-Mail-Adresse des Benutzers"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Alle Optionen sind abfragbar"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Nur einige vordefinierte Optionen sind abfragbar"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

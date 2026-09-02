@@ -3662,6 +3662,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "เอนทิตีที่มี ID '%s' มีรายการ meta สำหรับคีย์ '%s' อยู่แล้ว"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "คีย์ meta '%s' ไม่ได้รับอนุญาต"
@@ -3687,7 +3688,7 @@ msgid ""
 "The entity with ID '%s' already has entry with meta key '%s' and value '%s'"
 msgstr "เอนทิตีที่มี ID '%s' มีรายการที่มีคีย์ meta '%s' และค่า '%s' อยู่แล้ว"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3825,7 +3826,7 @@ msgstr ""
 "อ็อบเจกต์ JSON โดยคีย์คือ meta key และค่าคือ array ของค่า (ค่าสเกลาร์จะถูกคืนค่าเป็น array "
 "ที่มี 1 รายการ)"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5030,7 +5031,7 @@ msgid "Property to order by"
 msgstr "คุณสมบัติที่ใช้เรียงลำดับ"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "ไม่มี option ที่มีชื่อ '%s'"
@@ -9708,12 +9709,14 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "การตั้งค่าจาก <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "ตัวเลือกทั้งหมดสามารถสืบค้นได้"
+msgid "No options are queryable by non-administrators"
+msgstr "ผู้ที่ไม่ใช่ผู้ดูแลระบบไม่สามารถค้นหา (query) ตัวเลือก (options) ใดๆ ได้"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "มีเพียงตัวเลือกที่กำหนดไว้ล่วงหน้าบางส่วนเท่านั้นที่สามารถสืบค้นได้"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"มีเพียงตัวเลือก (options) ที่กำหนดไว้ล่วงหน้าไม่กี่รายการเท่านั้นที่ผู้ที่ไม่ใช่ผู้ดูแลระบบสามารถค้นหา "
+"(query) ได้"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13411,6 +13414,12 @@ msgstr "เรียงลำดับตาม nicename ของผู้ใ�
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "เรียงลำดับตามอีเมลของผู้ใช้"
+
+#~ msgid "All options are queryable"
+#~ msgstr "ตัวเลือกทั้งหมดสามารถสืบค้นได้"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "มีเพียงตัวเลือกที่กำหนดไว้ล่วงหน้าบางส่วนเท่านั้นที่สามารถสืบค้นได้"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

@@ -3791,6 +3791,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "Entitas dengan ID '%s' sudah memiliki entri meta untuk kunci '%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "Kunci meta '%s' tidak diizinkan"
@@ -3820,7 +3821,7 @@ msgstr ""
 "Entitas dengan ID '%s' sudah memiliki entri dengan kunci meta '%s' dan nilai "
 "'%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3968,7 +3969,7 @@ msgstr ""
 "Objek JSON, dengan kunci adalah kunci meta, dan nilai adalah array dari "
 "nilai-nilai (nilai skalar dikembalikan sebagai array dengan 1 item)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5245,7 +5246,7 @@ msgid "Property to order by"
 msgstr "Properti untuk diurutkan"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Tidak ada opsi dengan nama '%s'"
@@ -10110,12 +10111,12 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Pengaturan dari <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Semua opsi dapat di-query"
+msgid "No options are queryable by non-administrators"
+msgstr "Tidak ada opsi yang dapat dikueri oleh non-administrator"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Hanya beberapa opsi yang telah ditentukan yang dapat di-query"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr "Hanya beberapa opsi standar yang dapat dikueri oleh non-administrator"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13937,6 +13938,12 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid "All options are queryable"
+#~ msgstr "Semua opsi dapat di-query"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Hanya beberapa opsi yang telah ditentukan yang dapat di-query"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

@@ -3581,6 +3581,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "ID 为 '%s' 的实体已存在键 '%s' 的元数据条目"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "元数据键 '%s' 不被允许"
@@ -3606,7 +3607,7 @@ msgid ""
 "The entity with ID '%s' already has entry with meta key '%s' and value '%s'"
 msgstr "ID 为 '%s' 的实体已存在元数据键 '%s' 且值为 '%s' 的条目"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
@@ -3742,7 +3743,7 @@ msgid ""
 msgstr ""
 "JSON 对象，其中键为元键，值为值数组（标量值以含 1 个元素的数组形式返回）。"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:49
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -4918,7 +4919,7 @@ msgid "Property to order by"
 msgstr "排序属性"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "不存在名为 '%s' 的选项"
@@ -9519,12 +9520,12 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "来自 <code>wp_options</code> 的设置"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "所有选项均可查询"
+msgid "No options are queryable by non-administrators"
+msgstr "非管理员无法查询任何选项"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "仅少数预定义选项可查询"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr "非管理员只能查询几个预定义的选项"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13152,6 +13153,12 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#~ msgid "All options are queryable"
+#~ msgstr "所有选项均可查询"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "仅少数预定义选项可查询"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"
