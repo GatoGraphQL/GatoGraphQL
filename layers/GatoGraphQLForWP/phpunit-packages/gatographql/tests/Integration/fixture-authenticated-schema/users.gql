@@ -1,0 +1,9 @@
+query {
+  users(pagination: { limit: 3 }) {
+    id
+    metaValue(key: "wp_capabilities")
+    metaValues(key: "wp_capabilities")
+    meta(keys: ["wp_capabilities"])
+    metaKeys(filter: { include: ["wp_capabilities"] })
+  }
+}

@@ -7,10 +7,23 @@ namespace PoPCMSSchema\CustomPostMetaWP\TypeAPIs;
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
 use WP_Post;
 
+use function current_user_can;
 use function get_post_meta;
+use function is_protected_meta;
 
 class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 {
+    public function isMetaKeyProtected(string $key): bool
+    {
+        if (current_user_can('manage_options')) {
+            return false;
+        }
+        if (!is_protected_meta($key, 'post')) {
+            return false;
+        }
+        return !$this->isMetaKeyExplicitlyAllowed($key);
+    }
+
     /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.
