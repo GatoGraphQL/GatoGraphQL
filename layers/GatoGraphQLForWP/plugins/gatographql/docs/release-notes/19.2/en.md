@@ -1,5 +1,23 @@
 # Release Notes: 19.2
 
+## Security
+
+### Protected user meta keys can no longer be modified through mutations
+
+Writing a protected user meta key (the role/capabilities key, the user level, session tokens and application passwords) through the user meta mutations `addUserMeta`, `updateUserMeta`, `setUserMeta` and `deleteUserMeta` (and their bulk variants) is now rejected ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
+
+Previously, because editing one's own account authorized writing any meta key on it, a logged-in user could set their own capabilities key and escalate to a higher role. Assigning roles remains available through the `updateUser` mutation's `roles` input, which is gated by the `promote_users` capability.
+
+The same protection is applied to the custom post, comment and taxonomy meta mutations, which now reject WordPress protected meta keys (those flagged by `is_protected_meta`, such as keys prefixed with `_`) ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
+
+Protected **user** meta keys are also no longer **readable** by non-administrators. Previously any user, including anonymous visitors, could read them through fields `metaValue`, `metaValues`, `meta` and `metaKeys` — including application-password hashes stored under `_application_passwords`, session tokens, and the roles/capabilities keys — because the meta allow/deny list defaulted to permissive. Now administrators can read any user meta key, while every other user cannot read the protected ones (they are also omitted from the `metaKeys` list). Meta on other entities (posts, comments, taxonomies) is unaffected — for instance a product's `_price` remains readable — so this does not change public content reads.
+
+### Reading site options is restricted to administrators
+
+The fields to read site options (`optionValue`, `optionValues`, `optionNames`, `optionObjectValue` and `optionObjectValues`) previously allowed any user, including anonymous visitors, to read the value of any option in the database, because the "Settings" allow/deny list defaulted to an empty denylist. This could expose sensitive options such as API keys stored by other plugins ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
+
+Now, administrators can read any option, while every other user can only read the options explicitly added to the settings allowlist, whose default is empty. To expose specific options publicly, add them under Settings.
+
 ## Added
 
 ### Composing directives with `@start` and `@end`

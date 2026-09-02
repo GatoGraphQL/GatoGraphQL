@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
+
 class OptionNamesFilterByModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractOptionsModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     protected static function getEndpoint(): string
@@ -31,5 +33,15 @@ class OptionNamesFilterByModifyPluginSettingsFixtureEndpointWebserverRequestTest
             'date_format',
             'posts_per_page',
         ];
+    }
+
+    protected function getDifferentLoginUsername(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserUsername();
+    }
+
+    protected function getDifferentLoginPassword(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserPassword();
     }
 }

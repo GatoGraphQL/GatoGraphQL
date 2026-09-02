@@ -1469,7 +1469,7 @@ msgstr "Récupérer les objets payload d'une mutation `%s` récemment exécutée
 #: CMSSchema/packages/custompost-tag-mutations/src/FieldResolvers/ObjectType/SetTagsOnCustomPostObjectTypeFieldResolverTrait.php:15
 #: CMSSchema/packages/custompost-tag-mutations/src/MutationResolvers/AbstractSetTagsOnCustomPostMutationResolver.php:190
 #: CMSSchema/packages/custompost-tag-mutations/src/TypeResolvers/InputObjectType/AbstractSetTagsOnGenericCustomPostInputObjectTypeResolver.php:32
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:366
 msgid "custom post"
 msgstr "contenu personnalisé"
 
@@ -4063,6 +4063,7 @@ msgstr ""
 "'%s'"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "La clé de métadonnées '%s' n'est pas autorisée"
@@ -4093,8 +4094,8 @@ msgstr ""
 "L'entité avec l'ID '%s' possède déjà une entrée avec la clé de métadonnées "
 "'%s' et la valeur '%s'"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
-#: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
+#: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
@@ -4244,7 +4245,7 @@ msgstr ""
 "comme valeur (une valeur scalaire est retournée sous forme de tableau à 1 "
 "élément)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5621,7 +5622,7 @@ msgid "Property to order by"
 msgstr "Propriété de tri"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "Il n'existe aucune option avec le nom '%s'"
@@ -9903,6 +9904,23 @@ msgstr ""
 "<code>#</code> sont évaluées comme des regex (expressions régulières)."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
+msgid ""
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
+msgstr ""
+"<br/>Les rôles/capacités, les jetons de session et les clés de mot de passe "
+"d'application ne sont jamais accessibles aux non-administrateurs, "
+"indépendamment de cette liste. Les autres clés protégées (celles préfixées "
+"par <code>_</code>) sont également masquées par défaut aux non-"
+"administrateurs, mais peuvent être exposées en les ajoutant à cette liste en "
+"tant qu'entrée exacte (pas une regex), sous le comportement « allow ». Les "
+"administrateurs peuvent toujours accéder à toutes les clés."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
 msgid ""
 "<strong>Example:</strong> Any of these entries match meta key "
@@ -9911,13 +9929,13 @@ msgstr ""
 "<strong>Exemple :</strong> N'importe laquelle de ces entrées correspond à la "
 "clé meta <code>\"%1$s\"</code> : %2$s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:263
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:264
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:703
 #, php-format
 msgid "Treat %s as “sensitive” data"
 msgstr "Traiter %s comme des données « sensibles »"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:264
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:265
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:704
 #, php-format
 msgid ""
@@ -9929,44 +9947,44 @@ msgstr ""
 "uniquement si la configuration du schéma a l'option <code>Expose Sensitive "
 "Data in the Schema</code> activée"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:267
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:291
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:315
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:339
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:268
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:292
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:340
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1136
 #, php-format
 msgid "%1$s<hr/>%2$s<hr/>%3$s%4$s"
 msgstr "%1$s<hr/>%2$s<hr/>%3$s%4$s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:364
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:365
 #, php-format
 msgid "%s (interface)"
 msgstr "%s (interface)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:366
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
 msgid "user"
 msgstr "utilisateur"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:368
 msgid "comment"
 msgstr "commentaire"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:368
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:369
 msgid "taxonomy"
 msgstr "taxonomie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:398
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:399
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1182
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:53
 msgid "Behavior"
 msgstr "Comportement"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:401
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:402
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1185
 msgid "Are the entries being allowed or denied access to?"
 msgstr "Les entrées se voient-elles accorder ou refuser l'accès ?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:403
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1186
 msgid ""
 "<ul><li>Allow access: only the configured entries can be accessed, and no "
@@ -9977,20 +9995,20 @@ msgstr ""
 "et aucune autre.</li><li>Refuser l'accès : les entrées configurées ne sont "
 "pas accessibles, toutes les autres entrées le sont.</li></ul>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:407
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:408
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1191
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:55
 msgid "Allow access"
 msgstr "Autoriser l'accès"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:408
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:409
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1192
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:56
 msgid "Deny access"
 msgstr "Refuser l'accès"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:423
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:430
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:424
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:431
 #, php-format
 msgid "%s meta keys"
 msgstr "clés meta %s"
@@ -10675,12 +10693,14 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "Paramètres de <code>wp_options</code>"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "Toutes les options sont interrogeables"
+msgid "No options are queryable by non-administrators"
+msgstr "Aucune option n'est interrogeable par les non-administrateurs"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "Seules quelques options prédéfinies sont interrogeables"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"Seules quelques options prédéfinies sont interrogeables par les non-"
+"administrateurs"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -14551,6 +14571,40 @@ msgstr "Trier par nom d'usage de l'utilisateur"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Trier par e-mail de l'utilisateur"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Les clés de métadonnées utilisateur protégées (les clés de rôles/"
+#~ "capacités, jetons de session, mots de passe d'application, et autres clés "
+#~ "préfixées par <code>_</code>) ne sont jamais accessibles aux non-"
+#~ "administrateurs, quelle que soit cette liste ; les administrateurs "
+#~ "peuvent toujours y accéder."
+
+#~ msgid ""
+#~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "
+#~ "<code>#</code> are evaluated as regex (regular expressions).<br/"
+#~ ">Protected meta keys (WordPress internal keys, such as those prefixed "
+#~ "with <code>_</code>, and the user roles/capabilities keys) are never "
+#~ "accessible to non-administrators, regardless of this list; administrators "
+#~ "can always access them."
+#~ msgstr ""
+#~ "<strong>Attention :</strong> les entrées entourées de <code>/</code> ou "
+#~ "de <code>#</code> sont évaluées en tant que regex (expressions "
+#~ "régulières).<br/>Les clés de métadonnées protégées (les clés internes de "
+#~ "WordPress, comme celles préfixées par <code>_</code>, ainsi que les clés "
+#~ "de rôles/capacités des utilisateurs) ne sont jamais accessibles aux non-"
+#~ "administrateurs, indépendamment de cette liste ; les administrateurs "
+#~ "peuvent toujours y accéder."
+
+#~ msgid "All options are queryable"
+#~ msgstr "Toutes les options sont interrogeables"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "Seules quelques options prédéfinies sont interrogeables"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"

@@ -7,13 +7,47 @@ namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
 use WP_User;
 
+use function current_user_can;
 use function get_user_meta;
+use function is_protected_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
+    public function isMetaKeyProtected(string $key): bool
+    {
+        if (current_user_can('manage_options')) {
+            return false;
+        }
+        if ($this->isMetaKeyAbsolutelyProtected($key)) {
+            return true;
+        }
+        if (is_protected_meta($key, 'user')) {
+            return !$this->isMetaKeyExplicitlyAllowed($key);
+        }
+        return false;
+    }
+
+    protected function isMetaKeyAbsolutelyProtected(string $key): bool
+    {
+        if ($key === 'session_tokens' || $key === '_application_passwords') {
+            return true;
+        }
+        global $wpdb;
+        $basePrefix = $wpdb->base_prefix;
+        return preg_match(
+            '/^' . preg_quote($basePrefix, '/') . '(?:\d+_)?(?:capabilities|user_level)$/',
+            $key
+        ) === 1;
+    }
+
+    public function isMetaKeyProtectedFromReading(string $key): bool
+    {
+        return $this->isMetaKeyProtected($key);
+    }
+
     /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.

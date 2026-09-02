@@ -75,7 +75,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                 $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
                 $allTaxonomyTermMetaKeys = $taxonomyMetaTypeAPI->getTaxonomyTermMetaKeys($taxonomyTerm);
                 foreach ($allTaxonomyTermMetaKeys as $key) {
-                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key)) {
+                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key) || $taxonomyMetaTypeAPI->isMetaKeyProtectedFromReading($key)) {
                         continue;
                     }
                     $metaKeys[] = $key;
@@ -88,9 +88,13 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                     $objectTypeFieldResolutionFeedbackStore,
                 );
             case 'metaValue':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValue = $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $taxonomyTerm,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     true
                 );
                 // If it's an array, it must be a JSON object
@@ -99,9 +103,13 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                 }
                 return $metaValue;
             case 'metaValues':
+                $key = $fieldDataAccessor->getValue('key');
+                if (!$this->isMetaKeyReadable($key)) {
+                    return null;
+                }
                 $metaValues = $this->getTaxonomyMetaTypeAPI()->getTaxonomyTermMeta(
                     $taxonomyTerm,
-                    $fieldDataAccessor->getValue('key'),
+                    $key,
                     false
                 );
                 if (!is_array($metaValues)) {
@@ -122,6 +130,9 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                 $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
                     if (!array_key_exists($key, $allMeta)) {
+                        continue;
+                    }
+                    if (!$this->isMetaKeyReadable($key)) {
                         continue;
                     }
                     $meta[$key] = $allMeta[$key];

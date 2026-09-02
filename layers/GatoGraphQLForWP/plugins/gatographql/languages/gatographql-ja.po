@@ -1396,7 +1396,7 @@ msgstr ""
 #: CMSSchema/packages/custompost-tag-mutations/src/FieldResolvers/ObjectType/SetTagsOnCustomPostObjectTypeFieldResolverTrait.php:15
 #: CMSSchema/packages/custompost-tag-mutations/src/MutationResolvers/AbstractSetTagsOnCustomPostMutationResolver.php:190
 #: CMSSchema/packages/custompost-tag-mutations/src/TypeResolvers/InputObjectType/AbstractSetTagsOnGenericCustomPostInputObjectTypeResolver.php:32
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:366
 msgid "custom post"
 msgstr "カスタム投稿"
 
@@ -3810,6 +3810,7 @@ msgid "The entity with ID '%s' already has meta entry for key '%s'"
 msgstr "ID '%s' のエンティティには、キー '%s' のメタエントリがすでに存在します"
 
 #: CMSSchema/packages/meta-mutations/src/FeedbackItemProviders/MutationErrorFeedbackItemProvider.php:38
+#: CMSSchema/packages/usermeta-mutations-wp/src/TypeAPIs/UserMetaTypeMutationAPI.php:46
 #, php-format
 msgid "Meta key '%s' is not allowed"
 msgstr "メタキー '%s' は許可されていません"
@@ -3839,8 +3840,8 @@ msgstr ""
 "ID '%s' のエンティティには、メタキー '%s' および値 '%s' のエントリがすでに存"
 "在します"
 
-#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:203
-#: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:121
+#: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
+#: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
@@ -3982,7 +3983,7 @@ msgstr ""
 "JSONオブジェクト。キーはメタキー、値は値の配列（スカラー値は1要素の配列として"
 "返されます）。"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:44
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -5256,7 +5257,7 @@ msgid "Property to order by"
 msgstr "並び替えに使用するプロパティ"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:78
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "名前 '%s' のオプションは存在しません"
@@ -9363,6 +9364,22 @@ msgstr ""
 "リは正規表現として評価されます。"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
+msgid ""
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
+msgstr ""
+"<br/>ロール／権限、セッショントークン、アプリケーションパスワードキーは、この"
+"リストの内容にかかわらず、管理者以外がアクセスすることは決してできません。そ"
+"の他の保護されたキー（<code>_</code>で始まるもの)も、デフォルトでは管理者以外"
+"には非表示となっていますが、「allow」動作の下でこのリストに完全一致のエント"
+"リー（正規表現ではなく)として追加することで公開できます。管理者は常にすべての"
+"キーにアクセスできます。"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
 msgid ""
 "<strong>Example:</strong> Any of these entries match meta key "
@@ -9371,13 +9388,13 @@ msgstr ""
 "<strong>例：</strong> これらのエントリはいずれもメタキー <code>\"%1$s\"</"
 "code> に一致します：%2$s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:263
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:264
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:703
 #, php-format
 msgid "Treat %s as “sensitive” data"
 msgstr "%s を「機密」データとして扱う"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:264
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:265
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:704
 #, php-format
 msgid ""
@@ -9389,44 +9406,44 @@ msgstr ""
 "<code>Expose Sensitive Data in the Schema</code> が有効になっている場合にのみ"
 "スキーマに公開されます"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:267
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:291
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:315
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:339
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:268
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:292
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:340
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1136
 #, php-format
 msgid "%1$s<hr/>%2$s<hr/>%3$s%4$s"
 msgstr "%1$s<hr/>%2$s<hr/>%3$s%4$s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:364
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:365
 #, php-format
 msgid "%s (interface)"
 msgstr "%s（インターフェース）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:366
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
 msgid "user"
 msgstr "ユーザー"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:368
 msgid "comment"
 msgstr "コメント"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:368
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:369
 msgid "taxonomy"
 msgstr "タクソノミー"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:398
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:399
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1182
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:53
 msgid "Behavior"
 msgstr "動作"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:401
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:402
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1185
 msgid "Are the entries being allowed or denied access to?"
 msgstr "エントリへのアクセスは許可されていますか、それとも拒否されていますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:403
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1186
 msgid ""
 "<ul><li>Allow access: only the configured entries can be accessed, and no "
@@ -9437,20 +9454,20 @@ msgstr ""
 "セスできません。</li><li>アクセスを拒否：設定されたエントリはアクセスできず、"
 "それ以外のエントリはすべてアクセスできます。</li></ul>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:407
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:408
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1191
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:55
 msgid "Allow access"
 msgstr "アクセスを許可"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:408
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:409
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1192
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:56
 msgid "Deny access"
 msgstr "アクセスを拒否"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:423
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:430
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:424
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:431
 #, php-format
 msgid "%s meta keys"
 msgstr "%s メタキー"
@@ -10114,12 +10131,13 @@ msgid "Settings from <code>wp_options</code>"
 msgstr "<code>wp_options</code> からの設定"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
-msgid "All options are queryable"
-msgstr "すべてのオプションがクエリ可能"
+msgid "No options are queryable by non-administrators"
+msgstr "管理者以外のユーザーは、どのオプションも参照できません"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
-msgid "Only a few predefined options are queryable"
-msgstr "事前定義されたいくつかのオプションのみクエリ可能"
+msgid "Only a few predefined options are queryable by non-administrators"
+msgstr ""
+"管理者以外のユーザーは、事前に定義された一部のオプションのみ参照できます"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Meta (posts, users, comments, taxonomies)"
@@ -13896,6 +13914,37 @@ msgstr "ユーザーのnicenameで並べ替えます"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "ユーザーのメールアドレスで並べ替えます"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>保護されたユーザーメタキー(ロール/権限のキー、セッショントークン、ア"
+#~ "プリケーションパスワード、その他 <code>_</code> で始まるキー)は、このリス"
+#~ "トの設定にかかわらず、管理者以外のユーザーは常にアクセスできません。管理者"
+#~ "は常にアクセス可能です。"
+
+#~ msgid ""
+#~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "
+#~ "<code>#</code> are evaluated as regex (regular expressions).<br/"
+#~ ">Protected meta keys (WordPress internal keys, such as those prefixed "
+#~ "with <code>_</code>, and the user roles/capabilities keys) are never "
+#~ "accessible to non-administrators, regardless of this list; administrators "
+#~ "can always access them."
+#~ msgstr ""
+#~ "<strong>ご注意ください:</strong> <code>/</code> または <code>#</code> で囲"
+#~ "まれたエントリーは正規表現(regular expressions)として評価されます。<br/>保"
+#~ "護されたメタキー(WordPress内部のキー。<code>_</code>で始まるキーやユーザー"
+#~ "の役割・権限キーなど)は、このリストの内容に関わらず、管理者以外はアクセス"
+#~ "できません。管理者は常にアクセスできます。"
+
+#~ msgid "All options are queryable"
+#~ msgstr "すべてのオプションがクエリ可能"
+
+#~ msgid "Only a few predefined options are queryable"
+#~ msgstr "事前定義されたいくつかのオプションのみクエリ可能"
 
 #, php-format
 #~ msgid "The status of the comment with ID '%s' could not be updated"
