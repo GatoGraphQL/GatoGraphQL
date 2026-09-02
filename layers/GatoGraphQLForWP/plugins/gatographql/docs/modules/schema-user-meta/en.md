@@ -60,7 +60,7 @@ There are 2 behaviors, "Allow access" and "Deny access":
 - **Allow access:** only the configured entries can be accessed, and no other can
 - **Deny access:** the configured entries cannot be accessed, all other entries can
 
-Protected user meta keys (the roles/capabilities keys, session tokens, application passwords, and other keys prefixed with `_`) are never accessible to non-administrators, regardless of this configuration; administrators can always access them.
+The roles/capabilities, session tokens and application password keys are never accessible to non-administrators, regardless of this configuration. Other protected keys (those prefixed with `_`) are also hidden from non-administrators by default, but can be exposed by adding them to the list as an exact entry (not a regex), under the "Allow access" behavior. Administrators can always access all keys.
 
 <div class="img-width-1024" markdown=1>
 

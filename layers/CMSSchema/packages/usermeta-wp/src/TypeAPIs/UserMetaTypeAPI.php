@@ -21,10 +21,18 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
         if (current_user_can('manage_options')) {
             return false;
         }
-        if (is_protected_meta($key, 'user')) {
+        if ($this->isMetaKeyAbsolutelyProtected($key)) {
             return true;
         }
-        if ($key === 'session_tokens') {
+        if (is_protected_meta($key, 'user')) {
+            return !$this->isMetaKeyExplicitlyAllowed($key);
+        }
+        return false;
+    }
+
+    protected function isMetaKeyAbsolutelyProtected(string $key): bool
+    {
+        if ($key === 'session_tokens' || $key === '_application_passwords') {
             return true;
         }
         global $wpdb;

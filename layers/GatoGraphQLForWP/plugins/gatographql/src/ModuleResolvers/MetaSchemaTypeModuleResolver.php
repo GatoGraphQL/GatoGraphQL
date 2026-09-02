@@ -257,7 +257,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $entriesTitle = \__('Meta keys', 'gatographql');
             $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'gatographql');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gatographql');
-            $userMetaHeadsUpDesc = $headsUpDesc . \__('<br/>Protected user meta keys (the roles/capabilities keys, session tokens, application passwords, and other keys prefixed with <code>_</code>) are never accessible to non-administrators, regardless of this list; administrators can always access them.', 'gatographql');
+            $userMetaHeadsUpDesc = $headsUpDesc . \__('<br/>The roles/capabilities, session tokens and application password keys are never accessible to non-administrators, regardless of this list. Other protected keys (those prefixed with <code>_</code>) are also hidden from non-administrators by default, but can be exposed by adding them to this list as an exact entry (not a regex), under the "allow" behavior. Administrators can always access all keys.', 'gatographql');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'gatographql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));

@@ -6,6 +6,7 @@ namespace PoPCMSSchema\Meta\TypeAPIs;
 
 use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractMetaTypeAPI extends AbstractBasicService implements MetaTypeAPIInterface
@@ -29,6 +30,26 @@ abstract class AbstractMetaTypeAPI extends AbstractBasicService implements MetaT
             $this->getAllowOrDenyMetaEntries(),
             $this->getAllowOrDenyMetaBehavior()
         );
+    }
+
+    final protected function isMetaKeyExplicitlyAllowed(string $key): bool
+    {
+        if ($this->getAllowOrDenyMetaBehavior() !== Behaviors::ALLOW) {
+            return false;
+        }
+        foreach ($this->getAllowOrDenyMetaEntries() as $entry) {
+            $entry = trim($entry);
+            if (
+                (str_starts_with($entry, '/') && str_ends_with($entry, '/'))
+                || (str_starts_with($entry, '#') && str_ends_with($entry, '#'))
+            ) {
+                continue;
+            }
+            if ($entry === $key) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public function isMetaKeyProtected(string $key): bool
