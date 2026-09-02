@@ -6,8 +6,15 @@ namespace PoPCMSSchema\SettingsWP\TypeAPIs;
 
 use PoPCMSSchema\Settings\TypeAPIs\AbstractSettingsTypeAPI;
 
+use function current_user_can;
+
 class SettingsTypeAPI extends AbstractSettingsTypeAPI
 {
+    protected function canCurrentUserAccessAllOptions(): bool
+    {
+        return current_user_can('manage_options');
+    }
+
     /**
      * If the name is non-existent, return `null`.
      * Otherwise, return the value.

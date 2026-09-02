@@ -7,10 +7,20 @@ namespace PoPCMSSchema\TaxonomyMetaWP\TypeAPIs;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\AbstractTaxonomyMetaTypeAPI;
 use WP_Term;
 
+use function current_user_can;
 use function get_term_meta;
+use function is_protected_meta;
 
 class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 {
+    public function isMetaKeyProtectedFromMutation(string $key): bool
+    {
+        if (current_user_can('manage_options')) {
+            return false;
+        }
+        return is_protected_meta($key, 'term');
+    }
+
     /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.

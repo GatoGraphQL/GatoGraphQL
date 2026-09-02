@@ -7,6 +7,7 @@ namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
 use WP_User;
 
+use function current_user_can;
 use function get_user_meta;
 
 /**
@@ -16,6 +17,9 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
     public function isMetaKeyProtectedFromMutation(string $key): bool
     {
+        if (current_user_can('manage_options')) {
+            return false;
+        }
         if (
             $key === 'session_tokens'
             || $key === '_application_passwords'
