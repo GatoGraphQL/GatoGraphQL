@@ -4144,7 +4144,7 @@ msgstr ""
 "JSON-object, met als sleutel de metasleutel en als waarde een array van "
 "waarden (een scalaire waarde wordt geretourneerd als een array met 1 item)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9681,15 +9681,19 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Beschermde meta-sleutels van gebruikers (de rollen/rechten-sleutels, "
-"sessietokens, applicatiewachtwoorden en andere sleutels die beginnen met "
-"<code>_</code>) zijn nooit toegankelijk voor niet-beheerders, ongeacht deze "
-"lijst; beheerders hebben er altijd toegang toe."
+"<br/>De rollen/rechten, sessietokens en applicatiewachtwoordsleutels zijn "
+"nooit toegankelijk voor niet-beheerders, ongeacht deze lijst. Andere "
+"beschermde sleutels (die beginnen met <code>_</code>) zijn ook standaard "
+"verborgen voor niet-beheerders, maar kunnen zichtbaar worden gemaakt door ze "
+"als exacte vermelding (geen regex) aan deze lijst toe te voegen, onder het "
+"\"toestaan\"-gedrag. Beheerders hebben altijd toegang tot alle sleutels."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -14315,6 +14319,17 @@ msgstr "Sorteren op gebruikers nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sorteren op gebruikers-e-mailadres"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Beschermde meta-sleutels van gebruikers (de rollen/rechten-sleutels, "
+#~ "sessietokens, applicatiewachtwoorden en andere sleutels die beginnen met "
+#~ "<code>_</code>) zijn nooit toegankelijk voor niet-beheerders, ongeacht "
+#~ "deze lijst; beheerders hebben er altijd toegang toe."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

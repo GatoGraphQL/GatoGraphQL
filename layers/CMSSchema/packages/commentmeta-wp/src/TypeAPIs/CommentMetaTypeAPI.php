@@ -18,7 +18,10 @@ class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
         if (current_user_can('manage_options')) {
             return false;
         }
-        return is_protected_meta($key, 'comment');
+        if (!is_protected_meta($key, 'comment')) {
+            return false;
+        }
+        return !$this->isMetaKeyExplicitlyAllowed($key);
     }
 
     /**

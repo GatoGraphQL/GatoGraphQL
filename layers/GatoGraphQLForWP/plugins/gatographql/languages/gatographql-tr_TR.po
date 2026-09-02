@@ -3931,7 +3931,7 @@ msgstr ""
 "JSON nesnesi; anahtar meta anahtarı, değer ise bir değerler dizisidir "
 "(skaler bir değer, 1 öğeli dizi olarak döndürülür)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9320,15 +9320,20 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Korunan kullanıcı meta anahtarları (roller/yetenekler anahtarları, "
-"oturum belirteçleri, uygulama parolaları ve <code>_</code> ön ekiyle "
-"başlayan diğer anahtarlar), bu listeden bağımsız olarak, yönetici olmayanlar "
-"tarafından asla erişilemez; yöneticiler bunlara her zaman erişebilir."
+"<br/>Roller/yetkiler, oturum belirteçleri ve uygulama parolası anahtarları, "
+"bu listeden bağımsız olarak yönetici olmayan kullanıcılar tarafından hiçbir "
+"zaman erişilebilir değildir. Diğer korumalı anahtarlar (<code>_</code> ön "
+"ekine sahip olanlar) da varsayılan olarak yönetici olmayan kullanıcılardan "
+"gizlenir, ancak \"allow\" davranışı altında bu listeye tam bir giriş (bir "
+"regex değil) olarak eklenerek açığa çıkarılabilir. Yöneticiler her zaman tüm "
+"anahtarlara erişebilir."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13915,6 +13920,18 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Korunan kullanıcı meta anahtarları (roller/yetenekler anahtarları, "
+#~ "oturum belirteçleri, uygulama parolaları ve <code>_</code> ön ekiyle "
+#~ "başlayan diğer anahtarlar), bu listeden bağımsız olarak, yönetici "
+#~ "olmayanlar tarafından asla erişilemez; yöneticiler bunlara her zaman "
+#~ "erişebilir."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

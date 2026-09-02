@@ -3983,7 +3983,7 @@ msgstr ""
 "JSONオブジェクト。キーはメタキー、値は値の配列（スカラー値は1要素の配列として"
 "返されます）。"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9365,15 +9365,19 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>保護されたユーザーメタキー(ロール/権限のキー、セッショントークン、アプリ"
-"ケーションパスワード、その他 <code>_</code> で始まるキー)は、このリストの設定"
-"にかかわらず、管理者以外のユーザーは常にアクセスできません。管理者は常にアク"
-"セス可能です。"
+"<br/>ロール／権限、セッショントークン、アプリケーションパスワードキーは、この"
+"リストの内容にかかわらず、管理者以外がアクセスすることは決してできません。そ"
+"の他の保護されたキー（<code>_</code>で始まるもの)も、デフォルトでは管理者以外"
+"には非表示となっていますが、「allow」動作の下でこのリストに完全一致のエント"
+"リー（正規表現ではなく)として追加することで公開できます。管理者は常にすべての"
+"キーにアクセスできます。"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13910,6 +13914,17 @@ msgstr "ユーザーのnicenameで並べ替えます"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "ユーザーのメールアドレスで並べ替えます"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>保護されたユーザーメタキー(ロール/権限のキー、セッショントークン、ア"
+#~ "プリケーションパスワード、その他 <code>_</code> で始まるキー)は、このリス"
+#~ "トの設定にかかわらず、管理者以外のユーザーは常にアクセスできません。管理者"
+#~ "は常にアクセス可能です。"
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

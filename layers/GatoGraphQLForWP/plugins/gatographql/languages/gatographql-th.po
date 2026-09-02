@@ -3826,7 +3826,7 @@ msgstr ""
 "อ็อบเจกต์ JSON โดยคีย์คือ meta key และค่าคือ array ของค่า (ค่าสเกลาร์จะถูกคืนค่าเป็น array "
 "ที่มี 1 รายการ)"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -8975,15 +8975,21 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>คีย์เมตาของผู้ใช้ที่ได้รับการป้องกัน (คีย์บทบาท/ความสามารถ, โทเคนเซสชัน, "
-"รหัสผ่านแอปพลิเคชัน และคีย์อื่น ๆ ที่นำหน้าด้วย <code>_</code>) "
-"จะไม่สามารถเข้าถึงได้โดยผู้ที่ไม่ใช่ผู้ดูแลระบบเสมอ ไม่ว่ารายการนี้จะระบุไว้อย่างไร "
-"ผู้ดูแลระบบสามารถเข้าถึงคีย์เหล่านี้ได้เสมอ"
+"<br/>บทบาท/สิทธิ์การใช้งาน (roles/capabilities), โทเคนเซสชัน (session tokens) "
+"และคีย์รหัสผ่านแอปพลิเคชัน (application password keys) "
+"จะไม่สามารถเข้าถึงได้โดยผู้ที่ไม่ใช่ผู้ดูแลระบบเลย ไม่ว่ารายการนี้จะระบุไว้อย่างไรก็ตาม "
+"คีย์ที่ได้รับการป้องกันอื่น ๆ (คีย์ที่มีคำนำหน้าเป็น <code>_</code>) "
+"ก็จะถูกซ่อนจากผู้ที่ไม่ใช่ผู้ดูแลระบบโดยค่าเริ่มต้นเช่นกัน "
+"แต่สามารถเปิดเผยได้โดยการเพิ่มคีย์เหล่านั้นลงในรายการนี้เป็นรายการที่ตรงกันแบบตรงตัว (exact "
+"entry) (ไม่ใช่ regex) ภายใต้พฤติกรรม \"อนุญาต\" (allow) "
+"ผู้ดูแลระบบสามารถเข้าถึงคีย์ทั้งหมดได้เสมอ"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13426,6 +13432,17 @@ msgstr "เรียงลำดับตาม nicename ของผู้ใ�
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "เรียงลำดับตามอีเมลของผู้ใช้"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>คีย์เมตาของผู้ใช้ที่ได้รับการป้องกัน (คีย์บทบาท/ความสามารถ, โทเคนเซสชัน, "
+#~ "รหัสผ่านแอปพลิเคชัน และคีย์อื่น ๆ ที่นำหน้าด้วย <code>_</code>) "
+#~ "จะไม่สามารถเข้าถึงได้โดยผู้ที่ไม่ใช่ผู้ดูแลระบบเสมอ ไม่ว่ารายการนี้จะระบุไว้อย่างไร "
+#~ "ผู้ดูแลระบบสามารถเข้าถึงคีย์เหล่านี้ได้เสมอ"
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

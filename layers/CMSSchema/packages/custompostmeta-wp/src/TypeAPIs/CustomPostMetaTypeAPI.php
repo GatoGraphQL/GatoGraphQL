@@ -18,7 +18,10 @@ class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
         if (current_user_can('manage_options')) {
             return false;
         }
-        return is_protected_meta($key, 'post');
+        if (!is_protected_meta($key, 'post')) {
+            return false;
+        }
+        return !$this->isMetaKeyExplicitlyAllowed($key);
     }
 
     /**

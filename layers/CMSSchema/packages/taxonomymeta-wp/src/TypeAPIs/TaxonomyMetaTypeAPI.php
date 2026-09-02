@@ -18,7 +18,10 @@ class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
         if (current_user_can('manage_options')) {
             return false;
         }
-        return is_protected_meta($key, 'term');
+        if (!is_protected_meta($key, 'term')) {
+            return false;
+        }
+        return !$this->isMetaKeyExplicitlyAllowed($key);
     }
 
     /**

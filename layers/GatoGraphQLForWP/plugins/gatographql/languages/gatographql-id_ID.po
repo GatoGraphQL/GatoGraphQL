@@ -3969,7 +3969,7 @@ msgstr ""
 "Objek JSON, dengan kunci adalah kunci meta, dan nilai adalah array dari "
 "nilai-nilai (nilai skalar dikembalikan sebagai array dengan 1 item)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9362,15 +9362,19 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Kunci meta pengguna yang dilindungi (kunci peran/kemampuan, token sesi, "
-"kata sandi aplikasi, dan kunci lain dengan awalan <code>_</code>) tidak "
-"pernah dapat diakses oleh non-administrator, terlepas dari daftar ini; "
-"administrator selalu dapat mengaksesnya."
+"<br/>Peran/kemampuan, token sesi, dan kunci kata sandi aplikasi tidak pernah "
+"dapat diakses oleh non-administrator, terlepas dari daftar ini. Kunci "
+"terproteksi lainnya (yang diawali dengan <code>_</code>) juga disembunyikan "
+"dari non-administrator secara default, tetapi dapat diekspos dengan "
+"menambahkannya ke daftar ini sebagai entri persis (bukan regex), di bawah "
+"perilaku \"allow\". Administrator selalu dapat mengakses semua kunci."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13950,6 +13954,17 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Kunci meta pengguna yang dilindungi (kunci peran/kemampuan, token "
+#~ "sesi, kata sandi aplikasi, dan kunci lain dengan awalan <code>_</code>) "
+#~ "tidak pernah dapat diakses oleh non-administrator, terlepas dari daftar "
+#~ "ini; administrator selalu dapat mengaksesnya."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

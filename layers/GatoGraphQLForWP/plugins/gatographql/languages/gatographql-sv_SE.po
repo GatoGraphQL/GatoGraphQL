@@ -3995,7 +3995,7 @@ msgstr ""
 "JSON-objekt, med nyckeln som metanyckel och värdet som en array av värden "
 "(ett skalärt värde returneras som en array med 1 element)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9403,15 +9403,19 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Skyddade användarmetadatanycklar (nycklarna för roller/behörigheter, "
-"sessionstoken, applikationslösenord och andra nycklar med prefixet <code>_</"
-"code>) är aldrig tillgängliga för icke-administratörer, oavsett denna lista; "
-"administratörer kan alltid komma åt dem."
+"<br/>Roller/behörigheter, sessionstoken och nycklar för applikationslösenord "
+"är aldrig tillgängliga för icke-administratörer, oavsett denna lista. Andra "
+"skyddade nycklar (de som har prefixet <code>_</code>) är också dolda för "
+"icke-administratörer som standard, men kan exponeras genom att lägga till "
+"dem i denna lista som en exakt post (inte ett reguljärt uttryck), under "
+"\"allow\"-beteendet. Administratörer kan alltid komma åt alla nycklar."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13989,6 +13993,17 @@ msgstr "Sortera efter användarens nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortera efter användarens e-postadress"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Skyddade användarmetadatanycklar (nycklarna för roller/behörigheter, "
+#~ "sessionstoken, applikationslösenord och andra nycklar med prefixet "
+#~ "<code>_</code>) är aldrig tillgängliga för icke-administratörer, oavsett "
+#~ "denna lista; administratörer kan alltid komma åt dem."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "
