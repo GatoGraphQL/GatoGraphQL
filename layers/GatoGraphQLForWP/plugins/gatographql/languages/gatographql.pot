@@ -3471,7 +3471,7 @@ msgstr ""
 msgid "JSON object, with key the meta key, and value an array of values (a scalar value is returned as an array with 1 item)."
 msgstr ""
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -8034,7 +8034,7 @@ msgid "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <cod
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
-msgid "<br/>Protected user meta keys (the roles/capabilities keys, session tokens, application passwords, and other keys prefixed with <code>_</code>) are never accessible to non-administrators, regardless of this list; administrators can always access them."
+msgid "<br/>The roles/capabilities, session tokens and application password keys are never accessible to non-administrators, regardless of this list. Other protected keys (those prefixed with <code>_</code>) are also hidden from non-administrators by default, but can be exposed by adding them to this list as an exact entry (not a regex), under the \"allow\" behavior. Administrators can always access all keys."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261

@@ -4135,7 +4135,7 @@ msgstr ""
 "Objeto JSON, con la clave de meta como clave y un array de valores como "
 "valor (un valor escalar se devuelve como un array con 1 elemento)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9689,16 +9689,20 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Las claves meta de usuario protegidas (las claves de roles/capacidades, "
-"tokens de sesión, contraseñas de aplicación y otras claves con el prefijo "
-"<code>_</code>) nunca son accesibles para los no administradores, "
-"independientemente de esta lista; los administradores siempre pueden acceder "
-"a ellas."
+"<br/>Los roles/capacidades, los tokens de sesión y las claves de contraseñas "
+"de aplicación nunca son accesibles para los no administradores, "
+"independientemente de esta lista. Otras claves protegidas (las que tienen el "
+"prefijo <code>_</code>) también están ocultas para los no administradores de "
+"forma predeterminada, pero se pueden exponer añadiéndolas a esta lista como "
+"una entrada exacta (no una expresión regular), bajo el comportamiento "
+"\"allow\". Los administradores siempre pueden acceder a todas las claves."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -14336,6 +14340,18 @@ msgstr "Ordenar por el nicename del usuario"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordenar por el email del usuario"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Las claves meta de usuario protegidas (las claves de roles/"
+#~ "capacidades, tokens de sesión, contraseñas de aplicación y otras claves "
+#~ "con el prefijo <code>_</code>) nunca son accesibles para los no "
+#~ "administradores, independientemente de esta lista; los administradores "
+#~ "siempre pueden acceder a ellas."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

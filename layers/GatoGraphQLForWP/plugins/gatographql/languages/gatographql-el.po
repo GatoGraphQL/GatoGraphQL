@@ -4137,7 +4137,7 @@ msgstr ""
 "Αντικείμενο JSON, με κλειδί το κλειδί meta και τιμή έναν πίνακα τιμών (μια "
 "βαθμωτή τιμή επιστρέφεται ως πίνακας με 1 στοιχείο)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9663,16 +9663,20 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Τα προστατευμένα κλειδιά μεταδεδομένων χρήστη (τα κλειδιά ρόλων/"
-"δυνατοτήτων, τα διακριτικά περιόδου σύνδεσης, οι κωδικοί πρόσβασης "
-"εφαρμογών, και άλλα κλειδιά με πρόθεμα <code>_</code>) δεν είναι ποτέ "
-"προσβάσιμα σε μη διαχειριστές, ανεξάρτητα από αυτή τη λίστα· οι διαχειριστές "
-"έχουν πάντα πρόσβαση σε αυτά."
+"<br/>Οι ρόλοι/δυνατότητες, τα διακριτικά συνεδρίας (session tokens) και τα "
+"κλειδιά κωδικών πρόσβασης εφαρμογής δεν είναι ποτέ προσβάσιμα σε μη "
+"διαχειριστές, ανεξάρτητα από αυτή τη λίστα. Άλλα προστατευμένα κλειδιά (αυτά "
+"με πρόθεμα <code>_</code>) είναι επίσης κρυφά από μη διαχειριστές από "
+"προεπιλογή, αλλά μπορούν να εκτεθούν προσθέτοντάς τα σε αυτή τη λίστα ως "
+"ακριβή καταχώρηση (όχι κανονική έκφραση), υπό τη συμπεριφορά \"allow\". Οι "
+"διαχειριστές έχουν πάντα πρόσβαση σε όλα τα κλειδιά."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -14332,6 +14336,18 @@ msgstr "Ταξινόμηση με βάση το nicename χρήστη"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ταξινόμηση με βάση το email χρήστη"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Τα προστατευμένα κλειδιά μεταδεδομένων χρήστη (τα κλειδιά ρόλων/"
+#~ "δυνατοτήτων, τα διακριτικά περιόδου σύνδεσης, οι κωδικοί πρόσβασης "
+#~ "εφαρμογών, και άλλα κλειδιά με πρόθεμα <code>_</code>) δεν είναι ποτέ "
+#~ "προσβάσιμα σε μη διαχειριστές, ανεξάρτητα από αυτή τη λίστα· οι "
+#~ "διαχειριστές έχουν πάντα πρόσβαση σε αυτά."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

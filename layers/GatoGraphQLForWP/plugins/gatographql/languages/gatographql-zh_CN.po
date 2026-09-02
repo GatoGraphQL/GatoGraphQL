@@ -3743,7 +3743,7 @@ msgid ""
 msgstr ""
 "JSON 对象，其中键为元键，值为值数组（标量值以含 1 个元素的数组形式返回）。"
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -8792,14 +8792,17 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>受保护的用户元数据键（角色/权限键、会话令牌、应用程序密码，以及其他以 "
-"<code>_</code> 为前缀的键）无论此列表如何设置，都始终无法被非管理员访问；管理"
-"员始终可以访问它们。"
+"<br/>无论此列表如何设置，角色/权限、会话令牌和应用程序密码密钥都绝不会被非管"
+"理员访问。其他受保护的键（那些以 <code>_</code> 为前缀的键）默认情况下也会对"
+"非管理员隐藏，但可以通过将其作为精确条目（而非正则表达式）添加到此列表中，并"
+"采用“允许”行为来将其公开。管理员始终可以访问所有键。"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -13164,6 +13167,16 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>受保护的用户元数据键（角色/权限键、会话令牌、应用程序密码，以及其他"
+#~ "以 <code>_</code> 为前缀的键）无论此列表如何设置，都始终无法被非管理员访"
+#~ "问；管理员始终可以访问它们。"
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "

@@ -3995,7 +3995,7 @@ msgstr ""
 "Đối tượng JSON, với khóa là khóa meta và giá trị là một mảng các giá trị "
 "(giá trị vô hướng được trả về dưới dạng mảng có 1 phần tử)."
 
-#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:54
+#: CMSSchema/packages/meta/src/TypeAPIs/AbstractMetaTypeAPI.php:75
 #: WPSchema/packages/meta/src/FeedbackItemProviders/FeedbackItemProvider.php:27
 #, php-format
 msgid "There is no meta with key '%s'"
@@ -9424,15 +9424,20 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:260
 msgid ""
-"<br/>Protected user meta keys (the roles/capabilities keys, session tokens, "
-"application passwords, and other keys prefixed with <code>_</code>) are "
-"never accessible to non-administrators, regardless of this list; "
-"administrators can always access them."
+"<br/>The roles/capabilities, session tokens and application password keys "
+"are never accessible to non-administrators, regardless of this list. Other "
+"protected keys (those prefixed with <code>_</code>) are also hidden from non-"
+"administrators by default, but can be exposed by adding them to this list as "
+"an exact entry (not a regex), under the \"allow\" behavior. Administrators "
+"can always access all keys."
 msgstr ""
-"<br/>Các khóa meta người dùng được bảo vệ (khóa vai trò/quyền hạn, token "
-"phiên, mật khẩu ứng dụng và các khóa khác có tiền tố <code>_</code>) không "
-"bao giờ được phép truy cập đối với người dùng không phải quản trị viên, bất "
-"kể danh sách này; quản trị viên luôn có thể truy cập chúng."
+"<br/>Vai trò/quyền hạn, token phiên và khóa mật khẩu ứng dụng không bao giờ "
+"có thể truy cập được đối với người dùng không phải quản trị viên, bất kể "
+"danh sách này. Các khóa được bảo vệ khác (những khóa có tiền tố <code>_</"
+"code>) cũng bị ẩn khỏi người dùng không phải quản trị viên theo mặc định, "
+"nhưng có thể được hiển thị bằng cách thêm chúng vào danh sách này dưới dạng "
+"một mục chính xác (không phải regex), theo hành vi \"allow\". Quản trị viên "
+"luôn có thể truy cập tất cả các khóa."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:261
 #, php-format
@@ -14004,6 +14009,17 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid ""
+#~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
+#~ "tokens, application passwords, and other keys prefixed with <code>_</"
+#~ "code>) are never accessible to non-administrators, regardless of this "
+#~ "list; administrators can always access them."
+#~ msgstr ""
+#~ "<br/>Các khóa meta người dùng được bảo vệ (khóa vai trò/quyền hạn, token "
+#~ "phiên, mật khẩu ứng dụng và các khóa khác có tiền tố <code>_</code>) "
+#~ "không bao giờ được phép truy cập đối với người dùng không phải quản trị "
+#~ "viên, bất kể danh sách này; quản trị viên luôn có thể truy cập chúng."
 
 #~ msgid ""
 #~ "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or "
