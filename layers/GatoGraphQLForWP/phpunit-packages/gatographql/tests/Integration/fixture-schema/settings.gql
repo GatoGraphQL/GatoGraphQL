@@ -1,5 +1,5 @@
 {
-  existingValue: optionValue(name: "siteurl")
+  optionValue(name: "siteurl")
   isGutenbergEditorEnabled
   isGutenbergEditorEnabledForPost: useGutenbergEditorWithCustomPostType(customPostType: "post")
   isGutenbergEditorEnabledForDummyCPT: useGutenbergEditorWithCustomPostType(customPostType: "dummy-cpt")

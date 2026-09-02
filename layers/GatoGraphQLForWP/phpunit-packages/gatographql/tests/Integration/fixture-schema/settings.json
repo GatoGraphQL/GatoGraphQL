@@ -5,23 +5,23 @@
       "locations": [
         {
           "line": 2,
-          "column": 30
+          "column": 15
         }
       ],
       "extensions": {
         "path": [
           "(name: \"siteurl\")",
-          "existingValue: optionValue(name: \"siteurl\")",
+          "optionValue(name: \"siteurl\")",
           "query { ... }"
         ],
         "type": "QueryRoot",
-        "field": "existingValue: optionValue(name: \"siteurl\")",
+        "field": "optionValue(name: \"siteurl\")",
         "code": "PoPCMSSchema/Settings@e1"
       }
     }
   ],
   "data": {
-    "existingValue": null,
+    "optionValue": null,
     "isGutenbergEditorEnabled": true,
     "isGutenbergEditorEnabledForPost": true,
     "isGutenbergEditorEnabledForDummyCPT": true
