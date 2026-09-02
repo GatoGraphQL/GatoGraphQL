@@ -174,6 +174,7 @@ trait MutateEntityMetaMutationResolverTrait
         $nonAllowedMetaKeys = array_filter(
             $metaKeys,
             fn (string $metaKey) => !$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($metaKey)
+                || $taxonomyMetaTypeAPI->isMetaKeyProtectedFromMutation($metaKey)
         );
         if ($nonAllowedMetaKeys === []) {
             return;

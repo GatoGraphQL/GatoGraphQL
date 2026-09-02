@@ -4,6 +4,12 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.2.2 - 02/09/2026
+
+### Security
+
+- Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
+
 ## 19.2.1 - 20/08/2026
 
 ### Improvements

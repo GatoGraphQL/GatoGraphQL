@@ -14,6 +14,22 @@ use function get_user_meta;
  */
 class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
+    public function isMetaKeyProtectedFromMutation(string $key): bool
+    {
+        if (
+            $key === 'session_tokens'
+            || $key === '_application_passwords'
+        ) {
+            return true;
+        }
+        global $wpdb;
+        $basePrefix = $wpdb->base_prefix;
+        return preg_match(
+            '/^' . preg_quote($basePrefix, '/') . '(?:\d+_)?(?:capabilities|user_level)$/',
+            $key
+        ) === 1;
+    }
+
     /**
      * If the key is non-existent, return `null`.
      * Otherwise, return the value.

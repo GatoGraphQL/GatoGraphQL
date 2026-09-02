@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.2.2 =
+* Security - Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
+
 = 19.2.1 =
 * Improved - Tested up to WordPress 7.1 (#aa2cdc8d)
 * Fixed - The dropdowns in the plugin's post type editors are styled again under WordPress 7.1 (#3380)

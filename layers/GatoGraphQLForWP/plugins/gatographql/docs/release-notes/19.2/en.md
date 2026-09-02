@@ -1,5 +1,13 @@
 # Release Notes: 19.2
 
+## Security
+
+### Protected user meta keys can no longer be modified through mutations
+
+Writing a protected user meta key (the role/capabilities key, the user level, session tokens and application passwords) through the user meta mutations `addUserMeta`, `updateUserMeta`, `setUserMeta` and `deleteUserMeta` (and their bulk variants) is now rejected ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
+
+Previously, because editing one's own account authorized writing any meta key on it, a logged-in user could set their own capabilities key and escalate to a higher role. Assigning roles remains available through the `updateUser` mutation's `roles` input, which is gated by the `promote_users` capability.
+
 ## Added
 
 ### Composing directives with `@start` and `@end`
