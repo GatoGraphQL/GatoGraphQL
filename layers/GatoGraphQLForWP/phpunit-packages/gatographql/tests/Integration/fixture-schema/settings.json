@@ -1,5 +1,27 @@
 {
+  "errors": [
+    {
+      "message": "There is no option with name 'siteurl'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"siteurl\")",
+          "existingValue: optionValue(name: \"siteurl\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "existingValue: optionValue(name: \"siteurl\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    }
+  ],
   "data": {
+    "existingValue": null,
     "isGutenbergEditorEnabled": true,
     "isGutenbergEditorEnabledForPost": true,
     "isGutenbergEditorEnabledForDummyCPT": true
