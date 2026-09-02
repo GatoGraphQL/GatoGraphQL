@@ -15,7 +15,7 @@ use function get_user_meta;
  */
 class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
-    public function isMetaKeyProtectedFromMutation(string $key): bool
+    public function isMetaKeyProtected(string $key): bool
     {
         if (current_user_can('manage_options')) {
             return false;

@@ -13,7 +13,7 @@ use function is_protected_meta;
 
 class CommentMetaTypeAPI extends AbstractCommentMetaTypeAPI
 {
-    public function isMetaKeyProtectedFromMutation(string $key): bool
+    public function isMetaKeyProtected(string $key): bool
     {
         if (current_user_can('manage_options')) {
             return false;

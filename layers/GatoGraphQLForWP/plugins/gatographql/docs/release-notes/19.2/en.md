@@ -10,6 +10,8 @@ Previously, because editing one's own account authorized writing any meta key on
 
 The same protection is applied to the custom post, comment and taxonomy meta mutations, which now reject WordPress protected meta keys (those flagged by `is_protected_meta`, such as keys prefixed with `_`) ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
 
+Protected meta keys are also no longer **readable** by non-administrators. Previously any user, including anonymous visitors, could read them through fields `metaValue`, `metaValues`, `meta` and `metaKeys` — including application-password hashes stored under `_application_passwords`, and session tokens — because the meta allow/deny list defaulted to permissive. Now administrators can read any meta key, while every other user cannot read the protected keys (they are also omitted from the `metaKeys` list).
+
 ### Reading site options is restricted to administrators
 
 The fields to read site options (`optionValue`, `optionValues`, `optionNames`, `optionObjectValue` and `optionObjectValues`) previously allowed any user, including anonymous visitors, to read the value of any option in the database, because the "Settings" allow/deny list defaulted to an empty denylist. This could expose sensitive options such as API keys stored by other plugins ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).

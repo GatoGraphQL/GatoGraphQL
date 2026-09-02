@@ -80,7 +80,7 @@ class CustomPostObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldR
                 $customPostMetaTypeAPI = $this->getLogicalCustomPostMetaTypeAPI();
                 $allCustomPostMetaKeys = $customPostMetaTypeAPI->getCustomPostMetaKeys($customPost);
                 foreach ($allCustomPostMetaKeys as $key) {
-                    if (!$customPostMetaTypeAPI->validateIsMetaKeyAllowed($key)) {
+                    if (!$customPostMetaTypeAPI->validateIsMetaKeyAllowed($key) || $customPostMetaTypeAPI->isMetaKeyProtected($key)) {
                         continue;
                     }
                     $metaKeys[] = $key;

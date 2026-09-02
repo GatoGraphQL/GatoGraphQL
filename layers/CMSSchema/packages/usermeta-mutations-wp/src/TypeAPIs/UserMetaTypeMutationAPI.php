@@ -38,7 +38,7 @@ class UserMetaTypeMutationAPI extends AbstractUserMetaTypeMutationAPI
      */
     protected function assertMetaKeyIsNotProtected(string $key): void
     {
-        if (!$this->getUserMetaTypeAPI()->isMetaKeyProtectedFromMutation($key)) {
+        if (!$this->getUserMetaTypeAPI()->isMetaKeyProtected($key)) {
             return;
         }
         throw $this->getEntityMetaCRUDMutationException(

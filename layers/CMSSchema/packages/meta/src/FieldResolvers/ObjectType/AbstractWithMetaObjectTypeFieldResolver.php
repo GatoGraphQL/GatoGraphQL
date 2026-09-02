@@ -67,7 +67,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
             case 'metaValue':
             case 'metaValues':
                 $key = $fieldDataAccessor->getValue('key');
-                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($key)) {
+                if (!$this->getMetaTypeAPI()->validateIsMetaKeyAllowed($key) || $this->getMetaTypeAPI()->isMetaKeyProtected($key)) {
                     $field = $fieldDataAccessor->getField();
                     $objectTypeFieldResolutionFeedbackStore->addError(
                         new ObjectTypeFieldResolutionFeedback(
@@ -89,7 +89,7 @@ abstract class AbstractWithMetaObjectTypeFieldResolver extends AbstractObjectTyp
                 /** @var string[] */
                 $keys = $fieldDataAccessor->getValue('keys');
                 foreach ($keys as $key) {
-                    if ($metaTypeAPI->validateIsMetaKeyAllowed($key)) {
+                    if ($metaTypeAPI->validateIsMetaKeyAllowed($key) && !$metaTypeAPI->isMetaKeyProtected($key)) {
                         continue;
                     }
                     $nonAllowedKeys[] = $key;

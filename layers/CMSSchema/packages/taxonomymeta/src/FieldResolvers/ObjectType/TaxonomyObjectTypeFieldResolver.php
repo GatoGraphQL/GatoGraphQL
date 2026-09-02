@@ -75,7 +75,7 @@ class TaxonomyObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldRes
                 $taxonomyMetaTypeAPI = $this->getTaxonomyMetaTypeAPI();
                 $allTaxonomyTermMetaKeys = $taxonomyMetaTypeAPI->getTaxonomyTermMetaKeys($taxonomyTerm);
                 foreach ($allTaxonomyTermMetaKeys as $key) {
-                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key)) {
+                    if (!$taxonomyMetaTypeAPI->validateIsMetaKeyAllowed($key) || $taxonomyMetaTypeAPI->isMetaKeyProtected($key)) {
                         continue;
                     }
                     $metaKeys[] = $key;
