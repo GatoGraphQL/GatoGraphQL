@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 
-class AllowedSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
+class AllowedSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     use AllowedSettingsFixtureEndpointWebserverRequestTestTrait;
-    use RunQueryAsNonAuthenticatedUserWebserverRequestTestTrait;
 
     protected static function getEndpoint(): string
     {
@@ -29,5 +29,15 @@ class AllowedSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest ext
     protected function getPluginSettingsNewValue(): mixed
     {
         return $this->getAllowedSettingsKeyEntriesNewValue();
+    }
+
+    protected function getDifferentLoginUsername(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserUsername();
+    }
+
+    protected function getDifferentLoginPassword(): string
+    {
+        return Environment::getIntegrationTestsAuthenticatedSubscriberUserPassword();
     }
 }
