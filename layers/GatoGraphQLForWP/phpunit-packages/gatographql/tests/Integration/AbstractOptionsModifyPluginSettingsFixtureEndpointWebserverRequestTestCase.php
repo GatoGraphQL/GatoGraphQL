@@ -21,6 +21,8 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
  */
 abstract class AbstractOptionsModifyPluginSettingsFixtureEndpointWebserverRequestTestCase extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
+    use RunQueryAsNonAuthenticatedUserWebserverRequestTestTrait;
+
     protected function getSettingsKey(): string
     {
         return ModuleSettingOptions::ENTRIES;

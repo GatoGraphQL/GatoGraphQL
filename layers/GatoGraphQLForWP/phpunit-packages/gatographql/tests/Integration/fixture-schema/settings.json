@@ -1,184 +1,229 @@
 {
-    "data": {
-        "existingValue": "https://gatographql.lndo.site",
-        "nonExistingValue": null,
-        "existingArray": [
-            "gatographql-testing-schema/gatographql-testing-schema.php",
-            "gatographql-testing/gatographql-testing.php",
-            "gatographql/gatographql.php",
-            "wordpress-importer/wordpress-importer.php"
+  "errors": [
+    {
+      "message": "There is no option with name 'siteurl'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"siteurl\")",
+          "existingValue: optionValue(name: \"siteurl\")",
+          "query { ... }"
         ],
-        "nonExistingArray": null,
-        "existingObject": {
-            "administrator": {
-                "name": "Administrator",
-                "capabilities": {
-                    "switch_themes": true,
-                    "edit_themes": true,
-                    "activate_plugins": true,
-                    "edit_plugins": true,
-                    "edit_users": true,
-                    "edit_files": true,
-                    "manage_options": true,
-                    "moderate_comments": true,
-                    "manage_categories": true,
-                    "manage_links": true,
-                    "upload_files": true,
-                    "import": true,
-                    "unfiltered_html": true,
-                    "edit_posts": true,
-                    "edit_others_posts": true,
-                    "edit_published_posts": true,
-                    "publish_posts": true,
-                    "edit_pages": true,
-                    "read": true,
-                    "level_10": true,
-                    "level_9": true,
-                    "level_8": true,
-                    "level_7": true,
-                    "level_6": true,
-                    "level_5": true,
-                    "level_4": true,
-                    "level_3": true,
-                    "level_2": true,
-                    "level_1": true,
-                    "level_0": true,
-                    "edit_others_pages": true,
-                    "edit_published_pages": true,
-                    "publish_pages": true,
-                    "delete_pages": true,
-                    "delete_others_pages": true,
-                    "delete_published_pages": true,
-                    "delete_posts": true,
-                    "delete_others_posts": true,
-                    "delete_published_posts": true,
-                    "delete_private_posts": true,
-                    "edit_private_posts": true,
-                    "read_private_posts": true,
-                    "delete_private_pages": true,
-                    "edit_private_pages": true,
-                    "read_private_pages": true,
-                    "delete_users": true,
-                    "create_users": true,
-                    "unfiltered_upload": true,
-                    "edit_dashboard": true,
-                    "update_plugins": true,
-                    "delete_plugins": true,
-                    "install_plugins": true,
-                    "update_themes": true,
-                    "install_themes": true,
-                    "update_core": true,
-                    "list_users": true,
-                    "remove_users": true,
-                    "promote_users": true,
-                    "edit_theme_options": true,
-                    "delete_themes": true,
-                    "export": true,
-                    "gatogql_manage_graphql_schema": true
-                }
-            },
-            "editor": {
-                "name": "Editor",
-                "capabilities": {
-                    "moderate_comments": true,
-                    "manage_categories": true,
-                    "manage_links": true,
-                    "upload_files": true,
-                    "unfiltered_html": true,
-                    "edit_posts": true,
-                    "edit_others_posts": true,
-                    "edit_published_posts": true,
-                    "publish_posts": true,
-                    "edit_pages": true,
-                    "read": true,
-                    "level_7": true,
-                    "level_6": true,
-                    "level_5": true,
-                    "level_4": true,
-                    "level_3": true,
-                    "level_2": true,
-                    "level_1": true,
-                    "level_0": true,
-                    "edit_others_pages": true,
-                    "edit_published_pages": true,
-                    "publish_pages": true,
-                    "delete_pages": true,
-                    "delete_others_pages": true,
-                    "delete_published_pages": true,
-                    "delete_posts": true,
-                    "delete_others_posts": true,
-                    "delete_published_posts": true,
-                    "delete_private_posts": true,
-                    "edit_private_posts": true,
-                    "read_private_posts": true,
-                    "delete_private_pages": true,
-                    "edit_private_pages": true,
-                    "read_private_pages": true
-                }
-            },
-            "author": {
-                "name": "Author",
-                "capabilities": {
-                    "upload_files": true,
-                    "edit_posts": true,
-                    "edit_published_posts": true,
-                    "publish_posts": true,
-                    "read": true,
-                    "level_2": true,
-                    "level_1": true,
-                    "level_0": true,
-                    "delete_posts": true,
-                    "delete_published_posts": true
-                }
-            },
-            "contributor": {
-                "name": "Contributor",
-                "capabilities": {
-                    "edit_posts": true,
-                    "read": true,
-                    "level_1": true,
-                    "level_0": true,
-                    "delete_posts": true
-                }
-            },
-            "subscriber": {
-                "name": "Subscriber",
-                "capabilities": { "read": true, "level_0": true }
-            }
-        },
-        "nonExistingObject": null,
-        "existingObjects": [
-            {
-                "id": "nfpllg",
-                "category": "",
-                "desc": "",
-                "properties": [],
-                "_created": 1750156925,
-                "_user_id": 1,
-                "_version": "2.0-beta"
-            },
-            {
-                "id": "fufxfs",
-                "category": "",
-                "desc": "",
-                "properties": [],
-                "_created": 1750156913,
-                "_user_id": 1,
-                "_version": "2.0-beta"
-            }
+        "type": "QueryRoot",
+        "field": "existingValue: optionValue(name: \"siteurl\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'nonExisting'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 33
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"nonExisting\")",
+          "nonExistingValue: optionValue(name: \"nonExisting\")",
+          "query { ... }"
         ],
-        "nonExistingObjects": null,
-        "valueWithQuotes": "It's a \"quoted\" value",
-        "arrayWithQuotes": [
-            "It's the first",
-            "She said \"the second\""
+        "type": "QueryRoot",
+        "field": "nonExistingValue: optionValue(name: \"nonExisting\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'active_plugins'",
+      "locations": [
+        {
+          "line": 4,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"active_plugins\")",
+          "existingArray: optionValues(name: \"active_plugins\")",
+          "query { ... }"
         ],
-        "objectWithQuotes": {
-            "label": "It's an object",
-            "quote": "She said \"hello\""
-        },
-        "isGutenbergEditorEnabled": true,
-        "isGutenbergEditorEnabledForPost": true,
-        "isGutenbergEditorEnabledForDummyCPT": true
+        "type": "QueryRoot",
+        "field": "existingArray: optionValues(name: \"active_plugins\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'nonExisting'",
+      "locations": [
+        {
+          "line": 5,
+          "column": 34
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"nonExisting\")",
+          "nonExistingArray: optionValues(name: \"nonExisting\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "nonExistingArray: optionValues(name: \"nonExisting\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'wp_user_roles'",
+      "locations": [
+        {
+          "line": 6,
+          "column": 37
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"wp_user_roles\")",
+          "existingObject: optionObjectValue(name: \"wp_user_roles\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "existingObject: optionObjectValue(name: \"wp_user_roles\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'nonExisting'",
+      "locations": [
+        {
+          "line": 7,
+          "column": 40
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"nonExisting\")",
+          "nonExistingObject: optionObjectValue(name: \"nonExisting\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "nonExistingObject: optionObjectValue(name: \"nonExisting\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'list_of_objects'",
+      "locations": [
+        {
+          "line": 8,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"list_of_objects\")",
+          "existingObjects: optionObjectValues(name: \"list_of_objects\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "existingObjects: optionObjectValues(name: \"list_of_objects\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'nonExisting'",
+      "locations": [
+        {
+          "line": 9,
+          "column": 42
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"nonExisting\")",
+          "nonExistingObjects: optionObjectValues(name: \"nonExisting\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "nonExistingObjects: optionObjectValues(name: \"nonExisting\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'value_with_quotes'",
+      "locations": [
+        {
+          "line": 10,
+          "column": 32
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"value_with_quotes\")",
+          "valueWithQuotes: optionValue(name: \"value_with_quotes\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "valueWithQuotes: optionValue(name: \"value_with_quotes\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'list_of_values_with_quotes'",
+      "locations": [
+        {
+          "line": 11,
+          "column": 33
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"list_of_values_with_quotes\")",
+          "arrayWithQuotes: optionValues(name: \"list_of_values_with_quotes\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "arrayWithQuotes: optionValues(name: \"list_of_values_with_quotes\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
+    },
+    {
+      "message": "There is no option with name 'object_with_quotes'",
+      "locations": [
+        {
+          "line": 12,
+          "column": 39
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(name: \"object_with_quotes\")",
+          "objectWithQuotes: optionObjectValue(name: \"object_with_quotes\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "objectWithQuotes: optionObjectValue(name: \"object_with_quotes\")",
+        "code": "PoPCMSSchema/Settings@e1"
+      }
     }
+  ],
+  "data": {
+    "existingValue": null,
+    "nonExistingValue": null,
+    "existingArray": null,
+    "nonExistingArray": null,
+    "existingObject": null,
+    "nonExistingObject": null,
+    "existingObjects": null,
+    "nonExistingObjects": null,
+    "valueWithQuotes": null,
+    "arrayWithQuotes": null,
+    "objectWithQuotes": null,
+    "isGutenbergEditorEnabled": true,
+    "isGutenbergEditorEnabledForPost": true,
+    "isGutenbergEditorEnabledForDummyCPT": true
+  }
 }

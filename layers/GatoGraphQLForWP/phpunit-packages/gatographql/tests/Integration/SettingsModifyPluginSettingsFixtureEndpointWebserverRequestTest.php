@@ -9,6 +9,8 @@ use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
+    use RunQueryAsNonAuthenticatedUserWebserverRequestTestTrait;
+
     protected static function getEndpoint(): string
     {
         return 'graphql';
@@ -31,6 +33,6 @@ class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return Behaviors::ALLOW;
+        return Behaviors::DENY;
     }
 }

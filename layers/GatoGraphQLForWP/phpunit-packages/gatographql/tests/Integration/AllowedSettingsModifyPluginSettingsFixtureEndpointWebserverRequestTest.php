@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 class AllowedSettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
     use AllowedSettingsFixtureEndpointWebserverRequestTestTrait;
+    use RunQueryAsNonAuthenticatedUserWebserverRequestTestTrait;
 
     protected static function getEndpoint(): string
     {
