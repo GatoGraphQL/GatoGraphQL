@@ -36,6 +36,11 @@ abstract class AbstractMetaTypeAPI extends AbstractBasicService implements MetaT
         return false;
     }
 
+    public function isMetaKeyProtectedFromReading(string $key): bool
+    {
+        return false;
+    }
+
     /**
      * If the allow/denylist validation fails, throw an exception.
      *

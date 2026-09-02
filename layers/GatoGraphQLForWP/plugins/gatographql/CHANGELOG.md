@@ -11,7 +11,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
 - Protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) can no longer be written through the custom post, comment and taxonomy meta mutations either (#3389)
 - Reading site options (fields <code>optionValue</code>, <code>optionValues</code>, <code>optionNames</code> and their variants) is now restricted to administrators unless the option is added to the settings allowlist, closing an information disclosure where any user could read arbitrary options; the "Settings" allow/deny default is now an empty allowlist (#3389)
-- Reading protected meta keys (the user roles/capabilities keys, <code>user_level</code>, session tokens, application passwords, and WordPress internal keys) is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> — e.g. application-password hashes (#3389)
+- Reading protected user meta keys (the roles/capabilities keys, <code>user_level</code>, session tokens, application passwords, and other user meta keys prefixed with <code>_</code>) is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> — e.g. application-password hashes (#3389)
 
 ## 19.2.1 - 20/08/2026
 

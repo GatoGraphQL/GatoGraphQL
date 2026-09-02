@@ -9,6 +9,7 @@ use WP_User;
 
 use function current_user_can;
 use function get_user_meta;
+use function is_protected_meta;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -20,10 +21,10 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
         if (current_user_can('manage_options')) {
             return false;
         }
-        if (
-            $key === 'session_tokens'
-            || $key === '_application_passwords'
-        ) {
+        if (is_protected_meta($key, 'user')) {
+            return true;
+        }
+        if ($key === 'session_tokens') {
             return true;
         }
         global $wpdb;
@@ -32,6 +33,11 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
             '/^' . preg_quote($basePrefix, '/') . '(?:\d+_)?(?:capabilities|user_level)$/',
             $key
         ) === 1;
+    }
+
+    public function isMetaKeyProtectedFromReading(string $key): bool
+    {
+        return $this->isMetaKeyProtected($key);
     }
 
     /**

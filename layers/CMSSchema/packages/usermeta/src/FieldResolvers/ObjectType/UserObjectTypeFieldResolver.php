@@ -75,7 +75,7 @@ class UserObjectTypeFieldResolver extends AbstractWithMetaObjectTypeFieldResolve
                 $userMetaTypeAPI = $this->getUserMetaTypeAPI();
                 $allUserMetaKeys = $userMetaTypeAPI->getUserMetaKeys($user);
                 foreach ($allUserMetaKeys as $key) {
-                    if (!$userMetaTypeAPI->validateIsMetaKeyAllowed($key) || $userMetaTypeAPI->isMetaKeyProtected($key)) {
+                    if (!$userMetaTypeAPI->validateIsMetaKeyAllowed($key) || $userMetaTypeAPI->isMetaKeyProtectedFromReading($key)) {
                         continue;
                     }
                     $metaKeys[] = $key;
