@@ -296,8 +296,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 '</td><td>',
                                 [
                                     \__('Settings from <code>wp_options</code>', 'gatographql'),
-                                    \__('All options are queryable', 'gatographql'),
-                                    \__('Only a few predefined options are queryable', 'gatographql'),
+                                    \__('No options are queryable by non-administrators', 'gatographql'),
+                                    \__('Only a few predefined options are queryable by non-administrators', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(

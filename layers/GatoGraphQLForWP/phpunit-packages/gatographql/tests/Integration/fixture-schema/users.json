@@ -1,623 +1,587 @@
 {
-    "data": {
-        "users": [
-            {
-                "avatar": {
-                    "id": "151c781af7bc12e23f83ac650902c3ad",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/02a2cc9bf6e20f72ef99fab2a277b7a2b00fcf8c6900a6c66eb442cdeb2dfe66?s=96&#038;d=mm&#038;r=g"
-                },
-                "capabilities": [
-                    "delete_others_pages",
-                    "delete_others_posts",
-                    "delete_pages",
-                    "delete_posts",
-                    "delete_private_pages",
-                    "delete_private_posts",
-                    "delete_published_pages",
-                    "delete_published_posts",
-                    "edit_others_pages",
-                    "edit_others_posts",
-                    "edit_pages",
-                    "edit_posts",
-                    "edit_private_pages",
-                    "edit_private_posts",
-                    "edit_published_pages",
-                    "edit_published_posts",
-                    "level_0",
-                    "level_1",
-                    "level_2",
-                    "level_3",
-                    "level_4",
-                    "level_5",
-                    "level_6",
-                    "level_7",
-                    "manage_categories",
-                    "manage_links",
-                    "moderate_comments",
-                    "publish_pages",
-                    "publish_posts",
-                    "read",
-                    "read_private_pages",
-                    "read_private_posts",
-                    "unfiltered_html",
-                    "upload_files"
-                ],
-                "customPostCount": 5,
-                "customPosts": [
-                    {
-                        "__typename": "Post",
-                        "id": 1140,
-                        "title": "Welcome to a single post full of blocks!"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1622,
-                        "title": "Dolore ex et deleniti mollitia"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1627,
-                        "title": "Quis voluptatum tempore veniam est sit"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1613,
-                        "title": "Dolor facilis repellat pariatur veniam at"
-                    },
-                    {
-                        "__typename": "Post",
-                        "id": 1119,
-                        "title": "Nested mutations are a must have"
-                    }
-                ],
-                "description": "",
-                "displayName": "Editor Smith",
-                "email": "editor@test.com",
-                "firstName": "Editor",
-                "hasAnyCapability": true,
-                "hasAnyRole": true,
-                "hasCapability": false,
-                "hasRole": false,
-                "id": 6,
-                "lastName": "Smith",
-                "locale": "en_US",
-                "metaValue": "editor",
-                "metaValue2": {
-                    "editor": true
-                },
-                "meta": {
-                    "nickname": [
-                        "editor"
-                    ],
-                    "wp_capabilities": [
-                        {
-                            "editor": true
-                        }
-                    ]
-                },
-                "metaKeys": [
-                    "nickname",
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_capabilities",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingMetaKeys": [
-                    "nickname",
-                    "wp_capabilities"
-                ],
-                "excludingMetaKeys": [
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingAndExcludingMetaKeys": [
-                    "nickname"
-                ],
-                "name": "Editor Smith",
-                "nicename": "editor",
-                "nickname": "editor",
-                "postCount": 2,
-                "posts": [
-                    {
-                        "id": 1140,
-                        "title": "Welcome to a single post full of blocks!"
-                    },
-                    {
-                        "id": 1119,
-                        "title": "Nested mutations are a must have"
-                    }
-                ],
-                "registeredDate": "1982-06-29T17:48:26+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "editor"
-                ],
-                "roles": [
-                    {
-                        "id": "editor",
-                        "name": "editor",
-                        "capabilities": [
-                            "delete_others_pages",
-                            "delete_others_posts",
-                            "delete_pages",
-                            "delete_posts",
-                            "delete_private_pages",
-                            "delete_private_posts",
-                            "delete_published_pages",
-                            "delete_published_posts",
-                            "edit_others_pages",
-                            "edit_others_posts",
-                            "edit_pages",
-                            "edit_posts",
-                            "edit_private_pages",
-                            "edit_private_posts",
-                            "edit_published_pages",
-                            "edit_published_posts",
-                            "level_0",
-                            "level_1",
-                            "level_2",
-                            "level_3",
-                            "level_4",
-                            "level_5",
-                            "level_6",
-                            "level_7",
-                            "manage_categories",
-                            "manage_links",
-                            "moderate_comments",
-                            "publish_pages",
-                            "publish_posts",
-                            "read",
-                            "read_private_pages",
-                            "read_private_posts",
-                            "unfiltered_html",
-                            "upload_files"
-                        ]
-                    }
-                ],
-                "slug": "editor",
-                "url": "https:\/\/gatographql.lndo.site\/author\/editor\/",
-                "urlPath": "\/author\/editor\/",
-                "username": "editor",
-                "websiteURL": null
-            },
-            {
-                "avatar": {
-                    "id": "903330aa75ae09ed50e6892435966828",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/ad1dd9c4dbbe4eab67f63fce29e00214833aee1e254078a06891a7d618888ff9?s=96&#038;d=mm&#038;r=g"
-                },
-                "capabilities": [
-                    "delete_posts",
-                    "delete_published_posts",
-                    "edit_posts",
-                    "edit_published_posts",
-                    "level_0",
-                    "level_1",
-                    "level_2",
-                    "publish_posts",
-                    "read",
-                    "upload_files"
-                ],
-                "customPostCount": 10,
-                "customPosts": [
-                    {
-                        "__typename": "Page",
-                        "id": 1705,
-                        "title": "Page with parent only"
-                    },
-                    {
-                        "__typename": "Page",
-                        "id": 1703,
-                        "title": "Page with parent and children"
-                    },
-                    {
-                        "__typename": "Page",
-                        "id": 1701,
-                        "title": "Page with several levels of children"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1688,
-                        "title": "Dummy CPT with parent only"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1684,
-                        "title": "Dummy CPT with parent and children"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1682,
-                        "title": "Dummy CPT with several levels of children"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1619,
-                        "title": "Error debitis nulla vel est"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1630,
-                        "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
-                    },
-                    {
-                        "__typename": "GenericCustomPost",
-                        "id": 1631,
-                        "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
-                    },
-                    {
-                        "__typename": "Post",
-                        "id": 1128,
-                        "title": "HTTP caching improves performance"
-                    }
-                ],
-                "description": "",
-                "displayName": "Author Marquez",
-                "email": "author@test.com",
-                "firstName": "Author",
-                "hasAnyCapability": true,
-                "hasAnyRole": false,
-                "hasCapability": false,
-                "hasRole": false,
-                "id": 5,
-                "lastName": "Marquez",
-                "locale": "en_US",
-                "metaValue": "author",
-                "metaValue2": {
-                    "author": true
-                },
-                "meta": {
-                    "nickname": [
-                        "author"
-                    ],
-                    "wp_capabilities": [
-                        {
-                            "author": true
-                        }
-                    ]
-                },
-                "metaKeys": [
-                    "nickname",
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_capabilities",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingMetaKeys": [
-                    "nickname",
-                    "wp_capabilities"
-                ],
-                "excludingMetaKeys": [
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingAndExcludingMetaKeys": [
-                    "nickname"
-                ],
-                "name": "Author Marquez",
-                "nicename": "author",
-                "nickname": "author",
-                "postCount": 1,
-                "posts": [
-                    {
-                        "id": 1128,
-                        "title": "HTTP caching improves performance"
-                    }
-                ],
-                "registeredDate": "1982-06-29T17:48:25+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "author"
-                ],
-                "roles": [
-                    {
-                        "id": "author",
-                        "name": "author",
-                        "capabilities": [
-                            "delete_posts",
-                            "delete_published_posts",
-                            "edit_posts",
-                            "edit_published_posts",
-                            "level_0",
-                            "level_1",
-                            "level_2",
-                            "publish_posts",
-                            "read",
-                            "upload_files"
-                        ]
-                    }
-                ],
-                "slug": "author",
-                "url": "https:\/\/gatographql.lndo.site\/author\/author\/",
-                "urlPath": "\/author\/author\/",
-                "username": "author",
-                "websiteURL": null
-            },
-            {
-                "avatar": {
-                    "id": "07b70c8ebc386861764ccc8da808a2f3",
-                    "size": 96,
-                    "src": "https:\/\/secure.gravatar.com\/avatar\/82e7c14deae6e916e47d76c1cc776c6dfcd67a50082e47fd00bf13d07565b2ac?s=96&#038;d=mm&#038;r=g"
-                },
-                "capabilities": [
-                    "delete_posts",
-                    "edit_posts",
-                    "level_0",
-                    "level_1",
-                    "read"
-                ],
-                "customPostCount": 1,
-                "customPosts": [
-                    {
-                        "__typename": "Post",
-                        "id": 1116,
-                        "title": "Working on flat chain syntax next"
-                    }
-                ],
-                "description": "",
-                "displayName": "Contributor Johnson",
-                "email": "contributor@test.com",
-                "firstName": "Contributor",
-                "hasAnyCapability": true,
-                "hasAnyRole": false,
-                "hasCapability": false,
-                "hasRole": false,
-                "id": 4,
-                "lastName": "Johnson",
-                "locale": "en_US",
-                "metaValue": "contributor",
-                "metaValue2": {
-                    "contributor": true
-                },
-                "meta": {
-                    "nickname": [
-                        "contributor"
-                    ],
-                    "wp_capabilities": [
-                        {
-                            "contributor": true
-                        }
-                    ]
-                },
-                "metaKeys": [
-                    "nickname",
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_capabilities",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingMetaKeys": [
-                    "nickname",
-                    "wp_capabilities"
-                ],
-                "excludingMetaKeys": [
-                    "first_name",
-                    "last_name",
-                    "description",
-                    "rich_editing",
-                    "syntax_highlighting",
-                    "infinite_scrolling",
-                    "comment_shortcuts",
-                    "admin_color",
-                    "use_ssl",
-                    "show_admin_bar_front",
-                    "locale",
-                    "wp_user_level",
-                    "dismissed_wp_pointers",
-                    "_application_passwords",
-                    "session_tokens",
-                    "wp_dashboard_quick_press_last_post_id"
-                ],
-                "includingAndExcludingMetaKeys": [
-                    "nickname"
-                ],
-                "name": "Contributor Johnson",
-                "nicename": "contributor",
-                "nickname": "contributor",
-                "postCount": 1,
-                "posts": [
-                    {
-                        "id": 1116,
-                        "title": "Working on flat chain syntax next"
-                    }
-                ],
-                "registeredDate": "1982-06-29T17:48:24+00:00",
-                "registeredDateStr": "June 29",
-                "roleNames": [
-                    "contributor"
-                ],
-                "roles": [
-                    {
-                        "id": "contributor",
-                        "name": "contributor",
-                        "capabilities": [
-                            "delete_posts",
-                            "edit_posts",
-                            "level_0",
-                            "level_1",
-                            "read"
-                        ]
-                    }
-                ],
-                "slug": "contributor",
-                "url": "https:\/\/gatographql.lndo.site\/author\/contributor\/",
-                "urlPath": "\/author\/contributor\/",
-                "username": "contributor",
-                "websiteURL": null
-            }
+  "data": {
+    "users": [
+      {
+        "avatar": {
+          "id": "151c781af7bc12e23f83ac650902c3ad",
+          "size": 96,
+          "src": "https://secure.gravatar.com/avatar/02a2cc9bf6e20f72ef99fab2a277b7a2b00fcf8c6900a6c66eb442cdeb2dfe66?s=96&#038;d=mm&#038;r=g"
+        },
+        "capabilities": [
+          "delete_others_pages",
+          "delete_others_posts",
+          "delete_pages",
+          "delete_posts",
+          "delete_private_pages",
+          "delete_private_posts",
+          "delete_published_pages",
+          "delete_published_posts",
+          "edit_others_pages",
+          "edit_others_posts",
+          "edit_pages",
+          "edit_posts",
+          "edit_private_pages",
+          "edit_private_posts",
+          "edit_published_pages",
+          "edit_published_posts",
+          "level_0",
+          "level_1",
+          "level_2",
+          "level_3",
+          "level_4",
+          "level_5",
+          "level_6",
+          "level_7",
+          "manage_categories",
+          "manage_links",
+          "moderate_comments",
+          "publish_pages",
+          "publish_posts",
+          "read",
+          "read_private_pages",
+          "read_private_posts",
+          "unfiltered_html",
+          "upload_files"
         ],
-        "usersByExcludeIDs": [
-            {
-                "id": 6,
-                "name": "Editor Smith"
-            },
-            {
-                "id": 5,
-                "name": "Author Marquez"
-            },
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            },
-            {
-                "id": 3,
-                "name": "Subscriber Bennett"
-            },
-            {
-                "id": 2,
-                "name": "Blogger Davenport"
-            }
+        "customPostCount": 5,
+        "customPosts": [
+          {
+            "__typename": "Post",
+            "id": 1140,
+            "title": "Welcome to a single post full of blocks!"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1622,
+            "title": "Dolore ex et deleniti mollitia"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1627,
+            "title": "Quis voluptatum tempore veniam est sit"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1613,
+            "title": "Dolor facilis repellat pariatur veniam at"
+          },
+          {
+            "__typename": "Post",
+            "id": 1119,
+            "title": "Nested mutations are a must have"
+          }
         ],
-        "usersByExcludeRoles": [
-            {
-                "id": 6,
-                "name": "Editor Smith"
-            },
-            {
-                "id": 5,
-                "name": "Author Marquez"
-            },
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            },
-            {
-                "id": 3,
-                "name": "Subscriber Bennett"
-            },
-            {
-                "id": 2,
-                "name": "Blogger Davenport"
-            }
+        "description": "",
+        "displayName": "Editor Smith",
+        "email": "editor@test.com",
+        "firstName": "Editor",
+        "hasAnyCapability": true,
+        "hasAnyRole": true,
+        "hasCapability": false,
+        "hasRole": false,
+        "id": 6,
+        "lastName": "Smith",
+        "locale": "en_US",
+        "metaValue": "editor",
+        "metaValue2": "Editor",
+        "meta": {
+          "nickname": [
+            "editor"
+          ],
+          "first_name": [
+            "Editor"
+          ]
+        },
+        "metaKeys": [
+          "nickname",
+          "first_name",
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
         ],
-        "emptyUsersByIds": [],
-        "usersByIds": [
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            },
-            {
-                "id": 2,
-                "name": "Blogger Davenport"
-            }
+        "includingMetaKeys": [
+          "nickname",
+          "first_name"
         ],
-        "usersByMetaQuery": [
-            {
-                "id": 2,
-                "name": "Blogger Davenport"
-            }
+        "excludingMetaKeys": [
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
         ],
-        "usersByRoles": [
-            {
-                "id": 5,
-                "name": "Author Marquez"
-            },
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            }
+        "includingAndExcludingMetaKeys": [
+          "nickname"
         ],
-        "usersBySearchBy": [
-            {
-                "id": 5,
-                "name": "Author Marquez"
-            }
+        "name": "Editor Smith",
+        "nicename": "editor",
+        "nickname": "editor",
+        "postCount": 2,
+        "posts": [
+          {
+            "id": 1140,
+            "title": "Welcome to a single post full of blocks!"
+          },
+          {
+            "id": 1119,
+            "title": "Nested mutations are a must have"
+          }
         ],
-        "usersSortedASC": [
-            {
-                "id": 5,
-                "name": "Author Marquez"
-            },
-            {
-                "id": 2,
-                "name": "Blogger Davenport"
-            },
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            }
+        "registeredDate": "1982-06-29T17:48:26+00:00",
+        "registeredDateStr": "June 29",
+        "roleNames": [
+          "editor"
         ],
-        "usersSortedDESC": [
-            {
-                "id": 3,
-                "name": "Subscriber Bennett"
-            },
-            {
-                "id": 6,
-                "name": "Editor Smith"
-            },
-            {
-                "id": 4,
-                "name": "Contributor Johnson"
-            }
-        ]
-    }
+        "roles": [
+          {
+            "id": "editor",
+            "name": "editor",
+            "capabilities": [
+              "delete_others_pages",
+              "delete_others_posts",
+              "delete_pages",
+              "delete_posts",
+              "delete_private_pages",
+              "delete_private_posts",
+              "delete_published_pages",
+              "delete_published_posts",
+              "edit_others_pages",
+              "edit_others_posts",
+              "edit_pages",
+              "edit_posts",
+              "edit_private_pages",
+              "edit_private_posts",
+              "edit_published_pages",
+              "edit_published_posts",
+              "level_0",
+              "level_1",
+              "level_2",
+              "level_3",
+              "level_4",
+              "level_5",
+              "level_6",
+              "level_7",
+              "manage_categories",
+              "manage_links",
+              "moderate_comments",
+              "publish_pages",
+              "publish_posts",
+              "read",
+              "read_private_pages",
+              "read_private_posts",
+              "unfiltered_html",
+              "upload_files"
+            ]
+          }
+        ],
+        "slug": "editor",
+        "url": "https://gatographql.lndo.site/author/editor/",
+        "urlPath": "/author/editor/",
+        "username": "editor",
+        "websiteURL": null
+      },
+      {
+        "avatar": {
+          "id": "903330aa75ae09ed50e6892435966828",
+          "size": 96,
+          "src": "https://secure.gravatar.com/avatar/ad1dd9c4dbbe4eab67f63fce29e00214833aee1e254078a06891a7d618888ff9?s=96&#038;d=mm&#038;r=g"
+        },
+        "capabilities": [
+          "delete_posts",
+          "delete_published_posts",
+          "edit_posts",
+          "edit_published_posts",
+          "level_0",
+          "level_1",
+          "level_2",
+          "publish_posts",
+          "read",
+          "upload_files"
+        ],
+        "customPostCount": 10,
+        "customPosts": [
+          {
+            "__typename": "Page",
+            "id": 1705,
+            "title": "Page with parent only"
+          },
+          {
+            "__typename": "Page",
+            "id": 1703,
+            "title": "Page with parent and children"
+          },
+          {
+            "__typename": "Page",
+            "id": 1701,
+            "title": "Page with several levels of children"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1688,
+            "title": "Dummy CPT with parent only"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1684,
+            "title": "Dummy CPT with parent and children"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1682,
+            "title": "Dummy CPT with several levels of children"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1619,
+            "title": "Error debitis nulla vel est"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1630,
+            "title": "Corrupti voluptatem asperiores nam exercitationem corrupti"
+          },
+          {
+            "__typename": "GenericCustomPost",
+            "id": 1631,
+            "title": "Voluptatibus inventore quaerat quas explicabo possimus debitis"
+          },
+          {
+            "__typename": "Post",
+            "id": 1128,
+            "title": "HTTP caching improves performance"
+          }
+        ],
+        "description": "",
+        "displayName": "Author Marquez",
+        "email": "author@test.com",
+        "firstName": "Author",
+        "hasAnyCapability": true,
+        "hasAnyRole": false,
+        "hasCapability": false,
+        "hasRole": false,
+        "id": 5,
+        "lastName": "Marquez",
+        "locale": "en_US",
+        "metaValue": "author",
+        "metaValue2": "Author",
+        "meta": {
+          "nickname": [
+            "author"
+          ],
+          "first_name": [
+            "Author"
+          ]
+        },
+        "metaKeys": [
+          "nickname",
+          "first_name",
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
+        ],
+        "includingMetaKeys": [
+          "nickname",
+          "first_name"
+        ],
+        "excludingMetaKeys": [
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
+        ],
+        "includingAndExcludingMetaKeys": [
+          "nickname"
+        ],
+        "name": "Author Marquez",
+        "nicename": "author",
+        "nickname": "author",
+        "postCount": 1,
+        "posts": [
+          {
+            "id": 1128,
+            "title": "HTTP caching improves performance"
+          }
+        ],
+        "registeredDate": "1982-06-29T17:48:25+00:00",
+        "registeredDateStr": "June 29",
+        "roleNames": [
+          "author"
+        ],
+        "roles": [
+          {
+            "id": "author",
+            "name": "author",
+            "capabilities": [
+              "delete_posts",
+              "delete_published_posts",
+              "edit_posts",
+              "edit_published_posts",
+              "level_0",
+              "level_1",
+              "level_2",
+              "publish_posts",
+              "read",
+              "upload_files"
+            ]
+          }
+        ],
+        "slug": "author",
+        "url": "https://gatographql.lndo.site/author/author/",
+        "urlPath": "/author/author/",
+        "username": "author",
+        "websiteURL": null
+      },
+      {
+        "avatar": {
+          "id": "07b70c8ebc386861764ccc8da808a2f3",
+          "size": 96,
+          "src": "https://secure.gravatar.com/avatar/82e7c14deae6e916e47d76c1cc776c6dfcd67a50082e47fd00bf13d07565b2ac?s=96&#038;d=mm&#038;r=g"
+        },
+        "capabilities": [
+          "delete_posts",
+          "edit_posts",
+          "level_0",
+          "level_1",
+          "read"
+        ],
+        "customPostCount": 1,
+        "customPosts": [
+          {
+            "__typename": "Post",
+            "id": 1116,
+            "title": "Working on flat chain syntax next"
+          }
+        ],
+        "description": "",
+        "displayName": "Contributor Johnson",
+        "email": "contributor@test.com",
+        "firstName": "Contributor",
+        "hasAnyCapability": true,
+        "hasAnyRole": false,
+        "hasCapability": false,
+        "hasRole": false,
+        "id": 4,
+        "lastName": "Johnson",
+        "locale": "en_US",
+        "metaValue": "contributor",
+        "metaValue2": "Contributor",
+        "meta": {
+          "nickname": [
+            "contributor"
+          ],
+          "first_name": [
+            "Contributor"
+          ]
+        },
+        "metaKeys": [
+          "nickname",
+          "first_name",
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
+        ],
+        "includingMetaKeys": [
+          "nickname",
+          "first_name"
+        ],
+        "excludingMetaKeys": [
+          "last_name",
+          "description",
+          "rich_editing",
+          "syntax_highlighting",
+          "infinite_scrolling",
+          "comment_shortcuts",
+          "admin_color",
+          "use_ssl",
+          "show_admin_bar_front",
+          "locale",
+          "dismissed_wp_pointers",
+          "wp_dashboard_quick_press_last_post_id"
+        ],
+        "includingAndExcludingMetaKeys": [
+          "nickname"
+        ],
+        "name": "Contributor Johnson",
+        "nicename": "contributor",
+        "nickname": "contributor",
+        "postCount": 1,
+        "posts": [
+          {
+            "id": 1116,
+            "title": "Working on flat chain syntax next"
+          }
+        ],
+        "registeredDate": "1982-06-29T17:48:24+00:00",
+        "registeredDateStr": "June 29",
+        "roleNames": [
+          "contributor"
+        ],
+        "roles": [
+          {
+            "id": "contributor",
+            "name": "contributor",
+            "capabilities": [
+              "delete_posts",
+              "edit_posts",
+              "level_0",
+              "level_1",
+              "read"
+            ]
+          }
+        ],
+        "slug": "contributor",
+        "url": "https://gatographql.lndo.site/author/contributor/",
+        "urlPath": "/author/contributor/",
+        "username": "contributor",
+        "websiteURL": null
+      }
+    ],
+    "usersByExcludeIDs": [
+      {
+        "id": 6,
+        "name": "Editor Smith"
+      },
+      {
+        "id": 5,
+        "name": "Author Marquez"
+      },
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      },
+      {
+        "id": 3,
+        "name": "Subscriber Bennett"
+      },
+      {
+        "id": 2,
+        "name": "Blogger Davenport"
+      }
+    ],
+    "usersByExcludeRoles": [
+      {
+        "id": 6,
+        "name": "Editor Smith"
+      },
+      {
+        "id": 5,
+        "name": "Author Marquez"
+      },
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      },
+      {
+        "id": 3,
+        "name": "Subscriber Bennett"
+      },
+      {
+        "id": 2,
+        "name": "Blogger Davenport"
+      }
+    ],
+    "emptyUsersByIds": [],
+    "usersByIds": [
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      },
+      {
+        "id": 2,
+        "name": "Blogger Davenport"
+      }
+    ],
+    "usersByMetaQuery": [
+      {
+        "id": 2,
+        "name": "Blogger Davenport"
+      }
+    ],
+    "usersByRoles": [
+      {
+        "id": 5,
+        "name": "Author Marquez"
+      },
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      }
+    ],
+    "usersBySearchBy": [
+      {
+        "id": 5,
+        "name": "Author Marquez"
+      }
+    ],
+    "usersSortedASC": [
+      {
+        "id": 5,
+        "name": "Author Marquez"
+      },
+      {
+        "id": 2,
+        "name": "Blogger Davenport"
+      },
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      }
+    ],
+    "usersSortedDESC": [
+      {
+        "id": 3,
+        "name": "Subscriber Bennett"
+      },
+      {
+        "id": 6,
+        "name": "Editor Smith"
+      },
+      {
+        "id": 4,
+        "name": "Contributor Johnson"
+      }
+    ]
+  }
 }

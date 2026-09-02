@@ -58,11 +58,19 @@ abstract class AbstractSettingsTypeAPI extends AbstractBasicService implements S
 
     final public function validateIsOptionAllowed(string $name): bool
     {
+        if ($this->canCurrentUserAccessAllOptions()) {
+            return true;
+        }
         return $this->getAllowOrDenySettingsService()->isEntryAllowed(
             $name,
             $this->getAllowOrDenyOptionEntries(),
             $this->getAllowOrDenyOptionBehavior()
         );
+    }
+
+    protected function canCurrentUserAccessAllOptions(): bool
+    {
+        return false;
     }
 
     /**

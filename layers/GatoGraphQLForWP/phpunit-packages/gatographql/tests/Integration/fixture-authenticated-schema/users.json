@@ -1,0 +1,69 @@
+{
+  "data": {
+    "users": [
+      {
+        "id": 6,
+        "metaValue": {
+          "editor": true
+        },
+        "metaValues": [
+          {
+            "editor": true
+          }
+        ],
+        "meta": {
+          "wp_capabilities": [
+            {
+              "editor": true
+            }
+          ]
+        },
+        "metaKeys": [
+          "wp_capabilities"
+        ]
+      },
+      {
+        "id": 5,
+        "metaValue": {
+          "author": true
+        },
+        "metaValues": [
+          {
+            "author": true
+          }
+        ],
+        "meta": {
+          "wp_capabilities": [
+            {
+              "author": true
+            }
+          ]
+        },
+        "metaKeys": [
+          "wp_capabilities"
+        ]
+      },
+      {
+        "id": 4,
+        "metaValue": {
+          "contributor": true
+        },
+        "metaValues": [
+          {
+            "contributor": true
+          }
+        ],
+        "meta": {
+          "wp_capabilities": [
+            {
+              "contributor": true
+            }
+          ]
+        },
+        "metaKeys": [
+          "wp_capabilities"
+        ]
+      }
+    ]
+  }
+}

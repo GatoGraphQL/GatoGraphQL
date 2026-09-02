@@ -671,7 +671,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'time_format',
                     'blog_charset',
                 ] : [],
-                ModuleSettingOptions::BEHAVIOR => $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY,
+                ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOW,
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,
