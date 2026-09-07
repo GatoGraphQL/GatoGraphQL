@@ -20,6 +20,8 @@ The fields to read site options (`optionValue`, `optionValues`, `optionNames`, `
 
 Now, administrators can read any option, while every other user can only read the options explicitly added to the settings allowlist, whose default is empty. To expose specific options publicly, add them under Settings.
 
+In 19.2.3 the allow/deny list matching itself was hardened. Entries were compared against the requested name exactly, so on a site configured with a *denylist*, a name differing only in letter case or trailing whitespace did not match the entry and passed the check, while the database resolved it to the very same option or meta key. This allowed reading the value of a denylisted option, and writing and filtering by a denylisted meta key. Names are now compared ignoring letter case and trailing whitespace, for both the settings and the meta allow/deny lists ([#3392](https://github.com/GatoGraphQL/GatoGraphQL/pull/3392)).
+
 ## Added
 
 ### Composing directives with `@start` and `@end`
