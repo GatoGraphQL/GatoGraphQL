@@ -13580,12 +13580,12 @@ msgstr "Scalar URL, όπως https://mysite.com/my-fabulous-page"
 msgid "Custom scalar representing an XML string"
 msgstr "Προσαρμοσμένος scalar που αντιπροσωπεύει μια συμβολοσειρά XML"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:238
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:251
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr ""
 "Δεν είναι δυνατή η παροχή blocks για εξαίρεση και συμπερίληψη ταυτόχρονα"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:255
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:268
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
@@ -13593,7 +13593,7 @@ msgstr ""
 "Σφάλμα ανάλυσης ID δημοσίευσης %d: Αυτή η δημοσίευση δεν φαίνεται να "
 "περιέχει περιεχόμενο block."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:258
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:271
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
@@ -13601,7 +13601,7 @@ msgstr ""
 "Αυτό το πεδίο έχει σχεδιαστεί για ανάλυση blocks Gutenberg και δεν μπορεί να "
 "διαβάσει περιεχόμενο κλασικού επεξεργαστή."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:303
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:316
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "

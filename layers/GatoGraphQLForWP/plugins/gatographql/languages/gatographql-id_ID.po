@@ -13208,13 +13208,13 @@ msgstr "Skalar URL, seperti https://mysite.com/my-fabulous-page"
 msgid "Custom scalar representing an XML string"
 msgstr "Skalar khusus yang mewakili string XML"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:238
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:251
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr ""
 "Tidak dapat menyediakan blok untuk dikecualikan dan disertakan pada saat "
 "yang bersamaan"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:255
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:268
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
@@ -13222,7 +13222,7 @@ msgstr ""
 "Kesalahan saat mengurai ID post %d: Post ini tampaknya tidak mengandung "
 "konten blok."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:258
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:271
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
@@ -13230,7 +13230,7 @@ msgstr ""
 "Field ini dirancang untuk mengurai blok Gutenberg dan tidak dapat membaca "
 "konten editor klasik."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:303
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:316
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "

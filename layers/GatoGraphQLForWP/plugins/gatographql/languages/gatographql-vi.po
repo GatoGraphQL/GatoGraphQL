@@ -13268,11 +13268,11 @@ msgstr "Scalar URL, chẳng hạn như https://mysite.com/my-fabulous-page"
 msgid "Custom scalar representing an XML string"
 msgstr "Scalar tùy chỉnh đại diện cho một chuỗi XML"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:238
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:251
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr "Không thể cung cấp đồng thời các block để loại trừ và bao gồm"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:255
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:268
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
@@ -13280,7 +13280,7 @@ msgstr ""
 "Lỗi khi phân tích ID bài viết %d: Bài viết này dường như không chứa nội dung "
 "block."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:258
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:271
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
@@ -13288,7 +13288,7 @@ msgstr ""
 "Trường này được thiết kế để phân tích các block Gutenberg và không thể đọc "
 "nội dung của trình soạn thảo cổ điển."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:303
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:316
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "

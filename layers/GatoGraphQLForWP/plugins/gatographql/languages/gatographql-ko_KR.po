@@ -12819,11 +12819,11 @@ msgstr "URL 스칼라(예: https://mysite.com/my-fabulous-page)"
 msgid "Custom scalar representing an XML string"
 msgstr "XML 문자열을 나타내는 커스텀 스칼라"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:238
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:251
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr "제외할 블록과 포함할 블록을 동시에 제공할 수 없습니다"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:255
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:268
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
@@ -12831,7 +12831,7 @@ msgstr ""
 "포스트 ID %d 파싱 오류: 이 포스트에는 블록 콘텐츠가 포함되어 있지 않은 것 같"
 "습니다."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:258
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:271
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
@@ -12839,7 +12839,7 @@ msgstr ""
 "이 필드는 Gutenberg 블록을 파싱하도록 설계되었으며 클래식 에디터 콘텐츠를 읽"
 "을 수 없습니다."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:303
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:316
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "
