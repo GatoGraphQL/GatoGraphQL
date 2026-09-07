@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\TaxonomyMetaWP\TypeAPIs;
 
+use PoPCMSSchema\MetaQueryWP\TypeAPIs\ProtectedMetaKeyResolverTrait;
 use PoPCMSSchema\TaxonomyMeta\TypeAPIs\AbstractTaxonomyMetaTypeAPI;
 use WP_Term;
 
@@ -13,15 +14,36 @@ use function is_protected_meta;
 
 class TaxonomyMetaTypeAPI extends AbstractTaxonomyMetaTypeAPI
 {
+    use ProtectedMetaKeyResolverTrait;
+
     public function isMetaKeyProtected(string $key): bool
     {
         if (current_user_can('manage_options')) {
             return false;
         }
-        if (!is_protected_meta($key, 'term')) {
+        if (!$this->isMetaKeyProtectedByCMS($key)) {
             return false;
         }
         return !$this->isMetaKeyExplicitlyAllowed($key);
+    }
+
+    protected function isMetaKeyProtectedByCMS(string $key): bool
+    {
+        return $this->matchesProtectedMetaKey(
+            $key,
+            fn (string $candidateKey): bool => is_protected_meta($candidateKey, 'term')
+        );
+    }
+
+    protected function getMetaDatabaseTableName(): string
+    {
+        global $wpdb;
+        return $wpdb->termmeta;
+    }
+
+    public function isMetaKeyProtectedFromReading(string $key): bool
+    {
+        return $this->isMetaKeyProtected($key);
     }
 
     /**
