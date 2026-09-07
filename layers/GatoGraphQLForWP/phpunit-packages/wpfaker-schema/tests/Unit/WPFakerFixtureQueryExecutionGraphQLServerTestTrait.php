@@ -17,6 +17,7 @@ use function Brain\faker;
 use function Brain\fakerReset;
 use function Brain\Monkey\Functions\expect;
 use function Brain\Monkey\Functions\stubEscapeFunctions;
+use function Brain\Monkey\Functions\when;
 use function Brain\Monkey\setUp;
 use function Brain\Monkey\tearDown;
 
@@ -124,6 +125,9 @@ trait WPFakerFixtureQueryExecutionGraphQLServerTestTrait
     {
         // Stub `esc_sql`
         stubEscapeFunctions();
+
+        // There is no logged-in user in these tests
+        when('current_user_can')->justReturn(false);
 
         // Use default date format by WordPress
         expect('get_option')

@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
 Tested up to: 7.1
-Stable tag: 19.2.2
+Stable tag: 19.2.3
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -251,6 +251,11 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Documentation for the FluentCart integration (#3379)
 * Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 * Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+
+= 19.2.3 =
+* Security - Fixed a privilege escalation vulnerability where a logged-in user could still modify protected user meta keys (such as their own role/capabilities) through the user meta mutations by varying the letter case, accenting a letter, or adding trailing whitespace to the key name, bypassing the protection added in 19.2.2 (#3392)
+* Security - The allow/deny lists for settings and meta keys are no longer bypassable by varying the letter case, accenting a letter, or adding trailing whitespace in the name, which allowed reading the value of a denylisted option, and writing and filtering by a denylisted meta key (#3392)
+* Security - Writing the roles/capabilities user meta keys now requires the "promote users" capability, instead of any administrator-level capability (#3392)
 
 = 19.2.2 =
 * Security - Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
