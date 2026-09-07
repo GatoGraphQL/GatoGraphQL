@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.2.3 =
+* Security - Fixed a privilege escalation vulnerability where a logged-in user could still modify protected user meta keys (such as their own role/capabilities) through the user meta mutations by varying the letter case or adding trailing whitespace to the key name, bypassing the protection added in 19.2.2 (#3392)
+
 = 19.2.2 =
 * Security - Fixed a privilege escalation vulnerability where a logged-in user could modify protected user meta keys (such as their own role/capabilities) through the user meta mutations to gain higher privileges (#3389)
 * Security - Protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) can no longer be written through the custom post, comment and taxonomy meta mutations either (#3389)

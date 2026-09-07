@@ -10,6 +10,8 @@ Previously, because editing one's own account authorized writing any meta key on
 
 The same protection is applied to the custom post, comment and taxonomy meta mutations, which now reject WordPress protected meta keys (those flagged by `is_protected_meta`, such as keys prefixed with `_`) ([#3389](https://github.com/GatoGraphQL/GatoGraphQL/pull/3389)).
 
+In 19.2.3 this protection was hardened to also reject variants of the protected keys that differ only in letter case or trailing whitespace (such as `WP_capabilities` or `wp_capabilities `). WordPress resolves the meta key against the database column case-insensitively and ignoring trailing whitespace, so such a variant still targeted the protected row; the check now normalizes the key the same way before rejecting it ([#3392](https://github.com/GatoGraphQL/GatoGraphQL/pull/3392)).
+
 Protected **user** meta keys are also no longer **readable** by non-administrators. Previously any user, including anonymous visitors, could read them through fields `metaValue`, `metaValues`, `meta` and `metaKeys` — including application-password hashes stored under `_application_passwords`, session tokens, and the roles/capabilities keys — because the meta allow/deny list defaulted to permissive. Now administrators can read any user meta key, while every other user cannot read the protected ones (they are also omitted from the `metaKeys` list). Meta on other entities (posts, comments, taxonomies) is unaffected — for instance a product's `_price` remains readable — so this does not change public content reads.
 
 ### Reading site options is restricted to administrators

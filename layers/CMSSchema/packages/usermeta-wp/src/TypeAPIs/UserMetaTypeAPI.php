@@ -32,15 +32,21 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 
     protected function isMetaKeyAbsolutelyProtected(string $key): bool
     {
-        if ($key === 'session_tokens' || $key === '_application_passwords') {
+        $normalizedKey = $this->normalizeMetaKeyForProtection($key);
+        if ($normalizedKey === 'session_tokens' || $normalizedKey === '_application_passwords') {
             return true;
         }
         global $wpdb;
-        $basePrefix = $wpdb->base_prefix;
+        $basePrefix = strtolower($wpdb->base_prefix);
         return preg_match(
             '/^' . preg_quote($basePrefix, '/') . '(?:\d+_)?(?:capabilities|user_level)$/',
-            $key
+            $normalizedKey
         ) === 1;
+    }
+
+    protected function normalizeMetaKeyForProtection(string $key): string
+    {
+        return strtolower(rtrim($key));
     }
 
     public function isMetaKeyProtectedFromReading(string $key): bool
