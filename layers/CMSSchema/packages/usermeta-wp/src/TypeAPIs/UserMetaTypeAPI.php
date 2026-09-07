@@ -82,7 +82,7 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 
     protected function normalizeMetaKeyForProtection(string $key): string
     {
-        return strtolower(remove_accents(rtrim($key)));
+        return strtolower(remove_accents(trim($key)));
     }
 
     /**

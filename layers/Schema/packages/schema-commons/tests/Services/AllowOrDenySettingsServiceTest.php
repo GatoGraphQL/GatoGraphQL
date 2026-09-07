@@ -73,6 +73,8 @@ class AllowOrDenySettingsServiceTest extends TestCase
             'mixed case' => ['Plugin_Api_Key'],
             'trailing space' => ['plugin_api_key '],
             'uppercase and trailing space' => ['PLUGIN_API_KEY '],
+            'leading space' => [' plugin_api_key'],
+            'surrounding space' => ['  plugin_api_key  '],
         ];
     }
 

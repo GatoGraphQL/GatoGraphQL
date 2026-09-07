@@ -49,6 +49,6 @@ class AllowOrDenySettingsService implements AllowOrDenySettingsServiceInterface
 
     protected function normalizeEntryName(string $name): string
     {
-        return strtolower(rtrim($name));
+        return strtolower(trim($name));
     }
 }
