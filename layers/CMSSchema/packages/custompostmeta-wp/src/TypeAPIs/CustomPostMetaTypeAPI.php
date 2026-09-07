@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\CustomPostMetaWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostMeta\TypeAPIs\AbstractCustomPostMetaTypeAPI;
+use PoPCMSSchema\MetaQueryWP\TypeAPIs\ProtectedMetaKeyResolverTrait;
 use WP_Post;
 
 use function current_user_can;
@@ -13,15 +14,36 @@ use function is_protected_meta;
 
 class CustomPostMetaTypeAPI extends AbstractCustomPostMetaTypeAPI
 {
+    use ProtectedMetaKeyResolverTrait;
+
     public function isMetaKeyProtected(string $key): bool
     {
         if (current_user_can('manage_options')) {
             return false;
         }
-        if (!is_protected_meta($key, 'post')) {
+        if (!$this->isMetaKeyProtectedByCMS($key)) {
             return false;
         }
         return !$this->isMetaKeyExplicitlyAllowed($key);
+    }
+
+    protected function isMetaKeyProtectedByCMS(string $key): bool
+    {
+        return $this->matchesProtectedMetaKey(
+            $key,
+            fn (string $candidateKey): bool => is_protected_meta($candidateKey, 'post')
+        );
+    }
+
+    protected function getMetaDatabaseTableName(): string
+    {
+        global $wpdb;
+        return $wpdb->postmeta;
+    }
+
+    public function isMetaKeyProtectedFromReading(string $key): bool
+    {
+        return $this->isMetaKeyProtected($key);
     }
 
     /**
