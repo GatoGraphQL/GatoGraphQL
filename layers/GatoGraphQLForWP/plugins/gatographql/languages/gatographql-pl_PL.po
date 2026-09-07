@@ -13273,11 +13273,11 @@ msgstr "Skalar URL, np. https://mysite.com/my-fabulous-page"
 msgid "Custom scalar representing an XML string"
 msgstr "Niestandardowy skalar reprezentujący ciąg XML"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:238
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:251
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr "Nie można jednocześnie podać bloków do wykluczenia i uwzględnienia"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:255
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:268
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
@@ -13285,7 +13285,7 @@ msgstr ""
 "Błąd parsowania ID wpisu %d: Ten wpis nie wydaje się zawierać treści "
 "blokowej."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:258
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:271
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
@@ -13293,7 +13293,7 @@ msgstr ""
 "To pole jest przeznaczone do parsowania bloków Gutenberga i nie może "
 "odczytywać treści klasycznego edytora."
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:303
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:316
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "
