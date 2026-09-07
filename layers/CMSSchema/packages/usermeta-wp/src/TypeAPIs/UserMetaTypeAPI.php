@@ -4,19 +4,21 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UserMetaWP\TypeAPIs;
 
+use PoPCMSSchema\MetaQueryWP\TypeAPIs\ProtectedMetaKeyResolverTrait;
 use PoPCMSSchema\UserMeta\TypeAPIs\AbstractUserMetaTypeAPI;
 use WP_User;
 
 use function current_user_can;
 use function get_user_meta;
 use function is_protected_meta;
-use function remove_accents;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
 class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
+    use ProtectedMetaKeyResolverTrait;
+
     public function isMetaKeyProtected(string $key): bool
     {
         if ($this->isMetaKeyRoleRelated($key)) {
@@ -28,39 +30,38 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
         if ($this->isMetaKeyAbsolutelyProtected($key)) {
             return true;
         }
-        if (is_protected_meta($key, 'user')) {
+        if ($this->isMetaKeyProtectedByCMS($key)) {
             return !$this->isMetaKeyExplicitlyAllowed($key);
         }
         return false;
     }
 
+    protected function isMetaKeyProtectedByCMS(string $key): bool
+    {
+        return $this->matchesProtectedMetaKey(
+            $key,
+            fn (string $candidateKey): bool => is_protected_meta($candidateKey, 'user')
+        );
+    }
+
     protected function isMetaKeyAbsolutelyProtected(string $key): bool
     {
-        return $this->matchesProtectedMetaKey($key, $this->isNormalizedMetaKeyAbsolutelyProtected(...));
+        return $this->matchesProtectedMetaKey(
+            $key,
+            fn (string $candidateKey): bool => $this->isNormalizedMetaKeyAbsolutelyProtected(
+                $this->normalizeMetaKeyForProtection($candidateKey)
+            )
+        );
     }
 
     protected function isMetaKeyRoleRelated(string $key): bool
     {
-        return $this->matchesProtectedMetaKey($key, $this->isNormalizedMetaKeyRoleRelated(...));
-    }
-
-    /**
-     * @param callable(string):bool $isNormalizedMetaKeyProtected
-     */
-    protected function matchesProtectedMetaKey(string $key, callable $isNormalizedMetaKeyProtected): bool
-    {
-        if ($isNormalizedMetaKeyProtected($this->normalizeMetaKeyForProtection($key))) {
-            return true;
-        }
-        if (preg_match('/[^\x20-\x7E]/', $key) !== 1) {
-            return false;
-        }
-        foreach ($this->getDatabaseResolvedMetaKeys($key) as $matchedMetaKey) {
-            if ($isNormalizedMetaKeyProtected($this->normalizeMetaKeyForProtection($matchedMetaKey))) {
-                return true;
-            }
-        }
-        return false;
+        return $this->matchesProtectedMetaKey(
+            $key,
+            fn (string $candidateKey): bool => $this->isNormalizedMetaKeyRoleRelated(
+                $this->normalizeMetaKeyForProtection($candidateKey)
+            )
+        );
     }
 
     protected function isNormalizedMetaKeyRoleRelated(string $normalizedKey): bool
@@ -80,24 +81,10 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
             || $this->isNormalizedMetaKeyRoleRelated($normalizedKey);
     }
 
-    protected function normalizeMetaKeyForProtection(string $key): string
-    {
-        return strtolower(remove_accents(trim($key)));
-    }
-
-    /**
-     * @return string[]
-     */
-    protected function getDatabaseResolvedMetaKeys(string $key): array
+    protected function getMetaDatabaseTableName(): string
     {
         global $wpdb;
-        /** @var string[] */
-        return $wpdb->get_col(
-            $wpdb->prepare(
-                "SELECT DISTINCT meta_key FROM {$wpdb->usermeta} WHERE meta_key = %s",
-                $key
-            )
-        );
+        return $wpdb->usermeta;
     }
 
     public function isMetaKeyProtectedFromReading(string $key): bool

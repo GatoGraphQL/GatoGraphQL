@@ -1,644 +1,663 @@
 {
-    "data": {
-        "posts": [
-            {
-                "areCommentsOpen": true,
-                "author": {
-                    "id": 2,
-                    "name": "Blogger Davenport"
-                },
-                "categories": [
-                    {
-                        "id": 1,
-                        "name": "Uncategorized"
-                    }
-                ],
-                "categoryCount": 1,
-                "categoryNames": [
-                    "Uncategorized"
-                ],
-                "commentCount": 0,
-                "comments": [],
-                "content": "\n<p class=\"wp-block-paragraph\">Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n",
-                "customPostType": "post",
-                "date": "2020-04-17T13:06:58+00:00",
-                "dateStr": "April 17, 2020",
-                "wpAdminEditURL": null,
-                "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
-                "featuredImage": null,
-                "hasComments": false,
-                "hasFeaturedImage": false,
-                "id": 1,
-                "isStatus": false,
-                "isSticky": false,
-                "menuOrder": 0,
-                "metaValue": null,
-                "metaValue2": null,
-                "meta": {},
-                "metaKeys": [],
-                "includingMetaKeys": [],
-                "excludingMetaKeys": [],
-                "includingAndExcludingMetaKeys": [],
-                "postFormat": "standard",
-                "rawContent": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!<\/p>\n<!-- \/wp:paragraph -->",
-                "rawTitle": "Hello world!",
-                "rawExcerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
-                "slug": "hello-world",
-                "status": "publish",
-                "tagCount": 0,
-                "tagNames": [],
-                "tags": [],
-                "title": "Hello world!",
-                "url": "https:\/\/gatographql.lndo.site\/hello-world\/",
-                "urlPath": "\/hello-world\/"
-            },
-            {
-                "areCommentsOpen": true,
-                "author": {
-                    "id": 3,
-                    "name": "Subscriber Bennett"
-                },
-                "categories": [
-                    {
-                        "id": 3,
-                        "name": "Blog"
-                    }
-                ],
-                "categoryCount": 1,
-                "categoryNames": [
-                    "Blog"
-                ],
-                "commentCount": 1,
-                "comments": [
-                    {
-                        "id": 2
-                    }
-                ],
-                "content": "\n<p class=\"wp-block-paragraph\">This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)<\/h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n",
-                "customPostType": "post",
-                "date": "2020-12-12T03:56:13+00:00",
-                "dateStr": "December 12, 2020",
-                "wpAdminEditURL": null,
-                "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
-                "featuredImage": {
-                    "id": 1361,
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp"
-                },
-                "hasComments": true,
-                "hasFeaturedImage": true,
-                "id": 1113,
-                "isStatus": false,
-                "isSticky": false,
-                "menuOrder": 0,
-                "metaValue": "1361",
-                "metaValue2": "default",
-                "meta": {
-                    "_thumbnail_id": [
-                        "1361"
-                    ],
-                    "_wp_page_template": [
-                        "default"
-                    ]
-                },
-                "metaKeys": [
-                    "_thumbnail_id",
-                    "_wp_page_template"
-                ],
-                "includingMetaKeys": [
-                    "_thumbnail_id"
-                ],
-                "excludingMetaKeys": [
-                    "_wp_page_template"
-                ],
-                "includingAndExcludingMetaKeys": [
-                    "_thumbnail_id"
-                ],
-                "postFormat": "standard",
-                "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br><\/p>\n<!-- \/wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->",
-                "rawTitle": "Released v0.6, check it out",
-                "rawExcerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
-                "slug": "released-v0-6-check-it-out",
-                "status": "publish",
-                "tagCount": 2,
-                "tagNames": [
-                    "release",
-                    "plugin"
-                ],
-                "tags": [
-                    {
-                        "id": 13,
-                        "name": "release"
-                    },
-                    {
-                        "id": 12,
-                        "name": "plugin"
-                    }
-                ],
-                "title": "Released v0.6, check it out",
-                "url": "https:\/\/gatographql.lndo.site\/released-v0-6-check-it-out\/",
-                "urlPath": "\/released-v0-6-check-it-out\/"
-            },
-            {
-                "areCommentsOpen": true,
-                "author": {
-                    "id": 4,
-                    "name": "Contributor Johnson"
-                },
-                "categories": [
-                    {
-                        "id": 1,
-                        "name": "Uncategorized"
-                    }
-                ],
-                "categoryCount": 1,
-                "categoryNames": [
-                    "Uncategorized"
-                ],
-                "commentCount": 0,
-                "comments": [],
-                "content": "\n<h2 class=\"wp-block-heading\">Image Block (Wide)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Full width)<\/h2>\n\n\n\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n\n\n\n<h2 class=\"wp-block-heading\">Cover Image Block<\/h2>\n\n\n\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\"><div class=\"wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow\">\n<p class=\"has-text-align-center has-large-font-size wp-block-paragraph\">This block can be used for Hero section.<br>Full width\u00c2 has been applied.<\/p>\n<\/div><\/div>\n\n\n\n<h2 class=\"wp-block-heading\">Gallery Block<\/h2>\n",
-                "customPostType": "post",
-                "date": "2020-12-12T03:59:07+00:00",
-                "dateStr": "December 12, 2020",
-                "wpAdminEditURL": null,
-                "excerpt": "Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block",
-                "featuredImage": {
-                    "id": 1361,
-                    "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp"
-                },
-                "hasComments": false,
-                "hasFeaturedImage": true,
-                "id": 1116,
-                "isStatus": false,
-                "isSticky": false,
-                "menuOrder": 0,
-                "metaValue": "1361",
-                "metaValue2": null,
-                "meta": {
-                    "_thumbnail_id": [
-                        "1361"
-                    ]
-                },
-                "metaKeys": [
-                    "_thumbnail_id",
-                    "meta_with_object_value",
-                    "text_field",
-                    "_text_field",
-                    "number_field",
-                    "_number_field",
-                    "date_field",
-                    "_date_field",
-                    "textarea_field",
-                    "_textarea_field",
-                    "relationship_post_id",
-                    "_relationship_post_id",
-                    "relationship_post_ids",
-                    "_relationship_post_ids",
-                    "repeater_list_field_0_list_field",
-                    "_repeater_list_field_0_list_field",
-                    "repeater_list_field_1_list_field",
-                    "_repeater_list_field_1_list_field",
-                    "repeater_list_field_2_list_field",
-                    "_repeater_list_field_2_list_field",
-                    "repeater_list_field",
-                    "_repeater_list_field",
-                    "repeater_list_field_3_list_field",
-                    "_repeater_list_field_3_list_field"
-                ],
-                "includingMetaKeys": [
-                    "_thumbnail_id"
-                ],
-                "excludingMetaKeys": [
-                    "meta_with_object_value",
-                    "text_field",
-                    "_text_field",
-                    "number_field",
-                    "_number_field",
-                    "date_field",
-                    "_date_field",
-                    "textarea_field",
-                    "_textarea_field",
-                    "relationship_post_id",
-                    "_relationship_post_id",
-                    "relationship_post_ids",
-                    "_relationship_post_ids",
-                    "repeater_list_field_0_list_field",
-                    "_repeater_list_field_0_list_field",
-                    "repeater_list_field_1_list_field",
-                    "_repeater_list_field_1_list_field",
-                    "repeater_list_field_2_list_field",
-                    "_repeater_list_field_2_list_field",
-                    "repeater_list_field",
-                    "_repeater_list_field",
-                    "repeater_list_field_3_list_field",
-                    "_repeater_list_field_3_list_field"
-                ],
-                "includingAndExcludingMetaKeys": [
-                    "_thumbnail_id"
-                ],
-                "postFormat": "standard",
-                "rawContent": "<!-- wp:heading -->\n<h2>Image Block (Wide)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"align\":\"wide\",\"id\":1755} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:heading -->\n<h2>Image Block (Full width)<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:image {\"align\":\"full\",\"id\":1755} -->\n<figure class=\"wp-block-image alignfull\"><img src=\"https:\/\/d.pr\/i\/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"\/><\/figure>\n<!-- \/wp:image -->\n\n<!-- wp:heading -->\n<h2>Cover Image Block<\/h2>\n<!-- \/wp:heading -->\n\n<!-- wp:cover {\"url\":\"https:\/\/d.pr\/i\/8pTmgY+\",\"id\":1755} -->\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https:\/\/d.pr\/i\/8pTmgY+)\"><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"align\":\"center\",\"placeholder\":\"Write title\u2026\",\"fontSize\":\"large\"} -->\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br>Full width\u00c2 has been applied.<\/p>\n<!-- \/wp:paragraph --><\/div><\/div>\n<!-- \/wp:cover -->\n\n<!-- wp:heading -->\n<h2>Gallery Block<\/h2>\n<!-- \/wp:heading -->",
-                "rawTitle": "Working on flat chain syntax next",
-                "rawExcerpt": "Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block",
-                "slug": "working-on-flat-chain-syntax-next",
-                "status": "publish",
-                "tagCount": 4,
-                "tagNames": [
-                    "wordpress",
-                    "plugin",
-                    "GraphQL",
-                    "features"
-                ],
-                "tags": [
-                    {
-                        "id": 15,
-                        "name": "wordpress"
-                    },
-                    {
-                        "id": 12,
-                        "name": "plugin"
-                    },
-                    {
-                        "id": 10,
-                        "name": "GraphQL"
-                    },
-                    {
-                        "id": 9,
-                        "name": "features"
-                    }
-                ],
-                "title": "Working on flat chain syntax next",
-                "url": "https:\/\/gatographql.lndo.site\/working-on-flat-chain-syntax-next\/",
-                "urlPath": "\/working-on-flat-chain-syntax-next\/"
-            }
-        ],
-        "postsByAuthorIDs": [
-            {
-                "id": 1128,
-                "title": "HTTP caching improves performance"
-            }
-        ],
-        "postsByAuthorSlug": [
-            {
-                "id": 1210,
-                "title": "PHP-only blocks (combinations)"
-            },
-            {
-                "id": 1212,
-                "title": "All blocks with entity references"
-            },
-            {
-                "id": 1200,
-                "title": "PHP-only blocks"
-            },
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "id": 1123,
-                "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
-            }
-        ],
-        "postsByCategoryIDs": [
-            {
-                "id": 1212,
-                "title": "All blocks with entity references"
-            },
-            {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
-            },
-            {
-                "id": 1146,
-                "title": "Post with corrupted non-breaking space"
-            },
-            {
-                "id": 1150,
-                "title": "Post with old format of the Gutenberg `core\/list` block"
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
-            }
-        ],
-        "postsByDateQuery": [
-            {
-                "id": 1,
-                "title": "Hello world!"
-            }
-        ],
-        "postsByExcludeAuthorIDs": [
-            {
-                "id": 1210,
-                "title": "PHP-only blocks (combinations)"
-            },
-            {
-                "id": 1212,
-                "title": "All blocks with entity references"
-            },
-            {
-                "id": 1200,
-                "title": "PHP-only blocks"
-            },
-            {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
-            },
-            {
-                "id": 1146,
-                "title": "Post with corrupted non-breaking space"
-            },
-            {
-                "id": 1150,
-                "title": "Post with old format of the Gutenberg `core\/list` block"
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "id": 1123,
-                "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            }
-        ],
-        "postsByExcludeIDs": [
-            {
-                "id": 1212,
-                "title": "All blocks with entity references"
-            },
-            {
-                "id": 1210,
-                "title": "PHP-only blocks (combinations)"
-            },
-            {
-                "id": 1200,
-                "title": "PHP-only blocks"
-            },
-            {
-                "id": 1150,
-                "title": "Post with old format of the Gutenberg `core\/list` block"
-            },
-            {
-                "id": 1146,
-                "title": "Post with corrupted non-breaking space"
-            },
-            {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "id": 1123,
-                "title": "GraphQL or REST? Why not both?"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            }
-        ],
-        "postsByHasPassword": [],
-        "emptyPostsByIds": [],
-        "postsByIds": [
-            {
-                "id": 1128,
-                "title": "HTTP caching improves performance"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
-            }
-        ],
-        "postsByIsSticky": [],
-        "postsByMetaQuery": [
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
-            }
-        ],
-        "postsByPassword": [],
-        "postsBySearch": [
-            {
-                "id": 1142,
-                "title": "Post with internal links, also in meta (entries starting with internal_link_)"
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1,
-                "title": "Hello world!"
-            }
-        ],
-        "postsByStatus": [],
-        "postsByTagIDs": [
-            {
-                "id": 1210,
-                "title": "PHP-only blocks (combinations)"
-            },
-            {
-                "id": 1200,
-                "title": "PHP-only blocks"
-            },
-            {
-                "id": 1125,
-                "title": "Public or Private API mode, for extra security"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            }
-        ],
-        "postsByTagSlugs": [
-            {
-                "id": 1210,
-                "title": "PHP-only blocks (combinations)"
-            },
-            {
-                "id": 1200,
-                "title": "PHP-only blocks"
-            },
-            {
-                "id": 1119,
-                "title": "Nested mutations are a must have"
-            },
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
-            }
-        ],
-        "postsBySlugs": [
-            {
-                "id": 1,
-                "title": "Hello world!",
-                "slug": "hello-world"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out",
-                "slug": "released-v0-6-check-it-out"
-            }
-        ],
-        "postsSortedASC": [
-            {
-                "id": 1212,
-                "title": "All blocks with entity references"
-            },
-            {
-                "id": 1121,
-                "title": "Customize the schema for each client"
-            },
-            {
-                "id": 1123,
-                "title": "GraphQL or REST? Why not both?"
-            }
-        ],
-        "postsSortedDESC": [
-            {
-                "id": 1116,
-                "title": "Working on flat chain syntax next"
-            },
-            {
-                "id": 1140,
-                "title": "Welcome to a single post full of blocks!"
-            },
-            {
-                "id": 1113,
-                "title": "Released v0.6, check it out"
-            }
-        ],
-        "futurePost": {
-            "status": "future",
-            "rawStatus": "publish"
-        },
-        "postWithMeta": {
-            "object_metaValue": {
-                "_edit_lock": {
-                    "to": {
-                        "111": [
-                            "1743667747:1"
-                        ]
-                    }
-                },
-                "_pingme": {
-                    "to": {
-                        "111": [
-                            "1"
-                        ]
-                    }
-                },
-                "some_property_to_translate": {
-                    "to": {
-                        "111": [
-                            "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
-                        ]
-                    }
-                },
-                "some_property": {
-                    "to": {
-                        "111": [
-                            "Nothing about Diego?"
-                        ]
-                    }
-                }
-            },
-            "object_metaValues": [
-                {
-                    "_edit_lock": {
-                        "to": {
-                            "111": [
-                                "1743667747:1"
-                            ]
-                        }
-                    },
-                    "_pingme": {
-                        "to": {
-                            "111": [
-                                "1"
-                            ]
-                        }
-                    },
-                    "some_property_to_translate": {
-                        "to": {
-                            "111": [
-                                "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
-                            ]
-                        }
-                    },
-                    "some_property": {
-                        "to": {
-                            "111": [
-                                "Nothing about Diego?"
-                            ]
-                        }
-                    }
-                }
-            ],
-            "text_field_metaValue": "This is a text field value for ACF",
-            "number_field_metaValue": "22",
-            "date_field_metaValue": "20250426",
-            "textarea_field_metaValue": "This is a textarea field value for ACF, line 1\nline 2\nthird line",
-            "relationship_post_id_metaValue": "27",
-            "relationship_post_ids_metaValue": [
-                "1",
-                "56"
-            ]
+  "errors": [
+    {
+      "message": "There is no key with name '_thumbnail_id'",
+      "locations": [
+        {
+          "line": 34,
+          "column": 15
         }
+      ],
+      "extensions": {
+        "path": [
+          "(key: \"_thumbnail_id\")",
+          "metaValue(key: \"_thumbnail_id\")",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "metaValue(key: \"_thumbnail_id\")",
+        "code": "PoPCMSSchema/Meta@e1"
+      }
+    },
+    {
+      "message": "There is no key with name '_wp_page_template'",
+      "locations": [
+        {
+          "line": 35,
+          "column": 27
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(key: \"_wp_page_template\")",
+          "metaValue2: metaValue(key: \"_wp_page_template\")",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "metaValue2: metaValue(key: \"_wp_page_template\")",
+        "code": "PoPCMSSchema/Meta@e1"
+      }
+    },
+    {
+      "message": "There are no keys with names '_thumbnail_id', '_wp_page_template'",
+      "locations": [
+        {
+          "line": 36,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(keys: [\"_thumbnail_id\", \"_wp_page_template\"])",
+          "meta(keys: [\"_thumbnail_id\", \"_wp_page_template\"])",
+          "posts(pagination: {limit: 3}, sort: {by: ID, order: ASC}) { ... }",
+          "query { ... }"
+        ],
+        "type": "Post",
+        "field": "meta(keys: [\"_thumbnail_id\", \"_wp_page_template\"])",
+        "code": "PoPCMSSchema/Meta@e2"
+      }
     }
+  ],
+  "data": {
+    "posts": [
+      {
+        "areCommentsOpen": true,
+        "author": {
+          "id": 2,
+          "name": "Blogger Davenport"
+        },
+        "categories": [
+          {
+            "id": 1,
+            "name": "Uncategorized"
+          }
+        ],
+        "categoryCount": 1,
+        "categoryNames": [
+          "Uncategorized"
+        ],
+        "commentCount": 0,
+        "comments": [],
+        "content": "\n<p class=\"wp-block-paragraph\">Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n",
+        "customPostType": "post",
+        "date": "2020-04-17T13:06:58+00:00",
+        "dateStr": "April 17, 2020",
+        "wpAdminEditURL": null,
+        "excerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+        "featuredImage": null,
+        "hasComments": false,
+        "hasFeaturedImage": false,
+        "id": 1,
+        "isStatus": false,
+        "isSticky": false,
+        "menuOrder": 0,
+        "metaValue": null,
+        "metaValue2": null,
+        "meta": null,
+        "metaKeys": [],
+        "includingMetaKeys": [],
+        "excludingMetaKeys": [],
+        "includingAndExcludingMetaKeys": [],
+        "postFormat": "standard",
+        "rawContent": "<!-- wp:paragraph -->\n<p>Welcome to WordPress. This is your first post. Edit or delete it, then start writing!</p>\n<!-- /wp:paragraph -->",
+        "rawTitle": "Hello world!",
+        "rawExcerpt": "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!",
+        "slug": "hello-world",
+        "status": "publish",
+        "tagCount": 0,
+        "tagNames": [],
+        "tags": [],
+        "title": "Hello world!",
+        "url": "https://gatographql.lndo.site/hello-world/",
+        "urlPath": "/hello-world/"
+      },
+      {
+        "areCommentsOpen": true,
+        "author": {
+          "id": 3,
+          "name": "Subscriber Bennett"
+        },
+        "categories": [
+          {
+            "id": 3,
+            "name": "Blog"
+          }
+        ],
+        "categoryCount": 1,
+        "categoryNames": [
+          "Blog"
+        ],
+        "commentCount": 1,
+        "comments": [
+          {
+            "id": 2
+          }
+        ],
+        "content": "\n<p class=\"wp-block-paragraph\">This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Standard)</h2>\n\n\n\n<figure class=\"wp-block-image\"><img decoding=\"async\" src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n",
+        "customPostType": "post",
+        "date": "2020-12-12T03:56:13+00:00",
+        "dateStr": "December 12, 2020",
+        "wpAdminEditURL": null,
+        "excerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
+        "featuredImage": {
+          "id": 1361,
+          "src": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp"
+        },
+        "hasComments": true,
+        "hasFeaturedImage": true,
+        "id": 1113,
+        "isStatus": false,
+        "isSticky": false,
+        "menuOrder": 0,
+        "metaValue": null,
+        "metaValue2": null,
+        "meta": null,
+        "metaKeys": [],
+        "includingMetaKeys": [],
+        "excludingMetaKeys": [],
+        "includingAndExcludingMetaKeys": [],
+        "postFormat": "standard",
+        "rawContent": "<!-- wp:paragraph -->\n<p>This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets.<br><br></p>\n<!-- /wp:paragraph -->\n\n<!-- wp:heading -->\n<h2>Image Block (Standard)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"id\":1755} -->\n<figure class=\"wp-block-image\"><img src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n<!-- /wp:image -->",
+        "rawTitle": "Released v0.6, check it out",
+        "rawExcerpt": "This is a paragraph block. Professionally productize highly efficient results with world-class core competencies. Objectively matrix leveraged architectures vis-a-vis error-free applications. Completely maximize customized portals via fully researched metrics. Enthusiastically generate premier action items through web-enabled e-markets. Efficiently parallel task holistic intellectual capital and client-centric markets. Image Block (Standard)",
+        "slug": "released-v0-6-check-it-out",
+        "status": "publish",
+        "tagCount": 2,
+        "tagNames": [
+          "release",
+          "plugin"
+        ],
+        "tags": [
+          {
+            "id": 13,
+            "name": "release"
+          },
+          {
+            "id": 12,
+            "name": "plugin"
+          }
+        ],
+        "title": "Released v0.6, check it out",
+        "url": "https://gatographql.lndo.site/released-v0-6-check-it-out/",
+        "urlPath": "/released-v0-6-check-it-out/"
+      },
+      {
+        "areCommentsOpen": true,
+        "author": {
+          "id": 4,
+          "name": "Contributor Johnson"
+        },
+        "categories": [
+          {
+            "id": 1,
+            "name": "Uncategorized"
+          }
+        ],
+        "categoryCount": 1,
+        "categoryNames": [
+          "Uncategorized"
+        ],
+        "commentCount": 0,
+        "comments": [],
+        "content": "\n<h2 class=\"wp-block-heading\">Image Block (Wide)</h2>\n\n\n\n<figure class=\"wp-block-image alignwide\"><img decoding=\"async\" src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n\n\n\n<h2 class=\"wp-block-heading\">Image Block (Full width)</h2>\n\n\n\n<figure class=\"wp-block-image alignfull\"><img decoding=\"async\" src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n\n\n\n<h2 class=\"wp-block-heading\">Cover Image Block</h2>\n\n\n\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https://d.pr/i/8pTmgY+)\"><div class=\"wp-block-cover__inner-container is-layout-flow wp-block-cover-is-layout-flow\">\n<p class=\"has-text-align-center has-large-font-size wp-block-paragraph\">This block can be used for Hero section.<br>Full widthÂ has been applied.</p>\n</div></div>\n\n\n\n<h2 class=\"wp-block-heading\">Gallery Block</h2>\n",
+        "customPostType": "post",
+        "date": "2020-12-12T03:59:07+00:00",
+        "dateStr": "December 12, 2020",
+        "wpAdminEditURL": null,
+        "excerpt": "Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block",
+        "featuredImage": {
+          "id": 1361,
+          "src": "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp"
+        },
+        "hasComments": false,
+        "hasFeaturedImage": true,
+        "id": 1116,
+        "isStatus": false,
+        "isSticky": false,
+        "menuOrder": 0,
+        "metaValue": null,
+        "metaValue2": null,
+        "meta": null,
+        "metaKeys": [
+          "meta_with_object_value",
+          "text_field",
+          "number_field",
+          "date_field",
+          "textarea_field",
+          "relationship_post_id",
+          "relationship_post_ids",
+          "repeater_list_field_0_list_field",
+          "repeater_list_field_1_list_field",
+          "repeater_list_field_2_list_field",
+          "repeater_list_field",
+          "repeater_list_field_3_list_field"
+        ],
+        "includingMetaKeys": [
+          "text_field"
+        ],
+        "excludingMetaKeys": [
+          "meta_with_object_value",
+          "text_field",
+          "number_field",
+          "date_field",
+          "textarea_field",
+          "relationship_post_id",
+          "relationship_post_ids",
+          "repeater_list_field_0_list_field",
+          "repeater_list_field_1_list_field",
+          "repeater_list_field_2_list_field",
+          "repeater_list_field",
+          "repeater_list_field_3_list_field"
+        ],
+        "includingAndExcludingMetaKeys": [
+          "text_field"
+        ],
+        "postFormat": "standard",
+        "rawContent": "<!-- wp:heading -->\n<h2>Image Block (Wide)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"align\":\"wide\",\"id\":1755} -->\n<figure class=\"wp-block-image alignwide\"><img src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:heading -->\n<h2>Image Block (Full width)</h2>\n<!-- /wp:heading -->\n\n<!-- wp:image {\"align\":\"full\",\"id\":1755} -->\n<figure class=\"wp-block-image alignfull\"><img src=\"https://d.pr/i/8pTmgY+\" alt=\"\" class=\"wp-image-1755\"/></figure>\n<!-- /wp:image -->\n\n<!-- wp:heading -->\n<h2>Cover Image Block</h2>\n<!-- /wp:heading -->\n\n<!-- wp:cover {\"url\":\"https://d.pr/i/8pTmgY+\",\"id\":1755} -->\n<div class=\"wp-block-cover has-background-dim\" style=\"background-image:url(https://d.pr/i/8pTmgY+)\"><div class=\"wp-block-cover__inner-container\"><!-- wp:paragraph {\"align\":\"center\",\"placeholder\":\"Write title…\",\"fontSize\":\"large\"} -->\n<p class=\"has-text-align-center has-large-font-size\">This block can be used for Hero section.<br>Full widthÂ has been applied.</p>\n<!-- /wp:paragraph --></div></div>\n<!-- /wp:cover -->\n\n<!-- wp:heading -->\n<h2>Gallery Block</h2>\n<!-- /wp:heading -->",
+        "rawTitle": "Working on flat chain syntax next",
+        "rawExcerpt": "Image Block (Wide) Image Block (Full width) Cover Image Block Gallery Block",
+        "slug": "working-on-flat-chain-syntax-next",
+        "status": "publish",
+        "tagCount": 4,
+        "tagNames": [
+          "wordpress",
+          "plugin",
+          "GraphQL",
+          "features"
+        ],
+        "tags": [
+          {
+            "id": 15,
+            "name": "wordpress"
+          },
+          {
+            "id": 12,
+            "name": "plugin"
+          },
+          {
+            "id": 10,
+            "name": "GraphQL"
+          },
+          {
+            "id": 9,
+            "name": "features"
+          }
+        ],
+        "title": "Working on flat chain syntax next",
+        "url": "https://gatographql.lndo.site/working-on-flat-chain-syntax-next/",
+        "urlPath": "/working-on-flat-chain-syntax-next/"
+      }
+    ],
+    "postsByAuthorIDs": [
+      {
+        "id": 1128,
+        "title": "HTTP caching improves performance"
+      }
+    ],
+    "postsByAuthorSlug": [
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
+      },
+      {
+        "id": 1212,
+        "title": "All blocks with entity references"
+      },
+      {
+        "id": 1200,
+        "title": "PHP-only blocks"
+      },
+      {
+        "id": 1125,
+        "title": "Public or Private API mode, for extra security"
+      },
+      {
+        "id": 1123,
+        "title": "GraphQL or REST? Why not both?"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      },
+      {
+        "id": 1,
+        "title": "Hello world!"
+      }
+    ],
+    "postsByCategoryIDs": [
+      {
+        "id": 1212,
+        "title": "All blocks with entity references"
+      },
+      {
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+      },
+      {
+        "id": 1146,
+        "title": "Post with corrupted non-breaking space"
+      },
+      {
+        "id": 1150,
+        "title": "Post with old format of the Gutenberg `core/list` block"
+      },
+      {
+        "id": 1140,
+        "title": "Welcome to a single post full of blocks!"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      },
+      {
+        "id": 1116,
+        "title": "Working on flat chain syntax next"
+      },
+      {
+        "id": 1,
+        "title": "Hello world!"
+      }
+    ],
+    "postsByDateQuery": [
+      {
+        "id": 1,
+        "title": "Hello world!"
+      }
+    ],
+    "postsByExcludeAuthorIDs": [
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
+      },
+      {
+        "id": 1212,
+        "title": "All blocks with entity references"
+      },
+      {
+        "id": 1200,
+        "title": "PHP-only blocks"
+      },
+      {
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+      },
+      {
+        "id": 1146,
+        "title": "Post with corrupted non-breaking space"
+      },
+      {
+        "id": 1150,
+        "title": "Post with old format of the Gutenberg `core/list` block"
+      },
+      {
+        "id": 1140,
+        "title": "Welcome to a single post full of blocks!"
+      },
+      {
+        "id": 1125,
+        "title": "Public or Private API mode, for extra security"
+      },
+      {
+        "id": 1123,
+        "title": "GraphQL or REST? Why not both?"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      }
+    ],
+    "postsByExcludeIDs": [
+      {
+        "id": 1212,
+        "title": "All blocks with entity references"
+      },
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
+      },
+      {
+        "id": 1200,
+        "title": "PHP-only blocks"
+      },
+      {
+        "id": 1150,
+        "title": "Post with old format of the Gutenberg `core/list` block"
+      },
+      {
+        "id": 1146,
+        "title": "Post with corrupted non-breaking space"
+      },
+      {
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+      },
+      {
+        "id": 1140,
+        "title": "Welcome to a single post full of blocks!"
+      },
+      {
+        "id": 1125,
+        "title": "Public or Private API mode, for extra security"
+      },
+      {
+        "id": 1123,
+        "title": "GraphQL or REST? Why not both?"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      }
+    ],
+    "postsByHasPassword": [],
+    "emptyPostsByIds": [],
+    "postsByIds": [
+      {
+        "id": 1128,
+        "title": "HTTP caching improves performance"
+      },
+      {
+        "id": 1,
+        "title": "Hello world!"
+      }
+    ],
+    "postsByIsSticky": [],
+    "postsByMetaQuery": [
+      {
+        "id": 1125,
+        "title": "Public or Private API mode, for extra security"
+      },
+      {
+        "id": 1116,
+        "title": "Working on flat chain syntax next"
+      },
+      {
+        "id": 1113,
+        "title": "Released v0.6, check it out"
+      }
+    ],
+    "postsByPassword": [],
+    "postsBySearch": [
+      {
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+      },
+      {
+        "id": 1140,
+        "title": "Welcome to a single post full of blocks!"
+      },
+      {
+        "id": 1,
+        "title": "Hello world!"
+      }
+    ],
+    "postsByStatus": [],
+    "postsByTagIDs": [
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
+      },
+      {
+        "id": 1200,
+        "title": "PHP-only blocks"
+      },
+      {
+        "id": 1125,
+        "title": "Public or Private API mode, for extra security"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      },
+      {
+        "id": 1119,
+        "title": "Nested mutations are a must have"
+      },
+      {
+        "id": 1116,
+        "title": "Working on flat chain syntax next"
+      }
+    ],
+    "postsByTagSlugs": [
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
+      },
+      {
+        "id": 1200,
+        "title": "PHP-only blocks"
+      },
+      {
+        "id": 1119,
+        "title": "Nested mutations are a must have"
+      },
+      {
+        "id": 1116,
+        "title": "Working on flat chain syntax next"
+      },
+      {
+        "id": 1113,
+        "title": "Released v0.6, check it out"
+      }
+    ],
+    "postsBySlugs": [
+      {
+        "id": 1,
+        "title": "Hello world!",
+        "slug": "hello-world"
+      },
+      {
+        "id": 1113,
+        "title": "Released v0.6, check it out",
+        "slug": "released-v0-6-check-it-out"
+      }
+    ],
+    "postsSortedASC": [
+      {
+        "id": 1212,
+        "title": "All blocks with entity references"
+      },
+      {
+        "id": 1121,
+        "title": "Customize the schema for each client"
+      },
+      {
+        "id": 1123,
+        "title": "GraphQL or REST? Why not both?"
+      }
+    ],
+    "postsSortedDESC": [
+      {
+        "id": 1116,
+        "title": "Working on flat chain syntax next"
+      },
+      {
+        "id": 1140,
+        "title": "Welcome to a single post full of blocks!"
+      },
+      {
+        "id": 1113,
+        "title": "Released v0.6, check it out"
+      }
+    ],
+    "futurePost": {
+      "status": "future",
+      "rawStatus": "publish"
+    },
+    "postWithMeta": {
+      "object_metaValue": {
+        "_edit_lock": {
+          "to": {
+            "111": [
+              "1743667747:1"
+            ]
+          }
+        },
+        "_pingme": {
+          "to": {
+            "111": [
+              "1"
+            ]
+          }
+        },
+        "some_property_to_translate": {
+          "to": {
+            "111": [
+              "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+            ]
+          }
+        },
+        "some_property": {
+          "to": {
+            "111": [
+              "Nothing about Diego?"
+            ]
+          }
+        }
+      },
+      "object_metaValues": [
+        {
+          "_edit_lock": {
+            "to": {
+              "111": [
+                "1743667747:1"
+              ]
+            }
+          },
+          "_pingme": {
+            "to": {
+              "111": [
+                "1"
+              ]
+            }
+          },
+          "some_property_to_translate": {
+            "to": {
+              "111": [
+                "Messi won another cup for more than 4 times by now, bleh\r\nAnd with another sentence"
+              ]
+            }
+          },
+          "some_property": {
+            "to": {
+              "111": [
+                "Nothing about Diego?"
+              ]
+            }
+          }
+        }
+      ],
+      "text_field_metaValue": "This is a text field value for ACF",
+      "number_field_metaValue": "22",
+      "date_field_metaValue": "20250426",
+      "textarea_field_metaValue": "This is a textarea field value for ACF, line 1\nline 2\nthird line",
+      "relationship_post_id_metaValue": "27",
+      "relationship_post_ids_metaValue": [
+        "1",
+        "56"
+      ]
+    }
+  }
 }
