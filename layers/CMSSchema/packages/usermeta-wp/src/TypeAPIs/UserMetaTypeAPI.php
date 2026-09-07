@@ -10,6 +10,7 @@ use WP_User;
 use function current_user_can;
 use function get_user_meta;
 use function is_protected_meta;
+use function remove_accents;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -18,6 +19,9 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 {
     public function isMetaKeyProtected(string $key): bool
     {
+        if ($this->isMetaKeyRoleRelated($key)) {
+            return !current_user_can('promote_users');
+        }
         if (current_user_can('manage_options')) {
             return false;
         }
@@ -32,10 +36,35 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
 
     protected function isMetaKeyAbsolutelyProtected(string $key): bool
     {
-        $normalizedKey = $this->normalizeMetaKeyForProtection($key);
-        if ($normalizedKey === 'session_tokens' || $normalizedKey === '_application_passwords') {
+        return $this->matchesProtectedMetaKey($key, $this->isNormalizedMetaKeyAbsolutelyProtected(...));
+    }
+
+    protected function isMetaKeyRoleRelated(string $key): bool
+    {
+        return $this->matchesProtectedMetaKey($key, $this->isNormalizedMetaKeyRoleRelated(...));
+    }
+
+    /**
+     * @param callable(string):bool $isNormalizedMetaKeyProtected
+     */
+    protected function matchesProtectedMetaKey(string $key, callable $isNormalizedMetaKeyProtected): bool
+    {
+        if ($isNormalizedMetaKeyProtected($this->normalizeMetaKeyForProtection($key))) {
             return true;
         }
+        if (preg_match('/[^\x20-\x7E]/', $key) !== 1) {
+            return false;
+        }
+        foreach ($this->getDatabaseResolvedMetaKeys($key) as $matchedMetaKey) {
+            if ($isNormalizedMetaKeyProtected($this->normalizeMetaKeyForProtection($matchedMetaKey))) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    protected function isNormalizedMetaKeyRoleRelated(string $normalizedKey): bool
+    {
         global $wpdb;
         $basePrefix = strtolower($wpdb->base_prefix);
         return preg_match(
@@ -44,9 +73,31 @@ class UserMetaTypeAPI extends AbstractUserMetaTypeAPI
         ) === 1;
     }
 
+    protected function isNormalizedMetaKeyAbsolutelyProtected(string $normalizedKey): bool
+    {
+        return $normalizedKey === 'session_tokens'
+            || $normalizedKey === '_application_passwords'
+            || $this->isNormalizedMetaKeyRoleRelated($normalizedKey);
+    }
+
     protected function normalizeMetaKeyForProtection(string $key): string
     {
-        return strtolower(rtrim($key));
+        return strtolower(remove_accents(rtrim($key)));
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getDatabaseResolvedMetaKeys(string $key): array
+    {
+        global $wpdb;
+        /** @var string[] */
+        return $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT DISTINCT meta_key FROM {$wpdb->usermeta} WHERE meta_key = %s",
+                $key
+            )
+        );
     }
 
     public function isMetaKeyProtectedFromReading(string $key): bool
