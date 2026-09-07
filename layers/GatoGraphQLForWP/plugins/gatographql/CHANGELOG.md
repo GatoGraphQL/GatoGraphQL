@@ -15,6 +15,13 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
 
+## 19.2.4 - 07/09/2026
+
+### Security
+
+- Reading protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) from custom posts, comments and taxonomy terms is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> (#3393)
+- Protected meta keys can no longer be read or written by padding the key name with characters that the database does not tell apart from the key itself (#3393)
+
 ## 19.2.3 - 07/09/2026
 
 ### Security

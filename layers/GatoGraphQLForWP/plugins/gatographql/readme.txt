@@ -3,7 +3,7 @@ Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.1
 Tested up to: 7.1
-Stable tag: 19.2.3
+Stable tag: 19.2.4
 Requires PHP: 8.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -251,6 +251,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Documentation for the FluentCart integration (#3379)
 * Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 * Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+
+= 19.2.4 =
+* Security - Reading protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) from custom posts, comments and taxonomy terms is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> (#3393)
+* Security - Protected meta keys can no longer be read or written by padding the key name with characters that the database does not tell apart from the key itself (#3393)
 
 = 19.2.3 =
 * Security - Fixed a privilege escalation vulnerability where a logged-in user could still modify protected user meta keys (such as their own role/capabilities) through the user meta mutations by varying the letter case, accenting a letter, or adding trailing whitespace to the key name, bypassing the protection added in 19.2.2 (#3392)
