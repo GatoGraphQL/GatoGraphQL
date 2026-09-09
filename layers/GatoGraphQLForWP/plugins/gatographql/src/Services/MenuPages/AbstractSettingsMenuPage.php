@@ -497,7 +497,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                     }
                                                     if ($settingsCategoryResolver->addOptionsFormSubmitButton($settingsCategory)) {
                                                         submit_button(
-                                                            $this->getSubmitButtonLabel($settingsCategoryResolver, $settingsCategory)
+                                                            $this->getSubmitButtonLabel($settingsCategoryResolver, $settingsCategory),
+                                                            'primary',
+                                                            $this->getSubmitButtonName($settingsCategoryResolver, $settingsCategory)
                                                         );
                                                     }
                                                     ?>
@@ -873,6 +875,19 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php echo $label_safe; ?>
             </label>
         <?php
+    }
+
+    /**
+     * Get the name of the submit button for a settings category.
+     *
+     * WordPress names it `submit` unless told otherwise, which is a name
+     * the screen the form posts to may well give a meaning of its own. A
+     * page whose button does something other than save these settings can
+     * give it a name that says so.
+     */
+    protected function getSubmitButtonName(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
+    {
+        return 'submit';
     }
 
     /**

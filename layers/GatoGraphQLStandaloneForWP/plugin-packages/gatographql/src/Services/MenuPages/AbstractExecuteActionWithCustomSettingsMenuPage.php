@@ -14,6 +14,8 @@ use PoP\ComponentModel\Misc\GeneralUtils;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
+    public final const SUBMIT_BUTTON_NAME = 'gatographql-execute-action';
+
     /**
      * The upstream method will print several <form> tags,
      * for the different settings categories.
@@ -183,6 +185,18 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
     protected function getSubmitButtonLabel(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
     {
         return $this->getActionName();
+    }
+
+    /**
+     * This button runs the action on the selected entities; it does not
+     * save these settings, which are carried along with the request and
+     * apply to that run alone. Naming it `submit` would hand the screen it
+     * posts back to a parameter that screen may already read as its own
+     * "Save" button having been pressed.
+     */
+    protected function getSubmitButtonName(SettingsCategoryResolverInterface $settingsCategoryResolver, string $settingsCategory): string
+    {
+        return self::SUBMIT_BUTTON_NAME;
     }
 
     abstract protected function getActionName(): string;
