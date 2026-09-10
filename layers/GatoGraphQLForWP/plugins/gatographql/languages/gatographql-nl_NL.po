@@ -12163,14 +12163,14 @@ msgstr "<strong>Compatibel</strong> met uw versie van WordPress"
 msgid "There are no items to be configured"
 msgstr "Er zijn geen items om te configureren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:884
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Alle wijzigingen opslaan (tabblad '%s')"
@@ -12619,11 +12619,11 @@ msgstr ""
 msgid "Send your message to our support team:"
 msgstr "Stuur uw bericht naar ons ondersteuningsteam:"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:86
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:88
 msgid "No IDs were selected."
 msgstr "Er zijn geen ID's geselecteerd."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:92
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:94
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "De volgende ID's zijn geselecteerd: <strong>%s</strong>"

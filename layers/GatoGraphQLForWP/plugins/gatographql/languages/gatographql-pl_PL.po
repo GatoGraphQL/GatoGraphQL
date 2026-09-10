@@ -11871,14 +11871,14 @@ msgstr "<strong>Zgodny</strong> z Twoją wersją WordPress"
 msgid "There are no items to be configured"
 msgstr "Brak elementów do skonfigurowania"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:884
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Zapisz wszystkie zmiany (zakładka '%s')"
@@ -12325,11 +12325,11 @@ msgstr "Wsparcie jest zapewniane klientom z aktywną licencją %s."
 msgid "Send your message to our support team:"
 msgstr "Wyślij wiadomość do naszego zespołu wsparcia:"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:86
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:88
 msgid "No IDs were selected."
 msgstr "Nie wybrano żadnych identyfikatorów."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:92
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:94
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "Wybrano następujące identyfikatory: <strong>%s</strong>"

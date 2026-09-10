@@ -9,7 +9,7 @@ interface ExecuteBulkActionHelperInterface
     public function getExecuteActionWithCustomSettingsBulkActionName(string $bulkActionName): string;
 
     /**
-     * @param array<string,int> $entityIDs
+     * @param array<string|int> $entityIDs
      */
     public function getExecuteActionWithCustomSettingsPageURL(
         string $screenID,
