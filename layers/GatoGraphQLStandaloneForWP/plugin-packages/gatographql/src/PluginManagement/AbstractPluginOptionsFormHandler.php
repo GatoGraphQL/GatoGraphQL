@@ -24,8 +24,7 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
         string $module,
         string $option,
     ): mixed {
-        global $pagenow;
-        if (!in_array($pagenow, $this->getSupportedBulkActionPages())) {
+        if (!$this->isSupportedBulkActionPage()) {
             return parent::maybeOverrideValueFromForm($value, $module, $option);
         }
 
@@ -68,6 +67,41 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
 
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
         return in_array($formOrigin, $formTargets);
+    }
+
+    protected function isSupportedBulkActionPage(): bool
+    {
+        global $pagenow;
+
+        if (in_array($pagenow, $this->getSupportedBulkActionPages())) {
+            return true;
+        }
+
+        /**
+         * A screen added by a plugin is served by `admin.php`, which by
+         * itself says nothing about which screen it is. Those are named by
+         * their `page` query param instead, so that allowing one of them
+         * does not allow every plugin's settings screen along with it.
+         */
+        $pageParams = $this->getSupportedBulkActionPageParams()[$pagenow] ?? null;
+        if ($pageParams === null) {
+            return false;
+        }
+
+        $page = App::request('page') ?? App::query('page');
+        return in_array($page, $pageParams);
+    }
+
+    /**
+     * The screens supported by their `page` query param, as
+     * `[ '<pagenow>' => [ '<page>', ... ] ]`. Empty by default: a screen is
+     * named either here or by `getSupportedBulkActionPages()`, never both.
+     *
+     * @return array<string,string[]>
+     */
+    protected function getSupportedBulkActionPageParams(): array
+    {
+        return [];
     }
 
     /**
