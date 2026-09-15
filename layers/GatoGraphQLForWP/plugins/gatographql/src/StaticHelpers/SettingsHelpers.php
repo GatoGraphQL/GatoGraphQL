@@ -31,7 +31,6 @@ class SettingsHelpers
             foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
                 self::$commercialExtensionActivatedLicenseObjectProperties[$extensionSlug] = new CommercialExtensionActivatedLicenseObjectProperties(
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
-                    $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME],

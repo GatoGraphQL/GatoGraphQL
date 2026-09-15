@@ -12,6 +12,12 @@ The same goes for the record of which version of the plugin and of each extensio
 
 Nothing needs doing on an existing site: the options are migrated the next time the plugin is updated or activated.
 
+### Smaller license records
+
+The record of the activated licenses is one option the plugin does need on every request, since it is what tells an extension that it may run. Each license was stored together with the raw response received from the marketplace when it was activated, which nothing ever read back and which made up two thirds of the record: with the full set of extensions activated, 37 KB out of 56 KB ([#3397](https://github.com/GatoGraphQL/GatoGraphQL/pull/3397)).
+
+The response is no longer stored, and the records written by earlier versions are trimmed the next time the plugin is updated or activated.
+
 ## Added
 
 ### FluentCart extension

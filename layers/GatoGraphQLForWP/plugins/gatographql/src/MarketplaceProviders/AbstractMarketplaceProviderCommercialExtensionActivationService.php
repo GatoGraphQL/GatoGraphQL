@@ -176,7 +176,6 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
 
         return new CommercialExtensionActivatedLicenseObjectProperties(
             $licenseKey,
-            $body,
             $status,
             $instanceID,
             $instanceName,

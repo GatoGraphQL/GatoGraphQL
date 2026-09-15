@@ -9,7 +9,11 @@ class LicenseProperties
     /** The license key used to activate the extension */
     public final const LICENSE_KEY = 'licenseKey';
 
-    /** After executing an operation against the Marketplace Provider's API, store the response */
+    /**
+     * The raw response from the Marketplace Provider's API, which
+     * used to be stored with each entry and is not anymore, as nothing
+     * read it back. Kept to remove it from the entries stored before.
+     */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';
 
     /** The status of the license */
