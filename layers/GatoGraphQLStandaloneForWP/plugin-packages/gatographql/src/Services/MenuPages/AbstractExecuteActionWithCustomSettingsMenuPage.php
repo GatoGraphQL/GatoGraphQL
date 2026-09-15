@@ -64,11 +64,14 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         /** @var string */
         $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
 
-        /** @var string */
+        /**
+         * The query string arrives decoded once already, by PHP; decoding
+         * it again would turn an encoded `&` or `#` inside a value into
+         * a separator, and `parse_str` decodes the values by itself.
+         *
+         * @var string
+         */
         $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
-        if ($originRequestParamsAsString) {
-            $originRequestParamsAsString = rawurldecode($originRequestParamsAsString);
-        }
 
         $originRequestParams = GeneralUtils::getURLQueryParams($originRequestParamsAsString);
 
@@ -108,20 +111,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
             <?php
             foreach ($originRequestParams as $key => $value) {
-                if ($value === null || is_object($value)) {
-                    continue;
-                }
-                if (is_array($value)) {
-                    foreach ($value as $subValue) {
-                        ?>
-                        <input type="hidden" name="<?php echo esc_attr($key); ?>[]" value="<?php echo esc_attr($subValue); ?>" />
-                        <?php
-                    }
-                    continue;
-                }
-                ?>
-                <input type="hidden" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($value); ?>" />
-                <?php
+                $this->printHiddenInputs((string) $key, $value);
             } ?>
 
             <?php /** Print all these inputs below at the end!!! */ ?>
@@ -139,6 +129,27 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Support for XDebug */ ?>
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
         </form>
+        <?php
+    }
+
+    /**
+     * An array value is printed as one input per leaf, nested keys and
+     * all (`translation[en][hash]`), so that the request it came from is
+     * reproduced exactly.
+     */
+    protected function printHiddenInputs(string $name, mixed $value): void
+    {
+        if ($value === null || is_object($value)) {
+            return;
+        }
+        if (is_array($value)) {
+            foreach ($value as $subKey => $subValue) {
+                $this->printHiddenInputs($name . '[' . $subKey . ']', $subValue);
+            }
+            return;
+        }
+        ?>
+        <input type="hidden" name="<?php echo esc_attr($name); ?>" value="<?php echo esc_attr((string) $value); ?>" />
         <?php
     }
 

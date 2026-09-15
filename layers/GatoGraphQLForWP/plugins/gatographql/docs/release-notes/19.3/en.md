@@ -74,3 +74,11 @@ When **FluentCart Pro** is installed, its licensing and inventory data joins the
   }
 }
 ```
+
+## Fixed
+
+### Bulk actions with custom settings on screens holding special characters
+
+Executing a bulk action with custom settings takes a detour through the settings form, which carries every value of the originating request along with it and posts them back once the settings are chosen. The values were not encoded on the way, so a `#`, `&` or `=` inside one of them cut the list short, and whatever came after it was lost, the selected items included: the action then went back to the screen having done nothing ([#3396](https://github.com/GatoGraphQL/GatoGraphQL/pull/3396)).
+
+Polylang's "Translations" screen posts every stored translation on the page, and an apostrophe stored as `&#039;` was enough to trigger it. The values are now encoded in both directions.
