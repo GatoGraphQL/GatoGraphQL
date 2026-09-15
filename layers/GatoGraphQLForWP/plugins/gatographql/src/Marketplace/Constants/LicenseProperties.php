@@ -10,9 +10,12 @@ class LicenseProperties
     public final const LICENSE_KEY = 'licenseKey';
 
     /**
-     * The raw response from the Marketplace Provider's API, which
-     * used to be stored with each entry and is not anymore, as nothing
-     * read it back. Kept to remove it from the entries stored before.
+     * The raw response from the Marketplace Provider's API used to be
+     * stored under this key, and is not anymore, as nothing read it back.
+     *
+     * The key is still written, with an empty array, because versions
+     * before 19.3 read it without a guard into an `array` parameter:
+     * removing it would make a site fatal on rolling the plugin back.
      */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';
 

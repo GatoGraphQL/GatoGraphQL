@@ -432,6 +432,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $instanceName = $commercialExtensionActivatedLicenseObjectProperties->instanceName;
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
             LicenseProperties::LICENSE_KEY => $commercialExtensionActivatedLicenseObjectProperties->licenseKey,
+            LicenseProperties::API_RESPONSE_PAYLOAD => [],
             LicenseProperties::STATUS => $commercialExtensionActivatedLicenseObjectProperties->status,
             LicenseProperties::INSTANCE_ID => $instanceID,
             /**

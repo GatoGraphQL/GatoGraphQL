@@ -870,12 +870,15 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * Each activated license used to be stored along with the raw
      * response from the Marketplace Provider's API, which was never
      * read back and made up two thirds of an option that is loaded
-     * on every request. It is not stored anymore, and this
-     * removes it from the entries written before.
+     * on every request. It is not stored anymore, and this blanks
+     * it in the entries written before.
      *
      * Revalidating the licenses rewrites the entries too, but that
      * runs every few days, and not at all when the provider can't be
      * reached, so the entries are trimmed here as well.
+     *
+     * The key is kept, with an empty array, so that a site rolled
+     * back to a version that still reads it keeps working.
      */
     protected function removeAPIResponsePayloadFromStoredLicenseEntries(): void
     {
@@ -885,7 +888,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         $commercialExtensionActivatedLicenseEntries = get_option($option, []);
         $trimmedCommercialExtensionActivatedLicenseEntries = [];
         foreach ($commercialExtensionActivatedLicenseEntries as $extensionSlug => $commercialExtensionActivatedLicenseEntry) {
-            unset($commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD]);
+            $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD] = [];
             $trimmedCommercialExtensionActivatedLicenseEntries[$extensionSlug] = $commercialExtensionActivatedLicenseEntry;
         }
         if ($trimmedCommercialExtensionActivatedLicenseEntries === $commercialExtensionActivatedLicenseEntries) {
