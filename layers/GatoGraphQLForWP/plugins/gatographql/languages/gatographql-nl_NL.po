@@ -12619,11 +12619,11 @@ msgstr ""
 msgid "Send your message to our support team:"
 msgstr "Stuur uw bericht naar ons ondersteuningsteam:"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:88
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:90
 msgid "No IDs were selected."
 msgstr "Er zijn geen ID's geselecteerd."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:94
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "De volgende ID's zijn geselecteerd: <strong>%s</strong>"
