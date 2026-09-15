@@ -12628,7 +12628,7 @@ msgstr "Στείλτε το μήνυμά σας στην ομάδα υποστή
 msgid "No IDs were selected."
 msgstr "Δεν επιλέχθηκαν ID."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "Επιλέχθηκαν τα παρακάτω ID: <strong>%s</strong>"

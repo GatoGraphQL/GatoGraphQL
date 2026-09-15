@@ -12320,7 +12320,7 @@ msgstr "Skicka ditt meddelande till vårt supportteam:"
 msgid "No IDs were selected."
 msgstr "Inga ID:n valdes."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "Följande ID:n valdes: <strong>%s</strong>"

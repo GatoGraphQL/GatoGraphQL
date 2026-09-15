@@ -12267,7 +12267,7 @@ msgstr "サポートチームにメッセージを送信してください："
 msgid "No IDs were selected."
 msgstr "IDが選択されていません。"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "以下のIDが選択されました：<strong>%s</strong>"

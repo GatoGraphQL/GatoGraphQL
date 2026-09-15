@@ -11592,7 +11592,7 @@ msgstr "向我们的支持团队发送消息："
 msgid "No IDs were selected."
 msgstr "未选择任何ID。"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "已选择以下ID：<strong>%s</strong>"

@@ -11912,7 +11912,7 @@ msgstr "지원 팀에 메시지를 보내십시오:"
 msgid "No IDs were selected."
 msgstr "선택된 ID가 없습니다."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "다음 ID가 선택되었습니다: <strong>%s</strong>"

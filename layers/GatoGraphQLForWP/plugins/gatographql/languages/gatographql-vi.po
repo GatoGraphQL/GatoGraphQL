@@ -12327,7 +12327,7 @@ msgstr "Gửi tin nhắn của bạn đến đội ngũ hỗ trợ của chúng 
 msgid "No IDs were selected."
 msgstr "Không có ID nào được chọn."
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:141
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "Các ID sau đã được chọn: <strong>%s</strong>"
