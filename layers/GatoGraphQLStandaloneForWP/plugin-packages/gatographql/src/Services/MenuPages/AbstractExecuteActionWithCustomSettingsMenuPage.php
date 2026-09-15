@@ -61,25 +61,22 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
-        /** @var string */
-        $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
+        $bulkActionOriginURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_URL);
 
         /**
          * The query string arrives decoded once already, by PHP; decoding
          * it again would turn an encoded `&` or `#` inside a value into
          * a separator, and `parse_str` decodes the values by itself.
-         *
-         * @var string
          */
-        $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
-
-        $originRequestParams = GeneralUtils::getURLQueryParams($originRequestParamsAsString);
+        $originRequestParams = GeneralUtils::getURLQueryParams(
+            $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS)
+        );
 
         // When filtering entries, if this input is present in the request, the bulk action will not be executed
         unset($originRequestParams['filter_action']);
         unset($originRequestParams['bulk_action']);
 
-        $bulkActionSelectedIdsString = App::request(Params::BULK_ACTION_SELECTED_IDS) ?? App::query(Params::BULK_ACTION_SELECTED_IDS) ?? '';
+        $bulkActionSelectedIdsString = $this->getBulkActionParam(Params::BULK_ACTION_SELECTED_IDS);
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
             : explode(',', $bulkActionSelectedIdsString);
@@ -100,10 +97,8 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
          * Decoded once by PHP already, like the origin params above:
          * a `%2B` in the screen's search would otherwise come back as
          * a space.
-         *
-         * @var string
          */
-        $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
+        $sendbackURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_SENDBACK_URL);
 
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
@@ -133,6 +128,16 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
         </form>
         <?php
+    }
+
+    /**
+     * The bulk action params reach this page in the URL the origin
+     * screen linked to, and are posted back by its own form.
+     */
+    protected function getBulkActionParam(string $name): string
+    {
+        /** @var string */
+        return App::request($name) ?? App::query($name) ?? '';
     }
 
     /**
