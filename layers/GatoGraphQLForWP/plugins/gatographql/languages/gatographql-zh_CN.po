@@ -11588,11 +11588,11 @@ msgstr "支持服务仅提供给拥有 %s 有效许可证的客户。"
 msgid "Send your message to our support team:"
 msgstr "向我们的支持团队发送消息："
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:90
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:87
 msgid "No IDs were selected."
 msgstr "未选择任何ID。"
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:148
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:153
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr "已选择以下ID：<strong>%s</strong>"
