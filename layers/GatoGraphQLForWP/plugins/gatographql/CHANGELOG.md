@@ -16,6 +16,16 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+- Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
+
+### Fixed
+
+- The bulk action with custom settings now runs when a value on the originating screen contains a `#`, `&` or `=`, such as an HTML entity in a stored translation (#3396)
+- The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+
+### Security
+
+- The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
 
 ## 19.2.4 - 07/09/2026
 

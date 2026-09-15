@@ -61,28 +61,27 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             $content
         );
 
-        /** @var string */
-        $bulkActionOriginURL = App::request(Params::BULK_ACTION_ORIGIN_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_URL) ?? '';
+        $bulkActionOriginURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_URL);
 
-        /** @var string */
-        $originRequestParamsAsString = App::request(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? App::query(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS) ?? '';
-        if ($originRequestParamsAsString) {
-            $originRequestParamsAsString = rawurldecode($originRequestParamsAsString);
-        }
-
-        $originRequestParams = GeneralUtils::getURLQueryParams($originRequestParamsAsString);
+        /**
+         * The query string arrives decoded once already, by PHP; decoding
+         * it again would turn an encoded `&` or `#` inside a value into
+         * a separator, and `parse_str` decodes the values by itself.
+         */
+        $originRequestParams = GeneralUtils::getURLQueryParams(
+            $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_REQUEST_PARAMS)
+        );
 
         // When filtering entries, if this input is present in the request, the bulk action will not be executed
         unset($originRequestParams['filter_action']);
         unset($originRequestParams['bulk_action']);
 
-        $bulkActionSelectedIdsString = App::request(Params::BULK_ACTION_SELECTED_IDS) ?? App::query(Params::BULK_ACTION_SELECTED_IDS) ?? '';
+        $bulkActionSelectedIdsString = $this->getBulkActionParam(Params::BULK_ACTION_SELECTED_IDS);
         $bulkActionSelectedIds = empty($bulkActionSelectedIdsString)
             ? []
             : explode(',', $bulkActionSelectedIdsString);
 
-        $bulkActionSelectedIdsCount = count($bulkActionSelectedIds);
-        if ($bulkActionSelectedIdsCount === 0) {
+        if ($bulkActionSelectedIds === []) {
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 __('No IDs were selected.', 'gatographql')
@@ -90,16 +89,16 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         } else {
             printf(
                 '<div class="notice notice-info is-dismissible"><p>%s</p></div>',
-                sprintf(
-                    __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
-                    implode('</strong>, <strong>', $bulkActionSelectedIds)
-                )
+                $this->getSelectedEntitiesNoticeMessage($bulkActionSelectedIds)
             );
         }
 
-        /** @var string */
-        $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
-        $sendbackURL = rawurldecode($sendbackURL);
+        /**
+         * Decoded once by PHP already, like the origin params above:
+         * a `%2B` in the screen's search would otherwise come back as
+         * a space.
+         */
+        $sendbackURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_SENDBACK_URL);
 
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
@@ -108,21 +107,10 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
             <?php
             foreach ($originRequestParams as $key => $value) {
-                if ($value === null || is_object($value)) {
-                    continue;
-                }
-                if (is_array($value)) {
-                    foreach ($value as $subValue) {
-                        ?>
-                        <input type="hidden" name="<?php echo esc_attr($key); ?>[]" value="<?php echo esc_attr($subValue); ?>" />
-                        <?php
-                    }
-                    continue;
-                }
-                ?>
-                <input type="hidden" name="<?php echo esc_attr($key); ?>" value="<?php echo esc_attr($value); ?>" />
-                <?php
-            } ?>
+                $this->printHiddenInputs((string) $key, $value);
+            }
+            $this->printAdditionalHiddenInputs($bulkActionSelectedIds);
+            ?>
 
             <?php /** Print all these inputs below at the end!!! */ ?>
             <?php /** Because the previous form has these same fields, override them! */ ?>
@@ -139,6 +127,66 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php /** Support for XDebug */ ?>
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
         </form>
+        <?php
+    }
+
+    /**
+     * The bulk action params reach this page in the URL the origin
+     * screen linked to, and are posted back by its own form.
+     */
+    protected function getBulkActionParam(string $name): string
+    {
+        /** @var string */
+        return App::request($name) ?? App::query($name) ?? '';
+    }
+
+    /**
+     * Entity IDs mean something to the user on most screens. Where they
+     * do not (a screen keying its items by hash), the page can name the
+     * items instead.
+     *
+     * @param string[] $bulkActionSelectedIds
+     */
+    protected function getSelectedEntitiesNoticeMessage(array $bulkActionSelectedIds): string
+    {
+        return sprintf(
+            __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
+            implode('</strong>, <strong>', array_map('esc_html', $bulkActionSelectedIds))
+        );
+    }
+
+    /**
+     * Hidden inputs to post back on top of those of the origin request.
+     * The selected IDs travel in the URL on their own already, so a screen
+     * can leave its own selection param out of the origin params it
+     * carries there (see `getExecuteActionWithCustomSettingsPageURL()`),
+     * halving what a large selection adds to the URL, and re-create that
+     * param here.
+     *
+     * @param string[] $bulkActionSelectedIds
+     */
+    protected function printAdditionalHiddenInputs(array $bulkActionSelectedIds): void
+    {
+    }
+
+    /**
+     * An array value is printed as one input per leaf, nested keys and
+     * all (`translation[en][hash]`), so that the request it came from is
+     * reproduced exactly.
+     */
+    protected function printHiddenInputs(string $name, mixed $value): void
+    {
+        if ($value === null || is_object($value)) {
+            return;
+        }
+        if (is_array($value)) {
+            foreach ($value as $subKey => $subValue) {
+                $this->printHiddenInputs($name . '[' . $subKey . ']', $subValue);
+            }
+            return;
+        }
+        ?>
+        <input type="hidden" name="<?php echo esc_attr($name); ?>" value="<?php echo esc_attr((string) $value); ?>" />
         <?php
     }
 
