@@ -14,6 +14,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+- Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
 
 ### Fixed
 
