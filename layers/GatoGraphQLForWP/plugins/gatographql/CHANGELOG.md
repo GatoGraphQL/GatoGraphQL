@@ -18,6 +18,11 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Fixed
 
 - The bulk action with custom settings now runs when a value on the originating screen contains a `#`, `&` or `=`, such as an HTML entity in a stored translation (#3396)
+- The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+
+### Security
+
+- The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
 
 ## 19.2.4 - 07/09/2026
 

@@ -96,9 +96,14 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             );
         }
 
-        /** @var string */
+        /**
+         * Decoded once by PHP already, like the origin params above:
+         * a `%2B` in the screen's search would otherwise come back as
+         * a space.
+         *
+         * @var string
+         */
         $sendbackURL = App::request(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? App::query(Params::BULK_ACTION_ORIGIN_SENDBACK_URL) ?? '';
-        $sendbackURL = rawurldecode($sendbackURL);
 
         ?>
         <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
@@ -108,7 +113,9 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php
             foreach ($originRequestParams as $key => $value) {
                 $this->printHiddenInputs((string) $key, $value);
-            } ?>
+            }
+            $this->printAdditionalHiddenInputs($bulkActionSelectedIds);
+            ?>
 
             <?php /** Print all these inputs below at the end!!! */ ?>
             <?php /** Because the previous form has these same fields, override them! */ ?>
@@ -139,8 +146,22 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
     {
         return sprintf(
             __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
-            implode('</strong>, <strong>', $bulkActionSelectedIds)
+            implode('</strong>, <strong>', array_map('esc_html', $bulkActionSelectedIds))
         );
+    }
+
+    /**
+     * Hidden inputs to post back on top of those of the origin request.
+     * The selected IDs travel in the URL on their own already, so a screen
+     * can leave its own selection param out of the origin params it
+     * carries there (see `getExecuteActionWithCustomSettingsPageURL()`),
+     * halving what a large selection adds to the URL, and re-create that
+     * param here.
+     *
+     * @param string[] $bulkActionSelectedIds
+     */
+    protected function printAdditionalHiddenInputs(array $bulkActionSelectedIds): void
+    {
     }
 
     /**
