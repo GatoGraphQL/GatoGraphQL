@@ -251,6 +251,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Documentation for the FluentCart integration (#3379)
 * Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 * Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+* Fixed - The bulk action with custom settings now runs when a value on the originating screen contains a <code>#</code>, <code>&</code> or <code>=</code>, such as an HTML entity in a stored translation (#3396)
+* Fixed - The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+* Security - The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
 
 = 19.2.4 =
 * Security - Reading protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) from custom posts, comments and taxonomy terms is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> (#3393)

@@ -74,3 +74,19 @@ When **FluentCart Pro** is installed, its licensing and inventory data joins the
   }
 }
 ```
+
+## Fixed
+
+### Bulk actions with custom settings on screens holding special characters
+
+Executing a bulk action with custom settings takes a detour through the settings form, which carries every value of the originating request along with it and posts them back once the settings are chosen. The values were not encoded on the way, so a `#`, `&` or `=` inside one of them cut the list short, and whatever came after it was lost, the selected items included: the action then went back to the screen having done nothing ([#3396](https://github.com/GatoGraphQL/GatoGraphQL/pull/3396)).
+
+Polylang's "Translations" screen posts every stored translation on the page, and an apostrophe stored as `&#039;` was enough to trigger it. The values are now encoded in both directions.
+
+The same detour added a backslash before every quote in the values it carried, as they were read from the request WordPress had already slashed and then posted back to be slashed again. They are now carried unslashed.
+
+## Security
+
+### Escaped IDs on the custom settings page
+
+The custom settings page names the IDs selected on the originating screen in a notice. They were printed as they came in the URL, so a crafted link to that page could run a script in the wp-admin of the user who followed it. The IDs are now escaped ([#3396](https://github.com/GatoGraphQL/GatoGraphQL/pull/3396)).
