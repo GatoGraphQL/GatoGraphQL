@@ -84,8 +84,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             ? []
             : explode(',', $bulkActionSelectedIdsString);
 
-        $bulkActionSelectedIdsCount = count($bulkActionSelectedIds);
-        if ($bulkActionSelectedIdsCount === 0) {
+        if ($bulkActionSelectedIds === []) {
             printf(
                 '<div class="notice notice-warning is-dismissible"><p>%s</p></div>',
                 __('No IDs were selected.', 'gatographql')
@@ -93,10 +92,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         } else {
             printf(
                 '<div class="notice notice-info is-dismissible"><p>%s</p></div>',
-                sprintf(
-                    __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
-                    implode('</strong>, <strong>', $bulkActionSelectedIds)
-                )
+                $this->getSelectedEntitiesNoticeMessage($bulkActionSelectedIds)
             );
         }
 
@@ -130,6 +126,21 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
         </form>
         <?php
+    }
+
+    /**
+     * Entity IDs mean something to the user on most screens. Where they
+     * do not (a screen keying its items by hash), the page can name the
+     * items instead.
+     *
+     * @param string[] $bulkActionSelectedIds
+     */
+    protected function getSelectedEntitiesNoticeMessage(array $bulkActionSelectedIds): string
+    {
+        return sprintf(
+            __('The following IDs were selected: <strong>%s</strong>', 'gatographql'),
+            implode('</strong>, <strong>', $bulkActionSelectedIds)
+        );
     }
 
     /**
