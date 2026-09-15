@@ -9,14 +9,7 @@ class LicenseProperties
     /** The license key used to activate the extension */
     public final const LICENSE_KEY = 'licenseKey';
 
-    /**
-     * The raw response from the Marketplace Provider's API used to be
-     * stored under this key, and is not anymore, as nothing read it back.
-     *
-     * The key is still written, with an empty array, because versions
-     * before 19.3 read it without a guard into an `array` parameter:
-     * removing it would make a site fatal on rolling the plugin back.
-     */
+    /** After executing an operation against the Marketplace Provider's API, store the response */
     public final const API_RESPONSE_PAYLOAD = 'apiResponsePayload';
 
     /** The status of the license */

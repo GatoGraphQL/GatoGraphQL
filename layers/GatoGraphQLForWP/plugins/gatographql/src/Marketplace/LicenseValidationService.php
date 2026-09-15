@@ -15,6 +15,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulE
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialExtensionActivationServiceInterface;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -432,7 +433,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $instanceName = $commercialExtensionActivatedLicenseObjectProperties->instanceName;
         $commercialExtensionActivatedLicenseEntries[$extensionSlug] = [
             LicenseProperties::LICENSE_KEY => $commercialExtensionActivatedLicenseObjectProperties->licenseKey,
-            LicenseProperties::API_RESPONSE_PAYLOAD => [],
+            LicenseProperties::API_RESPONSE_PAYLOAD => PluginStaticModuleConfiguration::storeMarketplaceAPIResponsePayloadWithActivatedLicense() ? $commercialExtensionActivatedLicenseObjectProperties->apiResponsePayload : [],
             LicenseProperties::STATUS => $commercialExtensionActivatedLicenseObjectProperties->status,
             LicenseProperties::INSTANCE_ID => $instanceID,
             /**

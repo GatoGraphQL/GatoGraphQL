@@ -251,7 +251,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Documentation for the FluentCart integration (#3379)
 * Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 * Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
-* Improved - The activated licenses are stored without the raw response from the marketplace, cutting the option loaded on every request to a third of its size (#3397)
+* Improved - Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
 * Fixed - The bulk action with custom settings now runs when a value on the originating screen contains a <code>#</code>, <code>&</code> or <code>=</code>, such as an HTML entity in a stored translation (#3396)
 * Fixed - The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
 * Security - The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)

@@ -16,7 +16,7 @@ Nothing needs doing on an existing site: the options are migrated the next time 
 
 The record of the activated licenses is one option the plugin does need on every request, since it is what tells an extension that it may run. Each license was stored together with the raw response received from the marketplace when it was activated, which nothing ever read back and which made up two thirds of the record: with the full set of extensions activated, 36 KB out of 56 KB ([#3397](https://github.com/GatoGraphQL/GatoGraphQL/pull/3397)).
 
-The response is no longer stored, and the records written by earlier versions are trimmed the next time the plugin is updated or activated.
+The response is no longer stored when a license is activated or validated. The records written by earlier versions are left as they are; they shed the response the next time their license is validated against the marketplace, which happens every few days.
 
 ## Added
 
