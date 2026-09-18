@@ -6875,6 +6875,7 @@ msgstr ""
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:491
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
@@ -7700,7 +7701,7 @@ msgstr "已启用"
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:31
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "设置"
 
@@ -9430,33 +9431,43 @@ msgstr "信息"
 msgid "Debug"
 msgstr "调试"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:109
 msgid "Activate Plugins and Extensions"
 msgstr "激活插件和扩展"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:110
 msgid "Reset Settings"
 msgstr "重置设置"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
+msgid "Uninstall"
+msgstr "卸载"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:120
 #, php-format
 msgid "Activate Plugins and Extensions from the %s"
 msgstr "从 %s 激活插件和扩展"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:123
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "将 Gato GraphQL 设置恢复为默认值"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:124
+msgid ""
+"Choose what happens to the data stored by the plugin when the plugin is "
+"deleted"
+msgstr "选择删除插件时,插件存储的数据将如何处理"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:166
 msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "添加许可证密钥将<strong>激活插件</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:167
 msgid ""
 "Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr "删除现有许可证密钥将<strong>停用插件</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 msgid ""
 "Updating a license key will first <strong>deactivate the plugin</strong> "
 "(using the previous license key) and then <strong>activate the plugin</"
@@ -9465,13 +9476,13 @@ msgstr ""
 "更新许可证密钥将首先<strong>停用插件</strong>（使用旧许可证密钥），然后再次"
 "<strong>激活插件</strong>（使用新许可证密钥）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:169
 msgid ""
 "Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
 msgstr "不更新许可证密钥将<strong>验证插件状态</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:182
 #, php-format
 msgid ""
 "Enter the license keys from the %s, and click on <strong>Activate licenses "
@@ -9480,34 +9491,34 @@ msgstr ""
 "输入从 %s 获取的许可证密钥，然后点击<strong>激活许可证（或停用/验证）</"
 "strong>："
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:188
 msgid ""
 "When clicking on <strong>Activate licenses (or Deactivate/Validate)</"
 "strong>, one of the following actions will take place:"
 msgstr "点击<strong>激活许可证（或停用/验证）</strong>时，将执行以下操作之一："
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:197
 msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr "（显示详情：许可证何时被激活、停用或验证？）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:220
 msgid "Activate licenses (or Deactivate/Validate)"
 msgstr "激活许可证（或停用/验证）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:228
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:242
 #, php-format
 msgid "<em>There are no Bundles or Extensions from the %s installed</em>"
 msgstr "<em>未安装来自 %s 的套件或扩展</em>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:242
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:256
 msgid "Show options to reset the Settings"
 msgstr "显示重置设置的选项"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:249
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:263
 msgid "Reset the Gato GraphQL Settings?"
 msgstr "重置 Gato GraphQL 设置？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:267
 #, php-format
 msgid ""
 "Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</"
@@ -9516,117 +9527,150 @@ msgstr ""
 "将所有设置（位于 <code>%s</code>、<code>%s</code>、<code>%s</code>、"
 "<code>%s</code> 和 <code>%s</code> 选项卡下）恢复为默认值。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:272
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:286
 msgid ""
 "When the settings are reset, the default values can follow a restrictive or "
 "non-restrictive behavior:"
 msgstr "重置设置时，默认值可以遵循限制性或非限制性行为："
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:273
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:287
 msgid "Feature"
 msgstr "功能"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:274
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:288
 msgid "Non-restrictive behavior"
 msgstr "非限制性行为"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:289
 msgid "Restrictive behavior"
 msgstr "限制性行为"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:290
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:304
 msgid "“Sensitive” data fields"
 msgstr "“敏感”数据字段"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:291
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:305
 msgid "Added to the schema"
 msgstr "已添加到 Schema"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:292
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Not added to the schema"
 msgstr "未添加到 Schema"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:298
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:312
 msgid "Settings from <code>wp_options</code>"
 msgstr "来自 <code>wp_options</code> 的设置"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:313
 msgid "No options are queryable by non-administrators"
 msgstr "非管理员无法查询任何选项"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
 msgid "Only a few predefined options are queryable by non-administrators"
 msgstr "非管理员只能查询几个预定义的选项"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:320
 msgid "Meta (posts, users, comments, taxonomies)"
 msgstr "元数据（文章、用户、评论、分类法）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:307
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:321
 msgid "All keys are queryable"
 msgstr "所有键均可查询"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:308
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
 msgid "No keys are queryable"
 msgstr "没有键可查询"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:328
 msgid "Max limit to query entities (posts, users, etc)"
 msgstr "查询实体（文章、用户等）的最大限制"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:329
 msgid "Unlimited"
 msgstr "无限制"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
 msgid "Limited"
 msgstr "有限制"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:336
 msgid "Environment variables (extension)"
 msgstr "环境变量（扩展）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:323
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:337
 msgid "All environment variables and PHP constants are queryable"
 msgstr "所有环境变量和 PHP 常量均可查询"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:324
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:338
 msgid "No environment variables or PHP constants are queryable"
 msgstr "没有环境变量或 PHP 常量可查询"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:344
 msgid "HTTP Client requests (extension)"
 msgstr "HTTP 客户端请求（扩展）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:345
 msgid "All URLs can be requested"
 msgstr "所有 URL 均可请求"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:332
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:346
 msgid "No URL can be requested"
 msgstr "无法请求任何 URL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:351
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:365
 msgid "Choose if to use restrictive or non-restrictive default settings."
 msgstr "选择是否使用限制性或非限制性默认设置。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:369
 msgid "Use the restrictive default behavior for the Settings"
 msgstr "为设置使用限制性默认行为"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:356
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:370
 msgid "Use the non-restrictive default behavior for the Settings"
 msgstr "为设置使用非限制性默认行为"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:376
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:390
 msgid "Confirm: Reset Settings"
 msgstr "确认：重置设置"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:413
+msgid "Delete all plugin data when deleting the plugin?"
+msgstr "删除插件时,是否删除所有插件数据?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:414
+msgid ""
+"Remove everything the plugin has stored on this site: its settings, the "
+"metadata it added to your content, and its database tables."
+msgstr ""
+"删除插件在本站点存储的所有内容:其设置、添加到你的内容中的元数据,以及其数据库"
+"表。"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:425
+msgid "Also delete the entries created with the plugin?"
+msgstr "是否同时删除通过插件创建的条目?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:448
+msgid "Save Uninstall Settings"
+msgstr "保存卸载设置"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:486
+msgid ""
+"Remove the entries you created and edited through the plugin. Only applies "
+"when deleting all plugin data."
+msgstr "删除你通过插件创建和编辑的条目。仅在删除所有插件数据时适用。"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:490
+#, php-format
+msgid ""
+"Remove the entries you created and edited through the plugin: %s. Only "
+"applies when deleting all plugin data."
+msgstr "删除你通过插件创建和编辑的条目:%s。仅在删除所有插件数据时适用。"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:497
 msgid "Gato Plugins Store"
 msgstr "Gato 插件商店"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:502
 msgid "Activate Licenses"
 msgstr "激活许可证"
 
@@ -10488,11 +10532,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1263
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1351
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>（此消息仅对管理员可见。）</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1265
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1353
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "

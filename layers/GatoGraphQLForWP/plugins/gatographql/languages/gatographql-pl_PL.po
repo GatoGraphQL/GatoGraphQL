@@ -7328,6 +7328,7 @@ msgstr ""
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:491
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
@@ -8222,7 +8223,7 @@ msgstr "Włączony"
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:31
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Ustawienia"
 
@@ -10072,35 +10073,46 @@ msgstr "Informacja"
 msgid "Debug"
 msgstr "Debugowanie"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:109
 msgid "Activate Plugins and Extensions"
 msgstr "Aktywuj wtyczki i rozszerzenia"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:110
 msgid "Reset Settings"
 msgstr "Resetuj ustawienia"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
+msgid "Uninstall"
+msgstr "Odinstaluj"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:120
 #, php-format
 msgid "Activate Plugins and Extensions from the %s"
 msgstr "Aktywuj wtyczki i rozszerzenia z %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:123
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Przywróć domyślne wartości ustawień Gato GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:124
+msgid ""
+"Choose what happens to the data stored by the plugin when the plugin is "
+"deleted"
+msgstr ""
+"Wybierz, co się stanie z danymi zapisanymi przez wtyczkę po jej usunięciu"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:166
 msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr "Dodanie klucza licencyjnego <strong>aktywuje wtyczkę</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:167
 msgid ""
 "Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Usunięcie istniejącego klucza licencyjnego <strong>dezaktywuje wtyczkę</"
 "strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 msgid ""
 "Updating a license key will first <strong>deactivate the plugin</strong> "
 "(using the previous license key) and then <strong>activate the plugin</"
@@ -10110,7 +10122,7 @@ msgstr ""
 "strong> (używając poprzedniego klucza licencyjnego), a następnie ponownie "
 "<strong>aktywuje wtyczkę</strong> (używając nowego klucza licencyjnego)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:169
 msgid ""
 "Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
@@ -10118,7 +10130,7 @@ msgstr ""
 "Brak aktualizacji klucza licencyjnego <strong>zweryfikuje status wtyczki</"
 "strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:182
 #, php-format
 msgid ""
 "Enter the license keys from the %s, and click on <strong>Activate licenses "
@@ -10127,7 +10139,7 @@ msgstr ""
 "Wprowadź klucze licencyjne z %s i kliknij <strong>Aktywuj licencje (lub "
 "Dezaktywuj/Zweryfikuj)</strong>:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:188
 msgid ""
 "When clicking on <strong>Activate licenses (or Deactivate/Validate)</"
 "strong>, one of the following actions will take place:"
@@ -10135,30 +10147,30 @@ msgstr ""
 "Po kliknięciu <strong>Aktywuj licencje (lub Dezaktywuj/Zweryfikuj)</strong> "
 "zostanie wykonana jedna z następujących czynności:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:197
 msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
 "(Pokaż szczegóły: Kiedy licencje są aktywowane, dezaktywowane lub "
 "weryfikowane?)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:220
 msgid "Activate licenses (or Deactivate/Validate)"
 msgstr "Aktywuj licencje (lub Dezaktywuj/Zweryfikuj)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:228
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:242
 #, php-format
 msgid "<em>There are no Bundles or Extensions from the %s installed</em>"
 msgstr "<em>Brak zainstalowanych pakietów lub rozszerzeń z %s</em>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:242
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:256
 msgid "Show options to reset the Settings"
 msgstr "Pokaż opcje resetowania ustawień"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:249
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:263
 msgid "Reset the Gato GraphQL Settings?"
 msgstr "Zresetować ustawienia Gato GraphQL?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:267
 #, php-format
 msgid ""
 "Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</"
@@ -10168,7 +10180,7 @@ msgstr ""
 "<code>%s</code>, <code>%s</code> i <code>%s</code>) do ich wartości "
 "domyślnych."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:272
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:286
 msgid ""
 "When the settings are reset, the default values can follow a restrictive or "
 "non-restrictive behavior:"
@@ -10176,117 +10188,154 @@ msgstr ""
 "Po zresetowaniu ustawień wartości domyślne mogą stosować zachowanie "
 "restrykcyjne lub nierestrykcyjne:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:273
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:287
 msgid "Feature"
 msgstr "Funkcja"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:274
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:288
 msgid "Non-restrictive behavior"
 msgstr "Zachowanie nierestrykcyjne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:289
 msgid "Restrictive behavior"
 msgstr "Zachowanie restrykcyjne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:290
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:304
 msgid "“Sensitive” data fields"
 msgstr "“Wrażliwe” pola danych"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:291
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:305
 msgid "Added to the schema"
 msgstr "Dodane do schematu"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:292
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Not added to the schema"
 msgstr "Nie dodane do schematu"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:298
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:312
 msgid "Settings from <code>wp_options</code>"
 msgstr "Ustawienia z <code>wp_options</code>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:313
 msgid "No options are queryable by non-administrators"
 msgstr ""
 "Żadne opcje nie są dostępne do odpytywania przez osoby niebędące "
 "administratorami"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
 msgid "Only a few predefined options are queryable by non-administrators"
 msgstr ""
 "Tylko kilka predefiniowanych opcji jest dostępnych do odpytywania przez "
 "osoby niebędące administratorami"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:320
 msgid "Meta (posts, users, comments, taxonomies)"
 msgstr "Meta (wpisy, użytkownicy, komentarze, taksonomie)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:307
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:321
 msgid "All keys are queryable"
 msgstr "Wszystkie klucze są odpytywalne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:308
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
 msgid "No keys are queryable"
 msgstr "Żadne klucze nie są odpytywalne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:328
 msgid "Max limit to query entities (posts, users, etc)"
 msgstr "Maksymalny limit zapytań o encje (posty, użytkownicy itp.)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:329
 msgid "Unlimited"
 msgstr "Nieograniczony"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
 msgid "Limited"
 msgstr "Ograniczony"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:336
 msgid "Environment variables (extension)"
 msgstr "Zmienne środowiskowe (rozszerzenie)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:323
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:337
 msgid "All environment variables and PHP constants are queryable"
 msgstr "Wszystkie zmienne środowiskowe i stałe PHP są odpytywalne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:324
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:338
 msgid "No environment variables or PHP constants are queryable"
 msgstr "Żadne zmienne środowiskowe ani stałe PHP nie są odpytywalne"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:344
 msgid "HTTP Client requests (extension)"
 msgstr "Żądania klienta HTTP (rozszerzenie)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:345
 msgid "All URLs can be requested"
 msgstr "Wszystkie adresy URL mogą być żądane"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:332
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:346
 msgid "No URL can be requested"
 msgstr "Nie można żądać żadnego adresu URL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:351
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:365
 msgid "Choose if to use restrictive or non-restrictive default settings."
 msgstr ""
 "Wybierz, czy używać restrykcyjnych, czy nierestrykcyjnych ustawień "
 "domyślnych."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:369
 msgid "Use the restrictive default behavior for the Settings"
 msgstr "Użyj restrykcyjnego domyślnego zachowania dla ustawień"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:356
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:370
 msgid "Use the non-restrictive default behavior for the Settings"
 msgstr "Użyj nierestrykcyjnego domyślnego zachowania dla ustawień"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:376
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:390
 msgid "Confirm: Reset Settings"
 msgstr "Potwierdź: Resetuj ustawienia"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:413
+msgid "Delete all plugin data when deleting the plugin?"
+msgstr "Usunąć wszystkie dane wtyczki podczas usuwania wtyczki?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:414
+msgid ""
+"Remove everything the plugin has stored on this site: its settings, the "
+"metadata it added to your content, and its database tables."
+msgstr ""
+"Usuń wszystko, co wtyczka zapisała na tej stronie: jej ustawienia, metadane "
+"dodane do Twojej treści oraz jej tabele w bazie danych."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:425
+msgid "Also delete the entries created with the plugin?"
+msgstr "Usunąć również wpisy utworzone za pomocą wtyczki?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:448
+msgid "Save Uninstall Settings"
+msgstr "Zapisz ustawienia odinstalowywania"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:486
+msgid ""
+"Remove the entries you created and edited through the plugin. Only applies "
+"when deleting all plugin data."
+msgstr ""
+"Usuń wpisy utworzone i edytowane za pomocą wtyczki. Dotyczy tylko usuwania "
+"wszystkich danych wtyczki."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:490
+#, php-format
+msgid ""
+"Remove the entries you created and edited through the plugin: %s. Only "
+"applies when deleting all plugin data."
+msgstr ""
+"Usuń wpisy utworzone i edytowane za pomocą wtyczki: %s. Dotyczy tylko "
+"usuwania wszystkich danych wtyczki."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:497
 msgid "Gato Plugins Store"
 msgstr "Gato Plugins Store"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:502
 msgid "Activate Licenses"
 msgstr "Aktywuj licencje"
 
@@ -11195,11 +11244,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1263
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1351
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Ta wiadomość jest widoczna tylko dla administratora.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1265
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1353
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
