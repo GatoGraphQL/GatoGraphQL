@@ -26,7 +26,6 @@ use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
-use GatoGraphQL\GatoGraphQL\Settings\InstalledDataSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -608,7 +607,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             if ($installedDataSettingsManager->getInstalledFeatureVersion($featureInstaller->getFeatureSlug()) === $featureInstaller->getFeatureVersion()) {
                 continue;
             }
-            if (get_transient($this->getFeatureInstallationFailedTransientName($featureInstaller)) !== false) {
+            if ($this->isFeatureInstallationOnHold($featureInstaller)) {
                 continue;
             }
             $featureInstallersToInstall[] = $featureInstaller;
@@ -631,7 +630,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         set_transient($transientName, true, 30);
         try {
             foreach ($featureInstallersToInstall as $featureInstaller) {
-                $this->installFeature($featureInstaller, $installedDataSettingsManager);
+                $this->installFeature($featureInstaller);
             }
         } finally {
             delete_transient($transientName);
@@ -646,11 +645,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
      * it. Nor must it be attempted on every request: a database user
      * without the rights to create a table would fail the same way each
      * time, so the attempt is put off for a while.
+     *
+     * Public so that a feature which finds its data gone by hand (a table
+     * dropped, say) can have it installed again through the same logging,
+     * recording and putting off, rather than through a path of its own.
      */
-    protected function installFeature(
-        FeatureInstallerInterface $featureInstaller,
-        InstalledDataSettingsManagerInterface $installedDataSettingsManager,
-    ): void {
+    public function installFeature(FeatureInstallerInterface $featureInstaller): void
+    {
+        $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
         try {
             $featureInstaller->install();
         } catch (Throwable $throwable) {
@@ -675,11 +677,23 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
     }
 
+    public function isFeatureInstallationOnHold(FeatureInstallerInterface $featureInstaller): bool
+    {
+        return get_transient($this->getFeatureInstallationFailedTransientName($featureInstaller)) !== false;
+    }
+
+    /**
+     * The version is part of the name, so that an update shipping a fixed
+     * installer within the hour is not held back by the failure of the
+     * one it replaces.
+     */
     protected function getFeatureInstallationFailedTransientName(FeatureInstallerInterface $featureInstaller): string
     {
-        return OptionNamespacerFacade::getInstance()->namespaceOption(
-            'installing-feature-failed-' . $featureInstaller->getFeatureSlug()
-        );
+        return OptionNamespacerFacade::getInstance()->namespaceOption(sprintf(
+            'installing-feature-failed-%s-%s',
+            $featureInstaller->getFeatureSlug(),
+            $featureInstaller->getFeatureVersion()
+        ));
     }
 
     /**

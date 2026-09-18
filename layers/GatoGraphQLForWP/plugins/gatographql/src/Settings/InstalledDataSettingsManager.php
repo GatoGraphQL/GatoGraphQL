@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginOptions;
 
 use function get_option;
 use function update_option;
+use function wp_cache_delete;
 
 /**
  * The single entry recording what the plugin has installed on the site.
@@ -59,11 +60,22 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     }
 
     /**
-     * @param array<string,mixed> $installedData
+     * The option is read afresh from the database right before it is
+     * written, and the change applied over that: two requests writing at
+     * once (a feature installing itself while the Settings screen records
+     * a preference, say) would otherwise each put back what the other had
+     * just stored. The window is narrowed to the write itself, not closed:
+     * the Options API offers nothing atomic.
+     *
+     * @param callable(array<string,mixed>):array<string,mixed> $modify
      */
-    protected function storeInstalledData(array $installedData): void
+    protected function modifyInstalledData(callable $modify): void
     {
-        update_option($this->getOptionName(), $installedData);
+        $optionName = $this->getOptionName();
+        wp_cache_delete($optionName, 'options');
+        wp_cache_delete('alloptions', 'options');
+        $installedData = $this->getInstalledData();
+        update_option($optionName, $modify($installedData));
     }
 
     /**
@@ -71,7 +83,15 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
      */
     protected function getInstalledFeatures(): array
     {
-        $installedData = $this->getInstalledData();
+        return $this->getInstalledFeaturesFrom($this->getInstalledData());
+    }
+
+    /**
+     * @param array<string,mixed> $installedData
+     * @return array<string,array<string,mixed>>
+     */
+    protected function getInstalledFeaturesFrom(array $installedData): array
+    {
         if (!isset($installedData[self::KEY_FEATURES]) || !is_array($installedData[self::KEY_FEATURES])) {
             return [];
         }
@@ -94,14 +114,15 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
      */
     public function storeInstalledFeatureVersion(string $featureSlug, string $version, array $tableNames = []): void
     {
-        $installedData = $this->getInstalledData();
-        $features = $this->getInstalledFeatures();
-        $features[$featureSlug] = [
-            self::KEY_VERSION => $version,
-            self::KEY_TABLE_NAMES => array_values($tableNames),
-        ];
-        $installedData[self::KEY_FEATURES] = $features;
-        $this->storeInstalledData($installedData);
+        $this->modifyInstalledData(function (array $installedData) use ($featureSlug, $version, $tableNames): array {
+            $features = $this->getInstalledFeaturesFrom($installedData);
+            $features[$featureSlug] = [
+                self::KEY_VERSION => $version,
+                self::KEY_TABLE_NAMES => array_values($tableNames),
+            ];
+            $installedData[self::KEY_FEATURES] = $features;
+            return $installedData;
+        });
     }
 
     /**
@@ -123,14 +144,15 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
 
     public function removeInstalledFeatureVersion(string $featureSlug): void
     {
-        $features = $this->getInstalledFeatures();
-        if (!isset($features[$featureSlug])) {
+        if (!isset($this->getInstalledFeatures()[$featureSlug])) {
             return;
         }
-        unset($features[$featureSlug]);
-        $installedData = $this->getInstalledData();
-        $installedData[self::KEY_FEATURES] = $features;
-        $this->storeInstalledData($installedData);
+        $this->modifyInstalledData(function (array $installedData) use ($featureSlug): array {
+            $features = $this->getInstalledFeaturesFrom($installedData);
+            unset($features[$featureSlug]);
+            $installedData[self::KEY_FEATURES] = $features;
+            return $installedData;
+        });
     }
 
     /**
@@ -156,13 +178,14 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
      */
     protected function storeUninstallData(array $uninstallDataToMerge): void
     {
-        $installedData = $this->getInstalledData();
-        $storedUninstallData = $installedData[self::KEY_UNINSTALL] ?? [];
-        if (!is_array($storedUninstallData)) {
-            $storedUninstallData = [];
-        }
-        $installedData[self::KEY_UNINSTALL] = array_merge($storedUninstallData, $uninstallDataToMerge);
-        $this->storeInstalledData($installedData);
+        $this->modifyInstalledData(function (array $installedData) use ($uninstallDataToMerge): array {
+            $storedUninstallData = $installedData[self::KEY_UNINSTALL] ?? [];
+            if (!is_array($storedUninstallData)) {
+                $storedUninstallData = [];
+            }
+            $installedData[self::KEY_UNINSTALL] = array_merge($storedUninstallData, $uninstallDataToMerge);
+            return $installedData;
+        });
     }
 
     /**
