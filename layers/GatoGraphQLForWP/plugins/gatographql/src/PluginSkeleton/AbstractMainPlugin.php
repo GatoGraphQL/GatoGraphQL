@@ -558,6 +558,19 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         );
     }
 
+    /**
+     * Install every feature whose data is not already at the version the
+     * code expects.
+     *
+     * The versions are compared for equality, and not for the installed one
+     * being behind: a site which rolls the plugin back then has data ahead
+     * of its code, and must have the older installer run over it, so that
+     * the data is brought back to the shape that code expects. Comparing
+     * with `>=` would skip it, and leave the older code reading data it
+     * does not know. Rolling back is safe because `dbDelta()` never drops a
+     * column, so a column only the newer version knew about survives unused
+     * alongside the rows.
+     */
     protected function maybeInstallFeatures(): void
     {
         $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
