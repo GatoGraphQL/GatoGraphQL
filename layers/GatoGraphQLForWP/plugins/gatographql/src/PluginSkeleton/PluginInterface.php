@@ -131,23 +131,15 @@ interface PluginInterface
      * standalone plugins).
      *
      * Use 7 chars to identify it, as CPTs have
-     * a max length of 20 chars.
+     * a max length of 20 chars: this is the one namespace which cannot simply
+     * be the plugin's own, since "gatographql-schemaconfig" would already be
+     * 24 chars and WordPress would refuse to register it.
      *
-     * This is not what names the plugin's database tables, which are
-     * namespaced with {@see PluginInterface::getPluginNamespaceForDB()}.
+     * This is not what names the plugin's options, meta keys or database
+     * tables: those all carry the plugin's own namespace
+     * {@see PluginInterface::getPluginNamespace()}, which has room for it.
      */
     public function getPluginNamespaceForEntityTypeNames(): string;
-
-    /**
-     * Namespace the plugin's own database tables, so that they cannot
-     * collide with another plugin's.
-     *
-     * Not to be confused with
-     * {@see PluginInterface::getPluginNamespaceForEntityTypeNames()}, which
-     * names the custom post types and taxonomies. A table name may be up to
-     * 64 chars, so this one is under no particular pressure to be short.
-     */
-    public function getPluginNamespaceForDB(): string;
 
     /**
      * Namespace classes. Eg: The container caching class.

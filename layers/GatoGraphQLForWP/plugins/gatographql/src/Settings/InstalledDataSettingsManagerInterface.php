@@ -32,10 +32,7 @@ interface InstalledDataSettingsManagerInterface
      *
      * @param string[] $customPostTypes
      */
-    public function storeUninstallIdentity(
-        string $pluginNamespace,
-        array $customPostTypes,
-    ): void;
+    public function storeUninstallIdentity(array $customPostTypes): void;
 
     public function getDeleteDataOnUninstall(): bool;
 

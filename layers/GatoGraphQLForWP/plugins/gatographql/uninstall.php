@@ -14,6 +14,7 @@
 
 declare(strict_types=1);
 
+use GatoGraphQL\GatoGraphQL\PluginMetadata;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginUninstaller;
 
 if (!defined('WP_UNINSTALL_PLUGIN')) {
@@ -38,4 +39,4 @@ if (!class_exists(PluginUninstaller::class)) {
     return;
 }
 
-PluginUninstaller::uninstall();
+PluginUninstaller::uninstall(PluginMetadata::PLUGIN_NAMESPACE);

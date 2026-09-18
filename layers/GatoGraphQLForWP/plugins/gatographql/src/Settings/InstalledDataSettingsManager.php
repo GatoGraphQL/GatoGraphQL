@@ -28,7 +28,6 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     public final const KEY_VERSION = 'version';
     public final const KEY_TABLE_NAMES = 'tableNames';
     public final const KEY_UNINSTALL = 'uninstall';
-    public final const KEY_PLUGIN_NAMESPACE = 'namespace';
     public final const KEY_CUSTOM_POST_TYPES = 'customPostTypes';
     public final const KEY_DELETE_DATA = 'deleteData';
     public final const KEY_DELETE_CONTENT = 'deleteContent';
@@ -158,40 +157,37 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     /**
      * @param string[] $customPostTypes
      */
-    public function storeUninstallIdentity(
-        string $pluginNamespace,
-        array $customPostTypes,
-    ): void {
+    public function storeUninstallIdentity(array $customPostTypes): void
+    {
         $uninstallData = $this->getUninstallData();
-        $identity = [
-            self::KEY_PLUGIN_NAMESPACE => $pluginNamespace,
-            self::KEY_CUSTOM_POST_TYPES => $customPostTypes,
-        ];
+
+        $storedCustomPostTypes = $uninstallData[self::KEY_CUSTOM_POST_TYPES] ?? [];
+        if (!is_array($storedCustomPostTypes)) {
+            $storedCustomPostTypes = [];
+        }
+        sort($storedCustomPostTypes);
+
+        /**
+         * A custom post type registered by an extension which has just been
+         * deactivated must stay recorded, or uninstalling would leave its
+         * entries behind. So the list only ever grows.
+         */
+        $mergedCustomPostTypes = array_values(array_unique(array_merge(
+            $storedCustomPostTypes,
+            $customPostTypes
+        )));
+        sort($mergedCustomPostTypes);
 
         /**
          * The identity is recorded on every request, so only write when it
-         * has actually moved: a custom post type registered by a plugin
-         * which has just been deactivated must still be recorded, or
-         * uninstalling would leave its entries behind.
+         * has actually moved.
          */
-        $storedIdentity = [
-            self::KEY_PLUGIN_NAMESPACE => $uninstallData[self::KEY_PLUGIN_NAMESPACE] ?? null,
-            self::KEY_CUSTOM_POST_TYPES => $uninstallData[self::KEY_CUSTOM_POST_TYPES] ?? [],
-        ];
-        if (!is_array($storedIdentity[self::KEY_CUSTOM_POST_TYPES])) {
-            $storedIdentity[self::KEY_CUSTOM_POST_TYPES] = [];
-        }
-        $identity[self::KEY_CUSTOM_POST_TYPES] = array_values(array_unique(array_merge(
-            $storedIdentity[self::KEY_CUSTOM_POST_TYPES],
-            $customPostTypes
-        )));
-        sort($identity[self::KEY_CUSTOM_POST_TYPES]);
-        sort($storedIdentity[self::KEY_CUSTOM_POST_TYPES]);
-        if ($identity === $storedIdentity) {
+        if ($mergedCustomPostTypes === $storedCustomPostTypes) {
             return;
         }
 
-        $this->storeUninstallData(array_merge($uninstallData, $identity));
+        $uninstallData[self::KEY_CUSTOM_POST_TYPES] = $mergedCustomPostTypes;
+        $this->storeUninstallData($uninstallData);
     }
 
     public function getDeleteDataOnUninstall(): bool

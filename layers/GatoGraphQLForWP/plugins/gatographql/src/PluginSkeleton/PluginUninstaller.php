@@ -17,32 +17,38 @@ use function switch_to_blog;
  * asked for it, as the plugin is being deleted.
  *
  * This class runs from `uninstall.php`, i.e. with WordPress loaded but the
- * plugin not bootstrapped: there is no container, no service, and nothing
- * which can tell it the plugin's namespace. It is given none of that, and
- * instead finds the single option the plugin records it all under
- * {@see PluginOptions::INSTALLED_DATA}, searching for it by a suffix which
- * is the same whatever the plugin is called.
+ * plugin not bootstrapped: there is no container and no service with which to
+ * work out which data is the plugin's. It is told the plugin's namespace, and
+ * reads the single option the plugin records it all under
+ * {@see PluginOptions::INSTALLED_DATA}.
  *
- * Everything the plugin writes is namespaced already, by the option, meta
- * and database namespacers alike, so the data is removed by matching that
- * namespace rather than by keeping a list of what each feature created.
- * A feature added later is therefore removed too, without having to
- * remember to register it here.
+ * The namespace is passed in, and not searched for, because a site may well
+ * have Gato GraphQL and a standalone plugin installed side by side: each
+ * records an entry of its own, and deleting one must not read the other's and
+ * take its data with it.
+ *
+ * Options and meta keys are namespaced already, by the option and meta
+ * namespacers, so they are removed by matching that namespace rather than by
+ * keeping a list of what each feature created: a feature added later is
+ * removed too, without having to remember to register it here. Tables are
+ * the exception, and are dropped by the names the feature recorded when it
+ * installed them, so that a table belonging to another plugin can never
+ * match.
  */
 class PluginUninstaller
 {
     /**
      * Remove the plugin's data from every site it was installed on, if the
-     * user asked for that. Called from `uninstall.php`.
+     * user asked for that. Called from `uninstall.php`, which passes the
+     * namespace of the plugin being deleted.
      */
-    public static function uninstall(): void
+    public static function uninstall(string $pluginNamespace): void
     {
-        $optionName = self::findInstalledDataOptionName();
-        if ($optionName === null) {
+        if ($pluginNamespace === '') {
             return;
         }
 
-        $installedData = get_option($optionName);
+        $installedData = get_option($pluginNamespace . '-' . PluginOptions::INSTALLED_DATA);
         if (!is_array($installedData)) {
             return;
         }
@@ -53,11 +59,6 @@ class PluginUninstaller
         }
 
         if (!($uninstallData[InstalledDataSettingsManager::KEY_DELETE_DATA] ?? false)) {
-            return;
-        }
-
-        $pluginNamespace = (string) ($uninstallData[InstalledDataSettingsManager::KEY_PLUGIN_NAMESPACE] ?? '');
-        if ($pluginNamespace === '') {
             return;
         }
 
@@ -100,28 +101,6 @@ class PluginUninstaller
             self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $deleteContent);
             restore_current_blog();
         }
-    }
-
-    /**
-     * The option is found by suffix, and not by name, because the name
-     * carries the plugin's namespace, which is exactly what this class
-     * cannot know before reading it.
-     */
-    protected static function findInstalledDataOptionName(): ?string
-    {
-        global $wpdb;
-
-        /** @var string|null */
-        $optionName = $wpdb->get_var(
-            $wpdb->prepare(
-                "SELECT option_name FROM {$wpdb->options} WHERE option_name LIKE %s ORDER BY option_id ASC LIMIT 1",
-                '%' . $wpdb->esc_like(PluginOptions::INSTALLED_DATA_OPTION_SUFFIX)
-            )
-        );
-        if ($optionName === null || $optionName === '') {
-            return null;
-        }
-        return $optionName;
     }
 
     /**

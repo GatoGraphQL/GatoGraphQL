@@ -24,18 +24,12 @@ class PluginOptions
      * needed to remove it again.
      *
      * `uninstall.php` runs with WordPress loaded but the plugin not
-     * bootstrapped, so it has no services with which to work out the
-     * plugin's namespace, its tables or its custom post types. This
-     * option is the only thing it must find, and it carries all of them.
+     * bootstrapped, so it has no services with which to work out which
+     * tables and custom post types the plugin installed. It knows its own
+     * namespace, which is a compile-time constant, and this option, which
+     * that namespace names, carries everything else.
      *
      * @see PluginUninstaller
      */
     public final const INSTALLED_DATA = 'installed-data';
-
-    /**
-     * The suffix under which {@see PluginOptions::INSTALLED_DATA} is
-     * stored, whatever the plugin's namespace. `uninstall.php` searches
-     * the Options table for it, and reads the namespace from within.
-     */
-    public final const INSTALLED_DATA_OPTION_SUFFIX = '-' . self::INSTALLED_DATA;
 }

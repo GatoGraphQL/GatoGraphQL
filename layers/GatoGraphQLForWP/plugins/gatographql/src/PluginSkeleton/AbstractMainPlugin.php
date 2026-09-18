@@ -609,10 +609,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             array_values($customPostTypeRegistry->getCustomPostTypes())
         );
 
-        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity(
-            $this->getPluginNamespace(),
-            $customPostTypes
-        );
+        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity($customPostTypes);
     }
 
     /**

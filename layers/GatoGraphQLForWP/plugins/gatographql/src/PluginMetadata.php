@@ -12,6 +12,5 @@ final class PluginMetadata
 
     final public const PLUGIN_NAMESPACE = 'gatographql';
     final public const PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES = 'graphql';
-    final public const PLUGIN_NAMESPACE_FOR_DB = 'gatogql';
     final public const PLUGIN_NAMESPACE_FOR_CLASS = 'GatoGraphQL';
 }
