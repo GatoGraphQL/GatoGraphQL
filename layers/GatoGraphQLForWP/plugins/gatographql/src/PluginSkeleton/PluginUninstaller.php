@@ -11,6 +11,7 @@ use function get_sites;
 use function is_multisite;
 use function restore_current_blog;
 use function switch_to_blog;
+use function wp_cache_flush;
 
 /**
  * Remove everything the plugin has stored on the site, when the user has
@@ -32,34 +33,79 @@ use function switch_to_blog;
  * keeping a list of what each feature created: a feature added later is
  * removed too, without having to remember to register it here. Tables are
  * the exception, and are dropped by the names the feature recorded when it
- * installed them, so that a table belonging to another plugin can never
- * match.
+ * installed them, and only when those names carry the plugin's own table
+ * prefix, so that a table belonging to another plugin can never match, not
+ * even through a record someone has tampered with.
+ *
+ * On a network, every site holds a record of its own, with its own tables
+ * (their names carry the site's table prefix) and its own answer to whether
+ * the data is to be deleted, so each site is read and handled by itself.
  */
 class PluginUninstaller
 {
     /**
      * Remove the plugin's data from every site it was installed on, if the
      * user asked for that. Called from `uninstall.php`, which passes the
-     * namespace of the plugin being deleted.
+     * namespace of the plugin being deleted, and the name of the folder
+     * the plugin keeps its cache and logs under in `wp-content`.
      */
-    public static function uninstall(string $pluginNamespace): void
+    public static function uninstall(string $pluginNamespace, ?string $wpContentFolderName = null): void
     {
         if ($pluginNamespace === '') {
             return;
         }
 
+        if (!is_multisite()) {
+            $deleted = self::uninstallFromCurrentSite($pluginNamespace);
+            if ($deleted) {
+                self::deleteWPContentFolder($wpContentFolderName);
+            }
+            return;
+        }
+
+        /**
+         * Options, meta and tables are all per-site, and WordPress runs
+         * `uninstall.php` only for the site the plugin is being deleted
+         * from, so a network-wide delete would otherwise leave every other
+         * site's data behind.
+         */
+        $deletedFromAnySite = false;
+        /** @var int[] */
+        $sites = get_sites(['fields' => 'ids', 'number' => 0]);
+        foreach ($sites as $siteID) {
+            switch_to_blog($siteID);
+            $deleted = self::uninstallFromCurrentSite($pluginNamespace);
+            restore_current_blog();
+            $deletedFromAnySite = $deletedFromAnySite || $deleted;
+        }
+        if (!$deletedFromAnySite) {
+            return;
+        }
+        self::deleteSiteMeta($pluginNamespace);
+        self::deleteWPContentFolder($wpContentFolderName);
+        wp_cache_flush();
+    }
+
+    /**
+     * Read the site's own record, and remove what it says, if the site
+     * asked for it.
+     *
+     * @return bool Whether anything was removed from the site
+     */
+    protected static function uninstallFromCurrentSite(string $pluginNamespace): bool
+    {
         $installedData = get_option(PluginDataNaming::namespaceOptionName($pluginNamespace, PluginOptions::INSTALLED_DATA));
         if (!is_array($installedData)) {
-            return;
+            return false;
         }
 
         $uninstallData = $installedData[InstalledDataSettingsManager::KEY_UNINSTALL] ?? null;
         if (!is_array($uninstallData)) {
-            return;
+            return false;
         }
 
         if (!($uninstallData[InstalledDataSettingsManager::KEY_DELETE_DATA] ?? false)) {
-            return;
+            return false;
         }
 
         $tableNames = [];
@@ -89,60 +135,45 @@ class PluginUninstaller
         }
         /** @var string[] $taxonomies */
 
-        /**
-         * Options, meta and tables are all per-site, and WordPress runs
-         * `uninstall.php` only for the site the plugin is being deleted
-         * from, so a network-wide delete would otherwise leave every other
-         * site's data behind.
-         */
-        if (!is_multisite()) {
-            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $taxonomies, $deleteContent);
-            return;
-        }
-
-        /** @var int[] */
-        $sites = get_sites(['fields' => 'ids', 'number' => 0]);
-        foreach ($sites as $siteID) {
-            switch_to_blog($siteID);
-            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $taxonomies, $deleteContent);
-            restore_current_blog();
-        }
-    }
-
-    /**
-     * @param string[] $tableNames
-     * @param string[] $customPostTypes
-     * @param string[] $taxonomies
-     */
-    protected static function uninstallFromCurrentSite(
-        string $pluginNamespace,
-        array $tableNames,
-        array $customPostTypes,
-        array $taxonomies,
-        bool $deleteContent,
-    ): void {
         if ($deleteContent && $customPostTypes !== []) {
             self::deleteCustomPosts($customPostTypes);
         }
         if ($deleteContent && $taxonomies !== []) {
             self::deleteTaxonomyTerms($taxonomies);
         }
-        self::dropTables($tableNames);
+        self::dropTables($pluginNamespace, $tableNames);
         self::deleteMeta($pluginNamespace);
         self::deleteOptions($pluginNamespace);
+
+        /**
+         * The rows were removed with SQL, which the object cache knows
+         * nothing about: with a persistent cache, reinstalling the plugin
+         * would otherwise read back the record just deleted, and take the
+         * table it names to still exist.
+         */
+        wp_cache_flush();
+        return true;
     }
 
     /**
-     * Only the tables each feature recorded as it created them are dropped.
+     * Only the tables each feature recorded as it created them are dropped,
+     * and among those only the ones named the way the plugin names its
+     * tables, under the current site's table prefix: the record is an
+     * option, and an option can be written by whoever administers the site,
+     * which on a network is not who administers the network.
      *
      * @param string[] $tableNames
      */
-    protected static function dropTables(array $tableNames): void
+    protected static function dropTables(string $pluginNamespace, array $tableNames): void
     {
         global $wpdb;
 
+        $tableNamePrefix = PluginDataNaming::getTableNamePrefix($pluginNamespace);
         foreach ($tableNames as $tableName) {
             if (preg_match('/^[A-Za-z0-9_]+$/', $tableName) !== 1) {
+                continue;
+            }
+            if (!str_starts_with($tableName, $tableNamePrefix)) {
                 continue;
             }
             $wpdb->query("DROP TABLE IF EXISTS `{$tableName}`"); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
@@ -192,11 +223,7 @@ class PluginUninstaller
     {
         global $wpdb;
 
-        $optionNamePatterns = array_map(
-            static fn (string $optionNamePrefix): string => $wpdb->esc_like($optionNamePrefix) . '%',
-            PluginDataNaming::getOptionNamePrefixes($pluginNamespace)
-        );
-        foreach ($optionNamePatterns as $optionNamePattern) {
+        foreach (self::getOptionNamePatterns($pluginNamespace) as $optionNamePattern) {
             $wpdb->query(
                 $wpdb->prepare(
                     "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -204,12 +231,17 @@ class PluginUninstaller
                 )
             );
         }
+    }
 
-        if (!is_multisite()) {
-            return;
-        }
+    /**
+     * The network's own options table, which is one for all sites, so it is
+     * swept once rather than once per site.
+     */
+    protected static function deleteSiteMeta(string $pluginNamespace): void
+    {
+        global $wpdb;
 
-        foreach ($optionNamePatterns as $optionNamePattern) {
+        foreach (self::getOptionNamePatterns($pluginNamespace) as $optionNamePattern) {
             $wpdb->query(
                 $wpdb->prepare(
                     "DELETE FROM {$wpdb->sitemeta} WHERE meta_key LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
@@ -217,6 +249,62 @@ class PluginUninstaller
                 )
             );
         }
+    }
+
+    /**
+     * @return string[]
+     */
+    protected static function getOptionNamePatterns(string $pluginNamespace): array
+    {
+        global $wpdb;
+
+        return array_map(
+            static fn (string $optionNamePrefix): string => $wpdb->esc_like($optionNamePrefix) . '%',
+            PluginDataNaming::getOptionNamePrefixes($pluginNamespace)
+        );
+    }
+
+    /**
+     * The folder under `wp-content` where the plugin keeps its container
+     * cache and its logs, which is the one place it writes outside the
+     * database {@see \GatoGraphQL\GatoGraphQL\PluginEnvironment::getCacheDir()}.
+     * A site which moved that folder elsewhere through the corresponding
+     * constant or environment variable keeps it: only the default location
+     * is known here.
+     */
+    protected static function deleteWPContentFolder(?string $wpContentFolderName): void
+    {
+        if ($wpContentFolderName === null || $wpContentFolderName === '') {
+            return;
+        }
+        if (preg_match('/^[A-Za-z0-9_-]+$/', $wpContentFolderName) !== 1) {
+            return;
+        }
+        $folder = constant('WP_CONTENT_DIR') . DIRECTORY_SEPARATOR . $wpContentFolderName;
+        if (!is_dir($folder)) {
+            return;
+        }
+        self::deleteFolder($folder);
+    }
+
+    protected static function deleteFolder(string $folder): void
+    {
+        $entries = scandir($folder);
+        if ($entries === false) {
+            return;
+        }
+        foreach ($entries as $entry) {
+            if ($entry === '.' || $entry === '..') {
+                continue;
+            }
+            $path = $folder . DIRECTORY_SEPARATOR . $entry;
+            if (is_dir($path) && !is_link($path)) {
+                self::deleteFolder($path);
+                continue;
+            }
+            unlink($path);
+        }
+        rmdir($folder);
     }
 
     /**
@@ -301,7 +389,10 @@ class PluginUninstaller
     /**
      * The custom post types are no longer registered by the time this runs,
      * so the entries are removed directly, together with everything hanging
-     * off them, rather than through `wp_delete_post`.
+     * off them, rather than through `wp_delete_post`. What that function
+     * does is followed: the revisions go with their entry, meta and all,
+     * the comments too, and an attachment whose parent was an entry is kept
+     * and detached, as the file it stands for stays in the uploads folder.
      *
      * @param string[] $customPostTypes
      */
@@ -322,19 +413,54 @@ class PluginUninstaller
         }
 
         $customPostIDPlaceholders = implode(',', array_fill(0, count($customPostIDs), '%d'));
-        $statements = [
-            "DELETE FROM {$wpdb->postmeta} WHERE post_id IN ({$customPostIDPlaceholders})",
-            "DELETE FROM {$wpdb->term_relationships} WHERE object_id IN ({$customPostIDPlaceholders})",
-            "DELETE FROM {$wpdb->posts} WHERE ID IN ({$customPostIDPlaceholders}) OR post_parent IN ({$customPostIDPlaceholders})",
-        ];
-        foreach ($statements as $statement) {
-            $substitutionCount = substr_count($statement, '%d');
-            $substitutions = $substitutionCount === count($customPostIDs)
-                ? $customPostIDs
-                : array_merge($customPostIDs, $customPostIDs);
+        /** @var string[] */
+        $revisionIDs = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT ID FROM {$wpdb->posts} WHERE post_type = 'revision' AND post_parent IN ({$customPostIDPlaceholders})", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$customPostIDs
+            )
+        );
+        $postIDs = array_values(array_unique(array_merge($customPostIDs, $revisionIDs)));
+        $postIDPlaceholders = implode(',', array_fill(0, count($postIDs), '%d'));
+
+        /** @var string[] */
+        $commentIDs = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT comment_ID FROM {$wpdb->comments} WHERE comment_post_ID IN ({$postIDPlaceholders})", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$postIDs
+            )
+        );
+        if ($commentIDs !== []) {
+            $commentIDPlaceholders = implode(',', array_fill(0, count($commentIDs), '%d'));
+            foreach (
+                [
+                    "DELETE FROM {$wpdb->commentmeta} WHERE comment_id IN ({$commentIDPlaceholders})",
+                    "DELETE FROM {$wpdb->comments} WHERE comment_ID IN ({$commentIDPlaceholders})",
+                ] as $statement
+            ) {
+                $wpdb->query(
+                    $wpdb->prepare($statement, ...$commentIDs) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+                );
+            }
+        }
+
+        foreach (
+            [
+                "DELETE FROM {$wpdb->postmeta} WHERE post_id IN ({$postIDPlaceholders})",
+                "DELETE FROM {$wpdb->term_relationships} WHERE object_id IN ({$postIDPlaceholders})",
+                "DELETE FROM {$wpdb->posts} WHERE ID IN ({$postIDPlaceholders})",
+            ] as $statement
+        ) {
             $wpdb->query(
-                $wpdb->prepare($statement, ...$substitutions) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+                $wpdb->prepare($statement, ...$postIDs) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
             );
         }
+
+        $wpdb->query(
+            $wpdb->prepare(
+                "UPDATE {$wpdb->posts} SET post_parent = 0 WHERE post_type = 'attachment' AND post_parent IN ({$customPostIDPlaceholders})", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$customPostIDs
+            )
+        );
     }
 }

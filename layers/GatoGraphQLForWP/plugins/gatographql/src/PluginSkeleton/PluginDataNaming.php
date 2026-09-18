@@ -39,6 +39,11 @@ class PluginDataNaming
     public final const NAMESPACE_SEPARATOR = '-';
 
     /**
+     * What separates the plugin's namespace from the rest of a table name.
+     */
+    public final const TABLE_NAMESPACE_SEPARATOR = '_';
+
+    /**
      * WordPress hides a meta key from its UIs when it starts with this.
      */
     public final const PRIVATE_META_KEY_PREFIX = '_';
@@ -92,5 +97,23 @@ class PluginDataNaming
         bool $prefixUnderscore = true,
     ): string {
         return self::getMetaKeyPrefix($pluginNamespace, $prefixUnderscore) . $metaKey;
+    }
+
+    /**
+     * A table belongs to a site, so its name starts with the site's own
+     * table prefix, and then the plugin's namespace, joined by an
+     * underscore rather than the option separator as MySQL does not take
+     * a dash in an unquoted identifier. The uninstaller drops a recorded
+     * table only when its name starts like this.
+     */
+    public static function getTableNamePrefix(string $pluginNamespace): string
+    {
+        global $wpdb;
+        return $wpdb->prefix . $pluginNamespace . self::TABLE_NAMESPACE_SEPARATOR;
+    }
+
+    public static function namespaceTableName(string $pluginNamespace, string $tableName): string
+    {
+        return self::getTableNamePrefix($pluginNamespace) . $tableName;
     }
 }

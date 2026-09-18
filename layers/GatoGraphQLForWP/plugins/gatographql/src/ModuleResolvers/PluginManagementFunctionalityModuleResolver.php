@@ -15,6 +15,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 
+use function esc_html;
 use function get_post_type_object;
 use function get_submit_button;
 
@@ -478,7 +479,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             if ($customPostTypeObject === null) {
                 continue;
             }
-            $customPostTypeNames[] = $customPostTypeObject->labels->name;
+            $customPostTypeNames[] = esc_html($customPostTypeObject->labels->name);
         }
         $customPostTypeNames = array_values(array_unique($customPostTypeNames));
 

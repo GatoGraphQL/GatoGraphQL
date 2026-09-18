@@ -26,6 +26,7 @@ use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
+use GatoGraphQL\GatoGraphQL\Settings\InstalledDataSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -38,16 +39,22 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use Throwable;
 use WP_Theme;
 use WP_Upgrader;
 
 use function __;
 use function add_action;
+use function delete_transient;
 use function do_action;
+use function error_log;
 use function function_exists;
 use function get_called_class;
 use function get_option;
+use function get_transient;
 use function is_admin;
+use function set_transient;
+use function sprintf;
 use function update_option;
 use function wp_enqueue_style;
 use function wp_set_option_autoload;
@@ -576,27 +583,74 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     protected function maybeInstallFeatures(): void
     {
         $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
+        $featureInstallersToInstall = [];
         foreach ($this->getAllFeatureInstallers() as $featureInstaller) {
-            $featureSlug = $featureInstaller->getFeatureSlug();
-            $featureVersion = $featureInstaller->getFeatureVersion();
-            if ($installedDataSettingsManager->getInstalledFeatureVersion($featureSlug) === $featureVersion) {
+            if ($installedDataSettingsManager->getInstalledFeatureVersion($featureInstaller->getFeatureSlug()) === $featureInstaller->getFeatureVersion()) {
                 continue;
             }
-            /**
-             * The version is recorded only once installing has returned, so
-             * that a failure is retried on the next request instead of being
-             * remembered as done.
-             */
-            $featureInstaller->install();
-            $installedDataSettingsManager->storeInstalledFeatureVersion(
-                $featureSlug,
-                $featureVersion,
-                $featureInstaller->getTableNames()
-            );
+            $featureInstallersToInstall[] = $featureInstaller;
+        }
+        if ($featureInstallersToInstall === []) {
+            return;
+        }
+
+        /**
+         * Two requests arriving together, the first ones after an update,
+         * would both find the version behind and both run the installer.
+         * The one which does not get the lock leaves it to the other: it
+         * will find the version recorded on its next request, or the lock
+         * released if the other failed.
+         */
+        $transientName = $this->getPluginNamespace() . '-installing-features';
+        if (get_transient($transientName) !== false) {
+            return;
+        }
+        set_transient($transientName, true, 30);
+        try {
+            foreach ($featureInstallersToInstall as $featureInstaller) {
+                $this->installFeature($featureInstaller, $installedDataSettingsManager);
+            }
+        } finally {
+            delete_transient($transientName);
         }
     }
 
     /**
+     * The version is recorded only once installing has returned, so that a
+     * failure is retried on the next request instead of being remembered as
+     * done. The failure itself is logged and swallowed: this runs on every
+     * request, and a feature which cannot be installed must not take the
+     * site down with it.
+     */
+    protected function installFeature(
+        FeatureInstallerInterface $featureInstaller,
+        InstalledDataSettingsManagerInterface $installedDataSettingsManager,
+    ): void {
+        try {
+            $featureInstaller->install();
+        } catch (Throwable $throwable) {
+            error_log(sprintf(
+                '[%s] Installing feature "%s" (version %s) failed: %s',
+                $this->getPluginName(),
+                $featureInstaller->getFeatureSlug(),
+                $featureInstaller->getFeatureVersion(),
+                $throwable->getMessage()
+            ));
+            return;
+        }
+        $installedDataSettingsManager->storeInstalledFeatureVersion(
+            $featureInstaller->getFeatureSlug(),
+            $featureInstaller->getFeatureVersion(),
+            $featureInstaller->getTableNames()
+        );
+    }
+
+    /**
+     * The feature slugs must be unique across the plugin and its extensions,
+     * as they share a single record: two installers under one slug would
+     * each find the other's version recorded and take turns installing, on
+     * every request. The second one is dropped and the clash logged.
+     *
      * @return FeatureInstallerInterface[]
      */
     protected function getAllFeatureInstallers(): array
@@ -608,7 +662,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 $extension->getFeatureInstallers()
             );
         }
-        return $featureInstallers;
+        $featureInstallersBySlug = [];
+        foreach ($featureInstallers as $featureInstaller) {
+            $featureSlug = $featureInstaller->getFeatureSlug();
+            if (isset($featureInstallersBySlug[$featureSlug])) {
+                error_log(sprintf(
+                    '[%s] Feature slug "%s" is declared by more than one installer (%s and %s); only the first one is installed',
+                    $this->getPluginName(),
+                    $featureSlug,
+                    $featureInstallersBySlug[$featureSlug]::class,
+                    $featureInstaller::class
+                ));
+                continue;
+            }
+            $featureInstallersBySlug[$featureSlug] = $featureInstaller;
+        }
+        return array_values($featureInstallersBySlug);
     }
 
     /**

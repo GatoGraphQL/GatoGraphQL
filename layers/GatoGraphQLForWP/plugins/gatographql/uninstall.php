@@ -39,4 +39,4 @@ if (!class_exists(PluginUninstaller::class)) {
     return;
 }
 
-PluginUninstaller::uninstall(PluginMetadata::PLUGIN_NAMESPACE);
+PluginUninstaller::uninstall(PluginMetadata::PLUGIN_NAMESPACE, basename(__DIR__));

@@ -326,9 +326,6 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     }
 
     /**
-     * Delete the Settings and flush
-     */
-    /**
      * Mirror the user's choice into the plugin's own record of what it has
      * installed.
      *

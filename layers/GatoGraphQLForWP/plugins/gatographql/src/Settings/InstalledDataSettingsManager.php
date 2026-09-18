@@ -82,10 +82,11 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     public function getInstalledFeatureVersion(string $featureSlug): ?string
     {
         $features = $this->getInstalledFeatures();
-        if (!isset($features[$featureSlug][self::KEY_VERSION])) {
+        $version = $features[$featureSlug][self::KEY_VERSION] ?? null;
+        if (!is_scalar($version)) {
             return null;
         }
-        return (string) $features[$featureSlug][self::KEY_VERSION];
+        return (string) $version;
     }
 
     /**
