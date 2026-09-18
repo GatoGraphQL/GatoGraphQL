@@ -31,11 +31,13 @@ use function wp_cache_flush;
  * Options and meta keys are namespaced already, by the option and meta
  * namespacers, so they are removed by matching that namespace rather than by
  * keeping a list of what each feature created: a feature added later is
- * removed too, without having to remember to register it here. Tables are
- * the exception, and are dropped by the names the feature recorded when it
- * installed them, and only when those names carry the plugin's own table
- * prefix, so that a table belonging to another plugin can never match, not
- * even through a record someone has tampered with.
+ * removed too, without having to remember to register it here. Tables,
+ * custom post types and taxonomies are the exception, and are removed by
+ * the names the plugin recorded, and only when those names carry the
+ * plugin's own prefix (the site's table prefix and the plugin's namespace
+ * for a table, the plugin's entity-type namespace for the others), so that
+ * a table or an entry belonging to WordPress or to another plugin can never
+ * match, not even through a record someone has tampered with.
  *
  * On a network, every site holds a record of its own, with its own tables
  * (their names carry the site's table prefix) and its own answer to whether
@@ -44,19 +46,46 @@ use function wp_cache_flush;
 class PluginUninstaller
 {
     /**
+     * The folders under `wp-content` that are WordPress's own, or in such
+     * common use that the plugin's must never be taken for one of them.
+     */
+    protected const RESERVED_WP_CONTENT_FOLDER_NAMES = [
+        'cache',
+        'languages',
+        'logs',
+        'mu-plugins',
+        'plugins',
+        'themes',
+        'upgrade',
+        'upgrade-temp-backup',
+        'uploads',
+    ];
+
+    /**
+     * What the plugin writes under its folder in `wp-content`
+     * {@see \GatoGraphQL\GatoGraphQL\PluginEnvironment::getCacheDir()}
+     * {@see \GatoGraphQL\GatoGraphQL\PluginEnvironment::getLogsDir()}.
+     */
+    protected const WP_CONTENT_SUBFOLDER_NAMES = [
+        'cache',
+        'logs',
+    ];
+
+    /**
      * Remove the plugin's data from every site it was installed on, if the
      * user asked for that. Called from `uninstall.php`, which passes the
-     * namespace of the plugin being deleted, and the name of the folder
-     * the plugin keeps its cache and logs under in `wp-content`.
+     * namespace of the plugin being deleted, the namespace its custom post
+     * types and taxonomies are named under, and the name of the folder the
+     * plugin keeps its cache and logs under in `wp-content`.
      */
-    public static function uninstall(string $pluginNamespace, ?string $wpContentFolderName = null): void
+    public static function uninstall(string $pluginNamespace, string $entityTypeNamespace, ?string $wpContentFolderName = null): void
     {
-        if ($pluginNamespace === '') {
+        if ($pluginNamespace === '' || $entityTypeNamespace === '') {
             return;
         }
 
         if (!is_multisite()) {
-            $deleted = self::uninstallFromCurrentSite($pluginNamespace);
+            $deleted = self::uninstallFromCurrentSite($pluginNamespace, $entityTypeNamespace);
             if ($deleted) {
                 self::deleteWPContentFolder($wpContentFolderName);
             }
@@ -74,7 +103,7 @@ class PluginUninstaller
         $sites = get_sites(['fields' => 'ids', 'number' => 0]);
         foreach ($sites as $siteID) {
             switch_to_blog($siteID);
-            $deleted = self::uninstallFromCurrentSite($pluginNamespace);
+            $deleted = self::uninstallFromCurrentSite($pluginNamespace, $entityTypeNamespace);
             restore_current_blog();
             $deletedFromAnySite = $deletedFromAnySite || $deleted;
         }
@@ -92,7 +121,7 @@ class PluginUninstaller
      *
      * @return bool Whether anything was removed from the site
      */
-    protected static function uninstallFromCurrentSite(string $pluginNamespace): bool
+    protected static function uninstallFromCurrentSite(string $pluginNamespace, string $entityTypeNamespace): bool
     {
         $installedData = get_option(PluginDataNaming::namespaceOptionName($pluginNamespace, PluginOptions::INSTALLED_DATA));
         if (!is_array($installedData)) {
@@ -123,17 +152,14 @@ class PluginUninstaller
         $tableNames = array_values(array_unique($tableNames));
 
         $deleteContent = (bool) ($uninstallData[InstalledDataSettingsManager::KEY_DELETE_CONTENT] ?? false);
-        $customPostTypes = $uninstallData[InstalledDataSettingsManager::KEY_CUSTOM_POST_TYPES] ?? [];
-        if (!is_array($customPostTypes)) {
-            $customPostTypes = [];
-        }
-        /** @var string[] $customPostTypes */
-
-        $taxonomies = $uninstallData[InstalledDataSettingsManager::KEY_TAXONOMIES] ?? [];
-        if (!is_array($taxonomies)) {
-            $taxonomies = [];
-        }
-        /** @var string[] $taxonomies */
+        $customPostTypes = self::getOwnEntityTypeNames(
+            $entityTypeNamespace,
+            $uninstallData[InstalledDataSettingsManager::KEY_CUSTOM_POST_TYPES] ?? []
+        );
+        $taxonomies = self::getOwnEntityTypeNames(
+            $entityTypeNamespace,
+            $uninstallData[InstalledDataSettingsManager::KEY_TAXONOMIES] ?? []
+        );
 
         if ($deleteContent && $customPostTypes !== []) {
             self::deleteCustomPosts($customPostTypes);
@@ -143,6 +169,7 @@ class PluginUninstaller
         }
         self::dropTables($pluginNamespace, $tableNames);
         self::deleteMeta($pluginNamespace);
+        self::deleteUserOptions($pluginNamespace);
         self::deleteOptions($pluginNamespace);
 
         /**
@@ -153,6 +180,40 @@ class PluginUninstaller
          */
         wp_cache_flush();
         return true;
+    }
+
+    /**
+     * The custom post types and taxonomies recorded are trusted no further
+     * than the tables are: they come from an option, and an option can be
+     * written by whoever administers the site. Every entity type the plugin
+     * registers is named under its entity-type namespace
+     * {@see \GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\AbstractCustomPostType::getCustomPostType()}
+     * {@see \GatoGraphQL\GatoGraphQL\Services\Taxonomies\AbstractTaxonomy::getTaxonomy()},
+     * so a recorded name that is not, such as `post` or `category`, is not
+     * the plugin's, and is not acted on.
+     *
+     * @return string[]
+     */
+    protected static function getOwnEntityTypeNames(string $entityTypeNamespace, mixed $entityTypeNames): array
+    {
+        if (!is_array($entityTypeNames)) {
+            return [];
+        }
+        $entityTypeNamePrefix = $entityTypeNamespace . PluginDataNaming::NAMESPACE_SEPARATOR;
+        $ownEntityTypeNames = [];
+        foreach ($entityTypeNames as $entityTypeName) {
+            if (!is_string($entityTypeName)) {
+                continue;
+            }
+            if (preg_match('/^[a-z0-9_-]+$/', $entityTypeName) !== 1) {
+                continue;
+            }
+            if (!str_starts_with($entityTypeName, $entityTypeNamePrefix)) {
+                continue;
+            }
+            $ownEntityTypeNames[] = $entityTypeName;
+        }
+        return array_values(array_unique($ownEntityTypeNames));
     }
 
     /**
@@ -207,6 +268,24 @@ class PluginUninstaller
                 )
             );
         }
+    }
+
+    /**
+     * A user option is a row of user meta which WordPress stores under the
+     * site's table prefix, so it is neither an option nor a meta key of
+     * the plugin's shape, though it is named the way the options are past
+     * that prefix. Swept per site, as the prefix is the site's.
+     */
+    protected static function deleteUserOptions(string $pluginNamespace): void
+    {
+        global $wpdb;
+
+        $wpdb->query(
+            $wpdb->prepare(
+                "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                $wpdb->esc_like($wpdb->get_blog_prefix() . PluginDataNaming::getOptionNamePrefix($pluginNamespace)) . '%'
+            )
+        );
     }
 
     /**
@@ -277,16 +356,44 @@ class PluginUninstaller
         if ($wpContentFolderName === null || $wpContentFolderName === '') {
             return;
         }
-        if (preg_match('/^[A-Za-z0-9_-]+$/', $wpContentFolderName) !== 1) {
+        /**
+         * Lowercased, as the plugin names the folder
+         * {@see AbstractPlugin::getPluginWPContentFolderName()}; and never a
+         * folder of WordPress's own, whatever the plugin's folder is called.
+         */
+        $wpContentFolderName = strtolower($wpContentFolderName);
+        if (preg_match('/^[a-z0-9_-]+$/', $wpContentFolderName) !== 1) {
+            return;
+        }
+        if (in_array($wpContentFolderName, self::RESERVED_WP_CONTENT_FOLDER_NAMES, true)) {
             return;
         }
         $folder = constant('WP_CONTENT_DIR') . DIRECTORY_SEPARATOR . $wpContentFolderName;
-        if (!is_dir($folder)) {
+        if (!is_dir($folder) || is_link($folder)) {
             return;
         }
-        self::deleteFolder($folder);
+        /**
+         * Only what the plugin wrote there goes, and the folder itself only
+         * once it is empty: were anything else kept in it, it stays.
+         */
+        foreach (self::WP_CONTENT_SUBFOLDER_NAMES as $subfolderName) {
+            $subfolder = $folder . DIRECTORY_SEPARATOR . $subfolderName;
+            if (!is_dir($subfolder) || is_link($subfolder)) {
+                continue;
+            }
+            self::deleteFolder($subfolder);
+        }
+        $entries = scandir($folder);
+        if ($entries === false || array_diff($entries, ['.', '..']) !== []) {
+            return;
+        }
+        rmdir($folder);
     }
 
+    /**
+     * A folder reached through a link is not entered: what it links to is
+     * not the plugin's to delete. The link itself is removed like a file.
+     */
     protected static function deleteFolder(string $folder): void
     {
         $entries = scandir($folder);

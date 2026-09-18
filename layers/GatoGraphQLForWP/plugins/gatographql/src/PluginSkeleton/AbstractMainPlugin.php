@@ -62,6 +62,11 @@ use function wp_set_option_autoload;
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
     /**
+     * Seconds before a feature whose installing failed is tried again.
+     */
+    protected const FEATURE_INSTALLATION_RETRY_INTERVAL = 3600;
+
+    /**
      * If there is any error when initializing the plugin,
      * set this var to `true` to stop loading it and show an error message.
      */
@@ -560,7 +565,22 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                 ) {
                     return;
                 }
-                $this->maybeInstallFeatures();
+                /**
+                 * Collecting the installers resolves services, and a
+                 * container cached under a different context than the one
+                 * running (a license just activated, say) does not hold
+                 * them: that is logged, and left to the next request, as
+                 * this runs on every one and must not take the site down.
+                 */
+                try {
+                    $this->maybeInstallFeatures();
+                } catch (Throwable $throwable) {
+                    error_log(sprintf(
+                        '[%s] Installing features failed: %s',
+                        $this->getPluginName(),
+                        $throwable->getMessage()
+                    ));
+                }
                 $this->storeUninstallIdentity();
             },
             PluginLifecyclePriorities::AFTER_EVERYTHING
@@ -588,6 +608,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             if ($installedDataSettingsManager->getInstalledFeatureVersion($featureInstaller->getFeatureSlug()) === $featureInstaller->getFeatureVersion()) {
                 continue;
             }
+            if (get_transient($this->getFeatureInstallationFailedTransientName($featureInstaller)) !== false) {
+                continue;
+            }
             $featureInstallersToInstall[] = $featureInstaller;
         }
         if ($featureInstallersToInstall === []) {
@@ -601,7 +624,7 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
          * will find the version recorded on its next request, or the lock
          * released if the other failed.
          */
-        $transientName = $this->getPluginNamespace() . '-installing-features';
+        $transientName = OptionNamespacerFacade::getInstance()->namespaceOption('installing-features');
         if (get_transient($transientName) !== false) {
             return;
         }
@@ -617,10 +640,12 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
     /**
      * The version is recorded only once installing has returned, so that a
-     * failure is retried on the next request instead of being remembered as
-     * done. The failure itself is logged and swallowed: this runs on every
-     * request, and a feature which cannot be installed must not take the
-     * site down with it.
+     * failure is retried instead of being remembered as done. The failure
+     * itself is logged and swallowed: this runs on every request, and a
+     * feature which cannot be installed must not take the site down with
+     * it. Nor must it be attempted on every request: a database user
+     * without the rights to create a table would fail the same way each
+     * time, so the attempt is put off for a while.
      */
     protected function installFeature(
         FeatureInstallerInterface $featureInstaller,
@@ -630,18 +655,30 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             $featureInstaller->install();
         } catch (Throwable $throwable) {
             error_log(sprintf(
-                '[%s] Installing feature "%s" (version %s) failed: %s',
+                '[%s] Installing feature "%s" (version %s) failed, and will be tried again in an hour: %s',
                 $this->getPluginName(),
                 $featureInstaller->getFeatureSlug(),
                 $featureInstaller->getFeatureVersion(),
                 $throwable->getMessage()
             ));
+            set_transient(
+                $this->getFeatureInstallationFailedTransientName($featureInstaller),
+                true,
+                self::FEATURE_INSTALLATION_RETRY_INTERVAL
+            );
             return;
         }
         $installedDataSettingsManager->storeInstalledFeatureVersion(
             $featureInstaller->getFeatureSlug(),
             $featureInstaller->getFeatureVersion(),
             $featureInstaller->getTableNames()
+        );
+    }
+
+    protected function getFeatureInstallationFailedTransientName(FeatureInstallerInterface $featureInstaller): string
+    {
+        return OptionNamespacerFacade::getInstance()->namespaceOption(
+            'installing-feature-failed-' . $featureInstaller->getFeatureSlug()
         );
     }
 

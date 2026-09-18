@@ -147,12 +147,21 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     }
 
     /**
-     * @param array<string,mixed> $uninstallData
+     * Only the keys handed in are written, over what the option holds at
+     * that moment: the identity is recorded from any request and the
+     * preferences from the Settings screen, and one writing the whole
+     * uninstall record would put back what the other had just changed.
+     *
+     * @param array<string,mixed> $uninstallDataToMerge
      */
-    protected function storeUninstallData(array $uninstallData): void
+    protected function storeUninstallData(array $uninstallDataToMerge): void
     {
         $installedData = $this->getInstalledData();
-        $installedData[self::KEY_UNINSTALL] = $uninstallData;
+        $storedUninstallData = $installedData[self::KEY_UNINSTALL] ?? [];
+        if (!is_array($storedUninstallData)) {
+            $storedUninstallData = [];
+        }
+        $installedData[self::KEY_UNINSTALL] = array_merge($storedUninstallData, $uninstallDataToMerge);
         $this->storeInstalledData($installedData);
     }
 
@@ -169,7 +178,7 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
             self::KEY_TAXONOMIES => $taxonomies,
         ];
 
-        $moved = false;
+        $movedEntityTypeNames = [];
         foreach ($entityTypeNames as $key => $currentEntityTypeNames) {
             $storedEntityTypeNames = $uninstallData[$key] ?? [];
             if (!is_array($storedEntityTypeNames)) {
@@ -191,19 +200,18 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
             if ($mergedEntityTypeNames === $storedEntityTypeNames) {
                 continue;
             }
-            $uninstallData[$key] = $mergedEntityTypeNames;
-            $moved = true;
+            $movedEntityTypeNames[$key] = $mergedEntityTypeNames;
         }
 
         /**
          * The identity is recorded on every request, so only write when it
          * has actually moved.
          */
-        if (!$moved) {
+        if ($movedEntityTypeNames === []) {
             return;
         }
 
-        $this->storeUninstallData($uninstallData);
+        $this->storeUninstallData($movedEntityTypeNames);
     }
 
     public function getDeleteDataOnUninstall(): bool
@@ -220,9 +228,9 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
         bool $deleteDataOnUninstall,
         bool $deleteContentOnUninstall,
     ): void {
-        $uninstallData = $this->getUninstallData();
-        $uninstallData[self::KEY_DELETE_DATA] = $deleteDataOnUninstall;
-        $uninstallData[self::KEY_DELETE_CONTENT] = $deleteContentOnUninstall;
-        $this->storeUninstallData($uninstallData);
+        $this->storeUninstallData([
+            self::KEY_DELETE_DATA => $deleteDataOnUninstall,
+            self::KEY_DELETE_CONTENT => $deleteContentOnUninstall,
+        ]);
     }
 }

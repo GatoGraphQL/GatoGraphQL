@@ -23,9 +23,19 @@ class FakeWPDB
      */
     public array $columns = [];
 
+    /**
+     * @var string[] The statements `get_col` was asked
+     */
+    public array $selects = [];
+
     public function __get(string $name): string
     {
         return $this->prefix . $name;
+    }
+
+    public function get_blog_prefix(): string // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+    {
+        return $this->prefix;
     }
 
     public function esc_like(string $text): string // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
@@ -53,6 +63,7 @@ class FakeWPDB
      */
     public function get_col(string $query): array // phpcs:ignore PSR1.Methods.CamelCapsMethodName.NotCamelCaps
     {
+        $this->selects[] = $query;
         $matches = [];
         foreach ($this->columns as $prefix => $rows) {
             if (str_starts_with($query, $prefix)) {
