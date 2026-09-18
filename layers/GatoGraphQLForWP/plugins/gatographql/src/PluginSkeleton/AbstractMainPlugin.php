@@ -12,6 +12,9 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\TaxonomyRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
@@ -21,6 +24,8 @@ use GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterService
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -33,22 +38,33 @@ use PoP\Root\Environment as RootEnvironment;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
+use Throwable;
 use WP_Theme;
 use WP_Upgrader;
 
 use function __;
 use function add_action;
+use function delete_transient;
 use function do_action;
+use function error_log;
 use function function_exists;
 use function get_called_class;
 use function get_option;
+use function get_transient;
 use function is_admin;
+use function set_transient;
+use function sprintf;
 use function update_option;
 use function wp_enqueue_style;
 use function wp_set_option_autoload;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
+    /**
+     * Seconds before a feature whose installing failed is tried again.
+     */
+    protected const FEATURE_INSTALLATION_RETRY_INTERVAL = 3600;
+
     /**
      * If there is any error when initializing the plugin,
      * set this var to `true` to stop loading it and show an error message.
@@ -517,11 +533,224 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
 
+        // Create whatever the plugin and its extensions need on the site
+        $this->handleFeatureInstallation();
+
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
 
         // Maybe revalidate the commercial licenses
         $this->handleCommercialExtensions();
+    }
+
+    /**
+     * Install the features the plugin and its extensions declare, and record
+     * what has been installed so that uninstalling can undo it.
+     *
+     * This runs on every request, and not only when the plugin has just been
+     * activated or updated, because a feature is infrastructure: a table
+     * dropped by hand, or a database restored from a backup taken before it
+     * existed, must be recovered without the user being told to reactivate
+     * the plugin. Checking costs a single option read.
+     */
+    protected function handleFeatureInstallation(): void
+    {
+        add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            function (string $pluginAppGraphQLServerName): void {
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    || $this->initializationException !== null
+                ) {
+                    return;
+                }
+                /**
+                 * Collecting the installers resolves services, and a
+                 * container cached under a different context than the one
+                 * running (a license just activated, say) does not hold
+                 * them: that is logged, and left to the next request, as
+                 * this runs on every one and must not take the site down.
+                 */
+                try {
+                    $this->maybeInstallFeatures();
+                } catch (Throwable $throwable) {
+                    error_log(sprintf(
+                        '[%s] Installing features failed: %s',
+                        $this->getPluginName(),
+                        $throwable->getMessage()
+                    ));
+                }
+                $this->storeUninstallIdentity();
+            },
+            PluginLifecyclePriorities::AFTER_EVERYTHING
+        );
+    }
+
+    /**
+     * Install every feature whose data is not already at the version the
+     * code expects.
+     *
+     * The versions are compared for equality, and not for the installed one
+     * being behind: a site which rolls the plugin back then has data ahead
+     * of its code, and must have the older installer run over it, so that
+     * the data is brought back to the shape that code expects. Comparing
+     * with `>=` would skip it, and leave the older code reading data it
+     * does not know. Rolling back is safe because `dbDelta()` never drops a
+     * column, so a column only the newer version knew about survives unused
+     * alongside the rows.
+     */
+    protected function maybeInstallFeatures(): void
+    {
+        $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
+        $featureInstallersToInstall = [];
+        foreach ($this->getAllFeatureInstallers() as $featureInstaller) {
+            if ($installedDataSettingsManager->getInstalledFeatureVersion($featureInstaller->getFeatureSlug()) === $featureInstaller->getFeatureVersion()) {
+                continue;
+            }
+            if ($this->isFeatureInstallationOnHold($featureInstaller)) {
+                continue;
+            }
+            $featureInstallersToInstall[] = $featureInstaller;
+        }
+        if ($featureInstallersToInstall === []) {
+            return;
+        }
+
+        /**
+         * Two requests arriving together, the first ones after an update,
+         * would both find the version behind and both run the installer.
+         * The one which does not get the lock leaves it to the other: it
+         * will find the version recorded on its next request, or the lock
+         * released if the other failed.
+         */
+        $transientName = OptionNamespacerFacade::getInstance()->namespaceOption('installing-features');
+        if (get_transient($transientName) !== false) {
+            return;
+        }
+        set_transient($transientName, true, 30);
+        try {
+            foreach ($featureInstallersToInstall as $featureInstaller) {
+                $this->installFeature($featureInstaller);
+            }
+        } finally {
+            delete_transient($transientName);
+        }
+    }
+
+    /**
+     * The version is recorded only once installing has returned, so that a
+     * failure is retried instead of being remembered as done. The failure
+     * itself is logged and swallowed: this runs on every request, and a
+     * feature which cannot be installed must not take the site down with
+     * it. Nor must it be attempted on every request: a database user
+     * without the rights to create a table would fail the same way each
+     * time, so the attempt is put off for a while.
+     *
+     * Public so that a feature which finds its data gone by hand (a table
+     * dropped, say) can have it installed again through the same logging,
+     * recording and putting off, rather than through a path of its own.
+     */
+    public function installFeature(FeatureInstallerInterface $featureInstaller): void
+    {
+        $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
+        try {
+            $featureInstaller->install();
+        } catch (Throwable $throwable) {
+            error_log(sprintf(
+                '[%s] Installing feature "%s" (version %s) failed, and will be tried again in an hour: %s',
+                $this->getPluginName(),
+                $featureInstaller->getFeatureSlug(),
+                $featureInstaller->getFeatureVersion(),
+                $throwable->getMessage()
+            ));
+            set_transient(
+                $this->getFeatureInstallationFailedTransientName($featureInstaller),
+                true,
+                self::FEATURE_INSTALLATION_RETRY_INTERVAL
+            );
+            return;
+        }
+        $installedDataSettingsManager->storeInstalledFeatureVersion(
+            $featureInstaller->getFeatureSlug(),
+            $featureInstaller->getFeatureVersion(),
+            $featureInstaller->getTableNames()
+        );
+    }
+
+    public function isFeatureInstallationOnHold(FeatureInstallerInterface $featureInstaller): bool
+    {
+        return get_transient($this->getFeatureInstallationFailedTransientName($featureInstaller)) !== false;
+    }
+
+    /**
+     * The version is part of the name, so that an update shipping a fixed
+     * installer within the hour is not held back by the failure of the
+     * one it replaces.
+     */
+    protected function getFeatureInstallationFailedTransientName(FeatureInstallerInterface $featureInstaller): string
+    {
+        return OptionNamespacerFacade::getInstance()->namespaceOption(sprintf(
+            'installing-feature-failed-%s-%s',
+            $featureInstaller->getFeatureSlug(),
+            $featureInstaller->getFeatureVersion()
+        ));
+    }
+
+    /**
+     * The feature slugs must be unique across the plugin and its extensions,
+     * as they share a single record: two installers under one slug would
+     * each find the other's version recorded and take turns installing, on
+     * every request. The second one is dropped and the clash logged.
+     *
+     * @return FeatureInstallerInterface[]
+     */
+    protected function getAllFeatureInstallers(): array
+    {
+        $featureInstallers = $this->getFeatureInstallers();
+        foreach (PluginApp::getExtensionManager()->getExtensions() as $extension) {
+            $featureInstallers = array_merge(
+                $featureInstallers,
+                $extension->getFeatureInstallers()
+            );
+        }
+        $featureInstallersBySlug = [];
+        foreach ($featureInstallers as $featureInstaller) {
+            $featureSlug = $featureInstaller->getFeatureSlug();
+            if (isset($featureInstallersBySlug[$featureSlug])) {
+                error_log(sprintf(
+                    '[%s] Feature slug "%s" is declared by more than one installer (%s and %s); only the first one is installed',
+                    $this->getPluginName(),
+                    $featureSlug,
+                    $featureInstallersBySlug[$featureSlug]::class,
+                    $featureInstaller::class
+                ));
+                continue;
+            }
+            $featureInstallersBySlug[$featureSlug] = $featureInstaller;
+        }
+        return array_values($featureInstallersBySlug);
+    }
+
+    /**
+     * `uninstall.php` runs with WordPress loaded but the plugin not
+     * bootstrapped, so everything it needs to recognise this plugin's data
+     * is recorded here, while the plugin still can.
+     */
+    protected function storeUninstallIdentity(): void
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        $customPostTypes = array_map(
+            static fn (CustomPostTypeInterface $customPostType): string => $customPostType->getCustomPostType(),
+            array_values($customPostTypeRegistry->getCustomPostTypes())
+        );
+
+        $taxonomyRegistry = TaxonomyRegistryFacade::getInstance();
+        $taxonomies = array_map(
+            static fn (TaxonomyInterface $taxonomy): string => $taxonomy->getTaxonomy(),
+            array_values($taxonomyRegistry->getTaxonomies())
+        );
+
+        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity($customPostTypes, $taxonomies);
     }
 
     /**

@@ -20,6 +20,15 @@ The response is no longer stored when a license is activated or validated. The r
 
 ## Added
 
+### Deleting the plugin's data
+
+WordPress deletes a plugin's files when the plugin is deleted, and leaves everything it stored in the database behind. Under **Settings => Plugin Management => Uninstall** you can now ask for that data to be removed as well ([#3398](https://github.com/GatoGraphQL/GatoGraphQL/pull/3398)).
+
+Two choices are offered, both off to begin with, so nothing is ever deleted unless you say so. The first removes what the plugin stored for itself: its settings, the metadata it added to your content, and its database tables. The second also removes the entries you created through the plugin, such as your Persisted Queries and Custom Endpoints; it only applies when the first is on.
+
+Leaving both off keeps the current behaviour, which is also what you want when moving the plugin between servers, or reinstalling it: your settings and entries are still there when the plugin comes back.
+
+
 ### FluentCart extension
 
 The plugin docs now cover the new **FluentCart integration** ([#3379](https://github.com/GatoGraphQL/GatoGraphQL/pull/3379)).

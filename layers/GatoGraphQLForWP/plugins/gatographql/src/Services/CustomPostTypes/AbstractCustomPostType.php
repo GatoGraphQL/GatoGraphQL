@@ -756,7 +756,7 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
 
     protected function getCustomPostTypeNamespace(): string
     {
-        return PluginApp::getMainPlugin()->getPluginNamespaceForDB();
+        return PluginApp::getMainPlugin()->getPluginNamespaceForEntityTypeNames();
     }
 
     /**

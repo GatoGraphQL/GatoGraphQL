@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -26,6 +27,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
 {
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
+    public final const SAVE_UNINSTALL_SETTINGS_BUTTON_ID = 'submit-save-uninstall-settings';
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
@@ -157,6 +159,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                 if (
                     !isset($values[self::RESET_SETTINGS_BUTTON_ID])
                     && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
+                    && !isset($values[self::SAVE_UNINSTALL_SETTINGS_BUTTON_ID])
                 ) {
                     return;
                 }
@@ -204,6 +207,28 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                         $values[$settingOptionName] ?? [],
                         PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
+                    return;
+                }
+
+                // If pressed on the "Save Uninstall Settings" button...
+                if (isset($values[self::SAVE_UNINSTALL_SETTINGS_BUTTON_ID])) {
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        [
+                            [
+                                PluginManagementFunctionalityModuleResolver::UNINSTALL,
+                                PluginManagementFunctionalityModuleResolver::OPTION_DELETE_DATA_ON_UNINSTALL,
+                            ],
+                            [
+                                PluginManagementFunctionalityModuleResolver::UNINSTALL,
+                                PluginManagementFunctionalityModuleResolver::OPTION_DELETE_CONTENT_ON_UNINSTALL,
+                            ],
+                        ],
+                        $oldValue,
+                        $values,
+                    );
+
+                    $this->storeUninstallPreferences($values);
                     return;
                 }
             },
@@ -301,8 +326,34 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     }
 
     /**
-     * Delete the Settings and flush
+     * Mirror the user's choice into the plugin's own record of what it has
+     * installed.
+     *
+     * `uninstall.php` runs with the plugin not bootstrapped, so it can
+     * resolve neither this Settings category's option name nor the naming
+     * of the fields within it. It reads a single option instead, and this
+     * keeps that option current.
+     *
+     * @param array<string,mixed> $values
      */
+    protected function storeUninstallPreferences(array $values): void
+    {
+        $moduleResolver = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::UNINSTALL);
+        $deleteDataOptionName = $moduleResolver->getSettingOptionName(
+            PluginManagementFunctionalityModuleResolver::UNINSTALL,
+            PluginManagementFunctionalityModuleResolver::OPTION_DELETE_DATA_ON_UNINSTALL
+        );
+        $deleteContentOptionName = $moduleResolver->getSettingOptionName(
+            PluginManagementFunctionalityModuleResolver::UNINSTALL,
+            PluginManagementFunctionalityModuleResolver::OPTION_DELETE_CONTENT_ON_UNINSTALL
+        );
+
+        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallPreferences(
+            (bool) ($values[$deleteDataOptionName] ?? false),
+            (bool) ($values[$deleteContentOptionName] ?? false),
+        );
+    }
+
     protected function resetSettings(): void
     {
         $userSettingsManager = $this->getUserSettingsManager();
