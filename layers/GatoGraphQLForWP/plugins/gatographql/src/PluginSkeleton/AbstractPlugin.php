@@ -605,6 +605,11 @@ abstract class AbstractPlugin implements PluginInterface
         return PluginMetadata::PLUGIN_NAMESPACE;
     }
 
+    public function getPluginNamespaceForEntityTypeNames(): string
+    {
+        return PluginMetadata::PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES;
+    }
+
     public function getPluginNamespaceForDB(): string
     {
         return PluginMetadata::PLUGIN_NAMESPACE_FOR_DB;

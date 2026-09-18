@@ -122,8 +122,8 @@ interface PluginInterface
     public function getPluginNamespace(): string;
 
     /**
-     * Namespace the entities to store in DB:
-     * CPT, taxonomies, etc.
+     * Namespace the names of the entity types the plugin registers:
+     * custom post types, taxonomies, etc.
      *
      * Useful for standalone plugins to override
      * this value, and automatically have entities
@@ -132,6 +132,20 @@ interface PluginInterface
      *
      * Use 7 chars to identify it, as CPTs have
      * a max length of 20 chars.
+     *
+     * This is not what names the plugin's database tables, which are
+     * namespaced with {@see PluginInterface::getPluginNamespaceForDB()}.
+     */
+    public function getPluginNamespaceForEntityTypeNames(): string;
+
+    /**
+     * Namespace the plugin's own database tables, so that they cannot
+     * collide with another plugin's.
+     *
+     * Not to be confused with
+     * {@see PluginInterface::getPluginNamespaceForEntityTypeNames()}, which
+     * names the custom post types and taxonomies. A table name may be up to
+     * 64 chars, so this one is under no particular pressure to be short.
      */
     public function getPluginNamespaceForDB(): string;
 

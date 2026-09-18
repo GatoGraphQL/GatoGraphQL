@@ -34,7 +34,6 @@ interface InstalledDataSettingsManagerInterface
      */
     public function storeUninstallIdentity(
         string $pluginNamespace,
-        string $dbNamespace,
         array $customPostTypes,
     ): void;
 

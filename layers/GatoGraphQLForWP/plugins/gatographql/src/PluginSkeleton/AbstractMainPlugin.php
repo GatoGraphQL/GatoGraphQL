@@ -611,7 +611,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity(
             $this->getPluginNamespace(),
-            $this->getPluginNamespaceForDB(),
             $customPostTypes
         );
     }

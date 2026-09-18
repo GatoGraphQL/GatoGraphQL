@@ -29,7 +29,6 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     public final const KEY_TABLE_NAMES = 'tableNames';
     public final const KEY_UNINSTALL = 'uninstall';
     public final const KEY_PLUGIN_NAMESPACE = 'namespace';
-    public final const KEY_DB_NAMESPACE = 'dbNamespace';
     public final const KEY_CUSTOM_POST_TYPES = 'customPostTypes';
     public final const KEY_DELETE_DATA = 'deleteData';
     public final const KEY_DELETE_CONTENT = 'deleteContent';
@@ -161,13 +160,11 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
      */
     public function storeUninstallIdentity(
         string $pluginNamespace,
-        string $dbNamespace,
         array $customPostTypes,
     ): void {
         $uninstallData = $this->getUninstallData();
         $identity = [
             self::KEY_PLUGIN_NAMESPACE => $pluginNamespace,
-            self::KEY_DB_NAMESPACE => $dbNamespace,
             self::KEY_CUSTOM_POST_TYPES => $customPostTypes,
         ];
 
@@ -179,7 +176,6 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
          */
         $storedIdentity = [
             self::KEY_PLUGIN_NAMESPACE => $uninstallData[self::KEY_PLUGIN_NAMESPACE] ?? null,
-            self::KEY_DB_NAMESPACE => $uninstallData[self::KEY_DB_NAMESPACE] ?? null,
             self::KEY_CUSTOM_POST_TYPES => $uninstallData[self::KEY_CUSTOM_POST_TYPES] ?? [],
         ];
         if (!is_array($storedIdentity[self::KEY_CUSTOM_POST_TYPES])) {
