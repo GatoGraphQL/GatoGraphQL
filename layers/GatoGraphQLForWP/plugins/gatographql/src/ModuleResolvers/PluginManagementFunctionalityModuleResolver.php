@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -14,6 +15,7 @@ use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
 
+use function get_post_type_object;
 use function get_submit_button;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
@@ -23,12 +25,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
 
     public final const ACTIVATE_EXTENSIONS = Plugin::NAMESPACE . '\activate-extensions';
     public final const RESET_SETTINGS = Plugin::NAMESPACE . '\reset-settings';
+    public final const UNINSTALL = Plugin::NAMESPACE . '\uninstall';
 
     /**
      * Setting options
      */
     public final const OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS = 'commercial-extension-license-keys';
     public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
+    public final const OPTION_DELETE_DATA_ON_UNINSTALL = 'delete-data-on-uninstall';
+    public final const OPTION_DELETE_CONTENT_ON_UNINSTALL = 'delete-content-on-uninstall';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
@@ -70,6 +75,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         return [
             self::ACTIVATE_EXTENSIONS,
             self::RESET_SETTINGS,
+            self::UNINSTALL,
         ];
     }
 
@@ -77,7 +83,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         return match ($module) {
             self::ACTIVATE_EXTENSIONS,
-            self::RESET_SETTINGS
+            self::RESET_SETTINGS,
+            self::UNINSTALL
                 => true,
             default
                 => parent::isPredefinedEnabledOrDisabled($module),
@@ -88,7 +95,8 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         return match ($module) {
             self::ACTIVATE_EXTENSIONS,
-            self::RESET_SETTINGS
+            self::RESET_SETTINGS,
+            self::UNINSTALL
                 => true,
             default
                 => parent::isHidden($module),
@@ -100,6 +108,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         return match ($module) {
             self::ACTIVATE_EXTENSIONS => \__('Activate Plugins and Extensions', 'gatographql'),
             self::RESET_SETTINGS => \__('Reset Settings', 'gatographql'),
+            self::UNINSTALL => \__('Uninstall', 'gatographql'),
             default => $module,
         };
     }
@@ -112,6 +121,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $this->getGatoGraphQLShopName()
             ),
             self::RESET_SETTINGS => \__('Restore the Gato GraphQL Settings to default values', 'gatographql'),
+            self::UNINSTALL => \__('Choose what happens to the data stored by the plugin when the plugin is deleted', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -128,6 +138,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ],
             self::RESET_SETTINGS => [
                 self::OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR => $useRestrictiveDefaults ? ResetSettingsOptions::RESTRICTIVE : ResetSettingsOptions::NON_RESTRICTIVE,
+            ],
+            self::UNINSTALL => [
+                self::OPTION_DELETE_DATA_ON_UNINSTALL => false,
+                self::OPTION_DELETE_CONTENT_ON_UNINSTALL => false,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -388,8 +402,94 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TYPE => Properties::TYPE_NULL,
                 Properties::CSS_STYLE => 'display: none;',
             ];
+        } elseif ($module === self::UNINSTALL) {
+            $option = self::OPTION_DELETE_DATA_ON_UNINSTALL;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Delete all plugin data when deleting the plugin?', 'gatographql'),
+                Properties::DESCRIPTION => \__('Remove everything the plugin has stored on this site: its settings, the metadata it added to your content, and its database tables.', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            $option = self::OPTION_DELETE_CONTENT_ON_UNINSTALL;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Also delete the entries created with the plugin?', 'gatographql'),
+                Properties::DESCRIPTION => $this->getDeleteContentOnUninstallDescription(),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+
+            /**
+             * Have the button name be sent as part of the form, as this
+             * Settings category has no submit button of its own
+             * {@see SettingsCategoryResolver::addOptionsFormSubmitButton()}.
+             */
+            $saveUninstallSettingsButtonName = sprintf(
+                '%s[%s]',
+                $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
+                SettingsMenuPage::SAVE_UNINSTALL_SETTINGS_BUTTON_ID
+            );
+            /**
+             * Use `function_exists` because, when pressing on
+             * the button it will call options.php,
+             * and the function will not have been loaded yet!
+             */
+            $saveUninstallSettingsButtonHTML = '';
+            if (function_exists('get_submit_button')) {
+                $saveUninstallSettingsButtonHTML = get_submit_button(
+                    \__('Save Uninstall Settings', 'gatographql'),
+                    'primary',
+                    $saveUninstallSettingsButtonName,
+                    false
+                );
+            }
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'save-uninstall-settings-button'
+                ),
+                Properties::DESCRIPTION => $saveUninstallSettingsButtonHTML,
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
         }
         return $moduleSettings;
+    }
+
+    /**
+     * Name the entries the user would actually lose, by asking WordPress for
+     * the labels of the custom post types this plugin registered, rather than
+     * naming any of them here: which entries exist depends on which plugin
+     * this is, and on which of its extensions are active.
+     */
+    protected function getDeleteContentOnUninstallDescription(): string
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        $customPostTypeNames = [];
+        foreach ($customPostTypeRegistry->getCustomPostTypes() as $customPostTypeService) {
+            $customPostTypeObject = get_post_type_object($customPostTypeService->getCustomPostType());
+            if ($customPostTypeObject === null) {
+                continue;
+            }
+            $customPostTypeNames[] = $customPostTypeObject->labels->name;
+        }
+        $customPostTypeNames = array_values(array_unique($customPostTypeNames));
+
+        if ($customPostTypeNames === []) {
+            return \__('Remove the entries you created and edited through the plugin. Only applies when deleting all plugin data.', 'gatographql');
+        }
+
+        return sprintf(
+            \__('Remove the entries you created and edited through the plugin: %s. Only applies when deleting all plugin data.', 'gatographql'),
+            implode(\__(', ', 'gatographql'), $customPostTypeNames)
+        );
     }
 
     protected function getGatoGraphQLShopName(): string

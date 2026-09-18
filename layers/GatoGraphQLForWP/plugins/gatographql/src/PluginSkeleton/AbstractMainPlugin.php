@@ -12,6 +12,8 @@ use GatoGraphQL\GatoGraphQL\AppThread;
 use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
@@ -21,6 +23,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\DelegatingCommercialPluginUpdaterService
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
+use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -517,11 +520,96 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         // Dump the container whenever a new plugin or extension is activated
         $this->handleNewActivations();
 
+        // Create whatever the plugin and its extensions need on the site
+        $this->handleFeatureInstallation();
+
         // Initialize the procedure to register/initialize plugin and extensions
         $this->executeSetupProcedure();
 
         // Maybe revalidate the commercial licenses
         $this->handleCommercialExtensions();
+    }
+
+    /**
+     * Install the features the plugin and its extensions declare, and record
+     * what has been installed so that uninstalling can undo it.
+     *
+     * This runs on every request, and not only when the plugin has just been
+     * activated or updated, because a feature is infrastructure: a table
+     * dropped by hand, or a database restored from a backup taken before it
+     * existed, must be recovered without the user being told to reactivate
+     * the plugin. Checking costs a single option read.
+     */
+    protected function handleFeatureInstallation(): void
+    {
+        add_action(
+            PluginAppHooks::INITIALIZE_APP,
+            function (string $pluginAppGraphQLServerName): void {
+                if (
+                    $pluginAppGraphQLServerName === PluginAppGraphQLServerNames::INTERNAL
+                    || $this->initializationException !== null
+                ) {
+                    return;
+                }
+                $this->maybeInstallFeatures();
+                $this->storeUninstallIdentity();
+            },
+            PluginLifecyclePriorities::AFTER_EVERYTHING
+        );
+    }
+
+    protected function maybeInstallFeatures(): void
+    {
+        $installedDataSettingsManager = InstalledDataSettingsManagerFacade::getInstance();
+        foreach ($this->getAllFeatureInstallers() as $featureInstaller) {
+            $featureSlug = $featureInstaller->getFeatureSlug();
+            $featureVersion = $featureInstaller->getFeatureVersion();
+            if ($installedDataSettingsManager->getInstalledFeatureVersion($featureSlug) === $featureVersion) {
+                continue;
+            }
+            /**
+             * The version is recorded only once installing has returned, so
+             * that a failure is retried on the next request instead of being
+             * remembered as done.
+             */
+            $featureInstaller->install();
+            $installedDataSettingsManager->storeInstalledFeatureVersion($featureSlug, $featureVersion);
+        }
+    }
+
+    /**
+     * @return FeatureInstallerInterface[]
+     */
+    protected function getAllFeatureInstallers(): array
+    {
+        $featureInstallers = $this->getFeatureInstallers();
+        foreach (PluginApp::getExtensionManager()->getExtensions() as $extension) {
+            $featureInstallers = array_merge(
+                $featureInstallers,
+                $extension->getFeatureInstallers()
+            );
+        }
+        return $featureInstallers;
+    }
+
+    /**
+     * `uninstall.php` runs with WordPress loaded but the plugin not
+     * bootstrapped, so everything it needs to recognise this plugin's data
+     * is recorded here, while the plugin still can.
+     */
+    protected function storeUninstallIdentity(): void
+    {
+        $customPostTypeRegistry = CustomPostTypeRegistryFacade::getInstance();
+        $customPostTypes = array_map(
+            static fn (CustomPostTypeInterface $customPostType): string => $customPostType->getCustomPostType(),
+            array_values($customPostTypeRegistry->getCustomPostTypes())
+        );
+
+        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity(
+            $this->getPluginNamespace(),
+            $this->getPluginNamespaceForDB(),
+            $customPostTypes
+        );
     }
 
     /**

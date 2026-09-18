@@ -583,6 +583,23 @@ abstract class AbstractPlugin implements PluginInterface
         return [];
     }
 
+    /**
+     * Method to override.
+     *
+     * The features this plugin or extension must install on the site before
+     * it can work, such as a custom database table.
+     *
+     * Unlike setup data, these are installed on every request on which their
+     * version has moved on, in the admin and out of it alike, so that a site
+     * driven through WP-CLI or the REST API is served too.
+     *
+     * @return FeatureInstallerInterface[]
+     */
+    public function getFeatureInstallers(): array
+    {
+        return [];
+    }
+
     public function getPluginNamespace(): string
     {
         return PluginMetadata::PLUGIN_NAMESPACE;
