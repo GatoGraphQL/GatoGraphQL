@@ -10245,10 +10245,17 @@ msgstr "プラグインを削除するときに、すべてのプラグインデ
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
-"このサイト上でプラグインが保存したすべてのもの(設定、コンテンツに追加したメタ"
-"データ、データベーステーブル)を削除します。"
+"このプラグインがこのサイトに保存したすべてのデータを削除します。設定、拡張機"
+"能のライセンス記録、コンテンツやユーザーに追加されたメタデータ、データベース"
+"テーブル、キャッシュおよびログファイルが対象です。ライセンス記録を削除して"
+"も、マーケットプレイス上でのライセンスは解放されません。別のサイトで使用する"
+"には、まず「プラグインと拡張機能の有効化」画面でそのキーをクリアして保存して"
+"ください。"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11188,11 +11195,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(このメッセージは管理者にのみ表示されます。)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -13985,6 +13992,13 @@ msgstr "ユーザーのnicenameで並べ替えます"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "ユーザーのメールアドレスで並べ替えます"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "このサイト上でプラグインが保存したすべてのもの(設定、コンテンツに追加した"
+#~ "メタデータ、データベーステーブル)を削除します。"
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

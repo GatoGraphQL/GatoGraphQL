@@ -10287,11 +10287,17 @@ msgstr "Radera all data från tillägget när tillägget tas bort?"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
-"Ta bort allt som tillägget har lagrat på denna webbplats: dess "
-"inställningar, metadata som det har lagt till i ditt innehåll och dess "
-"databastabeller."
+"Ta bort allt som insticksprogrammet har lagrat på den här webbplatsen: dess "
+"inställningar, licensposterna för dess tillägg, metadatan som det lade till "
+"i ditt innehåll och dina användare, dess databastabeller samt dess cache- "
+"och loggfiler. Att ta bort en licenspost frigör inte licensen på "
+"marknadsplatsen: för att använda den på en annan webbplats, rensa först dess "
+"nyckel under Aktivera insticksprogram och tillägg och spara."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11233,12 +11239,12 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr ""
 "<p><em>(Detta meddelande är endast synligt för administratören.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -14064,6 +14070,14 @@ msgstr "Sortera efter användarens nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortera efter användarens e-postadress"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Ta bort allt som tillägget har lagrat på denna webbplats: dess "
+#~ "inställningar, metadata som det har lagt till i ditt innehåll och dess "
+#~ "databastabeller."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

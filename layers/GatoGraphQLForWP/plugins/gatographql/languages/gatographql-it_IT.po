@@ -10578,11 +10578,17 @@ msgstr "Eliminare tutti i dati del plugin quando si elimina il plugin?"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
 "Rimuovi tutto ciò che il plugin ha memorizzato su questo sito: le sue "
-"impostazioni, i metadati che ha aggiunto ai tuoi contenuti e le sue tabelle "
-"del database."
+"impostazioni, i record delle licenze delle sue estensioni, i metadati che ha "
+"aggiunto ai tuoi contenuti e utenti, le sue tabelle del database e i suoi "
+"file di cache e log. La rimozione di un record di licenza non rilascia la "
+"licenza sul marketplace: per usarla su un altro sito, prima cancella la sua "
+"chiave in Attiva Plugin ed Estensioni e salva."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11529,12 +11535,12 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr ""
 "<p><em>(Questo messaggio è visibile solo dall'amministratore.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -14390,6 +14396,14 @@ msgstr "Ordina per nicename dell'utente"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordina per email dell'utente"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Rimuovi tutto ciò che il plugin ha memorizzato su questo sito: le sue "
+#~ "impostazioni, i metadati che ha aggiunto ai tuoi contenuti e le sue "
+#~ "tabelle del database."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

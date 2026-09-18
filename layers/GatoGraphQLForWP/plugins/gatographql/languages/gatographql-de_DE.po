@@ -10681,11 +10681,18 @@ msgstr "Beim Löschen des Plugins alle Plugin-Daten löschen?"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
-"Entferne alles, was das Plugin auf dieser Website gespeichert hat: seine "
-"Einstellungen, die Metadaten, die es zu deinen Inhalten hinzugefügt hat, und "
-"seine Datenbanktabellen."
+"Entfernt alles, was das Plugin auf dieser Website gespeichert hat: seine "
+"Einstellungen, die Lizenzdatensätze seiner Erweiterungen, die Metadaten, die "
+"es zu deinen Inhalten und Benutzern hinzugefügt hat, seine Datenbanktabellen "
+"sowie seine Cache- und Protokolldateien. Das Entfernen eines "
+"Lizenzdatensatzes gibt die Lizenz nicht im Marketplace frei: Um sie auf "
+"einer anderen Website zu nutzen, lösche zunächst ihren Schlüssel unter "
+"Plugins und Erweiterungen aktivieren und speichere."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11639,12 +11646,12 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr ""
 "<p><em>(Diese Nachricht ist nur für den Administrator sichtbar.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -14523,6 +14530,14 @@ msgstr "Sortieren nach dem Nicename des Benutzers"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortieren nach der E-Mail-Adresse des Benutzers"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Entferne alles, was das Plugin auf dieser Website gespeichert hat: seine "
+#~ "Einstellungen, die Metadaten, die es zu deinen Inhalten hinzugefügt hat, "
+#~ "und seine Datenbanktabellen."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

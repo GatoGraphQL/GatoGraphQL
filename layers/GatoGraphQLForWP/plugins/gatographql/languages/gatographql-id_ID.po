@@ -10241,10 +10241,17 @@ msgstr "Hapus semua data plugin saat menghapus plugin?"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
-"Hapus semua yang telah disimpan plugin di situs ini: pengaturannya, metadata "
-"yang ditambahkannya ke konten Anda, dan tabel basis datanya."
+"Hapus semua yang telah disimpan plugin ini di situs ini: pengaturannya, "
+"catatan lisensi ekstensinya, metadata yang ditambahkannya ke konten dan "
+"pengguna Anda, tabel basis datanya, serta file cache dan lognya. Menghapus "
+"catatan lisensi tidak melepaskan lisensi di marketplace: untuk "
+"menggunakannya di situs lain, hapus dulu kuncinya di Aktifkan Plugin dan "
+"Ekstensi lalu simpan."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11183,11 +11190,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Pesan ini hanya terlihat oleh admin.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -14025,6 +14032,13 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Hapus semua yang telah disimpan plugin di situs ini: pengaturannya, "
+#~ "metadata yang ditambahkannya ke konten Anda, dan tabel basis datanya."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

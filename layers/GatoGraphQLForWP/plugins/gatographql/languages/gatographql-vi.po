@@ -10308,11 +10308,17 @@ msgstr "Xóa toàn bộ dữ liệu của plugin khi xóa plugin?"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
 msgid ""
 "Remove everything the plugin has stored on this site: its settings, the "
-"metadata it added to your content, and its database tables."
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
 msgstr ""
-"Xóa mọi thứ mà plugin đã lưu trữ trên trang web này: cài đặt của nó, "
-"metadata mà nó đã thêm vào nội dung của bạn, và các bảng cơ sở dữ liệu của "
-"nó."
+"Xóa mọi thứ mà plugin đã lưu trữ trên trang này: cài đặt của nó, hồ sơ giấy "
+"phép của các tiện ích mở rộng của nó, metadata mà nó đã thêm vào nội dung và "
+"người dùng của bạn, các bảng cơ sở dữ liệu của nó, cùng các tệp cache và log "
+"của nó. Việc xóa hồ sơ giấy phép không giải phóng giấy phép trên "
+"marketplace: để sử dụng nó trên một trang khác, trước tiên hãy xóa khóa của "
+"nó trong mục Kích hoạt Plugin và Tiện ích mở rộng rồi lưu lại."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
 msgid "Also delete the entries created with the plugin?"
@@ -11249,11 +11255,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1441
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Thông báo này chỉ hiển thị với quản trị viên.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1443
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -14080,6 +14086,14 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Xóa mọi thứ mà plugin đã lưu trữ trên trang web này: cài đặt của nó, "
+#~ "metadata mà nó đã thêm vào nội dung của bạn, và các bảng cơ sở dữ liệu "
+#~ "của nó."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "
