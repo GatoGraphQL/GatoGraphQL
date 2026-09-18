@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQL\GatoGraphQL\Meta\MetaNamespacerInterface;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
+
 /**
  * How the plugin's namespace is joined to the name of everything it stores.
  *
@@ -16,6 +19,14 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
  * It is static, and not a service, because `uninstall.php` runs with
  * WordPress loaded but the plugin not bootstrapped: there is no container
  * there to resolve a service from, and this is the one thing it still needs.
+ * A service would therefore be overridable on the side which writes the names
+ * and not on the side which deletes them, and an override would orphan
+ * precisely the rows it had itself created.
+ *
+ * Overriding how a name is built is done a level up instead, by replacing
+ * {@see OptionNamespacerInterface} or {@see MetaNamespacerInterface} with
+ * another implementation, which is a decision the whole site is built with
+ * rather than one taken per request.
  *
  * Custom post type and taxonomy names are deliberately not built from here.
  * They carry a namespace of their own
