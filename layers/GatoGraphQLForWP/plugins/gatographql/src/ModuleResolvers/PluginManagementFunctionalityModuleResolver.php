@@ -412,7 +412,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $option
                 ),
                 Properties::TITLE => \__('Delete all plugin data when deleting the plugin?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Remove everything the plugin has stored on this site: its settings, the license records of its extensions, the metadata it added to your content and users, its database tables, and its cache and log files.', 'gatographql'),
+                Properties::DESCRIPTION => \__('Remove everything the plugin has stored on this site: its settings, the license records of its extensions, the metadata it added to your content and users, its database tables, and its cache and log files. Removing a license record does not release the license on the marketplace: to use it on another site, first clear its key under Activate Plugins and Extensions and save.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
