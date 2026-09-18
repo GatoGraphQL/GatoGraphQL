@@ -151,6 +151,16 @@ interface PluginInterface
      */
     public function getPluginNamespaceForClass(): string;
 
+    /**
+     * The features this plugin or extension installs so that it can work,
+     * such as a custom database table. Declared here, and not only on the
+     * base class, because the main plugin collects them from every extension
+     * it has been given, and knows each only through this interface.
+     *
+     * @return FeatureInstallerInterface[]
+     */
+    public function getFeatureInstallers(): array;
+
     public function getPluginWPConfigConstantNamespace(): string;
 
     public function getPluginWPContentFolderName(): string;
