@@ -39,4 +39,18 @@ interface FeatureInstallerInterface
      * is recorded only once it returns.
      */
     public function install(): void;
+
+    /**
+     * The database tables the feature creates, with the site's table prefix,
+     * so that uninstalling drops those and nothing else.
+     *
+     * They are recorded when the feature installs, by the very code that
+     * creates them, so the record cannot drift from what is on the site. They
+     * are not matched by name: a plugin's database namespace can be a word as
+     * general as "graphql", and dropping every table starting with it would
+     * take another plugin's data with it.
+     *
+     * @return string[]
+     */
+    public function getTableNames(): array;
 }

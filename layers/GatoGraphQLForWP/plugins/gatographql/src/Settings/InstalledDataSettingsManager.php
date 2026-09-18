@@ -25,6 +25,8 @@ use function update_option;
 class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterface
 {
     public final const KEY_FEATURES = 'features';
+    public final const KEY_VERSION = 'version';
+    public final const KEY_TABLE_NAMES = 'tableNames';
     public final const KEY_UNINSTALL = 'uninstall';
     public final const KEY_PLUGIN_NAMESPACE = 'namespace';
     public final const KEY_DB_NAMESPACE = 'dbNamespace';
@@ -66,45 +68,68 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     }
 
     /**
-     * @return array<string,string>
+     * @return array<string,array<string,mixed>>
      */
-    protected function getInstalledFeatureVersions(): array
+    protected function getInstalledFeatures(): array
     {
         $installedData = $this->getInstalledData();
         if (!isset($installedData[self::KEY_FEATURES]) || !is_array($installedData[self::KEY_FEATURES])) {
             return [];
         }
-        /** @var array<string,string> */
+        /** @var array<string,array<string,mixed>> */
         return $installedData[self::KEY_FEATURES];
     }
 
     public function getInstalledFeatureVersion(string $featureSlug): ?string
     {
-        $featureVersions = $this->getInstalledFeatureVersions();
-        if (!isset($featureVersions[$featureSlug])) {
+        $features = $this->getInstalledFeatures();
+        if (!isset($features[$featureSlug][self::KEY_VERSION])) {
             return null;
         }
-        return (string) $featureVersions[$featureSlug];
+        return (string) $features[$featureSlug][self::KEY_VERSION];
     }
 
-    public function storeInstalledFeatureVersion(string $featureSlug, string $version): void
+    /**
+     * @param string[] $tableNames
+     */
+    public function storeInstalledFeatureVersion(string $featureSlug, string $version, array $tableNames = []): void
     {
         $installedData = $this->getInstalledData();
-        $featureVersions = $this->getInstalledFeatureVersions();
-        $featureVersions[$featureSlug] = $version;
-        $installedData[self::KEY_FEATURES] = $featureVersions;
+        $features = $this->getInstalledFeatures();
+        $features[$featureSlug] = [
+            self::KEY_VERSION => $version,
+            self::KEY_TABLE_NAMES => array_values($tableNames),
+        ];
+        $installedData[self::KEY_FEATURES] = $features;
         $this->storeInstalledData($installedData);
+    }
+
+    /**
+     * @return string[]
+     */
+    public function getInstalledTableNames(): array
+    {
+        $tableNames = [];
+        foreach ($this->getInstalledFeatures() as $feature) {
+            if (!isset($feature[self::KEY_TABLE_NAMES]) || !is_array($feature[self::KEY_TABLE_NAMES])) {
+                continue;
+            }
+            foreach ($feature[self::KEY_TABLE_NAMES] as $tableName) {
+                $tableNames[] = (string) $tableName;
+            }
+        }
+        return array_values(array_unique($tableNames));
     }
 
     public function removeInstalledFeatureVersion(string $featureSlug): void
     {
-        $featureVersions = $this->getInstalledFeatureVersions();
-        if (!isset($featureVersions[$featureSlug])) {
+        $features = $this->getInstalledFeatures();
+        if (!isset($features[$featureSlug])) {
             return;
         }
-        unset($featureVersions[$featureSlug]);
+        unset($features[$featureSlug]);
         $installedData = $this->getInstalledData();
-        $installedData[self::KEY_FEATURES] = $featureVersions;
+        $installedData[self::KEY_FEATURES] = $features;
         $this->storeInstalledData($installedData);
     }
 

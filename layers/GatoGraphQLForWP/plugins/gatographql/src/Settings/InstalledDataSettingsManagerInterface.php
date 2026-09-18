@@ -12,7 +12,17 @@ interface InstalledDataSettingsManagerInterface
      */
     public function getInstalledFeatureVersion(string $featureSlug): ?string;
 
-    public function storeInstalledFeatureVersion(string $featureSlug, string $version): void;
+    /**
+     * @param string[] $tableNames The tables the feature created
+     */
+    public function storeInstalledFeatureVersion(string $featureSlug, string $version, array $tableNames = []): void;
+
+    /**
+     * Every table created by every installed feature.
+     *
+     * @return string[]
+     */
+    public function getInstalledTableNames(): array;
 
     public function removeInstalledFeatureVersion(string $featureSlug): void;
 

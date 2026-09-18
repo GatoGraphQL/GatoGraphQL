@@ -57,10 +57,23 @@ class PluginUninstaller
         }
 
         $pluginNamespace = (string) ($uninstallData[InstalledDataSettingsManager::KEY_PLUGIN_NAMESPACE] ?? '');
-        $dbNamespace = (string) ($uninstallData[InstalledDataSettingsManager::KEY_DB_NAMESPACE] ?? '');
-        if ($pluginNamespace === '' || $dbNamespace === '') {
+        if ($pluginNamespace === '') {
             return;
         }
+
+        $tableNames = [];
+        $features = $installedData[InstalledDataSettingsManager::KEY_FEATURES] ?? [];
+        if (is_array($features)) {
+            foreach ($features as $feature) {
+                if (!is_array($feature) || !is_array($feature[InstalledDataSettingsManager::KEY_TABLE_NAMES] ?? null)) {
+                    continue;
+                }
+                foreach ($feature[InstalledDataSettingsManager::KEY_TABLE_NAMES] as $tableName) {
+                    $tableNames[] = (string) $tableName;
+                }
+            }
+        }
+        $tableNames = array_values(array_unique($tableNames));
 
         $deleteContent = (bool) ($uninstallData[InstalledDataSettingsManager::KEY_DELETE_CONTENT] ?? false);
         $customPostTypes = $uninstallData[InstalledDataSettingsManager::KEY_CUSTOM_POST_TYPES] ?? [];
@@ -76,7 +89,7 @@ class PluginUninstaller
          * site's data behind.
          */
         if (!is_multisite()) {
-            self::uninstallFromCurrentSite($pluginNamespace, $dbNamespace, $customPostTypes, $deleteContent);
+            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $deleteContent);
             return;
         }
 
@@ -84,7 +97,7 @@ class PluginUninstaller
         $sites = get_sites(['fields' => 'ids', 'number' => 0]);
         foreach ($sites as $siteID) {
             switch_to_blog($siteID);
-            self::uninstallFromCurrentSite($pluginNamespace, $dbNamespace, $customPostTypes, $deleteContent);
+            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $deleteContent);
             restore_current_blog();
         }
     }
@@ -112,36 +125,36 @@ class PluginUninstaller
     }
 
     /**
+     * @param string[] $tableNames
      * @param string[] $customPostTypes
      */
     protected static function uninstallFromCurrentSite(
         string $pluginNamespace,
-        string $dbNamespace,
+        array $tableNames,
         array $customPostTypes,
         bool $deleteContent,
     ): void {
         if ($deleteContent && $customPostTypes !== []) {
             self::deleteCustomPosts($customPostTypes);
         }
-        self::dropTables($dbNamespace);
+        self::dropTables($tableNames);
         self::deleteMeta($pluginNamespace);
         self::deleteOptions($pluginNamespace);
     }
 
     /**
-     * Tables are created as `{$wpdb->prefix}{$dbNamespace}_{name}`
-     * {@see AbstractPlugin::getPluginNamespaceForDB()}.
+     * Only the tables each feature recorded as it created them are dropped.
+     *
+     * @param string[] $tableNames
      */
-    protected static function dropTables(string $dbNamespace): void
+    protected static function dropTables(array $tableNames): void
     {
         global $wpdb;
 
-        $tableNamePattern = $wpdb->esc_like($wpdb->prefix . $dbNamespace . '_') . '%';
-        /** @var string[] */
-        $tableNames = $wpdb->get_col(
-            $wpdb->prepare('SHOW TABLES LIKE %s', $tableNamePattern)
-        );
         foreach ($tableNames as $tableName) {
+            if (preg_match('/^[A-Za-z0-9_]+$/', $tableName) !== 1) {
+                continue;
+            }
             $wpdb->query("DROP TABLE IF EXISTS `{$tableName}`"); // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
         }
     }

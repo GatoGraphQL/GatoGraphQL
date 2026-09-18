@@ -573,7 +573,11 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
              * remembered as done.
              */
             $featureInstaller->install();
-            $installedDataSettingsManager->storeInstalledFeatureVersion($featureSlug, $featureVersion);
+            $installedDataSettingsManager->storeInstalledFeatureVersion(
+                $featureSlug,
+                $featureVersion,
+                $featureInstaller->getTableNames()
+            );
         }
     }
 

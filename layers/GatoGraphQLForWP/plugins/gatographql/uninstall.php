@@ -20,7 +20,15 @@ if (!defined('WP_UNINSTALL_PLUGIN')) {
     exit;
 }
 
-$gatoGraphQLAutoloadFilePath = __DIR__ . '/vendor/autoload.php';
+/**
+ * The built plugin registers its scoped classes through the Scoper
+ * autoloader, and only the plugin's main file is pointed at it when the
+ * plugin is built. From source, that file does not exist.
+ */
+$gatoGraphQLAutoloadFilePath = __DIR__ . '/vendor/scoper-autoload.php';
+if (!file_exists($gatoGraphQLAutoloadFilePath)) {
+    $gatoGraphQLAutoloadFilePath = __DIR__ . '/vendor/autoload.php';
+}
 if (!file_exists($gatoGraphQLAutoloadFilePath)) {
     return;
 }
