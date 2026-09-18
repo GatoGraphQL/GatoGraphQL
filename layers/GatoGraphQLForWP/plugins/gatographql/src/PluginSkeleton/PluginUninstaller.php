@@ -83,6 +83,12 @@ class PluginUninstaller
         }
         /** @var string[] $customPostTypes */
 
+        $taxonomies = $uninstallData[InstalledDataSettingsManager::KEY_TAXONOMIES] ?? [];
+        if (!is_array($taxonomies)) {
+            $taxonomies = [];
+        }
+        /** @var string[] $taxonomies */
+
         /**
          * Options, meta and tables are all per-site, and WordPress runs
          * `uninstall.php` only for the site the plugin is being deleted
@@ -90,7 +96,7 @@ class PluginUninstaller
          * site's data behind.
          */
         if (!is_multisite()) {
-            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $deleteContent);
+            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $taxonomies, $deleteContent);
             return;
         }
 
@@ -98,7 +104,7 @@ class PluginUninstaller
         $sites = get_sites(['fields' => 'ids', 'number' => 0]);
         foreach ($sites as $siteID) {
             switch_to_blog($siteID);
-            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $deleteContent);
+            self::uninstallFromCurrentSite($pluginNamespace, $tableNames, $customPostTypes, $taxonomies, $deleteContent);
             restore_current_blog();
         }
     }
@@ -106,15 +112,20 @@ class PluginUninstaller
     /**
      * @param string[] $tableNames
      * @param string[] $customPostTypes
+     * @param string[] $taxonomies
      */
     protected static function uninstallFromCurrentSite(
         string $pluginNamespace,
         array $tableNames,
         array $customPostTypes,
+        array $taxonomies,
         bool $deleteContent,
     ): void {
         if ($deleteContent && $customPostTypes !== []) {
             self::deleteCustomPosts($customPostTypes);
+        }
+        if ($deleteContent && $taxonomies !== []) {
+            self::deleteTaxonomyTerms($taxonomies);
         }
         self::dropTables($tableNames);
         self::deleteMeta($pluginNamespace);
@@ -204,6 +215,85 @@ class PluginUninstaller
                     "DELETE FROM {$wpdb->sitemeta} WHERE meta_key LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
                     $optionNamePattern
                 )
+            );
+        }
+    }
+
+    /**
+     * The terms of the plugin's own taxonomies, which outlive the entries
+     * they were attached to: deleting an entry unlinks it from its terms,
+     * and leaves the terms themselves in place for a taxonomy nothing will
+     * register again.
+     *
+     * This is the counterpart of what {@see deleteCustomPosts()} removes,
+     * and neither covers the other: that one unlinks the plugin's entries
+     * from every taxonomy, including WordPress's own, while this one unlinks
+     * the plugin's taxonomies from every entry, including other plugins'.
+     *
+     * @param string[] $taxonomies
+     */
+    protected static function deleteTaxonomyTerms(array $taxonomies): void
+    {
+        global $wpdb;
+
+        $placeholders = implode(',', array_fill(0, count($taxonomies), '%s'));
+        /** @var string[] */
+        $termTaxonomyIDs = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT term_taxonomy_id FROM {$wpdb->term_taxonomy} WHERE taxonomy IN ({$placeholders})", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$taxonomies
+            )
+        );
+        if ($termTaxonomyIDs === []) {
+            return;
+        }
+        /** @var string[] */
+        $termIDs = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT term_id FROM {$wpdb->term_taxonomy} WHERE taxonomy IN ({$placeholders})", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$taxonomies
+            )
+        );
+
+        $termTaxonomyIDPlaceholders = implode(',', array_fill(0, count($termTaxonomyIDs), '%d'));
+        foreach (
+            [
+                "DELETE FROM {$wpdb->term_relationships} WHERE term_taxonomy_id IN ({$termTaxonomyIDPlaceholders})",
+                "DELETE FROM {$wpdb->term_taxonomy} WHERE term_taxonomy_id IN ({$termTaxonomyIDPlaceholders})",
+            ] as $statement
+        ) {
+            $wpdb->query(
+                $wpdb->prepare($statement, ...$termTaxonomyIDs) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
+            );
+        }
+
+        /**
+         * A term row can be shared by more than one taxonomy, so only the
+         * terms which no taxonomy claims any more are removed.
+         */
+        $termIDPlaceholders = implode(',', array_fill(0, count($termIDs), '%d'));
+        /** @var string[] */
+        $unclaimedTermIDs = $wpdb->get_col(
+            $wpdb->prepare(
+                "SELECT t.term_id FROM {$wpdb->terms} t
+                    LEFT JOIN {$wpdb->term_taxonomy} tt ON tt.term_id = t.term_id
+                    WHERE t.term_id IN ({$termIDPlaceholders}) AND tt.term_taxonomy_id IS NULL", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                ...$termIDs
+            )
+        );
+        if ($unclaimedTermIDs === []) {
+            return;
+        }
+
+        $unclaimedTermIDPlaceholders = implode(',', array_fill(0, count($unclaimedTermIDs), '%d'));
+        foreach (
+            [
+                "DELETE FROM {$wpdb->termmeta} WHERE term_id IN ({$unclaimedTermIDPlaceholders})",
+                "DELETE FROM {$wpdb->terms} WHERE term_id IN ({$unclaimedTermIDPlaceholders})",
+            ] as $statement
+        ) {
+            $wpdb->query(
+                $wpdb->prepare($statement, ...$unclaimedTermIDs) // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
             );
         }
     }

@@ -29,6 +29,7 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
     public final const KEY_TABLE_NAMES = 'tableNames';
     public final const KEY_UNINSTALL = 'uninstall';
     public final const KEY_CUSTOM_POST_TYPES = 'customPostTypes';
+    public final const KEY_TAXONOMIES = 'taxonomies';
     public final const KEY_DELETE_DATA = 'deleteData';
     public final const KEY_DELETE_CONTENT = 'deleteContent';
 
@@ -156,37 +157,51 @@ class InstalledDataSettingsManager implements InstalledDataSettingsManagerInterf
 
     /**
      * @param string[] $customPostTypes
+     * @param string[] $taxonomies
      */
-    public function storeUninstallIdentity(array $customPostTypes): void
+    public function storeUninstallIdentity(array $customPostTypes, array $taxonomies): void
     {
         $uninstallData = $this->getUninstallData();
 
-        $storedCustomPostTypes = $uninstallData[self::KEY_CUSTOM_POST_TYPES] ?? [];
-        if (!is_array($storedCustomPostTypes)) {
-            $storedCustomPostTypes = [];
-        }
-        sort($storedCustomPostTypes);
+        $entityTypeNames = [
+            self::KEY_CUSTOM_POST_TYPES => $customPostTypes,
+            self::KEY_TAXONOMIES => $taxonomies,
+        ];
 
-        /**
-         * A custom post type registered by an extension which has just been
-         * deactivated must stay recorded, or uninstalling would leave its
-         * entries behind. So the list only ever grows.
-         */
-        $mergedCustomPostTypes = array_values(array_unique(array_merge(
-            $storedCustomPostTypes,
-            $customPostTypes
-        )));
-        sort($mergedCustomPostTypes);
+        $moved = false;
+        foreach ($entityTypeNames as $key => $currentEntityTypeNames) {
+            $storedEntityTypeNames = $uninstallData[$key] ?? [];
+            if (!is_array($storedEntityTypeNames)) {
+                $storedEntityTypeNames = [];
+            }
+            sort($storedEntityTypeNames);
+
+            /**
+             * An entity type registered by an extension which has just been
+             * deactivated must stay recorded, or uninstalling would leave its
+             * entries behind. So the list only ever grows.
+             */
+            $mergedEntityTypeNames = array_values(array_unique(array_merge(
+                $storedEntityTypeNames,
+                $currentEntityTypeNames
+            )));
+            sort($mergedEntityTypeNames);
+
+            if ($mergedEntityTypeNames === $storedEntityTypeNames) {
+                continue;
+            }
+            $uninstallData[$key] = $mergedEntityTypeNames;
+            $moved = true;
+        }
 
         /**
          * The identity is recorded on every request, so only write when it
          * has actually moved.
          */
-        if ($mergedCustomPostTypes === $storedCustomPostTypes) {
+        if (!$moved) {
             return;
         }
 
-        $uninstallData[self::KEY_CUSTOM_POST_TYPES] = $mergedCustomPostTypes;
         $this->storeUninstallData($uninstallData);
     }
 

@@ -31,8 +31,9 @@ interface InstalledDataSettingsManagerInterface
      * can find it without the plugin being bootstrapped.
      *
      * @param string[] $customPostTypes
+     * @param string[] $taxonomies
      */
-    public function storeUninstallIdentity(array $customPostTypes): void;
+    public function storeUninstallIdentity(array $customPostTypes, array $taxonomies): void;
 
     public function getDeleteDataOnUninstall(): bool;
 

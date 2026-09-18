@@ -13,6 +13,7 @@ use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Facades\Registries\TaxonomyRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
@@ -24,6 +25,7 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\Services\Taxonomies\TaxonomyInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StateManagers\AppThreadHookManagerWrapper;
@@ -622,7 +624,13 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
             array_values($customPostTypeRegistry->getCustomPostTypes())
         );
 
-        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity($customPostTypes);
+        $taxonomyRegistry = TaxonomyRegistryFacade::getInstance();
+        $taxonomies = array_map(
+            static fn (TaxonomyInterface $taxonomy): string => $taxonomy->getTaxonomy(),
+            array_values($taxonomyRegistry->getTaxonomies())
+        );
+
+        InstalledDataSettingsManagerFacade::getInstance()->storeUninstallIdentity($customPostTypes, $taxonomies);
     }
 
     /**
