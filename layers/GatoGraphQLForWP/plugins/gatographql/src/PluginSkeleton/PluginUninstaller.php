@@ -48,7 +48,7 @@ class PluginUninstaller
             return;
         }
 
-        $installedData = get_option($pluginNamespace . '-' . PluginOptions::INSTALLED_DATA);
+        $installedData = get_option(PluginDataNaming::namespaceOptionName($pluginNamespace, PluginOptions::INSTALLED_DATA));
         if (!is_array($installedData)) {
             return;
         }
@@ -154,8 +154,8 @@ class PluginUninstaller
             $wpdb->usermeta,
             $wpdb->commentmeta,
         ];
-        $metaKeyPattern = $wpdb->esc_like($pluginNamespace . '-') . '%';
-        $underscoredMetaKeyPattern = $wpdb->esc_like('_' . $pluginNamespace . '-') . '%';
+        $metaKeyPattern = $wpdb->esc_like(PluginDataNaming::getMetaKeyPrefix($pluginNamespace, false)) . '%';
+        $underscoredMetaKeyPattern = $wpdb->esc_like(PluginDataNaming::getMetaKeyPrefix($pluginNamespace)) . '%';
         foreach ($metaTableNames as $metaTableName) {
             $wpdb->query(
                 $wpdb->prepare(
@@ -168,9 +168,10 @@ class PluginUninstaller
     }
 
     /**
-     * Options are namespaced {@see \GatoGraphQL\GatoGraphQL\Settings\OptionNamespacer::namespaceOption()},
-     * but the transients built on top of them are not: WordPress stores those
-     * under its own prefixes, so they are matched separately.
+     * The names come from {@see PluginDataNaming}, which is also what the
+     * namespacer service used to write them, so the two cannot drift apart.
+     * That covers the transients too: those are rows in the Options table
+     * under prefixes of WordPress's own, on top of the plugin's.
      *
      * This removes the plugin's record of its own installed data too, which
      * is wanted: the plugin is going away, and the entry is of no use to
@@ -180,13 +181,10 @@ class PluginUninstaller
     {
         global $wpdb;
 
-        $optionNamePatterns = [
-            $wpdb->esc_like($pluginNamespace . '-') . '%',
-            $wpdb->esc_like('_transient_' . $pluginNamespace . '-') . '%',
-            $wpdb->esc_like('_transient_timeout_' . $pluginNamespace . '-') . '%',
-            $wpdb->esc_like('_site_transient_' . $pluginNamespace . '-') . '%',
-            $wpdb->esc_like('_site_transient_timeout_' . $pluginNamespace . '-') . '%',
-        ];
+        $optionNamePatterns = array_map(
+            static fn (string $optionNamePrefix): string => $wpdb->esc_like($optionNamePrefix) . '%',
+            PluginDataNaming::getOptionNamePrefixes($pluginNamespace)
+        );
         foreach ($optionNamePatterns as $optionNamePattern) {
             $wpdb->query(
                 $wpdb->prepare(
