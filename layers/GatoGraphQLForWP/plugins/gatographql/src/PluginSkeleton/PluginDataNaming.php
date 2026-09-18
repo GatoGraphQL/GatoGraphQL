@@ -4,9 +4,6 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
-use GatoGraphQL\GatoGraphQL\Meta\MetaNamespacerInterface;
-use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
-
 /**
  * How the plugin's namespace is joined to the name of everything it stores.
  *
