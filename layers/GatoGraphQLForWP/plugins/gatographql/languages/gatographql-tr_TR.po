@@ -7257,6 +7257,7 @@ msgstr ""
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
@@ -8146,7 +8147,7 @@ msgstr "Etkin"
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:31
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Ayarlar"
 
@@ -9987,36 +9988,47 @@ msgstr "Bilgi"
 msgid "Debug"
 msgstr "Hata Ayıklama"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:110
 msgid "Activate Plugins and Extensions"
 msgstr "Eklentileri ve Uzantıları Etkinleştir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
 msgid "Reset Settings"
 msgstr "Ayarları Sıfırla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:112
+msgid "Uninstall"
+msgstr "Kaldırma"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:121
 #, php-format
 msgid "Activate Plugins and Extensions from the %s"
 msgstr "%s'den Eklentileri ve Uzantıları Etkinleştir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:114
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:124
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr "Gato GraphQL Ayarlarını varsayılan değerlere geri yükle"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:125
+msgid ""
+"Choose what happens to the data stored by the plugin when the plugin is "
+"deleted"
+msgstr ""
+"Eklenti silindiğinde eklenti tarafından depolanan verilere ne olacağını seçin"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:167
 msgid "Adding a license key will <strong>activate the plugin</strong>"
 msgstr ""
 "Bir lisans anahtarı eklemek <strong>eklentiyi etkinleştirecektir</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
 msgid ""
 "Removing an existing license key will <strong>deactivate the plugin</strong>"
 msgstr ""
 "Mevcut bir lisans anahtarını kaldırmak <strong>eklentiyi devre dışı "
 "bırakacaktır</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:169
 msgid ""
 "Updating a license key will first <strong>deactivate the plugin</strong> "
 "(using the previous license key) and then <strong>activate the plugin</"
@@ -10027,7 +10039,7 @@ msgstr ""
 "<strong>eklentiyi tekrar etkinleştirecektir</strong> (yeni lisans anahtarını "
 "kullanarak)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:155
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:170
 msgid ""
 "Not updating a license key will <strong>validate the status of the plugin</"
 "strong>"
@@ -10035,7 +10047,7 @@ msgstr ""
 "Bir lisans anahtarını güncellememek <strong>eklentinin durumunu "
 "doğrulayacaktır</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
 #, php-format
 msgid ""
 "Enter the license keys from the %s, and click on <strong>Activate licenses "
@@ -10044,7 +10056,7 @@ msgstr ""
 "%s'den lisans anahtarlarını girin ve <strong>Lisansları etkinleştir (veya "
 "Devre Dışı Bırak/Doğrula)</strong> üzerine tıklayın:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:174
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:189
 msgid ""
 "When clicking on <strong>Activate licenses (or Deactivate/Validate)</"
 "strong>, one of the following actions will take place:"
@@ -10052,30 +10064,30 @@ msgstr ""
 "<strong>Lisansları etkinleştir (veya Devre Dışı Bırak/Doğrula)</strong> "
 "üzerine tıklandığında aşağıdaki işlemlerden biri gerçekleşecektir:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:198
 msgid "(Show details: When are licenses activated, deactivated or validated?)"
 msgstr ""
 "(Ayrıntıları göster: Lisanslar ne zaman etkinleştirilir, devre dışı "
 "bırakılır veya doğrulanır?)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:221
 msgid "Activate licenses (or Deactivate/Validate)"
 msgstr "Lisansları etkinleştir (veya Devre Dışı Bırak/Doğrula)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:228
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:243
 #, php-format
 msgid "<em>There are no Bundles or Extensions from the %s installed</em>"
 msgstr "<em>%s'den yüklü Paket veya Uzantı bulunmamaktadır</em>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:242
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:257
 msgid "Show options to reset the Settings"
 msgstr "Ayarları sıfırlama seçeneklerini göster"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:249
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:264
 msgid "Reset the Gato GraphQL Settings?"
 msgstr "Gato GraphQL Ayarları sıfırlansın mı?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:268
 #, php-format
 msgid ""
 "Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</"
@@ -10085,7 +10097,7 @@ msgstr ""
 "code> ve <code>%s</code> sekmeleri altındakileri) varsayılan değerlerine "
 "geri yükle."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:272
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:287
 msgid ""
 "When the settings are reset, the default values can follow a restrictive or "
 "non-restrictive behavior:"
@@ -10093,116 +10105,160 @@ msgstr ""
 "Ayarlar sıfırlandığında, varsayılan değerler kısıtlayıcı veya kısıtlayıcı "
 "olmayan bir davranışı izleyebilir:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:273
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:288
 msgid "Feature"
 msgstr "Özellik"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:274
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:289
 msgid "Non-restrictive behavior"
 msgstr "Kısıtlayıcı olmayan davranış"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:290
 msgid "Restrictive behavior"
 msgstr "Kısıtlayıcı davranış"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:290
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:305
 msgid "“Sensitive” data fields"
 msgstr "\"Hassas\" veri alanları"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:291
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
 msgid "Added to the schema"
 msgstr "Şemaya eklendi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:292
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:307
 msgid "Not added to the schema"
 msgstr "Şemaya eklenmedi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:298
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:313
 msgid "Settings from <code>wp_options</code>"
 msgstr "<code>wp_options</code>'dan Ayarlar"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:299
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
 msgid "No options are queryable by non-administrators"
 msgstr "Yönetici olmayan kullanıcılar hiçbir seçeneği sorgulayamaz"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:300
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:315
 msgid "Only a few predefined options are queryable by non-administrators"
 msgstr ""
 "Yönetici olmayan kullanıcılar yalnızca birkaç önceden tanımlanmış seçeneği "
 "sorgulayabilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:321
 msgid "Meta (posts, users, comments, taxonomies)"
 msgstr "Meta (yazılar, kullanıcılar, yorumlar, taksonomiler)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:307
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
 msgid "All keys are queryable"
 msgstr "Tüm anahtarlar sorgulanabilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:308
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:323
 msgid "No keys are queryable"
 msgstr "Hiçbir anahtar sorgulanamaz"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:329
 msgid "Max limit to query entities (posts, users, etc)"
 msgstr ""
 "Varlıkları sorgulamak için maksimum limit (gönderiler, kullanıcılar, vb.)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
 msgid "Unlimited"
 msgstr "Sınırsız"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:316
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:331
 msgid "Limited"
 msgstr "Sınırlı"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:337
 msgid "Environment variables (extension)"
 msgstr "Ortam değişkenleri (uzantı)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:323
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:338
 msgid "All environment variables and PHP constants are queryable"
 msgstr "Tüm ortam değişkenleri ve PHP sabitleri sorgulanabilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:324
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:339
 msgid "No environment variables or PHP constants are queryable"
 msgstr "Hiçbir ortam değişkeni veya PHP sabiti sorgulanamaz"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:345
 msgid "HTTP Client requests (extension)"
 msgstr "HTTP İstemci istekleri (uzantı)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:346
 msgid "All URLs can be requested"
 msgstr "Tüm URL'ler istenebilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:332
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:347
 msgid "No URL can be requested"
 msgstr "Hiçbir URL talep edilemez"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:351
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:366
 msgid "Choose if to use restrictive or non-restrictive default settings."
 msgstr ""
 "Kısıtlayıcı veya kısıtlayıcı olmayan varsayılan ayarların kullanılıp "
 "kullanılmayacağını seçin."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:370
 msgid "Use the restrictive default behavior for the Settings"
 msgstr "Ayarlar için kısıtlayıcı varsayılan davranışı kullan"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:356
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:371
 msgid "Use the non-restrictive default behavior for the Settings"
 msgstr "Ayarlar için kısıtlayıcı olmayan varsayılan davranışı kullan"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:376
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:391
 msgid "Confirm: Reset Settings"
 msgstr "Onayla: Ayarları Sıfırla"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:397
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:414
+msgid "Delete all plugin data when deleting the plugin?"
+msgstr "Eklenti silinirken tüm eklenti verileri silinsin mi?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
+msgid ""
+"Remove everything the plugin has stored on this site: its settings, the "
+"license records of its extensions, the metadata it added to your content and "
+"users, its database tables, and its cache and log files. Removing a license "
+"record does not release the license on the marketplace: to use it on another "
+"site, first clear its key under Activate Plugins and Extensions and save."
+msgstr ""
+"Bu eklentinin bu sitede depoladığı her şeyi kaldırın: ayarlarını, "
+"uzantılarının lisans kayıtlarını, içeriğinize ve kullanıcılarınıza eklediği "
+"meta verileri, veritabanı tablolarını ve önbellek ile günlük dosyalarını. "
+"Bir lisans kaydını kaldırmak, lisansı pazar yerinde serbest bırakmaz: başka "
+"bir sitede kullanmak için önce Eklentileri ve Uzantıları Etkinleştir "
+"bölümünde anahtarını temizleyip kaydedin."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
+msgid "Also delete the entries created with the plugin?"
+msgstr "Eklenti ile oluşturulan girişler de silinsin mi?"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:449
+msgid "Save Uninstall Settings"
+msgstr "Kaldırma Ayarlarını Kaydet"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:487
+msgid ""
+"Remove the entries you created and edited through the plugin. Only applies "
+"when deleting all plugin data."
+msgstr ""
+"Eklenti aracılığıyla oluşturduğunuz ve düzenlediğiniz girişleri kaldırın. "
+"Yalnızca tüm eklenti verileri silinirken geçerlidir."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:491
+#, php-format
+msgid ""
+"Remove the entries you created and edited through the plugin: %s. Only "
+"applies when deleting all plugin data."
+msgstr ""
+"Eklenti aracılığıyla oluşturduğunuz ve düzenlediğiniz girişleri kaldırın: "
+"%s. Yalnızca tüm eklenti verileri silinirken geçerlidir."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:498
 msgid "Gato Plugins Store"
 msgstr "Gato Plugins Store"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:402
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:503
 msgid "Activate Licenses"
 msgstr "Lisansları Etkinleştir"
 
@@ -11110,11 +11166,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1263
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Bu mesaj yalnızca yönetici tarafından görülebilir.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1265
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -13941,6 +13997,13 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid ""
+#~ "Remove everything the plugin has stored on this site: its settings, the "
+#~ "metadata it added to your content, and its database tables."
+#~ msgstr ""
+#~ "Eklentinin bu sitede depoladığı her şeyi kaldırın: ayarlarını, "
+#~ "içeriğinize eklediği meta verileri ve veritabanı tablolarını."
 
 #~ msgid ""
 #~ "<br/>Protected user meta keys (the roles/capabilities keys, session "

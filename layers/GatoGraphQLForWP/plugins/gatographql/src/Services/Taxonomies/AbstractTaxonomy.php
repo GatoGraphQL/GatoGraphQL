@@ -177,6 +177,6 @@ abstract class AbstractTaxonomy extends AbstractAutomaticallyInstantiatedService
 
     protected function getTaxonomyNamespace(): string
     {
-        return PluginApp::getMainPlugin()->getPluginNamespaceForDB();
+        return PluginApp::getMainPlugin()->getPluginNamespaceForEntityTypeNames();
     }
 }

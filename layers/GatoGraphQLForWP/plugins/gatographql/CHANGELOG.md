@@ -9,6 +9,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Documentation for the FluentCart integration (#3379)
+- Choose whether the plugin's data is deleted when the plugin is deleted, under Settings => Plugin Management => Uninstall (#3398)
 
 ### Improvements
 
