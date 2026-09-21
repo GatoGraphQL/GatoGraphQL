@@ -122,8 +122,8 @@ interface PluginInterface
     public function getPluginNamespace(): string;
 
     /**
-     * Namespace the entities to store in DB:
-     * CPT, taxonomies, etc.
+     * Namespace the names of the entity types the plugin registers:
+     * custom post types, taxonomies, etc.
      *
      * Useful for standalone plugins to override
      * this value, and automatically have entities
@@ -131,9 +131,15 @@ interface PluginInterface
      * standalone plugins).
      *
      * Use 7 chars to identify it, as CPTs have
-     * a max length of 20 chars.
+     * a max length of 20 chars: this is the one namespace which cannot simply
+     * be the plugin's own, since "gatographql-schemaconfig" would already be
+     * 24 chars and WordPress would refuse to register it.
+     *
+     * This is not what names the plugin's options, meta keys or database
+     * tables: those all carry the plugin's own namespace
+     * {@see PluginInterface::getPluginNamespace()}, which has room for it.
      */
-    public function getPluginNamespaceForDB(): string;
+    public function getPluginNamespaceForEntityTypeNames(): string;
 
     /**
      * Namespace classes. Eg: The container caching class.
@@ -144,6 +150,16 @@ interface PluginInterface
      * standalone plugins).
      */
     public function getPluginNamespaceForClass(): string;
+
+    /**
+     * The features this plugin or extension installs so that it can work,
+     * such as a custom database table. Declared here, and not only on the
+     * base class, because the main plugin collects them from every extension
+     * it has been given, and knows each only through this interface.
+     *
+     * @return FeatureInstallerInterface[]
+     */
+    public function getFeatureInstallers(): array;
 
     public function getPluginWPConfigConstantNamespace(): string;
 

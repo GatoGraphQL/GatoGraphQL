@@ -249,6 +249,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
+* Added - Choose whether the plugin's data is deleted when the plugin is deleted, under Settings => Plugin Management => Uninstall (#3398)
 * Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
 * Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
 * Improved - Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
