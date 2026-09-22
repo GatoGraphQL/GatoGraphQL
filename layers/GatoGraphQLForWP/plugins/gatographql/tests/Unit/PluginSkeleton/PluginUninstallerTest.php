@@ -213,13 +213,16 @@ class PluginUninstallerTest extends TestCase
         ));
     }
 
-    public function testTheUserOptionsAreSweptUnderTheSitesPrefix(): void
+    public function testTheUserOptionsAndTheSiteScopedUserMetaAreSweptUnderTheSitesPrefix(): void
     {
         $this->recordsBySite[1] = $this->record(true);
 
         PluginUninstaller::uninstall(self::NAMESPACE, self::ENTITY_TYPE_NAMESPACE);
 
-        $this->assertContains('DELETE FROM wp_usermeta WHERE meta_key LIKE \'wp\\\\_gatographql-%\'', $this->wpdb->queries);
+        $this->assertContains(
+            'DELETE FROM wp_usermeta WHERE meta_key LIKE \'wp\\\\_gatographql-%\' OR meta_key LIKE \'\\\\_wp\\\\_gatographql-%\'',
+            $this->wpdb->queries
+        );
     }
 
     /**

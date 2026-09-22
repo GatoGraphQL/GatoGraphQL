@@ -275,15 +275,23 @@ class PluginUninstaller
      * site's table prefix, so it is neither an option nor a meta key of
      * the plugin's shape, though it is named the way the options are past
      * that prefix. Swept per site, as the prefix is the site's.
+     *
+     * A plugin's private user meta is scoped to the site the same way, as
+     * `wp_usermeta` is one table for the whole network, with the underscore
+     * kept in front of the prefix so that the row stays hidden from the
+     * profile screen and the REST API. That leaves it matching neither the
+     * meta sweep nor the user options, so it is swept here with them.
      */
     protected static function deleteUserOptions(string $pluginNamespace): void
     {
         global $wpdb;
 
+        $userOptionNamePrefix = $wpdb->get_blog_prefix() . PluginDataNaming::getOptionNamePrefix($pluginNamespace);
         $wpdb->query(
             $wpdb->prepare(
-                "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
-                $wpdb->esc_like($wpdb->get_blog_prefix() . PluginDataNaming::getOptionNamePrefix($pluginNamespace)) . '%'
+                "DELETE FROM {$wpdb->usermeta} WHERE meta_key LIKE %s OR meta_key LIKE %s", // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                $wpdb->esc_like($userOptionNamePrefix) . '%',
+                $wpdb->esc_like(PluginDataNaming::PRIVATE_META_KEY_PREFIX . $userOptionNamePrefix) . '%'
             )
         );
     }
