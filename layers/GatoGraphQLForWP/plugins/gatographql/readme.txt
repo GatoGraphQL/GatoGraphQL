@@ -247,6 +247,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 20.0.0 =
+* Breaking changes - Removed <code>AbstractPlugin::getPluginNamespaceForDB()</code> and <code>PluginMetadata::PLUGIN_NAMESPACE_FOR_DB</code>: an extension overriding the method must override <code>getPluginNamespaceForEntityTypeNames()</code> instead, and one reading the constant must read <code>PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES</code>
+
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
 * Added - Choose whether the plugin's data is deleted when the plugin is deleted, under Settings => Plugin Management => Uninstall (#3398)
