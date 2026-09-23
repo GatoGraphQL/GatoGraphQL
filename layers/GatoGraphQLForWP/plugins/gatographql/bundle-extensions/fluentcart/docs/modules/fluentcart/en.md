@@ -57,4 +57,4 @@ Beyond products, the extension reaches the store's orders (with their line items
 
 Every monetary amount comes in both forms FluentCart holds it in: the decimal figure to display, and the exact integer in the currency's minor units to compute with.
 
-It also provides `create`, `update` and `delete` mutations for those entities, plus the operations that are not an edit to a column &mdash; refunding an order, marking it paid, pausing and resuming a subscription &mdash; writing through FluentCart's own models and services, so a write the store itself would refuse is refused here too.
+It also provides `create`, `update` and `delete` mutations for those entities, plus the operations that are not an edit to a column (refunding an order, marking it paid, pausing and resuming a subscription), writing through FluentCart's own models and services, so a write the store itself would refuse is refused here too.
