@@ -2,7 +2,7 @@
 
 Integration with <a href="https://wordpress.org/plugins/fluent-cart/" target="_blank" rel="nofollow">FluentCart</a>.
 
-The GraphQL schema is provided with fields to fetch FluentCart data &mdash; products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the store's shipping and tax configuration &mdash; and with mutations to manage the store's data.
+The GraphQL schema is provided with fields to fetch FluentCart data (products and their variations, orders and payments, customers, subscriptions, coupons, carts, and the store's shipping and tax configuration), and with mutations to manage the store's data.
 
 ## Fetching data
 
@@ -82,7 +82,7 @@ The GraphQL schema is provided with fields to fetch FluentCart data &mdash; prod
 
 ## Amounts in two forms
 
-FluentCart stores every monetary amount in the currency's minor units &mdash; `2499` for $24.99 &mdash; and some currencies have no minor unit at all. Each monetary field is therefore available twice: as the decimal figure to display, and as the exact integer to compute with.
+FluentCart stores every monetary amount in the currency's minor units (`2499` for $24.99), and some currencies have no minor unit at all. Each monetary field is therefore available twice: as the decimal figure to display, and as the exact integer to compute with.
 
 ```graphql
 {
@@ -102,7 +102,7 @@ These mutations are provided by the `FluentCart Mutations` module, which depends
 
 Mutations write through FluentCart's own models and services, so a write the store itself would refuse is refused here too, rather than pushed through and left inconsistent with the payment gateway.
 
-Every mutation also has a bulk counterpart, taking a list of the same inputs and answering with one payload per item. And on an endpoint with nested mutations enabled, every entity carries the mutations that act on it as fields of its own &mdash; `update` and `delete`, and whatever else that entity does: a subscription's `pause`, an order's `refund`, a license's `activateSite`.
+Every mutation also has a bulk counterpart, taking a list of the same inputs and answering with one payload per item. And on an endpoint with nested mutations enabled, every entity carries the mutations that act on it as fields of its own: `update` and `delete`, and whatever else that entity does: a subscription's `pause`, an order's `refund`, a license's `activateSite`.
 
 The following entities are supported:
 
@@ -285,6 +285,6 @@ The store's own configuration is queried from the root, covering its identity, a
 
 ## Access control
 
-Product, category, brand and attribute data is public, matching what the store shows its visitors. Everything that exposes commercial or personal data &mdash; orders, customers, subscriptions, carts, coupons, the activity log and the store configuration &mdash; requires the corresponding FluentCart permission, which WordPress administrators hold implicitly. The downloadable files are the exception to the public catalogue: a product is public, but the files it delivers are held at the same permission FluentCart holds its own routes to them.
+Product, category, brand and attribute data is public, matching what the store shows its visitors. Everything that exposes commercial or personal data (orders, customers, subscriptions, carts, coupons, the activity log and the store configuration) requires the corresponding FluentCart permission, which WordPress administrators hold implicitly. The downloadable files are the exception to the public catalogue: a product is public, but the files it delivers are held at the same permission FluentCart holds its own routes to them.
 
-A shopper holds no such permission and still owns their orders, so the `fluentCartMy…` fields &mdash; `fluentCartMyOrders`, `fluentCartMySubscriptions`, `fluentCartMyDownloads`, `fluentCartMyPurchasedProducts`, `fluentCartMyLicenses` &mdash; are scoped to whoever is asking rather than gated, and take the same `filter`, `sort` and `pagination` arguments as the store-wide field each mirrors.
+A shopper holds no such permission and still owns their orders, so the `fluentCartMy…` fields (`fluentCartMyOrders`, `fluentCartMySubscriptions`, `fluentCartMyDownloads`, `fluentCartMyPurchasedProducts`, `fluentCartMyLicenses`) are scoped to whoever is asking rather than gated, and take the same `filter`, `sort` and `pagination` arguments as the store-wide field each mirrors.
