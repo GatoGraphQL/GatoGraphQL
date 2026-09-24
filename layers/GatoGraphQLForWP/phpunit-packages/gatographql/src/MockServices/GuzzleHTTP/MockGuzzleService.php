@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\MockServices\GuzzleHTTP;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\HandlerStack;
@@ -68,6 +69,20 @@ class MockGuzzleService implements MockGuzzleServiceInterface
     public function sendAsyncHTTPRequest(array $requestInputs): array
     {
         return $this->guzzleService->sendAsyncHTTPRequest($requestInputs);
+    }
+
+    /**
+     * Execute several JSON requests asynchronously, and give back what each
+     * of them produced: its response, or the exception it failed with
+     *
+     * @param RequestInput[] $requestInputs
+     * @return array<ResponseInterface|Exception>
+     *
+     * @throws GuzzleHTTPRequestException
+     */
+    public function sendAsyncHTTPRequestSettled(array $requestInputs): array
+    {
+        return $this->guzzleService->sendAsyncHTTPRequestSettled($requestInputs);
     }
 
     protected function createClient(): Client

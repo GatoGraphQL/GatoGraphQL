@@ -8,6 +8,7 @@ use Exception;
 use GuzzleHttp\BodySummarizer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Request;
 use PoP\ComponentModel\App;
@@ -100,6 +101,39 @@ class GuzzleService extends AbstractBasicService implements GuzzleServiceInterfa
      */
     public function sendAsyncHTTPRequest(array $requestInputs): array
     {
+        $results = $this->sendAsyncHTTPRequestSettled($requestInputs);
+
+        // A single failure fails for all
+        foreach ($results as $result) {
+            if ($result instanceof Exception) {
+                $this->throwException($result);
+            }
+        }
+
+        /** @var ResponseInterface[] */
+        return $results;
+    }
+
+    /**
+     * Execute several JSON requests asynchronously, and give back what each
+     * of them produced: its response, or the exception it failed with.
+     *
+     * A request that gets no answer at all - one that timed out, one whose
+     * host refused the connection - fails as an exception and not as a
+     * response, and there is nothing in a `http_errors` setting to change
+     * that. Waiting on the promises together would then make that one
+     * failure the answer for all of them, throwing away what the requests
+     * beside it did bring back; settling them keeps each one's outcome its
+     * own, and leaves it to the caller to say whether one failure fails
+     * everything.
+     *
+     * @param RequestInput[] $requestInputs
+     * @return array<ResponseInterface|Exception>
+     *
+     * @throws GuzzleHTTPRequestException
+     */
+    public function sendAsyncHTTPRequestSettled(array $requestInputs): array
+    {
         $client = $this->getClient();
         try {
             // Build the list of promises from the URLs and the body JSON queries
@@ -112,21 +146,26 @@ class GuzzleService extends AbstractBasicService implements GuzzleServiceInterfa
                 );
             }
 
-            // Wait on all of the requests to complete. Throws a ConnectException
-            // if any of the requests fail
-            $results = Utils::unwrap($promises);
-
             // Wait for the requests to complete, even if some of them fail
             $results = Utils::settle($promises)->wait();
         } catch (Exception $exception) {
             $this->throwException($exception);
         }
 
-        // You can access each result using the key provided to the unwrap function.
-        return array_map(
-            fn (array $result) => new ResponseWrapper($result['value']),
-            $results
-        );
+        $responses = [];
+        /** @var array<array{state:string,value?:UpstreamResponseInterface,reason?:mixed}> $results */
+        foreach ($results as $result) {
+            if (($result['state'] ?? '') === PromiseInterface::FULFILLED) {
+                $responses[] = new ResponseWrapper($result['value']);
+                continue;
+            }
+            /** @var mixed */
+            $reason = $result['reason'] ?? null;
+            $responses[] = $reason instanceof Exception
+                ? $this->createGuzzleHTTPRequestException($reason)
+                : new GuzzleHTTPRequestException('The request failed');
+        }
+        return $responses;
     }
 
     /**
@@ -154,8 +193,13 @@ class GuzzleService extends AbstractBasicService implements GuzzleServiceInterfa
      */
     protected function throwException(Exception $exception): void
     {
+        throw $this->createGuzzleHTTPRequestException($exception);
+    }
+
+    protected function createGuzzleHTTPRequestException(Exception $exception): GuzzleHTTPRequestException
+    {
         $exception = $this->maybeReplaceException($exception);
-        throw new GuzzleHTTPRequestException(
+        return new GuzzleHTTPRequestException(
             $exception->getMessage(),
             0,
             $exception
