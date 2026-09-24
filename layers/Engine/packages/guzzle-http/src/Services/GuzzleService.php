@@ -8,7 +8,6 @@ use Exception;
 use GuzzleHttp\BodySummarizer;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Promise\Utils;
 use GuzzleHttp\Psr7\Request;
 use PoP\ComponentModel\App;
@@ -153,10 +152,12 @@ class GuzzleService extends AbstractBasicService implements GuzzleServiceInterfa
         }
 
         $responses = [];
-        /** @var array<array{state:string,value?:UpstreamResponseInterface,reason?:mixed}> $results */
+        /** @var array<array<string,mixed>> $results */
         foreach ($results as $result) {
-            if (($result['state'] ?? '') === PromiseInterface::FULFILLED) {
-                $responses[] = new ResponseWrapper($result['value']);
+            /** @var mixed */
+            $value = $result['value'] ?? null;
+            if ($value instanceof UpstreamResponseInterface) {
+                $responses[] = new ResponseWrapper($value);
                 continue;
             }
             /** @var mixed */
