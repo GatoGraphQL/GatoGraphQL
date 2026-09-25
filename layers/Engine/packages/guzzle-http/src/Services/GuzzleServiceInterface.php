@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GuzzleHTTP\Services;
 
+use Exception;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use PoP\GuzzleHTTP\Exception\GuzzleHTTPRequestException;
@@ -35,6 +36,19 @@ interface GuzzleServiceInterface
      * @throws GuzzleHTTPRequestException
      */
     public function sendAsyncHTTPRequest(array $requestInputs): array;
+
+    /**
+     * Execute several JSON requests asynchronously, and give back what each
+     * of them produced: its response, or the exception it failed with, so
+     * that one request failing does not throw away what the requests beside
+     * it brought back.
+     *
+     * @param RequestInput[] $requestInputs
+     * @return array<ResponseInterface|Exception>
+     *
+     * @throws GuzzleHTTPRequestException
+     */
+    public function sendAsyncHTTPRequestSettled(array $requestInputs): array;
 
     /**
      * @param mixed[] $handlerContext
