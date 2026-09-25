@@ -100,6 +100,10 @@ Polylang's "Translations" screen posts every stored translation on the page, and
 
 The same detour added a backslash before every quote in the values it carried, as they were read from the request WordPress had already slashed and then posted back to be slashed again. They are now carried unslashed.
 
+### User queries after filtering by several emails
+
+Filtering users by several emails at once is done by adjusting the SQL of that one query. The adjustment was meant to be removed right after, but stayed in place, so a later user query in the same request whose search held an `@` and a comma was adjusted too. It is now removed once the query has run ([#3404](https://github.com/GatoGraphQL/GatoGraphQL/pull/3404)).
+
 ## Security
 
 ### Escaped IDs on the custom settings page
