@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\UsersWP\TypeAPIs;
 
+use Closure;
 use PoP\Root\App;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
 use PoPCMSSchema\Users\Constants\UserOrderBy;
@@ -12,10 +13,12 @@ use PoPSchema\SchemaCommons\Constants\QueryOptions;
 use WP_User;
 use WP_User_Query;
 
+use function add_action;
 use function get_user_by;
 use function get_users;
 use function esc_sql;
 use function get_userdata;
+use function remove_action;
 
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
@@ -24,6 +27,22 @@ class UserTypeAPI extends AbstractUserTypeAPI
 {
     public const HOOK_QUERY = __CLASS__ . ':query';
     public final const HOOK_ORDERBY_QUERY_ARG_VALUE = __CLASS__ . ':orderby-query-arg-value';
+
+    private ?Closure $enableMultipleEmailsCallable = null;
+
+    /**
+     * Cached so that add_action and remove_action are given the same
+     * Closure: WordPress tells one callback from another by the object,
+     * and a Closure created again would leave the hook in place for every
+     * user query that follows.
+     */
+    final protected function getEnableMultipleEmailsCallable(): Closure
+    {
+        if ($this->enableMultipleEmailsCallable === null) {
+            $this->enableMultipleEmailsCallable = $this->enableMultipleEmails(...);
+        }
+        return $this->enableMultipleEmailsCallable;
+    }
 
     /**
      * Indicates if the passed object is of type User
@@ -85,7 +104,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            \add_action('pre_user_query', $this->enableMultipleEmails(...));
+            add_action('pre_user_query', $this->getEnableMultipleEmailsCallable());
         }
 
         // Execute the query. Original solution from:
@@ -98,7 +117,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
+            remove_action('pre_user_query', $this->getEnableMultipleEmailsCallable());
         }
         return $ret;
     }
@@ -137,7 +156,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
         // 4. Remove hook
         $filterByEmails = $this->filterByEmails($query);
         if ($filterByEmails) {
-            \add_action('pre_user_query', $this->enableMultipleEmails(...));
+            add_action('pre_user_query', $this->getEnableMultipleEmailsCallable());
         }
 
         // Execute the query
@@ -145,7 +164,7 @@ class UserTypeAPI extends AbstractUserTypeAPI
 
         // Remove the hook
         if ($filterByEmails) {
-            App::removeAction('pre_user_query', $this->enableMultipleEmails(...));
+            remove_action('pre_user_query', $this->getEnableMultipleEmailsCallable());
         }
         return $ret;
     }
