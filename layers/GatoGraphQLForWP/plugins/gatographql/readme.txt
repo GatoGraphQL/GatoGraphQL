@@ -1,7 +1,7 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
-Requires at least: 6.1
+Requires at least: 6.5
 Tested up to: 7.1
 Stable tag: 19.2.4
 Requires PHP: 8.1
@@ -248,6 +248,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 20.0.0 =
+* Breaking changes - Bumped the minimum required WordPress version to 6.5 (#3405)
 * Breaking changes - Removed <code>AbstractPlugin::getPluginNamespaceForDB()</code> and <code>PluginMetadata::PLUGIN_NAMESPACE_FOR_DB</code>: an extension overriding the method must override <code>getPluginNamespaceForEntityTypeNames()</code> instead, and one reading the constant must read <code>PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES</code>
 
 = 19.3.0 =
