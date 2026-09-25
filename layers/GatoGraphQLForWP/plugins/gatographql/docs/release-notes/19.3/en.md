@@ -104,6 +104,10 @@ The same detour added a backslash before every quote in the values it carried, a
 
 Filtering users by several emails at once is done by adjusting the SQL of that one query. The adjustment was meant to be removed right after, but stayed in place, so a later user query in the same request whose search held an `@` and a comma was adjusted too. It is now removed once the query has run ([#3404](https://github.com/GatoGraphQL/GatoGraphQL/pull/3404)).
 
+### Log entries with an HTML entity in their context
+
+The Logs page shows the context of an entry as JSON under "Additional context". When one of its strings held an HTML entity, such as `&quot;` in a response from an AI service, the page could not read the JSON, and printed the whole entry as one line of text instead. It now shows the context, with the entity as it was logged ([#3406](https://github.com/GatoGraphQL/GatoGraphQL/pull/3406)).
+
 ## Security
 
 ### Escaped IDs on the custom settings page
