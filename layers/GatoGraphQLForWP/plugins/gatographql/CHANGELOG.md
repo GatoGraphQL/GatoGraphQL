@@ -27,6 +27,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - The bulk action with custom settings now runs when a value on the originating screen contains a `#`, `&` or `=`, such as an HTML entity in a stored translation (#3396)
 - The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+- Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
 
 ### Security
 
