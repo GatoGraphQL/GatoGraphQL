@@ -12106,20 +12106,20 @@ msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s tệp nhật ký đã bị xóa."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:730
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
 msgid "Additional context"
 msgstr "Ngữ cảnh bổ sung"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:788
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
 msgid "Search within these files"
 msgstr "Tìm kiếm trong các tệp này"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:797
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
 msgid "Search"
 msgstr "Tìm kiếm"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "

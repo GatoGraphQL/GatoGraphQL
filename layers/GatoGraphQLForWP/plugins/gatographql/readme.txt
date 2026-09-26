@@ -260,6 +260,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - The bulk action with custom settings now runs when a value on the originating screen contains a <code>#</code>, <code>&</code> or <code>=</code>, such as an HTML entity in a stored translation (#3396)
 * Fixed - The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
 * Fixed - Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
+* Fixed - Log entries whose context holds an HTML entity, such as <code>&quot;</code>, now show that context under "Additional context" (#3406)
 * Security - The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
 
 = 19.2.4 =

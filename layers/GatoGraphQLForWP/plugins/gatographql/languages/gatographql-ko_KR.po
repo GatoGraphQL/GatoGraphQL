@@ -11690,20 +11690,20 @@ msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s 로그 파일이 삭제되었습니다."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:730
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
 msgid "Additional context"
 msgstr "추가 컨텍스트"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:788
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
 msgid "Search within these files"
 msgstr "이 파일들 내에서 검색"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:797
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
 msgid "Search"
 msgstr "검색"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "

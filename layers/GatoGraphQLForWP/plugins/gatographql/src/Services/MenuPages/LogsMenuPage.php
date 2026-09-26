@@ -673,6 +673,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         $classes = array( 'line' );
 
+        $raw_line = $line;
         $line = esc_html($line);
         if (empty($line)) {
             $line = '&nbsp;';
@@ -717,7 +718,13 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
 
             if (isset($message_chunks[1])) {
                 try {
-                    $maybe_json = html_entity_decode(trim($message_chunks[1]));
+                    /**
+                     * Decode the context from the raw line, as an entity in
+                     * one of its strings (such as `&quot;`) would otherwise be
+                     * decoded along with the escaping, breaking the JSON.
+                     */
+                    $raw_line_chunks = explode(LoggerContext::LOG_ENTRY_CONTEXT_SEPARATOR, $raw_line, 2);
+                    $maybe_json = trim($raw_line_chunks[1] ?? '');
 
                     // Decode for validation.
                     $context = json_decode($maybe_json, false, 512, JSON_THROW_ON_ERROR);
@@ -728,7 +735,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     $message_chunks[1] = sprintf(
                         '<details><summary>%1$s</summary><pre><code class="prettyprint hljs language-json">%2$s</code></pre></details>',
                         esc_html__('Additional context', 'gatographql'),
-                        esc_html($context) // @phpstan-ignore-line
+                        htmlspecialchars($context, ENT_QUOTES, 'UTF-8', true) // @phpstan-ignore-line
                     );
 
                     $segments[2] = implode(' ', $message_chunks);
