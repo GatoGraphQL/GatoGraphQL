@@ -18,7 +18,33 @@ declare(strict_types=1);
 
 require dirname(__DIR__, 2) . '/vendor/autoload.php';
 
+use Gettext\Generators\Po;
 use Gettext\Translations;
+
+/**
+ * The library's PO generator, writing an obsolete entry whose text runs over
+ * several lines with `#~ ` on every one of them.
+ *
+ * The library prefixes only the first line of each value (`#~ msgid ""`) and
+ * writes the lines that follow it bare, so every multi-line obsolete entry of
+ * a catalog comes out malformed, and the next `msgmerge` refuses the file
+ * with "inconsistent use of #~".
+ */
+final class ObsoleteEntriesPo extends Po
+{
+    protected static function addLines(array &$lines, $name, $value): void
+    {
+        if (!str_starts_with($name, '#~ ')) {
+            parent::addLines($lines, $name, $value);
+            return;
+        }
+        $valueLines = [];
+        parent::addLines($valueLines, $name, $value);
+        foreach ($valueLines as $index => $valueLine) {
+            $lines[] = $index === 0 ? $valueLine : '#~ ' . $valueLine;
+        }
+    }
+}
 
 /** @return array<string,string> */
 function parseArgs(array $argv): array
@@ -335,7 +361,7 @@ printf(
 
 // persist incrementally so a long run can be resumed
 $persist = static function () use ($translations, $poFile): void {
-    $translations->toPoFile($poFile);
+    ObsoleteEntriesPo::toFile($translations, $poFile);
 };
 
 $done = 0;
@@ -393,7 +419,7 @@ if ($limit === 0) {
             }
             $done++;
         }
-        $translations->toPoFile($poFile);
+        ObsoleteEntriesPo::toFile($translations, $poFile);
         printf("  plural batch %d: %d entries (%d total)\n", $chunkIndex + 1, count($chunk), $done);
     }
 }
