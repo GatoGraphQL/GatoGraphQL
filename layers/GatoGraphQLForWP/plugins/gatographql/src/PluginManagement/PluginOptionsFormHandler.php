@@ -25,6 +25,13 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
     protected array $normalizedModuleOptionValuesCache = [];
 
     /**
+     * Modules whose submitted values are being resolved right now
+     *
+     * @var array<string,true>
+     */
+    protected array $overridingValueFromFormModules = [];
+
+    /**
      * Get the values from the form submitted to options.php, and normalize them
      *
      * @return array<string,mixed>
@@ -86,8 +93,31 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
      * Hidden input "form-origin" is used to only execute for this plugin,
      * since options.php is used everywhere, including WP core and other plugins.
      * Otherwise, it may thrown an exception!
+     *
+     * Resolving the submitted values builds the module's settings, and
+     * building them may read a submitted value of that same module again
+     * (eg: a description that depends on another option, or a default
+     * value). That nested read gets the value passed in (so the caller
+     * falls back to the stored setting), as otherwise it would resolve
+     * the module again, recursing until PHP segfaults.
      */
     public function maybeOverrideValueFromForm(
+        mixed $value,
+        string $module,
+        string $option,
+    ): mixed {
+        if (isset($this->overridingValueFromFormModules[$module])) {
+            return $value;
+        }
+        $this->overridingValueFromFormModules[$module] = true;
+        try {
+            return $this->doMaybeOverrideValueFromForm($value, $module, $option);
+        } finally {
+            unset($this->overridingValueFromFormModules[$module]);
+        }
+    }
+
+    protected function doMaybeOverrideValueFromForm(
         mixed $value,
         string $module,
         string $option,

@@ -108,6 +108,10 @@ Filtering users by several emails at once is done by adjusting the SQL of that o
 
 The Logs page shows the context of an entry as JSON under "Additional context". When one of its strings held an HTML entity, such as `&quot;` in a response from an AI service, the page could not read the JSON, and printed the whole entry as one line of text instead. It now shows the context, with the entity as it was logged ([#3406](https://github.com/GatoGraphQL/GatoGraphQL/pull/3406)).
 
+### Saving the settings when a value is missing
+
+Saving the settings reads the submitted values back while the new configuration is set up, and resolving a module's values builds that module's settings. When building them read a submitted value of that same module again, the values were resolved anew, over and over, until PHP crashed and the browser showed a "Bad Gateway" error. On the Plugin Management settings, it happened whenever the "Reset settings" option was missing from the submitted form. A value read while its own module is being resolved now comes from the stored settings ([#3411](https://github.com/GatoGraphQL/GatoGraphQL/pull/3411)).
+
 ## Security
 
 ### Escaped IDs on the custom settings page
