@@ -32,6 +32,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
 - Log entries whose context holds an HTML entity, such as `&quot;`, now show that context under "Additional context" (#3406)
 - Saving the settings no longer crashes with a "Bad Gateway" error when a value is missing from the submitted form, such as the "Reset settings" option under Plugin Management (#3411)
+- The plugin's texts follow a switch of the language within a request (`switch_to_locale()`), and go back when it is restored (#3412)
 
 ### Security
 

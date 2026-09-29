@@ -263,6 +263,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
 * Fixed - Log entries whose context holds an HTML entity, such as <code>&quot;</code>, now show that context under "Additional context" (#3406)
 * Fixed - Saving the settings no longer crashes with a "Bad Gateway" error when a value is missing from the submitted form, such as the "Reset settings" option under Plugin Management (#3411)
+* Fixed - The plugin's texts follow a switch of the language within a request (<code>switch_to_locale()</code>), and go back when it is restored (#3412)
 * Security - The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
 
 = 19.2.4 =
