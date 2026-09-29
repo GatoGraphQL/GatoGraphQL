@@ -250,6 +250,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 = 20.0.0 =
 * Breaking changes - Bumped the minimum required WordPress version to 6.5 (#3405)
 * Breaking changes - Removed <code>AbstractPlugin::getPluginNamespaceForDB()</code> and <code>PluginMetadata::PLUGIN_NAMESPACE_FOR_DB</code>: an extension overriding the method must override <code>getPluginNamespaceForEntityTypeNames()</code> instead, and one reading the constant must read <code>PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES</code>
+* Breaking changes - The "Settings" block in the Schema Configuration now defaults to "Allow access", as the "Settings" module does, so a configuration that never set the behavior allows only its listed options to non-administrators (#3409)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)

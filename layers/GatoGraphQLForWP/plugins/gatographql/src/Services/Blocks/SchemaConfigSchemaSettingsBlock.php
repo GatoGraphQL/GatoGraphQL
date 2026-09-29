@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
+use PoPSchema\SchemaCommons\Constants\Behaviors;
 
 class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAccessToEntriesBlock
 {
@@ -34,6 +35,16 @@ class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAcc
     protected function getRenderBlockLabel(): string
     {
         return $this->__('Settings entries', 'gatographql');
+    }
+
+    /**
+     * Same default as the "Settings" module: an allowlist, so the options
+     * are not disclosed by a Schema Configuration that leaves the
+     * behavior unset.
+     */
+    protected function getDefaultBehavior(): string
+    {
+        return Behaviors::ALLOW;
     }
 
     /**
