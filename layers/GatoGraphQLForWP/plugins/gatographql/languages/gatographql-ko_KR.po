@@ -7776,7 +7776,7 @@ msgstr "경로 '%s'에 해당하는 애플리케이션 상태가 없습니다"
 msgid ","
 msgstr ","
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:36
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:38
 #, php-format
 msgid ""
 "Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of "
@@ -7787,12 +7787,12 @@ msgstr ""
 "요하지만, 서버의 PHP 메모리 제한이 <strong>%3$s</strong>으로 설정되어 있습니"
 "다. 플러그인을 로드하려면 메모리 제한을 늘려 주세요."
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:42
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:44
 #, php-format
 msgid " <a href=\"%s\" target=\"_blank\">%s</a>"
 msgstr " <a href=\"%s\" target=\"_blank\">%s</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:44
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:46
 msgid "Browse documentation&#x2197;"
 msgstr "문서 보기&#x2197;"
 

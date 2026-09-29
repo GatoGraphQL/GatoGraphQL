@@ -8555,7 +8555,7 @@ msgstr "Il n'existe pas d'état d'application sous le chemin '%s'"
 msgid ","
 msgstr ","
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:36
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:38
 #, php-format
 msgid ""
 "Plugin <strong>%1$s</strong> requires at least <strong>%2$s</strong> of "
@@ -8567,12 +8567,12 @@ msgstr ""
 "<strong>%3$s</strong>. Veuillez augmenter la limite mémoire pour charger le "
 "plugin."
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:42
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:44
 #, php-format
 msgid " <a href=\"%s\" target=\"_blank\">%s</a>"
 msgstr " <a href=\"%s\" target=\"_blank\">%s</a>"
 
-#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:44
+#: GatoGraphQLForWP/plugins/gatographql/includes/startup.php:46
 msgid "Browse documentation&#x2197;"
 msgstr "Parcourir la documentation&#x2197;"
 
