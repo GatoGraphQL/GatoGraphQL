@@ -112,6 +112,10 @@ The Logs page shows the context of an entry as JSON under "Additional context". 
 
 Saving the settings reads the submitted values back while the new configuration is set up, and resolving a module's values builds that module's settings. When building them read a submitted value of that same module again, the values were resolved anew, over and over, until PHP crashed and the browser showed a "Bad Gateway" error. On the Plugin Management settings, it happened whenever the "Reset settings" option was missing from the submitted form. A value read while its own module is being resolved now comes from the stored settings ([#3411](https://github.com/GatoGraphQL/GatoGraphQL/pull/3411)).
 
+### The plugin's texts after switching the language
+
+When code switches the language within a request with `switch_to_locale()`, as WordPress does to send an email in the recipient's language, the plugin's texts, such as its log entries, stayed in the language the request started with. They now follow the switch, and go back to the previous language when it is restored ([#3412](https://github.com/GatoGraphQL/GatoGraphQL/pull/3412)).
+
 ## Security
 
 ### Escaped IDs on the custom settings page
