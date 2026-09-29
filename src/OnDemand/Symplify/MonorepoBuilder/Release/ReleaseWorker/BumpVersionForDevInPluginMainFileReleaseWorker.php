@@ -15,7 +15,7 @@ class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVers
     public function work(Version $version): void
     {
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
-        $requiredNextDevVersion = $this->upstreamVersionUtils->getRequiredNextFormat($version);
+        $requiredNextDevVersion = $this->versionUtils->getRequiredNextFormat($version);
 
         // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
         $prodVersion = $version->getVersionString();
