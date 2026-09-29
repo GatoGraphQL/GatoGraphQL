@@ -254,6 +254,14 @@ To preview running the command without actually executing it, append `-- --dry-r
 composer release-patch -- --dry-run
 ```
 
+By default, the next DEV version is the next "minor" one (eg: releasing `1.3.0` opens `1.4.0-dev`). To open the next "major" version instead (eg: releasing `1.3.0` opens `2.0.0-dev`), use the `-next-major` variant of the command:
+
+```bash
+composer release-patch-next-major
+composer release-minor-next-major
+composer release-major-next-major
+```
+
 ### Create release from tag in GitHub
 
 After tagging the repo on the step above, we must create a release from the tag to generate the extension plugins for production.
@@ -481,8 +489,11 @@ composer list
 | `rebuild-server` | Rebuild the Lando webserver |
 | `rebuild-server-prod` | Rebuild the Lando webserver for PROD |
 | `release-major` | Release a new 'major' version (MAJOR.xx.xx) (bump version, commit, push, tag, revert to 'dev-master', commit, push) |
+| `release-major-next-major` | Release a new 'major' version (MAJOR.xx.xx), and open the next 'major' version (instead of 'minor') |
 | `release-minor` | Release a new 'minor' version (xx.MINOR.xx) (bump version, commit, push, tag, revert to 'dev-master', commit, push) |
+| `release-minor-next-major` | Release a new 'minor' version (xx.MINOR.xx), and open the next 'major' version (instead of 'minor') |
 | `release-patch` | Release a new 'patch' version (xx.xx.PATCH) (bump version, commit, push, tag, revert to 'dev-master', commit, push) |
+| `release-patch-next-major` | Release a new 'patch' version (xx.xx.PATCH), and open the next 'major' version (instead of 'minor') |
 | `remove-unused-imports` | Remove unused `use` imports |
 | `reset-db` | Resets the WordPress database |
 | `reset-db-prod` | Resets the WordPress database in the PROD server |
