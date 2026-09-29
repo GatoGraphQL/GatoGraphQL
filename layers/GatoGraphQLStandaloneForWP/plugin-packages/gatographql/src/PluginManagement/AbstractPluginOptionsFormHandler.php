@@ -19,28 +19,28 @@ abstract class AbstractPluginOptionsFormHandler extends UpstreamPluginOptionsFor
      *
      * For that, it is enabled in all pages supporting bulk actions.
      */
-    public function maybeOverrideValueFromForm(
+    protected function doMaybeOverrideValueFromForm(
         mixed $value,
         string $module,
         string $option,
     ): mixed {
         if (!$this->isSupportedBulkActionPage()) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+            return parent::doMaybeOverrideValueFromForm($value, $module, $option);
         }
 
         // Check we are executing the bulk action with the custom settings
         $bulkAction = App::request('action') ?? App::query('action') ?? App::request('action2') ?? App::query('action2');
         if (!in_array($bulkAction, $this->getExecuteActionWithCustomSettingsBulkActionNames())) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+            return parent::doMaybeOverrideValueFromForm($value, $module, $option);
         }
 
         $executeAction = App::request(Params::BULK_ACTION_EXECUTE) ?? App::query(Params::BULK_ACTION_EXECUTE, false);
         if (!$executeAction) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+            return parent::doMaybeOverrideValueFromForm($value, $module, $option);
         }
 
         if (!$this->checkIsExpectedSubmittedExecuteActionForm($module, $option)) {
-            return parent::maybeOverrideValueFromForm($value, $module, $option);
+            return parent::doMaybeOverrideValueFromForm($value, $module, $option);
         }
 
         return $this->doOverrideValueFromForm($value, $module, $option);
