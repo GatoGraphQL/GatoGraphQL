@@ -10,6 +10,8 @@ use PoP\Root\Environment as RootEnvironment;
 use function wp_convert_hr_to_bytes;
 use function add_action;
 use function add_filter;
+use function determine_locale;
+use function load_textdomain;
 
 class Startup {
     /**
@@ -86,13 +88,30 @@ class Startup {
     }
 
     /**
+     * The translation files loaded into the 'gatographql' text domain,
+     * to load them again for the new locale when it is switched.
+     *
+     * @var array<string,array{0:string,1:string}> Key: the dir and prefix, Value: [dir, prefix]
+     */
+    private static array $textdomainTranslationFileLocations = [];
+
+    /**
      * Load the .l10n.php for the current locale into the 'gatographql' text domain,
      * falling back to a shipped variant of the same base language when the exact
      * locale's file is absent (e.g. es_AR / es_MX reuse es_ES, fr_CA reuses fr_FR).
+     *
+     * WordPress reloads a text domain on switch_to_locale() only from the
+     * languages directories it knows of, and these files are not in them,
+     * so they are loaded again for the new locale on 'change_locale'.
      */
-    public static function loadTextdomainWithFallback(string $dir, string $prefix): void
+    public static function loadTextdomainWithFallback(string $dir, string $prefix, ?string $locale = null): void
     {
-        $locale = determine_locale();
+        if (self::$textdomainTranslationFileLocations === []) {
+            add_action('change_locale', [self::class, 'reloadTextdomainForLocale']);
+        }
+        self::$textdomainTranslationFileLocations[$dir . $prefix] = [$dir, $prefix];
+
+        $locale ??= determine_locale();
         $translationFile = $dir . $prefix . $locale . '.l10n.php';
         if (!is_readable($translationFile)) {
             $base = (string) strtok($locale, '_');
@@ -105,7 +124,18 @@ class Startup {
             }
         }
         if (is_readable($translationFile)) {
-            load_textdomain('gatographql', $translationFile);
+            load_textdomain('gatographql', $translationFile, $locale);
+        }
+    }
+
+    /**
+     * Hooked on 'change_locale', which fires on switching the locale and on
+     * restoring it, after WordPress has unloaded the text domain.
+     */
+    public static function reloadTextdomainForLocale(string $locale): void
+    {
+        foreach (self::$textdomainTranslationFileLocations as [$dir, $prefix]) {
+            self::loadTextdomainWithFallback($dir, $prefix, $locale);
         }
     }
 
