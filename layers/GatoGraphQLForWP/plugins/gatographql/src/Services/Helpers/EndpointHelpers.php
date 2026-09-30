@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
 use GatoGraphQL\GatoGraphQL\Services\Menus\PluginMenu;
@@ -13,6 +13,8 @@ use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 
 use function apply_filters;
+use function array_map;
+use function is_string;
 
 class EndpointHelpers extends AbstractBasicService
 {
@@ -57,7 +59,7 @@ class EndpointHelpers extends AbstractBasicService
     public function isRequestingAdminPluginOwnUseGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE;
+            && $this->getRequestedPredefinedAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE;
     }
 
     /**
@@ -70,7 +72,7 @@ class EndpointHelpers extends AbstractBasicService
     public function isRequestingAdminBlockEditorGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::BLOCK_EDITOR;
+            && $this->getRequestedPredefinedAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::BLOCK_EDITOR;
     }
 
     /**
@@ -82,7 +84,7 @@ class EndpointHelpers extends AbstractBasicService
     public function isRequestingAdminPersistedQueryGraphQLEndpoint(): bool
     {
         return $this->isRequestingAdminGraphQLEndpoint()
-            && App::query(RequestParams::ENDPOINT_GROUP) === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
+            && $this->getRequestedPredefinedAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::PERSISTED_QUERY;
             // && App::getRequest()->query->has(RequestParams::PERSISTED_QUERY_ID);
     }
 
@@ -94,7 +96,7 @@ class EndpointHelpers extends AbstractBasicService
         if (!$this->isRequestingAdminGraphQLEndpoint()) {
             return false;
         }
-        return $this->getAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::DEFAULT;
+        return $this->getAdminGraphQLEndpointGroup() === AdminGraphQLEndpointGroups::DEFAULT->value;
     }
 
     /**
@@ -157,14 +159,14 @@ class EndpointHelpers extends AbstractBasicService
     public function getAdminGraphQLEndpointGroup(): string
     {
         /** @var string */
-        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, AdminGraphQLEndpointGroups::DEFAULT);
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP, AdminGraphQLEndpointGroups::DEFAULT->value);
 
         /**
          * If the endpointGroup is not supported, use the
          * default one.
          */
         if (!in_array($endpointGroup, $this->getSupportedAdminGraphQLEndpointGroups())) {
-            return AdminGraphQLEndpointGroups::DEFAULT;
+            return AdminGraphQLEndpointGroups::DEFAULT->value;
         }
         return $endpointGroup;
     }
@@ -192,12 +194,15 @@ class EndpointHelpers extends AbstractBasicService
         // Mandatory groups, add them after the filter
         return array_merge(
             $supportedAdminEndpointGroups,
-            $this->getPredefinedAdminGraphQLEndpointGroups()
+            array_map(
+                fn (AdminGraphQLEndpointGroups $endpointGroup): string => $endpointGroup->value,
+                $this->getPredefinedAdminGraphQLEndpointGroups()
+            )
         );
     }
 
     /**
-     * @return string[]
+     * @return AdminGraphQLEndpointGroups[]
      */
     protected function getPredefinedAdminGraphQLEndpointGroups(): array
     {
@@ -211,7 +216,22 @@ class EndpointHelpers extends AbstractBasicService
 
     protected function isPredefinedAdminGraphQLEndpointGroup(string $endpointGroup): bool
     {
-        return in_array($endpointGroup, $this->getPredefinedAdminGraphQLEndpointGroups());
+        $predefinedEndpointGroup = AdminGraphQLEndpointGroups::tryFrom($endpointGroup);
+        return $predefinedEndpointGroup !== null
+            && in_array($predefinedEndpointGroup, $this->getPredefinedAdminGraphQLEndpointGroups(), true);
+    }
+
+    /**
+     * The predefined endpoint group requested via the URL param,
+     * or `null` if none was requested, or it is a custom one.
+     */
+    private function getRequestedPredefinedAdminGraphQLEndpointGroup(): ?AdminGraphQLEndpointGroups
+    {
+        $endpointGroup = App::query(RequestParams::ENDPOINT_GROUP);
+        if (!is_string($endpointGroup)) {
+            return null;
+        }
+        return AdminGraphQLEndpointGroups::tryFrom($endpointGroup);
     }
 
     /**
@@ -220,7 +240,7 @@ class EndpointHelpers extends AbstractBasicService
      */
     public function getAdminPluginOwnUseGraphQLEndpoint(): string
     {
-        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PLUGIN_OWN_USE);
+        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PLUGIN_OWN_USE->value);
     }
 
     /**
@@ -229,7 +249,7 @@ class EndpointHelpers extends AbstractBasicService
      */
     public function getAdminBlockEditorGraphQLEndpoint(): string
     {
-        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::BLOCK_EDITOR);
+        return $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::BLOCK_EDITOR->value);
     }
 
     /**
@@ -242,13 +262,13 @@ class EndpointHelpers extends AbstractBasicService
             [
                 RequestParams::PERSISTED_QUERY_ID => $persistedQueryEndpointID,
             ],
-            $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY)
+            $this->getAdminGraphQLEndpoint(AdminGraphQLEndpointGroups::PERSISTED_QUERY->value)
         );
     }
 
     public function getAdminPersistedQueryID(): ?string
     {
-        if (App::query(RequestParams::ENDPOINT_GROUP) !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
+        if ($this->getRequestedPredefinedAdminGraphQLEndpointGroup() !== AdminGraphQLEndpointGroups::PERSISTED_QUERY) {
             return null;
         }
 

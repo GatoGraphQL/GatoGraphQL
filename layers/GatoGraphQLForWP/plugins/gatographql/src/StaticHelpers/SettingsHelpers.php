@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
 use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 
@@ -32,7 +33,7 @@ class SettingsHelpers
                 self::$commercialExtensionActivatedLicenseObjectProperties[$extensionSlug] = new CommercialExtensionActivatedLicenseObjectProperties(
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::LICENSE_KEY],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::API_RESPONSE_PAYLOAD],
-                    $commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS],
+                    LicenseStatus::tryFrom($commercialExtensionActivatedLicenseEntry[LicenseProperties::STATUS]) ?? LicenseStatus::OTHER,
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_ID],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::INSTANCE_NAME],
                     $commercialExtensionActivatedLicenseEntry[LicenseProperties::ACTIVATION_USAGE],

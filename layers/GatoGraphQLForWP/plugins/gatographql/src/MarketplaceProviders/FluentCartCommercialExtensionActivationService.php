@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
@@ -236,7 +236,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     /**
      * FluentCart uses 'valid' for active licenses.
      */
-    protected function convertStatus(string $status): string
+    protected function convertStatus(string $status): LicenseStatus
     {
         return match ($status) {
             'valid' => LicenseStatus::ACTIVE,

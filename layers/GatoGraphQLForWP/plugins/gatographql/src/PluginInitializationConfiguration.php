@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\GlobalFieldsSchemaExposure;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
@@ -65,7 +65,7 @@ use PoPAPI\API\Environment as APIEnvironment;
 use PoPAPI\API\Module as APIModule;
 use PoPSchema\Logger\Environment as LoggerEnvironment;
 use PoPSchema\Logger\Module as LoggerModule;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoPWPSchema\Blocks\Environment as BlocksEnvironment;
 use PoPWPSchema\Blocks\Module as BlocksModule;
 use PoP\ComponentModel\Engine\EngineHookNames;
@@ -1024,9 +1024,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
      * Get the fixed configuration for all components required in the plugin
      * when requesting some specific group in the admin endpoint
      *
+     * @param AdminGraphQLEndpointGroups|null $endpointGroup `null` when requesting a custom admin endpoint group
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(?AdminGraphQLEndpointGroups $endpointGroup): array
     {
         /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
         $moduleClassConfiguration = [
@@ -1170,25 +1171,25 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                     // Allow access to all entries for Root.optionValue
                     SettingsModule::class => [
                         SettingsEnvironment::SETTINGS_ENTRIES => [],
-                        SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY,
+                        SettingsEnvironment::SETTINGS_BEHAVIOR => Behaviors::DENY->value,
                     ],
 
                     // Allow access to all meta values
                     CustomPostMetaModule::class => [
                         CustomPostMetaEnvironment::CUSTOMPOST_META_ENTRIES => [],
-                        CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR => Behaviors::DENY,
+                        CustomPostMetaEnvironment::CUSTOMPOST_META_BEHAVIOR => Behaviors::DENY->value,
                     ],
                     UserMetaModule::class => [
                         UserMetaEnvironment::USER_META_ENTRIES => [],
-                        UserMetaEnvironment::USER_META_BEHAVIOR => Behaviors::DENY,
+                        UserMetaEnvironment::USER_META_BEHAVIOR => Behaviors::DENY->value,
                     ],
                     CommentMetaModule::class => [
                         CommentMetaEnvironment::COMMENT_META_ENTRIES => [],
-                        CommentMetaEnvironment::COMMENT_META_BEHAVIOR => Behaviors::DENY,
+                        CommentMetaEnvironment::COMMENT_META_BEHAVIOR => Behaviors::DENY->value,
                     ],
                     TaxonomyMetaModule::class => [
                         TaxonomyMetaEnvironment::TAXONOMY_META_ENTRIES => [],
-                        TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY,
+                        TaxonomyMetaEnvironment::TAXONOMY_META_BEHAVIOR => Behaviors::DENY->value,
                     ],
 
                     // Do use the Payloadable types for mutations
