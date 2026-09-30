@@ -13,14 +13,14 @@ use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersi
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginMainFileReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\ConvertVersionForProdInPluginNodeJSPackageJSONFilesReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\GuardOnDefaultBranchReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\RestoreVersionForDevInPluginBlockCompiledMarkdownFilesReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker;
+use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
 use PoP\PoP\OnDemand\Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateCurrentBranchAliasReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushNextDevReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\PushTagReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetCurrentMutualDependenciesReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\SetNextMutualDependenciesReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\TagVersionReleaseWorker;
-use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateBranchAliasReleaseWorker;
 use Symplify\MonorepoBuilder\Release\ReleaseWorker\UpdateReplaceReleaseWorker;
 
 class ReleaseWorkersDataSource

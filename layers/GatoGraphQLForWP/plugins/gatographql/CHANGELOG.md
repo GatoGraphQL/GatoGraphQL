@@ -4,6 +4,32 @@ All notable changes to `gatographql` will be documented in this file.
 
 Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) principles.
 
+## 19.3.0 - DATE
+
+### Added
+
+- Documentation for the FluentCart integration (#3379)
+- Choose whether the plugin's data is deleted when the plugin is deleted, under Settings => Plugin Management => Uninstall (#3398)
+
+### Improvements
+
+- The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
+- The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+- Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
+
+### Fixed
+
+- The bulk action with custom settings now runs when a value on the originating screen contains a `#`, `&` or `=`, such as an HTML entity in a stored translation (#3396)
+- The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+- Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
+- Log entries whose context holds an HTML entity, such as `&quot;`, now show that context under "Additional context" (#3406)
+- Saving the settings no longer crashes with a "Bad Gateway" error when a value is missing from the submitted form, such as the "Reset settings" option under Plugin Management (#3411)
+- The plugin's texts follow a switch of the language within a request (`switch_to_locale()`), and go back when it is restored (#3412)
+
+### Security
+
+- The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
+
 ## 19.2.4 - 07/09/2026
 
 ### Security

@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialPluginUpdatedPluginData;
 use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use PoP\Root\Exception\ShouldNotHappenException;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
@@ -41,6 +42,18 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
      * Only disable this for debugging
      */
     protected bool $cacheAllowed = true;
+
+    private ?OptionNamespacerInterface $optionNamespacer = null;
+
+    final protected function getOptionNamespacer(): OptionNamespacerInterface
+    {
+        if ($this->optionNamespacer === null) {
+            /** @var OptionNamespacerInterface */
+            $optionNamespacer = $this->instanceManager->getInstance(OptionNamespacerInterface::class);
+            $this->optionNamespacer = $optionNamespacer;
+        }
+        return $this->optionNamespacer;
+    }
 
     /**
      * Use the Marketplace provider's service to
@@ -87,7 +100,7 @@ abstract class AbstractMarketplaceProviderCommercialPluginUpdaterService extends
                 $activeExtensionData->homepageURL,
                 $activeExtensionData->marketplaceProductIDs,
                 $pluginLicenseKey,
-                str_replace('-', '_', $pluginSlug) . '_updater',
+                $this->getOptionNamespacer()->namespaceOption('updater-' . $pluginSlug),
             );
         }
 

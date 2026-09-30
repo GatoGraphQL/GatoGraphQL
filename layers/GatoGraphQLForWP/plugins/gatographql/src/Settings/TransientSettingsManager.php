@@ -59,7 +59,7 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
             $transients,
             $nameTransients
         );
-        update_option($option, $transients);
+        update_option($option, $transients, false);
     }
 
     /**
@@ -87,6 +87,6 @@ class TransientSettingsManager implements TransientSettingsManagerInterface
             return;
         }
 
-        update_option($option, $transients);
+        update_option($option, $transients, false);
     }
 }

@@ -69,7 +69,7 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
             $jsonData,
             $nameData
         );
-        update_option($option, $jsonData);
+        update_option($option, $jsonData, false);
     }
 
     /**
@@ -97,6 +97,6 @@ class JSONDataOptionSettingsManager implements JSONDataOptionSettingsManagerInte
             return;
         }
 
-        update_option($option, $jsonData);
+        update_option($option, $jsonData, false);
     }
 }

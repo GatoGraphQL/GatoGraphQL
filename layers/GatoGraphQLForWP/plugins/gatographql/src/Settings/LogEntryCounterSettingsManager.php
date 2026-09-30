@@ -92,7 +92,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
             $logCounts,
             array_change_key_case($severityLogCounts, CASE_LOWER)
         );
-        update_option($option, $logCounts);
+        update_option($option, $logCounts, false);
     }
 
     /**
@@ -120,6 +120,6 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
             return;
         }
 
-        update_option($option, $logCounts);
+        update_option($option, $logCounts, false);
     }
 }

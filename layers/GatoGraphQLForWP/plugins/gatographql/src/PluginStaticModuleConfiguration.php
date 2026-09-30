@@ -87,4 +87,16 @@ class PluginStaticModuleConfiguration
     {
         return true;
     }
+
+    /**
+     * Whether to store the raw response from the Marketplace Provider's
+     * API together with each activated license. Nothing reads it back,
+     * and it makes up two thirds of an option that is loaded on every
+     * request, so it is not stored anymore. The entries stored before
+     * are left untouched.
+     */
+    public static function storeMarketplaceAPIResponsePayloadWithActivatedLicense(): bool
+    {
+        return false;
+    }
 }

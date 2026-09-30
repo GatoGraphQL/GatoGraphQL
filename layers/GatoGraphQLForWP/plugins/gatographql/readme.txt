@@ -247,6 +247,20 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 == Changelog ==
 
+= 19.3.0 =
+* Added - Documentation for the FluentCart integration (#3379)
+* Added - Choose whether the plugin's data is deleted when the plugin is deleted, under Settings => Plugin Management => Uninstall (#3398)
+* Improved - The plugin's cached AI model data, its log counts and its internal transients are no longer loaded on every request, only where they are read (#3387)
+* Improved - The stored plugin and extension versions are no longer loaded on every request, only in the wp-admin where they are read (#3388)
+* Improved - Newly activated licenses are stored without the raw response from the marketplace, which nothing reads and made up two thirds of an option loaded on every request (#3397)
+* Fixed - The bulk action with custom settings now runs when a value on the originating screen contains a <code>#</code>, <code>&</code> or <code>=</code>, such as an HTML entity in a stored translation (#3396)
+* Fixed - The values carried to the custom settings page and back no longer gain a backslash before each quote on the way (#3396)
+* Fixed - Filtering users by several emails no longer changes the user queries that run after it in the same request (#3404)
+* Fixed - Log entries whose context holds an HTML entity, such as <code>&quot;</code>, now show that context under "Additional context" (#3406)
+* Fixed - Saving the settings no longer crashes with a "Bad Gateway" error when a value is missing from the submitted form, such as the "Reset settings" option under Plugin Management (#3411)
+* Fixed - The plugin's texts follow a switch of the language within a request (<code>switch_to_locale()</code>), and go back when it is restored (#3412)
+* Security - The selected IDs shown on the custom settings page are now escaped, closing a reflected XSS where a crafted link could run a script in the wp-admin of the user who followed it (#3396)
+
 = 19.2.4 =
 * Security - Reading protected meta keys (WordPress internal keys, such as those prefixed with <code>_</code>) from custom posts, comments and taxonomy terms is now restricted to administrators, closing an information disclosure where any user, including anonymous, could read them via fields <code>metaValue</code>/<code>metaValues</code>/<code>meta</code>/<code>metaKeys</code> (#3393)
 * Security - Protected meta keys can no longer be read or written by padding the key name with characters that the database does not tell apart from the key itself (#3393)
