@@ -6,7 +6,7 @@ namespace PoPCMSSchema\CustomPostMeta;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
@@ -26,15 +26,15 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getCustomPostMetaBehavior(): string
+    public function getCustomPostMetaBehavior(): Behaviors
     {
         $envVariable = Environment::CUSTOMPOST_META_BEHAVIOR;
         $defaultValue = Behaviors::ALLOW;
 
-        return $this->retrieveConfigurationValueOrUseDefault(
+        return Behaviors::tryFrom($this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
-            $defaultValue,
-        );
+            $defaultValue->value,
+        )) ?? $defaultValue;
     }
 
     public function treatCustomPostMetaKeysAsSensitiveData(): bool

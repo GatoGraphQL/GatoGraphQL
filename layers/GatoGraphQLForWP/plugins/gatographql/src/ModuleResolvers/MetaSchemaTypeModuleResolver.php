@@ -16,7 +16,7 @@ use PoPCMSSchema\PostCategories\TypeResolvers\ObjectType\PostCategoryObjectTypeR
 use PoPCMSSchema\PostTags\TypeResolvers\ObjectType\PostTagObjectTypeResolver;
 use PoPCMSSchema\Posts\TypeResolvers\ObjectType\PostObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
 {
@@ -221,7 +221,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         $defaultMetaValues = [
             ModuleSettingOptions::ENTRIES => [],
-            ModuleSettingOptions::BEHAVIOR => $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY,
+            ModuleSettingOptions::BEHAVIOR => $useRestrictiveDefaults ? Behaviors::ALLOW->value : Behaviors::DENY->value,
             self::OPTION_TREAT_META_KEYS_AS_SENSITIVE_DATA => true,
         ];
         $defaultValues = [
@@ -405,8 +405,8 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TYPE => Properties::TYPE_STRING,
                     Properties::POSSIBLE_VALUES => [
-                        Behaviors::ALLOW => \__('Allow access', 'gatographql'),
-                        Behaviors::DENY => \__('Deny access', 'gatographql'),
+                        Behaviors::ALLOW->value => \__('Allow access', 'gatographql'),
+                        Behaviors::DENY->value => \__('Deny access', 'gatographql'),
                     ],
                 ];
             }

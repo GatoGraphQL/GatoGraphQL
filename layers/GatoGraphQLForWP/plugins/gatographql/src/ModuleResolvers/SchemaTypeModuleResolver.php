@@ -28,7 +28,7 @@ use PoPCMSSchema\Tags\TypeResolvers\UnionType\TagUnionTypeResolver;
 use PoPCMSSchema\UserAvatars\TypeResolvers\ObjectType\UserAvatarObjectTypeResolver;
 use PoPCMSSchema\UserRolesWP\TypeResolvers\ObjectType\UserRoleObjectTypeResolver;
 use PoPCMSSchema\Users\TypeResolvers\ObjectType\UserObjectTypeResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoPWPSchema\Blocks\TypeResolvers\ObjectType\GeneralBlockObjectTypeResolver;
 use PoPWPSchema\Blocks\TypeResolvers\UnionType\BlockUnionTypeResolver;
 
@@ -671,7 +671,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     'time_format',
                     'blog_charset',
                 ] : [],
-                ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOW,
+                ModuleSettingOptions::BEHAVIOR => Behaviors::ALLOW->value,
             ],
             self::SCHEMA_USER_AVATARS => [
                 self::OPTION_DEFAULT_AVATAR_SIZE => 96,
@@ -1188,8 +1188,8 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    Behaviors::ALLOW => \__('Allow access', 'gatographql'),
-                    Behaviors::DENY => \__('Deny access', 'gatographql'),
+                    Behaviors::ALLOW->value => \__('Allow access', 'gatographql'),
+                    Behaviors::DENY->value => \__('Deny access', 'gatographql'),
                 ],
             ];
         } elseif ($module === self::SCHEMA_USER_AVATARS) {

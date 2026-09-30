@@ -10,7 +10,7 @@ use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Response\ResponseKeys;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 /**
  * The `optionNames`/`options` fields require both the "entries" and the
@@ -38,7 +38,7 @@ abstract class AbstractOptionsModifyPluginSettingsFixtureEndpointWebserverReques
 
     protected function getOptionAccessBehavior(): string
     {
-        return Behaviors::ALLOW;
+        return Behaviors::ALLOW->value;
     }
 
     /**

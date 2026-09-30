@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Settings\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Settings\Module;
@@ -49,7 +50,7 @@ abstract class AbstractSettingsTypeAPI extends AbstractBasicService implements S
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getSettingsEntries();
     }
-    public function getAllowOrDenyOptionBehavior(): string
+    public function getAllowOrDenyOptionBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

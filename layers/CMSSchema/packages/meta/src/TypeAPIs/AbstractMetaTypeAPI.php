@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Meta\TypeAPIs;
 
 use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Meta\Exception\MetaKeyNotAllowedException;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoPSchema\SchemaCommons\Services\AllowOrDenySettingsServiceInterface;
 
 abstract class AbstractMetaTypeAPI extends AbstractBasicService implements MetaTypeAPIInterface

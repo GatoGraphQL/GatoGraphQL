@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\Meta\TypeResolvers\InputObjectType;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -175,7 +176,7 @@ abstract class AbstractMetaQueryInputObjectTypeResolver extends AbstractQueryabl
      * @return string[]
      */
     abstract protected function getAllowOrDenyEntries(): array;
-    abstract protected function getAllowOrDenyBehavior(): string;
+    abstract protected function getAllowOrDenyBehavior(): Behaviors;
 
     /**
      * Integrate parameters into the "meta_query" WP_Query arg
