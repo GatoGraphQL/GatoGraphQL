@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\DataStructureFormatters;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
+use PoP\ComponentModel\Enums\DatabasesOutputModes;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use SplObjectStorage;
 use stdClass;
@@ -50,6 +50,7 @@ abstract class AbstractJSONDataStructureFormatter extends AbstractDataStructureF
     protected function getDatabasesOutput(array $databases): array
     {
         $outputDatabase = [];
+        /** @var DatabasesOutputModes */
         $dboutputmode = App::getState('dboutputmode');
         if ($dboutputmode === DatabasesOutputModes::SPLITBYDATABASES) {
             /**
