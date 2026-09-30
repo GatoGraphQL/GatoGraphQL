@@ -8,6 +8,7 @@ use PoPCMSSchema\CommentMutations\Constants\CommentCRUDHookNames;
 use PoPCMSSchema\CommentMutations\Constants\MutationInputProperties;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\FeedbackItemProviders\MutationErrorFeedbackItemProvider;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedback;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
@@ -126,10 +127,14 @@ abstract class AbstractUpdateCommentMutationResolver extends AbstractEditComment
         );
     }
 
-    protected function getCommentStatus(FieldDataAccessorInterface $fieldDataAccessor): ?string
+    protected function getCommentStatus(FieldDataAccessorInterface $fieldDataAccessor): ?CommentStatus
     {
         /** @var string|null */
-        return $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
+        $commentStatus = $fieldDataAccessor->getValue(MutationInputProperties::STATUS);
+        if ($commentStatus === null) {
+            return null;
+        }
+        return CommentStatus::from($commentStatus);
     }
 
     /**

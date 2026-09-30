@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\TypeAPIs;
 
+use PoPCMSSchema\Comments\Enums\CommentStatus;
+
 /**
  * Methods to interact with the Type, to be implemented by the underlying CMS
  */
@@ -34,7 +36,7 @@ interface CommentTypeAPIInterface
     public function getCommentCustomPostID(object $comment): int|string;
     public function isCommentApproved(object $comment): bool;
     public function getCommentType(object $comment): string;
-    public function getCommentStatus(object $comment): string;
+    public function getCommentStatus(object $comment): CommentStatus;
     public function getCommentParent(object $comment): int|string|null;
     public function getCommentDate(object $comment, bool $gmt = false): string;
     public function getCommentID(object $comment): string|int;
