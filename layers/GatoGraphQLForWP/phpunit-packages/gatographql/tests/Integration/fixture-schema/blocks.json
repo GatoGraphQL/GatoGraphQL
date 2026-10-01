@@ -898,8 +898,10 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -2002,7 +2004,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        }
                     },
                     {
                         "name": "core\/block",
@@ -3129,7 +3133,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -3763,8 +3769,10 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -3863,7 +3871,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        }
                     },
                     {
                         "name": "core\/code",
@@ -3961,7 +3971,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -4396,14 +4408,18 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cstrong\\u003eThis is a HTML block.\\u003c\/strong\\u003e\"} -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eNode 1\\u003c\/p\\u003e\\u003cp\\u003eNode 2\\u003c\/p\\u003e\"} -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -4464,11 +4480,15 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        }
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        }
                     },
                     {
                         "name": "core\/heading",
@@ -4534,13 +4554,17 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -9846,8 +9870,10 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
-                    "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    },
+                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -9946,7 +9972,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {}
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    }
                 },
                 {
                     "name": "core\/code",
@@ -10044,7 +10072,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },
@@ -10739,8 +10769,10 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
-                    "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
+                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -11843,7 +11875,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {}
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    }
                 },
                 {
                     "name": "core\/block",
@@ -12970,7 +13004,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },
