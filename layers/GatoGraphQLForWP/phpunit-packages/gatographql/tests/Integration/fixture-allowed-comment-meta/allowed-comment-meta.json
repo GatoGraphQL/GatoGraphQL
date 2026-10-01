@@ -5,7 +5,8 @@
         "description": null,
         "meta": {},
         "metaKeys": [
-          "_some_text_in_comment"
+          "_some_text_in_comment",
+          "some_text_in_comment"
         ]
       }
     ]
