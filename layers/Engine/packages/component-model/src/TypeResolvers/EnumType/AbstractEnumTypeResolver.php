@@ -15,7 +15,10 @@ use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use BackedEnum;
 use stdClass;
+
+use function array_map;
 
 abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
 {
@@ -44,6 +47,34 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             $this->outputService = $outputService;
         }
         return $this->outputService;
+    }
+
+    /**
+     * By default, the enum is not backed by a PHP enum
+     *
+     * @return class-string<BackedEnum>|null
+     */
+    public function getBackedEnumClass(): ?string
+    {
+        return null;
+    }
+
+    /**
+     * The values in the enum: the cases of the backed enum,
+     * if provided. Otherwise, it must be overridden.
+     *
+     * @return string[]
+     */
+    public function getEnumValues(): array
+    {
+        $backedEnumClass = $this->getBackedEnumClass();
+        if ($backedEnumClass === null) {
+            return [];
+        }
+        return array_map(
+            fn (BackedEnum $case): string => (string) $case->value,
+            $backedEnumClass::cases()
+        );
     }
 
     /**
@@ -76,7 +107,8 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
      * The validation that the enum value is valid is done in
      * `doValidateEnumFieldOrDirectiveArgumentsItem`.
      *
-     * This function simply returns the same value always.
+     * This function simply returns the same value always,
+     * or its corresponding case if the type is backed by a PHP enum.
      */
     public function coerceValue(
         string|int|float|bool|stdClass $inputValue,
@@ -112,6 +144,10 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
             );
             return null;
         }
+        $backedEnumClass = $this->getBackedEnumClass();
+        if ($backedEnumClass !== null) {
+            return $backedEnumClass::from($inputValue);
+        }
         return $inputValue;
     }
 
@@ -142,12 +178,15 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     }
 
     /**
-     * Return as is
+     * Return as is, or the value of the PHP enum case
      *
      * @return string|int|float|bool|mixed[]|stdClass
      */
     public function serialize(string|int|float|bool|object $scalarValue): string|int|float|bool|array|stdClass
     {
+        if ($scalarValue instanceof BackedEnum) {
+            return $scalarValue->value;
+        }
         /** @var string|int|float|bool|stdClass */
         return $scalarValue;
     }
@@ -155,11 +194,14 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     /**
      * Obtain the deprecation messages for an input value.
      *
-     * @param string|int|float|bool|stdClass $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
+     * @param string|int|float|bool|object $inputValue the (custom) scalar in any format: itself (eg: an object) or its representation (eg: as a string)
      * @return string[] The deprecation messages
      */
-    final public function getInputValueDeprecationMessages(string|int|float|bool|stdClass $inputValue): array
+    final public function getInputValueDeprecationMessages(string|int|float|bool|object $inputValue): array
     {
+        if ($inputValue instanceof BackedEnum) {
+            $inputValue = (string) $inputValue->value;
+        }
         /** @var string $inputValue */
         if ($deprecationMessage = $this->getConsolidatedEnumValueDeprecationMessage($inputValue)) {
             return [
@@ -339,6 +381,7 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
     public function isAlreadyCoercedValue(
         object $inputValue,
     ): bool {
-        return false;
+        $backedEnumClass = $this->getBackedEnumClass();
+        return $backedEnumClass !== null && $inputValue instanceof $backedEnumClass;
     }
 }

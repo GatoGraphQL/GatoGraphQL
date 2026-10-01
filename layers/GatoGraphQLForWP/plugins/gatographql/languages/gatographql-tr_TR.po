@@ -440,17 +440,12 @@ msgstr "Yorum oluşturulamadı"
 msgid "The comment with ID '%s' could not be updated"
 msgstr "Kimliği '%s' olan yorum güncellenemedi"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:158
-#, php-format
-msgid "Unsupported comment status '%s'"
-msgstr "Desteklenmeyen yorum durumu '%s'"
-
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:184
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:178
 #, php-format
 msgid "The comment with ID '%s' could not be sent to the trash"
 msgstr "Kimliği '%s' olan yorum çöp kutusuna gönderilemedi"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:200
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:194
 #, php-format
 msgid "The comment with ID '%s' could not be deleted"
 msgstr "Kimliği '%s' olan yorum silinemedi"
@@ -3342,7 +3337,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Menü adı boş olamaz"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:391
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3350,7 +3345,7 @@ msgstr ""
 "\"post_type\" türündeki menü öğeleri için hem \"objectType\" hem de "
 "\"objectID\" zorunludur"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:412
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3358,7 +3353,7 @@ msgstr ""
 "\"taxonomy\" türündeki menü öğeleri için hem \"objectType\" hem de "
 "\"objectID\" zorunludur"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:549
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "'%s' kimlikli menü silinemedi"
@@ -3446,15 +3441,15 @@ msgid ""
 "Retrieve the payload objects from a recently-executed `deleteMenu` mutation"
 msgstr "En son çalıştırılan `deleteMenu` mutasyonundan payload nesnelerini al"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:32
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:25
 msgid "Custom link menu item"
 msgstr "Özel bağlantı menü öğesi"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:33
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:26
 msgid "Menu item linking to a post type object"
 msgstr "Bir post type nesnesine bağlanan menü öğesi"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:34
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
 msgid "Menu item linking to a taxonomy term"
 msgstr "Bir taksonomi terimine bağlanan menü öğesi"
 
@@ -3788,7 +3783,7 @@ msgstr ""
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
@@ -5207,7 +5202,7 @@ msgid "Property to order by"
 msgstr "Sıralama ölçütü özellik"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:87
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "'%s' adında bir seçenek yok"
@@ -6749,7 +6744,7 @@ msgstr ""
 "'maxAge' değeri ya pozitif bir sayı ya da önbelleğe almayı devre dışı "
 "bırakmak için '0' olmalıdır"
 
-#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1022
+#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1055
 msgid ""
 "Positions of the additional fields to be affected by the directive, relative "
 "from the directive (as an array of positive integers)"
@@ -7317,7 +7312,7 @@ msgstr ""
 msgid "..."
 msgstr "..."
 
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:167
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:209
 #, php-format
 msgid "Enum value '%s' is deprecated: %s"
 msgstr "'%s' enum değeri kullanımdan kaldırıldı: %s"
@@ -8498,11 +8493,11 @@ msgid "Configuring the Voyager client for the single endpoint"
 msgstr "Tek uç nokta için Voyager istemcisini yapılandırma"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:487
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:125
-#: Schema/packages/logger/src/Log/Logger.php:139
-#: Schema/packages/logger/src/Log/Logger.php:146
+#: Schema/packages/logger/src/Log/Logger.php:119
+#: Schema/packages/logger/src/Log/Logger.php:136
+#: Schema/packages/logger/src/Log/Logger.php:143
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -8861,7 +8856,7 @@ msgid "Response Error Trigger"
 msgstr "Yanıt Hatası Tetikleyicisi"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PowerExtensionModuleResolver.php:98
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:109
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
 msgid "Schema Editing Access"
 msgstr "Şema Düzenleme Erişimi"
 
@@ -9725,45 +9720,45 @@ msgstr ""
 "Güvensiz URL'lerden medya öğesi oluşturulmasına izin verme (örneğin "
 "<code>https://testing-site.local</code>)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:105
 msgid "General"
 msgstr "Genel"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:285
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:342
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
 msgid "Logs"
 msgstr "Günlükler"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
 msgid "Server IP Configuration"
 msgstr "Sunucu IP Yapılandırması"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:116
 msgid "General options for the plugin"
 msgstr "Eklenti için genel seçenekler"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
 msgid "Store and browse plugin logs"
 msgstr "Eklenti günlüklerini depolayın ve göz atın"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
 msgid ""
 "Configure retrieving the Client IP depending on the platform/environment"
 msgstr "İstemci IP'sini platforma/ortama bağlı olarak almayı yapılandırın"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:120
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
 msgid "Grant access to users other than admins to edit the GraphQL schema"
 msgstr ""
 "Yöneticiler dışındaki kullanıcılara GraphQL şemasını düzenleme erişimi verin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:190
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:189
 msgid "Enable the Schema tutorial?"
 msgstr "Şema öğreticisi etkinleştirilsin mi?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:192
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:191
 #, php-format
 msgid ""
 "Add a tutorial page explaining all elements of the GraphQL schema offered by "
@@ -9774,17 +9769,17 @@ msgstr ""
 "soldaki menü gezintisinden erişilebilen bir öğretici sayfa ekleyin<br/><span "
 "class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:195
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:194
 msgid "Enabling the Schema Tutorial page"
 msgstr "Şema Öğreticisi sayfasını etkinleştirme"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:213
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:212
 msgid "Plugin setup: Install Persisted Queries for common admin tasks?"
 msgstr ""
 "Eklenti kurulumu: Yaygın yönetici görevleri için Kalıcı Sorgular yüklensin "
 "mi?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:215
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:214
 #, php-format
 msgid ""
 "When installing or updating the plugin, enable the creation of Persisted "
@@ -9795,15 +9790,15 @@ msgstr ""
 "görevlerini ele alan Kalıcı Sorgular oluşturulması etkinleştirilsin mi?<br/"
 "><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:218
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:217
 msgid "Managing the plugin's setup data"
 msgstr "Eklentinin kurulum verilerini yönetme"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:233
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:232
 msgid "Display admin notice with release notes?"
 msgstr "Sürüm notlarıyla yönetici bildirimi görüntülensin mi?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:235
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:234
 #, php-format
 msgid ""
 "Immediately after upgrading the plugin, show an admin notice with a link to "
@@ -9813,15 +9808,15 @@ msgstr ""
 "bir yönetici bildirimi gösterilsin mi?<br/><span class=\"more-info\">%s</"
 "span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:238
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:237
 msgid "Displaying the plugin's new features"
 msgstr "Eklentinin yeni özelliklerini görüntüleme"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:252
 msgid "Organize these settings under tabs?"
 msgstr "Bu ayarları sekmeler altında düzenleyin?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:255
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:254
 #, php-format
 msgid ""
 "Have all options in this Settings page be organized under tabs, one tab per "
@@ -9833,15 +9828,15 @@ msgstr ""
 "uygulamak için \"Değişiklikleri Kaydet\" düğmesine tıklamalısınız<br/><span "
 "class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:258
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:257
 msgid "Printing the Settings page with tabs or long format"
 msgstr "Ayarlar sayfasını sekmeli veya uzun biçimde yazdırma"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:282
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:281
 msgid "Enable logs?"
 msgstr "Günlükleri etkinleştir?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:283
 #, php-format
 msgid ""
 "Enable storing GraphQL execution logs, accessible via the <strong>%s</"
@@ -9850,7 +9845,7 @@ msgstr ""
 "GraphQL yürütme günlüklerinin <strong>%s</strong> menüsü aracılığıyla "
 "erişilebilir şekilde depolanmasını etkinleştirin. %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:288
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:287
 #, php-format
 msgid ""
 "<br/>Log files are stored under folder <code>%s</code>.<br/></"
@@ -9861,24 +9856,24 @@ msgstr ""
 "br><strong>Önemli:</strong> Günlük dosyaları çok büyük olabilir, bu nedenle "
 "bir süre sonra temizlenmeleri önerilir."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:303
 msgid "Enable logs by severity"
 msgstr "Günlükleri önem derecesine göre etkinleştir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:317
 msgid "Reverse log order?"
 msgstr "Günlük sırasını ters çevir?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:319
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
 msgid "Display newer log entries first when viewing a log file"
 msgstr ""
 "Bir günlük dosyasını görüntülerken daha yeni günlük girişlerini önce göster"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:339
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:338
 msgid "Enable log notifications?"
 msgstr "Log bildirimleri etkinleştirilsin mi?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:340
 #, php-format
 msgid ""
 "Show a badge with the number of log entries in the <strong>%s</strong> menu"
@@ -9886,19 +9881,19 @@ msgstr ""
 "<strong>%s</strong> menüsünde log girdilerinin sayısını gösteren bir rozet "
 "göster"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:353
 msgid "Enable log notifications by severity"
 msgstr "Log bildirimlerini önem derecesine göre etkinleştir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
 msgid "Indicate which severities are included in the badge's count"
 msgstr "Rozet sayısına hangi önem derecelerinin dahil edileceğini belirtin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:379
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:378
 msgid "$_SERVER property name to retrieve the client IP"
 msgstr "İstemci IP'sini almak için $_SERVER özellik adı"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:381
 msgid ""
 "The visitor's IP address is retrieved from under the <code>$_SERVER</code> "
 "global variable, by default under property <code>'REMOTE_ADDR'</code>; "
@@ -9910,27 +9905,27 @@ msgstr ""
 "platforma veya barındırma sağlayıcısına bağlı olarak farklı bir özelliğin "
 "kullanılması gerekebilir."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:383
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
 msgid "For instance:"
 msgstr "Örneğin:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:386
 msgid "Cloudflare might use <code>'HTTP_CF_CONNECTING_IP'</code>"
 msgstr "Cloudflare <code>'HTTP_CF_CONNECTING_IP'</code> kullanabilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
 msgid "AWS might use <code>'HTTP_X_FORWARDED_FOR'</code>"
 msgstr "AWS <code>'HTTP_X_FORWARDED_FOR'</code> kullanabilir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:389
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
 msgid "others"
 msgstr "diğerleri"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:414
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:413
 msgid "Which users can edit the schema?"
 msgstr "Şemayı hangi kullanıcılar düzenleyebilir?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:416
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:415
 #, php-format
 msgid ""
 "Indicate which users can edit the schema (i.e. creating and updating "
@@ -9941,50 +9936,50 @@ msgstr ""
 "Queries, Custom Endpoints ve diğerlerini oluşturma ve güncelleme)<br/><span "
 "class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:419
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:418
 msgid "Managing who can edit the schema"
 msgstr "Şemayı kimin düzenleyebileceğini yönetme"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:446
 msgid "Critical issues that prevent the operation from completing"
 msgstr "İşlemin tamamlanmasını engelleyen kritik sorunlar"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
 msgid "Non-critical issues that may affect the operation"
 msgstr "İşlemi etkileyebilecek kritik olmayan sorunlar"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
 msgid "General information about the operation"
 msgstr "İşlem hakkında genel bilgi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:450
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
 msgid "Detailed information for debugging purposes"
 msgstr "Hata ayıklama amacıyla ayrıntılı bilgi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:471
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:470
 #, php-format
 msgid "Indicate which severities are enabled for logging. %s"
 msgstr ""
 "Günlüğe kayıt için hangi önem derecelerinin etkinleştirildiğini belirtin. %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:474
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:473
 #, php-format
 msgid "<br/>Available severities:<br/><ul>%s</ul>"
 msgstr "<br/>Mevcut önem dereceleri:<br/><ul>%s</ul>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:489
 msgid "Error"
 msgstr "Hata"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
 msgid "Warning"
 msgstr "Uyarı"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
 msgid "Info"
 msgstr "Bilgi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:493
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
 msgid "Debug"
 msgstr "Hata Ayıklama"
 
@@ -13101,7 +13096,7 @@ msgstr ""
 "UUID (evrensel olarak benzersiz tanımlayıcı) skaleri, örneğin "
 "25770975-0c3d-4ff0-ba27-a0f98fe9b052"
 
-#: Schema/packages/logger/src/Log/Logger.php:96
+#: Schema/packages/logger/src/Log/Logger.php:94
 msgid " "
 msgstr " "
 
@@ -13151,15 +13146,15 @@ msgstr "Hata verisi"
 msgid "Status of the operation"
 msgstr "İşlemin durumu"
 
-#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:25
+#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:26
 msgid "Either the object ID or the error(s) must be provided"
 msgstr "Nesne kimliği veya hata(lar)dan en az biri sağlanmalıdır"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:31
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:25
 msgid "Success"
 msgstr "Başarılı"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:32
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:26
 msgid "Failure"
 msgstr "Başarısız"
 
@@ -13768,11 +13763,11 @@ msgid "Operators to compare against a string value"
 msgstr "Bir dize değeriyle karşılaştırma için operatörler"
 
 #: WPSchema/packages/meta/src/TypeResolvers/EnumType/MetaQueryValueTypeEnumTypeResolver.php:24
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
 msgid "Custom field type"
 msgstr "Özel alan türü"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:81
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:82
 msgid ""
 "Filter by meta key and value. The key must be allowed access in the "
 "Settings. See: https://developer.wordpress.org/reference/classes/"
@@ -13782,15 +13777,15 @@ msgstr ""
 "verilmesi gerekir. Bkz: https://developer.wordpress.org/reference/classes/"
 "wp_meta_query/"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:100
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
 msgid "Custom field key"
 msgstr "Özel alan anahtarı"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
 msgid "Value and operator to compare against"
 msgstr "Karşılaştırılacak değer ve operatör"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:104
 #: WPSchema/packages/schema-commons/src/Overrides/TypeResolvers/InputObjectType/DateQueryInputObjectTypeResolver.php:95
 msgid ""
 "OR or AND, how the sub-arrays should be compared. Default: AND. Only the "
@@ -13997,6 +13992,10 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#, php-format
+#~ msgid "Unsupported comment status '%s'"
+#~ msgstr "Desteklenmeyen yorum durumu '%s'"
 
 #~ msgid ""
 #~ "Remove everything the plugin has stored on this site: its settings, the "

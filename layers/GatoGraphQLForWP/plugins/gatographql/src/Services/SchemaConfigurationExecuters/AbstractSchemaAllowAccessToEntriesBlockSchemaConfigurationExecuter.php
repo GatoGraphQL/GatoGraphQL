@@ -7,7 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\SchemaConfigurationExecuters;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 abstract class AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecuter extends AbstractCustomizableConfigurationBlockSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
 {
@@ -27,7 +27,7 @@ abstract class AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecute
             fn () => $entries,
             PHP_INT_MAX
         );
-        $behavior = $schemaConfigBlockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
+        $behavior = Behaviors::tryFrom($schemaConfigBlockDataItem['attrs'][BlockAttributeNames::BEHAVIOR] ?? '') ?? $this->getDefaultBehavior();
         /**
          * Define the settings value through a hook.
          * Execute last so it overrides the default settings
@@ -35,7 +35,7 @@ abstract class AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecute
         $hookName = $this->getBehaviorHookName();
         App::addFilter(
             $hookName,
-            fn () => $behavior,
+            fn () => $behavior->value,
             PHP_INT_MAX
         );
     }
@@ -43,7 +43,7 @@ abstract class AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecute
     abstract protected function getEntriesHookName(): string;
     abstract protected function getBehaviorHookName(): string;
 
-    protected function getDefaultBehavior(): string
+    protected function getDefaultBehavior(): Behaviors
     {
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         return $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY;

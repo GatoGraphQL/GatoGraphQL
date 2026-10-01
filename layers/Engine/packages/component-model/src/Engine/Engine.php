@@ -16,18 +16,18 @@ use PoP\ComponentModel\ComponentProcessors\DataloadingConstants;
 use PoP\ComponentModel\Component\Component;
 use PoP\ComponentModel\Configuration\Request;
 use PoP\ComponentModel\Constants\DataLoading;
-use PoP\ComponentModel\Constants\DataOutputItems;
-use PoP\ComponentModel\Constants\DataOutputModes;
 use PoP\ComponentModel\Constants\DataProperties;
-use PoP\ComponentModel\Constants\DataSourceSelectors;
-use PoP\ComponentModel\Constants\DataSources;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Params;
 use PoP\ComponentModel\Constants\Props;
 use PoP\ComponentModel\Constants\Response as ConstantsResponse;
 use PoP\ComponentModel\DataStructure\DataStructureManagerInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
 use PoP\ComponentModel\EntryComponent\EntryComponentManagerInterface;
+use PoP\ComponentModel\Enums\DatabasesOutputModes;
+use PoP\ComponentModel\Enums\DataOutputItems;
+use PoP\ComponentModel\Enums\DataOutputModes;
+use PoP\ComponentModel\Enums\DataSources;
+use PoP\ComponentModel\Enums\DataSourceSelectors;
 use PoP\ComponentModel\Environment;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
@@ -580,8 +580,9 @@ class Engine extends AbstractBasicService implements EngineInterface
         // `array_replace_recursive` into engineState->data merges the
         // formatted output alongside whatever processAndGenerateData()
         // already wrote (componentdata, feedback, requestmeta, etc.).
+        /** @var DataOutputItems[] */
         $dataoutputitems = App::getState('dataoutputitems');
-        if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+        if (in_array(DataOutputItems::DATABASES, $dataoutputitems, true)) {
             $engineState = App::getEngineState();
             $engineState->data = array_replace_recursive(
                 $engineState->data,
@@ -678,9 +679,11 @@ class Engine extends AbstractBasicService implements EngineInterface
     protected function processAndGenerateData(): void
     {
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
+        /** @var DataOutputItems[] */
         $dataoutputitems = App::getState('dataoutputitems');
 
         // From the state we know if to process static/staful content or both
+        /** @var DataSourceSelectors */
         $datasourceselector = App::getState('datasourceselector');
 
         // Get the entry component based on the application configuration and the nature
@@ -723,7 +726,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                 // of (component tree, model_props), so they're stable across
                 // per-op MQE iterations within the same route. Compute once
                 // for the union tree (with the per-op filter cleared above).
-                if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
+                if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems, true)) {
                     $engineState->componentDatasetSettings = $this->getComponentDatasetSettings($component, $engineState->model_props, $engineState->props);
                 } else {
                     $engineState->componentDatasetSettings = [];
@@ -744,7 +747,7 @@ class Engine extends AbstractBasicService implements EngineInterface
         );
 
         $data = [];
-        if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems)) {
+        if (in_array(DataOutputItems::DATASET_COMPONENT_SETTINGS, $dataoutputitems, true)) {
             // Reuse the route-cached dataset settings from the props block
             // above. Each per-op call writes the same union snapshot here;
             // `array_replace_recursive` into `engineState->data` is idempotent.
@@ -770,15 +773,15 @@ class Engine extends AbstractBasicService implements EngineInterface
         // which is done through an action, called through getData()
         // Data = objectIDs (data-ids) + feedback + database
         if (
-            in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)
-            || in_array(DataOutputItems::DATABASES, $dataoutputitems)
+            in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems, true)
+            || in_array(DataOutputItems::DATABASES, $dataoutputitems, true)
         ) {
             $data = array_merge(
                 $data,
                 $this->getComponentData($component, $engineState->model_props, $engineState->props)
             );
 
-            if (in_array(DataOutputItems::DATABASES, $dataoutputitems)) {
+            if (in_array(DataOutputItems::DATABASES, $dataoutputitems, true)) {
                 // The drain accumulators live on EngineState so that multiple
                 // `processAndGenerateData()` calls within one `generateData()`
                 // (under the "Sequential Pass" Multiple Query Execution
@@ -832,7 +835,7 @@ class Engine extends AbstractBasicService implements EngineInterface
         list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
         if (
-            in_array(DataOutputItems::META, $dataoutputitems)
+            in_array(DataOutputItems::META, $dataoutputitems, true)
         ) {
             // Also add the request, session and site meta.
             // IMPORTANT: Call these methods after doing ->getComponentData, since the background_urls and other info is calculated there and printed here
@@ -878,10 +881,11 @@ class Engine extends AbstractBasicService implements EngineInterface
     protected function addSharedMeta(): void
     {
         // Externalize logic into function so it can be overridden by PoP Web Platform Engine
+        /** @var DataOutputItems[] */
         $dataoutputitems = App::getState('dataoutputitems');
 
         if (
-            in_array(DataOutputItems::META, $dataoutputitems)
+            in_array(DataOutputItems::META, $dataoutputitems, true)
         ) {
             $engineState = App::getEngineState();
 
@@ -895,7 +899,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                 $engineState->data['sitemeta'] = $sitemeta;
             }
 
-            if (in_array(DataOutputItems::SESSION, $dataoutputitems)) {
+            if (in_array(DataOutputItems::SESSION, $dataoutputitems, true)) {
                 if ($sessionmeta = $this->getSessionMeta()) {
                     $engineState->data['sessionmeta'] = $sessionmeta;
                 }
@@ -918,6 +922,7 @@ class Engine extends AbstractBasicService implements EngineInterface
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
+        /** @var DataOutputModes */
         $dataoutputmode = App::getState('dataoutputmode');
 
         // First check if there's a cache stored
@@ -1026,8 +1031,12 @@ class Engine extends AbstractBasicService implements EngineInterface
         $meta = [];
         if ($this->addSiteMeta()) {
             $meta[Params::VERSION] = $this->getApplicationInfo()->getVersion();
-            $meta[Params::DATAOUTPUTMODE] = App::getState('dataoutputmode');
-            $meta[Params::DATABASESOUTPUTMODE] = App::getState('dboutputmode');
+            /** @var DataOutputModes */
+            $dataoutputmode = App::getState('dataoutputmode');
+            /** @var DatabasesOutputModes */
+            $dboutputmode = App::getState('dboutputmode');
+            $meta[Params::DATAOUTPUTMODE] = $dataoutputmode->value;
+            $meta[Params::DATABASESOUTPUTMODE] = $dboutputmode->value;
 
             if (App::getState('mangled')) {
                 $meta[DefinitionsParams::MANGLED] = App::getState('mangled');
@@ -1398,10 +1407,14 @@ class Engine extends AbstractBasicService implements EngineInterface
         $engineState = App::getEngineState();
 
         // From the state we know if to process static/staful content or both
+        /** @var DataSourceSelectors */
         $datasourceselector = App::getState('datasourceselector');
+        /** @var DataOutputModes */
         $dataoutputmode = App::getState('dataoutputmode');
+        /** @var DataOutputItems[] */
         $dataoutputitems = App::getState('dataoutputitems');
-        $add_meta = in_array(DataOutputItems::META, $dataoutputitems);
+        $add_meta = in_array(DataOutputItems::META, $dataoutputitems, true);
+        $add_componentdata = in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems, true);
 
         $immutable_componentdata = $mutableonmodel_componentdata = $mutableonrequest_componentdata = [];
         $immutable_datasetcomponentdata = $mutableonmodel_datasetcomponentdata = $mutableonrequest_datasetcomponentdata = [];
@@ -1511,6 +1524,7 @@ class Engine extends AbstractBasicService implements EngineInterface
                 $data_properties = &$data_properties[$subcomponentFullName][$subcomponentsOutputProperty];
             }
             $data_properties = &$data_properties[$componentFullName][DataLoading::DATA_PROPERTIES];
+            /** @var DataSources|null */
             $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
 
             // If we are only requesting data from the model alone, and this dataloading component depends on mutableonrequest, then skip it
@@ -1548,7 +1562,8 @@ class Engine extends AbstractBasicService implements EngineInterface
                     array(
                     DataSources::IMMUTABLE,
                     DataSources::MUTABLEONMODEL,
-                    )
+                    ),
+                    true
                 )
             ) {
                 $component_props = &$model_props;
@@ -1732,7 +1747,8 @@ class Engine extends AbstractBasicService implements EngineInterface
                             array(
                             DataSources::IMMUTABLE,
                             DataSources::MUTABLEONMODEL,
-                            )
+                            ),
+                            true
                         )
                     ) {
                         $referencer_component_props = &$referencer_model_props;
@@ -1770,7 +1786,7 @@ class Engine extends AbstractBasicService implements EngineInterface
 
         $ret = [];
 
-        if (in_array(DataOutputItems::COMPONENT_DATA, $dataoutputitems)) {
+        if ($add_componentdata) {
             // If there are multiple URIs, then the results must be returned under the corresponding $model_instance_id for "mutableonmodel", and $url for "mutableonrequest"
             list($has_extra_routes, $model_instance_id, $current_uri) = $this->listExtraRouteVars();
 
@@ -2447,6 +2463,7 @@ class Engine extends AbstractBasicService implements EngineInterface
             return;
         }
 
+        /** @var DatabasesOutputModes */
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
@@ -2455,25 +2472,23 @@ class Engine extends AbstractBasicService implements EngineInterface
             return;
         }
 
-        if ($dboutputmode === DatabasesOutputModes::COMBINED) {
-            // Filter to make sure there are entries
-            if ($entries = array_filter($entries)) {
-                /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
-                $combined_databases = [];
-                foreach ($entries as $database_name => $database) {
-                    // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
-                    foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
-                        foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
-                            /** @var SplObjectStorage<FieldInterface,mixed> */
-                            $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
-                            $combinedDatabasesSplObjectStorage->addAll($fieldValues);
-                            $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
-                        }
+        // Filter to make sure there are entries
+        if ($entries = array_filter($entries)) {
+            /** @var array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> */
+            $combined_databases = [];
+            foreach ($entries as $database_name => $database) {
+                // Combine them on an ID by ID basis, because doing [2 => [...], 3 => [...]]), which is wrong
+                foreach ($database as $typeOutputKey => $resolvedIDFieldValues) {
+                    foreach ($resolvedIDFieldValues as $dbobject_id => $fieldValues) {
+                        /** @var SplObjectStorage<FieldInterface,mixed> */
+                        $combinedDatabasesSplObjectStorage = $combined_databases[$typeOutputKey][$dbobject_id] ?? new SplObjectStorage();
+                        $combinedDatabasesSplObjectStorage->addAll($fieldValues);
+                        $combined_databases[$typeOutputKey][$dbobject_id] = $combinedDatabasesSplObjectStorage;
                     }
                 }
-                // @phpstan-ignore-next-line
-                $ret[$name] = $combined_databases;
             }
+            // @phpstan-ignore-next-line
+            $ret[$name] = $combined_databases;
         }
     }
 

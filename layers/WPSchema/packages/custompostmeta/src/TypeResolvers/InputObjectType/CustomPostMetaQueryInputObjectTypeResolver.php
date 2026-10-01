@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CustomPostMeta\TypeResolvers\InputObjectType;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMeta\Module;
 use PoPCMSSchema\CustomPostMeta\ModuleConfiguration;
@@ -25,7 +26,7 @@ class CustomPostMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputO
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getCustomPostMetaEntries();
     }
-    protected function getAllowOrDenyBehavior(): string
+    protected function getAllowOrDenyBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

@@ -14,9 +14,9 @@ use PoP\ComponentModel\ComponentPath\ComponentPathHelpersInterface;
 use PoP\ComponentModel\Constants\Constants;
 use PoP\ComponentModel\Constants\DataLoading;
 use PoP\ComponentModel\Constants\DataProperties;
-use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\FieldOutputKeys;
 use PoP\ComponentModel\Constants\Props;
+use PoP\ComponentModel\Enums\DataSources;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ComponentFieldNodeInterface;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
@@ -1062,7 +1062,7 @@ abstract class AbstractComponentProcessor extends AbstractBasicService implement
     /**
      * @param array<string,mixed> $props
      */
-    public function getDatasource(Component $component, array &$props): string
+    public function getDatasource(Component $component, array &$props): DataSources
     {
         // Each component can only return one piece of data, and it must be indicated if it static or mutableonrequest
         // Retrieving only 1 piece is needed so that its children do not get confused what data their getLeafComponentFieldNodes applies to

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Enums\DatabasesOutputModes;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Module;
@@ -153,6 +153,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             return;
         }
 
+        /** @var DatabasesOutputModes */
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
@@ -161,32 +162,30 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             return;
         }
 
-        if ($dboutputmode === DatabasesOutputModes::COMBINED) {
-            // Filter to make sure there are entries
-            if ($entries = array_filter($entries)) {
-                /** @var array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> */
-                $combined_databases = [];
-                foreach ($entries as $database_name => $database) {
-                    foreach ($database as $typeOutputKey => $fieldEntries) {
-                        /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
-                        $combinedDatabasesType = $combined_databases[$typeOutputKey] ?? new SplObjectStorage();
-                        /** @var FieldInterface $field */
-                        foreach ($fieldEntries as $field) {
-                            /** @var array<string,mixed> */
-                            $combinedDatabasesTypeField = $combinedDatabasesType[$field] ?? [];
-                            /** @var array<string,mixed> */
-                            $entries = $fieldEntries[$field];
-                            $combinedDatabasesTypeField = array_merge(
-                                $combinedDatabasesTypeField,
-                                $entries
-                            );
-                            $combinedDatabasesType[$field] = $combinedDatabasesTypeField;
-                        }
-                        $combined_databases[$typeOutputKey] = $combinedDatabasesType;
+        // Filter to make sure there are entries
+        if ($entries = array_filter($entries)) {
+            /** @var array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> */
+            $combined_databases = [];
+            foreach ($entries as $database_name => $database) {
+                foreach ($database as $typeOutputKey => $fieldEntries) {
+                    /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
+                    $combinedDatabasesType = $combined_databases[$typeOutputKey] ?? new SplObjectStorage();
+                    /** @var FieldInterface $field */
+                    foreach ($fieldEntries as $field) {
+                        /** @var array<string,mixed> */
+                        $combinedDatabasesTypeField = $combinedDatabasesType[$field] ?? [];
+                        /** @var array<string,mixed> */
+                        $entries = $fieldEntries[$field];
+                        $combinedDatabasesTypeField = array_merge(
+                            $combinedDatabasesTypeField,
+                            $entries
+                        );
+                        $combinedDatabasesType[$field] = $combinedDatabasesTypeField;
                     }
+                    $combined_databases[$typeOutputKey] = $combinedDatabasesType;
                 }
-                $ret[$name] = $combined_databases;
             }
+            $ret[$name] = $combined_databases;
         }
     }
 

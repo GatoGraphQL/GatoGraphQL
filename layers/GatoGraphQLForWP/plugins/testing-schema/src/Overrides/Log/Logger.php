@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\TestingSchema\Overrides\Log;
 
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\Overrides\Logger\Log\Logger as UpstreamLogger;
 use GatoGraphQL\TestingSchema\Constants\CustomHeaders;
 
@@ -21,7 +21,7 @@ class Logger extends UpstreamLogger
     protected function logMessage(
         string $logFile,
         string $message,
-        string $severity,
+        LoggerSeverity $severity,
         ?array $context = null,
     ): void {
         parent::logMessage($logFile, $message, $severity, $context);

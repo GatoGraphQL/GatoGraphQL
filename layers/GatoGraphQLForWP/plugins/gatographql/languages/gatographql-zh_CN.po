@@ -432,17 +432,12 @@ msgstr "无法创建评论"
 msgid "The comment with ID '%s' could not be updated"
 msgstr "ID 为“%s”的评论无法被更新"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:158
-#, php-format
-msgid "Unsupported comment status '%s'"
-msgstr "不支持的评论状态 “%s”"
-
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:184
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:178
 #, php-format
 msgid "The comment with ID '%s' could not be sent to the trash"
 msgstr "ID 为“%s”的评论无法被移到回收站"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:200
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:194
 #, php-format
 msgid "The comment with ID '%s' could not be deleted"
 msgstr "ID 为“%s”的评论无法被删除"
@@ -3177,21 +3172,21 @@ msgstr "附加到文章或独立存在的媒体元素（如图片、视频等）
 msgid "The menu name cannot be empty"
 msgstr "菜单名称不能为空"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:391
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "对于类型为 \"post_type\" 的菜单项，\"objectType\" 和 \"objectID\" 均为必填项"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:412
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "对于类型为 \"taxonomy\" 的菜单项，\"objectType\" 和 \"objectID\" 均为必填项"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:549
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ID 为“%s”的菜单无法被删除"
@@ -3279,15 +3274,15 @@ msgid ""
 "Retrieve the payload objects from a recently-executed `deleteMenu` mutation"
 msgstr "从最近执行的 `deleteMenu` 变更操作中获取有效负载对象"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:32
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:25
 msgid "Custom link menu item"
 msgstr "自定义链接菜单项"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:33
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:26
 msgid "Menu item linking to a post type object"
 msgstr "链接到文章类型对象的菜单项"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:34
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
 msgid "Menu item linking to a taxonomy term"
 msgstr "链接到分类法术语的菜单项"
 
@@ -3610,7 +3605,7 @@ msgstr "ID 为 '%s' 的实体已存在元数据键 '%s' 且值为 '%s' 的条目
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
@@ -4919,7 +4914,7 @@ msgid "Property to order by"
 msgstr "排序属性"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:87
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "不存在名为 '%s' 的选项"
@@ -6404,7 +6399,7 @@ msgid ""
 "caching"
 msgstr "'maxAge' 的值必须是正数，或 '0' 表示不缓存"
 
-#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1022
+#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1055
 msgid ""
 "Positions of the additional fields to be affected by the directive, relative "
 "from the directive (as an array of positive integers)"
@@ -6929,7 +6924,7 @@ msgstr ""
 msgid "..."
 msgstr "..."
 
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:167
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:209
 #, php-format
 msgid "Enum value '%s' is deprecated: %s"
 msgstr "枚举值 '%s' 已弃用：%s"
@@ -8036,11 +8031,11 @@ msgid "Configuring the Voyager client for the single endpoint"
 msgstr "配置单端点的 Voyager 客户端"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:487
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:125
-#: Schema/packages/logger/src/Log/Logger.php:139
-#: Schema/packages/logger/src/Log/Logger.php:146
+#: Schema/packages/logger/src/Log/Logger.php:119
+#: Schema/packages/logger/src/Log/Logger.php:136
+#: Schema/packages/logger/src/Log/Logger.php:143
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -8378,7 +8373,7 @@ msgid "Response Error Trigger"
 msgstr "响应错误触发器"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PowerExtensionModuleResolver.php:98
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:109
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
 msgid "Schema Editing Access"
 msgstr "模式编辑访问"
 
@@ -9185,44 +9180,44 @@ msgstr ""
 "不允许从不安全的 URL 创建媒体项（例如 <code>https://testing-site.local</"
 "code>）"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:105
 msgid "General"
 msgstr "常规"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:285
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:342
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
 msgid "Logs"
 msgstr "日志"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
 msgid "Server IP Configuration"
 msgstr "服务器 IP 配置"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:116
 msgid "General options for the plugin"
 msgstr "插件的常规选项"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
 msgid "Store and browse plugin logs"
 msgstr "存储和浏览插件日志"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
 msgid ""
 "Configure retrieving the Client IP depending on the platform/environment"
 msgstr "根据平台/环境配置客户端 IP 的获取方式"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:120
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
 msgid "Grant access to users other than admins to edit the GraphQL schema"
 msgstr "授权非管理员用户编辑 GraphQL 架构"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:190
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:189
 msgid "Enable the Schema tutorial?"
 msgstr "启用架构教程？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:192
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:191
 #, php-format
 msgid ""
 "Add a tutorial page explaining all elements of the GraphQL schema offered by "
@@ -9232,15 +9227,15 @@ msgstr ""
 "添加一个教程页面，介绍 Gato GraphQL 提供的 GraphQL 架构的所有元素，可从左侧菜"
 "单导航访问<br/><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:195
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:194
 msgid "Enabling the Schema Tutorial page"
 msgstr "启用架构教程页面"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:213
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:212
 msgid "Plugin setup: Install Persisted Queries for common admin tasks?"
 msgstr "插件设置：为常见管理任务安装持久化查询？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:215
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:214
 #, php-format
 msgid ""
 "When installing or updating the plugin, enable the creation of Persisted "
@@ -9250,15 +9245,15 @@ msgstr ""
 "安装或更新插件时，启用创建用于处理 WordPress 常见管理任务的持久化查询？<br/"
 "><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:218
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:217
 msgid "Managing the plugin's setup data"
 msgstr "管理插件的设置数据"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:233
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:232
 msgid "Display admin notice with release notes?"
 msgstr "显示包含发布说明的管理员通知？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:235
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:234
 #, php-format
 msgid ""
 "Immediately after upgrading the plugin, show an admin notice with a link to "
@@ -9267,15 +9262,15 @@ msgstr ""
 "升级插件后，立即显示一条包含最新发布说明链接的管理员通知？<br/><span "
 "class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:238
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:237
 msgid "Displaying the plugin's new features"
 msgstr "正在显示插件的新功能"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:252
 msgid "Organize these settings under tabs?"
 msgstr "在标签页下组织这些设置？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:255
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:254
 #, php-format
 msgid ""
 "Have all options in this Settings page be organized under tabs, one tab per "
@@ -9285,22 +9280,22 @@ msgstr ""
 "将此设置页面中的所有选项按标签页组织，每个模块一个标签页。<br/>勾选复选框后，"
 "必须点击“保存更改”才能生效<br/><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:258
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:257
 msgid "Printing the Settings page with tabs or long format"
 msgstr "以选项卡或长格式打印设置页面"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:282
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:281
 msgid "Enable logs?"
 msgstr "启用日志？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:283
 #, php-format
 msgid ""
 "Enable storing GraphQL execution logs, accessible via the <strong>%s</"
 "strong> menu. %s"
 msgstr "启用存储 GraphQL 执行日志，可通过 <strong>%s</strong> 菜单访问。%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:288
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:287
 #, php-format
 msgid ""
 "<br/>Log files are stored under folder <code>%s</code>.<br/></"
@@ -9310,41 +9305,41 @@ msgstr ""
 "<br/>日志文件存储在文件夹 <code>%s</code> 下。<br/></br><strong>重要：</"
 "strong>日志文件可能非常大，建议定期清除。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:303
 msgid "Enable logs by severity"
 msgstr "按严重级别启用日志"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:317
 msgid "Reverse log order?"
 msgstr "反转日志顺序？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:319
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
 msgid "Display newer log entries first when viewing a log file"
 msgstr "查看日志文件时优先显示较新的日志条目"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:339
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:338
 msgid "Enable log notifications?"
 msgstr "启用日志通知？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:340
 #, php-format
 msgid ""
 "Show a badge with the number of log entries in the <strong>%s</strong> menu"
 msgstr "在 <strong>%s</strong> 菜单中显示带有日志条目数量的徽标"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:353
 msgid "Enable log notifications by severity"
 msgstr "按严重程度启用日志通知"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
 msgid "Indicate which severities are included in the badge's count"
 msgstr "指定哪些严重程度计入徽标的计数"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:379
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:378
 msgid "$_SERVER property name to retrieve the client IP"
 msgstr "用于获取客户端 IP 的 $_SERVER 属性名称"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:381
 msgid ""
 "The visitor's IP address is retrieved from under the <code>$_SERVER</code> "
 "global variable, by default under property <code>'REMOTE_ADDR'</code>; "
@@ -9355,27 +9350,27 @@ msgstr ""
 "<code>'REMOTE_ADDR'</code>；根据平台或托管服务提供商的不同，可能需要使用不同"
 "的属性。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:383
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
 msgid "For instance:"
 msgstr "例如："
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:386
 msgid "Cloudflare might use <code>'HTTP_CF_CONNECTING_IP'</code>"
 msgstr "Cloudflare 可能使用 <code>'HTTP_CF_CONNECTING_IP'</code>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
 msgid "AWS might use <code>'HTTP_X_FORWARDED_FOR'</code>"
 msgstr "AWS 可能使用 <code>'HTTP_X_FORWARDED_FOR'</code>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:389
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
 msgid "others"
 msgstr "其他"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:414
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:413
 msgid "Which users can edit the schema?"
 msgstr "哪些用户可以编辑 schema？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:416
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:415
 #, php-format
 msgid ""
 "Indicate which users can edit the schema (i.e. creating and updating "
@@ -9385,49 +9380,49 @@ msgstr ""
 "指定哪些用户可以编辑 schema（即创建和更新持久化查询、自定义端点等）<br/"
 "><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:419
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:418
 msgid "Managing who can edit the schema"
 msgstr "管理谁可以编辑 schema"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:446
 msgid "Critical issues that prevent the operation from completing"
 msgstr "阻止操作完成的严重问题"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
 msgid "Non-critical issues that may affect the operation"
 msgstr "可能影响操作的非严重问题"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
 msgid "General information about the operation"
 msgstr "关于操作的一般信息"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:450
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
 msgid "Detailed information for debugging purposes"
 msgstr "用于调试目的的详细信息"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:471
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:470
 #, php-format
 msgid "Indicate which severities are enabled for logging. %s"
 msgstr "指定启用哪些严重程度进行日志记录。%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:474
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:473
 #, php-format
 msgid "<br/>Available severities:<br/><ul>%s</ul>"
 msgstr "<br/>可用严重程度：<br/><ul>%s</ul>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:489
 msgid "Error"
 msgstr "错误"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
 msgid "Warning"
 msgstr "警告"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
 msgid "Info"
 msgstr "信息"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:493
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
 msgid "Debug"
 msgstr "调试"
 
@@ -12385,7 +12380,7 @@ msgid ""
 "a0f98fe9b052"
 msgstr "UUID（通用唯一标识符）标量，例如25770975-0c3d-4ff0-ba27-a0f98fe9b052"
 
-#: Schema/packages/logger/src/Log/Logger.php:96
+#: Schema/packages/logger/src/Log/Logger.php:94
 msgid " "
 msgstr " "
 
@@ -12433,15 +12428,15 @@ msgstr "错误数据"
 msgid "Status of the operation"
 msgstr "操作状态"
 
-#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:25
+#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:26
 msgid "Either the object ID or the error(s) must be provided"
 msgstr "必须提供对象 ID 或错误信息之一"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:31
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:25
 msgid "Success"
 msgstr "成功"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:32
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:26
 msgid "Failure"
 msgstr "失败"
 
@@ -13014,11 +13009,11 @@ msgid "Operators to compare against a string value"
 msgstr "与字符串值比较的运算符"
 
 #: WPSchema/packages/meta/src/TypeResolvers/EnumType/MetaQueryValueTypeEnumTypeResolver.php:24
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
 msgid "Custom field type"
 msgstr "自定义字段类型"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:81
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:82
 msgid ""
 "Filter by meta key and value. The key must be allowed access in the "
 "Settings. See: https://developer.wordpress.org/reference/classes/"
@@ -13027,15 +13022,15 @@ msgstr ""
 "按元键和值筛选。该键必须在设置中被允许访问。请参阅：https://"
 "developer.wordpress.org/reference/classes/wp_meta_query/"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:100
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
 msgid "Custom field key"
 msgstr "自定义字段键"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
 msgid "Value and operator to compare against"
 msgstr "用于比较的值和运算符"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:104
 #: WPSchema/packages/schema-commons/src/Overrides/TypeResolvers/InputObjectType/DateQueryInputObjectTypeResolver.php:95
 msgid ""
 "OR or AND, how the sub-arrays should be compared. Default: AND. Only the "
@@ -13233,6 +13228,10 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#, php-format
+#~ msgid "Unsupported comment status '%s'"
+#~ msgstr "不支持的评论状态 “%s”"
 
 #~ msgid ""
 #~ "Remove everything the plugin has stored on this site: its settings, the "

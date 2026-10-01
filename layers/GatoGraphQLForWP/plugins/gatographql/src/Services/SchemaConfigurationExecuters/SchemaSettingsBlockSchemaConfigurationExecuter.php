@@ -9,7 +9,7 @@ use GatoGraphQL\GatoGraphQL\Services\Blocks\BlockInterface;
 use GatoGraphQL\GatoGraphQL\Services\Blocks\SchemaConfigSchemaSettingsBlock;
 use PoPCMSSchema\Settings\Environment as SettingsEnvironment;
 use PoPCMSSchema\Settings\Module as SettingsModule;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\Module\ModuleConfigurationHelpers;
 
 class SchemaSettingsBlockSchemaConfigurationExecuter extends AbstractSchemaAllowAccessToEntriesBlockSchemaConfigurationExecuter implements PersistedQueryEndpointSchemaConfigurationExecuterServiceTagInterface, EndpointSchemaConfigurationExecuterServiceTagInterface
@@ -52,7 +52,7 @@ class SchemaSettingsBlockSchemaConfigurationExecuter extends AbstractSchemaAllow
      * are not disclosed by a Schema Configuration that leaves the
      * behavior unset.
      */
-    protected function getDefaultBehavior(): string
+    protected function getDefaultBehavior(): Behaviors
     {
         return Behaviors::ALLOW;
     }

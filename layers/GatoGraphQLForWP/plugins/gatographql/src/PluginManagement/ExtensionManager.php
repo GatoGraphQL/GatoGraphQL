@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 use GatoGraphQL\GatoGraphQL\PluginApp;

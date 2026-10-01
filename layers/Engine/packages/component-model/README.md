@@ -1200,14 +1200,14 @@ Those components indicating what DB objects must be loaded are called "dataloadi
 
 ##### Defining the DataSource
 
-Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through constant `\PoP\ComponentModel\Constants\DataSources::MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
+Indicate if the results are `immutable` (eg: results which never change and are cacheable) or `mutable on request`, through function `getDatasource`. By default results are set as `mutable on request` (through enum case `\PoP\ComponentModel\Enums\DataSources::MUTABLEONREQUEST`), so only when results are `immutable` this function must be implemented:
 
 ```php
 function getDatasource($component, &$props) 
 {
   switch ($component->name) {
     case self::COMPONENT_WHOWEARE:
-      return \PoP\ComponentModel\Constants\DataSources::IMMUTABLE;
+      return \PoP\ComponentModel\Enums\DataSources::IMMUTABLE;
   }
 
   return parent::getDatasource($component, $props);

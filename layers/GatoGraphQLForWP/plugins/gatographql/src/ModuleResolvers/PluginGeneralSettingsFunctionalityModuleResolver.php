@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
-use PoPSchema\Logger\Constants\LoggerSeverity;
-use PoPSchema\Logger\Constants\LoggerSigns;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
@@ -144,17 +143,17 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
             self::LOGS => [
                 self::OPTION_ENABLE_LOGS => true,
                 self::OPTION_ENABLE_LOGS_BY_SEVERITY => [
-                    LoggerSeverity::ERROR => true,
-                    LoggerSeverity::WARNING => true,
-                    LoggerSeverity::INFO => $isApplicationEnvironmentDev,
-                    LoggerSeverity::DEBUG => $isApplicationEnvironmentDev,
+                    LoggerSeverity::ERROR->value => true,
+                    LoggerSeverity::WARNING->value => true,
+                    LoggerSeverity::INFO->value => $isApplicationEnvironmentDev,
+                    LoggerSeverity::DEBUG->value => $isApplicationEnvironmentDev,
                 ],
                 self::OPTION_ENABLE_LOG_COUNT_BADGES => true,
                 self::OPTION_ENABLE_LOG_COUNT_BADGES_BY_SEVERITY => [
-                    LoggerSeverity::ERROR => true,
-                    LoggerSeverity::WARNING => true,
-                    LoggerSeverity::INFO => false,
-                    LoggerSeverity::DEBUG => false,
+                    LoggerSeverity::ERROR->value => true,
+                    LoggerSeverity::WARNING->value => true,
+                    LoggerSeverity::INFO->value => false,
+                    LoggerSeverity::DEBUG->value => false,
                 ],
                 self::OPTION_ENABLE_REVERSE_LOG_ORDER => false,
             ],
@@ -444,10 +443,10 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     protected function getLogSeverityDescriptions(): array
     {
         return [
-            LoggerSeverity::ERROR => \__('Critical issues that prevent the operation from completing', 'gatographql'),
-            LoggerSeverity::WARNING => \__('Non-critical issues that may affect the operation', 'gatographql'),
-            LoggerSeverity::INFO => \__('General information about the operation', 'gatographql'),
-            LoggerSeverity::DEBUG => \__('Detailed information for debugging purposes', 'gatographql'),
+            LoggerSeverity::ERROR->value => \__('Critical issues that prevent the operation from completing', 'gatographql'),
+            LoggerSeverity::WARNING->value => \__('Non-critical issues that may affect the operation', 'gatographql'),
+            LoggerSeverity::INFO->value => \__('General information about the operation', 'gatographql'),
+            LoggerSeverity::DEBUG->value => \__('Detailed information for debugging purposes', 'gatographql'),
         ];
     }
 
@@ -487,10 +486,10 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
     {
         $placeholder = \__('%s %s', 'gatographql');
         return [
-            LoggerSeverity::ERROR => sprintf($placeholder, LoggerSigns::ERROR, \__('Error', 'gatographql')),
-            LoggerSeverity::WARNING => sprintf($placeholder, LoggerSigns::WARNING, \__('Warning', 'gatographql')),
-            LoggerSeverity::INFO => sprintf($placeholder, LoggerSigns::INFO, \__('Info', 'gatographql')),
-            LoggerSeverity::DEBUG => sprintf($placeholder, LoggerSigns::DEBUG, \__('Debug', 'gatographql')),
+            LoggerSeverity::ERROR->value => sprintf($placeholder, LoggerSeverity::ERROR->sign(), \__('Error', 'gatographql')),
+            LoggerSeverity::WARNING->value => sprintf($placeholder, LoggerSeverity::WARNING->sign(), \__('Warning', 'gatographql')),
+            LoggerSeverity::INFO->value => sprintf($placeholder, LoggerSeverity::INFO->sign(), \__('Info', 'gatographql')),
+            LoggerSeverity::DEBUG->value => sprintf($placeholder, LoggerSeverity::DEBUG->sign(), \__('Debug', 'gatographql')),
         ];
     }
 }

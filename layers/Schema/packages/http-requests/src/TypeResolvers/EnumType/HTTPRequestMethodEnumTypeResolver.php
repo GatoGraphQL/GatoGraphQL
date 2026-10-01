@@ -13,19 +13,8 @@ class HTTPRequestMethodEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return 'HTTPRequestMethodEnum';
     }
-    /**
-     * @return string[]
-     */
-    public function getEnumValues(): array
+    public function getBackedEnumClass(): ?string
     {
-        return [
-            HTTPRequestMethodEnum::GET,
-            HTTPRequestMethodEnum::POST,
-            HTTPRequestMethodEnum::PUT,
-            HTTPRequestMethodEnum::DELETE,
-            HTTPRequestMethodEnum::PATCH,
-            HTTPRequestMethodEnum::HEAD,
-            HTTPRequestMethodEnum::OPTIONS,
-        ];
+        return HTTPRequestMethodEnum::class;
     }
 }

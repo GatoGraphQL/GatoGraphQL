@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use BackedEnum;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
@@ -35,6 +36,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -246,20 +248,51 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this->prepareDirectiveCacheFields = $fields;
             return;
         }
-        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveArgs);
+        $this->directiveDataAccessor = $this->createDirectiveDataAccessor(
+            $directiveArgs,
+            $this->directive->hasArgumentReferencingPromise()
+                ? $this->getBackedEnumClassesByDirectiveArgName($relationalTypeResolver)
+                : [],
+        );
         $this->prepareDirectiveCacheTypeResolver = $relationalTypeResolver;
         $this->prepareDirectiveCacheFields = $fields;
     }
 
     /**
      * @param array<string,mixed> $directiveArgs
+     * @param array<string,class-string<BackedEnum>> $backedEnumClassesByArgName
      */
     public function createDirectiveDataAccessor(
         array $directiveArgs,
+        array $backedEnumClassesByArgName = [],
     ): DirectiveDataAccessorInterface {
         return new DirectiveDataAccessor(
             $directiveArgs,
+            $backedEnumClassesByArgName,
         );
+    }
+
+    /**
+     * The directive args of an enum type backed by a PHP enum,
+     * whose value provided via a promise must still be coerced.
+     *
+     * @return array<string,class-string<BackedEnum>>
+     */
+    protected function getBackedEnumClassesByDirectiveArgName(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        $backedEnumClassesByArgName = [];
+        foreach ($this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver) as $directiveArgName => $directiveArgSchemaDefinition) {
+            $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+            if (!($directiveArgTypeResolver instanceof EnumTypeResolverInterface)) {
+                continue;
+            }
+            $backedEnumClass = $directiveArgTypeResolver->getBackedEnumClass();
+            if ($backedEnumClass === null) {
+                continue;
+            }
+            $backedEnumClassesByArgName[$directiveArgName] = $backedEnumClass;
+        }
+        return $backedEnumClassesByArgName;
     }
 
     /**

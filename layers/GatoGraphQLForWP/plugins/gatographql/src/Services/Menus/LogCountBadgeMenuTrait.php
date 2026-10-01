@@ -9,6 +9,7 @@ use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoP\Root\App;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 
 trait LogCountBadgeMenuTrait
 {
@@ -37,14 +38,17 @@ trait LogCountBadgeMenuTrait
             return null;
         }
 
-        $severitiesWithLogCount = array_keys(array_filter($logCountBySeverity, fn (int $logCount): bool => $logCount > 0));
+        $severitiesWithLogCount = array_map(
+            LoggerSeverity::from(...),
+            array_keys(array_filter($logCountBySeverity, fn (int $logCount): bool => $logCount > 0))
+        );
         if ($severitiesWithLogCount === []) {
             return null;
         }
 
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCount)[0];
-        $severityClass = 'badge-severity-' . strtolower($highestLevelSeverity);
-        $logCount = (string) $logCountBySeverity[$highestLevelSeverity];
+        $severityClass = 'badge-severity-' . strtolower($highestLevelSeverity->value);
+        $logCount = (string) $logCountBySeverity[$highestLevelSeverity->value];
         if (count($severitiesWithLogCount) > 1) {
             $logCount .= '+';
         }

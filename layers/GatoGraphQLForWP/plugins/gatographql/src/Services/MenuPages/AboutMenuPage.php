@@ -79,7 +79,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
                         'Product ID: ' . ($extensionCommercialExtensionActivatedLicenseObjectProperties->productID ?? ''),
                         'Instance Name: ' . ($extensionCommercialExtensionActivatedLicenseObjectProperties->instanceName ?? ''),
                         'Instance ID: ' . ($extensionCommercialExtensionActivatedLicenseObjectProperties->instanceID ?? ''),
-                        'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status,
+                        'Status: ' . $extensionCommercialExtensionActivatedLicenseObjectProperties->status->value,
                     ]
                 );
                 $customerName = $extensionCommercialExtensionActivatedLicenseObjectProperties->customerName;

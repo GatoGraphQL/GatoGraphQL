@@ -7,6 +7,7 @@ namespace GatoGraphQL\GatoGraphQL\Overrides\Logger\Log;
 use GatoGraphQL\GatoGraphQL\Facades\LogEntryCounterSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\File;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use PoPSchema\Logger\Log\Logger as UpstreamLogger;
 
 class Logger extends UpstreamLogger
@@ -41,7 +42,7 @@ class Logger extends UpstreamLogger
     protected function logMessage(
         string $logFile,
         string $message,
-        string $severity,
+        LoggerSeverity $severity,
         ?array $context = null,
     ): void {
         parent::logMessage($logFile, $message, $severity, $context);

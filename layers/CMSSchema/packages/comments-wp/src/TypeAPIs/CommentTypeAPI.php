@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CommentsWP\TypeAPIs;
 use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\Comments\Constants\CommentOrderBy;
-use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\SchemaCommons\DataLoading\ReturnTypes;
@@ -274,7 +274,7 @@ class CommentTypeAPI extends AbstractBasicService implements CommentTypeAPIInter
         $comment = $comment;
         return $comment->comment_type;
     }
-    public function getCommentStatus(object $comment): string
+    public function getCommentStatus(object $comment): CommentStatus
     {
         /** @var WP_Comment */
         $comment = $comment;

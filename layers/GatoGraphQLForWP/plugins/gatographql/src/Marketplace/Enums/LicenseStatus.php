@@ -2,25 +2,25 @@
 
 declare(strict_types=1);
 
-namespace GatoGraphQL\GatoGraphQL\Marketplace\Constants;
+namespace GatoGraphQL\GatoGraphQL\Marketplace\Enums;
 
-class LicenseStatus
+enum LicenseStatus: string
 {
     /** The license key has one or more activations */
-    public final const ACTIVE = 'active';
+    case ACTIVE = 'active';
 
     /** The license key's expiry date has passed, either because the related product had a defined license length or because the license's subscription has expired */
-    public final const EXPIRED = 'expired';
+    case EXPIRED = 'expired';
 
     /** The license key is valid but has no activations */
-    public final const INACTIVE = 'inactive';
+    case INACTIVE = 'inactive';
 
     /** The license key has been manually disabled */
-    public final const DISABLED = 'disabled';
+    case DISABLED = 'disabled';
 
     /** The license key has not been registered/activated on this site */
-    public final const UNREGISTERED = 'unregistered';
+    case UNREGISTERED = 'unregistered';
 
     /** The license is "inactive", "disabled", or any other */
-    public final const OTHER = 'other';
+    case OTHER = 'other';
 }

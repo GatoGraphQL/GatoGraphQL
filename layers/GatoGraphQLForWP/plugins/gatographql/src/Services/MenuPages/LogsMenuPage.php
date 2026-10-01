@@ -15,7 +15,7 @@ use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use PoPSchema\Logger\Constants\LoggerContext;
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use PoPSchema\Logger\Module as LoggerModule;
 use PoPSchema\Logger\ModuleConfiguration as LoggerModuleConfiguration;
 
@@ -117,7 +117,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
                     }
 
                     // Clear the log counts
-                    $this->getLogEntryCounterSettingsManager()->removeLogCounts(LoggerSeverity::ALL);
+                    $this->getLogEntryCounterSettingsManager()->removeLogCounts(LoggerSeverity::cases());
 
                     $this->file_controller = new FileController();
 
@@ -692,7 +692,7 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
             $has_timestamp = true;
         }
 
-        if (isset($segments[1]) && in_array($segments[1], LoggerSeverity::ALL)) {
+        if (isset($segments[1]) && LoggerSeverity::tryFrom($segments[1]) !== null) {
             $segments[1] = sprintf(
                 '<span class="%1$s">%2$s</span>',
                 esc_attr('log-level log-level--' . strtolower($segments[1])),

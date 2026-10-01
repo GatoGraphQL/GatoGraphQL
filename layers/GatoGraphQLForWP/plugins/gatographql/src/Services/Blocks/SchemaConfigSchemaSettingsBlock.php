@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\SchemaTypeModuleResolver;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAccessToEntriesBlock
 {
@@ -42,7 +42,7 @@ class SchemaConfigSchemaSettingsBlock extends AbstractSchemaConfigSchemaAllowAcc
      * are not disclosed by a Schema Configuration that leaves the
      * behavior unset.
      */
-    protected function getDefaultBehavior(): string
+    protected function getDefaultBehavior(): Behaviors
     {
         return Behaviors::ALLOW;
     }

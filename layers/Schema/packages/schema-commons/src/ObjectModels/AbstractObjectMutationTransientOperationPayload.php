@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\ObjectModels;
 
+use PoPSchema\SchemaCommons\Enums\OperationStatusEnum;
 use PoPSchema\SchemaCommons\ObjectModels\ErrorPayloadInterface;
 use RuntimeException;
 
@@ -16,7 +17,7 @@ abstract class AbstractObjectMutationTransientOperationPayload extends AbstractT
      * @param ErrorPayloadInterface[]|null $errors
      */
     public function __construct(
-        string $status,
+        OperationStatusEnum $status,
         public readonly string|int|null $objectID,
         ?array $errors,
     ) {

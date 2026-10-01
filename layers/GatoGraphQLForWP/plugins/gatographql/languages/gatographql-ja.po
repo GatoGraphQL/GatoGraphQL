@@ -444,17 +444,12 @@ msgstr "コメントを作成できませんでした"
 msgid "The comment with ID '%s' could not be updated"
 msgstr "ID '%s' のコメントを更新できませんでした"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:158
-#, php-format
-msgid "Unsupported comment status '%s'"
-msgstr "サポートされていないコメントステータス '%s' です"
-
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:184
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:178
 #, php-format
 msgid "The comment with ID '%s' could not be sent to the trash"
 msgstr "ID '%s' のコメントをゴミ箱に移動できませんでした"
 
-#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:200
+#: CMSSchema/packages/comment-mutations-wp/src/TypeAPIs/CommentTypeMutationAPI.php:194
 #, php-format
 msgid "The comment with ID '%s' could not be deleted"
 msgstr "ID '%s' のコメントを削除できませんでした"
@@ -3390,7 +3385,7 @@ msgstr "投稿に添付された、または独立したメディア要素（画
 msgid "The menu name cannot be empty"
 msgstr "メニュー名を空にすることはできません"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:391
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3398,7 +3393,7 @@ msgstr ""
 "\"post_type\" タイプのメニュー項目には、\"objectType\" と \"objectID\" の両方"
 "が必要です"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:412
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3406,7 +3401,7 @@ msgstr ""
 "\"taxonomy\" タイプのメニュー項目には、\"objectType\" と \"objectID\" の両方"
 "が必要です"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:549
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ID '%s' のメニューを削除できませんでした"
@@ -3500,15 +3495,15 @@ msgstr ""
 "最近実行された `deleteMenu` ミューテーションからペイロードオブジェクトを取得"
 "する"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:32
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:25
 msgid "Custom link menu item"
 msgstr "カスタムリンクのメニュー項目"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:33
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:26
 msgid "Menu item linking to a post type object"
 msgstr "投稿タイプオブジェクトにリンクするメニュー項目"
 
-#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:34
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
 msgid "Menu item linking to a taxonomy term"
 msgstr "タクソノミーターム にリンクするメニュー項目"
 
@@ -3843,7 +3838,7 @@ msgstr ""
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:107
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
@@ -5257,7 +5252,7 @@ msgid "Property to order by"
 msgstr "並び替えに使用するプロパティ"
 
 #: CMSSchema/packages/settings/src/FeedbackItemProviders/FeedbackItemProvider.php:29
-#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:86
+#: CMSSchema/packages/settings/src/TypeAPIs/AbstractSettingsTypeAPI.php:87
 #, php-format
 msgid "There is no option with name '%s'"
 msgstr "名前 '%s' のオプションは存在しません"
@@ -6814,7 +6809,7 @@ msgstr ""
 "'maxAge'の値は正の数、またはキャッシュを無効にするための'0'でなければなりませ"
 "ん"
 
-#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1022
+#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1055
 msgid ""
 "Positions of the additional fields to be affected by the directive, relative "
 "from the directive (as an array of positive integers)"
@@ -7379,7 +7374,7 @@ msgstr ""
 msgid "..."
 msgstr "..."
 
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:167
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:209
 #, php-format
 msgid "Enum value '%s' is deprecated: %s"
 msgstr "列挙値 '%s' は非推奨です: %s"
@@ -8555,11 +8550,11 @@ msgid "Configuring the Voyager client for the single endpoint"
 msgstr "シングルエンドポイント用 Voyager クライアントの設定"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:487
 #: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:125
-#: Schema/packages/logger/src/Log/Logger.php:139
-#: Schema/packages/logger/src/Log/Logger.php:146
+#: Schema/packages/logger/src/Log/Logger.php:119
+#: Schema/packages/logger/src/Log/Logger.php:136
+#: Schema/packages/logger/src/Log/Logger.php:143
 #, php-format
 msgid "%s %s"
 msgstr "%s %s"
@@ -8916,7 +8911,7 @@ msgid "Response Error Trigger"
 msgstr "レスポンスエラートリガー"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/Extensions/PowerExtensionModuleResolver.php:98
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:109
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
 msgid "Schema Editing Access"
 msgstr "スキーマ編集アクセス"
 
@@ -9767,44 +9762,44 @@ msgstr ""
 "安全でない URL（例：<code>https://testing-site.local</code>）からのメディアア"
 "イテムの作成を許可しない"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:105
 msgid "General"
 msgstr "一般"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:285
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:342
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
 msgid "Logs"
 msgstr "ログ"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:108
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
 msgid "Server IP Configuration"
 msgstr "サーバー IP 設定"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:116
 msgid "General options for the plugin"
 msgstr "プラグインの一般オプション"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:117
 msgid "Store and browse plugin logs"
 msgstr "プラグインログの保存と閲覧"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:118
 msgid ""
 "Configure retrieving the Client IP depending on the platform/environment"
 msgstr "プラットフォーム・環境に応じたクライアント IP の取得設定"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:120
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:119
 msgid "Grant access to users other than admins to edit the GraphQL schema"
 msgstr "管理者以外のユーザーに GraphQL スキーマの編集アクセスを許可する"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:190
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:189
 msgid "Enable the Schema tutorial?"
 msgstr "スキーマチュートリアルを有効にしますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:192
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:191
 #, php-format
 msgid ""
 "Add a tutorial page explaining all elements of the GraphQL schema offered by "
@@ -9815,17 +9810,17 @@ msgstr ""
 "ルページを追加し、左側のメニューからアクセスできるようにします<br/><span "
 "class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:195
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:194
 msgid "Enabling the Schema Tutorial page"
 msgstr "スキーマチュートリアルページの有効化"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:213
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:212
 msgid "Plugin setup: Install Persisted Queries for common admin tasks?"
 msgstr ""
 "プラグインセットアップ：一般的な管理タスク用のパーシステッドクエリをインス"
 "トールしますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:215
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:214
 #, php-format
 msgid ""
 "When installing or updating the plugin, enable the creation of Persisted "
@@ -9836,15 +9831,15 @@ msgstr ""
 "するパーシステッドクエリの作成を有効にしますか？<br/><span class=\"more-"
 "info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:218
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:217
 msgid "Managing the plugin's setup data"
 msgstr "プラグインのセットアップデータの管理"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:233
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:232
 msgid "Display admin notice with release notes?"
 msgstr "リリースノートの管理者通知を表示しますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:235
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:234
 #, php-format
 msgid ""
 "Immediately after upgrading the plugin, show an admin notice with a link to "
@@ -9853,15 +9848,15 @@ msgstr ""
 "プラグインのアップグレード直後に、最新のリリースノートへのリンクを含む管理者"
 "通知を表示しますか？<br/><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:238
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:237
 msgid "Displaying the plugin's new features"
 msgstr "プラグインの新機能の表示"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:253
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:252
 msgid "Organize these settings under tabs?"
 msgstr "これらの設定をタブで整理しますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:255
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:254
 #, php-format
 msgid ""
 "Have all options in this Settings page be organized under tabs, one tab per "
@@ -9872,15 +9867,15 @@ msgstr ""
 "割り当てます。<br/>チェックボックスにチェックを入れた後、「変更を保存」をク"
 "リックして適用してください<br/><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:258
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:257
 msgid "Printing the Settings page with tabs or long format"
 msgstr "設定ページをタブ形式または長形式で表示する"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:282
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:281
 msgid "Enable logs?"
 msgstr "ログを有効にしますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:283
 #, php-format
 msgid ""
 "Enable storing GraphQL execution logs, accessible via the <strong>%s</"
@@ -9889,7 +9884,7 @@ msgstr ""
 "<strong>%s</strong> メニューからアクセスできる GraphQL 実行ログの保存を有効に"
 "します。%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:288
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:287
 #, php-format
 msgid ""
 "<br/>Log files are stored under folder <code>%s</code>.<br/></"
@@ -9900,41 +9895,41 @@ msgstr ""
 "br><strong>重要：</strong>ログファイルは非常に大きくなる可能性があるため、定"
 "期的にクリアすることをお勧めします。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:303
 msgid "Enable logs by severity"
 msgstr "重大度別にログを有効にする"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:317
 msgid "Reverse log order?"
 msgstr "ログの順序を逆にしますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:319
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
 msgid "Display newer log entries first when viewing a log file"
 msgstr "ログファイルを表示する際に、新しいログエントリを先頭に表示する"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:339
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:338
 msgid "Enable log notifications?"
 msgstr "ログ通知を有効にしますか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:340
 #, php-format
 msgid ""
 "Show a badge with the number of log entries in the <strong>%s</strong> menu"
 msgstr "<strong>%s</strong>メニューにログエントリ数のバッジを表示する"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:353
 msgid "Enable log notifications by severity"
 msgstr "重大度別にログ通知を有効にする"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
 msgid "Indicate which severities are included in the badge's count"
 msgstr "バッジのカウントに含める重大度を指定する"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:379
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:378
 msgid "$_SERVER property name to retrieve the client IP"
 msgstr "クライアントIPを取得するための$_SERVER プロパティ名"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:381
 msgid ""
 "The visitor's IP address is retrieved from under the <code>$_SERVER</code> "
 "global variable, by default under property <code>'REMOTE_ADDR'</code>; "
@@ -9946,28 +9941,28 @@ msgstr ""
 "フォームやホスティングプロバイダによっては、別のプロパティを使用する必要があ"
 "る場合があります。"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:383
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
 msgid "For instance:"
 msgstr "例えば："
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:386
 msgid "Cloudflare might use <code>'HTTP_CF_CONNECTING_IP'</code>"
 msgstr ""
 "Cloudflareは<code>'HTTP_CF_CONNECTING_IP'</code>を使用する場合があります"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
 msgid "AWS might use <code>'HTTP_X_FORWARDED_FOR'</code>"
 msgstr "AWSは<code>'HTTP_X_FORWARDED_FOR'</code>を使用する場合があります"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:389
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
 msgid "others"
 msgstr "その他"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:414
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:413
 msgid "Which users can edit the schema?"
 msgstr "スキーマを編集できるユーザーは誰ですか？"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:416
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:415
 #, php-format
 msgid ""
 "Indicate which users can edit the schema (i.e. creating and updating "
@@ -9977,49 +9972,49 @@ msgstr ""
 "スキーマを編集できるユーザーを指定します（例：パーシステッドクエリ、カスタム"
 "エンドポイントの作成・更新など）<br/><span class=\"more-info\">%s</span>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:419
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:418
 msgid "Managing who can edit the schema"
 msgstr "スキーマを編集できるユーザーの管理"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:446
 msgid "Critical issues that prevent the operation from completing"
 msgstr "操作の完了を妨げる重大な問題"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
 msgid "Non-critical issues that may affect the operation"
 msgstr "操作に影響する可能性のある非重大な問題"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
 msgid "General information about the operation"
 msgstr "操作に関する一般情報"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:450
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
 msgid "Detailed information for debugging purposes"
 msgstr "デバッグ目的の詳細情報"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:471
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:470
 #, php-format
 msgid "Indicate which severities are enabled for logging. %s"
 msgstr "ログに記録する重大度を指定します。%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:474
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:473
 #, php-format
 msgid "<br/>Available severities:<br/><ul>%s</ul>"
 msgstr "<br/>利用可能な重大度：<br/><ul>%s</ul>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:489
 msgid "Error"
 msgstr "エラー"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
 msgid "Warning"
 msgstr "警告"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
 msgid "Info"
 msgstr "情報"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:493
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
 msgid "Debug"
 msgstr "デバッグ"
 
@@ -13110,7 +13105,7 @@ msgstr ""
 "UUID（ユニバーサルユニーク識別子）スカラー（例: 25770975-0c3d-4ff0-ba27-"
 "a0f98fe9b052）"
 
-#: Schema/packages/logger/src/Log/Logger.php:96
+#: Schema/packages/logger/src/Log/Logger.php:94
 msgid " "
 msgstr " "
 
@@ -13158,15 +13153,15 @@ msgstr "エラーデータ"
 msgid "Status of the operation"
 msgstr "操作のステータス"
 
-#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:25
+#: Schema/packages/schema-commons/src/ObjectModels/AbstractObjectMutationTransientOperationPayload.php:26
 msgid "Either the object ID or the error(s) must be provided"
 msgstr "オブジェクトIDまたはエラー（複数可）のいずれかを指定する必要があります"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:31
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:25
 msgid "Success"
 msgstr "成功"
 
-#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:32
+#: Schema/packages/schema-commons/src/TypeResolvers/EnumType/OperationStatusEnumTypeResolver.php:26
 msgid "Failure"
 msgstr "失敗"
 
@@ -13767,11 +13762,11 @@ msgid "Operators to compare against a string value"
 msgstr "文字列値と比較するための演算子"
 
 #: WPSchema/packages/meta/src/TypeResolvers/EnumType/MetaQueryValueTypeEnumTypeResolver.php:24
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
 msgid "Custom field type"
 msgstr "カスタムフィールドの型"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:81
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:82
 msgid ""
 "Filter by meta key and value. The key must be allowed access in the "
 "Settings. See: https://developer.wordpress.org/reference/classes/"
@@ -13780,15 +13775,15 @@ msgstr ""
 "メタキーと値でフィルタリング。キーは設定でアクセスが許可されている必要があり"
 "ます。参照: https://developer.wordpress.org/reference/classes/wp_meta_query/"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:100
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:101
 msgid "Custom field key"
 msgstr "カスタムフィールドキー"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:102
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
 msgid "Value and operator to compare against"
 msgstr "比較する値と演算子"
 
-#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:103
+#: WPSchema/packages/meta/src/TypeResolvers/InputObjectType/AbstractMetaQueryInputObjectTypeResolver.php:104
 #: WPSchema/packages/schema-commons/src/Overrides/TypeResolvers/InputObjectType/DateQueryInputObjectTypeResolver.php:95
 msgid ""
 "OR or AND, how the sub-arrays should be compared. Default: AND. Only the "
@@ -13992,6 +13987,10 @@ msgstr "ユーザーのnicenameで並べ替えます"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "ユーザーのメールアドレスで並べ替えます"
+
+#, php-format
+#~ msgid "Unsupported comment status '%s'"
+#~ msgstr "サポートされていないコメントステータス '%s' です"
 
 #~ msgid ""
 #~ "Remove everything the plugin has stored on this site: its settings, the "
