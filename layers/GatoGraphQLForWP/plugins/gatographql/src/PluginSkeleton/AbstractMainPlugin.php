@@ -9,6 +9,7 @@ use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Exception\IOExcepti
 use GatoGraphQL\ExternalDependencyWrappers\Symfony\Component\Filesystem\FilesystemWrapper;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppThread;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ContainerLess\BeforeAppIsLoadedStaticHelpers;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerContainerBuilderFactory;
 use GatoGraphQL\GatoGraphQL\Container\InternalGraphQLServerSystemContainerBuilderFactory;
@@ -60,6 +61,8 @@ use function wp_set_option_autoload;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
 {
+    use EnqueuePluginAssetsTrait;
+
     /**
      * Seconds before a feature whose installing failed is tried again.
      */
@@ -358,7 +361,6 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
         update_option($option, $storedPluginVersions, false);
     }
 
-
     /**
      * Remove the cached folders (service container and config),
      * and regenerate the timestamp
@@ -518,15 +520,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
 
         // Load CSS assets
         add_action('admin_enqueue_scripts', function (): void {
-            $mainPlugin = PluginApp::getMainPlugin();
-            $mainPluginURL = $mainPlugin->getPluginURL();
-            $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-            wp_enqueue_style(
+            $this->enqueueMainPluginAssetStyle(
                 'gatographql-styles',
-                $mainPluginURL . 'assets/css/styles.css',
-                array(),
-                $mainPluginVersion
+                'assets/css/styles.css'
             );
         });
 

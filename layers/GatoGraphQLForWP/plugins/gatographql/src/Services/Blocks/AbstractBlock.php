@@ -7,9 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 use Error;
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\BlockCategories\BlockCategoryInterface;
@@ -42,6 +42,7 @@ use function wp_set_script_translations;
  */
 abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService implements BlockInterface
 {
+    use EnqueuePluginAssetsTrait;
     use HasDocumentationScriptTrait;
 
     private ?ModuleRegistryInterface $moduleRegistry = null;
@@ -387,14 +388,9 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
              * Register Highlight.js CSS file for documentation
              */
             if ($this->registerHighlightJSCSS()) {
-                $mainPlugin = PluginApp::getMainPlugin();
-                $mainPluginURL = $mainPlugin->getPluginURL();
-                $mainPluginVersion = $mainPlugin->getPluginVersion();
-                wp_enqueue_style(
+                $this->enqueueMainPluginAssetStyle(
                     'highlight-style',
-                    $mainPluginURL . 'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css',
-                    array(),
-                    $mainPluginVersion
+                    'assets/css/vendors/highlight-11.6.0/a11y-dark.min.css'
                 );
             }
         }

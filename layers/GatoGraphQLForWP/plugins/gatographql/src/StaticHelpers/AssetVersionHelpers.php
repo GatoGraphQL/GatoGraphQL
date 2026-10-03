@@ -6,17 +6,6 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use function filemtime;
 use function is_file;
-use function is_string;
-use function parse_str;
-use function parse_url;
-use function preg_quote;
-use function preg_replace;
-use function str_starts_with;
-use function strlen;
-use function strtok;
-use function substr;
-
-use const PHP_URL_QUERY;
 
 class AssetVersionHelpers
 {
@@ -27,42 +16,18 @@ class AssetVersionHelpers
      * an earlier build. The time the file was written is added to its
      * version, which installing another build changes.
      *
-     * Only the plugin's own assets are versioned, and only those whose
-     * version is a development one: an asset versioned by a hash of its
-     * content is cache-proof already, and a released version is another URL
-     * for every release.
-     *
-     * @param string $pluginURL The plugin's URL, ending in "/"
-     * @param string $pluginFolder The plugin's folder, not ending in "/"
+     * A released version is another URL for every release, so it is
+     * returned as it is.
      */
-    public static function addFileTimeToDevelopmentAssetVersion(string $src, string $pluginURL, string $pluginFolder): string
+    public static function getAssetVersion(string $pluginVersion, string $assetFilePath): string
     {
-        if ($pluginURL === '' || !str_starts_with($src, $pluginURL)) {
-            return $src;
+        if (!PluginVersionHelpers::isDevelopmentVersion($pluginVersion) || !is_file($assetFilePath)) {
+            return $pluginVersion;
         }
-        $queryArgs = [];
-        parse_str((string) parse_url($src, PHP_URL_QUERY), $queryArgs);
-        $version = $queryArgs['ver'] ?? null;
-        if (!is_string($version) || !PluginVersionHelpers::isDevelopmentVersion($version)) {
-            return $src;
-        }
-        $relativePath = strtok(substr($src, strlen($pluginURL)), '?#');
-        if ($relativePath === false) {
-            return $src;
-        }
-        $filePath = $pluginFolder . '/' . $relativePath;
-        if (!is_file($filePath)) {
-            return $src;
-        }
-        $fileTime = filemtime($filePath);
+        $fileTime = filemtime($assetFilePath);
         if ($fileTime === false) {
-            return $src;
+            return $pluginVersion;
         }
-        return (string) preg_replace(
-            '/([?&]ver=)' . preg_quote($version, '/') . '(?=&|#|$)/',
-            '${1}' . $version . '-' . $fileTime,
-            $src,
-            1
-        );
+        return $pluginVersion . '-' . $fileTime;
     }
 }

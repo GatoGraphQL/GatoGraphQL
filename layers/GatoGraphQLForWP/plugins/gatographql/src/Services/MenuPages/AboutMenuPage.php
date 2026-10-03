@@ -187,14 +187,10 @@ class AboutMenuPage extends AbstractDocsMenuPage
     protected function enqueueAboutPageAssets(): void
     {
         $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
 
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-about',
-            $mainPluginURL . 'assets/css/about.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/about.css'
         );
     }
 }

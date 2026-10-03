@@ -4,13 +4,14 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 
 /**
  * Menu page that opens in modal window
  */
 trait OpenInModalMenuPageTrait
 {
+    use EnqueuePluginAssetsTrait;
     use ResponsiveVideoContainerMenuPageTrait;
 
     /**
@@ -18,28 +19,20 @@ trait OpenInModalMenuPageTrait
      */
     protected function enqueueModalAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         /**
          * Hide the menus
          */
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-hide-admin-bar',
-            $mainPluginURL . 'assets/css/hide-admin-bar.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/hide-admin-bar.css'
         );
 
         /**
          * Styles for content within the modal window
          */
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-modal-window-content',
-            $mainPluginURL . 'assets/css/modal-window-content.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/modal-window-content.css'
         );
 
         $this->enqueueResponsiveVideoContainerAssets();
