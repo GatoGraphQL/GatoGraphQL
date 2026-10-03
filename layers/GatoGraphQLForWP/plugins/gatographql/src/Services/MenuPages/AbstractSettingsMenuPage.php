@@ -32,8 +32,6 @@ use function register_setting;
 use function settings_errors;
 use function settings_fields;
 use function submit_button;
-use function wp_enqueue_script;
-use function wp_enqueue_style;
 
 /**
  * Settings menu page

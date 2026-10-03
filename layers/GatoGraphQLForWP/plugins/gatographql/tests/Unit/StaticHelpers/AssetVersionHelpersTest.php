@@ -7,18 +7,17 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
+use function clearstatcache;
 use function file_put_contents;
+use function filemtime;
 use function mkdir;
 use function rmdir;
 use function sys_get_temp_dir;
-use function touch;
 use function uniqid;
 use function unlink;
 
 class AssetVersionHelpersTest extends TestCase
 {
-    private const FILE_TIME = 1700000000;
-
     private static string $assetFolder;
 
     public static function setUpBeforeClass(): void
@@ -26,7 +25,6 @@ class AssetVersionHelpersTest extends TestCase
         self::$assetFolder = sys_get_temp_dir() . '/' . uniqid('asset-version-helpers-');
         mkdir(self::$assetFolder);
         file_put_contents(self::$assetFolder . '/script.js', '');
-        touch(self::$assetFolder . '/script.js', self::FILE_TIME);
     }
 
     public static function tearDownAfterClass(): void
@@ -35,11 +33,21 @@ class AssetVersionHelpersTest extends TestCase
         rmdir(self::$assetFolder);
     }
 
-    #[DataProvider('provideGetAssetVersion')]
-    public function testGetAssetVersion(string $pluginVersion, string $assetFileName, string $expected): void
+    public function testDevelopmentVersionGetsTheFileTime(): void
+    {
+        $assetFilePath = self::$assetFolder . '/script.js';
+        clearstatcache(true, $assetFilePath);
+        $this->assertSame(
+            '20.0.0-dev-' . filemtime($assetFilePath),
+            AssetVersionHelpers::getAssetVersion('20.0.0-dev', $assetFilePath)
+        );
+    }
+
+    #[DataProvider('provideVersionKeptAsItIs')]
+    public function testVersionKeptAsItIs(string $pluginVersion, string $assetFileName): void
     {
         $this->assertSame(
-            $expected,
+            $pluginVersion,
             AssetVersionHelpers::getAssetVersion($pluginVersion, self::$assetFolder . '/' . $assetFileName)
         );
     }
@@ -47,14 +55,13 @@ class AssetVersionHelpersTest extends TestCase
     /**
      * @return array<string,string[]>
      */
-    public static function provideGetAssetVersion(): array
+    public static function provideVersionKeptAsItIs(): array
     {
         return [
-            'development version gets the file time' => ['20.0.0-dev', 'script.js', '20.0.0-dev-' . self::FILE_TIME],
-            'released version stays as it is' => ['20.0.0', 'script.js', '20.0.0'],
-            'version merely containing "-dev" stays as it is' => ['20.0.0-dev.1', 'script.js', '20.0.0-dev.1'],
-            'missing file keeps the version' => ['20.0.0-dev', 'missing.js', '20.0.0-dev'],
-            'folder keeps the version' => ['20.0.0-dev', '', '20.0.0-dev'],
+            'released version' => ['20.0.0', 'script.js'],
+            'version merely containing "-dev"' => ['20.0.0-dev.1', 'script.js'],
+            'missing file' => ['20.0.0-dev', 'missing.js'],
+            'folder' => ['20.0.0-dev', ''],
         ];
     }
 }

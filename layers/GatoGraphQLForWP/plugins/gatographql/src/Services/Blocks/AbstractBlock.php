@@ -26,7 +26,6 @@ use function is_admin;
 use function is_singular;
 use function register_block_type;
 use function wp_localize_script;
-use function wp_enqueue_style;
 use function wp_register_script;
 use function wp_register_style;
 use function wp_set_script_translations;

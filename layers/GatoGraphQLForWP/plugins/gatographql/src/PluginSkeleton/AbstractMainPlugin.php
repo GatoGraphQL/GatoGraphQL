@@ -56,7 +56,6 @@ use function is_admin;
 use function set_transient;
 use function sprintf;
 use function update_option;
-use function wp_enqueue_style;
 use function wp_set_option_autoload;
 
 abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginInterface
