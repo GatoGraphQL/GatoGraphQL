@@ -9,7 +9,6 @@ use GatoGraphQL\GatoGraphQL\Log\Controllers\FileHandler\{ File, FileController, 
 use GatoGraphQL\GatoGraphQL\Log\Controllers\PageController;
 use GatoGraphQL\GatoGraphQL\Module;
 use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\AbstractPluginMenuPage;
@@ -829,16 +828,10 @@ class LogsMenuPage extends AbstractPluginMenuPage implements PageController
     {
         parent::enqueueAssets();
 
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         // CSS
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-logs',
-            $mainPluginURL . 'assets/css/logs.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/logs.css'
         );
 
         $this->enqueueHighlightJSAssets(['json']);

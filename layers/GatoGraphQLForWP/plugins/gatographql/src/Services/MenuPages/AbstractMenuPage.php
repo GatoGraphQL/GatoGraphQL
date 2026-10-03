@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\AppHelpers;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\MenuPageHelper;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 abstract class AbstractMenuPage extends AbstractAutomaticallyInstantiatedService implements MenuPageInterface
 {
+    use EnqueuePluginAssetsTrait;
+
     protected ?string $hookName = null;
 
     private ?MenuPageHelper $menuPageHelper = null;

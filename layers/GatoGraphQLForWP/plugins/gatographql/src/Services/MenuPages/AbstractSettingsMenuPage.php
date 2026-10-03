@@ -32,8 +32,6 @@ use function register_setting;
 use function settings_errors;
 use function settings_fields;
 use function submit_button;
-use function wp_enqueue_script;
-use function wp_enqueue_style;
 
 /**
  * Settings menu page
@@ -580,21 +578,14 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueSettingsAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-        wp_enqueue_script(
+        $this->enqueueMainPluginAssetScript(
             'gatographql-settings',
-            $mainPluginURL . 'assets/js/settings.js',
-            array('jquery'),
-            $mainPluginVersion
+            'assets/js/settings.js',
+            array('jquery')
         );
-        wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-settings',
-            $mainPluginURL . 'assets/css/settings.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/settings.css'
         );
     }
 

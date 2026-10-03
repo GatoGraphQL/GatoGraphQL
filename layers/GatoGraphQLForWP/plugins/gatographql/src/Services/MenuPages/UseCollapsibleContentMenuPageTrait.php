@@ -4,14 +4,15 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 use GatoGraphQL\GatoGraphQL\ContentPrinters\CollapsibleContentPrinterTrait;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 
 /**
  * Menu page that uses tabpanels to organize its content
  */
 trait UseCollapsibleContentMenuPageTrait
 {
+    use EnqueuePluginAssetsTrait;
     use CollapsibleContentPrinterTrait;
 
     /**
@@ -19,21 +20,14 @@ trait UseCollapsibleContentMenuPageTrait
      */
     protected function enqueueCollapsibleContentAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-        \wp_enqueue_script(
+        $this->enqueueMainPluginAssetScript(
             'gatographql-collapse',
-            $mainPluginURL . 'assets/js/collapse.js',
-            array('jquery'),
-            $mainPluginVersion
+            'assets/js/collapse.js',
+            array('jquery')
         );
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-collapse',
-            $mainPluginURL . 'assets/css/collapse.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/collapse.css'
         );
     }
 }
