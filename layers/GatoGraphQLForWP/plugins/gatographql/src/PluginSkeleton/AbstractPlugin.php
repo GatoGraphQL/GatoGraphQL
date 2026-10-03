@@ -13,14 +13,18 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\PluginMetadata;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginInfoInterface;
 use GatoGraphQL\GatoGraphQL\Services\CustomPostTypes\CustomPostTypeInterface;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\AssetVersionHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\PluginVersionHelpers;
 use PoP\Root\App;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Helpers\ScopingHelpers;
 use PoP\Root\Module\ModuleInterface;
 
 use function add_action;
+use function add_filter;
 use function get_option;
 use function flush_rewrite_rules;
+use function is_string;
 
 abstract class AbstractPlugin implements PluginInterface
 {
@@ -387,6 +391,22 @@ abstract class AbstractPlugin implements PluginInterface
          * @see https://developer.wordpress.org/reference/functions/register_activation_hook/#process-flow
          */
         // register_activation_hook($this->getPluginFile(), $this->activate(...));
+
+        if (PluginVersionHelpers::isDevelopmentVersion($this->pluginVersion)) {
+            add_filter('script_loader_src', $this->addFileTimeToDevelopmentAssetVersion(...));
+            add_filter('style_loader_src', $this->addFileTimeToDevelopmentAssetVersion(...));
+        }
+    }
+
+    /**
+     * @see AssetVersionHelpers::addFileTimeToDevelopmentAssetVersion()
+     */
+    public function addFileTimeToDevelopmentAssetVersion(mixed $src): mixed
+    {
+        if (!is_string($src)) {
+            return $src;
+        }
+        return AssetVersionHelpers::addFileTimeToDevelopmentAssetVersion($src, $this->pluginURL, $this->pluginFolder);
     }
 
     /**
