@@ -7251,7 +7251,7 @@ msgstr ""
 "iletilmesini bekler, ancak %s sağlandı: '%s'"
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
@@ -8065,7 +8065,7 @@ msgstr ""
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "<strong>Gato GraphQL</strong> ile iletişime geç"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:82
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:77
 msgid "No items found."
 msgstr "Öğe bulunamadı."
 
@@ -8082,86 +8082,86 @@ msgctxt "plugin"
 msgid "Active"
 msgstr "Etkin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:48
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:550
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:47
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:549
 msgid "Module"
 msgstr "Modül"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:55
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:26
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:36
 msgid "Modules"
 msgstr "Modüller"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:158
 msgid "All"
 msgstr "Tümü"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:248
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:247
 msgid "View details"
 msgstr "Ayrıntıları görüntüle"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:267
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:266
 msgid "-"
 msgstr "-"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:296
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:295
 msgid "⇠ as disabled"
 msgstr "⇠ devre dışı olarak"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:314
 #, php-format
 msgid "%s or %s"
 msgstr "%s veya %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:332
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:364
 #, php-format
 msgid "%s (version constraint: <code>%s</code>)"
 msgstr "%s (sürüm kısıtlaması: <code>%s</code>)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "Yes"
 msgstr "Evet"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "No"
 msgstr "Hayır"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:461
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:581
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:460
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
 msgid "Disable"
 msgstr "Devre Dışı Bırak"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:464
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:555
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:554
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:264
 msgid "Enabled"
 msgstr "Etkin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:493
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:32
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:505
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:504
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:579
 msgid "Enable"
 msgstr "Etkinleştir"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:512
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:268
 msgid "Disabled"
 msgstr "Devre Dışı"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:558
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:557
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:544
 msgid "Description"
 msgstr "Açıklama"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:559
 #, php-format
 msgid ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
@@ -8170,23 +8170,23 @@ msgstr ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
 "%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
 msgid "Depends on:"
 msgstr "Bağımlı:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
 msgid "▹ active module"
 msgstr "▹ etkin modül"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
 msgid "☑︎ active plugin"
 msgstr "☑︎ etkin eklenti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
 msgid "☒ inactive plugin"
 msgstr "☒ etkin olmayan eklenti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:565
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
 msgid "✎ active theme"
 msgstr "✎ etkin tema"
 
@@ -8285,12 +8285,12 @@ msgid "No log files found."
 msgstr "Günlük dosyası bulunamadı."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:77
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:378
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:377
 msgid "Download"
 msgstr "İndir"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:78
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:386
 msgid "Delete permanently"
 msgstr "Kalıcı olarak sil"
 
@@ -9727,8 +9727,8 @@ msgstr "Genel"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:156
 msgid "Logs"
 msgstr "Günlükler"
 
@@ -11161,11 +11161,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1487
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Bu mesaj yalnızca yönetici tarafından görülebilir.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1489
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -11221,7 +11221,7 @@ msgstr "Sorgu yürütme (uç nokta/kalıcı sorgu)"
 msgid "Schema Configuration for GraphQL"
 msgstr "GraphQL için Şema Yapılandırması"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:409
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:404
 #, php-format
 msgid ""
 "You need to run `npm start` or `npm run build` for the \"%s\" block first."
@@ -11683,7 +11683,7 @@ msgid "🟡 Schema (private)"
 msgstr "🟡 Şema (özel)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPageAttachers/TopMenuPageAttacher.php:127
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:56
 msgid "Schema"
 msgstr "Şema"
 
@@ -11836,18 +11836,18 @@ msgstr "Daha fazla ayrıntı"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "WordPress sürümünüzle <strong>Uyumlu</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:304
 msgid "There are no items to be configured"
 msgstr "Yapılandırılacak öğe yok"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:890
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Tüm Değişiklikleri Kaydet ('%s' sekmesi)"
@@ -11961,11 +11961,11 @@ msgstr ""
 "target=\"%4$s\">uzantıları%5$s</a> inceleyin."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:47
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:44
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:43
 msgid "Loading..."
 msgstr "Yükleniyor..."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:189
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:185
 msgid ""
 "Click the \"Execute Query\" button, or press Ctrl+Enter (Command+Enter in "
 "Mac)"
@@ -11973,66 +11973,66 @@ msgstr ""
 "\"Sorguyu Çalıştır\" düğmesine tıklayın veya Ctrl+Enter tuşlarına basın "
 "(Mac'te Command+Enter)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:182
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:181
 msgid "← Browse log files"
 msgstr "← Günlük dosyalarına göz at"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:240
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:239
 msgid "Browse log files"
 msgstr "Günlük dosyalarına göz at"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:276
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:275
 msgid "Return to the file list."
 msgstr "Dosya listesine geri dön."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:303
 msgid "Delete this log file permanently?"
 msgstr "Bu günlük dosyası kalıcı olarak silinsin mi?"
 
 #. translators: %s is the name of a log file.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:336
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:335
 #, php-format
 msgid "Viewing log file %s"
 msgstr "%s günlük dosyası görüntüleniyor"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:347
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:346
 msgid "File rotations:"
 msgstr "Dosya döndürmeleri:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:354
 msgid "Current"
 msgstr "Geçerli"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:426
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:425
 msgid "Search results"
 msgstr "Arama sonuçları"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:595
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:594
 msgid "You do not have permission to manage log files."
 msgstr "Log dosyalarını yönetme izniniz yok."
 
 #. translators: %s is a number of files.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:654
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:653
 #, php-format
 msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s günlük dosyası silindi."
 msgstr[1] "%s günlük dosyası silindi."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:736
 msgid "Additional context"
 msgstr "Ek bağlam"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:794
 msgid "Search within these files"
 msgstr "Bu dosyalar içinde ara"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:803
 msgid "Search"
 msgstr "Ara"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:810
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "

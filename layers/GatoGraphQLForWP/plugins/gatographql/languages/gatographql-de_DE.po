@@ -7664,7 +7664,7 @@ msgstr ""
 "ausführende Feld übergeben wird, aber es wurden %s übergeben: '%s'"
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
@@ -8501,7 +8501,7 @@ msgstr ""
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "Kontaktieren Sie <strong>Gato GraphQL</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:82
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:77
 msgid "No items found."
 msgstr "Keine Einträge gefunden."
 
@@ -8518,86 +8518,86 @@ msgctxt "plugin"
 msgid "Active"
 msgstr "Aktiv"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:48
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:550
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:47
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:549
 msgid "Module"
 msgstr "Modul"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:55
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:26
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:36
 msgid "Modules"
 msgstr "Module"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:158
 msgid "All"
 msgstr "Alle"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:248
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:247
 msgid "View details"
 msgstr "Details anzeigen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:267
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:266
 msgid "-"
 msgstr "-"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:296
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:295
 msgid "⇠ as disabled"
 msgstr "⇠ als deaktiviert"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:314
 #, php-format
 msgid "%s or %s"
 msgstr "%s oder %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:332
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:364
 #, php-format
 msgid "%s (version constraint: <code>%s</code>)"
 msgstr "%s (Versionseinschränkung: <code>%s</code>)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "Yes"
 msgstr "Ja"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "No"
 msgstr "Nein"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:461
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:581
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:460
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
 msgid "Disable"
 msgstr "Deaktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:464
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:555
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:554
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:264
 msgid "Enabled"
 msgstr "Aktiviert"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:493
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:32
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Einstellungen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:505
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:504
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:579
 msgid "Enable"
 msgstr "Aktivieren"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:512
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:268
 msgid "Disabled"
 msgstr "Deaktiviert"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:558
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:557
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:544
 msgid "Description"
 msgstr "Beschreibung"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:559
 #, php-format
 msgid ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
@@ -8606,23 +8606,23 @@ msgstr ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
 "%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
 msgid "Depends on:"
 msgstr "Hängt ab von:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
 msgid "▹ active module"
 msgstr "▹ aktives Modul"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
 msgid "☑︎ active plugin"
 msgstr "☑︎ aktives Plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
 msgid "☒ inactive plugin"
 msgstr "☒ inaktives Plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:565
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
 msgid "✎ active theme"
 msgstr "✎ aktives Theme"
 
@@ -8722,12 +8722,12 @@ msgid "No log files found."
 msgstr "Keine Protokolldateien gefunden."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:77
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:378
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:377
 msgid "Download"
 msgstr "Herunterladen"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:78
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:386
 msgid "Delete permanently"
 msgstr "Dauerhaft löschen"
 
@@ -10187,8 +10187,8 @@ msgstr "Allgemein"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:156
 msgid "Logs"
 msgstr "Protokolle"
 
@@ -11641,12 +11641,12 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1487
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr ""
 "<p><em>(Diese Nachricht ist nur für den Administrator sichtbar.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1489
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -11703,7 +11703,7 @@ msgstr "Abfrageausführung (Endpunkt/persistierte Abfrage)"
 msgid "Schema Configuration for GraphQL"
 msgstr "Schema-Konfiguration für GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:409
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:404
 #, php-format
 msgid ""
 "You need to run `npm start` or `npm run build` for the \"%s\" block first."
@@ -12170,7 +12170,7 @@ msgid "🟡 Schema (private)"
 msgstr "🟡 Schema (privat)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPageAttachers/TopMenuPageAttacher.php:127
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:56
 msgid "Schema"
 msgstr "Schema"
 
@@ -12323,18 +12323,18 @@ msgstr "Weitere Details"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Kompatibel</strong> mit Ihrer WordPress-Version"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:304
 msgid "There are no items to be configured"
 msgstr "Es gibt keine zu konfigurierenden Elemente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:890
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Alle Änderungen speichern (Registerkarte '%s')"
@@ -12448,11 +12448,11 @@ msgstr ""
 "GraphQL-Website."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:47
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:44
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:43
 msgid "Loading..."
 msgstr "Wird geladen..."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:189
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:185
 msgid ""
 "Click the \"Execute Query\" button, or press Ctrl+Enter (Command+Enter in "
 "Mac)"
@@ -12460,66 +12460,66 @@ msgstr ""
 "Klicken Sie auf die Schaltfläche \"Execute Query\", oder drücken Sie "
 "Strg+Eingabe (Command+Eingabe auf dem Mac)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:182
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:181
 msgid "← Browse log files"
 msgstr "← Protokolldateien durchsuchen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:240
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:239
 msgid "Browse log files"
 msgstr "Protokolldateien durchsuchen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:276
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:275
 msgid "Return to the file list."
 msgstr "Zur Dateiliste zurückkehren."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:303
 msgid "Delete this log file permanently?"
 msgstr "Diese Protokolldatei dauerhaft löschen?"
 
 #. translators: %s is the name of a log file.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:336
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:335
 #, php-format
 msgid "Viewing log file %s"
 msgstr "Protokolldatei %s wird angezeigt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:347
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:346
 msgid "File rotations:"
 msgstr "Datei-Rotationen:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:354
 msgid "Current"
 msgstr "Aktuell"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:426
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:425
 msgid "Search results"
 msgstr "Suchergebnisse"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:595
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:594
 msgid "You do not have permission to manage log files."
 msgstr "Sie haben keine Berechtigung, Protokolldateien zu verwalten."
 
 #. translators: %s is a number of files.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:654
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:653
 #, php-format
 msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s Protokolldatei gelöscht."
 msgstr[1] "%s Protokolldateien gelöscht."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:736
 msgid "Additional context"
 msgstr "Zusätzlicher Kontext"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:794
 msgid "Search within these files"
 msgstr "In diesen Dateien suchen"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:803
 msgid "Search"
 msgstr "Suchen"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:810
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "
