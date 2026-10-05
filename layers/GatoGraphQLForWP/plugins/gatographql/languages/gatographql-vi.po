@@ -7364,7 +7364,7 @@ msgstr ""
 "mutation, nhưng đã cung cấp %s: '%s'"
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
@@ -8169,7 +8169,7 @@ msgstr ""
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "Liên hệ <strong>Gato GraphQL</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:82
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:77
 msgid "No items found."
 msgstr "Không tìm thấy mục nào."
 
@@ -8186,86 +8186,86 @@ msgctxt "plugin"
 msgid "Active"
 msgstr "Đang hoạt động"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:48
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:550
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:47
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:549
 msgid "Module"
 msgstr "Module"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:55
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:26
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:36
 msgid "Modules"
 msgstr "Các Module"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:158
 msgid "All"
 msgstr "Tất cả"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:248
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:247
 msgid "View details"
 msgstr "Xem chi tiết"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:267
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:266
 msgid "-"
 msgstr "-"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:296
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:295
 msgid "⇠ as disabled"
 msgstr "⇠ như đã tắt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:314
 #, php-format
 msgid "%s or %s"
 msgstr "%s hoặc %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:332
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:364
 #, php-format
 msgid "%s (version constraint: <code>%s</code>)"
 msgstr "%s (ràng buộc phiên bản: <code>%s</code>)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "Yes"
 msgstr "Có"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "No"
 msgstr "Không"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:461
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:581
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:460
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
 msgid "Disable"
 msgstr "Tắt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:464
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:555
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:554
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:264
 msgid "Enabled"
 msgstr "Đã bật"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:493
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:32
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:505
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:504
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:579
 msgid "Enable"
 msgstr "Bật"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:512
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:268
 msgid "Disabled"
 msgstr "Đã tắt"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:558
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:557
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:544
 msgid "Description"
 msgstr "Mô tả"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:559
 #, php-format
 msgid ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
@@ -8274,23 +8274,23 @@ msgstr ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
 "%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
 msgid "Depends on:"
 msgstr "Phụ thuộc vào:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
 msgid "▹ active module"
 msgstr "▹ mô-đun đang hoạt động"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
 msgid "☑︎ active plugin"
 msgstr "☑︎ plugin đang hoạt động"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
 msgid "☒ inactive plugin"
 msgstr "☒ plugin không hoạt động"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:565
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
 msgid "✎ active theme"
 msgstr "✎ giao diện đang hoạt động"
 
@@ -8387,12 +8387,12 @@ msgid "No log files found."
 msgstr "Không tìm thấy tệp nhật ký."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:77
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:378
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:377
 msgid "Download"
 msgstr "Tải xuống"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:78
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:386
 msgid "Delete permanently"
 msgstr "Xóa vĩnh viễn"
 
@@ -9829,8 +9829,8 @@ msgstr "Chung"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:156
 msgid "Logs"
 msgstr "Nhật ký"
 
@@ -11250,11 +11250,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1487
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Thông báo này chỉ hiển thị với quản trị viên.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1489
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -11310,7 +11310,7 @@ msgstr "Thực thi truy vấn (endpoint/persisted query)"
 msgid "Schema Configuration for GraphQL"
 msgstr "Cấu hình Schema cho GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:409
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:404
 #, php-format
 msgid ""
 "You need to run `npm start` or `npm run build` for the \"%s\" block first."
@@ -11767,7 +11767,7 @@ msgid "🟡 Schema (private)"
 msgstr "🟡 Schema (riêng tư)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPageAttachers/TopMenuPageAttacher.php:127
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:56
 msgid "Schema"
 msgstr "Schema"
 
@@ -11920,18 +11920,18 @@ msgstr "Thêm chi tiết"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Tương thích</strong> với phiên bản WordPress của bạn"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:304
 msgid "There are no items to be configured"
 msgstr "Không có mục nào cần cấu hình"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:890
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Lưu tất cả thay đổi (tab '%s')"
@@ -12045,76 +12045,76 @@ msgstr ""
 "GraphQL."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:47
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:44
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:43
 msgid "Loading..."
 msgstr "Đang tải..."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:189
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:185
 msgid ""
 "Click the \"Execute Query\" button, or press Ctrl+Enter (Command+Enter in "
 "Mac)"
 msgstr ""
 "Nhấp vào nút \"Execute Query\", hoặc nhấn Ctrl+Enter (Command+Enter trên Mac)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:182
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:181
 msgid "← Browse log files"
 msgstr "← Duyệt tệp nhật ký"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:240
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:239
 msgid "Browse log files"
 msgstr "Duyệt tệp nhật ký"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:276
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:275
 msgid "Return to the file list."
 msgstr "Quay lại danh sách tệp."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:303
 msgid "Delete this log file permanently?"
 msgstr "Xóa vĩnh viễn tệp nhật ký này?"
 
 #. translators: %s is the name of a log file.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:336
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:335
 #, php-format
 msgid "Viewing log file %s"
 msgstr "Đang xem tệp nhật ký %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:347
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:346
 msgid "File rotations:"
 msgstr "Vòng xoay tệp:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:354
 msgid "Current"
 msgstr "Hiện tại"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:426
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:425
 msgid "Search results"
 msgstr "Kết quả tìm kiếm"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:595
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:594
 msgid "You do not have permission to manage log files."
 msgstr "Bạn không có quyền quản lý các tệp nhật ký."
 
 #. translators: %s is a number of files.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:654
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:653
 #, php-format
 msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s tệp nhật ký đã bị xóa."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:736
 msgid "Additional context"
 msgstr "Ngữ cảnh bổ sung"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:794
 msgid "Search within these files"
 msgstr "Tìm kiếm trong các tệp này"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:803
 msgid "Search"
 msgstr "Tìm kiếm"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:810
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "

@@ -7549,7 +7549,7 @@ msgstr ""
 "εκτελεί το mutation, αλλά παρέχθηκαν %s: '%s'"
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:311
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
@@ -8382,7 +8382,7 @@ msgstr ""
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "Επικοινωνία με το <strong>Gato GraphQL</strong>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:82
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractItemListTable.php:77
 msgid "No items found."
 msgstr "Δεν βρέθηκαν στοιχεία."
 
@@ -8399,86 +8399,86 @@ msgctxt "plugin"
 msgid "Active"
 msgstr "Ενεργό"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:48
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:550
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:47
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:549
 msgid "Module"
 msgstr "Ενότητα"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:55
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:26
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/ModulesMenuPage.php:36
 msgid "Modules"
 msgstr "Ενότητες"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:158
 msgid "All"
 msgstr "Όλα"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:248
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:247
 msgid "View details"
 msgstr "Προβολή λεπτομερειών"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:267
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:266
 msgid "-"
 msgstr "-"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:296
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:295
 msgid "⇠ as disabled"
 msgstr "⇠ ως απενεργοποιημένο"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:315
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:314
 #, php-format
 msgid "%s or %s"
 msgstr "%s ή %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:332
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:331
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:364
 #, php-format
 msgid "%s (version constraint: <code>%s</code>)"
 msgstr "%s (περιορισμός έκδοσης: <code>%s</code>)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "Yes"
 msgstr "Ναι"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:381
 msgid "No"
 msgstr "Όχι"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:461
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:581
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:460
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
 msgid "Disable"
 msgstr "Απενεργοποίηση"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:464
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:555
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:554
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:264
 msgid "Enabled"
 msgstr "Ενεργοποιημένο"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:493
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:32
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:505
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:580
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:504
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:579
 msgid "Enable"
 msgstr "Ενεργοποίηση"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:512
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:268
 msgid "Disabled"
 msgstr "Απενεργοποιημένο"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:558
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:557
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractCustomPostType.php:544
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:559
 #, php-format
 msgid ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
@@ -8487,23 +8487,23 @@ msgstr ""
 "%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;%s<br/>&nbsp;&nbsp;"
 "%s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:560
 msgid "Depends on:"
 msgstr "Εξαρτάται από:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:561
 msgid "▹ active module"
 msgstr "▹ ενεργό module"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:562
 msgid "☑︎ active plugin"
 msgstr "☑︎ ενεργό plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:563
 msgid "☒ inactive plugin"
 msgstr "☒ ανενεργό plugin"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:565
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:564
 msgid "✎ active theme"
 msgstr "✎ ενεργό θέμα"
 
@@ -8604,12 +8604,12 @@ msgid "No log files found."
 msgstr "Δεν βρέθηκαν αρχεία καταγραφής."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:77
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:378
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:377
 msgid "Download"
 msgstr "Λήψη"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:78
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:386
 msgid "Delete permanently"
 msgstr "Οριστική διαγραφή"
 
@@ -10075,8 +10075,8 @@ msgstr "Γενικά"
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:140
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:157
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:156
 msgid "Logs"
 msgstr "Αρχεία καταγραφής"
 
@@ -11538,11 +11538,11 @@ msgstr "<strong>%s</strong>: %s."
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1487
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr "<p><em>(Αυτό το μήνυμα είναι ορατό μόνο από τον διαχειριστή.)</em></p>"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1489
 #, php-format
 msgid ""
 "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has "
@@ -11599,7 +11599,7 @@ msgstr "Εκτέλεση query (endpoint/αποθηκευμένο query)"
 msgid "Schema Configuration for GraphQL"
 msgstr "Διαμόρφωση σχήματος για GraphQL"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:409
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:404
 #, php-format
 msgid ""
 "You need to run `npm start` or `npm run build` for the \"%s\" block first."
@@ -12064,7 +12064,7 @@ msgid "🟡 Schema (private)"
 msgstr "🟡 Schema (ιδιωτικό)"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPageAttachers/TopMenuPageAttacher.php:127
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:57
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:56
 msgid "Schema"
 msgstr "Schema"
 
@@ -12217,18 +12217,18 @@ msgstr "Περισσότερες λεπτομέρειες"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Συμβατό</strong> με την έκδοσή σας του WordPress"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:306
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:304
 msgid "There are no items to be configured"
 msgstr "Δεν υπάρχουν στοιχεία για ρύθμιση"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:527
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:899
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:890
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Αποθήκευση όλων των αλλαγών (καρτέλα '%s')"
@@ -12342,11 +12342,11 @@ msgstr ""
 "GraphQL."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:47
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:44
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:43
 msgid "Loading..."
 msgstr "Φόρτωση..."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:189
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphiQLMenuPage.php:185
 msgid ""
 "Click the \"Execute Query\" button, or press Ctrl+Enter (Command+Enter in "
 "Mac)"
@@ -12354,66 +12354,66 @@ msgstr ""
 "Κάντε κλικ στο κουμπί \"Execute Query\" ή πατήστε Ctrl+Enter (Command+Enter "
 "σε Mac)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:182
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:181
 msgid "← Browse log files"
 msgstr "← Περιήγηση αρχείων καταγραφής"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:240
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:239
 msgid "Browse log files"
 msgstr "Περιήγηση αρχείων καταγραφής"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:276
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:275
 msgid "Return to the file list."
 msgstr "Επιστροφή στη λίστα αρχείων."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:303
 msgid "Delete this log file permanently?"
 msgstr "Οριστική διαγραφή αυτού του αρχείου καταγραφής;"
 
 #. translators: %s is the name of a log file.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:336
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:335
 #, php-format
 msgid "Viewing log file %s"
 msgstr "Προβολή αρχείου καταγραφής %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:347
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:346
 msgid "File rotations:"
 msgstr "Εναλλαγές αρχείων:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:355
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:354
 msgid "Current"
 msgstr "Τρέχον"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:426
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:425
 msgid "Search results"
 msgstr "Αποτελέσματα αναζήτησης"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:595
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:594
 msgid "You do not have permission to manage log files."
 msgstr "Δεν έχετε άδεια για διαχείριση αρχείων καταγραφής."
 
 #. translators: %s is a number of files.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:654
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:653
 #, php-format
 msgid "%s log file deleted."
 msgid_plural "%s log files deleted."
 msgstr[0] "%s αρχείο καταγραφής διαγράφηκε."
 msgstr[1] "%s αρχεία καταγραφής διαγράφηκαν."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:737
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:736
 msgid "Additional context"
 msgstr "Πρόσθετο πλαίσιο"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:795
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:794
 msgid "Search within these files"
 msgstr "Αναζήτηση μέσα σε αυτά τα αρχεία"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:804
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:803
 msgid "Search"
 msgstr "Αναζήτηση"
 
 #. translators: %s is a number.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:811
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:810
 #, php-format
 msgid ""
 "⚠️ Only %s files can be searched at one time. Try filtering the file list "
