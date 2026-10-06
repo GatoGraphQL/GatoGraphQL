@@ -10,3 +10,4 @@
 ## Fixed
 
 - The content of a Custom HTML block (`core/html`) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
+- A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)

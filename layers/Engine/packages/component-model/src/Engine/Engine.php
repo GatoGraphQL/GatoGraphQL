@@ -41,7 +41,9 @@ use PoP\ComponentModel\ModelInstance\ModelInstanceInterface;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\ModuleInfo;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\Response\DatabaseEntryManagerInterface;
+use PoP\ComponentModel\TypeResolvers\ASTNodeCachingTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeHelpers;
@@ -63,6 +65,12 @@ class Engine extends AbstractBasicService implements EngineInterface
     protected final const DATA_PROP_RELATIONAL_TYPE_RESOLVER = 'relationalTypeResolver';
     protected final const DATA_PROP_ID_FIELD_SET = 'idFieldSet';
 
+    /**
+     * How many executions are in progress in this AppThread: an internal
+     * GraphQL query can be executed while resolving another one.
+     */
+    private int $executionDepth = 0;
+
     private ?PersistentCacheInterface $persistentCache = null;
     private ?DataStructureManagerInterface $dataStructureManager = null;
     private ?ModelInstanceInterface $modelInstance = null;
@@ -77,6 +85,7 @@ class Engine extends AbstractBasicService implements EngineInterface
     private ?ComponentHelpersInterface $componentHelpers = null;
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
     private ?DatabaseEntryManagerInterface $databaseEntryManager = null;
+    private ?TypeRegistryInterface $typeRegistry = null;
 
     /**
      * Cannot autowire with "#[Required]" because its calling `getNamespace`
@@ -208,6 +217,15 @@ class Engine extends AbstractBasicService implements EngineInterface
             $this->databaseEntryManager = $databaseEntryManager;
         }
         return $this->databaseEntryManager;
+    }
+    final protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        if ($this->typeRegistry === null) {
+            /** @var TypeRegistryInterface */
+            $typeRegistry = $this->instanceManager->getInstance(TypeRegistryInterface::class);
+            $this->typeRegistry = $typeRegistry;
+        }
+        return $this->typeRegistry;
     }
 
     /**
@@ -391,6 +409,20 @@ class Engine extends AbstractBasicService implements EngineInterface
     public function generateDataAndPrepareResponse(
         bool $areFeedbackAndTracingStoresAlreadyCreated,
     ): void {
+        $this->executionDepth++;
+        try {
+            $this->doGenerateDataAndPrepareResponse($areFeedbackAndTracingStoresAlreadyCreated);
+        } finally {
+            $this->executionDepth--;
+            if ($this->executionDepth === 0) {
+                $this->resetASTNodeCaches();
+            }
+        }
+    }
+
+    protected function doGenerateDataAndPrepareResponse(
+        bool $areFeedbackAndTracingStoresAlreadyCreated,
+    ): void {
         // Create a new state
         App::generateAndStackEngineState();
         App::generateAndStackMutationResolutionStore();
@@ -428,6 +460,23 @@ class Engine extends AbstractBasicService implements EngineInterface
         if ($areFeedbackAndTracingStoresAlreadyCreated) {
             App::generateAndStackFeedbackStore();
             App::generateAndStackTracingStore();
+        }
+    }
+
+    /**
+     * The AST of the executed documents is not needed anymore once no
+     * execution is in progress, but the type resolvers caching results
+     * under its nodes keep it alive. Drop those caches, or a request
+     * executing many GraphQL queries (eg: via the internal GraphQL
+     * server) accumulates the AST of every one of them.
+     */
+    protected function resetASTNodeCaches(): void
+    {
+        foreach ($this->getTypeRegistry()->getTypeResolvers() as $typeResolver) {
+            if (!($typeResolver instanceof ASTNodeCachingTypeResolverInterface)) {
+                continue;
+            }
+            $typeResolver->resetASTNodeCaches();
         }
     }
 

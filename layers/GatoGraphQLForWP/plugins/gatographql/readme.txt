@@ -253,6 +253,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking changes - The "Settings" block in the Schema Configuration now defaults to "Allow access", as the "Settings" module does, so a configuration that never set the behavior allows only its listed options to non-administrators (#3409)
 * Breaking changes - Constant classes that hold a set of values are now native PHP enums, under namespace <code>…\Enums</code> instead of <code>…\Constants</code> (such as <code>LoggerSeverity</code>, <code>Behaviors</code>, <code>CommentStatus</code> and <code>LicenseStatus</code>). Code using one of their values as a string must read <code>->value</code>, and methods that receive or return those values, such as <code>LoggerInterface::log()</code>, now take and return the enum (#3414)
 * Fixed - The content of a Custom HTML block (<code>core/html</code>) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
+* Fixed - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)

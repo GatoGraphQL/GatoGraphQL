@@ -49,9 +49,20 @@ use SplObjectStorage;
 use WeakMap;
 use stdClass;
 
+use function array_filter;
+use function str_contains;
+
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     use ObjectTypeOrFieldDirectiveResolverTrait;
+
+    /**
+     * Separates the field name from the field instance's ID in the keys
+     * of the field resolvers cached per field instance. Field names
+     * cannot hold it, so a key holding it was cached under a field
+     * instance.
+     */
+    private const FIELD_INSTANCE_CACHE_KEY_SEPARATOR = ' #';
 
     /**
      * Cache of which objectTypeFieldResolvers will process the given field
@@ -188,6 +199,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
         $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
         parent::__construct();
+    }
+
+    /**
+     * Of the field resolvers cached per field, only those cached under
+     * a field instance are dropped. Those cached under a field name hold
+     * for the schema, not for an execution.
+     */
+    public function resetASTNodeCaches(): void
+    {
+        parent::resetASTNodeCaches();
+        $this->fieldArgsCache = new SplObjectStorage();
+        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
+        $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
+        $this->executableObjectTypeFieldResolverForFieldCache = null;
+        $this->objectTypeFieldResolversForFieldOrFieldNameCache = array_filter(
+            $this->objectTypeFieldResolversForFieldOrFieldNameCache,
+            fn (string $cacheKey): bool => !str_contains($cacheKey, self::FIELD_INSTANCE_CACHE_KEY_SEPARATOR),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**
@@ -1185,7 +1216,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * field name is not enough to cache: The resolver is specific
              * to the Field object
              */
-            $cacheKey = $field->getName() . ' #' . spl_object_id($field);
+            $cacheKey = $field->getName() . self::FIELD_INSTANCE_CACHE_KEY_SEPARATOR . spl_object_id($field);
         } else {
             $cacheKey = $fieldOrFieldName;
         }

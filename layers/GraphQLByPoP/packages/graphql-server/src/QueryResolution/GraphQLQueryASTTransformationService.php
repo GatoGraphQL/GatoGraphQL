@@ -17,7 +17,7 @@ use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\QueryOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\Root\Exception\ShouldNotHappenException;
-use SplObjectStorage;
+use WeakMap;
 
 class GraphQLQueryASTTransformationService extends QueryASTTransformationService implements GraphQLQueryASTTransformationServiceInterface
 {
@@ -26,16 +26,23 @@ class GraphQLQueryASTTransformationService extends QueryASTTransformationService
      * the same instance must be retrieved in every case.
      * Then, cache and reuse every created field
      *
-     * @var SplObjectStorage<Document,array<string,RelationalField>>
+     * Weakly keyed by the Document, so the entry goes away with it.
+     * Held in an SplObjectStorage, every Document ever executed stayed
+     * alive (together with its whole AST) for as long as the service
+     * did: an internal GraphQL server executing a persisted query per
+     * entity kept every one of those ASTs until the PHP process ended,
+     * which is what exhausted the memory of a long-running request.
+     *
+     * @var WeakMap<Document,array<string,RelationalField>>
      */
-    private SplObjectStorage $fieldInstanceContainer;
+    private WeakMap $fieldInstanceContainer;
 
     public function __construct()
     {
         /**
-         * @var SplObjectStorage<Document,array<string,RelationalField>>
+         * @var WeakMap<Document,array<string,RelationalField>>
          */
-        $fieldInstanceContainer = new SplObjectStorage();
+        $fieldInstanceContainer = new WeakMap();
         $this->fieldInstanceContainer = $fieldInstanceContainer;
     }
 
