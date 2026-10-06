@@ -3690,7 +3690,7 @@ msgstr ""
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr "', '"
@@ -6595,7 +6595,7 @@ msgstr ""
 "필드가 확인되기 전에 유효성을 검사합니다. 이 디렉티브는 실행이 필수적이므로 "
 "엔진에 이미 포함되어 있습니다"
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr "이 요청에 대한 항목 컴포넌트가 없습니다"
 
@@ -7169,7 +7169,7 @@ msgid ""
 msgstr ""
 "String 스칼라 타입은 UTF-8 문자 시퀀스로 표현되는 텍스트 데이터를 나타냅니다."
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid ""
 "Union Type '%s' is defined to implement interface '%s', hence its Type "
@@ -12359,7 +12359,7 @@ msgstr "GraphQL 인트로스펙션 활성화:"
 msgid "Unknown type kind '%s'"
 msgstr "알 수 없는 타입 종류 '%s'"
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr "'%s' 클래스의 GraphQL Operation AST 객체를 인식할 수 없습니다"

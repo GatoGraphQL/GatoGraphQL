@@ -3851,7 +3851,7 @@ msgstr ""
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr "', '"
@@ -6883,7 +6883,7 @@ msgstr ""
 "Validera fälten innan de löses upp. Detta direktiv ingår redan i motorn, "
 "eftersom dess körning är obligatorisk"
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr "Ingen entrykomponent för denna begäran"
 
@@ -7474,7 +7474,7 @@ msgstr ""
 "Skalärtypen String representerar textdata, representerad som UTF-8-"
 "teckensekvenser."
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid ""
 "Union Type '%s' is defined to implement interface '%s', hence its Type "
@@ -12778,7 +12778,7 @@ msgstr "aktivera GraphQL-introspektion:"
 msgid "Unknown type kind '%s'"
 msgstr "Okänd typkind '%s'"
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr "Kan inte känna igen GraphQL Operation AST-objektet med klassen '%s'"

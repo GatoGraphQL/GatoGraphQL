@@ -4094,7 +4094,7 @@ msgstr ""
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr "', '"
@@ -7282,7 +7282,7 @@ msgstr ""
 "Valider les champs avant qu'ils ne soient résolus. Cette directive est déjà "
 "incluse par le moteur, car son exécution est obligatoire"
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr "Aucun composant d'entrée pour cette requête"
 
@@ -7904,7 +7904,7 @@ msgstr ""
 "Le type scalaire String représente des données textuelles, exprimées sous "
 "forme de séquences de caractères UTF-8."
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid ""
 "Union Type '%s' is defined to implement interface '%s', hence its Type "
@@ -13336,7 +13336,7 @@ msgstr "activer l'introspection GraphQL :"
 msgid "Unknown type kind '%s'"
 msgstr "Genre de type inconnu '%s'"
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr ""

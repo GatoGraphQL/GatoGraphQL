@@ -3359,7 +3359,7 @@ msgstr ""
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr ""
@@ -5993,7 +5993,7 @@ msgstr ""
 msgid "Validate the fields before they are resolved. This directive is already included by the engine, since its execution is mandatory"
 msgstr ""
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr ""
 
@@ -6477,7 +6477,7 @@ msgstr ""
 msgid "The String scalar type represents textual data, represented as UTF-8 character sequences."
 msgstr ""
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid "Union Type '%s' is defined to implement interface '%s', hence its Type members must also satisfy this interface, but the following ones do not: '%s'"
 msgstr ""
@@ -10830,7 +10830,7 @@ msgstr ""
 msgid "Unknown type kind '%s'"
 msgstr ""
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr ""

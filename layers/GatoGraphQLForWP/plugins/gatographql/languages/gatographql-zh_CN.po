@@ -3607,7 +3607,7 @@ msgstr "ID 为 '%s' 的实体已存在元数据键 '%s' 且值为 '%s' 的条目
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr "', '"
@@ -6441,7 +6441,7 @@ msgid ""
 "included by the engine, since its execution is mandatory"
 msgstr "在字段解析之前对其进行验证。该指令已由引擎内置，因为其执行是强制性的"
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr "此请求没有入口组件"
 
@@ -6993,7 +6993,7 @@ msgid ""
 "character sequences."
 msgstr "String 标量类型表示文本数据，以 UTF-8 字符序列表示。"
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid ""
 "Union Type '%s' is defined to implement interface '%s', hence its Type "
@@ -12026,7 +12026,7 @@ msgstr "启用 GraphQL 内省："
 msgid "Unknown type kind '%s'"
 msgstr "未知的类型种类'%s'"
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr "无法识别 GraphQL 操作 AST 对象，类名为 '%s'"

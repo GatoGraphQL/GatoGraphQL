@@ -3989,7 +3989,7 @@ msgstr ""
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
 #: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:388
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
 msgid "', '"
 msgstr "', '"
@@ -7081,7 +7081,7 @@ msgstr ""
 "Επικύρωση των πεδίων πριν από την επίλυσή τους. Η οδηγία αυτή περιλαμβάνεται "
 "ήδη από τη μηχανή, καθώς η εκτέλεσή της είναι υποχρεωτική"
 
-#: Engine/packages/component-model/src/Engine/Engine.php:244
+#: Engine/packages/component-model/src/Engine/Engine.php:262
 msgid "No entry component for this request"
 msgstr "Δεν υπάρχει στοιχείο εισόδου για αυτό το αίτημα"
 
@@ -7686,7 +7686,7 @@ msgstr ""
 "Ο κλιμακωτός τύπος String αντιπροσωπεύει κειμενικά δεδομένα, αναπαριστώμενα "
 "ως ακολουθίες χαρακτήρων UTF-8."
 
-#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:384
+#: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:390
 #, php-format
 msgid ""
 "Union Type '%s' is defined to implement interface '%s', hence its Type "
@@ -13095,7 +13095,7 @@ msgstr "ενεργοποίηση ενδοσκόπησης GraphQL:"
 msgid "Unknown type kind '%s'"
 msgstr "Άγνωστο είδος τύπου '%s'"
 
-#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:92
+#: GraphQLByPoP/packages/graphql-server/src/QueryResolution/GraphQLQueryASTTransformationService.php:99
 #, php-format
 msgid "Cannot recognize GraphQL Operation AST object, with class '%s'"
 msgstr ""
