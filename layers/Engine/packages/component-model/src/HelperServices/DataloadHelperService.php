@@ -10,24 +10,34 @@ use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\Services\AbstractBasicService;
+use WeakMap;
+
+use function array_key_exists;
+use function spl_object_id;
 
 class DataloadHelperService extends AbstractBasicService implements DataloadHelperServiceInterface
 {
-    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
-
     /**
-     * Memoizes results of `getTypeResolverFromSubcomponentField` keyed by
-     * spl_object_id pair. The method is called inside nested loops in
-     * `AbstractComponentProcessor::initModelProps()` (once per relational /
-     * conditional field per component per operation), and the result depends
-     * only on the (resolver, field) instance pair — both of which are stable
-     * for the lifetime of a request — so caching avoids re-walking the type
-     * graph on every call. Uses `array_key_exists` (not `isset`) so that a
-     * legitimately cached `null` result is not treated as a cache miss.
+     * Memoizes results of `getTypeResolverFromSubcomponentField` per
+     * (field, resolver) instance pair. The method is called inside nested
+     * loops in `AbstractComponentProcessor::initModelProps()` (once per
+     * relational / conditional field per component per operation), and
+     * the result depends only on that pair, so caching avoids re-walking
+     * the type graph on every call. Uses `array_key_exists` (not `isset`)
+     * so that a legitimately cached `null` result is not treated as a
+     * cache miss.
      *
-     * @var array<string,RelationalTypeResolverInterface|null>
+     * Weakly keyed by the field, so the entries go away with the AST of
+     * the executed document. Keyed by `spl_object_id`, they piled up for
+     * every document executed in the request, and an ID reused by a field
+     * created after the previous one was freed got the other field's
+     * result back.
+     *
+     * @var WeakMap<FieldInterface,array<int,RelationalTypeResolverInterface|null>>|null
      */
-    private array $typeResolverFromSubcomponentFieldCache = [];
+    private ?WeakMap $typeResolverFromSubcomponentFieldCache = null;
+
+    private ?ComponentProcessorManagerInterface $componentProcessorManager = null;
 
     final protected function getComponentProcessorManager(): ComponentProcessorManagerInterface
     {
@@ -48,11 +58,19 @@ class DataloadHelperService extends AbstractBasicService implements DataloadHelp
         RelationalTypeResolverInterface $relationalTypeResolver,
         FieldInterface $field,
     ): ?RelationalTypeResolverInterface {
-        $cacheKey = spl_object_id($relationalTypeResolver) . '.' . spl_object_id($field);
-        if (array_key_exists($cacheKey, $this->typeResolverFromSubcomponentFieldCache)) {
-            return $this->typeResolverFromSubcomponentFieldCache[$cacheKey];
+        if ($this->typeResolverFromSubcomponentFieldCache === null) {
+            /** @var WeakMap<FieldInterface,array<int,RelationalTypeResolverInterface|null>> */
+            $typeResolverFromSubcomponentFieldCache = new WeakMap();
+            $this->typeResolverFromSubcomponentFieldCache = $typeResolverFromSubcomponentFieldCache;
         }
-        return $this->typeResolverFromSubcomponentFieldCache[$cacheKey] = $this->doGetTypeResolverFromSubcomponentField($relationalTypeResolver, $field);
+        $fieldCache = $this->typeResolverFromSubcomponentFieldCache[$field] ?? [];
+        $relationalTypeResolverObjectID = spl_object_id($relationalTypeResolver);
+        if (array_key_exists($relationalTypeResolverObjectID, $fieldCache)) {
+            return $fieldCache[$relationalTypeResolverObjectID];
+        }
+        $fieldCache[$relationalTypeResolverObjectID] = $this->doGetTypeResolverFromSubcomponentField($relationalTypeResolver, $field);
+        $this->typeResolverFromSubcomponentFieldCache[$field] = $fieldCache;
+        return $fieldCache[$relationalTypeResolverObjectID];
     }
 
     private function doGetTypeResolverFromSubcomponentField(
