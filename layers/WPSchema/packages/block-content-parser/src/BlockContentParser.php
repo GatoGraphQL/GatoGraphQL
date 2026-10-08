@@ -34,6 +34,12 @@ use function parse_blocks;
 class BlockContentParser extends AbstractBasicService implements BlockContentParserInterface
 {
     /**
+     * The block that HTML outside of any block is, as the editor shows it:
+     * the Classic block. `parse_blocks()` gives such HTML no name at all.
+     */
+    private const FREEFORM_BLOCK_NAME = 'core/freeform';
+
+    /**
      * Attributes that WordPress registers without the source their value is
      * saved in, by block and attribute name.
      *
@@ -354,7 +360,14 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      */
     protected function source_block(array $block, array $registered_blocks, array $options = []): ?array
     {
-        $block_name = $block['blockName'];
+        /**
+         * HTML between the blocks of a post (one the editor converted only in
+         * part, or written to the database directly) comes from the parser
+         * with no name. Read as is, it failed the whole post, every block in
+         * it included, for not being block content.
+         */
+        $block_name = $block['blockName'] ?? self::FREEFORM_BLOCK_NAME;
+        $block['blockName'] = $block_name;
 
         if (! $this->should_block_be_included($block, $block_name, $options)) {
             return null;
