@@ -254,6 +254,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Breaking changes - Constant classes that hold a set of values are now native PHP enums, under namespace <code>…\Enums</code> instead of <code>…\Constants</code> (such as <code>LoggerSeverity</code>, <code>Behaviors</code>, <code>CommentStatus</code> and <code>LicenseStatus</code>). Code using one of their values as a string must read <code>->value</code>, and methods that receive or return those values, such as <code>LoggerInterface::log()</code>, now take and return the enum (#3414)
 * Fixed - The content of a Custom HTML block (<code>core/html</code>) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
 * Fixed - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
+* Fixed - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (<code>core/freeform</code>). The whole post used to fail for not being block content (#3420)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
