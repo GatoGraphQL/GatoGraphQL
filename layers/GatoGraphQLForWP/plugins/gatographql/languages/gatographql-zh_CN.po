@@ -12512,23 +12512,23 @@ msgstr "URL 标量，例如 https://mysite.com/my-fabulous-page"
 msgid "Custom scalar representing an XML string"
 msgstr "表示 XML 字符串的自定义标量"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:269
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:275
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr "不能同时提供要排除和要包含的块"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:286
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:292
 #, php-format
 msgid ""
 "Error parsing post ID %d: This post does not appear to contain block content."
 msgstr "解析文章 ID %d 时出错：该文章似乎不包含块内容。"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:289
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:295
 msgid ""
 "This fields is designed to parse Gutenberg blocks and can not read classic "
 "editor content."
 msgstr "此字段用于解析 Gutenberg 块，无法读取经典编辑器内容。"
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:334
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:340
 msgid ""
 "This post either does not contain block content, or its block content has "
 "errors. (Edit the post within the WordPress editor, fix the errors, save, "
