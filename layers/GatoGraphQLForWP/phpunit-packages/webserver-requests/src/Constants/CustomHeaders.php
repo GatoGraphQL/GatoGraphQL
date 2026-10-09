@@ -19,6 +19,12 @@ class CustomHeaders
     public const REQUEST_ORIGIN = 'X-Request-Origin';
 
     /**
+     * Read by the proxy in front of the webservers (and removed
+     * there), so it never reaches the application
+     */
+    public const WEBSERVER_ROUTE = 'X-Webserver-Route';
+
+    /**
      * Duplicated constant
      *
      * @see layers/GatoGraphQLForWP/plugins/testing-schema/src/Constants/CustomHeaders.php

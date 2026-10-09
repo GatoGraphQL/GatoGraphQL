@@ -15,6 +15,7 @@ use PHPUnitForGatoGraphQL\WebserverRequests\Constants\CustomHeaders;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\IntegrationTestApplicationNotAvailableException;
 use PHPUnitForGatoGraphQL\WebserverRequests\Exception\UnauthenticatedUserException;
+use PHPUnitForGatoGraphQL\WebserverRequests\Exception\WebserverRouteNotConfiguredException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use RuntimeException;
@@ -41,6 +42,18 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
      */
     protected static function setUpWebserverRequestTests(): void
     {
+        if (
+            Environment::isIntegrationTestsWebserverRouteRequired()
+            && Environment::getIntegrationTestsWebserverRoute() === ''
+        ) {
+            throw new WebserverRouteNotConfiguredException(
+                sprintf(
+                    'Env var "%s" is required, but it is not set: the requests would be handled by a webserver other than the one running the code under test',
+                    Environment::INTEGRATION_TESTS_WEBSERVER_ROUTE
+                )
+            );
+        }
+
         // Skip running tests if the domain has not been configured
         if (static::getWebserverDomain() === '') {
             self::$skipOrFailTestsReason = 'Webserver domain not configured';
@@ -243,8 +256,26 @@ abstract class AbstractWebserverRequestTestCase extends TestCase
         return new Client(
             [
                 'cookies' => static::shareCookies(),
+                RequestOptions::HEADERS => static::getWebserverRouteHeaders(),
             ]
         );
+    }
+
+    /**
+     * Tell the proxy which webserver must handle the request,
+     * for when several webservers share the same domain
+     *
+     * @return array<string,string>
+     */
+    protected static function getWebserverRouteHeaders(): array
+    {
+        $route = Environment::getIntegrationTestsWebserverRoute();
+        if ($route === '') {
+            return [];
+        }
+        return [
+            CustomHeaders::WEBSERVER_ROUTE => $route,
+        ];
     }
 
     protected static function createCookieJar(): CookieJar
