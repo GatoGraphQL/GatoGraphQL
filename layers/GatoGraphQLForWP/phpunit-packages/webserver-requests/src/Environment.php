@@ -4,11 +4,14 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\WebserverRequests;
 
+use function filter_var;
 use function getenv;
 
 class Environment
 {
     public final const INTEGRATION_TESTS_WEBSERVER_DOMAIN = 'INTEGRATION_TESTS_WEBSERVER_DOMAIN';
+    public final const INTEGRATION_TESTS_WEBSERVER_ROUTE = 'INTEGRATION_TESTS_WEBSERVER_ROUTE';
+    public final const INTEGRATION_TESTS_WEBSERVER_ROUTE_REQUIRED = 'INTEGRATION_TESTS_WEBSERVER_ROUTE_REQUIRED';
     public final const INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_USERNAME';
     public final const INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD = 'INTEGRATION_TESTS_AUTHENTICATED_ADMIN_USER_PASSWORD';
     public final const INTEGRATION_TESTS_AUTHENTICATED_CONTRIBUTOR_USER_USERNAME = 'INTEGRATION_TESTS_AUTHENTICATED_CONTRIBUTOR_USER_USERNAME';
@@ -29,6 +32,34 @@ class Environment
             return '';
         }
         return $envVarValue;
+    }
+
+    /**
+     * When several webservers share the same domain behind a proxy,
+     * the route tells the proxy which of them must handle the request
+     */
+    public static function getIntegrationTestsWebserverRoute(): string
+    {
+        $envVar = self::INTEGRATION_TESTS_WEBSERVER_ROUTE;
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return '';
+        }
+        return $envVarValue;
+    }
+
+    /**
+     * Without a route, the requests would be handled by a different
+     * webserver than the one running the code under test
+     */
+    public static function isIntegrationTestsWebserverRouteRequired(): bool
+    {
+        $envVar = self::INTEGRATION_TESTS_WEBSERVER_ROUTE_REQUIRED;
+        $envVarValue = getenv($envVar);
+        if ($envVarValue === false) {
+            return false;
+        }
+        return filter_var($envVarValue, FILTER_VALIDATE_BOOLEAN);
     }
 
     public static function getIntegrationTestsAuthenticatedAdminUserUsername(): string
