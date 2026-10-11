@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 `GatoGraphQL/GatoGraphQL` is a monorepo of ~150 Composer packages that compiles into **one** distributable WordPress plugin: a GraphQL server for WordPress.
 
-The stack is layered from a CMS-agnostic component framework up to WordPress specifics, wired at runtime by a DI-container module graph, and compiled by CI into a PHP-7.4-downgraded, PHP-Scoper-prefixed `.zip`.
+The stack is layered from a CMS-agnostic component framework up to WordPress specifics, wired at runtime by a DI-container module graph, and compiled by CI into a PHP-Scoper-prefixed `.zip` that requires PHP 8.1, same as the source.
 
 Orientation docs: `README.md` (the product), `Monorepo_README.md` (what each layer is), `DEVELOPMENT.md` (full dev setup), `docs/development-environment.md` (Lando, caching, debugging), `instructions.md` (long-form development guidelines).
 
@@ -119,11 +119,11 @@ Configuration is **PHP data-source classes**, not config files: `src/Config/Symp
 - `validate-monorepo` — asserts the above are current; first step of `composer all`.
 - `release-patch|minor|major` — runs the workers in `src/OnDemand/Symplify/MonorepoBuilder/Release/ReleaseWorker/`, which rewrite version strings across ~6 file types (main file, readme stable tag, compiled block markdown, package.json, monorepo metadata) and then restore `-dev`.
 
-The PHP 8.1 → 7.4 downgrade lives in `config/rector/downgrade/` (one config per artifact, each with a `chained-rules/` folder for rules needing a separate second pass), driven by `ci/downgrade/downgrade_code.sh` — which **downgrades `vendor/` too**, not just this repo's source. `before_downgrade_code.sh` / `after_downgrade_code.sh` patch what Rector can't handle.
+**The PHP 8.1 → 7.4 downgrade is disabled**: `ENABLE_PHP_DOWNGRADE` is `false` in `EnvironmentVariablesDataSource`, so the built plugin requires PHP 8.1. The Rector machinery is still in place but dormant (`config/rector/downgrade/`, `ci/downgrade/downgrade_code.sh`, the `DowngradeRectorDataSource`, and the workflow steps gated on `enable_php_downgrade`); don't cite it as a live build step.
 
-`.github/workflows/generate_plugins.yml` is the centerpiece: a JSON matrix of plugins → localize composer paths → install → Rector downgrade → `sed` the PHP requirement and commit hash → `--no-dev` install → PHP-Scoper → `scoper-autoload.php` → zip.
+`.github/workflows/generate_plugins.yml` is the centerpiece: a JSON matrix of plugins → localize composer paths → install → (dormant: Rector downgrade + `sed` the PHP requirement) → `sed` the commit hash → `--no-dev` install → PHP-Scoper → `scoper-autoload.php` → zip.
 
-**The built artifact barely resembles the source** — PHP 7.4, scoper-prefixed namespaces, everything under one `vendor/`, tests and `composer.*` excluded. Never debug a production stack trace by reading `layers/` directly.
+**The built artifact differs from the source** — scoper-prefixed namespaces, everything under one `vendor/`, tests and `composer.*` excluded. Never debug a production stack trace by reading `layers/` directly.
 
 ## Common commands
 
@@ -141,7 +141,6 @@ The PHP 8.1 → 7.4 downgrade lives in `config/rector/downgrade/` (one config pe
 | Regenerate root composer.json + phpstan | `composer update-monorepo-config` |
 | Propagate version constraints to packages | `composer propagate-monorepo` |
 | Validate monorepo consistency | `composer validate-monorepo` |
-| Preview the PHP 7.4 downgrade (dry run) | `composer preview-code-downgrade` |
 | Build JS (blocks, editor scripts) | `composer build-js` (watch: `npm-start-js`) |
 | Build the Lando dev server from scratch | `composer build-server` |
 | Start / stop the Lando dev server | `composer start-server` / `stop-server` (`init-server` = start) |
@@ -198,7 +197,7 @@ The examples are starting points, not exhaustive — explore sibling resolvers i
 
 `instructions.md` and `.cursor/rules/*.mdc` define the rules. Worth surfacing:
 
-- **PHP 8.1+ in source**, downgraded to 7.4 for distribution. Don't rely on features newer than 8.1, and don't write code that breaks the downgrade. `declare(strict_types=1);` is mandatory.
+- **PHP 8.1** in source and in the built plugin. Don't rely on features newer than 8.1. `declare(strict_types=1);` is mandatory.
 - **PSR-1 / PSR-4 / PSR-12**, enforced by PHPCS. PascalCase classes, camelCase methods.
 - **Backward compatibility is a hard requirement.**
 - **Explicit types everywhere** — return types on every method, type hints on parameters and properties.
