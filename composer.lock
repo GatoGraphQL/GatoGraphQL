@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8bc79e486ebe1ad23699f0bf53f223cd",
+    "content-hash": "01b58d7f7b2d4f7c7440c3635c0e71b1",
     "packages": [
         {
             "name": "antecedent/patchwork",
@@ -277,16 +277,16 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.4.4",
+            "version": "3.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "198166618906cb2de69b95d7d47e5fa8aa1b2b95"
+                "reference": "528948210cc46f967a4b98e83b19e76f2b504993"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/198166618906cb2de69b95d7d47e5fa8aa1b2b95",
-                "reference": "198166618906cb2de69b95d7d47e5fa8aa1b2b95",
+                "url": "https://api.github.com/repos/composer/semver/zipball/528948210cc46f967a4b98e83b19e76f2b504993",
+                "reference": "528948210cc46f967a4b98e83b19e76f2b504993",
                 "shasum": ""
             },
             "require": {
@@ -328,7 +328,7 @@
                     "homepage": "http://robbast.nl"
                 }
             ],
-            "description": "Semver library that offers utilities, version constraint parsing and validation.",
+            "description": "Version comparison library that offers utilities, version constraint parsing and validation.",
             "keywords": [
                 "semantic",
                 "semver",
@@ -338,7 +338,7 @@
             "support": {
                 "irc": "ircs://irc.libera.chat:6697/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.4.4"
+                "source": "https://github.com/composer/semver/tree/3.5.1"
             },
             "funding": [
                 {
@@ -350,7 +350,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-08-20T19:15:30+00:00"
+            "time": "2026-10-05T13:12:12+00:00"
         },
         {
             "name": "fakerphp/faker",
@@ -8980,16 +8980,16 @@
         },
         {
             "name": "wp-cli/mustangostang-spyc",
-            "version": "0.6.6",
+            "version": "0.6.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/spyc.git",
-                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2"
+                "reference": "8adbd399bc819c19e36f4aab0aeeb3b918793e1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/30f25baaaba939caaff1f4b8c7ed998632f59fe2",
-                "reference": "30f25baaaba939caaff1f4b8c7ed998632f59fe2",
+                "url": "https://api.github.com/repos/wp-cli/spyc/zipball/8adbd399bc819c19e36f4aab0aeeb3b918793e1c",
+                "reference": "8adbd399bc819c19e36f4aab0aeeb3b918793e1c",
                 "shasum": ""
             },
             "require": {
@@ -9025,22 +9025,22 @@
             "description": "A simple YAML loader/dumper class for PHP (WP-CLI fork)",
             "homepage": "https://github.com/mustangostang/spyc/",
             "support": {
-                "source": "https://github.com/wp-cli/spyc/tree/0.6.6"
+                "source": "https://github.com/wp-cli/spyc/tree/0.6.7"
             },
-            "time": "2026-03-12T12:30:41+00:00"
+            "time": "2026-10-06T08:59:48+00:00"
         },
         {
             "name": "wp-cli/php-cli-tools",
-            "version": "v0.12.9",
+            "version": "v0.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/php-cli-tools.git",
-                "reference": "c3d25138ce46a66647ec0dc9b17bf300338494aa"
+                "reference": "5bd08e633ef3be1e21834a971e4c424fafd4f8f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/c3d25138ce46a66647ec0dc9b17bf300338494aa",
-                "reference": "c3d25138ce46a66647ec0dc9b17bf300338494aa",
+                "url": "https://api.github.com/repos/wp-cli/php-cli-tools/zipball/5bd08e633ef3be1e21834a971e4c424fafd4f8f5",
+                "reference": "5bd08e633ef3be1e21834a971e4c424fafd4f8f5",
                 "shasum": ""
             },
             "require": {
@@ -9088,9 +9088,9 @@
             ],
             "support": {
                 "issues": "https://github.com/wp-cli/php-cli-tools/issues",
-                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.12.9"
+                "source": "https://github.com/wp-cli/php-cli-tools/tree/v0.13.2"
             },
-            "time": "2026-03-29T11:12:54+00:00"
+            "time": "2026-10-07T11:43:52+00:00"
         },
         {
             "name": "wp-cli/wp-cli",
@@ -9098,27 +9098,29 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/wp-cli/wp-cli.git",
-                "reference": "49ad9e440b86ed46da49cc2062970ade9c4d798f"
+                "reference": "7b3a8f56ee053ef74e325d554ea6352d699fe506"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/49ad9e440b86ed46da49cc2062970ade9c4d798f",
-                "reference": "49ad9e440b86ed46da49cc2062970ade9c4d798f",
+                "url": "https://api.github.com/repos/wp-cli/wp-cli/zipball/7b3a8f56ee053ef74e325d554ea6352d699fe506",
+                "reference": "7b3a8f56ee053ef74e325d554ea6352d699fe506",
                 "shasum": ""
             },
             "require": {
+                "composer/semver": "^1.4 || ^2 || ^3",
                 "mustache/mustache": "^3.0.0",
                 "php": ">=7.2.24 || ^8.0",
                 "wp-cli/mustangostang-spyc": "^0.6.3",
-                "wp-cli/php-cli-tools": "~0.12.7"
+                "wp-cli/php-cli-tools": "~0.13.2"
             },
             "require-dev": {
                 "justinrainbow/json-schema": "^6.3",
                 "roave/security-advisories": "dev-latest",
-                "wp-cli/db-command": "^2",
-                "wp-cli/entity-command": "^2",
-                "wp-cli/extension-command": "^2",
-                "wp-cli/package-command": "^2",
+                "wp-cli/db-command": "^2 || ^3",
+                "wp-cli/entity-command": "^2 || ^3",
+                "wp-cli/extension-command": "^2 || ^3",
+                "wp-cli/language-command": "^2 || ^3",
+                "wp-cli/package-command": "^2 || ^3",
                 "wp-cli/wp-cli-tests": "^5"
             },
             "suggest": {
@@ -9147,7 +9149,7 @@
                     "cli version"
                 ],
                 "branch-alias": {
-                    "dev-main": "2.13.x-dev"
+                    "dev-main": "3.0.x-dev"
                 }
             },
             "autoload": {
@@ -9174,7 +9176,7 @@
                 "issues": "https://github.com/wp-cli/wp-cli/issues",
                 "source": "https://github.com/wp-cli/wp-cli"
             },
-            "time": "2026-06-03T21:33:03+00:00"
+            "time": "2026-10-10T10:00:59+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
@@ -9243,9 +9245,18 @@
             "time": "2025-07-24T20:08:31+00:00"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "package": "wp-cli/wp-cli",
+            "version": "dev-main",
+            "alias": "2.13.x-dev",
+            "alias_normalized": "2.13.9999999.9999999-dev"
+        }
+    ],
     "minimum-stability": "dev",
-    "stability-flags": {},
+    "stability-flags": {
+        "wp-cli/wp-cli": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
