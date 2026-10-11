@@ -57,6 +57,7 @@
         "symplify/monorepo-builder": "^10.2.2",
         "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-cli/i18n-command": "^2.7",
+        "wp-cli/wp-cli": "dev-main#7b3a8f56ee053ef74e325d554ea6352d699fe506 as 2.13.x-dev",
         "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
@@ -423,6 +424,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-autowire-array-parameter.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git"
         },
         {
@@ -436,10 +441,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/symplify-symplify-kernel.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/symplify-autowire-array-parameter.git"
         }
     ],
     "replace": {
