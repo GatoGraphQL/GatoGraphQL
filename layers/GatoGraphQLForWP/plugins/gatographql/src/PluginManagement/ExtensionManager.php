@@ -345,6 +345,18 @@ class ExtensionManager extends AbstractPluginManager
     }
 
     /**
+     * The bundle the extension is installed with, or the extension itself
+     * when it is installed standalone: the plugin whose file, version and
+     * base name are those of the installed extension.
+     *
+     * @param class-string<ExtensionInterface> $extensionClass
+     */
+    public function getBundlingOrStandaloneExtension(string $extensionClass): ExtensionInterface
+    {
+        return $this->getBundlingExtension($extensionClass) ?? $this->getExtension($extensionClass);
+    }
+
+    /**
      * Validate that the license for the commercial extension
      * has been activated.
      *
