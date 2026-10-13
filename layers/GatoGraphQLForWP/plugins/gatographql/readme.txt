@@ -257,6 +257,10 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (<code>core/freeform</code>). The whole post used to fail for not being block content (#3420)
 * Fixed - In a bundle, such as Gato AI Translations for Polylang, a doc that is only in English now shows the notice linking to the website in your language (#3425)
 * Fixed - The plugin's docs, and their links to the website, are in the language each user picked for the admin, not in the site's language (#3426)
+* Fixed - A post no longer fails to be read as blocks when one of its blocks leaves out an attribute that defaults to true/false or a number, such as a Video block without <code>controls</code> (#3427)
+* Fixed - A block's true/false attribute read from its HTML, such as <code>autoplay</code> or <code>controls</code> in a Video block, is now <code>true</code> when the HTML attribute is there and <code>false</code> when it is not, instead of an empty string or the block's default (#3427)
+* Fixed - A block attribute whose selector is <code>*</code> is now read from the block's own HTML element (#3427)
+* Fixed - A post whose content is only whitespace now has no blocks, instead of failing for not being block content (#3427)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
