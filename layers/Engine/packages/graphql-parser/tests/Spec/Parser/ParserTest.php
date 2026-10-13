@@ -283,6 +283,103 @@ GRAPHQL;
         );
     }
 
+    public function testDirectivesOnFragments(): void
+    {
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query ($withFoo: Boolean!) {
+                ...F @include(if: $withFoo)
+                ... on QueryRoot @skip(if: true) {
+                    bar
+                }
+                ... @include(if: false) {
+                    baz
+                }
+                ... {
+                    qux
+                }
+            }
+
+            fragment F on QueryRoot {
+                foo
+            }
+        ');
+
+        $this->assertSame(
+            "query (\$withFoo: Boolean!) { ...F @include(if: \$withFoo) ...on QueryRoot @skip(if: true) { bar } ... @include(if: false) { baz } ... { qux } }\n\nfragment F on QueryRoot { foo }",
+            $document->asDocumentString()
+        );
+        $fieldsOrFragmentBonds = $document->getOperations()[0]->getFieldsOrFragmentBonds();
+
+        /** @var FragmentReference */
+        $fragmentReference = $fieldsOrFragmentBonds[0];
+        $this->assertInstanceOf(FragmentReference::class, $fragmentReference);
+        $this->assertSame('include', $fragmentReference->getDirectives()[0]->getName());
+
+        /** @var InlineFragment */
+        $inlineFragment = $fieldsOrFragmentBonds[1];
+        $this->assertSame('QueryRoot', $inlineFragment->getTypeName());
+        $this->assertSame('skip', $inlineFragment->getDirectives()[0]->getName());
+
+        /** @var InlineFragment */
+        $inlineFragmentWithoutTypeCondition = $fieldsOrFragmentBonds[2];
+        $this->assertInstanceOf(InlineFragment::class, $inlineFragmentWithoutTypeCondition);
+        $this->assertNull($inlineFragmentWithoutTypeCondition->getTypeName());
+        $this->assertSame('include', $inlineFragmentWithoutTypeCondition->getDirectives()[0]->getName());
+
+        /** @var InlineFragment */
+        $inlineFragmentWithoutTypeConditionOrDirectives = $fieldsOrFragmentBonds[3];
+        $this->assertInstanceOf(InlineFragment::class, $inlineFragmentWithoutTypeConditionOrDirectives);
+        $this->assertNull($inlineFragmentWithoutTypeConditionOrDirectives->getTypeName());
+        $this->assertSame([], $inlineFragmentWithoutTypeConditionOrDirectives->getDirectives());
+    }
+
+    public function testVariablesInDirectivesOnFragmentsAreUsed(): void
+    {
+        $document = $this->getParser()->parse('
+            query ($a: Boolean!, $b: Boolean!, $c: Boolean!) {
+                ...F @include(if: $a)
+                ... on QueryRoot @skip(if: $b) {
+                    bar
+                }
+                ... @include(if: $c) {
+                    baz
+                }
+            }
+
+            fragment F on QueryRoot {
+                foo
+            }
+        ');
+        $document->validate();
+        $this->assertSame(
+            ['a', 'b', 'c'],
+            array_map(
+                fn (VariableReference $variableReference) => $variableReference->getName(),
+                $document->getVariableReferencesInOperation($document->getOperations()[0])
+            )
+        );
+    }
+
+    #[DataProvider('invalidFragmentsProvider')]
+    public function testInvalidFragments(string $query): void
+    {
+        $this->expectException(SyntaxErrorParserException::class);
+        $this->getParser()->parse($query);
+    }
+
+    /**
+     * @return array<string,string[]>
+     */
+    public static function invalidFragmentsProvider(): array
+    {
+        return [
+            'inline-fragment-without-selection-set' => ['{ ... @include(if: true) }'],
+            'inline-fragment-with-empty-selection-set' => ['{ ... { } }'],
+            'fragment-spread-directive-without-name' => ['{ ...F @ } fragment F on QueryRoot { foo }'],
+        ];
+    }
+
     public function testUnicodeBOMIsIgnored(): void
     {
         $parser = $this->getParser();

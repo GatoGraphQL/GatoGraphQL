@@ -283,13 +283,46 @@ class Parser extends Tokenizer implements ParserInterface
             return $this->parseBodyItem($type);
         }
 
-        $this->lex();
+        $fragmentReferenceToken = $this->lex();
 
         if ($this->eat(Token::TYPE_ON)) {
             return $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
         }
 
+        if ($this->matchMulti([Token::TYPE_AT, Token::TYPE_LBRACE])) {
+            return $this->parseInlineFragmentWithoutTypeCondition($fragmentReferenceToken);
+        }
+
         return $this->parseFragmentReference();
+    }
+
+    /**
+     * An inline fragment without a type condition, such as
+     * `... @include(if: $foo) { id }`, applies to the enclosing type.
+     *
+     * @throws SyntaxErrorParserException
+     * @see https://spec.graphql.org/September2025/#sec-Inline-Fragments
+     */
+    protected function parseInlineFragmentWithoutTypeCondition(Token $fragmentReferenceToken): InlineFragment
+    {
+        $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
+
+        if (!$this->match(Token::TYPE_LBRACE)) {
+            throw $this->createUnexpectedException($this->peek());
+        }
+
+        $this->beforeParsingFieldsOrFragmentBonds();
+
+        /** @var array<FieldInterface|FragmentBondInterface> */
+        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
+
+        $this->afterParsingFieldsOrFragmentBonds();
+
+        if (!$fieldsOrFragmentBonds) {
+            throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
+        }
+
+        return $this->createInlineFragment(null, $fieldsOrFragmentBonds, $directives, $this->getTokenLocation($fragmentReferenceToken));
     }
 
     /**
@@ -503,17 +536,23 @@ class Parser extends Tokenizer implements ParserInterface
     protected function parseFragmentReference(): FragmentReference
     {
         $nameToken = $this->eatIdentifierToken();
+        $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
         return $this->createFragmentReference(
             $nameToken->getData(),
-            $this->getTokenLocation($nameToken)
+            $this->getTokenLocation($nameToken),
+            $directives,
         );
     }
 
+    /**
+     * @param Directive[] $directives
+     */
     protected function createFragmentReference(
         string $name,
         Location $location,
+        array $directives = [],
     ): FragmentReference {
-        return new FragmentReference($name, $location);
+        return new FragmentReference($name, $location, $directives);
     }
 
     /**
@@ -627,7 +666,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Directive[] $directives
      */
     protected function createInlineFragment(
-        string $typeName,
+        ?string $typeName,
         array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
