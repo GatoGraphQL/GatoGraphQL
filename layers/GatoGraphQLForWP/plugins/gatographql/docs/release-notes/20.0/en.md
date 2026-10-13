@@ -9,7 +9,7 @@
 
 ## Added
 
-- Added the "Spec-Compliant Error Handling" setting, to handle errors as the GraphQL spec defines: a `null` in a non-null field is passed up to its nearest nullable parent, scalar and enum values are validated, and every error indicates its `path` in the response. It is disabled by default ([#3432](https://github.com/GatoGraphQL/GatoGraphQL/pull/3432))
+- Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), and add the response `path` to errors. All of them are disabled by default ([#3432](https://github.com/GatoGraphQL/GatoGraphQL/pull/3432))
 
 ## Fixed
 
