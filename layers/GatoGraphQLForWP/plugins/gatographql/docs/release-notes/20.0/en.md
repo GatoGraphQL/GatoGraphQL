@@ -13,3 +13,4 @@
 - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
 - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (`core/freeform`). The whole post used to fail for not being block content (#3420)
 - In a bundle, such as Gato AI Translations for Polylang, a doc that is only in English now shows the notice linking to the website in your language ([#3425](https://github.com/GatoGraphQL/GatoGraphQL/pull/3425))
+- The plugin's docs, and their links to the website, are in the language each user picked for the admin, not in the site's language ([#3426](https://github.com/GatoGraphQL/GatoGraphQL/pull/3426))

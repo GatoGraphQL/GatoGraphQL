@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 
 use GatoGraphQL\GatoGraphQL\PluginApp;
-use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 
+use function explode;
+use function get_user_locale;
 use function in_array;
 use function preg_replace;
 
@@ -18,11 +19,13 @@ class LocaleHelper
     private ?array $websiteTranslatedLanguages = null;
 
     /**
-     * User's selected language code for the admin panel
+     * User's selected language code for the admin panel, so the docs and
+     * their links are in the same language as the admin. Without a user,
+     * it is the site's.
      */
     public function getLocaleLanguage(): string
     {
-        return LocaleUtils::getLocaleLanguage();
+        return explode('_', get_user_locale())[0];
     }
 
     /**
