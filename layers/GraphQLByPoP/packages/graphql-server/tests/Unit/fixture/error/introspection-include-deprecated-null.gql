@@ -1,0 +1,7 @@
+{
+  __type(name: "QueryRoot") {
+    fields(includeDeprecated: null) {
+      name
+    }
+  }
+}
