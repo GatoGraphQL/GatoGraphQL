@@ -322,6 +322,10 @@
                     "name": "__Schema",
                     "fields": [
                         {
+                            "name": "description",
+                            "args": []
+                        },
+                        {
                             "name": "directives",
                             "args": [
                                 {
@@ -486,13 +490,13 @@
                 },
                 {
                     "kind": "ENUM",
-                    "name": "DirectiveLocation",
+                    "name": "__DirectiveLocation",
                     "fields": null,
                     "inputFields": null
                 },
                 {
                     "kind": "ENUM",
-                    "name": "TypeKind",
+                    "name": "__TypeKind",
                     "fields": null,
                     "inputFields": null
                 },

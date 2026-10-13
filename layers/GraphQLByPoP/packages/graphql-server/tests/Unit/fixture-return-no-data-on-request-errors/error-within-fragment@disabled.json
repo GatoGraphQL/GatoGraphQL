@@ -111,11 +111,11 @@
                     "nonExistingField": null
                 },
                 {
-                    "name": "DirectiveLocation",
+                    "name": "__DirectiveLocation",
                     "nonExistingField": null
                 },
                 {
-                    "name": "TypeKind",
+                    "name": "__TypeKind",
                     "nonExistingField": null
                 }
             ]
