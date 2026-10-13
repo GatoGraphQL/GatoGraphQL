@@ -35,6 +35,9 @@ services:
     PoP\ComponentModel\DirectivePipeline\DirectivePipelineServiceInterface:
         class: \PoP\ComponentModel\DirectivePipeline\DirectivePipelineService
 
+    PoP\ComponentModel\DirectivePipeline\DirectiveNullabilityValidationServiceInterface:
+        class: \PoP\ComponentModel\DirectivePipeline\DirectiveNullabilityValidationService
+
     PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface:
         class: \PoP\ComponentModel\Feedback\FeedbackEntryManager
 
@@ -140,6 +143,9 @@ services:
 
     PoP\ComponentModel\Schema\InputCoercingServiceInterface:
         class: \PoP\ComponentModel\Schema\InputCoercingService
+
+    PoP\ComponentModel\Schema\OutputValueNullabilityServiceInterface:
+        class: \PoP\ComponentModel\Schema\OutputValueNullabilityService
 
     PoP\ComponentModel\Schema\SchemaCastingServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaCastingService

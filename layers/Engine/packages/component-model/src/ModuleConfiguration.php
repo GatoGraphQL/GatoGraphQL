@@ -115,6 +115,31 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Handle errors as defined in the GraphQL spec:
+     *
+     * - Propagate the `null` from a Non-Null response position
+     *   to its nearest nullable parent
+     * - Coerce the values of Scalar and Enum types in the response
+     * - Add the response path to every execution error
+     *
+     * Disabled by default, as it modifies the response.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Handling-Execution-Errors
+     */
+    public function enableSpecCompliantErrorHandling(): bool
+    {
+        $envVariable = Environment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
      * Indicate: If a directive fails, then set those fields in `null`
      * and remove the affected IDs/fields from the upcoming stages
      * of the directive pipeline execution.

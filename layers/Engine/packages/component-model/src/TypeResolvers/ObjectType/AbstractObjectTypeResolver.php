@@ -10,6 +10,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Enums\OutputValueNullabilityViolations;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -28,6 +29,7 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
+use PoP\ComponentModel\Schema\OutputValueNullabilityServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
@@ -145,6 +147,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
     private ?EngineInterface $engine = null;
+    private ?OutputValueNullabilityServiceInterface $outputValueNullabilityService = null;
 
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
@@ -190,6 +193,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             $this->engine = $engine;
         }
         return $this->engine;
+    }
+    final protected function getOutputValueNullabilityService(): OutputValueNullabilityServiceInterface
+    {
+        if ($this->outputValueNullabilityService === null) {
+            /** @var OutputValueNullabilityServiceInterface */
+            $outputValueNullabilityService = $this->instanceManager->getInstance(OutputValueNullabilityServiceInterface::class);
+            $this->outputValueNullabilityService = $outputValueNullabilityService;
+        }
+        return $this->outputValueNullabilityService;
     }
 
     public function __construct()
@@ -534,9 +546,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * All other conditions, check them when enabled by configuration.
          */
         if ($value === null) {
-            $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName());
-            $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
-            if ($fieldTypeIsNonNullable) {
+            $nullabilityViolation = $this->getOutputValueNullabilityService()->getNullabilityViolation(
+                $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName()),
+                $value,
+            );
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_VALUE) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
@@ -575,6 +589,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($fieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
                 return $value;
             }
+
+            $nullabilityViolation = $this->getOutputValueNullabilityService()->getNullabilityViolation(
+                $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName()),
+                $value,
+            );
 
             /**
              * Execute the validation, return an error if it fails
@@ -628,15 +647,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return null;
             }
-            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-            if (
-                $fieldIsNonNullArrayItemsType
-                && is_array($value)
-                && array_filter(
-                    $value,
-                    fn (mixed $arrayItem) => $arrayItem === null
-                )
-            ) {
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_ARRAY_ITEM) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
@@ -699,18 +710,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return null;
             }
-            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-            if (
-                $fieldIsNonNullArrayOfArraysItemsType
-                && is_array($value)
-                && array_filter(
-                    $value,
-                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                        $arrayItem,
-                        fn (mixed $arrayItemItem) => $arrayItemItem === null
-                    ) !== [],
-                )
-            ) {
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_ARRAY_OF_ARRAYS_ITEM) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
