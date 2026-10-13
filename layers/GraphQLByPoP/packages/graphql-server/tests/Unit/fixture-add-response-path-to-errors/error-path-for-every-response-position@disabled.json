@@ -1,0 +1,77 @@
+{
+    "errors": [
+        {
+            "message": "Cannot cast value '1.2' for type 'Boolean'",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 26
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "1.2",
+                    "(namespaced: 1.2)",
+                    "name(namespaced: 1.2)",
+                    "type { ... }",
+                    "fields { ... }",
+                    "__type(name: \"__EnumValue\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Type",
+                "field": "name(namespaced: 1.2)",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        }
+    ],
+    "data": {
+        "__type": {
+            "name": "__EnumValue",
+            "fields": [
+                {
+                    "name": "deprecationReason",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "description",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "extensions",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "globalID",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "id",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "isDeprecated",
+                    "type": {
+                        "name": null
+                    }
+                },
+                {
+                    "name": "name",
+                    "type": {
+                        "name": null
+                    }
+                }
+            ]
+        }
+    }
+}

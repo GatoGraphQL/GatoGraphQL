@@ -113,6 +113,23 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      */
     public function getFormattedData(array $data): array
     {
+        $isNull = false;
+        $formattedData = $this->formatData($data, $isNull);
+        if ($isNull) {
+            return [];
+        }
+        return $formattedData;
+    }
+
+    /**
+     * Produce the response data.
+     *
+     * @param array<string,mixed> $data
+     * @param bool $isNull Set to `true` when the `null` value of some Non-Null response position must be propagated all the way up to the root, so the data must be `null`
+     * @return array<string,mixed>
+     */
+    protected function formatData(array $data, bool &$isNull): array
+    {
         $fields = $this->getFields();
         if (!$fields) {
             return [];
@@ -143,7 +160,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $typeOutputKeyPaths = $data['datasetcomponentsettings'][$componentName]['outputKeys'] ?? [];
             $objectIDorIDs = $componentData['objectIDs'];
             // @phpstan-ignore-next-line
-            $this->addData($ret, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, false);
+            $isNullObject = $this->addData($ret, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, FieldOutputKeys::ID, $typeOutputKeyPaths, [], false);
+            if ($isNullObject && !is_array($objectIDorIDs)) {
+                $isNull = true;
+            }
         }
 
         $appStateManager->override('previously-resolved-fields-for-objects', null);
@@ -160,11 +180,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string|int|null>|string|integer $objectIDorIDs The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      * @param array<string> $typeOutputKeyPaths
+     * @param array<string|int> $responsePath The path to the response position where the data is added
+     * @return bool For a single object: if it must be `null` (as some Non-Null field within it is `null`). For a list of objects: if some item is `null`
      */
-    private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField = true): void
+    private function addData(array &$sourceRet, ?array &$ret, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, array|string|int $objectIDorIDs, string $objectKeyPath, array &$typeOutputKeyPaths, array $responsePath, bool $concatenateField = true): bool
     {
         // The results can be a single ID or value, or an array of IDs
         if (is_array($objectIDorIDs)) {
+            $hasNullItem = false;
             foreach ($objectIDorIDs as $objectID) {
                 /**
                  * If the object ID is null, then add a null to the result
@@ -172,19 +195,26 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                  */
                 if ($objectID === null) {
                     $ret[] = null;
+                    $hasNullItem = true;
                     continue;
                 }
                 // Add a new array for this DB object, where to return all its properties
                 $ret[] = [];
-                $resolvedObjectRet = &$ret[count($ret) - 1];
+                $position = count($ret) - 1;
+                $resolvedObjectRet = &$ret[$position];
                 // @phpstan-ignore-next-line
-                $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+                $isNullObject = $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, [...$responsePath, $position], $concatenateField);
+                unset($resolvedObjectRet);
+                if ($isNullObject) {
+                    $ret[$position] = null;
+                    $hasNullItem = true;
+                }
             }
-            return;
+            return $hasNullItem;
         }
         $objectID = $objectIDorIDs;
         // @phpstan-ignore-next-line
-        $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $concatenateField);
+        return $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $responsePath, $concatenateField);
     }
 
     /**
@@ -194,11 +224,13 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
      * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
+     * @param array<string|int> $responsePath The path to the response position of the object
+     * @return bool If the object must be `null` (as some Non-Null field within it is `null`)
      */
-    private function addObjectData(array &$sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, bool $concatenateField): void
+    private function addObjectData(array &$sourceRet, ?array &$resolvedObjectRet, array $fields, array &$databases, array &$unionTypeOutputKeyIDs, string|int $objectID, string $objectKeyPath, array &$typeOutputKeyPaths, array $responsePath, bool $concatenateField): bool
     {
         if (!$fields) {
-            return;
+            return false;
         }
 
         // Execute for all fields other than the first one, "root", for both UnionTypeResolvers and non-union ones
@@ -220,7 +252,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
         }
         // If there is no typeOutputKey, it is an error (eg: requesting posts.cats.saranga)
         if (!$typeOutputKey) {
-            return;
+            return false;
         }
 
         $astHelperService = $this->getASTHelperService();
@@ -244,6 +276,8 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
          */
         $executableDocument = null;
         $fragments = null;
+        $skipAddingDataForType = $this->skipAddingDataForType($typeOutputKey);
+        $isNullObject = false;
         foreach ($fields as $field) {
             /**
              * If the key doesn't exist, then do nothing.
@@ -274,18 +308,36 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $previouslyResolvedFieldsForObjectsStore = App::getState('previously-resolved-fields-for-objects');
             $previouslyResolvedFieldsForObjectsStore->add($typeOutputKey, $objectID, $field);
 
+            $fieldOutputKey = $field->getOutputKey();
+            $fieldResponsePath = $skipAddingDataForType
+                ? $responsePath
+                : [...$responsePath, $fieldOutputKey];
+            if (!$skipAddingDataForType) {
+                $this->onFieldAddedToResponse($typeOutputKey, $objectID, $field, $fieldResponsePath);
+            }
+
             if ($field instanceof LeafField) {
                 /** @var LeafField */
                 $leafField = $field;
-                $resolvedObjectRet[$leafField->getOutputKey()] = $resolvedObject[$leafField];
+                $resolvedObjectRet[$fieldOutputKey] = $this->processLeafFieldValue(
+                    $typeOutputKey,
+                    $objectID,
+                    $leafField,
+                    $resolvedObject[$leafField],
+                    $fieldResponsePath,
+                );
+                if (
+                    $resolvedObjectRet[$fieldOutputKey] === null
+                    && $this->mustPropagateNullFromField($typeOutputKey, $objectID, $leafField, $fieldResponsePath, false)
+                ) {
+                    $isNullObject = true;
+                }
                 continue;
             }
 
             /** @var RelationalField */
             $relationalField = $field;
-            $relationalFieldOutputKey = $relationalField->getOutputKey();
-
-            $skipAddingDataForType = $this->skipAddingDataForType($typeOutputKey);
+            $relationalFieldOutputKey = $fieldOutputKey;
 
             /**
              * If it's null, directly assign the null to the result.
@@ -298,6 +350,9 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 && !$skipAddingDataForType
             ) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = null;
+                if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, false)) {
+                    $isNullObject = true;
+                }
                 continue;
             }
 
@@ -334,8 +389,17 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     continue;
                 }
                 $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
+                $objectIDorIDs = $unionTypeOutputKeyID ?? $resolvedObject[$relationalField];
                 // @phpstan-ignore-next-line
-                $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+                $isNullNestedObject = $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, $nextField, $typeOutputKeyPaths, $fieldResponsePath);
+                unset($resolvedObjectNestedPropertyRet);
+                /**
+                 * The data of the SuperRoot is not printed, so if some
+                 * nested object must be `null`, then the whole data is `null`.
+                 */
+                if ($isNullNestedObject && !is_array($objectIDorIDs)) {
+                    $isNullObject = true;
+                }
                 continue;
             }
 
@@ -345,6 +409,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             // If it is an empty array, then directly add an empty array as the result
             if (is_array($resolvedObject[$relationalField]) && empty($resolvedObject[$relationalField])) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = [];
+                unset($resolvedObjectNestedPropertyRet);
                 continue;
             }
 
@@ -361,9 +426,94 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                     $resolvedObjectRet[$relationalFieldOutputKey] = [];
                 }
             }
+            $objectIDorIDs = $unionTypeOutputKeyID ?? $resolvedObject[$relationalField];
             // @phpstan-ignore-next-line
-            $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $unionTypeOutputKeyID ?? $resolvedObject[$relationalField], $nextField, $typeOutputKeyPaths);
+            $hasNullObjectOrItem = $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, $nextField, $typeOutputKeyPaths, $fieldResponsePath);
+            unset($resolvedObjectNestedPropertyRet);
+            if (!$hasNullObjectOrItem) {
+                continue;
+            }
+            /**
+             * For a list, the `null` item is propagated to the field
+             * only if the list items are Non-Null.
+             */
+            if (
+                is_array($objectIDorIDs)
+                && !$this->mustPropagateNullFromListItem($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, in_array(null, $objectIDorIDs, true))
+            ) {
+                continue;
+            }
+            $resolvedObjectRet[$relationalFieldOutputKey] = null;
+            if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, true)) {
+                $isNullObject = true;
+            }
         }
+        return $isNullObject;
+    }
+
+    /**
+     * Allow GraphQL to keep track of the response position
+     * of every field added to the response.
+     *
+     * @param array<string|int> $responsePath
+     */
+    protected function onFieldAddedToResponse(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+    ): void {
+    }
+
+    /**
+     * Allow GraphQL to coerce the value of a leaf field.
+     *
+     * @param array<string|int> $responsePath
+     */
+    protected function processLeafFieldValue(
+        string $typeOutputKey,
+        string|int $objectID,
+        LeafField $leafField,
+        mixed $value,
+        array $responsePath,
+    ): mixed {
+        return $value;
+    }
+
+    /**
+     * Allow GraphQL to indicate that the `null` value of a field
+     * must be propagated to its parent object (eg: as the field
+     * is Non-Null).
+     *
+     * @param array<string|int> $responsePath
+     * @param bool $isPropagatedNull Whether the `null` was propagated from a nested object or list item (whose error was already reported)
+     */
+    protected function mustPropagateNullFromField(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+        bool $isPropagatedNull,
+    ): bool {
+        return false;
+    }
+
+    /**
+     * Allow GraphQL to indicate that the `null` item in a list
+     * must be propagated to the list field (eg: as the list items
+     * are Non-Null).
+     *
+     * @param array<string|int> $responsePath
+     * @param bool $hasNullValueItem Whether the field resolved some list item as `null` (instead of the `null` being propagated from the item's object)
+     */
+    protected function mustPropagateNullFromListItem(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+        bool $hasNullValueItem,
+    ): bool {
+        return false;
     }
 
     /**

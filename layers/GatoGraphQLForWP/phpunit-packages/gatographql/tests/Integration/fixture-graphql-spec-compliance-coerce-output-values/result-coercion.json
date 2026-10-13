@@ -1,0 +1,24 @@
+{
+    "data": {
+        "posts": [
+            {
+                "id": "1",
+                "title": "Hello world!",
+                "status": "publish",
+                "commentCount": 0,
+                "author": {
+                    "id": "2"
+                }
+            },
+            {
+                "id": "1113",
+                "title": "Released v0.6, check it out",
+                "status": "publish",
+                "commentCount": 1,
+                "author": {
+                    "id": "3"
+                }
+            }
+        ]
+    }
+}

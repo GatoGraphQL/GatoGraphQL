@@ -7,20 +7,52 @@ namespace PoP\ComponentModel\TypeResolvers\ScalarType;
 use CastToType;
 use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
+use PoP\ComponentModel\TypeResolvers\OutputValueCoercingLeafTypeResolverInterface;
 use stdClass;
+
+use function is_bool;
+use function is_float;
+use function is_int;
+use function is_string;
+use function strtolower;
 
 /**
  * GraphQL Built-in Scalar
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
-class BooleanScalarTypeResolver extends AbstractScalarTypeResolver
+class BooleanScalarTypeResolver extends AbstractScalarTypeResolver implements OutputValueCoercingLeafTypeResolverInterface
 {
     use BuiltInScalarTypeResolverTrait;
 
     public function getTypeName(): string
     {
         return 'Boolean';
+    }
+
+    /**
+     * Fields of type `Boolean` must return a boolean.
+     * Numbers (non-zero is `true`) and the strings
+     * `"true"`, `"false"`, `"1"`, `"0"` and `""` can be coerced.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Boolean.Result-Coercion
+     */
+    public function coerceOutputValue(string|int|float|bool|array|stdClass $serializedValue): string|int|float|bool|null
+    {
+        if (is_bool($serializedValue)) {
+            return $serializedValue;
+        }
+        if (is_int($serializedValue) || is_float($serializedValue)) {
+            return $serializedValue != 0;
+        }
+        if (is_string($serializedValue)) {
+            return match (strtolower($serializedValue)) {
+                'true', '1' => true,
+                'false', '0', '' => false,
+                default => null,
+            };
+        }
+        return null;
     }
 
     public function coerceValue(

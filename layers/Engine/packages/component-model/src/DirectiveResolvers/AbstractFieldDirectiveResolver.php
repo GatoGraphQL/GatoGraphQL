@@ -9,6 +9,7 @@ use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\DirectivePipeline\DirectiveNullabilityValidationServiceInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Directives\DirectiveLocations;
@@ -137,6 +138,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     private ?VersioningServiceInterface $versioningService = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
+    private ?DirectiveNullabilityValidationServiceInterface $directiveNullabilityValidationService = null;
 
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
@@ -191,6 +193,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this->schemaCastingService = $schemaCastingService;
         }
         return $this->schemaCastingService;
+    }
+    final protected function getDirectiveNullabilityValidationService(): DirectiveNullabilityValidationServiceInterface
+    {
+        if ($this->directiveNullabilityValidationService === null) {
+            /** @var DirectiveNullabilityValidationServiceInterface */
+            $directiveNullabilityValidationService = $this->instanceManager->getInstance(DirectiveNullabilityValidationServiceInterface::class);
+            $this->directiveNullabilityValidationService = $directiveNullabilityValidationService;
+        }
+        return $this->directiveNullabilityValidationService;
     }
 
     /**
@@ -1348,6 +1359,17 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
+            $directiveNullabilityValidationService = $this->getDirectiveNullabilityValidationService();
+            $directiveNullabilityValidationSnapshot = $directiveNullabilityValidationService->mustValidateDirectivePipeline()
+                ? $directiveNullabilityValidationService->takeSnapshot(
+                    $relationalTypeResolver,
+                    $idFieldSet,
+                    $idObjects,
+                    $resolvedIDFieldValues,
+                    $engineIterationFeedbackStore,
+                )
+                : null;
+
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
@@ -1435,6 +1457,19 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $astNode ?? $this->directive,
+                    $resolvedIDFieldValues,
+                    $engineIterationFeedbackStore,
+                );
+            }
+
+            if ($directiveNullabilityValidationSnapshot !== null) {
+                $directiveNullabilityValidationService->trackNullabilityViolations(
+                    $directiveNullabilityValidationSnapshot,
+                    $this,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $idFieldSet,
+                    $idObjects,
                     $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
                 );

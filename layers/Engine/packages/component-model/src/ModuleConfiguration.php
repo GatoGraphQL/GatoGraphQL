@@ -115,6 +115,74 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Propagate the `null` from a Non-Null response position
+     * (including a `null` item in a list with Non-Null items)
+     * to its nearest nullable parent, as defined in the GraphQL
+     * spec. If it reaches the root, "data" is `null`.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Handling-Execution-Errors
+     *
+     * Disabled by default, as it modifies the response.
+     */
+    public function propagateNullToNearestNullableParent(): bool
+    {
+        $envVariable = Environment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
+     * Coerce the values of the built-in Scalar types (including
+     * printing ID values as strings) and of Enum types in the
+     * response, as defined in the GraphQL spec, adding an error
+     * when the value cannot be coerced.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Scalars.Result-Coercion-and-Serialization
+     *
+     * Disabled by default, as it modifies the response.
+     */
+    public function coerceOutputValues(): bool
+    {
+        $envVariable = Environment::COERCE_OUTPUT_VALUES;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
+     * Add the response path (as top-level entry "path") to every
+     * execution error, as defined in the GraphQL spec, printing
+     * the error once per response position.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Errors.Error-Result-Format
+     *
+     * Disabled by default, as it modifies the response.
+     */
+    public function addResponsePathToErrors(): bool
+    {
+        $envVariable = Environment::ADD_RESPONSE_PATH_TO_ERRORS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
      * Indicate: If a directive fails, then set those fields in `null`
      * and remove the affected IDs/fields from the upcoming stages
      * of the directive pipeline execution.

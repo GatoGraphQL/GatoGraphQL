@@ -12,6 +12,7 @@ use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\TypeResolvers\AbstractTypeResolver;
+use PoP\ComponentModel\TypeResolvers\OutputValueCoercingLeafTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\Root\App;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
@@ -19,8 +20,11 @@ use BackedEnum;
 use stdClass;
 
 use function array_map;
+use function in_array;
+use function is_int;
+use function is_string;
 
-abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface
+abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements EnumTypeResolverInterface, OutputValueCoercingLeafTypeResolverInterface
 {
     /** @var string[]|null */
     protected ?array $consolidatedEnumValuesCache = null;
@@ -189,6 +193,28 @@ abstract class AbstractEnumTypeResolver extends AbstractTypeResolver implements 
         }
         /** @var string|int|float|bool|stdClass */
         return $scalarValue;
+    }
+
+    /**
+     * Fields of an Enum type must return one of its values
+     * (including the "sensitive" ones, which are hidden from
+     * the schema when it does not expose sensitive data).
+     *
+     * @see https://spec.graphql.org/draft/#sec-Enums.Result-Coercion
+     */
+    public function coerceOutputValue(string|int|float|bool|array|stdClass $serializedValue): string|int|float|bool|null
+    {
+        if (!is_string($serializedValue) && !is_int($serializedValue)) {
+            return null;
+        }
+        $enumValue = (string) $serializedValue;
+        if (
+            !in_array($enumValue, $this->getConsolidatedEnumValues(), true)
+            && !in_array($enumValue, $this->getConsolidatedAdminEnumValues(), true)
+        ) {
+            return null;
+        }
+        return $serializedValue;
     }
 
     /**

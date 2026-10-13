@@ -1,0 +1,12 @@
+query {
+  __type(name: "__EnumValue") {
+    name
+    fields {
+      name
+      type {
+        # The input expects a Boolean, passing a Float
+        name(namespaced: 1.2)
+      }
+    }
+  }
+}

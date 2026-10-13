@@ -13,6 +13,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The "Settings" block in the Schema Configuration now defaults to "Allow access", as the "Settings" module does, so a configuration that never set the behavior allows only its listed options to non-administrators (#3409)
 - Constant classes that hold a set of values are now native PHP enums, under namespace `…\Enums` instead of `…\Constants` (such as `LoggerSeverity`, `Behaviors`, `CommentStatus` and `LicenseStatus`). Code using one of their values as a string must read `->value`, and methods that receive or return those values, such as `LoggerInterface::log()`, now take and return the enum (#3414)
 
+### Added
+
+- Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), and add the response `path` to errors. All of them are disabled by default (#3432)
+
 ### Fixed
 
 - The content of a Custom HTML block (`core/html`) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)

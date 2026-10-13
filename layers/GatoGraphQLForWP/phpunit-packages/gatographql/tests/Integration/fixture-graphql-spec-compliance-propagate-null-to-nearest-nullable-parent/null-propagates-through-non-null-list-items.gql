@@ -1,0 +1,7 @@
+query {
+  # "users" is of type "[User!]!": a null item nulls the list, and then the root
+  users(pagination: { limit: 2 }, sort: { by: ID, order: ASC }) {
+    id
+    postCount(filter: { dateQuery: { before: "Yesterday at noon" } })
+  }
+}
