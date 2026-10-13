@@ -1,0 +1,9 @@
+query {
+  me {
+    id
+  }
+  # The field is non-nullable, and its argument fails
+  posts(pagination: { limit: "Five" }) {
+    id
+  }
+}
