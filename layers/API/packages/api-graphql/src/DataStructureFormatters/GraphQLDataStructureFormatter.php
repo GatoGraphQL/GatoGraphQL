@@ -40,8 +40,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
 
     /**
-     * Set only while formatting the response with
-     * the spec-compliant error handling enabled
+     * Set only while formatting the response with some
+     * GraphQL spec compliance option enabled
      */
     private ?ResponsePositionStore $responsePositionStore = null;
 
@@ -101,8 +101,16 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         /** @var ComponentModelModuleConfiguration */
         $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
         $previousResponsePositionStore = $this->responsePositionStore;
-        $this->responsePositionStore = $componentModelModuleConfiguration->enableSpecCompliantErrorHandling()
-            ? $this->createResponsePositionStore($data)
+        $propagateNullToNearestNullableParent = $componentModelModuleConfiguration->propagateNullToNearestNullableParent();
+        $coerceOutputValues = $componentModelModuleConfiguration->coerceOutputValues();
+        $addResponsePathToErrors = $componentModelModuleConfiguration->addResponsePathToErrors();
+        $this->responsePositionStore = $propagateNullToNearestNullableParent || $coerceOutputValues || $addResponsePathToErrors
+            ? $this->createResponsePositionStore(
+                $data,
+                $propagateNullToNearestNullableParent,
+                $coerceOutputValues,
+                $addResponsePathToErrors,
+            )
             : null;
         try {
             return $this->doGetFormattedData($data);
@@ -164,10 +172,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->responsePositionStore !== null
+            $this->responsePositionStore?->addResponsePathToErrors === true
                 ? $this->reformatSchemaErrorEntriesWithResponsePath($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? [], $this->responsePositionStore)
                 : $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->responsePositionStore !== null
+            $this->responsePositionStore?->addResponsePathToErrors === true
                 ? $this->reformatObjectErrorEntriesWithResponsePath($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? [], $this->responsePositionStore)
                 : $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->responsePositionStore?->getErrorEntries() ?? [],
@@ -197,13 +205,22 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     /**
      * @param array<string,mixed> $data
      */
-    protected function createResponsePositionStore(array $data): ResponsePositionStore
-    {
+    protected function createResponsePositionStore(
+        array $data,
+        bool $propagateNullToNearestNullableParent,
+        bool $coerceOutputValues,
+        bool $addResponsePathToErrors,
+    ): ResponsePositionStore {
         $objectTypeResolvers = [];
         foreach ($this->getTypeRegistry()->getObjectTypeResolvers() as $objectTypeResolver) {
             $objectTypeResolvers[$objectTypeResolver->getTypeOutputKey()] = $objectTypeResolver;
         }
-        $responsePositionStore = new ResponsePositionStore($objectTypeResolvers);
+        $responsePositionStore = new ResponsePositionStore(
+            $objectTypeResolvers,
+            $propagateNullToNearestNullableParent,
+            $coerceOutputValues,
+            $addResponsePathToErrors,
+        );
 
         /** @var array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> */
         $objectErrorEntries = $data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? [];
@@ -388,9 +405,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             return $value;
         }
         $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($leafField);
-        $outputValueCoercingLeafTypeResolver = $fieldTypeResolver instanceof OutputValueCoercingLeafTypeResolverInterface
+        $outputValueCoercingLeafTypeResolver = $this->responsePositionStore->coerceOutputValues && $fieldTypeResolver instanceof OutputValueCoercingLeafTypeResolverInterface
             ? $fieldTypeResolver
             : null;
+        $propagateNullToNearestNullableParent = $this->responsePositionStore->propagateNullToNearestNullableParent;
+        if ($outputValueCoercingLeafTypeResolver === null && !$propagateNullToNearestNullableParent) {
+            return $value;
+        }
 
         $fieldIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
         $fieldIsArray = $fieldIsArrayOfArrays || ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
@@ -430,7 +451,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                 $arrayItem[$innerKey] = $this->coerceLeafValue($typeOutputKey, $objectID, $leafField, $innerArrayItem, $outputValueCoercingLeafTypeResolver, [...$arrayItemResponsePath, $innerKey]);
             }
             if (
-                $outputValueNullabilityService->hasNonNullableArrayOfArraysItems($fieldTypeModifiers)
+                $propagateNullToNearestNullableParent
+                && $outputValueNullabilityService->hasNonNullableArrayOfArraysItems($fieldTypeModifiers)
                 && in_array(null, $arrayItem, true)
             ) {
                 $this->maybeAddNullabilityError($typeOutputKey, $objectID, $leafField, FieldResolutionErrorFeedbackItemProvider::E9, $arrayItemResponsePath);
@@ -441,7 +463,8 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         }
 
         if (
-            $outputValueNullabilityService->hasNonNullableArrayItems($fieldTypeModifiers)
+            $propagateNullToNearestNullableParent
+            && $outputValueNullabilityService->hasNonNullableArrayItems($fieldTypeModifiers)
             && in_array(null, $value, true)
         ) {
             $this->maybeAddNullabilityError($typeOutputKey, $objectID, $leafField, FieldResolutionErrorFeedbackItemProvider::E6, $responsePath);
@@ -565,11 +588,11 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             [$objectID],
         );
         $item[Tokens::FIELD] = $field->asASTNodeString();
+        $entry = $this->getObjectEntry($typeOutputKey, $item);
         $this->responsePositionStore->addErrorEntry(
-            $this->addResponsePathToEntry(
-                $this->getObjectEntry($typeOutputKey, $item),
-                $responsePath,
-            )
+            $this->responsePositionStore->addResponsePathToErrors
+                ? $this->addResponsePathToEntry($entry, $responsePath)
+                : $entry
         );
         $this->responsePositionStore->addErroredObjectField($typeOutputKey, $objectID, $field);
     }
@@ -584,7 +607,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         array $responsePath,
         bool $isPropagatedNull,
     ): bool {
-        if ($this->responsePositionStore === null) {
+        if ($this->responsePositionStore?->propagateNullToNearestNullableParent !== true) {
             return false;
         }
         $fieldTypeModifiers = $this->responsePositionStore->getObjectTypeResolver($typeOutputKey)?->getFieldTypeModifiers($field);
@@ -610,7 +633,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         array $responsePath,
         bool $hasNullValueItem,
     ): bool {
-        if ($this->responsePositionStore === null) {
+        if ($this->responsePositionStore?->propagateNullToNearestNullableParent !== true) {
             return false;
         }
         $fieldTypeModifiers = $this->responsePositionStore->getObjectTypeResolver($typeOutputKey)?->getFieldTypeModifiers($field);

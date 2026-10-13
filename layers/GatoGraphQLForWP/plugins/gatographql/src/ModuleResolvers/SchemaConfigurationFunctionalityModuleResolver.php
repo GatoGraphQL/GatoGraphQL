@@ -32,13 +32,16 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
-    public final const SPEC_COMPLIANT_ERROR_HANDLING = Plugin::NAMESPACE . '\spec-compliant-error-handling';
+    public final const GRAPHQL_SPEC_COMPLIANCE = Plugin::NAMESPACE . '\graphql-spec-compliance';
 
     /**
      * Setting options
      */
     public final const OPTION_DEFAULT_SCHEMA_EXPOSURE = 'default-schema-exposure';
     public final const OPTION_USE_PAYLOADABLE_MUTATIONS_DEFAULT_VALUE = 'use-payloadable-mutations-default-value';
+    public final const OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT = 'propagate-null-to-nearest-nullable-parent';
+    public final const OPTION_COERCE_OUTPUT_VALUES = 'coerce-output-values';
+    public final const OPTION_ADD_RESPONSE_PATH_TO_ERRORS = 'add-response-path-to-errors';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -64,7 +67,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::MUTATIONS,
             self::NESTED_MUTATIONS,
             self::SCHEMA_SELF_FIELDS,
-            self::SPEC_COMPLIANT_ERROR_HANDLING,
+            self::GRAPHQL_SPEC_COMPLIANCE,
             self::GLOBAL_ID_FIELD,
             self::SCHEMA_NAMESPACING,
             self::GLOBAL_FIELDS,
@@ -103,7 +106,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'gatographql'),
             self::SCHEMA_SELF_FIELDS => \__('Self Fields', 'gatographql'),
             self::GLOBAL_ID_FIELD => \__('Global ID Field', 'gatographql'),
-            self::SPEC_COMPLIANT_ERROR_HANDLING => \__('Spec-Compliant Error Handling', 'gatographql'),
+            self::GRAPHQL_SPEC_COMPLIANCE => \__('GraphQL Spec Compliance', 'gatographql'),
             default => $module,
         };
     }
@@ -122,7 +125,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'gatographql'),
             self::SCHEMA_SELF_FIELDS => \__('Expose "self" fields in the schema', 'gatographql'),
             self::GLOBAL_ID_FIELD => \__('Uniquely identify objects via field <code>globalID</code> on all types of the GraphQL schema', 'gatographql'),
-            self::SPEC_COMPLIANT_ERROR_HANDLING => \__('Handle errors in the response as the GraphQL spec defines: a <code>null</code> in a non-null field is passed up to its nearest nullable parent, scalar and enum values are validated, and every error indicates its path in the response', 'gatographql'),
+            self::GRAPHQL_SPEC_COMPLIANCE => \__('Follow the GraphQL spec where Gato GraphQL behaves differently by default: pass a <code>null</code> in a non-null field up to its nearest nullable parent, coerce the scalar and enum values, and add the response path to errors', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -192,8 +195,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
             ],
-            self::SPEC_COMPLIANT_ERROR_HANDLING => [
-                ModuleSettingOptions::DEFAULT_VALUE => false,
+            self::GRAPHQL_SPEC_COMPLIANCE => [
+                self::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
+                self::OPTION_COERCE_OUTPUT_VALUES => false,
+                self::OPTION_ADD_RESPONSE_PATH_TO_ERRORS => false,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -417,25 +422,42 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
-        } elseif ($module === self::SPEC_COMPLIANT_ERROR_HANDLING) {
-            $option = ModuleSettingOptions::DEFAULT_VALUE;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => \__('Handle errors as in the GraphQL spec?', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('When a non-null field has an error, pass the <code>null</code> up to its nearest nullable parent (or to <code>data</code>), validate the values of scalars and enums (such as an <code>Int</code> being a 32-bit integer, or an <code>ID</code> being a string), and add the response <code>path</code> to every error. Disabled by default, as it changes the shape of the response.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
-                    $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/using-spec-compliant-error-handling',
-                        \__('Using spec-compliant error handling', 'gatographql')
-                    )
-                ),
-                Properties::TYPE => Properties::TYPE_BOOL,
+        } elseif ($module === self::GRAPHQL_SPEC_COMPLIANCE) {
+            $helpLinkHTML = $this->getSettingsItemHelpLinkHTML(
+                'https://gatographql.com/guides/schema/using-graphql-spec-compliance',
+                \__('Using GraphQL spec compliance', 'gatographql')
+            );
+            $options = [
+                self::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => [
+                    \__('Pass a null up to the nearest nullable parent?', 'gatographql'),
+                    \__('When a non-null field (or an item in a list with non-null items) is <code>null</code>, pass the <code>null</code> up to its nearest nullable parent (or to <code>data</code>), as the GraphQL spec defines. By default, the field is printed as <code>null</code>.', 'gatographql'),
+                ],
+                self::OPTION_COERCE_OUTPUT_VALUES => [
+                    \__('Coerce scalar and enum values?', 'gatographql'),
+                    \__('Coerce the values of the built-in scalars and of enums to their type, as the GraphQL spec defines (eg: an <code>ID</code> is printed as a string, such as <code>"1"</code>), adding an error when the value cannot be coerced. By default, the values are printed as they are (eg: an <code>ID</code> is printed as <code>1</code>).', 'gatographql'),
+                ],
+                self::OPTION_ADD_RESPONSE_PATH_TO_ERRORS => [
+                    \__('Add the response path to errors?', 'gatographql'),
+                    \__('Add entry <code>path</code> to every error, with its position in the response (eg: <code>["posts", 1, "title"]</code>), as the GraphQL spec defines. Then an error that happens in several positions is printed once for each of them. Gato GraphQL always prints the path of the error in the query, under <code>extensions.path</code>.', 'gatographql'),
+                ],
             ];
+            foreach ($options as $option => [$title, $description]) {
+                $moduleSettings[] = [
+                    Properties::INPUT => $option,
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        $option
+                    ),
+                    Properties::TITLE => $title,
+                    Properties::DESCRIPTION => sprintf(
+                        '%s<br/>%s<br/><span class="more-info">%s</span>',
+                        $description,
+                        $defaultValueDesc,
+                        $helpLinkHTML
+                    ),
+                    Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+            }
         }
         return $moduleSettings;
     }

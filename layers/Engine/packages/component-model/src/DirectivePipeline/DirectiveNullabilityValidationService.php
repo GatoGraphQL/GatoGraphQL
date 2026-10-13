@@ -68,7 +68,7 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
-        if (!$moduleConfiguration->enableSpecCompliantErrorHandling()) {
+        if (!$moduleConfiguration->propagateNullToNearestNullableParent()) {
             return false;
         }
         return App::getState('directive-pipeline-depth') === 1;

@@ -37,6 +37,9 @@ final class ResponsePositionStore
      */
     public function __construct(
         private readonly array $objectTypeResolvers,
+        public readonly bool $propagateNullToNearestNullableParent,
+        public readonly bool $coerceOutputValues,
+        public readonly bool $addResponsePathToErrors,
     ) {
     }
 

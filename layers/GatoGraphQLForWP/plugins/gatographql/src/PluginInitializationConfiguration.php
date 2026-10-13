@@ -274,12 +274,26 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
-            // Handle errors as in the GraphQL spec?
+            // Pass a null up to the nearest nullable parent, as in the GraphQL spec?
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING,
-                'module' => SchemaConfigurationFunctionalityModuleResolver::SPEC_COMPLIANT_ERROR_HANDLING,
-                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+                'envVariable' => ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GRAPHQL_SPEC_COMPLIANCE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT,
+            ],
+            // Coerce scalar and enum values, as in the GraphQL spec?
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::COERCE_OUTPUT_VALUES,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GRAPHQL_SPEC_COMPLIANCE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_COERCE_OUTPUT_VALUES,
+            ],
+            // Add the response path to errors, as in the GraphQL spec?
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GRAPHQL_SPEC_COMPLIANCE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_ADD_RESPONSE_PATH_TO_ERRORS,
             ],
             // Expose global fields?
             [
@@ -975,7 +989,15 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             ],
             [
                 'class' => ComponentModelModule::class,
-                'envVariable' => ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING,
+                'envVariable' => ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT,
+            ],
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::COERCE_OUTPUT_VALUES,
+            ],
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS,
             ],
         ];
     }
@@ -1053,11 +1075,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
          * The internal GraphQL server receives the configuration
          * of the default admin endpoint. Its responses are processed
          * by the plugin and its extensions, which expect the shape
-         * of the response that does not follow the spec-compliant
-         * error handling, so never enable it there.
+         * of the response that does not follow the GraphQL spec
+         * compliance options, so never enable them there.
          */
         if (AppHelpers::isInternalGraphQLServerAppThread()) {
-            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING] = false;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT] = false;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::COERCE_OUTPUT_VALUES] = false;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS] = false;
         }
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
             /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
@@ -1075,8 +1099,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
                         // Enable the “sensitive” data
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
-                        // The plugin's own clients expect the non spec-compliant error handling
-                        ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING => false,
+                        // The plugin's own clients expect the response without the GraphQL spec compliance options
+                        ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
+                        ComponentModelEnvironment::COERCE_OUTPUT_VALUES => false,
+                        ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS => false,
                     ],
                     GraphQLServerModule::class => [
                         // Expose global fields
@@ -1138,8 +1164,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
                         // Enable the “sensitive” data
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
-                        // The plugin's own clients expect the non spec-compliant error handling
-                        ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING => false,
+                        // The plugin's own clients expect the response without the GraphQL spec compliance options
+                        ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
+                        ComponentModelEnvironment::COERCE_OUTPUT_VALUES => false,
+                        ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS => false,
                     ],
                     GraphQLParserModule::class => [
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => true,

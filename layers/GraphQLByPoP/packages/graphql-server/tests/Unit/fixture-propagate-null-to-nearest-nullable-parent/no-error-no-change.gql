@@ -1,0 +1,9 @@
+query {
+  __type(name: "__EnumValue") {
+    name
+    kind
+    fields {
+      name
+    }
+  }
+}

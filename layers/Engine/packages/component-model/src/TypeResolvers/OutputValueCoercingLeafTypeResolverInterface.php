@@ -9,7 +9,7 @@ use stdClass;
 /**
  * Scalar and Enum types that coerce their values in the response,
  * as defined in the GraphQL spec (eg: an `Int` must be a 32-bit
- * integer). Applied only when the spec-compliant error handling
+ * integer). Applied only when the coercion of output values
  * is enabled.
  *
  * @see https://spec.graphql.org/draft/#CoerceResult()
