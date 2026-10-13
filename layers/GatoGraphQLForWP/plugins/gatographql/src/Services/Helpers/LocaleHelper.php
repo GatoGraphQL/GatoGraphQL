@@ -41,9 +41,11 @@ class LocaleHelper
         $languages = [];
         $mainPlugin = PluginApp::getMainPlugin();
         // The .l10n.php files are named "<plugin-file-basename>-<locale>.l10n.php" (matching
-        // the text-domain loading wiring in the plugin entry file).
-        $prefix = basename($mainPlugin->getPluginFile(), '.php') . '-';
-        $languagesDir = $mainPlugin->getPluginDir() . '/languages/';
+        // the text-domain loading wiring in the plugin entry file), next to the plugin
+        // file: in a bundle, the plugin dir is the embedded Gato GraphQL instead.
+        $pluginFile = $mainPlugin->getPluginFile();
+        $prefix = basename($pluginFile, '.php') . '-';
+        $languagesDir = dirname($pluginFile) . '/languages/';
         foreach (glob($languagesDir . $prefix . '*.l10n.php') ?: [] as $translationFile) {
             // "gatographql-es_ES.l10n.php" => locale "es_ES" => language "es"
             $locale = substr(basename($translationFile), strlen($prefix), -strlen('.l10n.php'));
