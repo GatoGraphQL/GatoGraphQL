@@ -239,6 +239,17 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         };
     }
 
+    /**
+     * @see https://spec.graphql.org/September2025/#sec-The-__Type-Type
+     */
+    public function getFieldArgTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName, string $fieldArgName): int
+    {
+        return match ($fieldArgName) {
+            'includeDeprecated' => SchemaTypeModifiers::MANDATORY,
+            default => parent::getFieldArgTypeModifiers($objectTypeResolver, $fieldName, $fieldArgName),
+        };
+    }
+
     public function resolveValue(
         ObjectTypeResolverInterface $objectTypeResolver,
         object $object,
@@ -251,6 +262,16 @@ class TypeObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
             case 'kind':
                 return $type->getKind();
             case 'name':
+                /**
+                 * From GraphQL spec: LIST and NON_NULL types "must return null"
+                 * for `name`, as they are wrapping types
+                 *
+                 * @see https://spec.graphql.org/September2025/#sec-List
+                 * @see https://spec.graphql.org/September2025/#sec-Non-Null
+                 */
+                if ($type instanceof WrappingTypeInterface) {
+                    return null;
+                }
                 return $type->getName();
             case 'description':
                 return $type->getDescription();
