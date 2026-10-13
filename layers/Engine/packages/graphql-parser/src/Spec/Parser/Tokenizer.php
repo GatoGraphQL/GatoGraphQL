@@ -13,6 +13,14 @@ class Tokenizer
 {
     use StandaloneServiceTrait;
 
+    /**
+     * The Unicode Byte Order Mark (U+FEFF) encoded in UTF-8,
+     * which is ignored like whitespace
+     *
+     * @see https://spec.graphql.org/September2025/#UnicodeBOM
+     */
+    public final const UNICODE_BOM = "\xEF\xBB\xBF";
+
     protected string $source;
     protected int $pos = 0;
     protected int $line = 1;
@@ -47,6 +55,9 @@ class Tokenizer
             $ch = $this->source[$this->pos];
             if ($ch === ' ' || $ch === "\t" || $ch === ',') {
                 $this->pos++;
+            } elseif ($ch === self::UNICODE_BOM[0] && substr($this->source, $this->pos, 3) === self::UNICODE_BOM) {
+                $this->pos += 3;
+                $this->lineStart += 3;
             } elseif ($ch === '#') {
                 $this->pos++;
                 while (
@@ -357,22 +368,11 @@ class Tokenizer
                     case 'r':
                         $ch = "\r";
                         break;
+                    case 't':
+                        $ch = "\t";
+                        break;
                     case 'u':
-                        $codepoint = substr($this->source, $this->pos + 1, 4);
-                        if (!preg_match('/[0-9A-Fa-f]{4}/', $codepoint)) {
-                            throw new SyntaxErrorParserException(
-                                new FeedbackItemResolution(
-                                    GraphQLParserErrorFeedbackItemProvider::class,
-                                    GraphQLParserErrorFeedbackItemProvider::E_3,
-                                    [
-                                        $codepoint,
-                                    ]
-                                ),
-                                $this->getLocation()
-                            );
-                        }
-                        $ch = html_entity_decode("&#x{$codepoint};", ENT_QUOTES, 'UTF-8');
-                        $this->pos += 4;
+                        $ch = $this->scanEscapedUnicode();
                         break;
                     default:
                         throw new SyntaxErrorParserException(
@@ -398,6 +398,109 @@ class Tokenizer
         }
 
         throw $this->createUnexpectedTokenTypeException(Token::TYPE_END);
+    }
+
+    /**
+     * Scan an escaped unicode sequence, in either form:
+     *
+     *   - Fixed-width: `A`, also as a surrogate pair (`😀`)
+     *   - Braced: `\u{1F600}`
+     *
+     * The position must be on the "u" char, and is left on
+     * the last char of the sequence.
+     *
+     * @throws SyntaxErrorParserException
+     * @see https://spec.graphql.org/September2025/#EscapedUnicode
+     */
+    protected function scanEscapedUnicode(): string
+    {
+        $sequenceStartPos = $this->pos;
+        [$codePoint, $isBraced] = $this->scanEscapedUnicodeCodePoint();
+
+        if ($codePoint >= 0xD800 && $codePoint <= 0xDFFF) {
+            $isLeadingSurrogate = $codePoint <= 0xDBFF;
+            if ($isBraced || !$isLeadingSurrogate || substr($this->source, $this->pos + 1, 2) !== '\\u') {
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            }
+            $this->pos += 2;
+            [$trailingCodePoint, $isTrailingBraced] = $this->scanEscapedUnicodeCodePoint();
+            if ($isTrailingBraced || $trailingCodePoint < 0xDC00 || $trailingCodePoint > 0xDFFF) {
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            }
+            $codePoint = 0x10000 + (($codePoint - 0xD800) << 10) + ($trailingCodePoint - 0xDC00);
+        }
+
+        return $this->encodeCodePointAsUTF8($codePoint);
+    }
+
+    /**
+     * @return array{0:int,1:bool} The code point, and if it is in the braced form
+     * @throws SyntaxErrorParserException
+     */
+    protected function scanEscapedUnicodeCodePoint(): array
+    {
+        $sequenceStartPos = $this->pos;
+        if (($this->source[$this->pos + 1] ?? '') === '{') {
+            $closingBracePos = strpos($this->source, '}', $this->pos + 2);
+            if ($closingBracePos === false) {
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            }
+            $hexDigits = substr($this->source, $this->pos + 2, $closingBracePos - $this->pos - 2);
+            if (!preg_match('/^[0-9A-Fa-f]+$/', $hexDigits) || strlen(ltrim($hexDigits, '0')) > 6) {
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            }
+            $codePoint = (int) hexdec($hexDigits);
+            if ($codePoint > 0x10FFFF) {
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            }
+            $this->pos = $closingBracePos;
+            return [$codePoint, true];
+        }
+
+        $hexDigits = substr($this->source, $this->pos + 1, 4);
+        if (!preg_match('/^[0-9A-Fa-f]{4}$/', $hexDigits)) {
+            throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+        }
+        $this->pos += 4;
+        return [(int) hexdec($hexDigits), false];
+    }
+
+    /**
+     * @param int $sequenceStartPos Position of the "u" char
+     */
+    protected function createInvalidEscapedUnicodeException(int $sequenceStartPos): SyntaxErrorParserException
+    {
+        $sequence = substr($this->source, $sequenceStartPos + 1, max(4, $this->pos - $sequenceStartPos));
+        return new SyntaxErrorParserException(
+            new FeedbackItemResolution(
+                GraphQLParserErrorFeedbackItemProvider::class,
+                GraphQLParserErrorFeedbackItemProvider::E_3,
+                [
+                    $sequence,
+                ]
+            ),
+            $this->getLocation()
+        );
+    }
+
+    protected function encodeCodePointAsUTF8(int $codePoint): string
+    {
+        if ($codePoint < 0x80) {
+            return chr($codePoint);
+        }
+        if ($codePoint < 0x800) {
+            return chr(0xC0 | ($codePoint >> 6))
+                . chr(0x80 | ($codePoint & 0x3F));
+        }
+        if ($codePoint < 0x10000) {
+            return chr(0xE0 | ($codePoint >> 12))
+                . chr(0x80 | (($codePoint >> 6) & 0x3F))
+                . chr(0x80 | ($codePoint & 0x3F));
+        }
+        return chr(0xF0 | ($codePoint >> 18))
+            . chr(0x80 | (($codePoint >> 12) & 0x3F))
+            . chr(0x80 | (($codePoint >> 6) & 0x3F))
+            . chr(0x80 | ($codePoint & 0x3F));
     }
 
     protected function end(): bool

@@ -286,6 +286,20 @@ class Document implements DocumentInterface
     }
 
     /**
+     * Indicate if the Fragment is referenced within the Operation,
+     * either directly or via other Fragments.
+     */
+    public function isFragmentReferencedInOperation(Fragment $fragment, OperationInterface $operation): bool
+    {
+        foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
+            if ($fragmentReference->getName() === $fragment->getName()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gather all the FragmentReference within the Operation.
      *
      * @return FragmentReference[]

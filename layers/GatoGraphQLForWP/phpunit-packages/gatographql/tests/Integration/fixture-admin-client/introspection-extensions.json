@@ -16955,6 +16955,14 @@
                     },
                     "fields": [
                         {
+                            "name": "description",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "directives",
                             "extensions": {
                                 "isMutation": false,
@@ -24650,132 +24658,6 @@
                     ]
                 },
                 {
-                    "name": "DirectiveLocation",
-                    "extensions": {
-                        "elementName": "DirectiveLocation",
-                        "namespacedName": "DirectiveLocation",
-                        "possibleValues": null
-                    },
-                    "fields": null,
-                    "inputFields": null,
-                    "enumValues": [
-                        {
-                            "name": "ARGUMENT_DEFINITION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "ENUM",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "ENUM_VALUE",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "FIELD",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "FIELD_DEFINITION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "FRAGMENT_DEFINITION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "FRAGMENT_SPREAD",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INLINE_FRAGMENT",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INPUT_FIELD_DEFINITION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INPUT_OBJECT",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INTERFACE",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "MUTATION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "OBJECT",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "QUERY",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "SCALAR",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "SCHEMA",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "SUBSCRIPTION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "UNION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "VARIABLE_DEFINITION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ]
-                },
-                {
                     "name": "FilterCustomPostStatusEnum",
                     "extensions": {
                         "elementName": "FilterCustomPostStatusEnum",
@@ -25346,66 +25228,6 @@
                     ]
                 },
                 {
-                    "name": "TypeKind",
-                    "extensions": {
-                        "elementName": "TypeKind",
-                        "namespacedName": "TypeKind",
-                        "possibleValues": null
-                    },
-                    "fields": null,
-                    "inputFields": null,
-                    "enumValues": [
-                        {
-                            "name": "ENUM",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INPUT_OBJECT",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "INTERFACE",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "LIST",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "NON_NULL",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "OBJECT",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "SCALAR",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        },
-                        {
-                            "name": "UNION",
-                            "extensions": {
-                                "isSensitiveDataElement": false
-                            }
-                        }
-                    ]
-                },
-                {
                     "name": "UserOrderByEnum",
                     "extensions": {
                         "elementName": "UserOrderByEnum",
@@ -25477,6 +25299,192 @@
                         },
                         {
                             "name": "WEBSITE_URL",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__DirectiveLocation",
+                    "extensions": {
+                        "elementName": "__DirectiveLocation",
+                        "namespacedName": "__DirectiveLocation",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": [
+                        {
+                            "name": "ARGUMENT_DEFINITION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ENUM",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "ENUM_VALUE",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "FIELD",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "FIELD_DEFINITION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "FRAGMENT_DEFINITION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "FRAGMENT_SPREAD",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INLINE_FRAGMENT",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INPUT_FIELD_DEFINITION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INPUT_OBJECT",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INTERFACE",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "MUTATION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "OBJECT",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "QUERY",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "SCALAR",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "SCHEMA",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "SUBSCRIPTION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "UNION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "VARIABLE_DEFINITION",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "__TypeKind",
+                    "extensions": {
+                        "elementName": "__TypeKind",
+                        "namespacedName": "__TypeKind",
+                        "possibleValues": null
+                    },
+                    "fields": null,
+                    "inputFields": null,
+                    "enumValues": [
+                        {
+                            "name": "ENUM",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INPUT_OBJECT",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "INTERFACE",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "LIST",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "NON_NULL",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "OBJECT",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "SCALAR",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "UNION",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
