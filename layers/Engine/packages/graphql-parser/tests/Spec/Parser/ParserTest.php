@@ -155,6 +155,53 @@ GRAPHQL;
         );
     }
 
+    public function testEscapedTabAndUnicodeStrings(): void
+    {
+        $this->assertSame("a\tb", $this->tokenizeStringContents("a\\tb")->getData());
+        $this->assertSame('A', $this->tokenizeStringContents("\\u{41}")->getData());
+        $this->assertSame('A', $this->tokenizeStringContents("\\u{0000041}")->getData());
+        $this->assertSame("\u{1F600}", $this->tokenizeStringContents("\\u{1F600}")->getData());
+        $this->assertSame("\u{10FFFF}", $this->tokenizeStringContents("\\u{10FFFF}")->getData());
+        $this->assertSame("a\u{1F600}b", $this->tokenizeStringContents("a\\uD83D\\uDE00b")->getData());
+        $this->assertSame("\u{E9}", $this->tokenizeStringContents("\\u00E9")->getData());
+    }
+
+    #[DataProvider('invalidEscapedUnicodeProvider')]
+    public function testInvalidEscapedUnicode(string $graphQLString): void
+    {
+        $this->expectException(SyntaxErrorParserException::class);
+        $this->tokenizeStringContents($graphQLString);
+    }
+
+    /**
+     * @return array<string,string[]>
+     */
+    public static function invalidEscapedUnicodeProvider(): array
+    {
+        return [
+            'lone-leading-surrogate' => ["\\uD83D"],
+            'lone-leading-surrogate-followed-by-text' => ["\\uD83Dabc"],
+            'lone-trailing-surrogate' => ["\\uDE00"],
+            'leading-surrogate-and-non-surrogate' => ["\\uD83D\\u0041"],
+            'braced-surrogate' => ["\\u{D83D}"],
+            'braced-leading-and-fixed-trailing-surrogates' => ["\\u{D83D}\\uDE00"],
+            'out-of-range' => ["\\u{110000}"],
+            'empty-braces' => ["\\u{}"],
+            'unclosed-braces' => ["\\u{1F600"],
+            'non-hex-braced' => ["\\u{XYZ}"],
+            'short-fixed-width' => ["\\u12"],
+        ];
+    }
+
+    public function testUnicodeBOMIsIgnored(): void
+    {
+        $parser = $this->getParser();
+        $this->assertEquals(
+            $parser->parse('{ foo }'),
+            $parser->parse(Tokenizer::UNICODE_BOM . '{ foo }')
+        );
+    }
+
     #[DataProvider('wrongQueriesProvider')]
     public function testWrongQueries(string $query): void
     {
