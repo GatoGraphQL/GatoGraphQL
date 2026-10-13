@@ -62,7 +62,7 @@ abstract class AbstractDirectiveNullabilityValidationTestCase extends AbstractTe
             $appStateManager->override('directive-pipeline-depth', $depth);
             $this->assertSame(
                 $expected,
-                $directiveNullabilityValidationService->mustValidateDirectivePipelineStage(),
+                $directiveNullabilityValidationService->mustValidateDirectivePipeline(),
                 sprintf('Directive pipeline depth %s', $depth)
             );
         }

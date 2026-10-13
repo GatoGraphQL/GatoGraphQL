@@ -7,6 +7,7 @@ namespace PoP\ComponentModel\DirectivePipeline;
 use PoP\ComponentModel\DirectiveResolvers\FieldDirectiveResolverInterface;
 use League\Pipeline\PipelineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessProviderInterface;
 use PoP\ComponentModel\TypeResolvers\RelationalTypeResolverInterface;
@@ -47,6 +48,12 @@ class DirectivePipelineDecorator
         /** @var int */
         $directivePipelineDepth = App::getState('directive-pipeline-depth');
         $appStateManager->override('directive-pipeline-depth', $directivePipelineDepth + 1);
+        /** @var DirectiveNullabilityValidationServiceInterface */
+        $directiveNullabilityValidationService = InstanceManagerFacade::getInstance()->getInstance(DirectiveNullabilityValidationServiceInterface::class);
+        $mustValidateDirectivePipeline = $directiveNullabilityValidationService->mustValidateDirectivePipeline();
+        if ($mustValidateDirectivePipeline) {
+            $directiveNullabilityValidationService->startDirectivePipeline($engineIterationFeedbackStore);
+        }
         try {
             $this->doResolveDirectivePipeline(
                 $relationalTypeResolver,
@@ -61,6 +68,14 @@ class DirectivePipelineDecorator
                 $engineIterationFeedbackStore,
             );
         } finally {
+            if ($mustValidateDirectivePipeline) {
+                $directiveNullabilityValidationService->endDirectivePipeline(
+                    $relationalTypeResolver,
+                    $idObjects,
+                    $resolvedIDFieldValues,
+                    $engineIterationFeedbackStore,
+                );
+            }
             $appStateManager->override('directive-pipeline-depth', $directivePipelineDepth);
         }
     }

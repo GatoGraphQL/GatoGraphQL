@@ -1360,7 +1360,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
             $directiveNullabilityValidationService = $this->getDirectiveNullabilityValidationService();
-            $directiveNullabilityValidationSnapshot = $directiveNullabilityValidationService->mustValidateDirectivePipelineStage()
+            $directiveNullabilityValidationSnapshot = $directiveNullabilityValidationService->mustValidateDirectivePipeline()
                 ? $directiveNullabilityValidationService->takeSnapshot(
                     $relationalTypeResolver,
                     $idFieldSet,
@@ -1463,7 +1463,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             }
 
             if ($directiveNullabilityValidationSnapshot !== null) {
-                $directiveNullabilityValidationService->validate(
+                $directiveNullabilityValidationService->trackNullabilityViolations(
                     $directiveNullabilityValidationSnapshot,
                     $this,
                     $this->directive,

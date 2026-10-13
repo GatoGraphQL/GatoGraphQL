@@ -25,11 +25,21 @@ use PoP\Root\Services\AbstractBasicService;
 use SplObjectStorage;
 
 use function array_key_exists;
+use function array_key_last;
+use function array_pop;
 use function array_slice;
 use function spl_object_id;
 
 class DirectiveNullabilityValidationService extends AbstractBasicService implements DirectiveNullabilityValidationServiceInterface
 {
+    /**
+     * A stack, as a directive pipeline started by the engine
+     * could (in theory) resolve another one.
+     *
+     * @var DirectiveNullabilityValidationContext[]
+     */
+    private array $contexts = [];
+
     private ?OutputValueNullabilityServiceInterface $outputValueNullabilityService = null;
 
     final protected function getOutputValueNullabilityService(): OutputValueNullabilityServiceInterface
@@ -50,8 +60,11 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
      * (not on the field itself), so they must not be validated against the
      * field's type. Instead, the field is validated when the meta directive's
      * stage finishes, after it has composed the field's value back.
+     *
+     * The violations are reported once the whole pipeline has been executed,
+     * as a later directive may still replace the `null` (eg: `@default`).
      */
-    public function mustValidateDirectivePipelineStage(): bool
+    public function mustValidateDirectivePipeline(): bool
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
@@ -98,12 +111,21 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
         );
     }
 
+    public function startDirectivePipeline(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
+        $this->contexts[] = new DirectiveNullabilityValidationContext(
+            $engineIterationFeedbackStore->objectResolutionFeedbackStore->getErrorCount(),
+            $engineIterationFeedbackStore->schemaFeedbackStore->getErrorCount(),
+        );
+    }
+
     /**
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      * @param array<string|int,object> $idObjects
      * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
      */
-    public function validate(
+    public function trackNullabilityViolations(
         DirectiveNullabilityValidationSnapshot $snapshot,
         FieldDirectiveResolverInterface $fieldDirectiveResolver,
         Directive $directive,
@@ -113,31 +135,15 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
         array $resolvedIDFieldValues,
         EngineIterationFeedbackStore $engineIterationFeedbackStore,
     ): void {
-        $objectResolutionFeedbackStore = $engineIterationFeedbackStore->objectResolutionFeedbackStore;
-        $schemaFeedbackStore = $engineIterationFeedbackStore->schemaFeedbackStore;
-
-        /**
-         * The errors are only ever appended to the stores, so
-         * those added by this stage are the ones after the snapshot.
-         *
-         * @var array<string|int,array<int,true>>
-         */
-        $erroredIDFields = [];
-        foreach (array_slice($objectResolutionFeedbackStore->getErrors(), $snapshot->objectErrorCount) as $objectError) {
-            foreach ($objectError->getIDFieldSet() as $id => $fieldSet) {
-                foreach ($fieldSet->fields as $field) {
-                    $erroredIDFields[$id][spl_object_id($field)] = true;
-                }
-            }
+        $context = $this->contexts[array_key_last($this->contexts) ?? -1] ?? null;
+        if ($context === null) {
+            return;
         }
-        /** @var array<int,true> */
-        $erroredFields = [];
-        foreach (array_slice($schemaFeedbackStore->getErrors(), $snapshot->schemaErrorCount) as $schemaError) {
-            foreach ($schemaError->getFields() as $field) {
-                $erroredFields[spl_object_id($field)] = true;
-            }
-        }
-
+        [$erroredIDFields, $erroredFields] = $this->getErroredIDFields(
+            $engineIterationFeedbackStore,
+            $snapshot->objectErrorCount,
+            $snapshot->schemaErrorCount,
+        );
         $isMetaDirective = $fieldDirectiveResolver instanceof MetaFieldDirectiveResolverInterface;
         foreach ($idFieldSet as $id => $fieldSet) {
             $objectTypeResolver = $this->getObjectTypeResolver($relationalTypeResolver, $idObjects, $id);
@@ -145,11 +151,14 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
                 continue;
             }
             foreach ($fieldSet->fields as $field) {
-                if (!isset($resolvedIDFieldValues[$id]) || !$resolvedIDFieldValues[$id]->offsetExists($field)) {
-                    continue;
-                }
                 $fieldID = spl_object_id($field);
-                if (isset($erroredFields[$fieldID]) || isset($erroredIDFields[$id][$fieldID])) {
+                if (
+                    isset($erroredFields[$fieldID])
+                    || isset($erroredIDFields[$id][$fieldID])
+                    || !isset($resolvedIDFieldValues[$id])
+                    || !$resolvedIDFieldValues[$id]->offsetExists($field)
+                ) {
+                    unset($context->idFieldNullabilityViolations[$id][$fieldID]);
                     continue;
                 }
                 $nullabilityViolation = $this->getNullabilityViolation(
@@ -158,10 +167,11 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
                     $resolvedIDFieldValues[$id][$field],
                 );
                 if ($nullabilityViolation === null) {
+                    unset($context->idFieldNullabilityViolations[$id][$fieldID]);
                     continue;
                 }
                 /**
-                 * Report only the violations introduced by this directive
+                 * Attribute the violation to the directive that introduced it
                  */
                 if (
                     isset($snapshot->idFieldNullabilityViolations[$id])
@@ -170,11 +180,72 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
                 ) {
                     continue;
                 }
+                $context->idFieldNullabilityViolations[$id][$fieldID] = new DirectiveNullabilityViolation(
+                    $directive,
+                    $isMetaDirective,
+                    $field,
+                    $nullabilityViolation,
+                );
+            }
+        }
+    }
+
+    /**
+     * @param array<string|int,object> $idObjects
+     * @param array<string|int,SplObjectStorage<FieldInterface,mixed>> $resolvedIDFieldValues
+     */
+    public function endDirectivePipeline(
+        RelationalTypeResolverInterface $relationalTypeResolver,
+        array $idObjects,
+        array $resolvedIDFieldValues,
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+    ): void {
+        $context = array_pop($this->contexts);
+        if ($context === null) {
+            return;
+        }
+        [$erroredIDFields, $erroredFields] = $this->getErroredIDFields(
+            $engineIterationFeedbackStore,
+            $context->objectErrorCount,
+            $context->schemaErrorCount,
+        );
+        $objectResolutionFeedbackStore = $engineIterationFeedbackStore->objectResolutionFeedbackStore;
+        foreach ($context->idFieldNullabilityViolations as $id => $fieldNullabilityViolations) {
+            $objectTypeResolver = $this->getObjectTypeResolver($relationalTypeResolver, $idObjects, $id);
+            if ($objectTypeResolver === null) {
+                continue;
+            }
+            foreach ($fieldNullabilityViolations as $fieldID => $directiveNullabilityViolation) {
+                $field = $directiveNullabilityViolation->field;
+                if (
+                    isset($erroredFields[$fieldID])
+                    || isset($erroredIDFields[$id][$fieldID])
+                    || !isset($resolvedIDFieldValues[$id])
+                    || !$resolvedIDFieldValues[$id]->offsetExists($field)
+                ) {
+                    continue;
+                }
+                /**
+                 * Report the violation only if it is still there
+                 * after all the directives have been executed
+                 */
+                $nullabilityViolation = $this->getNullabilityViolation(
+                    $objectTypeResolver,
+                    $field,
+                    $resolvedIDFieldValues[$id][$field],
+                );
+                if ($nullabilityViolation !== $directiveNullabilityViolation->nullabilityViolation) {
+                    continue;
+                }
+                $directive = $directiveNullabilityViolation->directive;
                 $objectResolutionFeedbackStore->addError(
                     new ObjectResolutionFeedback(
                         new FeedbackItemResolution(
                             FieldResolutionErrorFeedbackItemProvider::class,
-                            $this->getNullabilityViolationErrorCode($nullabilityViolation, $isMetaDirective),
+                            $this->getNullabilityViolationErrorCode(
+                                $nullabilityViolation,
+                                $directiveNullabilityViolation->isMetaDirective,
+                            ),
                             [
                                 $directive->asQueryString(),
                                 $field->getName(),
@@ -190,6 +261,37 @@ class DirectiveNullabilityValidationService extends AbstractBasicService impleme
                 );
             }
         }
+    }
+
+    /**
+     * The errors are only ever appended to the stores, so
+     * those added after some point are the ones after the
+     * count of errors at that point.
+     *
+     * @return array{0:array<string|int,array<int,true>>,1:array<int,true>} The errored fields per object ID, and the fields errored for all objects
+     */
+    protected function getErroredIDFields(
+        EngineIterationFeedbackStore $engineIterationFeedbackStore,
+        int $objectErrorCount,
+        int $schemaErrorCount,
+    ): array {
+        /** @var array<string|int,array<int,true>> */
+        $erroredIDFields = [];
+        foreach (array_slice($engineIterationFeedbackStore->objectResolutionFeedbackStore->getErrors(), $objectErrorCount) as $objectError) {
+            foreach ($objectError->getIDFieldSet() as $id => $fieldSet) {
+                foreach ($fieldSet->fields as $field) {
+                    $erroredIDFields[$id][spl_object_id($field)] = true;
+                }
+            }
+        }
+        /** @var array<int,true> */
+        $erroredFields = [];
+        foreach (array_slice($engineIterationFeedbackStore->schemaFeedbackStore->getErrors(), $schemaErrorCount) as $schemaError) {
+            foreach ($schemaError->getFields() as $field) {
+                $erroredFields[spl_object_id($field)] = true;
+            }
+        }
+        return [$erroredIDFields, $erroredFields];
     }
 
     /**

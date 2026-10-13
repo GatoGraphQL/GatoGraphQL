@@ -1,0 +1,61 @@
+{
+    "errors": [
+        {
+            "message": "On field 'args' of type '__Field', there is no argument with name 'includeDeprecated'",
+            "locations": [
+                {
+                    "line": 7,
+                    "column": 12
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(includeDeprecated: \"yes\")",
+                    "args(includeDeprecated: \"yes\") { ... }",
+                    "fields { ... }",
+                    "__type(name: \"__EnumValue\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Field",
+                "field": "args(includeDeprecated: \"yes\") { ... }",
+                "code": "gql@5.4.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "__type": {
+            "name": "__EnumValue",
+            "fields": [
+                {
+                    "name": "deprecationReason",
+                    "args": null
+                },
+                {
+                    "name": "description",
+                    "args": null
+                },
+                {
+                    "name": "extensions",
+                    "args": null
+                },
+                {
+                    "name": "globalID",
+                    "args": null
+                },
+                {
+                    "name": "id",
+                    "args": null
+                },
+                {
+                    "name": "isDeprecated",
+                    "args": null
+                },
+                {
+                    "name": "name",
+                    "args": null
+                }
+            ]
+        }
+    }
+}
