@@ -1,0 +1,17 @@
+{
+  "data": {
+    "posts": [
+      {
+        "__typename": "Post",
+        "title": "Keyboard navigation",
+        "slug": "keyboard-navigation"
+      }
+    ],
+    "pages": [
+      {
+        "__typename": "Page",
+        "status": "publish"
+      }
+    ]
+  }
+}
