@@ -1,0 +1,58 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'nonExistingField' on type 'Post'",
+            "locations": [
+                {
+                    "line": 10,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingField",
+                    "customPosts(filter: {ids: [1, 2]}, pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "CustomPostUnion",
+                "field": "nonExistingField",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https://spec.graphql.org/draft/#sec-Field-Selections"
+            }
+        },
+        {
+            "message": "There is no field 'nonExistingField' on type 'Page'",
+            "locations": [
+                {
+                    "line": 10,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingField",
+                    "customPosts(filter: {ids: [1, 2]}, pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "CustomPostUnion",
+                "field": "nonExistingField",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https://spec.graphql.org/draft/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "customPosts": [
+            {
+                "__typename": "Post",
+                "id": 1,
+                "nonExistingField": null
+            },
+            {
+                "__typename": "Page",
+                "id": 2,
+                "nonExistingField": null
+            }
+        ]
+    }
+}

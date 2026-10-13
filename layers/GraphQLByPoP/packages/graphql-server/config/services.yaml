@@ -13,6 +13,9 @@ services:
     GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Schema\GraphQLSchemaDefinitionService
 
+    GraphQLByPoP\GraphQLServer\Validation\RequestValidationServiceInterface:
+        class: \GraphQLByPoP\GraphQLServer\Validation\RequestValidationService
+
     GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxServiceInterface:
         class: \GraphQLByPoP\GraphQLServer\Syntax\GraphQLSyntaxService
 

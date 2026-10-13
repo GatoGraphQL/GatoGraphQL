@@ -1614,6 +1614,113 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        $fieldArgs = $this->getCoercedFieldArgs(
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($fieldArgs === null) {
+            return null;
+        }
+
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+
+        /**
+         * Perform validations
+         */
+        $this->validateInvariableOnObjectResolutionFieldData(
+            $fieldArgs,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        /**
+         * If there is a promise, this method cannot be executed.
+         * It will be done later, after promises are resolved
+         * to an actual value when resolving the object.
+         */
+        if (!$field->hasArgumentReferencingPromise()) {
+            $this->validateVariableOnObjectResolutionFieldData(
+                $fieldArgs,
+                $field,
+                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+        }
+
+        return $fieldArgs;
+    }
+
+    /**
+     * Validate the Field Arguments against the schema only,
+     * without executing the validations that depend on the
+     * state of the application (such as the user being
+     * logged-in, or a mutation being allowed), or that are
+     * customized by the field resolver:
+     *
+     * - no non-existing argument has been provided
+     * - the argument values can be coerced to their type
+     * - no mandatory argument is missing or is null
+     *
+     * These are the "request errors" defined in the GraphQL spec,
+     * which can be detected before executing the query.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Validation.Arguments
+     */
+    public function validateFieldArgsAgainstSchema(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        $fieldArgs = $this->getCoercedFieldArgs(
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($fieldArgs === null) {
+            return;
+        }
+
+        /** @var array<string,mixed> */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $this->validateOnlyExistingFieldArguments(
+            $fieldArgs,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        if ($field->hasArgumentReferencingPromise()) {
+            return;
+        }
+        $this->validateNonMissingOrNullMandatoryFieldArguments(
+            $fieldArgs,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
+    }
+
+    /**
+     * Add the default values to the Field Arguments,
+     * coerce them, and allow the field resolver to
+     * inject additional arguments
+     *
+     * @return array<string,mixed>|null null if there was a coercion error
+     */
+    protected function getCoercedFieldArgs(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
         $fieldArgs = $field->getArgumentKeyValues();
 
         /**
@@ -1652,46 +1759,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional arguments
          */
-        $fieldArgs = $objectTypeFieldResolver->prepareFieldArgs(
+        return $objectTypeFieldResolver->prepareFieldArgs(
             $fieldArgs,
             $this,
             $field,
             $objectTypeFieldResolutionFeedbackStore
         );
-        if ($fieldArgs === null) {
-            return null;
-        }
-
-        /**
-         * Perform validations
-         */
-        $this->validateInvariableOnObjectResolutionFieldData(
-            $fieldArgs,
-            $field,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return null;
-        }
-
-        /**
-         * If there is a promise, this method cannot be executed.
-         * It will be done later, after promises are resolved
-         * to an actual value when resolving the object.
-         */
-        if (!$field->hasArgumentReferencingPromise()) {
-            $this->validateVariableOnObjectResolutionFieldData(
-                $fieldArgs,
-                $field,
-                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return null;
-            }
-        }
-
-        return $fieldArgs;
     }
 
     /**

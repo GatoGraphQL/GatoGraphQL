@@ -183,6 +183,32 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
+     * Validate the requested operations against the schema
+     * before executing them and, if there are errors (such as
+     * a field not existing in the type, or an argument with
+     * a value of the wrong type), do not execute anything,
+     * and print the errors only (without entry "data"),
+     * as defined in the GraphQL spec.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Validation
+     * @see https://spec.graphql.org/draft/#sec-Response-Format
+     *
+     * Disabled by default, as it modifies the response.
+     */
+    public function returnNoDataOnRequestErrors(): bool
+    {
+        $envVariable = Environment::RETURN_NO_DATA_ON_REQUEST_ERRORS;
+        $defaultValue = false;
+        $callback = EnvironmentValueHelpers::toBool(...);
+
+        return $this->retrieveConfigurationValueOrUseDefault(
+            $envVariable,
+            $defaultValue,
+            $callback,
+        );
+    }
+
+    /**
      * Indicate: If a directive fails, then set those fields in `null`
      * and remove the affected IDs/fields from the upcoming stages
      * of the directive pipeline execution.

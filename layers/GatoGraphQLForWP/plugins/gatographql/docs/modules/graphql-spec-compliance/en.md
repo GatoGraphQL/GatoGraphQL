@@ -85,6 +85,49 @@ With this option enabled, errors also have entry `path`, with the position in th
 
 If an error applies to several positions in the response, it is printed once for each of them.
 
+### Return no data on request errors
+
+By default, Gato GraphQL validates each field when resolving it. If a field has an error (such as not existing in the type, or receiving an argument with a value of the wrong type), that field is printed as `null`, and the other fields are still resolved:
+
+```json
+{
+  "errors": [
+    {
+      "message": "There is no field 'nonExistingField' on type 'Post'"
+    }
+  ],
+  "data": {
+    "post": {
+      "title": "Hello world!",
+      "nonExistingField": null
+    }
+  }
+}
+```
+
+With this option enabled, the whole query is validated against the schema before executing it. If it has errors, nothing is executed (not even the mutations), and the response contains the errors only, without entry `data`:
+
+```json
+{
+  "errors": [
+    {
+      "message": "There is no field 'nonExistingField' on type 'Post'"
+    }
+  ]
+}
+```
+
+The query is validated whether there is data for the field or not. For instance, an error in the fields of a post that does not exist is also reported.
+
+These validations are executed before executing the query:
+
+- The field exists in the type
+- A field with a selection set (such as `author { name }`) is not a scalar or enum
+- The arguments exist, the mandatory ones are provided, and their values can be coerced to their type
+- The directives exist, can be applied to the field, are not repeated (unless repeatable), and their arguments are valid
+
+The validations that depend on the data, or on the user (such as having the capability to execute a mutation), are still executed when resolving the field, so they do not produce a request error.
+
 ## How to use
 
 Each option can be configured as follows, in order of priority:

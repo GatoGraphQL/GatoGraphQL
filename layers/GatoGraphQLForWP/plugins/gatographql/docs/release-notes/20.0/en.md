@@ -9,7 +9,7 @@
 
 ## Added
 
-- Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), and add the response `path` to errors. All of them are disabled by default ([#3432](https://github.com/GatoGraphQL/GatoGraphQL/pull/3432))
+- Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), add the response `path` to errors, and return no data on request errors (validating the query before executing it). All of them are disabled by default ([#3432](https://github.com/GatoGraphQL/GatoGraphQL/pull/3432), [#3434](https://github.com/GatoGraphQL/GatoGraphQL/pull/3434))
 
 ## Fixed
 

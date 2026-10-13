@@ -17,6 +17,7 @@ class SchemaConfigGraphQLSpecComplianceBlock extends AbstractSchemaConfigBlock
     public final const ATTRIBUTE_NAME_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT = 'propagateNullToNearestNullableParent';
     public final const ATTRIBUTE_NAME_COERCE_OUTPUT_VALUES = 'coerceOutputValues';
     public final const ATTRIBUTE_NAME_ADD_RESPONSE_PATH_TO_ERRORS = 'addResponsePathToErrors';
+    public final const ATTRIBUTE_NAME_RETURN_NO_DATA_ON_REQUEST_ERRORS = 'returnNoDataOnRequestErrors';
 
     protected function getBlockName(): string
     {
@@ -48,6 +49,7 @@ class SchemaConfigGraphQLSpecComplianceBlock extends AbstractSchemaConfigBlock
             self::ATTRIBUTE_NAME_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => \__('Pass a null up to the nearest nullable parent?', 'gatographql'),
             self::ATTRIBUTE_NAME_COERCE_OUTPUT_VALUES => \__('Coerce scalar and enum values?', 'gatographql'),
             self::ATTRIBUTE_NAME_ADD_RESPONSE_PATH_TO_ERRORS => \__('Add the response path to errors?', 'gatographql'),
+            self::ATTRIBUTE_NAME_RETURN_NO_DATA_ON_REQUEST_ERRORS => \__('Return no data on request errors?', 'gatographql'),
         ];
         $blockContent = '';
         foreach ($attributeNameLabels as $attributeName => $label) {

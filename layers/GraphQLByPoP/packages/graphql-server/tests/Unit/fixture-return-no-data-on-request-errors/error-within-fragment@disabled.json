@@ -1,0 +1,124 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'nonExistingField' on type '__Type'",
+            "locations": [
+                {
+                    "line": 15,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingField",
+                    "fragment TypeData on __Type { ... }"
+                ],
+                "type": "__Type",
+                "field": "nonExistingField",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "queryType": {
+                "name": "QueryRoot"
+            },
+            "types": [
+                {
+                    "name": "MutationRoot",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "QueryRoot",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "Root",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_DirectiveExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_EnumValueExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_FieldExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_InputValueExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_NamedTypeExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "_SchemaExtensions",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__Directive",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__EnumValue",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__Field",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__InputValue",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__Schema",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "__Type",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "Boolean",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "ID",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "Int",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "String",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "IdentifiableObject",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "DirectiveKindEnum",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "DirectiveLocation",
+                    "nonExistingField": null
+                },
+                {
+                    "name": "TypeKind",
+                    "nonExistingField": null
+                }
+            ]
+        }
+    }
+}
