@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ExtendedSpec\Execution;
 
 use PoP\ComponentModel\DirectiveResolvers\OperationDependencyDefinerFieldDirectiveResolverInterface;
+use PoP\ComponentModel\Module;
+use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
@@ -24,8 +26,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
+use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
+use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 
@@ -119,8 +123,40 @@ class ExecutableDocument extends AbstractExecutableDocument
     protected function validate(): void
     {
         parent::validate();
+        $this->assertOperationTypesExistInSchema();
         $this->assertFragmentSpreadTypesExistInSchema();
         $this->assertVariablesAreInputTypes();
+    }
+
+    /**
+     * The schema has no mutation type when mutations are disabled.
+     * (Subscriptions are rejected already when parsing the query.)
+     *
+     * @throws InvalidRequestException
+     * @see https://spec.graphql.org/draft/#sec-Operation-Type-Existence
+     */
+    protected function assertOperationTypesExistInSchema(): void
+    {
+        /** @var ModuleConfiguration */
+        $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
+        if ($moduleConfiguration->enableMutations()) {
+            return;
+        }
+        foreach ($this->document->getOperations() as $operation) {
+            if (!($operation instanceof MutationOperation)) {
+                continue;
+            }
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_2_A,
+                    [
+                        $operation->getOperationType(),
+                    ]
+                ),
+                $operation
+            );
+        }
     }
 
     /**

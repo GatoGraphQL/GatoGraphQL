@@ -1,0 +1,20 @@
+{
+  "errors": [
+    {
+      "message": "The schema does not support 'mutation' operations",
+      "locations": [
+        {
+          "line": 7,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "mutation CreatePost { ... }"
+        ],
+        "code": "gql@5.2[a]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Operation-Type-Existence"
+      }
+    }
+  ]
+}

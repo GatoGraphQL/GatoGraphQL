@@ -10,6 +10,7 @@ use PoP\Root\Feedback\FeedbackCategories;
 class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
 {
     // public final const E_5_1_1 = '5.1.1';
+    public final const E_5_2_A = '5.2[a]';
     public final const E_5_2_1_1 = '5.2.1.1';
     public final const E_5_2_2_1 = '5.2.2.1';
     // public final const E_5_2_3_1 = '5.2.3.1';
@@ -64,6 +65,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return [
             // self::E_5_1_1,
+            self::E_5_2_A,
             self::E_5_2_1_1,
             self::E_5_2_2_1,
             // self::E_5_2_3_1,
@@ -112,6 +114,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             // self::E_5_1_1 => 'not_applicable',
+            self::E_5_2_A => $this->__('The schema does not support \'%s\' operations', 'gatographql'),
             self::E_5_2_1_1 => $this->__('Operation name \'%s\' is duplicated', 'gatographql'),
             self::E_5_2_2_1 => $this->__('When the document contains more than one operation, there can be no anonymous operation', 'gatographql'),
             // self::E_5_2_3_1 => 'subscriptions_not_yet_supported',
@@ -166,6 +169,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     {
         return match ($code) {
             // self::E_5_1_1 => 'https://spec.graphql.org/draft/#sec-Executable-Definitions',
+            self::E_5_2_A => 'https://spec.graphql.org/draft/#sec-Operation-Type-Existence',
             self::E_5_2_1_1 => 'https://spec.graphql.org/draft/#sec-Operation-Name-Uniqueness',
             self::E_5_2_2_1 => 'https://spec.graphql.org/draft/#sec-Lone-Anonymous-Operation',
             // self::E_5_2_3_1 => 'https://spec.graphql.org/draft/#sec-Single-root-field',
