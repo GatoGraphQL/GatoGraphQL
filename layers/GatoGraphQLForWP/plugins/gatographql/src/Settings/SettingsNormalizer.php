@@ -4,13 +4,26 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
+use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use PoP\Root\Services\AbstractBasicService;
 
+use function __;
+use function add_settings_error;
+use function esc_html;
+use function function_exists;
+use function get_settings_errors;
+use function is_string;
+use function sprintf;
+use function trim;
+
 class SettingsNormalizer extends AbstractBasicService implements SettingsNormalizerInterface
 {
     private ?ModuleRegistryInterface $moduleRegistry = null;
+    private ?URLPathSettingValidatorInterface $urlPathSettingValidator = null;
+    private ?UserSettingsManagerInterface $userSettingsManager = null;
 
     final protected function getModuleRegistry(): ModuleRegistryInterface
     {
@@ -20,6 +33,19 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
             $this->moduleRegistry = $moduleRegistry;
         }
         return $this->moduleRegistry;
+    }
+    final protected function getURLPathSettingValidator(): URLPathSettingValidatorInterface
+    {
+        if ($this->urlPathSettingValidator === null) {
+            /** @var URLPathSettingValidatorInterface */
+            $urlPathSettingValidator = $this->instanceManager->getInstance(URLPathSettingValidatorInterface::class);
+            $this->urlPathSettingValidator = $urlPathSettingValidator;
+        }
+        return $this->urlPathSettingValidator;
+    }
+    final protected function getUserSettingsManager(): UserSettingsManagerInterface
+    {
+        return $this->userSettingsManager ??= UserSettingsManagerFacade::getInstance();
     }
 
     /**
@@ -173,9 +199,171 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
                 if (!$moduleResolver->isValidValue($module, $option, $values[$name] ?? null)) {
                     $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                 }
+
+                $urlPathSettingType = $moduleResolver->getURLPathSettingOptions($module)[$option] ?? null;
+                if ($urlPathSettingType !== null && is_string($values[$name] ?? null)) {
+                    /** @var string */
+                    $moduleName = $item['name'];
+                    /** @var string */
+                    $title = $itemSetting[Properties::TITLE] ?? $option;
+                    $values[$name] = $this->validateURLPathSettingValue(
+                        $values,
+                        $module,
+                        $option,
+                        $urlPathSettingType,
+                        sprintf(
+                            __('"%1$s" in "%2$s"', 'gatographql'),
+                            $title,
+                            $moduleName
+                        ),
+                    );
+                }
             }
         }
         return $values;
+    }
+
+    /**
+     * Validate the value of an option that modifies permalinks
+     * (such as the path of the single endpoint). If it is not
+     * valid, keep the previous value, and show an error.
+     *
+     * A value that has not been modified is accepted as it is,
+     * so that saving the Settings never changes a path that
+     * was already in use.
+     *
+     * @param array<string,mixed> $values All values submitted, each under its optionName as key
+     */
+    protected function validateURLPathSettingValue(
+        array $values,
+        string $module,
+        string $option,
+        URLPathSettingType $urlPathSettingType,
+        string $settingLabel,
+    ): string {
+        $moduleResolver = $this->getModuleRegistry()->getModuleResolver($module);
+        $name = $moduleResolver->getSettingOptionName($module, $option);
+        /** @var string */
+        $value = $values[$name];
+        $value = trim($value);
+
+        $urlPathSettingValidator = $this->getURLPathSettingValidator();
+        $urlPath = $urlPathSettingValidator->normalizeURLPath($value);
+        $previousValue = $this->getStoredURLPathSettingValue($module, $option);
+        if ($urlPath === $urlPathSettingValidator->normalizeURLPath($previousValue)) {
+            return $value;
+        }
+
+        $error = $urlPathSettingValidator->getURLPathError($urlPath, $urlPathSettingType)
+            ?? $this->getURLPathSettingClashError($values, $module, $option, $urlPathSettingType, $urlPath);
+        if ($error !== null) {
+            $this->addSettingsError(
+                $name,
+                sprintf(
+                    __('Option %1$s was not saved, as %2$s. It keeps value "%3$s".', 'gatographql'),
+                    $settingLabel,
+                    esc_html($error),
+                    esc_html($previousValue)
+                ),
+                'error'
+            );
+            return $previousValue;
+        }
+
+        if ($urlPathSettingType === URLPathSettingType::ENDPOINT) {
+            $page = $urlPathSettingValidator->getPageUnderURLPath($urlPath);
+            if ($page !== null) {
+                $this->addSettingsError(
+                    $name,
+                    sprintf(
+                        __('Option %1$s: page "%2$s" has path "%3$s" too, so it can\'t be accessed anymore.', 'gatographql'),
+                        $settingLabel,
+                        esc_html($page->post_title),
+                        esc_html($urlPath)
+                    ),
+                    'warning'
+                );
+            }
+        }
+
+        return $value;
+    }
+
+    protected function getStoredURLPathSettingValue(string $module, string $option): string
+    {
+        $value = $this->getUserSettingsManager()->getSetting($module, $option);
+        if (is_string($value) && trim($value) !== '') {
+            return $value;
+        }
+        /** @var string */
+        return $this->getModuleRegistry()->getModuleResolver($module)->getSettingsDefaultValue($module, $option);
+    }
+
+    /**
+     * Two endpoints under the same path (or two custom post types
+     * under the same base slug) make one of them unreachable.
+     *
+     * The other option's value is the one submitted in the
+     * form, or the stored one if it is in another form.
+     *
+     * @param array<string,mixed> $values All values submitted, each under its optionName as key
+     */
+    protected function getURLPathSettingClashError(
+        array $values,
+        string $module,
+        string $option,
+        URLPathSettingType $urlPathSettingType,
+        string $urlPath,
+    ): ?string {
+        $moduleRegistry = $this->getModuleRegistry();
+        $urlPathSettingValidator = $this->getURLPathSettingValidator();
+        foreach ($moduleRegistry->getAllModules() as $otherModule) {
+            $otherModuleResolver = $moduleRegistry->getModuleResolver($otherModule);
+            foreach ($otherModuleResolver->getURLPathSettingOptions($otherModule) as $otherOption => $otherURLPathSettingType) {
+                if (
+                    $otherURLPathSettingType !== $urlPathSettingType
+                    || ($otherModule === $module && $otherOption === $option)
+                    || !$moduleRegistry->isModuleEnabled($otherModule)
+                ) {
+                    continue;
+                }
+                $otherName = $otherModuleResolver->getSettingOptionName($otherModule, $otherOption);
+                $otherValue = $values[$otherName] ?? null;
+                if (!is_string($otherValue)) {
+                    $otherValue = $this->getStoredURLPathSettingValue($otherModule, $otherOption);
+                } elseif (trim($otherValue) === '') {
+                    /** @var string */
+                    $otherValue = $otherModuleResolver->getSettingsDefaultValue($otherModule, $otherOption);
+                }
+                if ($urlPathSettingValidator->normalizeURLPath($otherValue) !== $urlPath) {
+                    continue;
+                }
+                return sprintf(
+                    __('it is already used by "%s"', 'gatographql'),
+                    $otherModuleResolver->getName($otherModule)
+                );
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Show the message in the Settings page. It is added
+     * only when saving the Settings in options.php (where
+     * function `add_settings_error` is loaded), and only once,
+     * as the Settings are normalized more than once.
+     */
+    protected function addSettingsError(string $name, string $message, string $type): void
+    {
+        if (!function_exists('add_settings_error')) {
+            return;
+        }
+        foreach (get_settings_errors($name) as $settingsError) {
+            if ($settingsError['message'] === $message) {
+                return;
+            }
+        }
+        add_settings_error($name, $name, $message, $type);
     }
 
     /**

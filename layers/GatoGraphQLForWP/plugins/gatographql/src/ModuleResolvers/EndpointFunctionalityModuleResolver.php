@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Constants\GraphQLEndpointPaths;
 use GatoGraphQL\GatoGraphQL\Constants\HTMLCodes;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptionValues;
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
@@ -149,6 +150,19 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
+    }
+
+    /**
+     * @return array<string,URLPathSettingType> Key: option, value: the kind of URL path
+     */
+    public function getURLPathSettingOptions(string $module): array
+    {
+        return match ($module) {
+            self::SINGLE_ENDPOINT => [
+                ModuleSettingOptions::PATH => URLPathSettingType::ENDPOINT,
+            ],
+            default => parent::getURLPathSettingOptions($module),
+        };
     }
 
     /**

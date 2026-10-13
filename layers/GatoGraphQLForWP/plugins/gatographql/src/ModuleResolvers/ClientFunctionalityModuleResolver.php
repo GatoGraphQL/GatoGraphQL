@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
@@ -136,6 +137,20 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
+    }
+
+    /**
+     * @return array<string,URLPathSettingType> Key: option, value: the kind of URL path
+     */
+    public function getURLPathSettingOptions(string $module): array
+    {
+        return match ($module) {
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => [
+                ModuleSettingOptions::PATH => URLPathSettingType::ENDPOINT,
+            ],
+            default => parent::getURLPathSettingOptions($module),
+        };
     }
 
     /**
