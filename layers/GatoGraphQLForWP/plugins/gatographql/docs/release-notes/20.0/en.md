@@ -24,3 +24,4 @@
 - A post whose content is only whitespace now has no blocks, instead of failing for not being block content ([#3427](https://github.com/GatoGraphQL/GatoGraphQL/pull/3427))
 - A fragment spread within several fragments now resolves its fields in each of them, also when one of those fragments does not apply, which made the fields go missing from the others ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))
 - An inline fragment within a fragment, such as `... on Post { title }`, is now only applied to objects of its type ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))
+- The paths in the Settings, such as the path of the single endpoint or the base slug of the persisted queries, are now validated: a path that would break the endpoint or the site, such as one with unsupported characters or already used by another endpoint, is not saved, and an error explains why ([#3435](https://github.com/GatoGraphQL/GatoGraphQL/pull/3435))
