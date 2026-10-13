@@ -1,0 +1,7 @@
+{
+  posts(pagination: { limit: 1 }) {
+    ... @nope {
+      id
+    }
+  }
+}

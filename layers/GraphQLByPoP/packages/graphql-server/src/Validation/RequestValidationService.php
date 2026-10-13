@@ -175,7 +175,9 @@ class RequestValidationService extends AbstractBasicService implements RequestVa
                     ...$fieldTypeConditionsTuples,
                     ...$this->getFieldTypeConditionsTuples(
                         $fieldOrFragmentBond->getFieldsOrFragmentBonds(),
-                        [...$typeConditions, $fieldOrFragmentBond->getTypeName()],
+                        $fieldOrFragmentBond->getTypeName() !== null
+                            ? [...$typeConditions, $fieldOrFragmentBond->getTypeName()]
+                            : $typeConditions,
                         $document,
                     ),
                 ];

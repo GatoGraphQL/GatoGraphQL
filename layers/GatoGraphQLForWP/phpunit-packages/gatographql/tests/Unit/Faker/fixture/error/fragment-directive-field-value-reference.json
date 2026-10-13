@@ -1,0 +1,24 @@
+{
+  "errors": [
+    {
+      "message": "Variable '__id' has not been defined in the operation",
+      "locations": [
+        {
+          "line": 3,
+          "column": 21
+        }
+      ],
+      "extensions": {
+        "path": [
+          "$__id",
+          "(if: $__id)",
+          "@include(if: $__id)",
+          "...F",
+          "query { ... }"
+        ],
+        "code": "gql@5.8.3",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-All-Variable-Uses-Defined"
+      }
+    }
+  ]
+}

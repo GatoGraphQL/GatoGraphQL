@@ -274,6 +274,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - A GraphQL query starting with a Unicode byte order mark is no longer a syntax error (#3437)
 * Fixed - A <code>mutation</code> operation is a request error when mutations are disabled, as the schema has no mutation type (#3437)
 * Fixed - With nested mutations enabled, a mutation within a fragment can no longer be executed by a <code>query</code> operation (#3437)
+* Fixed - Directives <code>@include</code> and <code>@skip</code> can be applied to fragment spreads and inline fragments, and inline fragments can omit the type condition, such as <code>... @include(if: $withDetails) { id }</code> (#3438)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)

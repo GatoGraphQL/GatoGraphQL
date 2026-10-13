@@ -548,7 +548,8 @@ class Document implements DocumentInterface
                 }
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds())
+                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds()),
+                    $this->getVariableReferencesInDirectives($fragmentReference->getDirectives())
                 );
                 continue;
             }
@@ -557,7 +558,8 @@ class Document implements DocumentInterface
                 $inlineFragment = $fieldOrFragmentBond;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds())
+                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds()),
+                    $this->getVariableReferencesInDirectives($inlineFragment->getDirectives())
                 );
                 continue;
             }
@@ -983,7 +985,10 @@ class Document implements DocumentInterface
         }
         /** @var FragmentReference */
         $fragmentReference = $fieldOrFragmentBond;
-        // Nothing to set here
+        foreach ($fragmentReference->getDirectives() as $directive) {
+            $astNodeAncestors[$directive] = $fragmentReference;
+            $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
+        }
     }
 
     /**

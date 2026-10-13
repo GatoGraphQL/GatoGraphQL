@@ -1,0 +1,7 @@
+{
+  ...F @deprecated(reason: "x")
+}
+
+fragment F on QueryRoot {
+  id
+}

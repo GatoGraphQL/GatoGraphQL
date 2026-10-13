@@ -40,6 +40,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - A GraphQL query starting with a Unicode byte order mark is no longer a syntax error (#3437)
 - A `mutation` operation is a request error when mutations are disabled, as the schema has no mutation type (#3437)
 - With nested mutations enabled, a mutation within a fragment can no longer be executed by a `query` operation (#3437)
+- Directives `@include` and `@skip` can be applied to fragment spreads and inline fragments, and inline fragments can omit the type condition, such as `... @include(if: $withDetails) { id }` (#3438)
 
 ## 19.3.0 - 30/09/2026
 

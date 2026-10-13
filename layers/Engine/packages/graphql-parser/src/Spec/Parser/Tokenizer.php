@@ -420,12 +420,12 @@ class Tokenizer
         if ($codePoint >= 0xD800 && $codePoint <= 0xDFFF) {
             $isLeadingSurrogate = $codePoint <= 0xDBFF;
             if ($isBraced || !$isLeadingSurrogate || substr($this->source, $this->pos + 1, 2) !== '\\u') {
-                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $this->pos);
             }
             $this->pos += 2;
             [$trailingCodePoint, $isTrailingBraced] = $this->scanEscapedUnicodeCodePoint();
             if ($isTrailingBraced || $trailingCodePoint < 0xDC00 || $trailingCodePoint > 0xDFFF) {
-                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $this->pos);
             }
             $codePoint = 0x10000 + (($codePoint - 0xD800) << 10) + ($trailingCodePoint - 0xDC00);
         }
@@ -443,15 +443,15 @@ class Tokenizer
         if (($this->source[$this->pos + 1] ?? '') === '{') {
             $closingBracePos = strpos($this->source, '}', $this->pos + 2);
             if ($closingBracePos === false) {
-                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $this->pos + strcspn($this->source, "\"\n\r", $this->pos + 1));
             }
             $hexDigits = substr($this->source, $this->pos + 2, $closingBracePos - $this->pos - 2);
             if (!preg_match('/^[0-9A-Fa-f]+$/', $hexDigits) || strlen(ltrim($hexDigits, '0')) > 6) {
-                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $closingBracePos);
             }
             $codePoint = (int) hexdec($hexDigits);
             if ($codePoint > 0x10FFFF) {
-                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+                throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $closingBracePos);
             }
             $this->pos = $closingBracePos;
             return [$codePoint, true];
@@ -459,7 +459,7 @@ class Tokenizer
 
         $hexDigits = substr($this->source, $this->pos + 1, 4);
         if (!preg_match('/^[0-9A-Fa-f]{4}$/', $hexDigits)) {
-            throw $this->createInvalidEscapedUnicodeException($sequenceStartPos);
+            throw $this->createInvalidEscapedUnicodeException($sequenceStartPos, $this->pos + min(4, strcspn($this->source, "\"\n\r", $this->pos + 1)));
         }
         $this->pos += 4;
         return [(int) hexdec($hexDigits), false];
@@ -467,10 +467,11 @@ class Tokenizer
 
     /**
      * @param int $sequenceStartPos Position of the "u" char
+     * @param int $sequenceEndPos Position of the last char in the sequence
      */
-    protected function createInvalidEscapedUnicodeException(int $sequenceStartPos): SyntaxErrorParserException
+    protected function createInvalidEscapedUnicodeException(int $sequenceStartPos, int $sequenceEndPos): SyntaxErrorParserException
     {
-        $sequence = substr($this->source, $sequenceStartPos + 1, max(4, $this->pos - $sequenceStartPos));
+        $sequence = substr($this->source, $sequenceStartPos + 1, $sequenceEndPos - $sequenceStartPos);
         return new SyntaxErrorParserException(
             new FeedbackItemResolution(
                 GraphQLParserErrorFeedbackItemProvider::class,

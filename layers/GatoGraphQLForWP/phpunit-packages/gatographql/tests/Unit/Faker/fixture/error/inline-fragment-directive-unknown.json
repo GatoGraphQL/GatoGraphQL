@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "message": "There is no directive with name 'nope'",
+      "locations": [
+        {
+          "line": 3,
+          "column": 10
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@nope",
+          "... { ... }",
+          "posts(pagination: {limit: 1}) { ... }",
+          "query { ... }"
+        ],
+        "code": "gql@5.7.1",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Directives-Are-Defined"
+      }
+    }
+  ]
+}

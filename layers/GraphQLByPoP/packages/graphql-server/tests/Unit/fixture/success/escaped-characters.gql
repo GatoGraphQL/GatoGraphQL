@@ -1,0 +1,8 @@
+{
+  fixedLengthUnicode: __type(name: "QueryRoot") {
+    name
+  }
+  variableLengthUnicode: __type(name: "Qu\u{65}ry\u{000052}oot") {
+    name
+  }
+}

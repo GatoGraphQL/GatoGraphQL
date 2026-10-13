@@ -156,6 +156,7 @@ class ASTNodeDuplicatorService extends AbstractBasicService implements ASTNodeDu
         return new FragmentReference(
             $fragmentReference->getName(),
             new RuntimeLocation($fragmentReference),
+            $fragmentReference->getDirectives(),
         );
     }
 

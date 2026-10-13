@@ -1,0 +1,29 @@
+{
+  "errors": [
+    {
+      "message": "Cannot cast value 'Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀' for type 'Boolean'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 32
+        }
+      ],
+      "extensions": {
+        "path": [
+          "\"Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀\"",
+          "(if: \"Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀\")",
+          "@include(if: \"Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀\")",
+          "id @include(if: \"Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀\")",
+          "query { ... }"
+        ],
+        "type": "QueryRoot",
+        "field": "id @include(if: \"Tab:\t, emoji as code point: 😀, emoji as surrogate pair: 😀\")",
+        "code": "gql@5.6.1[16]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Values-of-Correct-Type"
+      }
+    }
+  ],
+  "data": {
+    "id": null
+  }
+}
