@@ -164,7 +164,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         $errors = array_merge(
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->responsePositionStore !== null
+                ? $this->reformatSchemaErrorEntriesWithResponsePath($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? [], $this->responsePositionStore)
+                : $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->responsePositionStore !== null
                 ? $this->reformatObjectErrorEntriesWithResponsePath($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? [], $this->responsePositionStore)
                 : $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
@@ -284,6 +286,41 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
                                 Tokens::IDS => $idsWithoutResponsePath,
                             ]
                         );
+                    }
+                }
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * A schema error applies to the field for all objects, so
+     * print an error entry for every response position of the
+     * field, under top-level entry "path". If the field was not
+     * printed in the response, print the error without the "path".
+     *
+     * @see https://spec.graphql.org/draft/#sec-Errors.Error-Result-Format
+     *
+     * @param array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> $entries
+     * @return array<int,mixed[]>
+     */
+    protected function reformatSchemaErrorEntriesWithResponsePath(
+        array $entries,
+        ResponsePositionStore $responsePositionStore,
+    ): array {
+        $ret = [];
+        foreach ($entries as $typeOutputKey => $fieldItems) {
+            /** @var FieldInterface $field */
+            foreach ($fieldItems as $field) {
+                $responsePaths = $responsePositionStore->getFieldResponsePaths($typeOutputKey, $field);
+                foreach ($fieldItems[$field] as $item) {
+                    $entry = $this->getSchemaEntry($typeOutputKey, $item);
+                    if ($responsePaths === []) {
+                        $ret[] = $entry;
+                        continue;
+                    }
+                    foreach ($responsePaths as $responsePath) {
+                        $ret[] = $this->addResponsePathToEntry($entry, $responsePath);
                     }
                 }
             }
@@ -545,6 +582,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         string|int $objectID,
         FieldInterface $field,
         array $responsePath,
+        bool $isPropagatedNull,
     ): bool {
         if ($this->responsePositionStore === null) {
             return false;
@@ -556,7 +594,9 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if (!$this->getOutputValueNullabilityService()->isNonNullable($fieldTypeModifiers)) {
             return false;
         }
-        $this->maybeAddNullabilityError($typeOutputKey, $objectID, $field, FieldResolutionErrorFeedbackItemProvider::E3, $responsePath);
+        if (!$isPropagatedNull) {
+            $this->maybeAddNullabilityError($typeOutputKey, $objectID, $field, FieldResolutionErrorFeedbackItemProvider::E3, $responsePath);
+        }
         return true;
     }
 
@@ -568,6 +608,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         string|int $objectID,
         FieldInterface $field,
         array $responsePath,
+        bool $hasNullValueItem,
     ): bool {
         if ($this->responsePositionStore === null) {
             return false;
@@ -576,7 +617,13 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         if ($fieldTypeModifiers === null) {
             return false;
         }
-        return $this->getOutputValueNullabilityService()->hasNonNullableArrayItems($fieldTypeModifiers);
+        if (!$this->getOutputValueNullabilityService()->hasNonNullableArrayItems($fieldTypeModifiers)) {
+            return false;
+        }
+        if ($hasNullValueItem) {
+            $this->maybeAddNullabilityError($typeOutputKey, $objectID, $field, FieldResolutionErrorFeedbackItemProvider::E6, $responsePath);
+        }
+        return true;
     }
 
     /**

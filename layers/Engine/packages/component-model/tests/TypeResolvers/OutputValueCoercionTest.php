@@ -114,9 +114,7 @@ class OutputValueCoercionTest extends AbstractTestCase
     public function testEnumCoercesTheSerializedBackedEnumCase(): void
     {
         $typeResolver = $this->createTypeResolver(TestBackedEnumTypeResolver::class);
-        /** @var LeafOutputTypeResolverInterface $typeResolver */
         $serializedValue = $typeResolver->serialize(TestBackedEnum::SECOND);
-        /** @var OutputValueCoercingLeafTypeResolverInterface $typeResolver */
         $this->assertSame('SECOND', $typeResolver->coerceOutputValue($serializedValue));
     }
 }

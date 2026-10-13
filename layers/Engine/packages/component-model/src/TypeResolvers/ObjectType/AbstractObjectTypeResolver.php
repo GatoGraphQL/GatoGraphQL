@@ -32,7 +32,6 @@ use PoP\ComponentModel\Response\OutputServiceInterface;
 use PoP\ComponentModel\Schema\OutputValueNullabilityServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StandaloneCheckpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;

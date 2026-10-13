@@ -328,7 +328,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 );
                 if (
                     $resolvedObjectRet[$fieldOutputKey] === null
-                    && $this->mustPropagateNullFromField($typeOutputKey, $objectID, $leafField, $fieldResponsePath)
+                    && $this->mustPropagateNullFromField($typeOutputKey, $objectID, $leafField, $fieldResponsePath, false)
                 ) {
                     $isNullObject = true;
                 }
@@ -350,7 +350,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 && !$skipAddingDataForType
             ) {
                 $resolvedObjectRet[$relationalFieldOutputKey] = null;
-                if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath)) {
+                if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, false)) {
                     $isNullObject = true;
                 }
                 continue;
@@ -439,12 +439,12 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
              */
             if (
                 is_array($objectIDorIDs)
-                && !$this->mustPropagateNullFromListItem($typeOutputKey, $objectID, $relationalField, $fieldResponsePath)
+                && !$this->mustPropagateNullFromListItem($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, in_array(null, $objectIDorIDs, true))
             ) {
                 continue;
             }
             $resolvedObjectRet[$relationalFieldOutputKey] = null;
-            if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath)) {
+            if ($this->mustPropagateNullFromField($typeOutputKey, $objectID, $relationalField, $fieldResponsePath, true)) {
                 $isNullObject = true;
             }
         }
@@ -486,12 +486,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * is Non-Null).
      *
      * @param array<string|int> $responsePath
+     * @param bool $isPropagatedNull Whether the `null` was propagated from a nested object or list item (whose error was already reported)
      */
     protected function mustPropagateNullFromField(
         string $typeOutputKey,
         string|int $objectID,
         FieldInterface $field,
         array $responsePath,
+        bool $isPropagatedNull,
     ): bool {
         return false;
     }
@@ -502,12 +504,14 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * are Non-Null).
      *
      * @param array<string|int> $responsePath
+     * @param bool $hasNullValueItem Whether the field resolved some list item as `null` (instead of the `null` being propagated from the item's object)
      */
     protected function mustPropagateNullFromListItem(
         string $typeOutputKey,
         string|int $objectID,
         FieldInterface $field,
         array $responsePath,
+        bool $hasNullValueItem,
     ): bool {
         return false;
     }

@@ -23,6 +23,8 @@ final class ResponsePositionStore
 {
     /** @var array<string,array<string|int,array<int,array<array<string|int>>>>> */
     private array $responsePaths = [];
+    /** @var array<string,array<int,array<array<string|int>>>> */
+    private array $fieldResponsePaths = [];
     /** @var array<string,array<string|int,array<int,true>>> */
     private array $erroredObjectFields = [];
     /** @var array<string,array<int,true>> */
@@ -52,7 +54,9 @@ final class ResponsePositionStore
         FieldInterface $field,
         array $responsePath,
     ): void {
-        $this->responsePaths[$typeOutputKey][$objectID][spl_object_id($field)][] = $responsePath;
+        $fieldID = spl_object_id($field);
+        $this->responsePaths[$typeOutputKey][$objectID][$fieldID][] = $responsePath;
+        $this->fieldResponsePaths[$typeOutputKey][$fieldID][] = $responsePath;
     }
 
     /**
@@ -64,6 +68,18 @@ final class ResponsePositionStore
         FieldInterface $field,
     ): array {
         return $this->responsePaths[$typeOutputKey][$objectID][spl_object_id($field)] ?? [];
+    }
+
+    /**
+     * The response paths of the field, for all objects
+     *
+     * @return array<array<string|int>>
+     */
+    public function getFieldResponsePaths(
+        string $typeOutputKey,
+        FieldInterface $field,
+    ): array {
+        return $this->fieldResponsePaths[$typeOutputKey][spl_object_id($field)] ?? [];
     }
 
     public function addErroredObjectField(
