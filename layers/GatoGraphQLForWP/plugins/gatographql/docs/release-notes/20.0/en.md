@@ -6,11 +6,15 @@
 - Removed `AbstractPlugin::getPluginNamespaceForDB()` and `PluginMetadata::PLUGIN_NAMESPACE_FOR_DB`: an extension overriding the method must override `getPluginNamespaceForEntityTypeNames()` instead, and one reading the constant must read `PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES`
 - The "Settings" block in the Schema Configuration now defaults to "Allow access", as the "Settings" module does, so a configuration that never set the behavior allows only its listed options to non-administrators (#3409)
 - Constant classes that hold a set of values are now native PHP enums, under namespace `…\Enums` instead of `…\Constants` (such as `LoggerSeverity`, `Behaviors`, `CommentStatus` and `LicenseStatus`). Code using one of their values as a string must read `->value`, and methods that receive or return those values, such as `LoggerInterface::log()`, now take and return the enum ([#3414](https://github.com/GatoGraphQL/GatoGraphQL/pull/3414))
+- Introspection follows the GraphQL spec: the `name` of the `LIST` and `NON_NULL` types is `null`, enums `TypeKind` and `DirectiveLocation` are renamed as `__TypeKind` and `__DirectiveLocation`, and argument `includeDeprecated` is non-null (`Boolean! = false`) ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
 
 ## Added
 
 - Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), add the response `path` to errors, and return no data on request errors (validating the query before executing it). All of them are disabled by default ([#3432](https://github.com/GatoGraphQL/GatoGraphQL/pull/3432), [#3434](https://github.com/GatoGraphQL/GatoGraphQL/pull/3434))
 - Fields `blocks`, `blockDataItems` and `blockFlattenedDataItems` can add the blocks of synced patterns (argument `resolveSyncedPatterns`) and the values of block bindings, such as pattern overrides (argument `resolveBlockBindings`) ([#3436](https://github.com/GatoGraphQL/GatoGraphQL/pull/3436))
+- Operations, fragments and variables in the GraphQL query can have descriptions, as in the September 2025 edition of the GraphQL spec ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
+- Strings in the GraphQL query can contain the escape sequences `\t` and `\u{1F600}`, and characters encoded as surrogate pairs, such as `\uD83D\uDE00` ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
+- Field `__Schema.description` ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
 
 ## Fixed
 
@@ -26,3 +30,7 @@
 - A fragment spread within several fragments now resolves its fields in each of them, also when one of those fragments does not apply, which made the fields go missing from the others ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))
 - An inline fragment within a fragment, such as `... on Post { title }`, is now only applied to objects of its type ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))
 - The paths in the Settings, such as the path of the single endpoint or the base slug of the persisted queries, are now validated: a path that would break the endpoint or the site, such as one with unsupported characters or already used by another endpoint, is not saved, and an error explains why ([#3435](https://github.com/GatoGraphQL/GatoGraphQL/pull/3435))
+- Fragment spreads and inline fragments can be used at the root of an operation, such as `query { ...RootFields }` ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
+- A GraphQL query starting with a Unicode byte order mark is no longer a syntax error ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
+- A `mutation` operation is a request error when mutations are disabled, as the schema has no mutation type ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
+- With nested mutations enabled, a mutation within a fragment can no longer be executed by a `query` operation ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
