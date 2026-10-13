@@ -32,6 +32,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const SCHEMA_EXPOSE_SENSITIVE_DATA = Plugin::NAMESPACE . '\schema-expose-sensitive-data';
     public final const SCHEMA_SELF_FIELDS = Plugin::NAMESPACE . '\schema-self-fields';
     public final const GLOBAL_ID_FIELD = Plugin::NAMESPACE . '\global-id-field';
+    public final const SPEC_COMPLIANT_ERROR_HANDLING = Plugin::NAMESPACE . '\spec-compliant-error-handling';
 
     /**
      * Setting options
@@ -63,6 +64,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::MUTATIONS,
             self::NESTED_MUTATIONS,
             self::SCHEMA_SELF_FIELDS,
+            self::SPEC_COMPLIANT_ERROR_HANDLING,
             self::GLOBAL_ID_FIELD,
             self::SCHEMA_NAMESPACING,
             self::GLOBAL_FIELDS,
@@ -101,6 +103,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose Sensitive Data in the Schema', 'gatographql'),
             self::SCHEMA_SELF_FIELDS => \__('Self Fields', 'gatographql'),
             self::GLOBAL_ID_FIELD => \__('Global ID Field', 'gatographql'),
+            self::SPEC_COMPLIANT_ERROR_HANDLING => \__('Spec-Compliant Error Handling', 'gatographql'),
             default => $module,
         };
     }
@@ -119,6 +122,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             self::SCHEMA_EXPOSE_SENSITIVE_DATA => \__('Expose “sensitive” data elements in the schema', 'gatographql'),
             self::SCHEMA_SELF_FIELDS => \__('Expose "self" fields in the schema', 'gatographql'),
             self::GLOBAL_ID_FIELD => \__('Uniquely identify objects via field <code>globalID</code> on all types of the GraphQL schema', 'gatographql'),
+            self::SPEC_COMPLIANT_ERROR_HANDLING => \__('Handle errors in the response as the GraphQL spec defines: a <code>null</code> in a non-null field is passed up to its nearest nullable parent, scalar and enum values are validated, and every error indicates its path in the response', 'gatographql'),
             default => parent::getDescription($module),
         };
     }
@@ -187,6 +191,9 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             ],
             self::SCHEMA_SELF_FIELDS => [
                 ModuleSettingOptions::DEFAULT_VALUE => true,
+            ],
+            self::SPEC_COMPLIANT_ERROR_HANDLING => [
+                ModuleSettingOptions::DEFAULT_VALUE => false,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -406,6 +413,25 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     $this->getSettingsItemHelpLinkHTML(
                         'https://gatographql.com/guides/schema/querying-self-fields',
                         \__('Querying \'self\' fields', 'gatographql')
+                    )
+                ),
+                Properties::TYPE => Properties::TYPE_BOOL,
+            ];
+        } elseif ($module === self::SPEC_COMPLIANT_ERROR_HANDLING) {
+            $option = ModuleSettingOptions::DEFAULT_VALUE;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => \__('Handle errors as in the GraphQL spec?', 'gatographql'),
+                Properties::DESCRIPTION => sprintf(
+                    \__('When a non-null field has an error, pass the <code>null</code> up to its nearest nullable parent (or to <code>data</code>), validate the values of scalars and enums (such as an <code>Int</code> being a 32-bit integer, or an <code>ID</code> being a string), and add the response <code>path</code> to every error. Disabled by default, as it changes the shape of the response.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    $defaultValueDesc,
+                    $this->getSettingsItemHelpLinkHTML(
+                        'https://gatographql.com/guides/schema/using-spec-compliant-error-handling',
+                        \__('Using spec-compliant error handling', 'gatographql')
                     )
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,

@@ -274,6 +274,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::SCHEMA_SELF_FIELDS,
                 'option' => ModuleSettingOptions::DEFAULT_VALUE,
             ],
+            // Handle errors as in the GraphQL spec?
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::SPEC_COMPLIANT_ERROR_HANDLING,
+                'option' => ModuleSettingOptions::DEFAULT_VALUE,
+            ],
             // Expose global fields?
             [
                 'class' => GraphQLServerModule::class,
@@ -966,6 +973,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA,
             ],
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING,
+            ],
         ];
     }
 
@@ -1037,6 +1048,17 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 ComponentModelEnvironment::SEND_EXCEPTION_TRACES => true,
             ]
         ];
+
+        /**
+         * The internal GraphQL server receives the configuration
+         * of the default admin endpoint. Its responses are processed
+         * by the plugin and its extensions, which expect the shape
+         * of the response that does not follow the spec-compliant
+         * error handling, so never enable it there.
+         */
+        if (AppHelpers::isInternalGraphQLServerAppThread()) {
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING] = false;
+        }
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
             /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
             return array_merge_recursive(
@@ -1053,6 +1075,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
                         // Enable the “sensitive” data
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                        // The plugin's own clients expect the non spec-compliant error handling
+                        ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING => false,
                     ],
                     GraphQLServerModule::class => [
                         // Expose global fields
@@ -1114,6 +1138,8 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::ENABLE_SELF_FIELD => true,
                         // Enable the “sensitive” data
                         ComponentModelEnvironment::EXPOSE_SENSITIVE_DATA_IN_SCHEMA => true,
+                        // The plugin's own clients expect the non spec-compliant error handling
+                        ComponentModelEnvironment::ENABLE_SPEC_COMPLIANT_ERROR_HANDLING => false,
                     ],
                     GraphQLParserModule::class => [
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => true,

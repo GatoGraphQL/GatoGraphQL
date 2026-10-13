@@ -51,6 +51,7 @@ Gato GraphQL is extensible, and ships with the following modules (organized by c
 <tr><th colspan="2"><br/>Schema Type</th></tr>
 <tr><td><a href="docs/modules/schema-expose-sensitive-data/en.md">Expose Sensitive Data in the Schema</a></td><td>Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data</td></tr>
 <tr><td><a href="docs/modules/schema-self-fields/en.md">Self Fields</a></td><td>Expose "self" fields in the GraphQL schema (such as <code>Post.self</code> and <code>User.self</code>), which can help give a particular shape to the GraphQL response</td></tr>
+<tr><td><a href="docs/modules/spec-compliant-error-handling/en.md">Spec-Compliant Error Handling</a></td><td>Handle errors in the response as the GraphQL spec defines: a <code>null</code> in a non-null field is passed up to its nearest nullable parent, scalar and enum values are validated, and every error indicates its path in the response</td></tr>
 <tr><th colspan="2"><br/>Operational</th></tr>
 <tr><td><a href="docs/modules/composable-directives/en.md">Composable Directives</a></td><td>Have directives modify the behavior of other directives</td></tr>
 <tr><td><a href="docs/modules/multifield-directives/en.md">Multi-Field Directives</a></td><td>A single directive can be applied to multiple fields, for performance and extended use cases</td></tr>
