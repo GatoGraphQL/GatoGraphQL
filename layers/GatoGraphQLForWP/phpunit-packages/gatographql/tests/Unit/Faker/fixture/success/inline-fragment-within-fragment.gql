@@ -1,0 +1,15 @@
+# The inline fragment's type condition must be satisfied,
+# also when it is placed within a fragment.
+# In this test, type "Page" should not print the title.
+{
+  customPosts(pagination: { limit: 3 }) {
+    __typename
+    ...CustomPostData
+  }
+}
+
+fragment CustomPostData on CustomPost {
+  ... on Post {
+    title
+  }
+}
