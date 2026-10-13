@@ -743,9 +743,11 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         },
-                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
+                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
                         "innerBlocks": null
                     },
                     {
@@ -761,11 +763,15 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
-                        "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                        "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"autoplay\":false,\"caption\":\"Test video of a road in a city\",\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"playsInline\":false} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                         "innerBlocks": null
                     },
                     {
@@ -1861,7 +1867,9 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         }
                     },
                     {
@@ -1877,9 +1885,13 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         }
                     },
                     {
@@ -2978,7 +2990,9 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2996,9 +3010,13 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -4372,9 +4390,11 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         },
-                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><\/figure>\n<!-- \/wp:audio -->",
+                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><\/figure>\n<!-- \/wp:audio -->",
                         "innerBlocks": null
                     },
                     {
@@ -4389,12 +4409,16 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
-                        "contentSource": "<!-- wp:video {\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\",\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\"><\/video><\/figure>\n<!-- \/wp:video -->",
+                        "contentSource": "<!-- wp:video {\"autoplay\":false,\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\",\"playsInline\":false,\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\"><\/video><\/figure>\n<!-- \/wp:video -->",
                         "innerBlocks": null
                     },
                     {
@@ -4452,7 +4476,9 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         }
                     },
                     {
@@ -4465,10 +4491,14 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         }
                     },
                     {
@@ -4518,7 +4548,9 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -4535,10 +4567,14 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -10614,9 +10650,11 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     },
-                    "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
+                    "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
                     "innerBlocks": null
                 },
                 {
@@ -10632,11 +10670,15 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     },
-                    "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                    "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"autoplay\":false,\"caption\":\"Test video of a road in a city\",\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"playsInline\":false} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                     "innerBlocks": null
                 },
                 {
@@ -11732,7 +11774,9 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     }
                 },
                 {
@@ -11748,9 +11792,13 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     }
                 },
                 {
@@ -12849,7 +12897,9 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12867,9 +12917,13 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null

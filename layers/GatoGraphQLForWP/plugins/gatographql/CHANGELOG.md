@@ -20,6 +20,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (`core/freeform`). The whole post used to fail for not being block content (#3420)
 - In a bundle, such as Gato AI Translations for Polylang, a doc that is only in English now shows the notice linking to the website in your language (#3425)
 - The plugin's docs, and their links to the website, are in the language each user picked for the admin, not in the site's language (#3426)
+- A post no longer fails to be read as blocks when one of its blocks leaves out an attribute that defaults to true/false or a number, such as a Video block without `controls` (#3427)
+- A block's true/false attribute read from its HTML, such as `autoplay` or `controls` in a Video block, is now `true` when the HTML attribute is there and `false` when it is not, instead of an empty string or the block's default (#3427)
+- A block attribute whose selector is `*` is now read from the block's own HTML element (#3427)
+- A post whose content is only whitespace now has no blocks, instead of failing for not being block content (#3427)
 
 ## 19.3.0 - 30/09/2026
 

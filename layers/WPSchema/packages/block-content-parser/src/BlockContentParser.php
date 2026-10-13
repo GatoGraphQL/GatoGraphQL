@@ -26,10 +26,12 @@ use function parse_blocks;
 /**
  * This class is based on class `ContentParser`
  * from project `Automattic/vip-block-data-api`,
- * released under `v1.0.0`.
+ * released under `v1.0.0`, with the parsing fixes
+ * released up to `v1.4.12` integrated.
  *
  * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
- * @see https://github.com/Automattic/vip-block-data-api/tree/1.0.0
+ * @see https://github.com/Automattic/vip-block-data-api/blob/9f0a86db300fd37555bb76843f0662bd1c4f0dfb/src/parser/content-parser.php
+ * @see https://github.com/Automattic/vip-block-data-api/tree/1.4.12
  */
 class BlockContentParser extends AbstractBasicService implements BlockContentParserInterface
 {
@@ -98,7 +100,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
         $customPostContent = (string) $this->getCustomPostTypeAPI()->getRawContent($customPost);
         // If the post has no content, don't parse it or it'll produce an error
-        if ($customPostContent === '') {
+        if (trim($customPostContent) === '') {
             return new BlockContentParserPayload(
                 [],
                 null
@@ -196,7 +198,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      * All code below has been copied from `ContentParser`
      * from project `Automattic/vip-block-data-api`.
      *
-     * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
+     * @see https://github.com/Automattic/vip-block-data-api/blob/9f0a86db300fd37555bb76843f0662bd1c4f0dfb/src/parser/content-parser.php
      *
      * ----------------------------------------------------------------
      */
@@ -280,9 +282,10 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $this->post_id  = $post_id;
         $this->warnings = [];
 
-        $has_blocks = has_blocks($post_content);
+        // An empty `post_content` fails `has_blocks` check, but is still valid.
+        $has_content = trim($post_content) !== '';
 
-        if (! $has_blocks) {
+        if ($has_content && ! has_blocks($post_content)) {
             // $error_message = join(' ', [
             //     sprintf('Error parsing post ID %d: This post does not appear to contain block content.', $post_id),
             //     'The VIP Block Data API is designed to parse Gutenberg blocks and can not read classic editor content.',
@@ -518,13 +521,13 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return mixed[]|string|null
+     * @return mixed The sourced value, or else the attribute's default, which can be of any type
      *
      * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
+    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): mixed
     {
         $attribute_value         = null;
         $attribute_default_value = $block_attribute_definition['default'] ?? null;
@@ -568,6 +571,25 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     }
 
     /**
+     * Select the elements matching the selector within the node,
+     * as `querySelectorAll` does in the editor, so the node itself
+     * is never a match.
+     *
+     * `Crawler::filter()` also matches the node itself, so selector
+     * `*` (as used by the `anchor` block support) matched the `<body>`
+     * wrapping the block, which has no attributes, and the attribute
+     * came back empty.
+     *
+     * @see https://github.com/Automattic/vip-block-data-api/pull/71
+     *
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function filter_by_selector(Crawler $crawler, string $selector): Crawler
+    {
+        return $crawler->children()->filter($selector);
+    }
+
+    /**
      * @param array<string,mixed> $block_attribute_definition
      *
      *
@@ -575,7 +597,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block_attribute(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_block_attribute(Crawler $crawler, array $block_attribute_definition): string|bool|null
     {
         // 'attribute' sources:
         // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#attribute-source
@@ -585,11 +607,17 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
             $attribute_value = $crawler->attr($attribute);
+            if ('boolean' === ($block_attribute_definition['type'] ?? null)) {
+                // HTML boolean attributes are true when present, even if written as
+                // controls="false". Omit the attribute to mean false; preserve that false
+                // instead of replacing it with the block's default.
+                $attribute_value = null !== $attribute_value;
+            }
         }
 
         return $attribute_value;
@@ -612,7 +640,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -653,7 +681,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -680,7 +708,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -708,7 +736,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector    = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         $attribute_values = $crawler->each(function ($node) use ($query_items) {
@@ -747,7 +775,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -837,7 +865,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector         = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() === 0) {
@@ -889,7 +917,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         $node       = $crawler->getNode(0);
