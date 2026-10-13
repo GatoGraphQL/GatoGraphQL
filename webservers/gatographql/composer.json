@@ -59,6 +59,18 @@
             "lando wp db reset --yes",
             "@install-site"
         ],
+        "snapshot-db": "lando composer snapshot-db-within-container",
+        "snapshot-db-within-container": [
+            "Composer\\Config::disableProcessTimeout",
+            "mkdir -p /app/tmp",
+            "wp db export /app/tmp/db-snapshot.sql"
+        ],
+        "restore-db": [
+            "Composer\\Config::disableProcessTimeout",
+            "@purge-cache",
+            "lando composer restore-db-within-container"
+        ],
+        "restore-db-within-container": "wp db import /app/tmp/db-snapshot.sql",
         "reset-domain": "lando wp search-replace \"$(lando wp option get siteurl | grep -E -o 'localhost:[0-9]+')\" \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site": "lando composer install-site-within-container -- \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site-within-container": [
