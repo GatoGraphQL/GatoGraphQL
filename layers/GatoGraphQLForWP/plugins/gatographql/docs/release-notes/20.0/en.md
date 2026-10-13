@@ -18,3 +18,5 @@
 - A block's true/false attribute read from its HTML, such as `autoplay` or `controls` in a Video block, is now `true` when the HTML attribute is there and `false` when it is not, instead of an empty string or the block's default ([#3427](https://github.com/GatoGraphQL/GatoGraphQL/pull/3427))
 - A block attribute whose selector is `*` is now read from the block's own HTML element ([#3427](https://github.com/GatoGraphQL/GatoGraphQL/pull/3427))
 - A post whose content is only whitespace now has no blocks, instead of failing for not being block content ([#3427](https://github.com/GatoGraphQL/GatoGraphQL/pull/3427))
+- A fragment spread within several fragments now resolves its fields in each of them, also when one of those fragments does not apply, which made the fields go missing from the others ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))
+- An inline fragment within a fragment, such as `... on Post { title }`, is now only applied to objects of its type ([#3428](https://github.com/GatoGraphQL/GatoGraphQL/pull/3428))

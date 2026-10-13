@@ -711,6 +711,8 @@
             "composer reset-domain -d webservers/gatographql-for-prod"
         ],
         "install-site": "composer install-site -d webservers/gatographql",
+        "snapshot-db": "composer snapshot-db -d webservers/gatographql",
+        "restore-db": "composer restore-db -d webservers/gatographql",
         "import-data": "composer import-data -d webservers/gatographql",
         "create-users": "composer create-users -d webservers/gatographql",
         "update-deps": "composer update-deps -d webservers/gatographql",
@@ -823,6 +825,8 @@
         "reset-db": "Resets the WordPress database",
         "reset-domain": "Resets the Lando domain in the WordPress site (for when not using proxy)",
         "install-site": "Installs the WordPress site",
+        "snapshot-db": "Export the database of the webserver to its tmp/db-snapshot.sql",
+        "restore-db": "Put the database of the webserver back to its last snapshot",
         "import-data": "Imports pre-defined data into the DB (posts, users, CPTs, etc)",
         "update-deps": "Update the Composer dependencies for the 'Gato GraphQL' demo site",
         "optimize-autoloader": "Optimizes the Composer autoloaders for all the plugins installed in the webserver",

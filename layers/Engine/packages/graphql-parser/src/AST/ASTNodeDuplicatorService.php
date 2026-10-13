@@ -118,18 +118,15 @@ class ASTNodeDuplicatorService extends AbstractBasicService implements ASTNodeDu
             if ($fieldOrFragmentBond instanceof FragmentReference) {
                 /** @var FragmentReference */
                 $fragmentReference = $fieldOrFragmentBond;
-                $clonedFieldsOrFragmentBonds[] = $fragmentReference;
+                $clonedFragmentReference = $this->cloneFragmentReference($fragmentReference);
+                $clonedFieldsOrFragmentBonds[] = $clonedFragmentReference;
                 continue;
             }
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $clonedFieldsOrFragmentBonds = array_merge(
-                    $clonedFieldsOrFragmentBonds,
-                    $this->recursivelyCloneFieldOrFragmentBonds(
-                        $inlineFragment->getFieldsOrFragmentBonds(),
-                    )
-                );
+                $clonedInlineFragment = $this->cloneInlineFragment($inlineFragment);
+                $clonedFieldsOrFragmentBonds[] = $clonedInlineFragment;
                 continue;
             }
             if ($fieldOrFragmentBond instanceof RelationalField) {
@@ -145,6 +142,38 @@ class ASTNodeDuplicatorService extends AbstractBasicService implements ASTNodeDu
             $clonedFieldsOrFragmentBonds[] = $clonedLeafField;
         }
         return $clonedFieldsOrFragmentBonds;
+    }
+
+    /**
+     * The FragmentReference must also be cloned, as the exclusive
+     * Fragment is stored under it. Otherwise, a Fragment nested
+     * within a Fragment that is referenced several times would
+     * resolve to the same cloned Fragment for all of them.
+     */
+    protected function cloneFragmentReference(
+        FragmentReference $fragmentReference,
+    ): FragmentReference {
+        return new FragmentReference(
+            $fragmentReference->getName(),
+            new RuntimeLocation($fragmentReference),
+        );
+    }
+
+    /**
+     * Keep the InlineFragment, as its type condition must
+     * still be satisfied to resolve its fields.
+     */
+    protected function cloneInlineFragment(
+        InlineFragment $inlineFragment,
+    ): InlineFragment {
+        return new InlineFragment(
+            $inlineFragment->getTypeName(),
+            $this->recursivelyCloneFieldOrFragmentBonds(
+                $inlineFragment->getFieldsOrFragmentBonds(),
+            ),
+            $inlineFragment->getDirectives(),
+            new RuntimeLocation($inlineFragment),
+        );
     }
 
     protected function cloneRelationalField(
