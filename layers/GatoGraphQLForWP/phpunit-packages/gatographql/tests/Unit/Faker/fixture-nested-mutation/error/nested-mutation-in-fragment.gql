@@ -1,0 +1,15 @@
+{
+  customPost(by: {id: 1724}) {
+    ...AddCommentFragment
+  }
+}
+
+fragment AddCommentFragment on Post {
+  addComment(input: {
+    commentAs: { html: "Great insight!" },
+    authorName: "Leo"
+    authorEmail: "leo@saronga.com",
+  }) {
+    status
+  }
+}
