@@ -2,12 +2,13 @@
 # ⚠️ Troubleshooting: "404 page not found" at https://gatographql.lndo.site/
 # (only when `proxy: "ON"` in ~/.lando/config.yml)
 #
-# Fix is automated via `restart-lando-proxy` composer script.
+# Traefik registers only the containers that are UP when it starts, so
+# `start-server` and the rebuilds route the app via a file in the proxy's
+# hot-reloaded config folder (`route-in-lando-proxy` composer script).
 #
-# To do it by hand, run either of:
-#   composer restart-lando-proxy
-#   docker restart landoproxyhyperion5000gandalfedition_proxy_1
-# (A route is only registered for containers that are UP at restart time.)
+# To do it by hand: composer route-in-lando-proxy
+# (Avoid `composer restart-lando-proxy`: it drops the requests in flight to
+# every other devserver.)
 ################################################################################
 
 name: gatographql
