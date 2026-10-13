@@ -227,8 +227,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
         $websiteURL = ($websiteDocURL !== null && $websiteDocURL !== '')
             ? $websiteDocURL
             : rtrim(PluginApp::getMainPlugin()->getPluginWebsiteURL(), '/');
-        // Prefix the user's language as a subdomain: https://gatographql.com -> https://es.gatographql.com
-        $localizedURL = preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
+        $localizedURL = $this->getLocaleHelper()->localizeWebsiteURL($websiteURL, $language);
         $host = (string) parse_url($localizedURL, PHP_URL_HOST);
         $path = (string) parse_url($localizedURL, PHP_URL_PATH);
         $link = sprintf(

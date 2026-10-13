@@ -7,6 +7,9 @@ namespace GatoGraphQL\GatoGraphQL\Services\Helpers;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\LocaleUtils;
 
+use function in_array;
+use function preg_replace;
+
 class LocaleHelper
 {
     /**
@@ -49,5 +52,21 @@ class LocaleHelper
         }
         $this->websiteTranslatedLanguages = array_values($languages);
         return $this->websiteTranslatedLanguages;
+    }
+
+    /**
+     * The same page on the website in the user's language, which takes the
+     * language as a subdomain (https://gatographql.com/docs ->
+     * https://es.gatographql.com/docs). The path stays in English, as the
+     * website redirects it to the page's translated slug. A language the
+     * website is not translated to keeps the English page.
+     */
+    public function localizeWebsiteURL(string $websiteURL, ?string $language = null): string
+    {
+        $language ??= $this->getLocaleLanguage();
+        if ($language === 'en' || !in_array($language, $this->getWebsiteTranslatedLanguages(), true)) {
+            return $websiteURL;
+        }
+        return preg_replace('#^(https?://)#', '${1}' . $language . '.', $websiteURL) ?? $websiteURL;
     }
 }

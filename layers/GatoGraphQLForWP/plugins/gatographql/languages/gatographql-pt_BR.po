@@ -8485,7 +8485,7 @@ msgid "File '%s' is corrupted"
 msgstr "O arquivo '%s' está corrompido"
 
 #. translators: %s: link to this documentation on the localized website
-#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:243
+#: GatoGraphQLForWP/plugins/gatographql/src/ContentProcessors/AbstractContentParser.php:242
 #, php-format
 msgid ""
 "This documentation is in English. You can read it in your language at %s."
@@ -11367,7 +11367,7 @@ msgstr "Processar dados de serviços externos"
 msgid "The extension with class '%s' has not been registered yet"
 msgstr "A extensão com a classe '%s' ainda não foi registrada"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:461
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:473
 #, php-format
 msgid ""
 "The license is invalid. Please <a href=\"%s\">enter a new license key in %s</"
@@ -11376,7 +11376,7 @@ msgstr ""
 "A licença é inválida. Por favor, <a href=\"%s\">insira uma nova chave de "
 "licença em %s</a> para ativá-la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:462
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:474
 #, php-format
 msgid ""
 "The provided license key belongs to a different extension. Please <a "
@@ -11385,19 +11385,19 @@ msgstr ""
 "A chave de licença fornecida pertence a uma extensão diferente. Por favor, "
 "<a href=\"%s\">insira a chave de licença correta em %s</a> para ativá-la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:463
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:475
 #, php-format
 msgid "Please <a href=\"%s\">enter the license key in %s</a> to enable it"
 msgstr ""
 "Por favor, <a href=\"%s\">insira a chave de licença em %s</a> para ativá-la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:486
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:498
 msgid "The license is invalid. Please enter a new license key to enable it"
 msgstr ""
 "A licença é inválida. Por favor, insira uma nova chave de licença para ativá-"
 "la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:487
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:499
 msgid ""
 "The provided license key belongs to a different extension. Please enter the "
 "right license key to enable it"
@@ -11405,16 +11405,16 @@ msgstr ""
 "A chave de licença fornecida pertence a uma extensão diferente. Por favor, "
 "insira a chave de licença correta para ativá-la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:488
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:500
 msgid "Please enter the license key to enable it"
 msgstr "Por favor, insira a chave de licença para ativá-la"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:504
 #, php-format
 msgid "<strong>%s</strong>: %s."
 msgstr "<strong>%s</strong>: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:494
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginManagement/ExtensionManager.php:506
 msgid "Gato GraphQL PRO"
 msgstr "Gato GraphQL PRO"
 
