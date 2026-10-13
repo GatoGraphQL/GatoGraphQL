@@ -193,6 +193,96 @@ GRAPHQL;
         ];
     }
 
+    public function testDescriptionsOnExecutableDefinitions(): void
+    {
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            """
+            Operation description
+            """
+            query Q(
+                "Variable description"
+                $a: Int
+                """
+                Another variable description
+                """
+                $b: String
+            ) {
+                foo(a: $a, b: $b) {
+                    ...F
+                }
+            }
+
+            "Fragment description"
+            fragment F on Foo {
+                id
+            }
+
+            "Mutation description"
+            mutation M {
+                bar
+            }
+        ');
+
+        $this->assertSame(
+            "query Q(\$a: Int, \$b: String) { foo(a: \$a, b: \$b) { ...F } }\n\nmutation M { bar }\n\nfragment F on Foo { id }",
+            $document->asDocumentString()
+        );
+    }
+
+    #[DataProvider('invalidDescriptionsProvider')]
+    public function testInvalidDescriptions(string $query): void
+    {
+        $this->expectException(SyntaxErrorParserException::class);
+        $this->getParser()->parse($query);
+    }
+
+    /**
+     * @return array<string,string[]>
+     */
+    public static function invalidDescriptionsProvider(): array
+    {
+        return [
+            'on-query-shorthand' => ['"Description" { foo }'],
+            'at-end-of-document' => ['{ foo } "Description"'],
+            'two-descriptions' => ['"First" "Second" query { foo }'],
+            'on-field' => ['{ "Description" foo }'],
+        ];
+    }
+
+    public function testFragmentsOnOperationRoot(): void
+    {
+        $parser = $this->getParser();
+        $document = $parser->parse('
+            query {
+                ...F
+                ... on QueryRoot {
+                    bar
+                }
+                baz
+            }
+
+            fragment F on QueryRoot {
+                foo
+            }
+        ');
+
+        $this->assertSame(
+            "query { ...F ...on QueryRoot { bar } baz }\n\nfragment F on QueryRoot { foo }",
+            $document->asDocumentString()
+        );
+        $fieldsOrFragmentBonds = $document->getOperations()[0]->getFieldsOrFragmentBonds();
+        $this->assertInstanceOf(FragmentReference::class, $fieldsOrFragmentBonds[0]);
+        $this->assertInstanceOf(InlineFragment::class, $fieldsOrFragmentBonds[1]);
+        $this->assertInstanceOf(LeafField::class, $fieldsOrFragmentBonds[2]);
+
+        $document = $parser->parse('mutation { ...F } fragment F on MutationRoot { foo }');
+        $this->assertSame(
+            "mutation { ...F }\n\nfragment F on MutationRoot { foo }",
+            $document->asDocumentString()
+        );
+    }
+
     public function testUnicodeBOMIsIgnored(): void
     {
         $parser = $this->getParser();

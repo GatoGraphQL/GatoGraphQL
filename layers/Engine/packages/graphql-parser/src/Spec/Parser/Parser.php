@@ -68,6 +68,11 @@ class Parser extends Tokenizer implements ParserInterface
                     $this->fragments[] = $this->parseFragment();
                     break;
 
+                case Token::TYPE_STRING:
+                case Token::TYPE_BLOCK_STRING:
+                    $this->parseExecutableDefinitionDescription();
+                    break;
+
                 default:
                     throw new SyntaxErrorParserException(
                         new FeedbackItemResolution(
@@ -86,6 +91,24 @@ class Parser extends Tokenizer implements ParserInterface
             $this->operations,
             $this->fragments,
         );
+    }
+
+    /**
+     * Descriptions on operations and fragments document them,
+     * without affecting their execution, so they are skipped.
+     *
+     * A description must be followed by an operation type or
+     * "fragment" (the query shorthand can't have a description).
+     *
+     * @throws SyntaxErrorParserException
+     * @see https://spec.graphql.org/September2025/#sec-Descriptions
+     */
+    protected function parseExecutableDefinitionDescription(): void
+    {
+        $this->lex();
+        if (!$this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION, Token::TYPE_SUBSCRIPTION, Token::TYPE_FRAGMENT])) {
+            throw $this->createUnexpectedException($this->peek());
+        }
     }
 
     /**
@@ -168,8 +191,7 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            $fieldOrFragmentBond = $this->parseBodyItem($type);
-            $fieldsOrFragmentBonds[] = $fieldOrFragmentBond;
+            $fieldsOrFragmentBonds[] = $this->parseFieldOrFragmentBond($type);
         }
 
         $this->afterParsingFieldsOrFragmentBonds();
@@ -244,22 +266,30 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            if ($this->match(Token::TYPE_FRAGMENT_REFERENCE)) {
-                $this->lex();
-
-                if ($this->eat(Token::TYPE_ON)) {
-                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
-                } else {
-                    $fieldsOrFragmentBonds[] = $this->parseFragmentReference();
-                }
-            } else {
-                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token);
-            }
+            $fieldsOrFragmentBonds[] = $this->parseFieldOrFragmentBond($token);
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
         return $fieldsOrFragmentBonds;
+    }
+
+    /**
+     * Parse a field, a fragment spread or an inline fragment
+     */
+    protected function parseFieldOrFragmentBond(string $type): FieldInterface|FragmentBondInterface
+    {
+        if (!$this->match(Token::TYPE_FRAGMENT_REFERENCE)) {
+            return $this->parseBodyItem($type);
+        }
+
+        $this->lex();
+
+        if ($this->eat(Token::TYPE_ON)) {
+            return $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
+        }
+
+        return $this->parseFragmentReference();
     }
 
     /**
@@ -274,6 +304,13 @@ class Parser extends Tokenizer implements ParserInterface
 
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
             $this->eat(Token::TYPE_COMMA);
+
+            /**
+             * Skip the variable's description, as it doesn't affect execution
+             *
+             * @see https://spec.graphql.org/September2025/#sec-Descriptions
+             */
+            $this->eatMulti([Token::TYPE_STRING, Token::TYPE_BLOCK_STRING]);
 
             /** @var Token|null */
             $variableToken = $this->eat(Token::TYPE_VARIABLE);
