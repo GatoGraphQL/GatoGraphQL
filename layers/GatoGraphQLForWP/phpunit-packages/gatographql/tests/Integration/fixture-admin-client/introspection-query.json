@@ -2407,6 +2407,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -2464,6 +2486,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -2510,6 +2554,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -13958,6 +14024,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -14015,6 +14103,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -14061,6 +14171,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -15151,6 +15283,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -15208,6 +15362,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {
@@ -15254,6 +15430,28 @@
                                         "ofType": null
                                     },
                                     "defaultValue": "true"
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "description": "Indicate if to add the blocks of a synced pattern (block `core\/block`) as its inner blocks",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "description": "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source",
+                                    "type": {
+                                        "kind": "SCALAR",
+                                        "name": "Boolean",
+                                        "isOneOf": false,
+                                        "ofType": null
+                                    },
+                                    "defaultValue": "false"
                                 }
                             ],
                             "type": {

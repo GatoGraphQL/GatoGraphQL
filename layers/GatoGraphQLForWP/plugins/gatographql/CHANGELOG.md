@@ -16,6 +16,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 ### Added
 
 - Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a `null` in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing `ID` as a string), add the response `path` to errors, and return no data on request errors (validating the query before executing it). All of them are disabled by default (#3432, #3434)
+- Fields `blocks`, `blockDataItems` and `blockFlattenedDataItems` can add the blocks of synced patterns (argument `resolveSyncedPatterns`) and the values of block bindings, such as pattern overrides (argument `resolveBlockBindings`) (#3436)
 
 ### Fixed
 

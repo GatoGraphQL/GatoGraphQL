@@ -21,6 +21,10 @@ interface BlockContentParserInterface
      *                  When parsing HTML5, the parser will convert non-breaking space "U+00A0" to "&nbsp;" entities,
      *                  and then the search/replace in "rawContent" will fail.
      *                  Then allow to disable the HTML5 parser.
+     *              'resolve-synced-patterns': Indicate if to add the blocks of the synced pattern
+     *                  referenced by a `core/block` block as its inner blocks. Default: false.
+     *              'resolve-block-bindings': Indicate if to replace the block attributes bound
+     *                  to a source (via the Block Bindings API) with the source's value. Default: false.
      *
      * @return BlockContentParserPayload|null `null` if the custom post does not exist
      * @throws BlockContentParserException If there is any error processing the content

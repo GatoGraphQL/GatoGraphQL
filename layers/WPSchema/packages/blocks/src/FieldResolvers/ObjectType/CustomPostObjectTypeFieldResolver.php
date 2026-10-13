@@ -154,6 +154,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                     [
                         'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
                         'useHTML5Parser' => $this->getBooleanScalarTypeResolver(),
+                        'resolveSyncedPatterns' => $this->getBooleanScalarTypeResolver(),
+                        'resolveBlockBindings' => $this->getBooleanScalarTypeResolver(),
                     ]
                 ),
             'blockDataItems',
@@ -164,6 +166,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                         'filterBy' => $this->getIncludeExcludeFilterInputObjectTypeResolver(),
                         'includeProperties' => $this->getIncludeBlockPropertiesInputObjectTypeResolver(),
                         'useHTML5Parser' => $this->getBooleanScalarTypeResolver(),
+                        'resolveSyncedPatterns' => $this->getBooleanScalarTypeResolver(),
+                        'resolveBlockBindings' => $this->getBooleanScalarTypeResolver(),
                     ]
                 ),
             default
@@ -175,6 +179,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldArgName) {
             'useHTML5Parser' => $this->__('Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as "U+00A0", to "&nbsp;" entities.', 'gatographql'),
+            'resolveSyncedPatterns' => $this->__('Indicate if to add the blocks of a synced pattern (block `core/block`) as its inner blocks', 'gatographql'),
+            'resolveBlockBindings' => $this->__('Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source', 'gatographql'),
             default => parent::getFieldArgDescription($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -183,6 +189,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
     {
         return match ($fieldArgName) {
             'useHTML5Parser' => true,
+            'resolveSyncedPatterns',
+            'resolveBlockBindings' => false,
             default => parent::getFieldArgDefaultValue($objectTypeResolver, $fieldName, $fieldArgName),
         };
     }
@@ -224,6 +232,8 @@ class CustomPostObjectTypeFieldResolver extends AbstractQueryableObjectTypeField
                 $options = [
                     'include-inner-content' => $includeInnerContent,
                     'use-html5-parser' => $useHTML5Parser,
+                    'resolve-synced-patterns' => $fieldDataAccessor->getValue('resolveSyncedPatterns') ?? false,
+                    'resolve-block-bindings' => $fieldDataAccessor->getValue('resolveBlockBindings') ?? false,
                 ];
 
                 /**

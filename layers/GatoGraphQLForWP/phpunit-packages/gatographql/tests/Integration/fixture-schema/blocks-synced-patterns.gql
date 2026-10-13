@@ -1,0 +1,51 @@
+########################################################################
+# Synced patterns (block `core/block`) are resolved into their blocks
+# only with `resolveSyncedPatterns: true`.
+#
+# Synced pattern 1132 has blocks nested in groups: each block must
+# appear once, under its own parent.
+########################################################################
+query {
+  postWithNestedSyncedPattern: post(by: { id: 1119 }) {
+    id
+    notResolved: blockDataItems(
+      filterBy: { include: ["core/block"] }
+    )
+    blocks(
+      filterBy: { include: ["core/block", "core/group", "core/paragraph"] }
+      resolveSyncedPatterns: true
+    ) {
+      ...BlockData
+    }
+    blockDataItems(
+      filterBy: { include: ["core/block", "core/group", "core/paragraph"] }
+      resolveSyncedPatterns: true
+    )
+    blockFlattenedDataItems(
+      filterBy: { include: ["core/block", "core/group", "core/paragraph"] }
+      resolveSyncedPatterns: true
+    )
+  }
+
+}
+
+fragment BlockData on Block {
+  name
+  attributes
+  contentSource
+  innerBlocks {
+    name
+    attributes
+    contentSource
+    innerBlocks {
+      name
+      attributes
+      contentSource
+      innerBlocks {
+        name
+        attributes
+        contentSource
+      }
+    }
+  }
+}
