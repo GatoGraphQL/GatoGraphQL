@@ -45,6 +45,7 @@ class GraphQLSpecComplianceBlockSchemaConfigurationExecuter extends AbstractBloc
             SchemaConfigGraphQLSpecComplianceBlock::ATTRIBUTE_NAME_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT,
             SchemaConfigGraphQLSpecComplianceBlock::ATTRIBUTE_NAME_COERCE_OUTPUT_VALUES => ComponentModelEnvironment::COERCE_OUTPUT_VALUES,
             SchemaConfigGraphQLSpecComplianceBlock::ATTRIBUTE_NAME_ADD_RESPONSE_PATH_TO_ERRORS => ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS,
+            SchemaConfigGraphQLSpecComplianceBlock::ATTRIBUTE_NAME_RETURN_NO_DATA_ON_REQUEST_ERRORS => ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS,
         ];
         foreach ($attributeNameEnvironmentClasses as $attributeName => $environmentClass) {
             $this->executeDefaultEnableDisableBlockAttribute(

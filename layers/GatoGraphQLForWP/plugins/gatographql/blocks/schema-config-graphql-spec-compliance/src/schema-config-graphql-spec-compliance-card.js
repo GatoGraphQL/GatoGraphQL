@@ -111,6 +111,15 @@ const SchemaConfigGraphQLSpecComplianceCard = ( props ) => {
 				enabledLabel={ __('Add the response path', 'gatographql') }
 				disabledLabel={ __('Do not add the response path', 'gatographql') }
 			/>
+			<hr />
+			<EnableDisableOption
+				{ ...props }
+				attributeName="returnNoDataOnRequestErrors"
+				label={ __('Return no data on request errors?', 'gatographql') }
+				tooltip={ __('Validate the query before executing it and, if it has errors, return the errors only, without "data"', 'gatographql') }
+				enabledLabel={ __('Return no data', 'gatographql') }
+				disabledLabel={ __('Resolve the valid fields', 'gatographql') }
+			/>
 		</>
 	);
 }

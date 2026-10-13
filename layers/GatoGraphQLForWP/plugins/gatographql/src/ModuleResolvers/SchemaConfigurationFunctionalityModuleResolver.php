@@ -42,6 +42,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
     public final const OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT = 'propagate-null-to-nearest-nullable-parent';
     public final const OPTION_COERCE_OUTPUT_VALUES = 'coerce-output-values';
     public final const OPTION_ADD_RESPONSE_PATH_TO_ERRORS = 'add-response-path-to-errors';
+    public final const OPTION_RETURN_NO_DATA_ON_REQUEST_ERRORS = 'return-no-data-on-request-errors';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
 
@@ -199,6 +200,7 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 self::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
                 self::OPTION_COERCE_OUTPUT_VALUES => false,
                 self::OPTION_ADD_RESPONSE_PATH_TO_ERRORS => false,
+                self::OPTION_RETURN_NO_DATA_ON_REQUEST_ERRORS => false,
             ],
         ];
         return $defaultValues[$module][$option] ?? null;
@@ -439,6 +441,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 self::OPTION_ADD_RESPONSE_PATH_TO_ERRORS => [
                     \__('Add the response path to errors?', 'gatographql'),
                     \__('Add entry <code>path</code> to every error, with its position in the response (eg: <code>["posts", 1, "title"]</code>), as the GraphQL spec defines. Then an error that happens in several positions is printed once for each of them. Gato GraphQL always prints the path of the error in the query, under <code>extensions.path</code>.', 'gatographql'),
+                ],
+                self::OPTION_RETURN_NO_DATA_ON_REQUEST_ERRORS => [
+                    \__('Return no data on request errors?', 'gatographql'),
+                    \__('Validate the whole query against the schema before executing it, as the GraphQL spec defines. If it has errors (eg: a field that does not exist, or an argument with a value of the wrong type), nothing is executed, and the response contains the errors only, without entry <code>data</code>. If disabled, the valid fields are still resolved.', 'gatographql'),
                 ],
             ];
             foreach ($options as $option => [$title, $description]) {

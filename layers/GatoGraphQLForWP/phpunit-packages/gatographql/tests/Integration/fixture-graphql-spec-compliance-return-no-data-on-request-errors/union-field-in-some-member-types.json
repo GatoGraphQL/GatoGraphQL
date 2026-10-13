@@ -1,0 +1,38 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'isSticky' on type 'Page'",
+            "locations": [
+                {
+                    "line": 12,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "isSticky",
+                    "customPosts(filter: {ids: [1, 2]}, pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "CustomPostUnion",
+                "field": "isSticky",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https://spec.graphql.org/draft/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "customPosts": [
+            {
+                "__typename": "Post",
+                "id": 1,
+                "isSticky": null
+            },
+            {
+                "__typename": "Page",
+                "id": 2,
+                "isSticky": null
+            }
+        ]
+    }
+}

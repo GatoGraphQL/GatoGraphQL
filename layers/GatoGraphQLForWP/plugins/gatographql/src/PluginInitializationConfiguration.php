@@ -295,6 +295,13 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'module' => SchemaConfigurationFunctionalityModuleResolver::GRAPHQL_SPEC_COMPLIANCE,
                 'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_ADD_RESPONSE_PATH_TO_ERRORS,
             ],
+            // Return no data on request errors, as in the GraphQL spec?
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS,
+                'module' => SchemaConfigurationFunctionalityModuleResolver::GRAPHQL_SPEC_COMPLIANCE,
+                'option' => SchemaConfigurationFunctionalityModuleResolver::OPTION_RETURN_NO_DATA_ON_REQUEST_ERRORS,
+            ],
             // Expose global fields?
             [
                 'class' => GraphQLServerModule::class,
@@ -999,6 +1006,10 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                 'class' => ComponentModelModule::class,
                 'envVariable' => ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS,
             ],
+            [
+                'class' => ComponentModelModule::class,
+                'envVariable' => ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS,
+            ],
         ];
     }
 
@@ -1082,6 +1093,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
             $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT] = false;
             $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::COERCE_OUTPUT_VALUES] = false;
             $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS] = false;
+            $moduleClassConfiguration[ComponentModelModule::class][ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS] = false;
         }
         if ($endpointGroup === AdminGraphQLEndpointGroups::PLUGIN_OWN_USE) {
             /** @var array<class-string<ModuleInterface>,array<string,mixed>> */
@@ -1103,6 +1115,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
                         ComponentModelEnvironment::COERCE_OUTPUT_VALUES => false,
                         ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS => false,
+                        ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS => false,
                     ],
                     GraphQLServerModule::class => [
                         // Expose global fields
@@ -1168,6 +1181,7 @@ class PluginInitializationConfiguration extends AbstractMainPluginInitialization
                         ComponentModelEnvironment::PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => false,
                         ComponentModelEnvironment::COERCE_OUTPUT_VALUES => false,
                         ComponentModelEnvironment::ADD_RESPONSE_PATH_TO_ERRORS => false,
+                        ComponentModelEnvironment::RETURN_NO_DATA_ON_REQUEST_ERRORS => false,
                     ],
                     GraphQLParserModule::class => [
                         GraphQLParserEnvironment::ENABLE_COMPOSABLE_DIRECTIVES => true,

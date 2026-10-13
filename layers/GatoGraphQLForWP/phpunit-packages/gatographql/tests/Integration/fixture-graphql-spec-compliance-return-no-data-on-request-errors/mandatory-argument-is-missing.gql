@@ -1,0 +1,9 @@
+{
+  # Argument "by" is mandatory
+  post {
+    id
+  }
+  users(pagination: { limit: 2 }) {
+    id
+  }
+}

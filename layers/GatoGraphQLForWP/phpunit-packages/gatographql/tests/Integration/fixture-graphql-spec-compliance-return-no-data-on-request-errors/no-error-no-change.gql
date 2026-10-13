@@ -1,0 +1,9 @@
+{
+  post(by: { id: 1 }) {
+    id
+    title
+  }
+  users(pagination: { limit: 2 }) {
+    id
+  }
+}

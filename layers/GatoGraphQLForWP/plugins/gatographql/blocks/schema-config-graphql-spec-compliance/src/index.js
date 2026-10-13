@@ -73,6 +73,10 @@ registerBlockType( 'gatographql/schema-config-graphql-spec-compliance', {
 			type: 'string',
 			default: ATTRIBUTE_VALUE_DEFAULT,
 		},
+		returnNoDataOnRequestErrors: {
+			type: 'string',
+			default: ATTRIBUTE_VALUE_DEFAULT,
+		},
 	},
 
 	/**
