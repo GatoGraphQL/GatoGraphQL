@@ -430,11 +430,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
             $options = [
                 self::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => [
                     \__('Pass a null up to the nearest nullable parent?', 'gatographql'),
-                    \__('When a non-null field (or an item in a list with non-null items) is <code>null</code>, pass the <code>null</code> up to its nearest nullable parent (or to <code>data</code>), as the GraphQL spec defines. By default, the field is printed as <code>null</code>.', 'gatographql'),
+                    \__('When a non-null field (or an item in a list with non-null items) is <code>null</code>, pass the <code>null</code> up to its nearest nullable parent (or to <code>data</code>), as the GraphQL spec defines. If disabled, the field is printed as <code>null</code>.', 'gatographql'),
                 ],
                 self::OPTION_COERCE_OUTPUT_VALUES => [
                     \__('Coerce scalar and enum values?', 'gatographql'),
-                    \__('Coerce the values of the built-in scalars and of enums to their type, as the GraphQL spec defines (eg: an <code>ID</code> is printed as a string, such as <code>"1"</code>), adding an error when the value cannot be coerced. By default, the values are printed as they are (eg: an <code>ID</code> is printed as <code>1</code>).', 'gatographql'),
+                    \__('Coerce the values of the built-in scalars and of enums to their type, as the GraphQL spec defines (eg: an <code>ID</code> is printed as a string, such as <code>"1"</code>), adding an error when the value cannot be coerced. If disabled, the values are printed as they are (eg: an <code>ID</code> is printed as <code>1</code>).', 'gatographql'),
                 ],
                 self::OPTION_ADD_RESPONSE_PATH_TO_ERRORS => [
                     \__('Add the response path to errors?', 'gatographql'),
