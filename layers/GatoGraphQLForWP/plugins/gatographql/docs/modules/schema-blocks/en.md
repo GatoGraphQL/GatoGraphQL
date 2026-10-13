@@ -1177,6 +1177,106 @@ This query:
 
 Please notice that the two additional attributes, `parentBlockPosition` and `innerBlockPositions`, are removed when filtering, as they don't make sense anymore.
 
+## Synced patterns and block bindings
+
+Fields `blocks`, `blockDataItems` and `blockFlattenedDataItems` print the blocks as stored in the post's content. Two arguments add the data that WordPress adds when rendering the post (both are `false` by default):
+
+- `resolveSyncedPatterns`: a synced pattern (block `core/block`) only stores a reference to the pattern. With this argument, its blocks are added as the `innerBlocks` of `core/block`
+- `resolveBlockBindings`: the attributes bound to a source via the [Block Bindings API](https://developer.wordpress.org/block-editor/reference-guides/block-api/block-bindings/) (such as a post's data or meta, or an override in a synced pattern) get the value from that source
+
+For this content:
+
+```html
+<!-- wp:paragraph {"metadata":{"bindings":{"content":{"source":"core/post-data","args":{"field":"date"}}}}} -->
+<p>Placeholder for the date</p>
+<!-- /wp:paragraph -->
+
+<!-- wp:block {"ref":1136,"content":{"Title":{"content":"Overridden title"}}} /-->
+```
+
+...where synced pattern `1136` contains a heading that can be overridden:
+
+```html
+<!-- wp:heading {"metadata":{"name":"Title","bindings":{"__default":{"source":"core/pattern-overrides"}}}} -->
+<h2 class="wp-block-heading">Default title</h2>
+<!-- /wp:heading -->
+```
+
+...this query:
+
+```graphql
+{
+  post(by: { id: 1128 }) {
+    blockDataItems(
+      resolveSyncedPatterns: true
+      resolveBlockBindings: true
+    )
+  }
+}
+```
+
+...produces:
+
+```json
+{
+  "data": {
+    "post": {
+      "blockDataItems": [
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "metadata": {
+              "bindings": {
+                "content": {
+                  "source": "core/post-data",
+                  "args": {
+                    "field": "date"
+                  }
+                }
+              }
+            },
+            "content": "2020-12-12T04:08:47+00:00",
+            "dropCap": false
+          }
+        },
+        {
+          "name": "core/block",
+          "attributes": {
+            "ref": 1136,
+            "content": {
+              "Title": {
+                "content": "Overridden title"
+              }
+            }
+          },
+          "innerBlocks": [
+            {
+              "name": "core/heading",
+              "attributes": {
+                "metadata": {
+                  "name": "Title",
+                  "bindings": {
+                    "content": {
+                      "source": "core/pattern-overrides"
+                    }
+                  }
+                },
+                "content": "Overridden title",
+                "level": 2
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+A synced pattern is added only if it is published and not password-protected (as when WordPress renders it), and a pattern within itself is not added again.
+
+These values are not in the post's content, so leave both arguments disabled when the blocks will be used to update that content (such as when translating it).
+
 ## Preact example
 
 Please check the [Preact example](https://github.com/Automattic/vip-block-data-api/tree/1.0.0/#preact-example) in `Automattic/vip-block-data-api`, to see an example of how to map the block data into customizedclient-side JavaScript components.

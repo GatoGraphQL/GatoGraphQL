@@ -14,13 +14,23 @@ use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use Throwable;
+use WP_Block;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
 use WP_Error;
 use WP_Post;
 
+use function array_key_exists;
+use function function_exists;
+use function get_block_bindings_source;
+use function get_block_bindings_supported_attributes;
+use function get_object_vars;
 use function get_post;
+use function get_post_type;
 use function has_blocks;
+use function is_array;
+use function is_numeric;
+use function is_string;
 use function parse_blocks;
 
 /**
@@ -42,6 +52,26 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     private const FREEFORM_BLOCK_NAME = 'core/freeform';
 
     /**
+     * The block that references a synced pattern (formerly
+     * "reusable block"), stored as a `wp_block` post
+     */
+    private const SYNCED_PATTERN_BLOCK_NAME = 'core/block';
+
+    /**
+     * The block attributes that can be bound to a source, by block,
+     * for WordPress versions before 6.9, which has no function
+     * `get_block_bindings_supported_attributes()`
+     *
+     * @var array<string,string[]>
+     */
+    private const BLOCK_BINDINGS_SUPPORTED_ATTRIBUTES = [
+        'core/paragraph' => ['content'],
+        'core/heading' => ['content'],
+        'core/image' => ['id', 'url', 'title', 'alt'],
+        'core/button' => ['url', 'text', 'linkTarget', 'rel'],
+    ];
+
+    /**
      * Attributes that WordPress registers without the source their value is
      * saved in, by block and attribute name.
      *
@@ -60,6 +90,15 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     ];
 
     private bool $includeInnerContent = false;
+    private bool $resolveSyncedPatterns = false;
+    private bool $resolveBlockBindings = false;
+    /**
+     * The synced patterns being resolved, to stop a pattern
+     * that (directly or not) references itself
+     *
+     * @var array<int,true>
+     */
+    private array $resolvingSyncedPatternIDs = [];
 
     private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
 
@@ -106,7 +145,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
                 null
             );
         }
-        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->setParsingOptions($options);
         $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
@@ -187,9 +226,19 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         string $customPostContent,
         array $options = [],
     ): BlockContentParserPayload {
-        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->setParsingOptions($options);
         $parsedBlockData = $this->parse($customPostContent, null, $options);
         return $this->processParsedBlockData($parsedBlockData);
+    }
+
+    /**
+     * @param array<string,mixed> $options
+     */
+    protected function setParsingOptions(array $options): void
+    {
+        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->resolveSyncedPatterns = $options['resolve-synced-patterns'] ?? false;
+        $this->resolveBlockBindings = $options['resolve-block-bindings'] ?? false;
     }
 
     /**
@@ -304,18 +353,18 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $parsing_error = false;
 
         try {
-            $blocks = parse_blocks($post_content);
-            $blocks = array_values(array_filter($blocks, function ($block) {
-                // @phpstan-ignore-next-line
-                $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
-                // @phpstan-ignore-next-line
-                return ! $is_whitespace_block;
-            }));
+            $blocks = $this->parseBlocksWithoutWhitespace($post_content);
 
             $registered_blocks = $this->block_registry->get_all_registered();
 
-            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $options) {
-                return $this->source_block($block, $registered_blocks, $options);
+            $context = [];
+            if ($post_id !== null) {
+                $context['postId'] = $post_id;
+                $context['postType'] = get_post_type($post_id);
+            }
+
+            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $options, $context) {
+                return $this->source_block($block, $registered_blocks, $options, $context);
             }, $blocks);
 
             $sourced_blocks = array_values(array_filter($sourced_blocks));
@@ -351,9 +400,26 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     }
 
     /**
+     * Parse the blocks, removing the whitespace between them
+     * (which `parse_blocks()` returns as blocks with no name)
+     *
+     * @return array<array<string,mixed>>
+     */
+    protected function parseBlocksWithoutWhitespace(string $content): array
+    {
+        return array_values(array_filter(parse_blocks($content), function ($block) {
+            // @phpstan-ignore-next-line
+            $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
+            // @phpstan-ignore-next-line
+            return ! $is_whitespace_block;
+        }));
+    }
+
+    /**
      * @param array<string,mixed> $block
      * @param WP_Block_Type[] $registered_blocks
      * @param array<string,mixed> $options
+     * @param array<string,mixed> $context The context available to the block (eg: `postId`), as when rendering it
      *
      * @return array<string,mixed>|null
      *
@@ -361,7 +427,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block(array $block, array $registered_blocks, array $options = []): ?array
+    protected function source_block(array $block, array $registered_blocks, array $options = [], array $context = []): ?array
     {
         /**
          * HTML between the blocks of a post (one the editor converted only in
@@ -439,6 +505,13 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
         }
 
+        if ($this->resolveBlockBindings) {
+            $block_attributes = array_merge(
+                $block_attributes,
+                $this->getBlockBindingsAttributes($block, $context)
+            );
+        }
+
         // Sourced attributes already pass through the HTML5 DOM crawler above (which
         // converts the non-breaking space "U+00A0" (UTF-8 bytes "\xc2\xa0") to "&nbsp;"),
         // but unsourced attributes are taken raw from the block-delimiter JSON. Normalize
@@ -460,13 +533,20 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         if (isset($block['innerBlocks'])) {
-            $inner_blocks = array_map(function ($block) use ($registered_blocks, $options) {
-                return $this->source_block($block, $registered_blocks, $options);
+            $inner_blocks = array_map(function ($block) use ($registered_blocks, $options, $context) {
+                return $this->source_block($block, $registered_blocks, $options, $context);
             }, $block['innerBlocks']);
 
             $inner_blocks = array_values(array_filter($inner_blocks));
 
             if (! empty($inner_blocks)) {
+                $sourced_block['innerBlocks'] = $inner_blocks;
+            }
+        }
+
+        if ($this->resolveSyncedPatterns && $block_name === self::SYNCED_PATTERN_BLOCK_NAME) {
+            $inner_blocks = $this->getSyncedPatternInnerBlocks($block, $registered_blocks, $options, $context);
+            if ($inner_blocks !== []) {
                 $sourced_block['innerBlocks'] = $inner_blocks;
             }
         }
@@ -493,6 +573,154 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         return $sourced_block;
+    }
+
+    /**
+     * The blocks of the synced pattern referenced by a `core/block`
+     * block, as its inner blocks. As when WordPress renders it,
+     * the pattern must be published and not password-protected,
+     * and its blocks receive the overrides set in the referencing
+     * block (attribute `content`) as context `pattern/overrides`.
+     *
+     * The pattern's blocks are parsed from its content (instead of
+     * rendering the pattern), so each block appears once, under
+     * its own parent.
+     *
+     * @param array<string,mixed> $block
+     * @param WP_Block_Type[] $registered_blocks
+     * @param array<string,mixed> $options
+     * @param array<string,mixed> $context
+     * @return array<array<string,mixed>>
+     */
+    protected function getSyncedPatternInnerBlocks(array $block, array $registered_blocks, array $options, array $context): array
+    {
+        /** @var array<string,mixed> */
+        $attrs = $block['attrs'];
+        $ref = $attrs['ref'] ?? null;
+        if (!is_numeric($ref)) {
+            return [];
+        }
+        $syncedPatternID = (int) $ref;
+        if (isset($this->resolvingSyncedPatternIDs[$syncedPatternID])) {
+            return [];
+        }
+
+        $syncedPattern = get_post($syncedPatternID);
+        if (
+            !($syncedPattern instanceof WP_Post)
+            || $syncedPattern->post_type !== 'wp_block'
+            || $syncedPattern->post_status !== 'publish'
+            || $syncedPattern->post_password !== ''
+        ) {
+            return [];
+        }
+
+        if (isset($attrs['content'])) {
+            $context['pattern/overrides'] = $attrs['content'];
+        }
+
+        $this->resolvingSyncedPatternIDs[$syncedPatternID] = true;
+        try {
+            $inner_blocks = array_map(
+                fn (array $innerBlock) => $this->source_block($innerBlock, $registered_blocks, $options, $context),
+                $this->parseBlocksWithoutWhitespace($syncedPattern->post_content)
+            );
+        } finally {
+            unset($this->resolvingSyncedPatternIDs[$syncedPatternID]);
+        }
+        return array_values(array_filter($inner_blocks));
+    }
+
+    /**
+     * The values of the block's attributes bound to a source (via
+     * the Block Bindings API), such as a post meta, or an override
+     * in a synced pattern.
+     *
+     * Same logic as in `WP_Block::process_block_bindings()`,
+     * without rendering the block.
+     *
+     * @param array<string,mixed> $block
+     * @param array<string,mixed> $context
+     * @return array<string,mixed>
+     */
+    protected function getBlockBindingsAttributes(array $block, array $context): array
+    {
+        /** @var string */
+        $block_name = $block['blockName'];
+        /** @var array<string,mixed> */
+        $attrs = $block['attrs'];
+        $bindings = $attrs['metadata']['bindings'] ?? null;
+        if (!is_array($bindings) || $bindings === []) {
+            return [];
+        }
+        $supported_attributes = $this->getBlockBindingsSupportedAttributes($block_name);
+        if ($supported_attributes === []) {
+            return [];
+        }
+
+        $computed_attributes = [];
+
+        /**
+         * A default binding for pattern overrides applies
+         * to all the supported attributes
+         */
+        if (($bindings['__default']['source'] ?? null) === 'core/pattern-overrides') {
+            $updated_bindings = [];
+            foreach ($supported_attributes as $attribute_name) {
+                $updated_bindings[$attribute_name] = $bindings[$attribute_name] ?? ['source' => 'core/pattern-overrides'];
+            }
+            $bindings = $updated_bindings;
+            /** @var array<string,mixed> */
+            $metadata = $attrs['metadata'];
+            $computed_attributes['metadata'] = array_merge(
+                $metadata,
+                ['bindings' => $bindings]
+            );
+        }
+
+        $block_instance = new WP_Block($block, $context, $this->block_registry);
+        foreach ($bindings as $attribute_name => $block_binding) {
+            if (
+                !in_array($attribute_name, $supported_attributes, true)
+                || !is_array($block_binding)
+                || !is_string($block_binding['source'] ?? null)
+            ) {
+                continue;
+            }
+            $block_binding_source = get_block_bindings_source($block_binding['source']);
+            if ($block_binding_source === null) {
+                continue;
+            }
+            /**
+             * Property `uses_context` was added in WordPress 6.7
+             *
+             * @var string[]
+             */
+            $uses_context = get_object_vars($block_binding_source)['uses_context'] ?? [];
+            foreach ($uses_context as $context_name) {
+                if (array_key_exists($context_name, $context)) {
+                    $block_instance->context[$context_name] = $context[$context_name];
+                }
+            }
+            /** @var array<string,mixed> */
+            $source_args = !empty($block_binding['args']) && is_array($block_binding['args']) ? $block_binding['args'] : [];
+            $source_value = $block_binding_source->get_value($source_args, $block_instance, $attribute_name);
+            if ($source_value !== null) {
+                $computed_attributes[$attribute_name] = $source_value;
+            }
+        }
+        return $computed_attributes;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getBlockBindingsSupportedAttributes(string $block_name): array
+    {
+        if (function_exists('get_block_bindings_supported_attributes')) {
+            return get_block_bindings_supported_attributes($block_name);
+        }
+        return self::BLOCK_BINDINGS_SUPPORTED_ATTRIBUTES[$block_name] ?? [];
     }
 
     /**

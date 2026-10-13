@@ -1207,6 +1207,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -1234,6 +1246,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -1252,6 +1276,18 @@
                                 },
                                 {
                                     "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -5740,6 +5776,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -5767,6 +5815,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -5785,6 +5845,18 @@
                                 },
                                 {
                                     "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
@@ -6270,6 +6342,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -6297,6 +6381,18 @@
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
                                 }
                             ]
                         },
@@ -6315,6 +6411,18 @@
                                 },
                                 {
                                     "name": "useHTML5Parser",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveSyncedPatterns",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                },
+                                {
+                                    "name": "resolveBlockBindings",
                                     "extensions": {
                                         "isSensitiveDataElement": false
                                     }
