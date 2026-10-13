@@ -1,0 +1,16 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+    types {
+      ...TypeData
+    }
+  }
+}
+
+fragment TypeData on __Type {
+  name
+  # Type "__Type" has no field "nonExistingField"
+  nonExistingField
+}

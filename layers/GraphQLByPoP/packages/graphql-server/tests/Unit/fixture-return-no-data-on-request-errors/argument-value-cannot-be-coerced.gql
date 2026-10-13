@@ -1,0 +1,11 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+    # The input expects an Array<String>, passing Array<Array>
+    directives(ofKinds: [["query"]]) {
+      name
+    }
+  }
+}

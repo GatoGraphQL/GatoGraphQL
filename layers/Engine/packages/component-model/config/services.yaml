@@ -153,6 +153,9 @@ services:
     PoP\ComponentModel\Schema\SchemaNamespacingServiceInterface:
         class: \PoP\ComponentModel\Schema\SchemaNamespacingService
 
+    PoP\ComponentModel\Schema\TypeConditionServiceInterface:
+        class: \PoP\ComponentModel\Schema\TypeConditionService
+
     PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface:
         class: \PoP\ComponentModel\AttachableExtensions\AttachableExtensionManager
 

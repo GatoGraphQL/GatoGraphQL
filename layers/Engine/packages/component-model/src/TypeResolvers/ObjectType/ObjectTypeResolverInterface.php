@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\TypeResolvers\ObjectType;
 
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
+use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FieldResolvers\ObjectType\ObjectTypeFieldResolverInterface;
 use PoP\ComponentModel\MutationResolvers\MutationResolverInterface;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
@@ -55,6 +56,16 @@ interface ObjectTypeResolverInterface extends RelationalTypeResolverInterface, O
      * Get the first FieldResolver that resolves the field
      */
     public function getExecutableObjectTypeFieldResolverForField(FieldInterface|string $fieldOrFieldName): ?ObjectTypeFieldResolverInterface;
+    /**
+     * Validate the Field Arguments against the schema only
+     * (non-existing arguments, coercion of the values, and
+     * missing mandatory arguments), as done before executing
+     * the query.
+     */
+    public function validateFieldArgsAgainstSchema(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void;
     /**
      * @param array<string,mixed> $fieldArgs
      */

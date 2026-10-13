@@ -1,0 +1,24 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'nonExistingField' on type '__Type'",
+            "locations": [
+                {
+                    "line": 12,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingField",
+                    "__type(name: \"NonExistingType\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Type",
+                "field": "nonExistingField",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Field-Selections"
+            }
+        }
+    ]
+}

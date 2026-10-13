@@ -1,0 +1,14 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+  }
+  # There is no type "NonExistingType", so __type is null,
+  # and its fields are never resolved
+  __type(name: "NonExistingType") {
+    name
+    # Type "__Type" has no field "nonExistingField"
+    nonExistingField
+  }
+}
