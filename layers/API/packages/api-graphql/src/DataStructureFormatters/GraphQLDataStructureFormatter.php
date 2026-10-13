@@ -8,24 +8,47 @@ use PoPAPI\APIMirrorQuery\DataStructureFormatters\MirrorQueryDataStructureFormat
 use PoPAPI\APIMirrorQuery\State\PreviouslyResolvedFieldsForObjectsStore;
 use PoPAPI\GraphQLAPI\Module;
 use PoPAPI\GraphQLAPI\ModuleConfiguration;
+use PoPAPI\GraphQLAPI\State\ResponsePositionStore;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\FeedbackCategories;
 use PoP\ComponentModel\Feedback\FeedbackEntryManagerInterface;
 use PoP\ComponentModel\Feedback\Tokens;
+use PoP\ComponentModel\Module as ComponentModelModule;
+use PoP\ComponentModel\ModuleConfiguration as ComponentModelModuleConfiguration;
+use PoP\ComponentModel\Registries\TypeRegistryInterface;
+use PoP\ComponentModel\Response\OutputServiceInterface;
+use PoP\ComponentModel\Schema\OutputValueNullabilityServiceInterface;
+use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\TypeResolvers\OutputValueCoercingLeafTypeResolverInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\LeafField;
 use PoP\GraphQLParser\Spec\Parser\Ast\RelationalField;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
 use SplObjectStorage;
+use stdClass;
+
+use function in_array;
+use function is_array;
+use function is_bool;
 
 class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
 {
     private const ADDITIONAL_FEEDBACK = 'additionalFeedback';
 
+    /**
+     * Set only while formatting the response with
+     * the spec-compliant error handling enabled
+     */
+    private ?ResponsePositionStore $responsePositionStore = null;
+
     private ?FeedbackEntryManagerInterface $feedbackEntryService = null;
+    private ?TypeRegistryInterface $typeRegistry = null;
+    private ?OutputValueNullabilityServiceInterface $outputValueNullabilityService = null;
+    private ?OutputServiceInterface $outputService = null;
 
     final protected function getFeedbackEntryManager(): FeedbackEntryManagerInterface
     {
@@ -35,6 +58,33 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $this->feedbackEntryService = $feedbackEntryService;
         }
         return $this->feedbackEntryService;
+    }
+    final protected function getTypeRegistry(): TypeRegistryInterface
+    {
+        if ($this->typeRegistry === null) {
+            /** @var TypeRegistryInterface */
+            $typeRegistry = $this->instanceManager->getInstance(TypeRegistryInterface::class);
+            $this->typeRegistry = $typeRegistry;
+        }
+        return $this->typeRegistry;
+    }
+    final protected function getOutputValueNullabilityService(): OutputValueNullabilityServiceInterface
+    {
+        if ($this->outputValueNullabilityService === null) {
+            /** @var OutputValueNullabilityServiceInterface */
+            $outputValueNullabilityService = $this->instanceManager->getInstance(OutputValueNullabilityServiceInterface::class);
+            $this->outputValueNullabilityService = $outputValueNullabilityService;
+        }
+        return $this->outputValueNullabilityService;
+    }
+    final protected function getOutputService(): OutputServiceInterface
+    {
+        if ($this->outputService === null) {
+            /** @var OutputServiceInterface */
+            $outputService = $this->instanceManager->getInstance(OutputServiceInterface::class);
+            $this->outputService = $outputService;
+        }
+        return $this->outputService;
     }
 
     public function getName(): string
@@ -48,13 +98,33 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      */
     public function getFormattedData(array $data): array
     {
+        /** @var ComponentModelModuleConfiguration */
+        $componentModelModuleConfiguration = App::getModule(ComponentModelModule::class)->getConfiguration();
+        $previousResponsePositionStore = $this->responsePositionStore;
+        $this->responsePositionStore = $componentModelModuleConfiguration->enableSpecCompliantErrorHandling()
+            ? $this->createResponsePositionStore($data)
+            : null;
+        try {
+            return $this->doGetFormattedData($data);
+        } finally {
+            $this->responsePositionStore = $previousResponsePositionStore;
+        }
+    }
+
+    /**
+     * @return array<string,mixed>
+     * @param array<string,mixed> $data
+     */
+    protected function doGetFormattedData(array $data): array
+    {
         $ret = [];
 
         /**
          * Calculate the data first (even if printed later)
          * as it can also add errors.
          */
-        $resultData = parent::getFormattedData($data);
+        $isNullData = false;
+        $resultData = $this->formatData($data, $isNullData);
 
         /**
          * If the formatting produced additional feedback entries,
@@ -95,7 +165,10 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
             $this->reformatGeneralEntries($data[Response::GENERAL_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatDocumentEntries($data[Response::DOCUMENT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
             $this->reformatSchemaEntries($data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? []),
-            $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->responsePositionStore !== null
+                ? $this->reformatObjectErrorEntriesWithResponsePath($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? [], $this->responsePositionStore)
+                : $this->reformatObjectEntries($data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? []),
+            $this->responsePositionStore?->getErrorEntries() ?? [],
         );
         if ($errors !== []) {
             $ret['errors'] = $errors;
@@ -104,11 +177,406 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
         // Add the "extensions" entry
         $this->maybeAddTopLevelExtensionsEntryToResponse($ret, $data);
 
-        if ($resultData) {
+        /**
+         * When the `null` of a Non-Null response position was
+         * propagated all the way up to the root, "data" is `null`.
+         *
+         * @see https://spec.graphql.org/draft/#sec-Handling-Execution-Errors
+         */
+        if ($isNullData) {
+            $ret['data'] = null;
+        } elseif ($resultData) {
             $ret['data'] = $resultData;
         }
 
         return $ret;
+    }
+
+    /**
+     * @param array<string,mixed> $data
+     */
+    protected function createResponsePositionStore(array $data): ResponsePositionStore
+    {
+        $objectTypeResolvers = [];
+        foreach ($this->getTypeRegistry()->getObjectTypeResolvers() as $objectTypeResolver) {
+            $objectTypeResolvers[$objectTypeResolver->getTypeOutputKey()] = $objectTypeResolver;
+        }
+        $responsePositionStore = new ResponsePositionStore($objectTypeResolvers);
+
+        /** @var array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> */
+        $objectErrorEntries = $data[Response::OBJECT_FEEDBACK][FeedbackCategories::ERROR] ?? [];
+        foreach ($objectErrorEntries as $typeOutputKey => $fieldItems) {
+            /** @var FieldInterface $field */
+            foreach ($fieldItems as $field) {
+                foreach ($fieldItems[$field] as $item) {
+                    /** @var array<string|int> */
+                    $ids = $item[Tokens::IDS] ?? [];
+                    foreach ($ids as $id) {
+                        $responsePositionStore->addErroredObjectField($typeOutputKey, $id, $field);
+                    }
+                }
+            }
+        }
+
+        /** @var array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> */
+        $schemaErrorEntries = $data[Response::SCHEMA_FEEDBACK][FeedbackCategories::ERROR] ?? [];
+        foreach ($schemaErrorEntries as $typeOutputKey => $fieldItems) {
+            /** @var FieldInterface $field */
+            foreach ($fieldItems as $field) {
+                $responsePositionStore->addErroredField($typeOutputKey, $field);
+            }
+        }
+
+        return $responsePositionStore;
+    }
+
+    /**
+     * Print an error entry for every response position the error
+     * applies to, under top-level entry "path". If the
+     * (object, field) was not printed in the response, print
+     * the error without the "path".
+     *
+     * @see https://spec.graphql.org/draft/#sec-Errors.Error-Result-Format
+     *
+     * @param array<string,SplObjectStorage<FieldInterface,array<array<string,mixed>>>> $entries
+     * @return array<int,mixed[]>
+     */
+    protected function reformatObjectErrorEntriesWithResponsePath(
+        array $entries,
+        ResponsePositionStore $responsePositionStore,
+    ): array {
+        $ret = [];
+        foreach ($entries as $typeOutputKey => $fieldItems) {
+            /** @var FieldInterface $field */
+            foreach ($fieldItems as $field) {
+                foreach ($fieldItems[$field] as $item) {
+                    /** @var array<string|int> */
+                    $ids = $item[Tokens::IDS] ?? [];
+                    if ($ids === []) {
+                        $ret[] = $this->getObjectEntry($typeOutputKey, $item);
+                        continue;
+                    }
+                    $idsWithoutResponsePath = [];
+                    foreach ($ids as $id) {
+                        $responsePaths = $responsePositionStore->getResponsePaths($typeOutputKey, $id, $field);
+                        if ($responsePaths === []) {
+                            $idsWithoutResponsePath[] = $id;
+                            continue;
+                        }
+                        foreach ($responsePaths as $responsePath) {
+                            $ret[] = $this->addResponsePathToEntry(
+                                $this->getObjectEntry(
+                                    $typeOutputKey,
+                                    [
+                                        ...$item,
+                                        Tokens::IDS => [$id],
+                                    ]
+                                ),
+                                $responsePath,
+                            );
+                        }
+                    }
+                    if ($idsWithoutResponsePath !== []) {
+                        $ret[] = $this->getObjectEntry(
+                            $typeOutputKey,
+                            [
+                                ...$item,
+                                Tokens::IDS => $idsWithoutResponsePath,
+                            ]
+                        );
+                    }
+                }
+            }
+        }
+        return $ret;
+    }
+
+    /**
+     * Place "path" after "message" and "locations",
+     * as in the examples in the GraphQL spec.
+     *
+     * @param array<string,mixed> $entry
+     * @param array<string|int> $responsePath
+     * @return array<string,mixed>
+     */
+    protected function addResponsePathToEntry(array $entry, array $responsePath): array
+    {
+        $entryWithResponsePath = [];
+        foreach ($entry as $key => $value) {
+            if ($key === 'extensions' || $key === 'causes') {
+                $entryWithResponsePath['path'] ??= $responsePath;
+            }
+            $entryWithResponsePath[$key] = $value;
+        }
+        $entryWithResponsePath['path'] ??= $responsePath;
+        return $entryWithResponsePath;
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function onFieldAddedToResponse(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+    ): void {
+        $this->responsePositionStore?->addResponsePath($typeOutputKey, $objectID, $field, $responsePath);
+    }
+
+    /**
+     * Coerce the value of Scalar and Enum types, and set `null`
+     * on lists with Non-Null items that contain a `null` item.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Value-Completion
+     *
+     * @param array<string|int> $responsePath
+     */
+    protected function processLeafFieldValue(
+        string $typeOutputKey,
+        string|int $objectID,
+        LeafField $leafField,
+        mixed $value,
+        array $responsePath,
+    ): mixed {
+        if ($this->responsePositionStore === null || $value === null) {
+            return $value;
+        }
+        $objectTypeResolver = $this->responsePositionStore->getObjectTypeResolver($typeOutputKey);
+        if ($objectTypeResolver === null) {
+            return $value;
+        }
+        $fieldTypeModifiers = $objectTypeResolver->getFieldTypeModifiers($leafField);
+        if ($fieldTypeModifiers === null) {
+            return $value;
+        }
+        $fieldTypeResolver = $objectTypeResolver->getFieldTypeResolver($leafField);
+        $outputValueCoercingLeafTypeResolver = $fieldTypeResolver instanceof OutputValueCoercingLeafTypeResolverInterface
+            ? $fieldTypeResolver
+            : null;
+
+        $fieldIsArrayOfArrays = ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS) === SchemaTypeModifiers::IS_ARRAY_OF_ARRAYS;
+        $fieldIsArray = $fieldIsArrayOfArrays || ($fieldTypeModifiers & SchemaTypeModifiers::IS_ARRAY) === SchemaTypeModifiers::IS_ARRAY;
+        if (!$fieldIsArray) {
+            return $this->coerceLeafValue($typeOutputKey, $objectID, $leafField, $value, $outputValueCoercingLeafTypeResolver, $responsePath);
+        }
+
+        if (!is_array($value)) {
+            if ($outputValueCoercingLeafTypeResolver === null) {
+                return $value;
+            }
+            $this->addCoercionError($typeOutputKey, $objectID, $leafField, $value, $outputValueCoercingLeafTypeResolver, $responsePath);
+            return null;
+        }
+
+        $outputValueNullabilityService = $this->getOutputValueNullabilityService();
+        foreach ($value as $key => $arrayItem) {
+            if ($arrayItem === null) {
+                continue;
+            }
+            $arrayItemResponsePath = [...$responsePath, $key];
+            if (!$fieldIsArrayOfArrays) {
+                $value[$key] = $this->coerceLeafValue($typeOutputKey, $objectID, $leafField, $arrayItem, $outputValueCoercingLeafTypeResolver, $arrayItemResponsePath);
+                continue;
+            }
+            if (!is_array($arrayItem)) {
+                if ($outputValueCoercingLeafTypeResolver !== null) {
+                    $this->addCoercionError($typeOutputKey, $objectID, $leafField, $arrayItem, $outputValueCoercingLeafTypeResolver, $arrayItemResponsePath);
+                    $value[$key] = null;
+                }
+                continue;
+            }
+            foreach ($arrayItem as $innerKey => $innerArrayItem) {
+                if ($innerArrayItem === null) {
+                    continue;
+                }
+                $arrayItem[$innerKey] = $this->coerceLeafValue($typeOutputKey, $objectID, $leafField, $innerArrayItem, $outputValueCoercingLeafTypeResolver, [...$arrayItemResponsePath, $innerKey]);
+            }
+            if (
+                $outputValueNullabilityService->hasNonNullableArrayOfArraysItems($fieldTypeModifiers)
+                && in_array(null, $arrayItem, true)
+            ) {
+                $this->maybeAddNullabilityError($typeOutputKey, $objectID, $leafField, FieldResolutionErrorFeedbackItemProvider::E9, $arrayItemResponsePath);
+                $value[$key] = null;
+                continue;
+            }
+            $value[$key] = $arrayItem;
+        }
+
+        if (
+            $outputValueNullabilityService->hasNonNullableArrayItems($fieldTypeModifiers)
+            && in_array(null, $value, true)
+        ) {
+            $this->maybeAddNullabilityError($typeOutputKey, $objectID, $leafField, FieldResolutionErrorFeedbackItemProvider::E6, $responsePath);
+            return null;
+        }
+        return $value;
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function coerceLeafValue(
+        string $typeOutputKey,
+        string|int $objectID,
+        LeafField $leafField,
+        mixed $value,
+        ?OutputValueCoercingLeafTypeResolverInterface $outputValueCoercingLeafTypeResolver,
+        array $responsePath,
+    ): mixed {
+        if ($outputValueCoercingLeafTypeResolver === null) {
+            return $value;
+        }
+        /** @var string|int|float|bool|mixed[]|stdClass $value */
+        $coercedValue = $outputValueCoercingLeafTypeResolver->coerceOutputValue($value);
+        if ($coercedValue === null) {
+            $this->addCoercionError($typeOutputKey, $objectID, $leafField, $value, $outputValueCoercingLeafTypeResolver, $responsePath);
+        }
+        return $coercedValue;
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function addCoercionError(
+        string $typeOutputKey,
+        string|int $objectID,
+        LeafField $leafField,
+        mixed $value,
+        OutputValueCoercingLeafTypeResolverInterface $outputValueCoercingLeafTypeResolver,
+        array $responsePath,
+    ): void {
+        if (is_array($value) || $value instanceof stdClass) {
+            $valueAsString = $this->getOutputService()->jsonEncodeArrayOrStdClassValue($value);
+        } elseif (is_bool($value)) {
+            $valueAsString = $value ? 'true' : 'false';
+        } else {
+            /** @var string|int|float $value */
+            $valueAsString = (string) $value;
+        }
+        $this->addErrorEntry(
+            $typeOutputKey,
+            $objectID,
+            $leafField,
+            new FeedbackItemResolution(
+                FieldResolutionErrorFeedbackItemProvider::class,
+                FieldResolutionErrorFeedbackItemProvider::E16,
+                [
+                    $valueAsString,
+                    $leafField->getName(),
+                    $outputValueCoercingLeafTypeResolver->getMaybeNamespacedTypeName(),
+                ]
+            ),
+            $responsePath,
+        );
+    }
+
+    /**
+     * Every `null` on a Non-Null response position must have an
+     * error. If the (object, field) does not have one yet
+     * (eg: a directive set the `null` but did not report it),
+     * add it.
+     *
+     * @param array<string|int> $responsePath
+     */
+    protected function maybeAddNullabilityError(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        string $errorCode,
+        array $responsePath,
+    ): void {
+        if ($this->responsePositionStore === null) {
+            return;
+        }
+        if ($this->responsePositionStore->hasError($typeOutputKey, $objectID, $field)) {
+            return;
+        }
+        $this->addErrorEntry(
+            $typeOutputKey,
+            $objectID,
+            $field,
+            new FeedbackItemResolution(
+                FieldResolutionErrorFeedbackItemProvider::class,
+                $errorCode,
+                [
+                    $field->getName(),
+                ]
+            ),
+            $responsePath,
+        );
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function addErrorEntry(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        FeedbackItemResolution $feedbackItemResolution,
+        array $responsePath,
+    ): void {
+        if ($this->responsePositionStore === null) {
+            return;
+        }
+        $item = $this->getFeedbackEntryManager()->formatObjectOrSchemaFeedbackCommonEntry(
+            $field,
+            null,
+            [],
+            $feedbackItemResolution,
+            [$objectID],
+        );
+        $item[Tokens::FIELD] = $field->asASTNodeString();
+        $this->responsePositionStore->addErrorEntry(
+            $this->addResponsePathToEntry(
+                $this->getObjectEntry($typeOutputKey, $item),
+                $responsePath,
+            )
+        );
+        $this->responsePositionStore->addErroredObjectField($typeOutputKey, $objectID, $field);
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function mustPropagateNullFromField(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+    ): bool {
+        if ($this->responsePositionStore === null) {
+            return false;
+        }
+        $fieldTypeModifiers = $this->responsePositionStore->getObjectTypeResolver($typeOutputKey)?->getFieldTypeModifiers($field);
+        if ($fieldTypeModifiers === null) {
+            return false;
+        }
+        if (!$this->getOutputValueNullabilityService()->isNonNullable($fieldTypeModifiers)) {
+            return false;
+        }
+        $this->maybeAddNullabilityError($typeOutputKey, $objectID, $field, FieldResolutionErrorFeedbackItemProvider::E3, $responsePath);
+        return true;
+    }
+
+    /**
+     * @param array<string|int> $responsePath
+     */
+    protected function mustPropagateNullFromListItem(
+        string $typeOutputKey,
+        string|int $objectID,
+        FieldInterface $field,
+        array $responsePath,
+    ): bool {
+        if ($this->responsePositionStore === null) {
+            return false;
+        }
+        $fieldTypeModifiers = $this->responsePositionStore->getObjectTypeResolver($typeOutputKey)?->getFieldTypeModifiers($field);
+        if ($fieldTypeModifiers === null) {
+            return false;
+        }
+        return $this->getOutputValueNullabilityService()->hasNonNullableArrayItems($fieldTypeModifiers);
     }
 
     /**

@@ -9,14 +9,18 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+use PoP\ComponentModel\TypeResolvers\OutputValueCoercingLeafTypeResolverInterface;
 use stdClass;
+
+use function is_int;
+use function is_string;
 
 /**
  * GraphQL Built-in Scalar
  *
  * @see https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars
  */
-class IDScalarTypeResolver extends AbstractScalarTypeResolver
+class IDScalarTypeResolver extends AbstractScalarTypeResolver implements OutputValueCoercingLeafTypeResolverInterface
 {
     use BuiltInScalarTypeResolverTrait;
 
@@ -28,6 +32,20 @@ class IDScalarTypeResolver extends AbstractScalarTypeResolver
     public function getTypeDescription(): ?string
     {
         return $this->__('The ID scalar type represents a unique identifier.', 'gatographql');
+    }
+
+    /**
+     * Fields of type `ID` are serialized as a string.
+     * Integers can be coerced.
+     *
+     * @see https://spec.graphql.org/draft/#sec-ID.Result-Coercion
+     */
+    public function coerceOutputValue(string|int|float|bool|array|stdClass $serializedValue): string|int|float|bool|null
+    {
+        if (is_string($serializedValue) || is_int($serializedValue)) {
+            return (string) $serializedValue;
+        }
+        return null;
     }
 
     /**
