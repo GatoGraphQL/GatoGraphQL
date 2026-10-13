@@ -48,6 +48,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
     public final const E_5_8_3 = '5.8.3';
     public final const E_5_8_4 = '5.8.4';
     public final const E_5_8_5 = '5.8.5';
+    public final const E_5_8_5_B = '5.8.5[b]';
     public final const E_6_1_A = '6.1[a]';
     public final const E_6_1_B = '6.1[b]';
     public final const E_6_1_C = '6.1[c]';
@@ -103,6 +104,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_8_3,
             self::E_5_8_4,
             self::E_5_8_5,
+            self::E_5_8_5_B,
             self::E_6_1_A,
             self::E_6_1_B,
             self::E_6_1_C,
@@ -152,6 +154,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_8_3 => $this->__('Variable \'%s\' has not been defined in the operation', 'gatographql'),
             self::E_5_8_4 => $this->__('Variable \'%s\' is not used', 'gatographql'),
             self::E_5_8_5 => $this->__('Non-nullable variable \'%s\' has not been provided', 'gatographql'),
+            self::E_5_8_5_B => $this->__('Variable \'%1$s\' of type \'%2$s\' cannot be used where type \'%3$s\' is expected', 'gatographql'),
             self::E_6_1_A => $this->__('Operation with name \'%s\' does not exist', 'gatographql'),
             self::E_6_1_B => $this->__('When the document contains more than one operation, the operation name to execute must be provided', 'gatographql'),
             self::E_6_1_C => $this->__('The document is empty', 'gatographql'),
@@ -207,6 +210,7 @@ class GraphQLSpecErrorFeedbackItemProvider extends AbstractFeedbackItemProvider
             self::E_5_8_3 => 'https://spec.graphql.org/draft/#sec-All-Variable-Uses-Defined',
             self::E_5_8_4 => 'https://spec.graphql.org/draft/#sec-All-Variables-Used',
             self::E_5_8_5 => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
+            self::E_5_8_5_B => 'https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed',
             self::E_6_1_A,
             self::E_6_1_B,
             self::E_6_1_C,

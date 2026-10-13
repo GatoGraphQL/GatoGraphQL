@@ -5,8 +5,10 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ExtendedSpec\Execution;
 
 use PoP\ComponentModel\DirectiveResolvers\OperationDependencyDefinerFieldDirectiveResolverInterface;
+use PoP\ComponentModel\FeedbackItemProviders\InputValueCoercionGraphQLSpecErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\ComponentModel\Registries\FieldDirectiveResolverRegistryInterface;
 use PoP\ComponentModel\Registries\OperationDependencyDefinerDirectiveRegistryInterface;
 use PoP\ComponentModel\Registries\TypeRegistryInterface;
 use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
@@ -14,11 +16,17 @@ use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterfac
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\ScalarTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
+use PoP\GraphQLParser\Enums\FragmentInclusionDirectiveName;
+use PoP\GraphQLParser\Exception\FeatureNotSupportedException;
 use PoP\GraphQLParser\Exception\InvalidRequestException;
 use PoP\GraphQLParser\ExtendedSpec\Execution\AbstractExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Parser\Ast\ArgumentValue\DynamicVariableReferenceInterface;
 use PoP\GraphQLParser\FeedbackItemProviders\GraphQLSpecErrorFeedbackItemProvider;
+use PoP\GraphQLParser\FeedbackItemProviders\GraphQLUnsupportedFeatureErrorFeedbackItemProvider;
 use PoP\GraphQLParser\Spec\Execution\Context;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
+use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\VariableReference;
 use PoP\GraphQLParser\Spec\Parser\Ast\Directive;
 use PoP\GraphQLParser\Spec\Parser\Ast\Document;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
@@ -32,6 +40,9 @@ use PoP\GraphQLParser\Spec\Parser\Ast\Variable;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\ComponentModel\Feedback\FeedbackItemResolution;
+
+use function is_bool;
+use function sprintf;
 
 class ExecutableDocument extends AbstractExecutableDocument
 {
@@ -65,6 +76,7 @@ class ExecutableDocument extends AbstractExecutableDocument
 
     private ?TypeRegistryInterface $typeRegistry = null;
     private ?OperationDependencyDefinerDirectiveRegistryInterface $operationDependencyDefinerDirectiveRegistry = null;
+    private ?FieldDirectiveResolverRegistryInterface $fieldDirectiveResolverRegistry = null;
 
     final protected function getTypeRegistry(): TypeRegistryInterface
     {
@@ -83,6 +95,16 @@ class ExecutableDocument extends AbstractExecutableDocument
             $this->operationDependencyDefinerDirectiveRegistry = $operationDependencyDefinerDirectiveRegistry;
         }
         return $this->operationDependencyDefinerDirectiveRegistry;
+    }
+
+    final protected function getFieldDirectiveResolverRegistry(): FieldDirectiveResolverRegistryInterface
+    {
+        if ($this->fieldDirectiveResolverRegistry === null) {
+            /** @var FieldDirectiveResolverRegistryInterface */
+            $fieldDirectiveResolverRegistry = InstanceManagerFacade::getInstance()->getInstance(FieldDirectiveResolverRegistryInterface::class);
+            $this->fieldDirectiveResolverRegistry = $fieldDirectiveResolverRegistry;
+        }
+        return $this->fieldDirectiveResolverRegistry;
     }
 
     public function __construct(
@@ -125,6 +147,7 @@ class ExecutableDocument extends AbstractExecutableDocument
         parent::validate();
         $this->assertOperationTypesExistInSchema();
         $this->assertFragmentSpreadTypesExistInSchema();
+        $this->assertFragmentBondDirectivesAreValid();
         $this->assertVariablesAreInputTypes();
     }
 
@@ -240,11 +263,180 @@ class ExecutableDocument extends AbstractExecutableDocument
             if ($fieldOrFragmentBond instanceof InlineFragment) {
                 /** @var InlineFragment */
                 $inlineFragment = $fieldOrFragmentBond;
-                $this->assertFragmentSpreadTypeExistsInSchema($inlineFragment->getTypeName(), $inlineFragment);
+                $inlineFragmentTypeName = $inlineFragment->getTypeName();
+                if ($inlineFragmentTypeName !== null) {
+                    $this->assertFragmentSpreadTypeExistsInSchema($inlineFragmentTypeName, $inlineFragment);
+                }
                 $this->assertInlineFragmentSpreadTypesInFieldsOrFragmentsExistInSchema($inlineFragment->getFieldsOrFragmentBonds());
                 continue;
             }
         }
+    }
+
+    /**
+     * Fragment spreads and inline fragments only support directives
+     * `@include` and `@skip`, which are evaluated when collecting the
+     * fields, before resolving the query. Then, argument `if` must be
+     * a Boolean, or an operation variable of type Boolean.
+     *
+     * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
+     * @see https://spec.graphql.org/September2025/#sec-Field-Collection
+     */
+    protected function assertFragmentBondDirectivesAreValid(): void
+    {
+        foreach ($this->document->getFragments() as $fragment) {
+            $this->assertFragmentBondDirectivesInFieldsOrFragmentBondsAreValid($fragment->getFieldsOrFragmentBonds());
+        }
+        foreach ($this->document->getOperations() as $operation) {
+            $this->assertFragmentBondDirectivesInFieldsOrFragmentBondsAreValid($operation->getFieldsOrFragmentBonds());
+        }
+    }
+
+    /**
+     * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
+     * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertFragmentBondDirectivesInFieldsOrFragmentBondsAreValid(array $fieldsOrFragmentBonds): void
+    {
+        foreach ($fieldsOrFragmentBonds as $fieldOrFragmentBond) {
+            if ($fieldOrFragmentBond instanceof RelationalField) {
+                $this->assertFragmentBondDirectivesInFieldsOrFragmentBondsAreValid($fieldOrFragmentBond->getFieldsOrFragmentBonds());
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof InlineFragment) {
+                foreach ($fieldOrFragmentBond->getDirectives() as $directive) {
+                    $this->assertFragmentBondDirectiveIsValid($directive);
+                }
+                $this->assertFragmentBondDirectivesInFieldsOrFragmentBondsAreValid($fieldOrFragmentBond->getFieldsOrFragmentBonds());
+                continue;
+            }
+            if ($fieldOrFragmentBond instanceof FragmentReference) {
+                foreach ($fieldOrFragmentBond->getDirectives() as $directive) {
+                    $this->assertFragmentBondDirectiveIsValid($directive);
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     * @throws FeatureNotSupportedException
+     */
+    protected function assertFragmentBondDirectiveIsValid(Directive $directive): void
+    {
+        $directiveName = $directive->getName();
+        if (FragmentInclusionDirectiveName::tryFrom($directiveName) === null) {
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    $this->getFieldDirectiveResolverRegistry()->getFieldDirectiveResolver($directiveName) !== null
+                        ? GraphQLSpecErrorFeedbackItemProvider::E_5_7_2
+                        : GraphQLSpecErrorFeedbackItemProvider::E_5_7_1,
+                    [
+                        $directiveName,
+                    ]
+                ),
+                $directive
+            );
+        }
+        foreach ($directive->getArguments() as $argument) {
+            if ($argument->getName() === 'if') {
+                continue;
+            }
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_4_1_B,
+                    [
+                        $directiveName,
+                        $argument->getName(),
+                    ]
+                ),
+                $argument
+            );
+        }
+        $ifArgument = $directive->getArgument('if');
+        if ($ifArgument === null) {
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_C,
+                    [
+                        'if',
+                        $directiveName,
+                    ]
+                ),
+                $directive
+            );
+        }
+        $ifValueAST = $ifArgument->getValueAST();
+        if ($ifValueAST instanceof DynamicVariableReferenceInterface) {
+            throw new FeatureNotSupportedException(
+                new FeedbackItemResolution(
+                    GraphQLUnsupportedFeatureErrorFeedbackItemProvider::class,
+                    GraphQLUnsupportedFeatureErrorFeedbackItemProvider::E_5
+                ),
+                $ifValueAST
+            );
+        }
+        if ($ifValueAST instanceof VariableReference) {
+            $variable = $ifValueAST->getVariable();
+            if ($variable === null || ($variable->getTypeName() === 'Boolean' && !$variable->isArray())) {
+                return;
+            }
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_8_5_B,
+                    [
+                        $variable->getName(),
+                        $this->getVariableTypeAsString($variable),
+                        'Boolean!',
+                    ]
+                ),
+                $ifValueAST
+            );
+        }
+        if ($ifValueAST instanceof Literal && $ifValueAST->getValue() === null) {
+            throw new InvalidRequestException(
+                new FeedbackItemResolution(
+                    GraphQLSpecErrorFeedbackItemProvider::class,
+                    GraphQLSpecErrorFeedbackItemProvider::E_5_4_2_1_D,
+                    [
+                        'if',
+                        $directiveName,
+                    ]
+                ),
+                $ifValueAST
+            );
+        }
+        if ($ifValueAST instanceof Literal && is_bool($ifValueAST->getValue())) {
+            return;
+        }
+        throw new InvalidRequestException(
+            new FeedbackItemResolution(
+                InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::class,
+                InputValueCoercionGraphQLSpecErrorFeedbackItemProvider::E_5_6_1_16,
+                [
+                    $ifArgument->getValueAST()->asQueryString(),
+                    'Boolean',
+                ]
+            ),
+            $ifArgument
+        );
+    }
+
+    protected function getVariableTypeAsString(Variable $variable): string
+    {
+        $typeName = $variable->getTypeName();
+        if ($variable->isArrayOfArrays()) {
+            $typeName = sprintf('[[%s%s]%s]', $typeName, $variable->isArrayOfArraysElementRequired() ? '!' : '', $variable->isArrayElementRequired() ? '!' : '');
+        } elseif ($variable->isArray()) {
+            $typeName = sprintf('[%s%s]', $typeName, $variable->isArrayElementRequired() ? '!' : '');
+        }
+        return $typeName . ($variable->isRequired() ? '!' : '');
     }
 
     /**

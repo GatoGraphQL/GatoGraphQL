@@ -1,0 +1,22 @@
+{
+  "errors": [
+    {
+      "message": "Mandatory argument 'if' in directive 'include' has not been provided",
+      "locations": [
+        {
+          "line": 2,
+          "column": 9
+        }
+      ],
+      "extensions": {
+        "path": [
+          "@include",
+          "...F",
+          "query { ... }"
+        ],
+        "code": "gql@5.4.2.1[c]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+      }
+    }
+  ]
+}

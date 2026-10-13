@@ -1,0 +1,7 @@
+{
+  ...F @include(if: true, foo: 1)
+}
+
+fragment F on QueryRoot {
+  id
+}
