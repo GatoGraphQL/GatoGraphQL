@@ -16,6 +16,10 @@
 - Strings in the GraphQL query can contain the escape sequences `\t` and `\u{1F600}`, and characters encoded as surrogate pairs, such as `\uD83D\uDE00` ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
 - Field `__Schema.description` ([#3437](https://github.com/GatoGraphQL/GatoGraphQL/pull/3437))
 
+## Improvements
+
+- Upgraded GraphiQL to version 5.4.0 ([#3440](https://github.com/GatoGraphQL/GatoGraphQL/pull/3440))
+
 ## Fixed
 
 - The content of a Custom HTML block (`core/html`) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
