@@ -231,7 +231,7 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-tag-three',
+            'bricks_post_tag',
             [],
             $this->getTaxonomyArgs(
                 false,
@@ -243,7 +243,7 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-tag-four',
+            'elementor_post_tag',
             [],
             $this->getTaxonomyArgs(
                 false,
@@ -291,7 +291,7 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-category-three',
+            'bricks_post_category',
             [],
             $this->getTaxonomyArgs(
                 true,
@@ -303,7 +303,7 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-category-four',
+            'elementor_post_category',
             [],
             $this->getTaxonomyArgs(
                 true,
@@ -343,28 +343,28 @@ class Plugin
         );
 
         \register_post_type(
-            'dummy-cpt-three',
+            'bricks_post',
             $this->getCustomPostTypeArgs(
                 [
-                    'dummy-tag-three',
-                    'dummy-category-three',
+                    'bricks_post_tag',
+                    'bricks_post_category',
                 ],
-                __('Dummy CPT (Three)'),
-                __('Dummy CPTs (Three)'),
-                __('dummy CPTs (three)'),
+                __('Bricks Post'),
+                __('Bricks Posts'),
+                __('bricks posts'),
             )
         );
 
         \register_post_type(
-            'dummy-cpt-four',
+            'elementor_post',
             $this->getCustomPostTypeArgs(
                 [
-                    'dummy-tag-four',
-                    'dummy-category-four',
+                    'elementor_post_tag',
+                    'elementor_post_category',
                 ],
-                __('Dummy CPT (Four)'),
-                __('Dummy CPTs (Four)'),
-                __('dummy CPTs (four)'),
+                __('Elementor Post'),
+                __('Elementor Posts'),
+                __('elementor posts'),
             )
         );
     }
