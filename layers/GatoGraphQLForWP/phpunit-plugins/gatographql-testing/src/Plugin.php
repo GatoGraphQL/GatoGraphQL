@@ -235,10 +235,10 @@ class Plugin
             [],
             $this->getTaxonomyArgs(
                 false,
-                __('Dummy Tag (Three)'),
-                __('Dummy Tags (Three)'),
-                __('dummy tag (three)'),
-                __('dummy tags (three)'),
+                __('Bricks Post Tag'),
+                __('Bricks Post Tags'),
+                __('bricks post tag'),
+                __('bricks post tags'),
             )
         );
 
@@ -247,10 +247,10 @@ class Plugin
             [],
             $this->getTaxonomyArgs(
                 false,
-                __('Dummy Tag (Four)'),
-                __('Dummy Tags (Four)'),
-                __('dummy tag (four)'),
-                __('dummy tags (four)'),
+                __('Elementor Post Tag'),
+                __('Elementor Post Tags'),
+                __('elementor post tag'),
+                __('elementor post tags'),
             )
         );
 
@@ -295,10 +295,10 @@ class Plugin
             [],
             $this->getTaxonomyArgs(
                 true,
-                __('Dummy Category (Three)'),
-                __('Dummy Categories (Three)'),
-                __('dummy category (three)'),
-                __('dummy categories (three)'),
+                __('Bricks Post Category'),
+                __('Bricks Post Categories'),
+                __('bricks post category'),
+                __('bricks post categories'),
             )
         );
 
@@ -307,10 +307,10 @@ class Plugin
             [],
             $this->getTaxonomyArgs(
                 true,
-                __('Dummy Category (Four)'),
-                __('Dummy Categories (Four)'),
-                __('dummy category (four)'),
-                __('dummy categories (four)'),
+                __('Elementor Post Category'),
+                __('Elementor Post Categories'),
+                __('elementor post category'),
+                __('elementor post categories'),
             )
         );
 
