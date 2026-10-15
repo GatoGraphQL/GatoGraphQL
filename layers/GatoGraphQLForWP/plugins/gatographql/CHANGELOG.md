@@ -45,6 +45,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - A `mutation` operation is a request error when mutations are disabled, as the schema has no mutation type (#3437)
 - With nested mutations enabled, a mutation within a fragment can no longer be executed by a `query` operation (#3437)
 - Directives `@include` and `@skip` can be applied to fragment spreads and inline fragments, and inline fragments can omit the type condition, such as `... @include(if: $withDetails) { id }` (#3438)
+- A block attribute kept in the block's comment, such as the text of an Etch `etch/text` block, is now read from there when the block's HTML does not hold it, instead of coming back empty (#3441)
 
 ## 19.3.0 - 30/09/2026
 

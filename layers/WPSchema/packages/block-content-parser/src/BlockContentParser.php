@@ -498,7 +498,20 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             // Enter the <body> tag for block parsing
             $crawler = $crawler->filter('body');
 
-            $attribute_value = $this->source_attribute($crawler, $block_attribute_definition);
+            /**
+             * A block rendered in PHP can keep a sourced attribute in its
+             * delimiter attributes (Etch does with the `content` of
+             * `etch/text`), and that is where WordPress reads it from when
+             * rendering the block. When the HTML holds no value for it, the
+             * delimiter's is the attribute's, not the default.
+             */
+            $attribute_value = $this->source_attribute_value($crawler, $block_attribute_definition);
+            if (null === $attribute_value) {
+                if (isset($block_attributes[ $block_attribute_name ])) {
+                    continue;
+                }
+                $attribute_value = $attribute_default_value;
+            }
 
             if (null !== $attribute_value) {
                 $block_attributes[ $block_attribute_name ] = $attribute_value;
@@ -757,9 +770,28 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      */
     protected function source_attribute(Crawler $crawler, array $block_attribute_definition): mixed
     {
-        $attribute_value         = null;
-        $attribute_default_value = $block_attribute_definition['default'] ?? null;
-        $attribute_source        = $block_attribute_definition['source'];
+        $attribute_value = $this->source_attribute_value($crawler, $block_attribute_definition);
+
+        if (null === $attribute_value) {
+            $attribute_value = $block_attribute_definition['default'] ?? null;
+        }
+
+        return $attribute_value;
+    }
+
+    /**
+     * @param array<string,mixed> $block_attribute_definition
+     *
+     * @return mixed The sourced value, or null when the HTML holds none
+     *
+     * @access private
+     *
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function source_attribute_value(Crawler $crawler, array $block_attribute_definition): mixed
+    {
+        $attribute_value  = null;
+        $attribute_source = $block_attribute_definition['source'];
 
         // See block attribute sources:
         // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#value-source
@@ -789,10 +821,6 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             $attribute_value = $this->source_block_node($crawler, $block_attribute_definition);
         } elseif ('children' === $attribute_source) {
             $attribute_value = $this->source_block_children($crawler, $block_attribute_definition);
-        }
-
-        if (null === $attribute_value) {
-            $attribute_value = $attribute_default_value;
         }
 
         return $attribute_value;
