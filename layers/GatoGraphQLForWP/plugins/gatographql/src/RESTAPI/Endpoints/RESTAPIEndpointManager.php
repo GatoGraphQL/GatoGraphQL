@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\RESTAPI\Endpoints;
 
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\RESTAPI\Registries\RESTControllerRegistryInterface;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
@@ -29,6 +30,14 @@ class RESTAPIEndpointManager extends AbstractAutomaticallyInstantiatedService im
 
     public function initialize(): void
     {
+        /**
+         * For the main application only: the internal GraphQL server
+         * instantiates every service again, and would add the hook a
+         * second time.
+         */
+        if (!AppHelpers::isMainAppThread()) {
+            return;
+        }
         if (!class_exists('WP_REST_Server')) {
             return;
         }
