@@ -276,6 +276,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - A <code>mutation</code> operation is a request error when mutations are disabled, as the schema has no mutation type (#3437)
 * Fixed - With nested mutations enabled, a mutation within a fragment can no longer be executed by a <code>query</code> operation (#3437)
 * Fixed - Directives <code>@include</code> and <code>@skip</code> can be applied to fragment spreads and inline fragments, and inline fragments can omit the type condition, such as <code>... @include(if: $withDetails) { id }</code> (#3438)
+* Fixed - A block attribute kept in the block's comment, such as the text of an Etch <code>etch/text</code> block, is now read from there when the block's HTML does not hold it, instead of coming back empty (#3441)
 * Fixed - The plugin's WordPress hooks, such as its REST API routes and AJAX handlers, are no longer added a second time after a query is run with the internal GraphQL server, such as during a translation (#3442)
 
 = 19.3.0 =
