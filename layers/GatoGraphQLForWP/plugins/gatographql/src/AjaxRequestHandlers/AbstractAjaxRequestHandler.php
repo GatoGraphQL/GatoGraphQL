@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\AjaxRequestHandlers;
 
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use PoP\Root\Services\AbstractAutomaticallyInstantiatedService;
 
 use function add_action;
@@ -16,6 +17,14 @@ abstract class AbstractAjaxRequestHandler extends AbstractAutomaticallyInstantia
 {
     final public function initialize(): void
     {
+        /**
+         * For the main application only: the internal GraphQL server
+         * instantiates every service again, and would add the hook a
+         * second time.
+         */
+        if (!AppHelpers::isMainAppThread()) {
+            return;
+        }
         add_action(
             'wp_ajax_' . $this->getAjaxAction(),
             [$this, 'processAjaxRequest']
