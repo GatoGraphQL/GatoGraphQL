@@ -4863,7 +4863,7 @@
                     "namespacedName": "CustomPostEnumString",
                     "fields": null,
                     "kind": "SCALAR",
-                    "description": "Custom post types (available for querying via the API). Possible values: `dummy-cpt`, `elementor_post`, `bricks_post`, `dummy-cpt-two`, `page`, `post`, `wp_block`."
+                    "description": "Custom post types (available for querying via the API). Possible values: `bricks_post`, `dummy-cpt`, `dummy-cpt-two`, `elementor_post`, `page`, `post`, `wp_block`."
                 },
                 {
                     "name": "DangerouslyNonSpecificScalar",

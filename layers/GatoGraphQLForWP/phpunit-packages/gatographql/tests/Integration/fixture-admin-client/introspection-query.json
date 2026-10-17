@@ -18361,7 +18361,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                                    "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -19053,7 +19053,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                                    "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -23619,7 +23619,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                                    "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -26272,7 +26272,7 @@
                                             }
                                         }
                                     },
-                                    "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                                    "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                                 },
                                 {
                                     "name": "by",
@@ -40038,7 +40038,7 @@
                 {
                     "kind": "SCALAR",
                     "name": "CustomPostEnumString",
-                    "description": "Custom post types (available for querying via the API). Possible values: `dummy-cpt`, `elementor_post`, `bricks_post`, `dummy-cpt-two`, `page`, `post`, `wp_block`.",
+                    "description": "Custom post types (available for querying via the API). Possible values: `bricks_post`, `dummy-cpt`, `dummy-cpt-two`, `elementor_post`, `page`, `post`, `wp_block`.",
                     "fields": null,
                     "inputFields": null,
                     "interfaces": null,
@@ -46048,7 +46048,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -47548,7 +47548,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -48868,7 +48868,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49111,7 +49111,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49429,7 +49429,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -49631,7 +49631,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -53185,7 +53185,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",
@@ -53661,7 +53661,7 @@
                                     }
                                 }
                             },
-                            "defaultValue": "[\"dummy-cpt\", \"elementor_post\", \"bricks_post\", \"dummy-cpt-two\", \"page\", \"post\", \"wp_block\"]"
+                            "defaultValue": "[\"bricks_post\", \"dummy-cpt\", \"dummy-cpt-two\", \"elementor_post\", \"page\", \"post\", \"wp_block\"]"
                         },
                         {
                             "name": "dateQuery",

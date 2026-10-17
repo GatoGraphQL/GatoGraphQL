@@ -17280,10 +17280,10 @@
                         "elementName": "CustomPostEnumString",
                         "namespacedName": "CustomPostEnumString",
                         "possibleValues": [
-                            "dummy-cpt",
-                            "elementor_post",
                             "bricks_post",
+                            "dummy-cpt",
                             "dummy-cpt-two",
+                            "elementor_post",
                             "page",
                             "post",
                             "wp_block"
