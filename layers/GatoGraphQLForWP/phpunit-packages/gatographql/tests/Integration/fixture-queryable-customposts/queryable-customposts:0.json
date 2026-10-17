@@ -1,7 +1,7 @@
 {
   "errors": [
     {
-      "message": "Value 'attachment' for type 'CustomPostEnumString' is not valid (the only valid values are: 'dummy-cpt', 'elementor_post', 'bricks_post', 'dummy-cpt-two', 'page', 'post', 'wp_block')",
+      "message": "Value 'attachment' for type 'CustomPostEnumString' is not valid (the only valid values are: 'bricks_post', 'dummy-cpt', 'dummy-cpt-two', 'elementor_post', 'page', 'post', 'wp_block')",
       "locations": [
         {
           "line": 3,
@@ -21,7 +21,7 @@
       }
     },
     {
-      "message": "Value 'nav_menu_item' for type 'CustomPostEnumString' is not valid (the only valid values are: 'dummy-cpt', 'elementor_post', 'bricks_post', 'dummy-cpt-two', 'page', 'post', 'wp_block')",
+      "message": "Value 'nav_menu_item' for type 'CustomPostEnumString' is not valid (the only valid values are: 'bricks_post', 'dummy-cpt', 'dummy-cpt-two', 'elementor_post', 'page', 'post', 'wp_block')",
       "locations": [
         {
           "line": 3,
@@ -41,7 +41,7 @@
       }
     },
     {
-      "message": "Value 'custom_css' for type 'CustomPostEnumString' is not valid (the only valid values are: 'dummy-cpt', 'elementor_post', 'bricks_post', 'dummy-cpt-two', 'page', 'post', 'wp_block')",
+      "message": "Value 'custom_css' for type 'CustomPostEnumString' is not valid (the only valid values are: 'bricks_post', 'dummy-cpt', 'dummy-cpt-two', 'elementor_post', 'page', 'post', 'wp_block')",
       "locations": [
         {
           "line": 3,
@@ -61,7 +61,7 @@
       }
     },
     {
-      "message": "Value 'revision' for type 'CustomPostEnumString' is not valid (the only valid values are: 'dummy-cpt', 'elementor_post', 'bricks_post', 'dummy-cpt-two', 'page', 'post', 'wp_block')",
+      "message": "Value 'revision' for type 'CustomPostEnumString' is not valid (the only valid values are: 'bricks_post', 'dummy-cpt', 'dummy-cpt-two', 'elementor_post', 'page', 'post', 'wp_block')",
       "locations": [
         {
           "line": 3,

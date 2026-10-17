@@ -5,10 +5,10 @@
         "name": "CustomPostEnumString",
         "extensions": {
           "possibleValues": [
-            "dummy-cpt",
-            "elementor_post",
             "bricks_post",
+            "dummy-cpt",
             "dummy-cpt-two",
+            "elementor_post",
             "page",
             "post",
             "wp_block"
