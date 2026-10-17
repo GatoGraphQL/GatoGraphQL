@@ -220,6 +220,14 @@ class Plugin extends AbstractMainPlugin
         parent::doBootApplication();
 
         /**
+         * The application is booted once per AppThread, but WordPress
+         * hooks are global to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
+        /**
          * Load the image width classes also within the Gutenberg editor,
          * to be used within the documentation modal windows.
          */
