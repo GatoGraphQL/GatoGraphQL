@@ -112,6 +112,14 @@ abstract class AbstractBlock extends AbstractAutomaticallyInstantiatedService im
     final public function initialize(): void
     {
         /**
+         * The service is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
+        /**
          * Call it on "boot" after the WP_Query is parsed, so the single CPT
          * is loaded, and asking for `is_singular(CPT)` works.
          */

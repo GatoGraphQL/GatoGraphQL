@@ -1211,6 +1211,9 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
                     return;
                 }
                 App::setAppThread(new AppThread($pluginAppGraphQLServerName, $pluginAppGraphQLServerContext));
+                if ($pluginAppGraphQLServerName === PluginAppGraphQLServerNames::EXTERNAL) {
+                    App::setMainAppThread(App::getAppThread());
+                }
                 $hookManager = new HookManager();
                 /**
                  * Boot the external GraphQL server only after the
@@ -1507,6 +1510,14 @@ abstract class AbstractMainPlugin extends AbstractPlugin implements MainPluginIn
     public function boot(): void
     {
         parent::boot();
+
+        /**
+         * The plugin is booted once per AppThread, but WordPress hooks
+         * are global to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
 
         \add_filter(
             'admin_body_class',

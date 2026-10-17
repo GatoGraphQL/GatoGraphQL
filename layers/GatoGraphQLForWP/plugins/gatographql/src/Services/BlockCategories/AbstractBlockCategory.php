@@ -34,6 +34,14 @@ abstract class AbstractBlockCategory extends AbstractAutomaticallyInstantiatedSe
     final public function initialize(): void
     {
         /**
+         * The service is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
+        /**
          * Starting from WP 5.8 the hook is a different one
          *
          * @see https://github.com/GatoGraphQL/GatoGraphQL/issues/711
