@@ -3733,15 +3733,15 @@ msgstr "Bir menüye eklenen öğeler (bağlantılar, sayfalar vb.)"
 msgid "Representation of a navigation menu"
 msgstr "Bir gezinme menüsünün temsili"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:106
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:108
 msgid "Error adding meta"
 msgstr "Meta eklerken hata"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:147
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:158
 msgid "Error updating meta"
 msgstr "Meta güncellenirken hata"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:173
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:184
 msgid "Error deleting meta"
 msgstr "Meta silinirken hata"
 

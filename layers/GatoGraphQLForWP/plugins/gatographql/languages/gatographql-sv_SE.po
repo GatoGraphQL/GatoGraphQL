@@ -3800,15 +3800,15 @@ msgstr "Objekt (länkar, sidor, etc.) tillagda i en meny"
 msgid "Representation of a navigation menu"
 msgstr "Representation av en navigeringsmeny"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:106
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:108
 msgid "Error adding meta"
 msgstr "Fel vid tillägg av metadata"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:147
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:158
 msgid "Error updating meta"
 msgstr "Fel vid uppdatering av metadata"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:173
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:184
 msgid "Error deleting meta"
 msgstr "Fel vid borttagning av metadata"
 

@@ -3558,15 +3558,15 @@ msgstr "添加到菜单的条目（链接、页面等）"
 msgid "Representation of a navigation menu"
 msgstr "导航菜单的表示"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:106
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:108
 msgid "Error adding meta"
 msgstr "添加元数据时出错"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:147
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:158
 msgid "Error updating meta"
 msgstr "更新元数据时出错"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:173
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:184
 msgid "Error deleting meta"
 msgstr "删除元数据时出错"
 

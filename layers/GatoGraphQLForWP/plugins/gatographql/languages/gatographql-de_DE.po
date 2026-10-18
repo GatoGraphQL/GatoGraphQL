@@ -3998,15 +3998,15 @@ msgstr "Elemente (Links, Seiten usw.), die einem Menü hinzugefügt wurden"
 msgid "Representation of a navigation menu"
 msgstr "Darstellung eines Navigationsmenüs"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:106
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:108
 msgid "Error adding meta"
 msgstr "Fehler beim Hinzufügen von Meta"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:147
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:158
 msgid "Error updating meta"
 msgstr "Fehler beim Aktualisieren von Meta"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:173
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:184
 msgid "Error deleting meta"
 msgstr "Fehler beim Löschen von Meta"
 

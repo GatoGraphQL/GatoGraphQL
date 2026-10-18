@@ -3639,15 +3639,15 @@ msgstr "รายการ (ลิงก์, หน้า, ฯลฯ) ที่�
 msgid "Representation of a navigation menu"
 msgstr "การแสดงผลของเมนูนำทาง"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:106
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:108
 msgid "Error adding meta"
 msgstr "เกิดข้อผิดพลาดในการเพิ่ม meta"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:147
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:158
 msgid "Error updating meta"
 msgstr "เกิดข้อผิดพลาดในการอัปเดต meta"
 
-#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:173
+#: CMSSchema/packages/meta-mutations-wp/src/TypeAPIs/EntityMetaTypeMutationAPITrait.php:184
 msgid "Error deleting meta"
 msgstr "เกิดข้อผิดพลาดในการลบ meta"
 
