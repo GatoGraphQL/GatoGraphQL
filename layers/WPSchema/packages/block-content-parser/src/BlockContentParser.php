@@ -89,6 +89,26 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         ],
     ];
 
+    /**
+     * The attributes of blocks that WordPress no longer registers, but
+     * that posts may still hold, by block and attribute name.
+     *
+     * `core/subhead` was dropped from WordPress, and its posts keep it
+     * as it was saved: the text in its `<p>`. Unregistered, its text
+     * was not read at all.
+     *
+     * @var array<string,array<string,array<string,string>>>
+     */
+    private const UNREGISTERED_BLOCK_ATTRIBUTES = [
+        'core/subhead' => [
+            'content' => [
+                'type' => 'string',
+                'source' => 'html',
+                'selector' => 'p',
+            ],
+        ],
+    ];
+
     private bool $includeInnerContent = false;
     private bool $resolveSyncedPatterns = false;
     private bool $resolveBlockBindings = false;
@@ -442,7 +462,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             return null;
         }
 
-        if (! isset($registered_blocks[ $block_name ])) {
+        if (! isset($registered_blocks[ $block_name ]) && ! isset(self::UNREGISTERED_BLOCK_ATTRIBUTES[ $block_name ])) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->addMissingBlockWarning()) {
@@ -453,7 +473,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $useHTML5Parser = $options['use-html5-parser'] ?? true;
 
         $block_definition            = $registered_blocks[ $block_name ] ?? null;
-        $block_definition_attributes = $block_definition->attributes ?? [];
+        $block_definition_attributes = $block_definition->attributes ?? self::UNREGISTERED_BLOCK_ATTRIBUTES[ $block_name ] ?? [];
 
         $block_attributes = $block['attrs'];
 
@@ -566,7 +586,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
 
         if ($this->is_debug_enabled()) {
             $sourced_block['debug'] = [
-                'block_definition_attributes' => $block_definition->attributes,
+                'block_definition_attributes' => $block_definition_attributes,
             ];
         }
 

@@ -49,6 +49,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 - The plugin's WordPress hooks, such as its REST API routes and AJAX handlers, are no longer added a second time after a query is run with the internal GraphQL server, such as during a translation (#3442)
 - Extensions are no longer set up once more with every query run with the internal GraphQL server, such as during a translation, and the plugin's blocks, admin notices and API endpoints no longer add their WordPress hooks a second time (#3443)
 - A value written with the meta mutations, such as `updateCustomPostMeta`, keeps its backslashes, which were being removed when storing it (#3446)
+- The text of a Subhead block (`core/subhead`), which WordPress no longer registers but older posts still hold, is now read from the block's HTML (#3447)
 
 ## 19.3.0 - 30/09/2026
 
