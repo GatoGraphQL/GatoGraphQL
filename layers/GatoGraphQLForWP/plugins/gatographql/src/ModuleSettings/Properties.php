@@ -36,4 +36,41 @@ class Properties
     public final const TYPE_NULL = 'null';
     public final const TYPE_HIDDEN = 'hidden';
     public final const CSS_STYLE = 'css-style';
+
+    /**
+     * Optional properties to render the setting. When absent, the
+     * Settings page picks the control from the type and values above.
+     */
+
+    // On a TYPE_NULL heading: what its group applies to, shown beside it
+    public final const SCOPE = 'scope';
+    // Force a control, when the one picked from the type does not fit
+    public final const CONTROL = 'control';
+    // Longer explanation, behind the "?" button (DESCRIPTION stays the one line under the title)
+    public final const HELP = 'help';
+    // Link to the docs page about the setting
+    public final const DOCS_URL = 'docsURL';
+    // Unit after a number field (eg: "seconds")
+    public final const UNIT = 'unit';
+    // Example value shown inside an empty field
+    public final const PLACEHOLDER = 'placeholder';
+    // Used for Integers: above it, the default value is stored
+    public final const MAX_NUMBER = 'maxNumber';
+    // [option => value]: the setting applies only when that other option (of the same module) has that value (or one of those values, if an array)
+    public final const DEPENDS_ON = 'dependsOn';
+    // Extra words to find the setting by, in "Search all settings"
+    public final const SEARCH_KEYWORDS = 'searchKeywords';
+
+    public final const CONTROL_GROUP = 'group';
+    public final const CONTROL_DIVIDER = 'divider';
+    public final const CONTROL_CONTENT = 'content';
+    public final const CONTROL_SWITCH = 'switch';
+    public final const CONTROL_SEGMENTED = 'segmented';
+    public final const CONTROL_SELECT = 'select';
+    public final const CONTROL_CHECKLIST = 'checklist';
+    public final const CONTROL_TAGS = 'tags';
+    public final const CONTROL_TEXTAREA = 'textarea';
+    public final const CONTROL_INPUT = 'input';
+    public final const CONTROL_GRID = 'grid';
+    public final const CONTROL_CHIPS = 'chips';
 }

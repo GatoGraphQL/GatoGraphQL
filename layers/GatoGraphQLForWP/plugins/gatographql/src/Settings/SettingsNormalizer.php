@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsControlHelpers;
 use PoP\Root\Services\AbstractBasicService;
 
 use function __;
@@ -162,9 +163,14 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
                     $values[$name] = !empty($values[$name]);
                 } elseif ($type === Properties::TYPE_INT) {
                     $values[$name] = (int) ($values[$name] ?? null);
-                    // If the value is below its minimum, reset to the default one
-                    $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
-                    if ($minNumber !== null && $values[$name] < $minNumber) {
+                    // If the value is out of its range, reset to the default one
+                    if (
+                        SettingsControlHelpers::isNumberOutOfRange(
+                            $values[$name],
+                            $itemSetting[Properties::MIN_NUMBER] ?? null,
+                            $itemSetting[Properties::MAX_NUMBER] ?? null,
+                        )
+                    ) {
                         $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
                 } elseif (
