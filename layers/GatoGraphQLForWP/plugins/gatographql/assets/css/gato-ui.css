@@ -34,6 +34,7 @@
     --gato-font-size-xs: 12px;
     --gato-text: #1d2327;
     --gato-text-muted: #50575e;
+    --gato-text-faint: #a7aaad;
     --gato-surface: #fff;
     --gato-surface-alt: #f6f7f7;
     --gato-border: #dcdcde;
@@ -56,10 +57,13 @@
     --gato-warning: #dba617;
     --gato-warning-text: #8a5a00;
     --gato-warning-soft: #fcf9e8;
+    --gato-success: #00a32a;
     --gato-success-text: #007017;
     --gato-success-soft: #edfaef;
     --gato-danger: #b32d2e;
     --gato-danger-soft: #fcf0f1;
+    --gato-danger-hover: #8a2424;
+    --gato-info: #72aee6;
 
     color: var(--gato-text);
     font-size: var(--gato-font-size);
@@ -174,7 +178,8 @@
     padding: 0 7px;
     white-space: nowrap;
 }
-.gato-badge--changed {
+.gato-badge--changed,
+.gato-badge--warning {
     color: var(--gato-warning-text);
     background: var(--gato-warning-soft);
 }
@@ -551,6 +556,17 @@
     border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
     min-width: 0;
 }
+.gato-grid__detail {
+    flex: 1 1 100%;
+    font-size: var(--gato-font-size-xs);
+    color: var(--gato-text-muted);
+}
+.gato-grid__detail--danger {
+    color: var(--gato-danger);
+}
+.gato-grid__detail--warning {
+    color: var(--gato-warning-text);
+}
 .gato-grid__row.is-changed .gato-grid__label-text::after {
     content: "";
     display: inline-block;
@@ -629,4 +645,268 @@
 }
 .gato-savebar__actions .button {
     margin: 0;
+}
+
+/* Stage track: the stages of a run, in order, as dots on a line.
+   `--pick` chooses where a run stops, `--progress` shows where it is. */
+.gato-track {
+    --gato-track-dot: 16px;
+    --gato-track-line: 3px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+.gato-track__stops {
+    display: flex;
+    align-items: flex-start;
+    padding: 4px 0 2px;
+}
+.gato-track__stop {
+    position: relative;
+    flex: 1 1 0;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--gato-text-muted);
+    font: inherit;
+    text-align: center;
+}
+.gato-track__stop + .gato-track__stop::before {
+    content: "";
+    position: absolute;
+    top: calc((var(--gato-track-dot) - var(--gato-track-line)) / 2);
+    left: -50%;
+    right: 50%;
+    height: var(--gato-track-line);
+    border-radius: 2px;
+    background: var(--gato-border);
+}
+.gato-track__stop.is-included::before {
+    background: var(--gato-accent);
+}
+.gato-track__dot {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: var(--gato-track-dot);
+    height: var(--gato-track-dot);
+    border-radius: 50%;
+    border: 2px solid var(--gato-text-faint);
+    background: var(--gato-surface);
+    color: var(--gato-on-accent);
+    transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+.gato-track__stop.is-included .gato-track__dot {
+    background: var(--gato-accent);
+    border-color: var(--gato-accent);
+}
+.gato-track__stop.is-current .gato-track__dot {
+    box-shadow: 0 0 0 4px var(--gato-accent-ring);
+}
+.gato-track__stop.is-failed .gato-track__dot {
+    background: var(--gato-danger);
+    border-color: var(--gato-danger);
+    box-shadow: 0 0 0 4px var(--gato-danger-soft);
+}
+.gato-track__tick {
+    width: 10px;
+    height: 10px;
+}
+.gato-track__label {
+    padding: 0 4px;
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+.gato-track__stop.is-included .gato-track__label {
+    color: var(--gato-text);
+}
+.gato-track__stop.is-current .gato-track__label {
+    font-weight: 600;
+    color: var(--gato-text);
+}
+.gato-track__sub {
+    font-size: 11px;
+    color: var(--gato-text-muted);
+    font-variant-numeric: tabular-nums;
+}
+.gato-track__caption {
+    margin: 0;
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text-muted);
+}
+button.gato-track__stop {
+    cursor: pointer;
+}
+button.gato-track__stop[aria-disabled="true"] {
+    cursor: default;
+}
+button.gato-track__stop:hover:not([aria-disabled="true"]) .gato-track__label {
+    color: var(--gato-accent-hover);
+}
+button.gato-track__stop:hover:not([aria-disabled="true"]):not(.is-included) .gato-track__dot {
+    border-color: var(--gato-accent);
+}
+.gato-ui button.gato-track__stop:focus-visible {
+    box-shadow: none;
+}
+button.gato-track__stop:focus-visible .gato-track__dot {
+    box-shadow: 0 0 0 2px var(--gato-surface), 0 0 0 4px var(--gato-accent);
+}
+.gato-track.is-disabled .gato-track__stops {
+    opacity: .6;
+}
+@media (prefers-reduced-motion: reduce) {
+    .gato-track__dot {
+        transition: none;
+    }
+}
+
+/* Stage table: per row a stage, per column group a language, each with
+   its measures (eg: translated, pending, left out) */
+.gato-stage-table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+}
+.gato-ui .gato-stage-table {
+    width: 100%;
+    margin: 0;
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-inner);
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    background: var(--gato-surface);
+    box-shadow: none;
+    font-size: var(--gato-font-size-sm);
+}
+.gato-ui .gato-stage-table th,
+.gato-ui .gato-stage-table td {
+    padding: 7px 10px;
+    border: 0;
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.45;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    white-space: nowrap;
+    background: transparent;
+}
+.gato-ui .gato-stage-table thead th {
+    background: var(--gato-surface-alt);
+}
+.gato-ui .gato-stage-table .gato-stage-table__name {
+    width: 170px;
+    font-weight: 400;
+    text-align: left;
+}
+.gato-ui .gato-stage-table .gato-stage-table__group {
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
+    text-align: center;
+}
+.gato-ui .gato-stage-table .gato-stage-table__measure {
+    font-size: 11px;
+    font-weight: 400;
+    color: var(--gato-text-muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+}
+.gato-ui .gato-stage-table .gato-stage-table__group,
+.gato-ui .gato-stage-table .gato-stage-table__group-start {
+    border-left: var(--gato-border-width) solid var(--gato-border);
+}
+.gato-ui .gato-stage-table tbody tr > * {
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+}
+.gato-ui .gato-stage-table tbody tr:nth-child(even) > * {
+    background: color-mix(in srgb, var(--gato-surface-alt) 50%, var(--gato-surface));
+}
+.gato-ui .gato-stage-table .is-empty {
+    color: var(--gato-text-faint);
+}
+.gato-ui .gato-stage-table .has-reasons {
+    color: var(--gato-accent);
+    text-decoration: underline dotted;
+    text-underline-offset: 3px;
+    cursor: help;
+}
+
+/* Filter chips: pressing one shows only what it names */
+.gato-filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.gato-ui .gato-filter-chip {
+    margin: 0;
+    padding: 3px 10px;
+    border: var(--gato-border-width) solid var(--gato-border-strong);
+    border-radius: 14px;
+    background: var(--gato-surface);
+    color: var(--gato-text);
+    font-family: inherit;
+    font-size: var(--gato-font-size-xs);
+    line-height: 1.4;
+    cursor: pointer;
+}
+.gato-ui .gato-filter-chip:hover {
+    border-color: var(--gato-text-muted);
+}
+.gato-ui .gato-filter-chip[aria-pressed="true"] {
+    background: var(--gato-text);
+    border-color: var(--gato-text);
+    color: var(--gato-surface);
+}
+.gato-filter-chip__count {
+    margin-left: 5px;
+    opacity: .7;
+    font-variant-numeric: tabular-nums;
+}
+
+/* Option tiles: a checkbox with its label, and a count beside it */
+.gato-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+.gato-option {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border: var(--gato-border-width) solid var(--gato-border-strong);
+    border-radius: var(--gato-radius-inner);
+    background: var(--gato-surface);
+    font-size: var(--gato-font-size-sm);
+    cursor: pointer;
+}
+.gato-option:has(input:checked) {
+    border-color: var(--gato-accent);
+    background: var(--gato-accent-soft);
+}
+.gato-option:has(input:disabled) {
+    cursor: not-allowed;
+}
+.gato-option:has(input:disabled):not(:has(input:checked)) {
+    color: var(--gato-text-muted);
+}
+.gato-ui .gato-option input[type="checkbox"] {
+    margin: 0;
+}
+.gato-option__count {
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-xs);
+    font-variant-numeric: tabular-nums;
 }

@@ -334,11 +334,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         );
     }
 
-    protected function getAdminUIThemeClass(): string
-    {
-        return 'gato-ui gato-ui--' . PluginApp::getMainPlugin()->getAdminUIThemeSlug();
-    }
-
     /**
      * Print the settings form
      */
@@ -1070,10 +1065,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueSettingsAssets(): void
     {
-        $this->enqueueMainPluginAssetStyle(
-            'gatographql-ui',
-            'assets/css/gato-ui.css'
-        );
+        $uiStyleHandle = $this->enqueueAdminUIStyle();
         $this->enqueueMainPluginAssetScript(
             'gatographql-settings',
             'assets/js/settings.js',
@@ -1107,7 +1099,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $this->enqueueMainPluginAssetStyle(
             'gatographql-settings',
             'assets/css/settings.css',
-            ['gatographql-ui']
+            [$uiStyleHandle]
         );
     }
 
@@ -1331,7 +1323,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             <?php endif; ?>
             <div class="gato-grid">
                 <?php
+                /** @var array<string|int,array{label:string,tone?:string,detail?:string}> */
+                $keyStatuses = $itemSetting[Properties::KEY_STATUSES] ?? [];
                 foreach ($keyLabels as $key => $label) {
+                    $keyStatus = $keyStatuses[$key] ?? null;
                     $id = $name . '_' . $key;
                     $entryName = $optionsFormName . '[' . $name . '][' . $key . ']';
                     $entryValue = $this->getPropertyArrayEntryValue($value, $key, $itemSetting);
@@ -1348,6 +1343,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             <?php endif; ?>
                             <?php if ($showKey) : ?>
                                 <code class="gato-grid__key"><?php echo esc_html((string) $key) ?></code>
+                            <?php endif; ?>
+                            <?php if ($keyStatus !== null) : ?>
+                                <span class="gato-badge gato-badge--<?php echo esc_attr($keyStatus['tone'] ?? Properties::KEY_STATUS_TONE_NEUTRAL) ?> gato-grid__status"><?php echo esc_html($keyStatus['label']) ?></span>
                             <?php endif; ?>
                         </span>
                         <?php
@@ -1395,6 +1393,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             <?php
                         }
                         ?>
+                        <?php if (($keyStatus['detail'] ?? '') !== '') : ?>
+                            <span class="gato-grid__detail gato-grid__detail--<?php echo esc_attr($keyStatus['tone'] ?? Properties::KEY_STATUS_TONE_NEUTRAL) ?>"><?php echo esc_html($keyStatus['detail']) ?></span>
+                        <?php endif; ?>
                     </div>
                     <?php
                 }

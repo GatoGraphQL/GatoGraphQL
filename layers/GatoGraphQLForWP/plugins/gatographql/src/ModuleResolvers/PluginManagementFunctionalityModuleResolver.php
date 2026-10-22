@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -14,10 +16,19 @@ use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 
+use function array_keys;
 use function esc_html;
+use function function_exists;
 use function get_post_type_object;
+use function get_settings_errors;
 use function get_submit_button;
+use function in_array;
+use function sprintf;
+use function str_starts_with;
+use function strlen;
+use function substr;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -35,6 +46,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
     public final const OPTION_DELETE_DATA_ON_UNINSTALL = 'delete-data-on-uninstall';
     public final const OPTION_DELETE_CONTENT_ON_UNINSTALL = 'delete-content-on-uninstall';
+
+    /**
+     * The code of the notice of a license operation (activate,
+     * deactivate or validate), followed by the extension's slug
+     */
+    public final const LICENSE_OPERATION_NOTICE_CODE_PREFIX = 'license_activation_';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
@@ -200,6 +217,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
+                    Properties::KEY_STATUSES => $this->getCommercialExtensionLicenseStatuses(array_keys($commercialExtensionSlugProductNames)),
                     Properties::SUBTYPE => Properties::TYPE_PASSWORD,
                 ];
                 /**
@@ -494,6 +512,106 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             \__('Remove the entries you created and edited through the plugin: %s. Only applies when deleting all plugin data.', 'gatographql'),
             implode(\__(', ', 'gatographql'), $customPostTypeNames)
         );
+    }
+
+    /**
+     * The status of the license of each commercial extension, as
+     * stored when it was last activated, deactivated or validated,
+     * or the error the last attempt produced
+     *
+     * @param string[] $extensionSlugs
+     * @return array<string,array{label:string,tone:string,detail?:string}>
+     */
+    protected function getCommercialExtensionLicenseStatuses(array $extensionSlugs): array
+    {
+        $activatedLicenses = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        $failures = $this->getCommercialExtensionLicenseOperationFailures();
+        $statuses = [];
+        foreach ($extensionSlugs as $extensionSlug) {
+            $activatedLicense = $activatedLicenses[$extensionSlug] ?? null;
+            $status = $activatedLicense === null
+                ? [
+                    'label' => \__('Not activated', 'gatographql'),
+                    'tone' => Properties::KEY_STATUS_TONE_NEUTRAL,
+                ]
+                : $this->getCommercialExtensionLicenseStatus($activatedLicense);
+            $failure = $failures[$extensionSlug] ?? null;
+            if ($failure !== null && $failure['type'] === 'error') {
+                $status = [
+                    'label' => \__('Error', 'gatographql'),
+                    'tone' => Properties::KEY_STATUS_TONE_DANGER,
+                ];
+            }
+            if ($failure !== null) {
+                $status['detail'] = $failure['message'];
+            }
+            $statuses[$extensionSlug] = $status;
+        }
+        return $statuses;
+    }
+
+    /**
+     * @return array{label:string,tone:string}
+     */
+    protected function getCommercialExtensionLicenseStatus(CommercialExtensionActivatedLicenseObjectProperties $activatedLicense): array
+    {
+        return match ($activatedLicense->status) {
+            LicenseStatus::ACTIVE => [
+                'label' => $activatedLicense->activationLimit > 0
+                    ? sprintf(
+                        \_n('Active · %1$s/%2$s site', 'Active · %1$s/%2$s sites', $activatedLicense->activationLimit, 'gatographql'),
+                        $activatedLicense->activationUsage,
+                        $activatedLicense->activationLimit
+                    )
+                    : \__('Active', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_SUCCESS,
+            ],
+            LicenseStatus::EXPIRED => [
+                'label' => \__('Expired', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_WARNING,
+            ],
+            LicenseStatus::DISABLED => [
+                'label' => \__('Disabled', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_DANGER,
+            ],
+            LicenseStatus::UNREGISTERED => [
+                'label' => \__('Not activated', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_NEUTRAL,
+            ],
+            LicenseStatus::INACTIVE,
+            LicenseStatus::OTHER => [
+                'label' => \__('Inactive', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_WARNING,
+            ],
+        };
+    }
+
+    /**
+     * The errors (the license is not valid) and warnings (the license
+     * server could not be reached) of the last attempt to activate,
+     * deactivate or validate the licenses, by extension, back from
+     * options.php
+     *
+     * @return array<string,array{type:string,message:string}>
+     */
+    protected function getCommercialExtensionLicenseOperationFailures(): array
+    {
+        if (!function_exists('get_settings_errors')) {
+            return [];
+        }
+        $failures = [];
+        foreach (get_settings_errors() as $settingsError) {
+            $code = $settingsError['code'];
+            $type = $settingsError['type'];
+            if (!str_starts_with($code, self::LICENSE_OPERATION_NOTICE_CODE_PREFIX) || !in_array($type, ['error', 'warning'], true)) {
+                continue;
+            }
+            $failures[substr($code, strlen(self::LICENSE_OPERATION_NOTICE_CODE_PREFIX))] = [
+                'type' => $type,
+                'message' => $settingsError['message'],
+            ];
+        }
+        return $failures;
     }
 
     protected function getGatoGraphQLShopName(): string

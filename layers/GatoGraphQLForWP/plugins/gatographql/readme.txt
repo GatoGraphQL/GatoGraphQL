@@ -260,6 +260,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Field <code>__Schema.description</code> (#3437)
 * Improved - Upgraded GraphiQL to version 5.4.0 (#3440)
 * Improved - Redesigned the Settings page: settings grouped by topic, a search across all tabs, the changes of every tab saved with one click, and controls that fit each setting (switches, option toggles, tag inputs, and "Set all to" on per-entry lists) (#3448)
+* Improved - Each license under "Plugin Management > Activate Licenses" shows its status (active on how many sites, expired, not activated), and the error of the last activation or validation that failed (#3448)
 * Fixed - The content of a Custom HTML block (<code>core/html</code>) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
 * Fixed - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
 * Fixed - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (<code>core/freeform</code>). The whole post used to fail for not being block content (#3420)

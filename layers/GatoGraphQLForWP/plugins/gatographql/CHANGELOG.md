@@ -26,6 +26,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 - Upgraded GraphiQL to version 5.4.0 (#3440)
 - Redesigned the Settings page: settings grouped by topic, a search across all tabs, the changes of every tab saved with one click, and controls that fit each setting (switches, option toggles, tag inputs, and "Set all to" on per-entry lists) (#3448)
+- Each license under "Plugin Management > Activate Licenses" shows its status (active on how many sites, expired, not activated), and the error of the last activation or validation that failed (#3448)
 
 ### Fixed
 

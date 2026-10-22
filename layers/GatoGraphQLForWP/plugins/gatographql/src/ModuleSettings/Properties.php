@@ -60,6 +60,12 @@ class Properties
     public final const DEPENDS_ON = 'dependsOn';
     // Extra words to find the setting by, in "Search all settings"
     public final const SEARCH_KEYWORDS = 'searchKeywords';
+    // On a TYPE_PROPERTY_ARRAY: [key => ['label' => ..., 'tone' => KEY_STATUS_TONE_*, 'detail' => ...]], a status shown beside each entry (eg: of a license)
+    public final const KEY_STATUSES = 'keyStatuses';
+    public final const KEY_STATUS_TONE_SUCCESS = 'success';
+    public final const KEY_STATUS_TONE_WARNING = 'warning';
+    public final const KEY_STATUS_TONE_DANGER = 'danger';
+    public final const KEY_STATUS_TONE_NEUTRAL = 'neutral';
 
     public final const CONTROL_GROUP = 'group';
     public final const CONTROL_DIVIDER = 'divider';
