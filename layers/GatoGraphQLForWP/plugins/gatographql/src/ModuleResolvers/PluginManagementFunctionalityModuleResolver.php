@@ -426,6 +426,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 Properties::TITLE => \__('Also delete the entries created with the plugin?', 'gatographql'),
                 Properties::DESCRIPTION => $this->getDeleteContentOnUninstallDescription(),
                 Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::DEPENDS_ON => [
+                    self::OPTION_DELETE_DATA_ON_UNINSTALL => true,
+                ],
             ];
 
             /**

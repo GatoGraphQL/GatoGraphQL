@@ -739,7 +739,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         /** @var string */
         $name = $itemSetting[Properties::NAME];
         /** @var string */
-        $title = $itemSetting[Properties::TITLE] ?? '';
+        $title = SettingsControlHelpers::getTitleWithoutUnit($itemSetting[Properties::TITLE] ?? '', $itemSetting[Properties::UNIT] ?? null);
         /** @var string */
         $description = $itemSetting[Properties::DESCRIPTION] ?? '';
 
@@ -1740,7 +1740,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
          */
         // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         /** @var array<string,mixed> */
-        $post = $_POST;
+        $post = $_POST; // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Each tab's nonce is verified in saveAllChangesInTabs()
         // phpcs:enable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
         /** @var array<string,mixed> */
         $saveAll = $post[self::SAVE_ALL] ?? [];
@@ -1805,9 +1805,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function saveAllChangesInTabs(array $post, array $saveAll): void
     {
-        /** @var string[] */
+        /**
+         * Submitted by the browser, so not to be trusted
+         *
+         * @var mixed[]
+         */
         $tabs = $saveAll[self::SAVE_ALL_TABS] ?? [];
-        /** @var array<string,string> */
+        /** @var array<string,mixed> */
         $nonces = $saveAll[self::SAVE_ALL_NONCES] ?? [];
 
         $settingsCategoryResolvers = [];

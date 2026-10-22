@@ -217,4 +217,14 @@ class SettingsControlHelpersTest extends TestCase
             ])
         );
     }
+
+    public function testTitleWithoutUnit(): void
+    {
+        $this->assertSame('Request timeout', SettingsControlHelpers::getTitleWithoutUnit('Request timeout (seconds)', 'seconds'));
+        $this->assertSame('Size limit', SettingsControlHelpers::getTitleWithoutUnit('Size limit (MB)', 'MB'));
+        $this->assertSame('Time per request', SettingsControlHelpers::getTitleWithoutUnit('Time per request (Seconds)', 'seconds'));
+        $this->assertSame('Request timeout (seconds)', SettingsControlHelpers::getTitleWithoutUnit('Request timeout (seconds)', null));
+        $this->assertSame('Max length (characters)', SettingsControlHelpers::getTitleWithoutUnit('Max length (characters)', 'tokens'));
+        $this->assertSame('Max length', SettingsControlHelpers::getTitleWithoutUnit('Max length', 'characters'));
+    }
 }

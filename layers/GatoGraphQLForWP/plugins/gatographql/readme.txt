@@ -259,6 +259,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Added - Strings in the GraphQL query can contain the escape sequences <code>\t</code> and <code>\u{1F600}</code>, and characters encoded as surrogate pairs, such as <code>\uD83D\uDE00</code> (#3437)
 * Added - Field <code>__Schema.description</code> (#3437)
 * Improved - Upgraded GraphiQL to version 5.4.0 (#3440)
+* Improved - Redesigned the Settings page: settings grouped by topic, a search across all tabs, the changes of every tab saved with one click, and controls that fit each setting (switches, option toggles, tag inputs, and "Set all to" on per-entry lists) (#3448)
 * Fixed - The content of a Custom HTML block (<code>core/html</code>) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
 * Fixed - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
 * Fixed - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (<code>core/freeform</code>). The whole post used to fail for not being block content (#3420)
@@ -281,6 +282,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - Extensions are no longer set up once more with every query run with the internal GraphQL server, such as during a translation, and the plugin's blocks, admin notices and API endpoints no longer add their WordPress hooks a second time (#3443)
 * Fixed - A value written with the meta mutations, such as <code>updateCustomPostMeta</code>, keeps its backslashes, which were being removed when storing it (#3446)
 * Fixed - The text of a Subhead block (<code>core/subhead</code>), which WordPress no longer registers but older posts still hold, is now read from the block's HTML (#3447)
+* Fixed - The entries of a list setting saved on the Settings page no longer end with a hidden line break (#3448)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)

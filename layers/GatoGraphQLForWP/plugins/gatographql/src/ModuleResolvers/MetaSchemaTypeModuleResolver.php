@@ -263,103 +263,39 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
             $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gatographql');
             $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
-            $moduleDescriptions = [
-                self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'custom posts'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        '_edit_last',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    '_edit_last',
-                                    '/_edit_.*/',
-                                    '#_edit_([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'users'
-                    ),
-                    $userMetaHeadsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'last_name',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'last_name',
-                                    '/last_.*/',
-                                    '#last_([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'comments'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'description',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'description',
-                                    '/desc.*/',
-                                    '#desc([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'taxonomies (tags and categories)'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'description',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'description',
-                                    '/desc.*/',
-                                    '#desc([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
+            $moduleEntities = [
+                self::SCHEMA_CUSTOMPOST_META => 'custom posts',
+                self::SCHEMA_USER_META => 'users',
+                self::SCHEMA_COMMENT_META => 'comments',
+                self::SCHEMA_TAXONOMY_META => 'taxonomies (tags and categories)',
+            ];
+            $moduleHeadsUpDescriptions = [
+                self::SCHEMA_CUSTOMPOST_META => $headsUpDesc,
+                self::SCHEMA_USER_META => $userMetaHeadsUpDesc,
+                self::SCHEMA_COMMENT_META => $headsUpDesc,
+                self::SCHEMA_TAXONOMY_META => $headsUpDesc,
+            ];
+            $moduleExampleEntries = [
+                self::SCHEMA_CUSTOMPOST_META => [
+                    '_edit_last',
+                    '/_edit_.*/',
+                    '#_edit_([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_USER_META => [
+                    'last_name',
+                    '/last_.*/',
+                    '#last_([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_COMMENT_META => [
+                    'description',
+                    '/desc.*/',
+                    '#desc([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_TAXONOMY_META => [
+                    'description',
+                    '/desc.*/',
+                    '#desc([a-zA-Z]*)#',
+                ],
             ];
             $entityNames = [
                 self::SCHEMA_META => sprintf(\__('%s (interface)', 'gatographql'), $this->getWithMetaInterfaceTypeResolver()->getTypeName()),
@@ -385,8 +321,33 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => $entriesTitle,
-                    Properties::DESCRIPTION => $moduleDescriptions[$module],
+                    Properties::DESCRIPTION => sprintf(
+                        '%s<br/>%s',
+                        sprintf(
+                            $metaKeyDesc,
+                            $moduleEntities[$module]
+                        ),
+                        $defaultValueDesc,
+                    ),
+                    Properties::HELP => sprintf(
+                        '%s<hr/>%s',
+                        $moduleHeadsUpDescriptions[$module],
+                        sprintf(
+                            $entryDesc,
+                            $moduleExampleEntries[$module][0],
+                            sprintf(
+                                $ulPlaceholder,
+                                implode(
+                                    '</code></li><li><code>',
+                                    $moduleExampleEntries[$module]
+                                )
+                            )
+                        )
+                    ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
+                    Properties::SEARCH_KEYWORDS => [
+                        \__('custom fields', 'gatographql'),
+                    ],
                 ];
 
                 $option = ModuleSettingOptions::BEHAVIOR;

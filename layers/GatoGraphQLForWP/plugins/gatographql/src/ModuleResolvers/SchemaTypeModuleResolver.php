@@ -730,6 +730,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $entities = $moduleEntities[$module];
             $defaultLimitOption = ModuleSettingOptions::LIST_DEFAULT_LIMIT;
             $maxLimitOption = ModuleSettingOptions::LIST_MAX_LIMIT;
+            if ($module === self::SCHEMA_CUSTOMPOSTS) {
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-limits'
+                    ),
+                    Properties::TITLE => \__('Limits', 'gatographql'),
+                    Properties::SCOPE => \__('Queries', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+            }
             $moduleSettings[] = [
                 Properties::INPUT => $defaultLimitOption,
                 Properties::NAME => $this->getSettingOptionName(
@@ -775,6 +786,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 foreach ($possibleCustomPostTypes as $value) {
                     $possibleValues[$value] = $value;
                 }
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-types'
+                    ),
+                    Properties::TITLE => \__('Custom post types', 'gatographql'),
+                    Properties::SCOPE => \__('Schema', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
                 $moduleSettings[] = [
@@ -797,6 +818,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     // Fetch all Schema Configurations from the DB
                     Properties::POSSIBLE_VALUES => $possibleValues,
                     Properties::IS_MULTIPLE => true,
+                    Properties::SEARCH_KEYWORDS => [
+                        'CPT',
+                    ],
                 ];
 
                 $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
@@ -813,6 +837,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $this->getPostObjectTypeResolver()->getTypeName(),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-sensitive-data'
+                    ),
+                    Properties::TITLE => \__('Sensitive data', 'gatographql'),
+                    Properties::SCOPE => \__('Privacy', 'gatographql'),
+                    Properties::TYPE => Properties::TYPE_NULL,
                 ];
 
                 $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA;
@@ -1034,6 +1068,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_COMMENTS) {
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'group-limits'
+                ),
+                Properties::TITLE => \__('Limits', 'gatographql'),
+                Properties::SCOPE => \__('Queries', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -1091,6 +1135,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::MIN_NUMBER => -1,
             ];
 
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'group-sensitive-data'
+                ),
+                Properties::TITLE => \__('Sensitive data', 'gatographql'),
+                Properties::SCOPE => \__('Privacy', 'gatographql'),
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
             $option = self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -1131,9 +1185,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gatographql');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'gatographql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
-            $moduleDescriptions = [
-                self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
+            $option = ModuleSettingOptions::ENTRIES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => $entriesTitle,
+                Properties::DESCRIPTION => sprintf(
+                    '%s<br/>%s',
                     sprintf(
                         \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'gatographql'),
                         'optionValue',
@@ -1141,6 +1202,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         'optionObjectValue',
                         'optionObjectValues'
                     ),
+                    $defaultValueDesc,
+                ),
+                Properties::HELP => sprintf(
+                    '%s<hr/>%s',
                     $headsUpDesc,
                     sprintf(
                         $entryDesc,
@@ -1156,20 +1221,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 ]
                             )
                         )
-                    ),
-                    $defaultValueDesc,
+                    )
                 ),
-            ];
-            $option = ModuleSettingOptions::ENTRIES;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => $entriesTitle,
-                Properties::DESCRIPTION => $moduleDescriptions[$module],
                 Properties::TYPE => Properties::TYPE_ARRAY,
+                Properties::SEARCH_KEYWORDS => [
+                    'wp_options',
+                ],
             ];
 
             $option = ModuleSettingOptions::BEHAVIOR;
@@ -1207,6 +1264,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,
+                Properties::UNIT => \__('pixels', 'gatographql'),
             ];
         } elseif ($module === self::SCHEMA_USER_ROLES) {
             $option = self::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA;

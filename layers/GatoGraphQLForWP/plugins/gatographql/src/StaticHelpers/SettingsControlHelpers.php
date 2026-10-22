@@ -15,6 +15,8 @@ use function is_bool;
 use function is_scalar;
 use function ksort;
 use function mb_strlen;
+use function mb_strtolower;
+use function mb_substr;
 use function preg_match;
 use function sort;
 use function strip_tags;
@@ -251,6 +253,23 @@ class SettingsControlHelpers
     {
         return ($minNumber !== null && $value < $minNumber)
             || ($maxNumber !== null && $value > $maxNumber);
+    }
+
+    /**
+     * The title without the unit it ends with in parentheses
+     * (eg: "Request timeout (seconds)"), when the field shows
+     * that same unit after it
+     */
+    public static function getTitleWithoutUnit(string $title, ?string $unit): string
+    {
+        if ($unit === null || $unit === '') {
+            return $title;
+        }
+        $suffix = ' (' . $unit . ')';
+        if (mb_strtolower(mb_substr($title, -mb_strlen($suffix))) !== mb_strtolower($suffix)) {
+            return $title;
+        }
+        return mb_substr($title, 0, -mb_strlen($suffix));
     }
 
     /**

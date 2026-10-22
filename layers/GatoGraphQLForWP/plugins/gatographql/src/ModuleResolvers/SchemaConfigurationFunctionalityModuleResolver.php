@@ -226,13 +226,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Namespace the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Namespace types in the GraphQL schema?<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Namespace types in the GraphQL schema?<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/namespacing-the-schema',
-                        \__('Namespacing the schema', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/namespacing-the-schema',
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::RESPONSE_HEADERS) {
@@ -245,14 +242,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Response Headers', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s<br/>%s<br/><span class="more-info">%s</span>',
+                    '%s<br/>%s',
                     \__('Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response-cors',
-                        \__('Adding custom headers to the GraphQL response (CORS)', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/adding-custom-headers-to-the-graphql-response-cors',
                 Properties::TYPE => Properties::TYPE_ARRAY,
                 Properties::IS_MULTIPLE => true,
             ];
@@ -271,13 +265,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Schema exposure.', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Under what types to expose global fields.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Under what types to expose global fields.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/hiding-global-fields',
-                        \__('Hiding Global Fields', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/hiding-global-fields',
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $globalFieldsSchemaExposureValues,
             ];
@@ -291,13 +282,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Enable multi-field directives?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable having a single directive be applied to multiple fields.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Enable having a single directive be applied to multiple fields.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/using-multi-field-directives',
-                        \__('Using multi-field directives', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/using-multi-field-directives',
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::COMPOSABLE_DIRECTIVES) {
@@ -310,13 +298,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Enable composable directives?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Enable adding composable directives (also called "meta-directives", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/using-composable-directives',
-                        \__('Using composable directives', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/using-composable-directives',
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::MUTATIONS) {
@@ -334,24 +319,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Use payload types for all mutations in the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Use payload types for mutations in the schema?<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Use payload types for mutations in the schema?<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations',
-                        \__('Returning a payload object or the mutated entity for mutations', 'gatographql')
-                    )
                 ),
+                Properties::HELP => \__('<strong>Use payload types for mutations</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/><strong>Use payload types for mutations, and add fields to query those payload objects</strong>:<br/><br/>In addition, query fields will be added to retrieve once again those payload objects.<br/><br/><strong>Do not use payload types for mutations (i.e. return the mutated entity)</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/returning-a-payload-object-or-the-mutated-entity-for-mutations',
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
-
-            $moduleSettings[] = [
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    'payload-types-intro'
-                ),
-                Properties::DESCRIPTION => \__('<strong>Use payload types for mutations</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/><strong>Use payload types for mutations, and add fields to query those payload objects</strong>:<br/><br/>In addition, query fields will be added to retrieve once again those payload objects.<br/><br/><strong>Do not use payload types for mutations (i.e. return the mutated entity)</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response\'s top-level <code>errors</code> entry.</li></ul>', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::NESTED_MUTATIONS) {
             $possibleValues = [
@@ -368,23 +342,13 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Mutation Scheme:', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Select the mutation scheme to use in the schema.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Select the mutation scheme to use in the schema.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/using-nested-mutations',
-                        \__('Using nested mutations', 'gatographql')
-                    )
                 ),
+                Properties::HELP => \__('<strong>Redundant fields:</strong><br/><br/>When nested mutations are enabled, a mutation operation in the <code>Root</code> type may find that another mutation will execute the same operation. As such, the <code>Root</code> mutation could be considered redundant, and removed from the schema.<br/><br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed.', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/using-nested-mutations',
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
-            ];
-            $moduleSettings[] = [
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    'intro'
-                ),
-                Properties::DESCRIPTION => \__('<strong>Redundant fields:</strong><br/><br/>When nested mutations are enabled, a mutation operation in the <code>Root</code> type may find that another mutation will execute the same operation. As such, the <code>Root</code> mutation could be considered redundant, and removed from the schema.<br/><br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed.', 'gatographql'),
-                Properties::TYPE => Properties::TYPE_NULL,
             ];
         } elseif ($module === self::SCHEMA_EXPOSE_SENSITIVE_DATA) {
             $option = ModuleSettingOptions::DEFAULT_VALUE;
@@ -396,13 +360,10 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Add “sensitive” fields to the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/querying-sensitive-data-fields',
-                        \__('Querying “sensitive” data fields', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/querying-sensitive-data-fields',
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_SELF_FIELDS) {
@@ -415,20 +376,14 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                 ),
                 Properties::TITLE => \__('Expose the self fields to all types in the schema?', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s<br/><span class="more-info">%s</span>', 'gatographql'),
+                    \__('Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s', 'gatographql'),
                     $defaultValueDesc,
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/schema/querying-self-fields',
-                        \__('Querying \'self\' fields', 'gatographql')
-                    )
                 ),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/schema/querying-self-fields',
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::GRAPHQL_SPEC_COMPLIANCE) {
-            $helpLinkHTML = $this->getSettingsItemHelpLinkHTML(
-                'https://gatographql.com/guides/schema/using-graphql-spec-compliance',
-                \__('Using GraphQL spec compliance', 'gatographql')
-            );
+            $docsURL = 'https://gatographql.com/guides/schema/using-graphql-spec-compliance';
             $options = [
                 self::OPTION_PROPAGATE_NULL_TO_NEAREST_NULLABLE_PARENT => [
                     \__('Pass a null up to the nearest nullable parent?', 'gatographql'),
@@ -456,11 +411,11 @@ class SchemaConfigurationFunctionalityModuleResolver extends AbstractFunctionali
                     ),
                     Properties::TITLE => $title,
                     Properties::DESCRIPTION => sprintf(
-                        '%s<br/>%s<br/><span class="more-info">%s</span>',
+                        '%s<br/>%s',
                         $description,
-                        $defaultValueDesc,
-                        $helpLinkHTML
+                        $defaultValueDesc
                     ),
+                    Properties::DOCS_URL => $docsURL,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
