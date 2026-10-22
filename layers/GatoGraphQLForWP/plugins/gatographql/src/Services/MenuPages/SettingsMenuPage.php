@@ -11,7 +11,6 @@ use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Targets;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
@@ -29,20 +28,10 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
     public final const SAVE_UNINSTALL_SETTINGS_BUTTON_ID = 'submit-save-uninstall-settings';
 
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final protected function getLicenseValidationService(): LicenseValidationServiceInterface
     {
         if ($this->licenseValidationService === null) {

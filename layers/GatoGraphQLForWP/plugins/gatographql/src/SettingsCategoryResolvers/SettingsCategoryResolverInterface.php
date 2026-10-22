@@ -27,4 +27,11 @@ interface SettingsCategoryResolverInterface
      * "Plugin Management" does not.
      */
     public function addOptionsFormSubmitButton(string $settingsCategory): bool;
+
+    /**
+     * Whether the changes in this category can be saved together
+     * with those of the other categories, via "Save all changes".
+     * Those that can't keep their own submit button.
+     */
+    public function canSaveWithOtherCategories(string $settingsCategory): bool;
 }

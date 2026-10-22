@@ -64,4 +64,14 @@ abstract class AbstractSettingsCategoryResolver extends AbstractBasicService imp
     {
         return true;
     }
+
+    /**
+     * A category without its own submit button (eg: "Plugin
+     * Management", whose buttons each do something else) is
+     * not saved with the others either.
+     */
+    public function canSaveWithOtherCategories(string $settingsCategory): bool
+    {
+        return $this->addOptionsFormSubmitButton($settingsCategory);
+    }
 }
