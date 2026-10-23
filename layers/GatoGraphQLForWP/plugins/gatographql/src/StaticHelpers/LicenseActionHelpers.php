@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
+use function array_keys;
+use function array_unique;
 use function count;
 use function explode;
 use function in_array;
@@ -67,6 +69,45 @@ class LicenseActionHelpers
             'previous' => [$extensionSlug => $storedLicenseKey],
             'submitted' => [$extensionSlug => $licenseKey],
             'store' => $store,
+        ];
+    }
+
+    /**
+     * For "Save license keys": the license keys to act on (before and
+     * after), only those of the licenses whose key was added, changed or
+     * cleared, or whose key is entered but not active yet. The licenses
+     * left as they were are not validated again: the button beside each
+     * one does that.
+     *
+     * @param array<string,mixed> $storedLicenseKeys
+     * @param array<string,mixed> $submittedLicenseKeys
+     * @param string[] $activatedExtensionSlugs
+     * @return array{previous:array<string,string>,submitted:array<string,string>}
+     */
+    public static function getLicenseKeysToSave(
+        array $storedLicenseKeys,
+        array $submittedLicenseKeys,
+        array $activatedExtensionSlugs,
+    ): array {
+        $previous = [];
+        $submitted = [];
+        $extensionSlugs = array_unique([...array_keys($storedLicenseKeys), ...array_keys($submittedLicenseKeys)]);
+        foreach ($extensionSlugs as $extensionSlug) {
+            $storedLicenseKey = $storedLicenseKeys[$extensionSlug] ?? '';
+            $storedLicenseKey = is_string($storedLicenseKey) ? trim($storedLicenseKey) : '';
+            $submittedLicenseKey = $submittedLicenseKeys[$extensionSlug] ?? '';
+            $submittedLicenseKey = is_string($submittedLicenseKey) ? trim($submittedLicenseKey) : '';
+            $isChanged = $storedLicenseKey !== $submittedLicenseKey;
+            $isNotActiveYet = $submittedLicenseKey !== '' && !in_array($extensionSlug, $activatedExtensionSlugs, true);
+            if (!$isChanged && !$isNotActiveYet) {
+                continue;
+            }
+            $previous[$extensionSlug] = $storedLicenseKey;
+            $submitted[$extensionSlug] = $submittedLicenseKey;
+        }
+        return [
+            'previous' => $previous,
+            'submitted' => $submitted,
         ];
     }
 }

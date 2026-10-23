@@ -262,7 +262,8 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
             $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gatographql');
-            $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
+            $sensitiveDataDescPlaceholder = \__('Only Schema Configurations that expose sensitive data show the %s.', 'gatographql');
+            $sensitiveDataHelp = \__('To show them, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration.', 'gatographql');
             $moduleEntities = [
                 self::SCHEMA_CUSTOMPOST_META => 'custom posts',
                 self::SCHEMA_USER_META => 'users',
@@ -359,11 +360,11 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Behavior', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        '%s %s%s',
-                        \__('Are the entries being allowed or denied access to?', 'gatographql'),
-                        \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
+                        '%s%s',
+                        \__('Whether queries can read only the meta keys, or all but them.', 'gatographql'),
                         $defaultValueDesc,
                     ),
+                    Properties::HELP => \__('<ul><li>Allow access: queries can read the meta keys, and nothing else.</li><li>Deny access: queries can read every meta key except these.</li></ul>', 'gatographql'),
                     Properties::TYPE => Properties::TYPE_STRING,
                     Properties::POSSIBLE_VALUES => [
                         Behaviors::ALLOW->value => \__('Allow access', 'gatographql'),
@@ -393,6 +394,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                         $entityNames[$module]
                     ),
                 ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

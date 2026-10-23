@@ -27,7 +27,6 @@ use function add_settings_error;
 use function admin_url;
 use function apply_filters;
 use function array_filter;
-use function array_keys;
 use function array_map;
 use function array_merge;
 use function array_values;
@@ -44,6 +43,7 @@ use function esc_html_e;
 use function esc_textarea;
 use function esc_url;
 use function get_current_user_id;
+use function get_option;
 use function get_plugin_page_hook;
 use function get_settings_errors;
 use function get_transient;
@@ -265,7 +265,46 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         array $values,
         string $settingsCategory,
     ): array {
-        return $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
+        $values = $this->getSettingsNormalizer()->normalizeSettingsByCategory($values, $settingsCategory);
+        return $this->keepStoredJSONTexts($values, $settingsCategory);
+    }
+
+    /**
+     * The screen shows a JSON value indented, to read it. Saving it
+     * keeps the text stored as it was, while it holds the same JSON.
+     *
+     * @param array<string,mixed> $values
+     * @return array<string,mixed>
+     */
+    protected function keepStoredJSONTexts(
+        array $values,
+        string $settingsCategory,
+    ): array {
+        $storedValues = get_option($this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory), []);
+        if (!is_array($storedValues)) {
+            return $values;
+        }
+        foreach ($this->getSettingsNormalizer()->getAllSettingsItems($settingsCategory) as $item) {
+            /** @var array<array<string,mixed>> */
+            $itemSettings = $item['settings'];
+            foreach ($itemSettings as $itemSetting) {
+                if (!($itemSetting[Properties::JSON] ?? false)) {
+                    continue;
+                }
+                /** @var string */
+                $name = $itemSetting[Properties::NAME];
+                $value = $values[$name] ?? null;
+                $storedValue = $storedValues[$name] ?? null;
+                if (
+                    is_string($value)
+                    && is_string($storedValue)
+                    && SettingsControlHelpers::isSameJSON($value, $storedValue)
+                ) {
+                    $values[$name] = $storedValue;
+                }
+            }
+        }
+        return $values;
     }
 
     protected function getOptionsFormModuleSectionName(string $optionsFormName, string $moduleID): string
@@ -1368,9 +1407,12 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 $keyActions = $itemSetting[Properties::KEY_ACTIONS] ?? [];
                 /** @var string|null */
                 $keyActionsField = $itemSetting[Properties::KEY_ACTIONS_FIELD] ?? null;
+                /** @var array<string|int,array<string,array<string,string>>> */
+                $keyEditActions = $itemSetting[Properties::KEY_EDIT_ACTIONS] ?? [];
                 foreach ($keyLabels as $key => $label) {
                     $keyStatus = $keyStatuses[$key] ?? null;
                     $entryActions = $keyActionsField === null ? [] : ($keyActions[$key] ?? []);
+                    $entryEditActions = $keyActionsField === null ? [] : ($keyEditActions[$key] ?? []);
                     $id = $name . '_' . $key;
                     $entryName = $optionsFormName . '[' . $name . '][' . $key . ']';
                     $entryValue = $this->getPropertyArrayEntryValue($value, $key, $itemSetting);
@@ -1418,7 +1460,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 </span>
                             <?php endif; ?>
                             <?php if ($entryActions !== []) : ?>
-                                <?php $this->printEntryActions((string) $keyActionsField, $entryActions, $label); ?>
+                                <?php $this->printEntryActions((string) $keyActionsField, $entryActions, $label, $entryEditActions); ?>
                                 </span>
                             <?php endif; ?>
                             <?php
@@ -1450,7 +1492,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         }
                         ?>
                         <?php if (($keyStatus['detail'] ?? '') !== '') : ?>
-                            <span class="gato-grid__detail gato-grid__detail--<?php echo esc_attr($keyStatus['tone'] ?? Properties::KEY_STATUS_TONE_NEUTRAL) ?>"><?php echo esc_html($keyStatus['detail']) ?></span>
+                            <span class="gato-grid__detail gato-grid__detail--<?php echo esc_attr($keyStatus['detailTone'] ?? $keyStatus['tone'] ?? Properties::KEY_STATUS_TONE_NEUTRAL) ?>"><?php echo esc_html($keyStatus['detail']) ?></span>
                         <?php endif; ?>
                     </div>
                     <?php
@@ -1485,16 +1527,27 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
 
     /**
      * The buttons beside an entry, which submit the form with their value
-     * under that field: one shows as a button, more go in a "Manage" menu.
+     * under that field: one shows as a primary button (it is the step to
+     * take, eg: "Activate"), more go in a "Manage" menu. Once the entry's
+     * value is changed or cleared, the script swaps them for the button
+     * of that edit, as the step to take.
      *
      * @param array<string,string> $actions value => label
+     * @param array<string,array<string,string>> $editActions KEY_EDIT_CHANGED|KEY_EDIT_CLEARED => [value => label]
      */
-    protected function printEntryActions(string $fieldName, array $actions, string $entryLabel): void
+    protected function printEntryActions(string $fieldName, array $actions, string $entryLabel, array $editActions = []): void
     {
+        foreach ($editActions as $edit => $editAction) {
+            foreach ($editAction as $actionValue => $actionLabel) {
+                ?>
+                <button type="submit" class="button button-primary gato-entry-action" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>" data-entry-edit="<?php echo esc_attr($edit) ?>" hidden><?php echo esc_html($actionLabel) ?></button>
+                <?php
+            }
+        }
         if (count($actions) === 1) {
             foreach ($actions as $actionValue => $actionLabel) {
                 ?>
-                <button type="submit" class="button gato-entry-action" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>"><?php echo esc_html($actionLabel) ?></button>
+                <button type="submit" class="button button-primary gato-entry-action" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>" data-entry-step><?php echo esc_html($actionLabel) ?></button>
                 <?php
             }
             return;

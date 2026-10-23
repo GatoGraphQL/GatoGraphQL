@@ -128,6 +128,10 @@ class SettingsControlHelpersTest extends TestCase
             Properties::CONTROL_INPUT,
             SettingsControlHelpers::getGridEntryControl([])
         );
+        $this->assertSame(
+            Properties::CONTROL_SELECT,
+            SettingsControlHelpers::getGridEntryControl([Properties::POSSIBLE_VALUES => ['d' => 'Default', 'e' => 'Enabled'], Properties::ENTRY_CONTROL => Properties::CONTROL_SELECT])
+        );
     }
 
     public function testGroupsSplitOnHeadingsAndDividers(): void
@@ -260,5 +264,15 @@ class SettingsControlHelpersTest extends TestCase
         $this->assertSame('Request timeout (seconds)', SettingsControlHelpers::getTitleWithoutUnit('Request timeout (seconds)', null));
         $this->assertSame('Max length (characters)', SettingsControlHelpers::getTitleWithoutUnit('Max length (characters)', 'tokens'));
         $this->assertSame('Max length', SettingsControlHelpers::getTitleWithoutUnit('Max length', 'characters'));
+    }
+
+    public function testTheSameJSONIndentedIsTheSame(): void
+    {
+        $this->assertTrue(SettingsControlHelpers::isSameJSON('{"reasoning_effort":"none"}', "{\r\n    \"reasoning_effort\": \"none\"\r\n}"));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{"reasoning_effort":"none"}', '{"reasoning_effort":"low"}'));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{"a":1,"b":2}', '{"b":2,"a":1}'));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{oops', '{ oops'));
+        $this->assertTrue(SettingsControlHelpers::isSameJSON('{oops', '{oops'));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('', 'null'));
     }
 }

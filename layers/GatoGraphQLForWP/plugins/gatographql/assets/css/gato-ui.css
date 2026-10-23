@@ -26,6 +26,10 @@
     --gato-accent-tint: color-mix(in srgb, var(--gato-accent) 12%, #fff);
     --gato-on-accent: #fff;
     accent-color: var(--gato-accent);
+    /* WordPress draws its checkboxes, radios and focus rings with these */
+    --wp-admin-theme-color: var(--gato-accent);
+    --wp-admin-theme-color-darker-10: var(--gato-accent-hover);
+    --wp-admin-theme-color-darker-20: color-mix(in srgb, var(--gato-accent-hover) 85%, #000);
 }
 
 /* Shape and neutral colors */

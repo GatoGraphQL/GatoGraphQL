@@ -15,9 +15,11 @@ use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\LicenseActionHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 
 use function __;
 use function add_action;
+use function array_keys;
 use function is_array;
 use function update_option;
 
@@ -216,7 +218,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                     return;
                 }
 
-                // If pressed on the "Activate (Extensions)" button...
+                // If pressed on the "Save license keys" button...
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
@@ -232,9 +234,14 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
 
                     // Retrieve the previously-stored license keys, and the newly-submitted license keys
                     $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    $licenseKeys = LicenseActionHelpers::getLicenseKeysToSave(
+                        is_array($oldValue[$settingOptionName] ?? null) ? $oldValue[$settingOptionName] : [],
+                        is_array($values[$settingOptionName] ?? null) ? $values[$settingOptionName] : [],
+                        array_keys(SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties()),
+                    );
                     $this->getLicenseValidationService()->activateDeactivateValidateGatoGraphQLCommercialExtensions(
-                        $oldValue[$settingOptionName] ?? [],
-                        $values[$settingOptionName] ?? [],
+                        $licenseKeys['previous'],
+                        $licenseKeys['submitted'],
                         PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
                     return;

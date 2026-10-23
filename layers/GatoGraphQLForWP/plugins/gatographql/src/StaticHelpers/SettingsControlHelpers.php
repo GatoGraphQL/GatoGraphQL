@@ -15,6 +15,7 @@ use function is_bool;
 use function is_scalar;
 use function json_decode;
 use function json_encode;
+use function json_last_error;
 use function max;
 use function mb_strlen;
 use function mb_strtolower;
@@ -169,6 +170,11 @@ class SettingsControlHelpers
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
         if ($possibleValues === []) {
             return Properties::CONTROL_INPUT;
+        }
+        /** @var string|null */
+        $entryControl = $itemSetting[Properties::ENTRY_CONTROL] ?? null;
+        if ($entryControl !== null) {
+            return $entryControl;
         }
         if ($itemSetting[Properties::IS_MULTIPLE] ?? false) {
             return Properties::CONTROL_SELECT;
@@ -337,6 +343,26 @@ class SettingsControlHelpers
         }
         $formatted = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         return $formatted === false ? $value : $formatted;
+    }
+
+    /**
+     * Whether both texts hold the same JSON, however indented. A text
+     * that is not valid JSON is the same only as the very same text.
+     */
+    public static function isSameJSON(string $value, string $otherValue): bool
+    {
+        if ($value === $otherValue) {
+            return true;
+        }
+        $decoded = json_decode($value, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return false;
+        }
+        $otherDecoded = json_decode($otherValue, true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            return false;
+        }
+        return $decoded === $otherDecoded;
     }
 
     /**

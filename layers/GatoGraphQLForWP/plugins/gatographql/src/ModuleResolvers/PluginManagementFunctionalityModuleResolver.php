@@ -201,14 +201,15 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                         '<p>%s</p><ul><li>%s</li><li>%s</li></ul><p>%s</p>',
                         \__('The button beside each license acts on that license only:', 'gatographql'),
                         \__('<strong>Activate</strong> activates the key you entered, or the new key that replaces the previous one.', 'gatographql'),
-                        \__('<strong>Validate</strong> checks the status of an active license, and <strong>Deactivate</strong> frees its site and removes its key.', 'gatographql'),
-                        \__('<strong>Update all licenses</strong> acts on every license at once: it activates the keys you added or changed, deactivates the ones you removed, and validates the rest.', 'gatographql'),
+                        \__('<strong>Validate</strong> checks the status of an active license, and <strong>Deactivate</strong> frees its site and removes its key (also when you clear the key).', 'gatographql'),
+                        \__('The button below the licenses does all of it at once: it activates every key you entered, and deactivates every license whose key you cleared.', 'gatographql'),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
                     Properties::KEY_STATUSES => $this->getCommercialExtensionLicenseStatuses(array_keys($commercialExtensionSlugProductNames)),
                     Properties::KEY_ACTIONS => $this->getCommercialExtensionLicenseActions(array_keys($commercialExtensionSlugProductNames)),
                     Properties::KEY_ACTIONS_FIELD => $licenseActionsFieldName,
+                    Properties::KEY_EDIT_ACTIONS => $this->getCommercialExtensionLicenseEditActions(array_keys($commercialExtensionSlugProductNames)),
                     Properties::SUBTYPE => Properties::TYPE_PASSWORD,
                 ];
                 /**
@@ -227,10 +228,22 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $activateExtensionsButtonsHTML = '';
                 if (function_exists('get_submit_button')) {
                     $activateExtensionsButtonsHTML = get_submit_button(
-                        \__('Update all licenses', 'gatographql'),
-                        'primary',
+                        \__('Apply license changes', 'gatographql'),
+                        'secondary',
                         $activateButtonName,
-                        false
+                        false,
+                        [
+                            'data-entry-batch' => '',
+                            'data-label-none' => \__('Activate licenses', 'gatographql'),
+                            'data-label-changed-one' => \__('Activate 1 license', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-changed-many' => \__('Activate %s licenses', 'gatographql'),
+                            'data-label-cleared-one' => \__('Deactivate 1 license', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-cleared-many' => \__('Deactivate %s licenses', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-mixed' => \__('Apply %s license changes', 'gatographql'),
+                        ]
                     );
                 }
                 $moduleSettings[] = [
@@ -531,7 +544,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
      * or the error the last attempt produced
      *
      * @param string[] $extensionSlugs
-     * @return array<string,array{label:string,tone:string,detail?:string}>
+     * @return array<string,array{label:string,tone:string,detail?:string,detailTone?:string}>
      */
     protected function getCommercialExtensionLicenseStatuses(array $extensionSlugs): array
     {
@@ -555,6 +568,9 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             }
             if ($failure !== null) {
                 $status['detail'] = $failure['message'];
+                $status['detailTone'] = $failure['type'] === 'error'
+                    ? Properties::KEY_STATUS_TONE_DANGER
+                    : Properties::KEY_STATUS_TONE_WARNING;
             }
             $statuses[$extensionSlug] = $status;
         }
@@ -585,6 +601,30 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             ];
         }
         return $actions;
+    }
+
+    /**
+     * Once a license key is edited, its row offers the step to take: to
+     * activate the key entered, or to deactivate the license whose key
+     * was cleared.
+     *
+     * @param string[] $extensionSlugs
+     * @return array<string,array<string,array<string,string>>>
+     */
+    protected function getCommercialExtensionLicenseEditActions(array $extensionSlugs): array
+    {
+        $editActions = [];
+        foreach ($extensionSlugs as $extensionSlug) {
+            $editActions[$extensionSlug] = [
+                Properties::KEY_EDIT_CHANGED => [
+                    LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_ACTIVATE, $extensionSlug) => \__('Activate', 'gatographql'),
+                ],
+                Properties::KEY_EDIT_CLEARED => [
+                    LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_DEACTIVATE, $extensionSlug) => \__('Deactivate', 'gatographql'),
+                ],
+            ];
+        }
+        return $editActions;
     }
 
     /**

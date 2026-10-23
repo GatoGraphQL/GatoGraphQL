@@ -630,6 +630,61 @@
 	}
 
 	/**
+	 * An entry with buttons beside it (eg: a license key): once its value
+	 * is changed or cleared, the button of that edit replaces them, as the
+	 * step to take. The button that acts on all the entries at once counts
+	 * the steps to take, and says what it does.
+	 */
+	function initEntryEdits( page ) {
+		page.querySelectorAll( 'form' ).forEach( ( form ) => {
+			const rows = Array.from( form.querySelectorAll( '.gato-grid__row' ) ).filter( ( row ) => row.querySelector( '[data-entry-edit]' ) && row.querySelector( 'input.gato-input' ) );
+			if ( ! rows.length ) {
+				return;
+			}
+			const batchButtons = form.querySelectorAll( '[data-entry-batch]' );
+			const update = ( row ) => {
+				const input = row.querySelector( 'input.gato-input' );
+				const value = input.value.trim();
+				const storedValue = input.defaultValue.trim();
+				let edit = null;
+				if ( value !== storedValue ) {
+					edit = value === '' ? 'cleared' : 'changed';
+				}
+				row.querySelectorAll( '[data-entry-edit]' ).forEach( ( button ) => {
+					button.hidden = button.dataset.entryEdit !== edit;
+				} );
+				row.querySelectorAll( '[data-entry-step], .gato-entry-menu' ).forEach( ( actions ) => {
+					actions.hidden = edit !== null;
+				} );
+				if ( edit === null && value !== '' && row.querySelector( '[data-entry-step]' ) ) {
+					return 'changed';
+				}
+				return edit;
+			};
+			const updateAll = () => {
+				const edits = rows.map( update ).filter( Boolean );
+				const changed = edits.filter( ( edit ) => edit === 'changed' ).length;
+				const cleared = edits.length - changed;
+				batchButtons.forEach( ( button ) => {
+					const labels = button.dataset;
+					let label = labels.labelNone;
+					if ( changed > 0 && cleared > 0 ) {
+						label = format( labels.labelMixed, edits.length );
+					} else if ( changed > 0 ) {
+						label = changed === 1 ? labels.labelChangedOne : format( labels.labelChangedMany, changed );
+					} else if ( cleared > 0 ) {
+						label = cleared === 1 ? labels.labelClearedOne : format( labels.labelClearedMany, cleared );
+					}
+					button.value = label;
+					button.disabled = edits.length === 0;
+				} );
+			};
+			rows.forEach( ( row ) => row.querySelector( 'input.gato-input' ).addEventListener( 'input', updateAll ) );
+			updateAll();
+		} );
+	}
+
+	/**
 	 * A textarea with an entry per line, as a tag input. The
 	 * textarea stays in the form, and is what is submitted.
 	 */
@@ -1129,6 +1184,7 @@
 		initChecklists( page );
 		initGrids( page );
 		initPasswordToggles( page );
+		initEntryEdits( page );
 		initJSONFields( page );
 		initButtonGroups( page );
 		initDependencies( page );

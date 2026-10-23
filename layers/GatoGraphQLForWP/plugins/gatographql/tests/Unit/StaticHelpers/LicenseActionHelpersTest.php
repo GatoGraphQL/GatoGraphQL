@@ -50,6 +50,44 @@ class LicenseActionHelpersTest extends TestCase
         );
     }
 
+    public function testSavingActsOnTheEditedKeysOnly(): void
+    {
+        $this->assertSame(
+            [
+                'previous' => ['translations' => 'KEY-AIT', 'one-click' => '', 'woocommerce' => 'KEY-WOO'],
+                'submitted' => ['translations' => '', 'one-click' => 'KEY-NEW', 'woocommerce' => 'KEY-WOO-2'],
+            ],
+            LicenseActionHelpers::getLicenseKeysToSave(
+                ['pro' => 'KEY-PRO', 'translations' => 'KEY-AIT', 'one-click' => '', 'woocommerce' => 'KEY-WOO'],
+                ['pro' => ' KEY-PRO ', 'translations' => '', 'one-click' => 'KEY-NEW', 'woocommerce' => 'KEY-WOO-2'],
+                ['pro', 'translations', 'woocommerce'],
+            )
+        );
+    }
+
+    public function testSavingActivatesAnUnchangedKeyThatIsNotActiveYet(): void
+    {
+        $this->assertSame(
+            [
+                'previous' => ['pro' => 'KEY-PRO'],
+                'submitted' => ['pro' => 'KEY-PRO'],
+            ],
+            LicenseActionHelpers::getLicenseKeysToSave(
+                ['pro' => 'KEY-PRO', 'translations' => 'KEY-AIT'],
+                ['pro' => 'KEY-PRO', 'translations' => 'KEY-AIT'],
+                ['translations'],
+            )
+        );
+    }
+
+    public function testSavingWithNoEditedKeyActsOnNone(): void
+    {
+        $this->assertSame(
+            ['previous' => [], 'submitted' => []],
+            LicenseActionHelpers::getLicenseKeysToSave(self::STORED, self::STORED, ['pro', 'translations'])
+        );
+    }
+
     public function testAValueThatIsNoActionDoesNothing(): void
     {
         $this->assertNull(LicenseActionHelpers::getLicenseKeysForAction('delete:pro', self::STORED, self::STORED));
