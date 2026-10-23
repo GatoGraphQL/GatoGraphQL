@@ -11,6 +11,8 @@ use PHPUnit\Framework\TestCase;
 use function array_column;
 use function array_map;
 use function count;
+use function str_repeat;
+use function str_replace;
 
 class SettingsControlHelpersTest extends TestCase
 {
@@ -93,8 +95,8 @@ class SettingsControlHelpersTest extends TestCase
                 [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'A', 'b' => 'B'], Properties::CONTROL => Properties::CONTROL_SELECT],
                 Properties::CONTROL_SELECT,
             ],
-            'null with scope is a group' => [
-                [Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Slugs', Properties::SCOPE => 'Custom posts'],
+            'null forced as a group is a group' => [
+                [Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Slugs', Properties::CONTROL => Properties::CONTROL_GROUP],
                 Properties::CONTROL_GROUP,
             ],
             'null with underlined title is a group' => [
@@ -139,8 +141,8 @@ class SettingsControlHelpersTest extends TestCase
             [Properties::NAME => 'heading-1', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => '<u>Custom posts:</u>'],
             $setting('c'),
             $setting('d'),
-            [Properties::NAME => 'heading-2', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Empty', Properties::SCOPE => 'Nothing'],
-            [Properties::NAME => 'heading-3', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Taxonomies', Properties::SCOPE => 'Tags and categories'],
+            [Properties::NAME => 'heading-2', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Empty', Properties::CONTROL => Properties::CONTROL_GROUP],
+            [Properties::NAME => 'heading-3', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Taxonomies', Properties::CONTROL => Properties::CONTROL_GROUP],
             $setting('e'),
         ]);
 
@@ -157,9 +159,20 @@ class SettingsControlHelpersTest extends TestCase
     public function testHeadingWithContentIsKeptWithoutSettings(): void
     {
         $groups = SettingsControlHelpers::getGroups([
-            [Properties::NAME => 'heading', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Note', Properties::SCOPE => 'All', Properties::DESCRIPTION => 'Some text'],
+            [Properties::NAME => 'heading', Properties::TYPE => Properties::TYPE_NULL, Properties::TITLE => 'Note', Properties::CONTROL => Properties::CONTROL_GROUP, Properties::DESCRIPTION => 'Some text'],
         ]);
         $this->assertSame(1, count($groups));
+    }
+
+    public function testJSONIsIndented(): void
+    {
+        $this->assertSame("{\n    \"reasoning_effort\": \"none\",\n    \"kwargs\": {\n        \"url\": \"https://a.b/c\"\n    }\n}", SettingsControlHelpers::formatJSON('{"reasoning_effort":"none","kwargs":{"url":"https://a.b/c"}}'));
+        $this->assertSame('{}', SettingsControlHelpers::formatJSON('{}'));
+        $this->assertSame('', SettingsControlHelpers::formatJSON(''));
+        $this->assertSame('{"a":', SettingsControlHelpers::formatJSON('{"a":'), 'A value that is not valid JSON must stay as it is.');
+        $this->assertSame(3, SettingsControlHelpers::getJSONTextareaRows('{}'));
+        $this->assertSame(7, SettingsControlHelpers::getJSONTextareaRows("{\n\n\n\n\n}"));
+        $this->assertSame(16, SettingsControlHelpers::getJSONTextareaRows(str_repeat("\n", 40)));
     }
 
     public function testFullWidthInputIsAskedFor(): void
@@ -169,6 +182,27 @@ class SettingsControlHelpersTest extends TestCase
         $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::FULL_WIDTH => false]));
         $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::USE_TEXTAREA => true, Properties::FULL_WIDTH => true]));
         $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'A', 'b' => 'B'], Properties::FULL_WIDTH => true]));
+    }
+
+    public function testDescriptionHelpMovesBehindTheButton(): void
+    {
+        $collapsible = '<details class="gato-collapsible"><summary>Show details</summary><div class="gato-collapsible-content">More <div>about</div> it</div></details>';
+        $this->assertSame(
+            ['description' => 'One line.', 'help' => 'More <div>about</div> it'],
+            SettingsControlHelpers::splitDescriptionHelp('One line. ' . $collapsible)
+        );
+        $this->assertSame(
+            ['description' => 'One line.', 'help' => 'A<br/><br/>B'],
+            SettingsControlHelpers::splitDescriptionHelp('One line.<br/>' . str_replace('More <div>about</div> it', 'A', $collapsible) . str_replace('More <div>about</div> it', 'B', $collapsible))
+        );
+        $this->assertSame(
+            ['description' => 'One line.', 'help' => 'Starts here'],
+            SettingsControlHelpers::splitDescriptionHelp('One line. ' . str_replace('More <div>about</div> it', '<br/> <br>Starts here', $collapsible))
+        );
+        $this->assertSame(
+            ['description' => 'Only a line', 'help' => ''],
+            SettingsControlHelpers::splitDescriptionHelp('Only a line')
+        );
     }
 
     public function testSelectedValueComparesAsStrings(): void

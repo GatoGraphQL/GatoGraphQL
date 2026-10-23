@@ -8,15 +8,23 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
 use function array_map;
 use function count;
+use function implode;
 use function in_array;
 use function is_array;
 use function is_bool;
 use function is_scalar;
+use function json_decode;
+use function json_encode;
+use function max;
 use function mb_strlen;
 use function mb_strtolower;
 use function mb_substr;
+use function min;
 use function preg_match;
+use function preg_replace;
+use function preg_replace_callback;
 use function strip_tags;
+use function substr_count;
 use function trim;
 
 /**
@@ -103,10 +111,7 @@ class SettingsControlHelpers
         $title = $itemSetting[Properties::TITLE] ?? '';
         /** @var string */
         $description = $itemSetting[Properties::DESCRIPTION] ?? '';
-        if (
-            isset($itemSetting[Properties::SCOPE])
-            || preg_match('#^\s*<u>.*</u>\s*$#s', $title) === 1
-        ) {
+        if (preg_match('#^\s*<u>.*</u>\s*$#s', $title) === 1) {
             return Properties::CONTROL_GROUP;
         }
         if (trim($title) === '' && preg_match('#^\s*<hr\s*/?>\s*$#i', $description) === 1) {
@@ -126,6 +131,31 @@ class SettingsControlHelpers
     {
         return self::getControl($itemSetting) === Properties::CONTROL_INPUT
             && ($itemSetting[Properties::FULL_WIDTH] ?? false);
+    }
+
+    /**
+     * Split the description of a setting into its one line, and the
+     * help it holds behind "Show details" (as printed by
+     * `getCollapsible`), which goes behind the "i" button instead.
+     *
+     * @return array{description:string,help:string}
+     */
+    public static function splitDescriptionHelp(string $description): array
+    {
+        $helps = [];
+        $description = (string) preg_replace_callback(
+            '#<details class="gato-collapsible"><summary>.*?</summary><div class="gato-collapsible-content">(.*?)</div></details>#s',
+            function (array $matches) use (&$helps): string {
+                $helps[] = trim((string) preg_replace('#^(\s|<br\s*/?>)+#i', '', $matches[1]));
+                return '';
+            },
+            $description
+        );
+        $description = (string) preg_replace('#(\s|<br\s*/?>)+$#i', '', $description);
+        return [
+            'description' => trim($description),
+            'help' => implode('<br/><br/>', $helps),
+        ];
     }
 
     /**
@@ -265,5 +295,30 @@ class SettingsControlHelpers
             $count++;
         }
         return $count;
+    }
+
+    /**
+     * A JSON value, indented to read it. A value that is not valid
+     * JSON stays as it is, for the user to fix it.
+     */
+    public static function formatJSON(string $value): string
+    {
+        if (trim($value) === '') {
+            return $value;
+        }
+        $decoded = json_decode($value);
+        if ($decoded === null && trim($value) !== 'null') {
+            return $value;
+        }
+        $formatted = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        return $formatted === false ? $value : $formatted;
+    }
+
+    /**
+     * Rows for a JSON textarea: as many as its lines, within bounds.
+     */
+    public static function getJSONTextareaRows(string $value): int
+    {
+        return max(3, min(16, substr_count($value, "\n") + 2));
     }
 }

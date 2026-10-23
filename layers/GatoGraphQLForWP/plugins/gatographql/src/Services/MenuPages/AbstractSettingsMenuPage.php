@@ -527,6 +527,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                 ?>
                                                     <!-- Panels -->
                                                     <?php
+                                                    $intro = $settingsCategoryResolver->getIntro($settingsCategory);
+                                                    if ($intro !== null) {
+                                                        $this->printCategoryIntro($settingsCategoryID, $intro);
+                                                    }
                                                     /**
                                                      * All the sections are printed one below the other, and the
                                                      * tabs down the side scroll to them (see settings.js)
@@ -656,8 +660,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $module = $item['module'];
         /** @var array<array<string,mixed>> */
         $itemSettings = $item['settings'];
-        /** @var string */
-        $moduleName = $item['name'];
         foreach (SettingsControlHelpers::getGroups($itemSettings) as $group) {
             $heading = $group['heading'];
             ?>
@@ -666,16 +668,12 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     <?php
                     /** @var string */
                     $headingTitle = $heading[Properties::TITLE] ?? '';
-                    $headingScope = $this->getGroupScope($heading, $moduleName);
                     /** @var string */
                     $headingDescription = $heading[Properties::DESCRIPTION] ?? '';
                     ?>
                     <div class="gato-card__head">
                         <span class="gato-card__heading">
                             <span class="gato-card__title"><?php echo esc_html($this->getGroupTitle($headingTitle)) ?></span>
-                            <?php if ($headingScope !== null) : ?>
-                                <span class="gato-scope"><?php echo esc_html($headingScope) ?></span>
-                            <?php endif; ?>
                         </span>
                     </div>
                     <?php if (trim($headingDescription) !== '') : ?>
@@ -690,23 +688,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             </section>
             <?php
         }
-    }
-
-    /**
-     * The scope of a group, as text. None when it only repeats
-     * the name of the section it is in.
-     *
-     * @param array<string,mixed> $heading
-     */
-    protected function getGroupScope(array $heading, string $moduleName): ?string
-    {
-        /** @var string */
-        $scope = $heading[Properties::SCOPE] ?? '';
-        $scope = trim(wp_strip_all_tags($scope));
-        if ($scope === '' || strtolower($scope) === strtolower(trim(wp_strip_all_tags($moduleName)))) {
-            return null;
-        }
-        return $scope;
     }
 
     /**
@@ -734,6 +715,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $title = SettingsControlHelpers::getTitleWithoutUnit($itemSetting[Properties::TITLE] ?? '', $itemSetting[Properties::UNIT] ?? null);
         /** @var string */
         $description = $itemSetting[Properties::DESCRIPTION] ?? '';
+        /** @var string */
+        $help = $itemSetting[Properties::HELP] ?? '';
+        if ($control !== Properties::CONTROL_CONTENT) {
+            $descriptionHelp = SettingsControlHelpers::splitDescriptionHelp($description);
+            $description = $descriptionHelp['description'];
+            $help = trim(implode('<br/><br/>', array_filter([$help, $descriptionHelp['help']])));
+        }
 
         /**
          * Content that shows nothing (eg: only a script) gets no row
@@ -747,8 +735,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             echo $description;
             return;
         }
-        /** @var string */
-        $help = $itemSetting[Properties::HELP] ?? '';
         /** @var string|null */
         $docsURL = $itemSetting[Properties::DOCS_URL] ?? null;
         /** @var string */
@@ -779,6 +765,8 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         }
         $hasTitle = trim($title) !== '';
         $titleID = 'title-' . $name;
+        $helpID = 'help-' . $name;
+        $hasHelp = trim(wp_strip_all_tags($help)) !== '';
         ?>
         <div
             id="section-<?php echo esc_attr($name) ?>"
@@ -796,7 +784,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         >
             <?php if ($hasTitle || trim($description) !== '' || $help !== '' || $dependsOn !== null) : ?>
                 <div class="gato-setting__main">
-                    <?php if ($hasTitle || $docsURL !== null) : ?>
+                    <?php if ($hasTitle || $hasHelp || $docsURL !== null) : ?>
                         <div class="gato-setting__title">
                             <?php if ($hasTitle) : ?>
                                 <?php if ($this->isLabelableControl($control)) : ?>
@@ -805,16 +793,18 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                     <span id="<?php echo esc_attr($titleID) ?>"><?php echo $title ?></span>
                                 <?php endif; ?>
                             <?php endif; ?>
-                            <?php if ($docsURL !== null) : ?>
-                                <a href="<?php echo esc_url($docsURL) ?>" class="gato-setting__docs" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Docs', 'gatographql') ?><span aria-hidden="true"> ↗</span><span class="screen-reader-text"><?php esc_html_e('(opens in a new tab)', 'gatographql') ?></span></a>
+                            <?php if ($hasHelp) : ?>
+                                <?php $this->printHelpToggle($helpID) ?>
+                            <?php elseif ($docsURL !== null) : ?>
+                                <?php $this->printDocsLink($docsURL) ?>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
                     <?php if (trim($description) !== '' && $control !== Properties::CONTROL_CONTENT) : ?>
                         <div class="gato-setting__description"><?php echo $description ?></div>
                     <?php endif; ?>
-                    <?php if ($help !== '') : ?>
-                        <details class="gato-collapsible gato-setting__help"><summary><?php esc_html_e('Show details', 'gatographql') ?></summary><div class="gato-collapsible-content"><?php echo $help ?></div></details>
+                    <?php if ($hasHelp) : ?>
+                        <?php $this->printHelpPanel($helpID, $help, $docsURL) ?>
                     <?php endif; ?>
                     <?php if ($dependsOn !== null) : ?>
                         <div class="gato-setting__dependency"><?php echo esc_html($dependsOn['message']) ?></div>
@@ -827,6 +817,72 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 ?>
             </div>
         </div>
+        <?php
+    }
+
+    /**
+     * What applies to all the sections of a tab, once above them
+     *
+     * @param array{title:string,description:string,help?:string} $intro
+     */
+    protected function printCategoryIntro(string $settingsCategoryID, array $intro): void
+    {
+        $help = $intro['help'] ?? '';
+        $helpID = 'help-' . $settingsCategoryID;
+        ?>
+        <section class="gato-card gato-tab-intro">
+            <div class="gato-setting">
+                <div class="gato-setting__main">
+                    <div class="gato-setting__title">
+                        <span><?php echo esc_html($intro['title']) ?></span>
+                        <?php if ($help !== '') : ?>
+                            <?php $this->printHelpToggle($helpID) ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="gato-setting__description"><?php echo $intro['description'] ?></div>
+                    <?php if ($help !== '') : ?>
+                        <?php $this->printHelpPanel($helpID, $help, null) ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </section>
+        <?php
+    }
+
+    /**
+     * The "i" button beside a title, which shows or hides its help
+     * (see gato-ui.js)
+     */
+    protected function printHelpToggle(string $helpID): void
+    {
+        ?>
+        <button type="button" class="gato-help-toggle" aria-expanded="false" aria-controls="<?php echo esc_attr($helpID) ?>" data-js-only hidden>
+            <span class="screen-reader-text"><?php esc_html_e('Help', 'gatographql') ?></span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-5"></path><circle cx="12" cy="8" r=".6" fill="currentColor"></circle></svg>
+        </button>
+        <?php
+    }
+
+    /**
+     * The help of a setting, shown by its "i" button. Without
+     * JavaScript, it is always shown.
+     */
+    protected function printHelpPanel(string $helpID, string $help, ?string $docsURL): void
+    {
+        ?>
+        <div id="<?php echo esc_attr($helpID) ?>" class="gato-help" data-help-panel>
+            <div class="gato-help__content"><?php echo $help ?></div>
+            <?php if ($docsURL !== null) : ?>
+                <?php $this->printDocsLink($docsURL) ?>
+            <?php endif; ?>
+        </div>
+        <?php
+    }
+
+    protected function printDocsLink(string $docsURL): void
+    {
+        ?>
+        <a href="<?php echo esc_url($docsURL) ?>" class="gato-setting__docs" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Docs', 'gatographql') ?><span aria-hidden="true"> ↗</span><span class="screen-reader-text"><?php esc_html_e('(opens in a new tab)', 'gatographql') ?></span></a>
         <?php
     }
 
@@ -1023,11 +1079,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      */
     protected function enqueueSettingsAssets(): void
     {
-        $uiStyleHandle = $this->enqueueAdminUIStyle();
+        $uiHandle = $this->enqueueAdminUIAssets();
         $this->enqueueMainPluginAssetScript(
             'gatographql-settings',
             'assets/js/settings.js',
-            array('jquery', 'gatographql-tabpanel')
+            array('jquery', 'gatographql-tabpanel', $uiHandle)
         );
         wp_localize_script(
             'gatographql-settings',
@@ -1040,6 +1096,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 'saving' => __('Saving…', 'gatographql'),
                 'tooManyFields' => __('The "%s" tab has more fields than the server accepts in one request (max_input_vars), so it can\'t be saved from here.', 'gatographql'),
                 'saveFailed' => __('The changes could not be saved: %s', 'gatographql'),
+                'invalidJSON' => __('This is not valid JSON: %s', 'gatographql'),
                 'show' => __('Show', 'gatographql'),
                 'hide' => __('Hide', 'gatographql'),
                 'filter' => __('Filter', 'gatographql'),
@@ -1055,7 +1112,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $this->enqueueMainPluginAssetStyle(
             'gatographql-settings',
             'assets/css/settings.css',
-            [$uiStyleHandle]
+            [$uiHandle]
         );
     }
 
@@ -1128,18 +1185,30 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $unit = $itemSetting[Properties::UNIT] ?? null;
         $fieldName = $optionsFormName . '[' . $name . ']';
         if ($useTextarea) {
+            $text = is_scalar($value) ? (string) $value : '';
+            $isJSON = $itemSetting[Properties::JSON] ?? false;
+            if ($isJSON) {
+                $text = SettingsControlHelpers::formatJSON($text);
+            }
             ?>
             <textarea
                 name="<?php echo esc_attr($fieldName); ?>"
                 id="<?php echo esc_attr($name); ?>"
-                class="gato-textarea"
-                rows="10"
+                class="gato-textarea<?php echo $isJSON ? ' gato-textarea--json' : '' ?>"
+                rows="<?php echo esc_attr((string) ($isJSON ? SettingsControlHelpers::getJSONTextareaRows($text) : 10)) ?>"
                 cols="50"
+                <?php if ($isJSON) : ?>
+                    data-json
+                    spellcheck="false"
+                    aria-describedby="<?php echo esc_attr($name . '-json-error') ?>"
+                <?php endif; ?>
                 <?php if ($placeholder !== null) : ?>
                     placeholder="<?php echo esc_attr($placeholder) ?>"
                 <?php endif; ?>
-               
-            ><?php echo esc_textarea(is_scalar($value) ? (string) $value : '') ?></textarea>
+            ><?php echo esc_textarea($text) ?></textarea>
+            <?php if ($isJSON) : ?>
+                <span id="<?php echo esc_attr($name . '-json-error') ?>" class="gato-field-error" role="status" hidden></span>
+            <?php endif; ?>
             <?php
             return;
         }
@@ -1255,8 +1324,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php
                 /** @var array<string|int,array{label:string,tone?:string,detail?:string}> */
                 $keyStatuses = $itemSetting[Properties::KEY_STATUSES] ?? [];
+                /** @var array<string|int,array<string,string>> */
+                $keyActions = $itemSetting[Properties::KEY_ACTIONS] ?? [];
+                /** @var string|null */
+                $keyActionsField = $itemSetting[Properties::KEY_ACTIONS_FIELD] ?? null;
                 foreach ($keyLabels as $key => $label) {
                     $keyStatus = $keyStatuses[$key] ?? null;
+                    $entryActions = $keyActionsField === null ? [] : ($keyActions[$key] ?? []);
                     $id = $name . '_' . $key;
                     $entryName = $optionsFormName . '[' . $name . '][' . $key . ']';
                     $entryValue = $this->getPropertyArrayEntryValue($value, $key, $itemSetting);
@@ -1280,6 +1354,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         <?php
                         if ($entryControl === Properties::CONTROL_INPUT) {
                             ?>
+                            <?php if ($entryActions !== []) : ?>
+                                <span class="gato-input-group">
+                            <?php endif; ?>
                             <input
                                 name="<?php echo esc_attr($entryName); ?>"
                                 id="<?php echo esc_attr($id) ?>"
@@ -1293,6 +1370,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 <?php endif; ?>
                                
                             >
+                            <?php if ($entryActions !== []) : ?>
+                                <?php $this->printEntryActions((string) $keyActionsField, $entryActions, $label); ?>
+                                </span>
+                            <?php endif; ?>
                             <?php
                         } elseif ($entryControl === Properties::CONTROL_SEGMENTED) {
                             $this->printSegmentedRadios(
@@ -1330,6 +1411,34 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 ?>
             </div>
         </div>
+        <?php
+    }
+
+    /**
+     * The buttons beside an entry, which submit the form with their value
+     * under that field: one shows as a button, more go in a "⋯" menu.
+     *
+     * @param array<string,string> $actions value => label
+     */
+    protected function printEntryActions(string $fieldName, array $actions, string $entryLabel): void
+    {
+        if (count($actions) === 1) {
+            foreach ($actions as $actionValue => $actionLabel) {
+                ?>
+                <button type="submit" class="button gato-entry-action" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>"><?php echo esc_html($actionLabel) ?></button>
+                <?php
+            }
+            return;
+        }
+        ?>
+        <details class="gato-entry-menu">
+            <summary class="button gato-entry-action" aria-label="<?php echo esc_attr(sprintf(__('Actions for %s', 'gatographql'), $entryLabel)) ?>"><span aria-hidden="true">⋯</span></summary>
+            <span class="gato-entry-menu__items">
+                <?php foreach ($actions as $actionValue => $actionLabel) : ?>
+                    <button type="submit" class="gato-entry-menu__item" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>"><?php echo esc_html($actionLabel) ?></button>
+                <?php endforeach; ?>
+            </span>
+        </details>
         <?php
     }
 

@@ -14,9 +14,11 @@ use GatoGraphQL\GatoGraphQL\ModuleSettings\Targets;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\LicenseActionHelpers;
 
 use function __;
 use function add_action;
+use function is_array;
 use function update_option;
 
 /**
@@ -27,6 +29,8 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
     public final const SAVE_UNINSTALL_SETTINGS_BUTTON_ID = 'submit-save-uninstall-settings';
+    // The button beside a license key: its value says what to do, and on which license
+    public final const LICENSE_ACTION_BUTTON_ID = 'submit-license-action';
 
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
@@ -148,6 +152,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                 if (
                     !isset($values[self::RESET_SETTINGS_BUTTON_ID])
                     && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
+                    && !isset($values[self::LICENSE_ACTION_BUTTON_ID])
                     && !isset($values[self::SAVE_UNINSTALL_SETTINGS_BUTTON_ID])
                 ) {
                     return;
@@ -172,6 +177,42 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                     );
 
                     $this->resetSettings();
+                    return;
+                }
+
+                // If pressed on the button beside a license key: act on that license only
+                if (isset($values[self::LICENSE_ACTION_BUTTON_ID])) {
+                    $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    /** @var array<string,mixed> */
+                    $storedLicenseKeys = is_array($oldValue[$settingOptionName] ?? null) ? $oldValue[$settingOptionName] : [];
+                    /** @var array<string,mixed> */
+                    $submittedLicenseKeys = is_array($values[$settingOptionName] ?? null) ? $values[$settingOptionName] : [];
+                    $licenseKeys = LicenseActionHelpers::getLicenseKeysForAction(
+                        $values[self::LICENSE_ACTION_BUTTON_ID],
+                        $storedLicenseKeys,
+                        $submittedLicenseKeys,
+                    );
+                    // Keep every other license key as stored, whatever was typed in its field
+                    $values[$settingOptionName] = $licenseKeys === null ? $storedLicenseKeys : $licenseKeys['store'];
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        [
+                            [
+                                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                            ],
+                        ],
+                        $oldValue,
+                        $values,
+                    );
+                    if ($licenseKeys === null) {
+                        return;
+                    }
+                    $this->getLicenseValidationService()->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+                        $licenseKeys['previous'],
+                        $licenseKeys['submitted'],
+                        PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                    );
                     return;
                 }
 

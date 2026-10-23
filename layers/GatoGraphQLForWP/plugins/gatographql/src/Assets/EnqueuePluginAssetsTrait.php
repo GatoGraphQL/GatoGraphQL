@@ -68,14 +68,16 @@ trait EnqueuePluginAssetsTrait
     }
 
     /**
-     * The look shared by the admin screens of the Gato plugins, drawn
-     * inside a wrapper with the classes from `getAdminUIThemeClass()`.
+     * The look and behavior shared by the admin screens of the Gato
+     * plugins, drawn inside a wrapper with the classes from
+     * `getAdminUIThemeClass()`.
      *
-     * @return string The stylesheet's handle
+     * @return string The handle of the stylesheet and of the script
      */
-    protected function enqueueAdminUIStyle(): string
+    protected function enqueueAdminUIAssets(): string
     {
         $this->enqueueMainPluginAssetStyle('gatographql-ui', 'assets/css/gato-ui.css');
+        $this->enqueueMainPluginAssetScript('gatographql-ui', 'assets/js/gato-ui.js', [], true);
         return 'gatographql-ui';
     }
 

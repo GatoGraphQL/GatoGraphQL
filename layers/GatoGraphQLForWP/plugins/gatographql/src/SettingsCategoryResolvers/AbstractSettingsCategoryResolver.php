@@ -74,4 +74,12 @@ abstract class AbstractSettingsCategoryResolver extends AbstractBasicService imp
     {
         return $this->addOptionsFormSubmitButton($settingsCategory);
     }
+
+    /**
+     * @return array{title:string,description:string,help?:string}|null
+     */
+    public function getIntro(string $settingsCategory): ?array
+    {
+        return null;
+    }
 }

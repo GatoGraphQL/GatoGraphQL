@@ -516,6 +516,49 @@
 	}
 
 	/**
+	 * JSON textareas: on leaving the field, indent its value,
+	 * or say why it is not valid JSON
+	 */
+	function initJSONFields( page ) {
+		page.querySelectorAll( 'textarea[data-json]' ).forEach( ( textarea ) => {
+			const error = document.getElementById( textarea.getAttribute( 'aria-describedby' ) );
+			const showError = ( message ) => {
+				textarea.setAttribute( 'aria-invalid', String( message !== '' ) );
+				if ( error ) {
+					error.textContent = message;
+					error.hidden = message === '';
+				}
+			};
+			const check = ( reformat ) => {
+				const value = textarea.value;
+				if ( value.trim() === '' ) {
+					showError( '' );
+					return;
+				}
+				let parsed;
+				try {
+					parsed = JSON.parse( value );
+				} catch ( exception ) {
+					showError( format( l10n.invalidJSON, exception.message ) );
+					return;
+				}
+				showError( '' );
+				const formatted = JSON.stringify( parsed, null, 4 );
+				if ( reformat && formatted !== value ) {
+					textarea.value = formatted;
+					textarea.dispatchEvent( new Event( 'input', { bubbles: true } ) );
+				}
+			};
+			textarea.addEventListener( 'blur', () => check( true ) );
+			textarea.addEventListener( 'input', () => {
+				if ( textarea.getAttribute( 'aria-invalid' ) === 'true' ) {
+					check( false );
+				}
+			} );
+		} );
+	}
+
+	/**
 	 * Password fields: show or hide the value
 	 */
 	function initPasswordToggles( page ) {
@@ -994,6 +1037,7 @@
 		initChecklists( page );
 		initGrids( page );
 		initPasswordToggles( page );
+		initJSONFields( page );
 		initButtonGroups( page );
 		initDependencies( page );
 		initSearch( page );

@@ -320,8 +320,9 @@
 .gato-setting__description p:last-child {
     margin-bottom: 0;
 }
-.gato-setting__help {
-    font-size: var(--gato-font-size-sm);
+/* What applies to all the sections of the tab, once above them */
+.gato-tab-intro {
+    margin-bottom: var(--gato-section-gap);
 }
 .gato-setting__dependency {
     display: none;

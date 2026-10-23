@@ -42,16 +42,16 @@ class Properties
      * Settings page picks the control from the type and values above.
      */
 
-    // On a TYPE_NULL heading: what its group applies to, shown beside it
-    public final const SCOPE = 'scope';
     // Force a control, when the one picked from the type does not fit
     public final const CONTROL = 'control';
-    // Longer explanation, behind the "?" button (DESCRIPTION stays the one line under the title)
+    // Longer explanation, behind the "i" button beside the title (DESCRIPTION stays the one line under the title)
     public final const HELP = 'help';
     // Link to the docs page about the setting
     public final const DOCS_URL = 'docsURL';
     // A text field that takes the whole width of the row (eg: a message, a URL), instead of sitting beside the title
     public final const FULL_WIDTH = 'fullWidth';
+    // A textarea that holds JSON: printed formatted, and flagged while it is not valid JSON
+    public final const JSON = 'json';
     // Unit after a number field (eg: "seconds")
     public final const UNIT = 'unit';
     // Example value shown inside an empty field
@@ -68,6 +68,10 @@ class Properties
     public final const KEY_STATUS_TONE_WARNING = 'warning';
     public final const KEY_STATUS_TONE_DANGER = 'danger';
     public final const KEY_STATUS_TONE_NEUTRAL = 'neutral';
+    // On a TYPE_PROPERTY_ARRAY: [key => [value => label]], buttons beside each entry, which submit the form with that value under KEY_ACTIONS_FIELD (eg: activate that license only); with more than one, they go in a "⋯" menu
+    public final const KEY_ACTIONS = 'keyActions';
+    // The name of the form field that the buttons of KEY_ACTIONS submit
+    public final const KEY_ACTIONS_FIELD = 'keyActionsField';
 
     public final const CONTROL_GROUP = 'group';
     public final const CONTROL_DIVIDER = 'divider';

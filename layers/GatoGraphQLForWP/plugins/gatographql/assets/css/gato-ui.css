@@ -149,6 +149,59 @@
     padding-bottom: 0;
 }
 
+/* The button beside an entry (eg: a license), or its "⋯" menu: all as wide, for the fields to line up */
+.gato-ui .gato-input-group > .gato-entry-action,
+.gato-ui .gato-entry-menu > summary.gato-entry-action {
+    min-width: var(--gato-affix-unit-width);
+    text-align: center;
+}
+.gato-entry-menu {
+    position: relative;
+}
+.gato-ui .gato-entry-menu > summary.gato-entry-action {
+    display: block;
+    list-style: none;
+    min-height: var(--gato-control-height);
+    height: var(--gato-control-height);
+    line-height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+}
+.gato-entry-menu > summary::-webkit-details-marker {
+    display: none;
+}
+.gato-entry-menu__items {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 25;
+    min-width: 160px;
+    margin-top: 4px;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+}
+.gato-entry-menu__item {
+    padding: 8px 14px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text);
+    cursor: pointer;
+}
+.gato-entry-menu__item:hover,
+.gato-entry-menu__item:focus-visible {
+    background: var(--gato-accent-soft);
+}
+
 /* Cards */
 .gato-card {
     background: var(--gato-surface);
@@ -181,12 +234,76 @@
     color: var(--gato-text-muted);
     font-size: var(--gato-font-size-sm);
 }
-.gato-scope {
-    font-size: 11px;
-    padding: 1px 8px;
-    border-radius: 10px;
-    background: var(--gato-border-subtle);
-    color: var(--gato-text-muted);
+
+/* Help: an "i" button beside a title, and the panel it opens (gato-ui.js) */
+.gato-ui .gato-help-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--gato-text-faint);
+    cursor: pointer;
+    vertical-align: middle;
+}
+.gato-ui .gato-help-toggle:hover,
+.gato-ui .gato-help-toggle[aria-expanded="true"] {
+    color: var(--gato-accent);
+    background: var(--gato-accent-soft);
+}
+.gato-help {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--gato-accent);
+    border-radius: 0 var(--gato-radius-inner) var(--gato-radius-inner) 0;
+    background: var(--gato-accent-soft);
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.55;
+}
+.gato-help > * + * {
+    margin-top: 8px;
+}
+.gato-help p,
+.gato-help ul,
+.gato-help ol {
+    margin: 0 0 8px;
+}
+.gato-help ul,
+.gato-help ol {
+    padding-left: 18px;
+}
+.gato-help ul {
+    list-style: disc;
+}
+.gato-help li {
+    margin: 0 0 4px;
+}
+.gato-help :last-child {
+    margin-bottom: 0;
+}
+.gato-help code {
+    background: color-mix(in srgb, var(--gato-accent) 8%, var(--gato-surface));
+}
+.gato-help pre {
+    margin: 0 0 8px;
+    padding: 8px 10px;
+    overflow: auto;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-control);
+    font: 12px/1.5 Menlo, Consolas, monospace;
+    white-space: pre-wrap;
+}
+.gato-help hr {
+    border: 0;
+    border-top: var(--gato-border-width) solid color-mix(in srgb, var(--gato-accent) 18%, var(--gato-surface));
+    margin: 10px 0;
 }
 
 /* Badges and pills */
@@ -388,6 +505,25 @@
     font: 12px/1.5 Menlo, Consolas, monospace;
     padding: 8px 10px;
     box-sizing: border-box;
+}
+/* JSON: as tall as its lines, and red while it is not valid */
+.gato-ui .gato-textarea--json {
+    min-height: 0;
+    tab-size: 4;
+    resize: vertical;
+}
+.gato-ui .gato-textarea[aria-invalid="true"] {
+    border-color: var(--gato-danger);
+    box-shadow: 0 0 0 1px var(--gato-danger);
+}
+.gato-field-error {
+    display: block;
+    margin-top: 6px;
+    color: var(--gato-danger);
+    font-size: var(--gato-font-size-xs);
+}
+.gato-field-error[hidden] {
+    display: none;
 }
 /* Text to read or copy, not to edit */
 .gato-ui textarea[readonly],
