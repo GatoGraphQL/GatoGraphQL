@@ -335,11 +335,16 @@
 			tab.addEventListener( 'click', scheduleUpdate );
 		} );
 
-		// The address names the section to open the page on
+		/**
+		 * The address names the section to open the page on. The first
+		 * one is already in view: going to it would only scroll the
+		 * notices above it out of sight (eg: the result of activating
+		 * a license)
+		 */
 		const requested = page.querySelector( '.gatographql-settings-section[data-module-requested]' );
 		const requestedNav = requested && navs.find( ( nav ) => nav.sections.includes( requested ) );
-		if ( requestedNav && requestedNav === getShownNav() ) {
-			const requestedIndex = requestedNav.sections.indexOf( requested );
+		const requestedIndex = requestedNav ? requestedNav.sections.indexOf( requested ) : -1;
+		if ( requestedIndex > 0 && requestedNav === getShownNav() ) {
 			goTo( requestedNav, requestedIndex, 'auto' );
 			/**
 			 * Other scripts may still change what is above it as the page

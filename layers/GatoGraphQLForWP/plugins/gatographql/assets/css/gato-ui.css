@@ -799,6 +799,9 @@
 .gato-grid__detail--warning {
     color: var(--gato-warning-text);
 }
+.gato-grid__detail--success {
+    color: var(--gato-success-text);
+}
 .gato-grid__label {
     display: flex;
     flex-direction: column;
