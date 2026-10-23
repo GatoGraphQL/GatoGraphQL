@@ -1,0 +1,908 @@
+/**
+ * Gato UI: the look shared by the admin screens of the Gato plugins
+ * (Settings, dashboards).
+ *
+ * Everything is drawn from the CSS variables in gato-ui-theme.css,
+ * which the main plugin can override (eg: the accent color) with its
+ * own stylesheet, loaded after that one.
+ */
+
+.gato-ui {
+    color: var(--gato-text);
+    font-size: var(--gato-font-size);
+}
+
+.gato-ui [hidden] {
+    display: none !important;
+}
+.gato-ui a {
+    color: var(--gato-accent);
+}
+.gato-ui a:hover,
+.gato-ui a:active {
+    color: var(--gato-accent-hover);
+}
+.gato-ui a:focus {
+    box-shadow: none;
+    outline: none;
+}
+.gato-ui a:focus-visible,
+.gato-ui button:focus-visible,
+.gato-ui input:focus-visible,
+.gato-ui select:focus,
+.gato-ui textarea:focus {
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+    outline: none;
+}
+.gato-ui input[type="text"]:focus,
+.gato-ui input[type="number"]:focus,
+.gato-ui input[type="password"]:focus,
+.gato-ui input[type="search"]:focus,
+.gato-ui select:focus,
+.gato-ui textarea:focus {
+    border-color: var(--gato-accent);
+}
+
+/* Buttons */
+.gato-ui .button-primary {
+    background: var(--gato-accent);
+    border-color: var(--gato-accent);
+    color: var(--gato-on-accent);
+}
+.gato-ui .button-primary:hover,
+.gato-ui .button-primary:focus {
+    background: var(--gato-accent-hover);
+    border-color: var(--gato-accent-hover);
+    color: var(--gato-on-accent);
+}
+.gato-ui .button-primary:disabled,
+.gato-ui .button-primary[disabled] {
+    background: var(--gato-accent-alt) !important;
+    border-color: var(--gato-accent-alt) !important;
+    color: var(--gato-on-accent) !important;
+}
+.gato-ui .button:not(.button-primary) {
+    color: var(--gato-accent);
+    border-color: var(--gato-accent);
+}
+.gato-ui .button:not(.button-primary):hover {
+    color: var(--gato-accent-hover);
+    border-color: var(--gato-accent-hover);
+    background: var(--gato-accent-soft);
+}
+
+/* A button beside a field is as tall as the field */
+.gato-ui .gato-input-group > .button {
+    min-height: var(--gato-control-height);
+    height: var(--gato-control-height);
+    line-height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+/* The button beside an entry (eg: a license), or its "Manage" menu: all as wide, for the fields to line up */
+.gato-ui .gato-input-group > .gato-entry-action,
+.gato-ui .gato-entry-menu > summary.gato-entry-action {
+    min-width: var(--gato-entry-action-width);
+    text-align: center;
+}
+.gato-entry-menu {
+    position: relative;
+}
+.gato-ui .gato-entry-menu > summary.gato-entry-action {
+    display: block;
+    list-style: none;
+    min-height: var(--gato-control-height);
+    height: var(--gato-control-height);
+    line-height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
+    padding-top: 0;
+    padding-bottom: 0;
+    white-space: nowrap;
+}
+.gato-entry-menu > summary::-webkit-details-marker {
+    display: none;
+}
+.gato-entry-menu__chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform .15s ease;
+}
+.gato-entry-menu[open] .gato-entry-menu__chevron {
+    transform: translateY(1px) rotate(-135deg);
+}
+.gato-entry-menu__items {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 25;
+    min-width: 160px;
+    margin-top: 4px;
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+}
+.gato-entry-menu__item {
+    padding: 8px 14px;
+    border: 0;
+    background: transparent;
+    text-align: left;
+    font: inherit;
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text);
+    cursor: pointer;
+}
+.gato-entry-menu__item:hover,
+.gato-entry-menu__item:focus-visible {
+    background: var(--gato-accent-soft);
+}
+
+/* Cards */
+.gato-card {
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    margin: 0 0 16px;
+    min-width: 0;
+}
+.gato-card__head {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 12px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px var(--gato-card-padding-x);
+    border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
+}
+.gato-card__heading {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+.gato-card__title {
+    font-weight: 600;
+    font-size: var(--gato-font-size);
+}
+.gato-card__description {
+    padding: 10px var(--gato-card-padding-x) 0;
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-sm);
+}
+
+.gato-card__help {
+    padding: 0 var(--gato-card-padding-x);
+}
+.gato-card__help > .gato-help {
+    margin-top: 10px;
+}
+
+/* Help: an "i" button beside a title, and the panel it opens (gato-ui.js) */
+.gato-ui .gato-help-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--gato-text-faint);
+    cursor: pointer;
+    vertical-align: middle;
+}
+.gato-ui .gato-help-toggle:hover,
+.gato-ui .gato-help-toggle[aria-expanded="true"] {
+    color: var(--gato-accent);
+    background: var(--gato-accent-soft);
+}
+.gato-help {
+    margin-top: 8px;
+    padding: 10px 14px;
+    border-left: 3px solid var(--gato-accent);
+    border-radius: 0 var(--gato-radius-inner) var(--gato-radius-inner) 0;
+    background: var(--gato-accent-soft);
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.55;
+}
+.gato-help > * + * {
+    margin-top: 8px;
+}
+.gato-help p,
+.gato-help ul,
+.gato-help ol {
+    margin: 0 0 8px;
+}
+.gato-help ul,
+.gato-help ol {
+    padding-left: 18px;
+}
+.gato-help ul {
+    list-style: disc;
+}
+.gato-help li {
+    margin: 0 0 4px;
+}
+.gato-help :last-child {
+    margin-bottom: 0;
+}
+.gato-help code {
+    background: color-mix(in srgb, var(--gato-accent) 8%, var(--gato-surface));
+}
+.gato-help pre {
+    margin: 0 0 8px;
+    padding: 8px 10px;
+    overflow: auto;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-control);
+    font: 12px/1.5 Menlo, Consolas, monospace;
+    white-space: pre-wrap;
+}
+.gato-help hr {
+    border: 0;
+    border-top: var(--gato-border-width) solid color-mix(in srgb, var(--gato-accent) 18%, var(--gato-surface));
+    margin: 10px 0;
+}
+
+/* Badges and pills */
+.gato-badge {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 18px;
+    font-weight: 400;
+    border-radius: 9px;
+    padding: 0 7px;
+    white-space: nowrap;
+}
+.gato-badge--warning {
+    color: var(--gato-warning-text);
+    background: var(--gato-warning-soft);
+}
+.gato-badge--success {
+    color: var(--gato-success-text);
+    background: var(--gato-success-soft);
+}
+.gato-badge--danger {
+    color: var(--gato-danger);
+    background: var(--gato-danger-soft);
+}
+.gato-badge--neutral {
+    color: var(--gato-text-muted);
+    background: var(--gato-border-subtle);
+}
+.gato-dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--gato-warning);
+    flex-shrink: 0;
+}
+
+/* Switch: a real checkbox */
+.gato-switch {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    position: relative;
+}
+.gato-switch__input {
+    position: absolute;
+    opacity: 0;
+    width: var(--gato-switch-width) !important;
+    height: var(--gato-switch-height) !important;
+    margin: 0 !important;
+    cursor: pointer;
+}
+.gato-switch__track {
+    width: var(--gato-switch-width);
+    height: var(--gato-switch-height);
+    border-radius: calc(var(--gato-switch-height) / 2);
+    background: #a7aaad;
+    position: relative;
+    flex-shrink: 0;
+    transition: background-color .15s;
+}
+.gato-switch__knob {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: calc(var(--gato-switch-height) - 4px);
+    height: calc(var(--gato-switch-height) - 4px);
+    border-radius: 50%;
+    background: var(--gato-surface);
+    transition: left .15s;
+}
+.gato-switch__input:checked + .gato-switch__track {
+    background: var(--gato-accent);
+}
+.gato-switch__input:checked + .gato-switch__track .gato-switch__knob {
+    left: calc(var(--gato-switch-width) - var(--gato-switch-height) + 2px);
+}
+.gato-switch__input:focus-visible + .gato-switch__track {
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-switch__state {
+    font-size: var(--gato-font-size-sm);
+    min-width: 24px;
+}
+.gato-switch__input:checked ~ .gato-switch__state .gato-switch__off,
+.gato-switch__input:not(:checked) ~ .gato-switch__state .gato-switch__on {
+    display: none;
+}
+
+/* Segmented control: radio buttons */
+.gato-seg {
+    display: inline-flex;
+    flex-wrap: wrap;
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    overflow: hidden;
+    background: var(--gato-surface);
+    max-width: 100%;
+}
+.gato-seg__option,
+.gato-seg--buttons > button {
+    position: relative;
+    display: inline-flex;
+    margin: 0;
+}
+.gato-seg__option + .gato-seg__option,
+.gato-seg--buttons > button + button {
+    border-left: var(--gato-border-width) solid var(--gato-border-control);
+}
+.gato-seg__option input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+.gato-seg__option span,
+.gato-seg--buttons > button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 12px;
+    height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text);
+    background: var(--gato-surface);
+    cursor: pointer;
+    white-space: nowrap;
+    border: 0;
+    font-family: inherit;
+}
+.gato-seg__option input:checked + span,
+.gato-seg--buttons > button[aria-pressed="true"] {
+    background: var(--gato-accent);
+    color: var(--gato-on-accent);
+}
+.gato-seg__option input:focus-visible + span {
+    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
+}
+/* Too wide for one line: one option below the other (see settings.js) */
+.gato-seg.is-stacked {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.gato-seg.is-stacked .gato-seg__option span,
+.gato-seg.is-stacked.gato-seg--buttons > button {
+    width: 100%;
+    white-space: normal;
+}
+.gato-seg.is-stacked .gato-seg__option + .gato-seg__option,
+.gato-seg.is-stacked.gato-seg--buttons > button + button {
+    border-left: 0;
+    border-top: var(--gato-border-width) solid var(--gato-border-control);
+}
+.gato-seg--sm .gato-seg__option span,
+.gato-seg--sm.gato-seg--buttons > button {
+    height: calc(var(--gato-control-height-sm) - 2 * var(--gato-border-width));
+    padding: 0 9px;
+    font-size: var(--gato-font-size-xs);
+}
+
+/* Fields */
+.gato-ui .gato-input,
+.gato-ui .gato-select {
+    min-height: var(--gato-control-height);
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    font-size: var(--gato-font-size-sm);
+    max-width: 100%;
+}
+.gato-ui .gato-input {
+    width: var(--gato-field-width);
+    padding: 0 var(--gato-control-padding-x);
+}
+.gato-ui .gato-input--number {
+    width: var(--gato-number-field-width);
+}
+.gato-setting--wide .gato-input-group,
+.gato-setting--wide .gato-input:not(.gato-input--number) {
+    width: 100%;
+}
+
+/* A password field, with the "eye" button that shows its value within it */
+.gato-password {
+    position: relative;
+    display: inline-flex;
+    max-width: 100%;
+    min-width: 0;
+}
+.gato-ui .gato-password > .gato-input {
+    min-width: 0;
+}
+.gato-setting--wide .gato-password:not(.gato-grid__row .gato-password) {
+    flex: 1 1 auto;
+    width: 100%;
+}
+.gato-ui .gato-password > .gato-input {
+    padding-right: calc(var(--gato-control-height) + 4px);
+}
+.gato-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--gato-control-height) - 8px);
+    height: calc(var(--gato-control-height) - 8px);
+    padding: 0;
+    border: 0;
+    border-radius: var(--gato-radius-control);
+    background: transparent;
+    color: var(--gato-text-muted);
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+.gato-password-toggle[hidden] {
+    display: none;
+}
+.gato-password-toggle:hover,
+.gato-password-toggle[aria-pressed="true"] {
+    color: var(--gato-accent);
+}
+.gato-password-toggle:focus-visible {
+    outline: 2px solid var(--gato-accent);
+    outline-offset: 0;
+}
+.gato-ui .gato-select {
+    min-width: 220px;
+}
+.gato-ui .gato-select--sm {
+    min-height: var(--gato-control-height-sm);
+    min-width: 170px;
+    font-size: var(--gato-font-size-xs);
+}
+.gato-ui .gato-select[multiple] {
+    min-width: 300px;
+}
+.gato-ui .gato-textarea {
+    width: 100%;
+    min-height: 110px;
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    font: 12px/1.5 Menlo, Consolas, monospace;
+    padding: 8px 10px;
+    box-sizing: border-box;
+}
+/* JSON: as tall as its lines, and red while it is not valid */
+.gato-ui .gato-textarea--json {
+    min-height: 0;
+    tab-size: 4;
+    resize: vertical;
+}
+.gato-ui .gato-textarea[aria-invalid="true"] {
+    border-color: var(--gato-danger);
+    box-shadow: 0 0 0 1px var(--gato-danger);
+}
+.gato-field-error {
+    display: block;
+    margin-top: 6px;
+    color: var(--gato-danger);
+    font-size: var(--gato-font-size-xs);
+}
+.gato-field-error[hidden] {
+    display: none;
+}
+/* Text to read or copy, not to edit */
+.gato-ui textarea[readonly],
+.gato-ui textarea:disabled {
+    background: var(--gato-surface-alt);
+    border-color: var(--gato-border);
+    color: var(--gato-text);
+    border-radius: var(--gato-radius-inner);
+    box-shadow: none;
+}
+
+/* A field with its unit inside, at its end: all of them as wide */
+.gato-affix {
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    background: var(--gato-surface);
+    overflow: hidden;
+}
+.gato-affix:focus-within {
+    border-color: var(--gato-accent);
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-ui .gato-affix .gato-input,
+.gato-ui .gato-affix .gato-input:focus {
+    flex: 0 0 auto;
+    width: var(--gato-affix-field-width);
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+.gato-affix__unit {
+    display: inline-flex;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 10px;
+    background: var(--gato-surface-alt);
+    border-left: var(--gato-border-width) solid var(--gato-border);
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-xs);
+    white-space: nowrap;
+}
+.gato-input-group {
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    max-width: 100%;
+}
+.gato-ui .gato-filter {
+    min-height: var(--gato-control-height-sm);
+    width: 200px;
+    max-width: 100%;
+    border: var(--gato-border-width) solid var(--gato-border-strong);
+    border-radius: var(--gato-radius-control);
+    font-size: var(--gato-font-size-xs);
+    padding: 0 8px;
+}
+
+/* Tag input: the textarea behind it is what is submitted */
+.gato-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    padding: 6px;
+    background: var(--gato-surface);
+    cursor: text;
+}
+.gato-tags:focus-within {
+    border-color: var(--gato-accent);
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-tags__tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font: 12px Menlo, Consolas, monospace;
+    background: var(--gato-border-subtle);
+    border-radius: 3px;
+    padding: 2px 4px 2px 6px;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+}
+.gato-tags__remove {
+    border: 0;
+    background: transparent;
+    padding: 0 2px;
+    cursor: pointer;
+    color: var(--gato-text-muted);
+    font-size: 14px;
+    line-height: 1;
+}
+.gato-tags__remove:hover {
+    color: var(--gato-danger);
+}
+.gato-ui .gato-tags__input {
+    border: 0;
+    box-shadow: none;
+    outline: 0;
+    flex: 1 1 160px;
+    min-width: 140px;
+    font-size: var(--gato-font-size-xs);
+    padding: 2px 4px;
+    min-height: 24px;
+    background: transparent;
+}
+.gato-ui .gato-tags__input:focus {
+    box-shadow: none;
+}
+
+/* Checklist */
+.gato-checklist {
+    border: var(--gato-border-width) solid var(--gato-border-strong);
+    border-radius: var(--gato-radius-inner);
+    overflow: hidden;
+    background: var(--gato-surface);
+    max-width: 560px;
+}
+.gato-checklist__bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--gato-surface-alt);
+}
+.gato-checklist__count {
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-xs);
+}
+.gato-checklist__items {
+    max-height: 280px;
+    overflow: auto;
+}
+.gato-checklist__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+    font-size: var(--gato-font-size-sm);
+    cursor: pointer;
+}
+.gato-checklist__bar[hidden] + .gato-checklist__items .gato-checklist__item:first-child {
+    border-top: 0;
+}
+
+/* Chips: checkboxes */
+.gato-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.gato-chip {
+    position: relative;
+    display: inline-flex;
+}
+.gato-chip input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+}
+.gato-chip span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: var(--gato-font-size-xs);
+    padding: 4px 10px;
+    border-radius: 14px;
+    border: var(--gato-border-width) solid var(--gato-border-strong);
+    background: var(--gato-surface);
+    cursor: pointer;
+}
+.gato-chip span::before {
+    content: "";
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid var(--gato-border-control);
+    background: var(--gato-surface) no-repeat center / 10px 10px;
+    flex-shrink: 0;
+}
+.gato-chip input:checked + span {
+    background: var(--gato-accent-soft);
+    border-color: var(--gato-accent);
+}
+.gato-chip input:checked + span::before {
+    border-color: var(--gato-accent);
+    background-color: var(--gato-accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");
+}
+.gato-chip input:focus-visible + span {
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+
+/* Grid: an entry per key */
+.gato-grid-field {
+    display: block;
+    min-width: 0;
+}
+.gato-grid-field > * + * {
+    margin-top: 8px;
+}
+.gato-grid-field__bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+.gato-setall {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 8px;
+    align-items: baseline;
+    font-size: var(--gato-font-size-xs);
+    color: var(--gato-text-muted);
+}
+.gato-setall__separator {
+    color: var(--gato-border-strong);
+}
+.gato-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    column-gap: 32px;
+}
+.gato-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+}
+.gato-ui .gato-grid--single .gato-input {
+    width: var(--gato-field-width);
+}
+/* The label on one side (it wraps when long), the control on the other.
+   Where both don't fit side by side, the control goes below the label,
+   to the right, rather than over it. */
+.gato-grid__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px 16px;
+    min-height: 44px;
+    padding: 6px 0;
+    border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
+    min-width: 0;
+}
+.gato-grid__row > .gato-grid__label {
+    flex: 1 1 200px;
+}
+.gato-grid__row > :not(.gato-grid__label):not(.gato-grid__detail) {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-width: 0;
+}
+.gato-grid__row > .gato-input-group {
+    justify-content: flex-end;
+}
+.gato-grid__detail {
+    flex: 1 1 100%;
+    font-size: var(--gato-font-size-xs);
+    color: var(--gato-text-muted);
+}
+.gato-grid__detail--danger {
+    color: var(--gato-danger);
+}
+.gato-grid__detail--warning {
+    color: var(--gato-warning-text);
+}
+.gato-grid__label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    min-width: 0;
+}
+.gato-grid__label-text {
+    font-weight: 500;
+}
+.gato-grid__key {
+    font-size: 11px;
+    color: var(--gato-text-muted);
+    background: none;
+    padding: 0;
+}
+
+/* Tables. Those printed within a setting (eg: by an extension), and the
+   WordPress tables of a screen of the kit (eg: a dashboard), take the
+   same look, whichever their classes. */
+.gato-setting .gato-setting__control table,
+.gato-setting .gato-setting__control table.widefat,
+.gato-ui table.widefat {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin: 8px 0;
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-inner);
+    overflow: hidden;
+    background: var(--gato-surface);
+    box-shadow: none;
+    font-size: var(--gato-font-size-sm);
+}
+.gato-setting .gato-setting__control table th,
+.gato-setting .gato-setting__control table td,
+.gato-ui table.widefat th,
+.gato-ui table.widefat td {
+    padding: 8px 12px;
+    border: 0;
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+    background: transparent;
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: top;
+}
+.gato-setting .gato-setting__control table tr:first-child > *,
+.gato-ui table.widefat tr:first-child > * {
+    border-top: 0;
+}
+.gato-setting .gato-setting__control table thead th,
+.gato-setting .gato-setting__control table tbody th,
+.gato-ui table.widefat thead th,
+.gato-ui table.widefat thead td {
+    font-weight: 500;
+    color: var(--gato-text-muted);
+    background: var(--gato-surface-alt);
+}
+.gato-setting .gato-setting__control table thead th,
+.gato-ui table.widefat thead th,
+.gato-ui table.widefat thead td {
+    border-bottom: 0;
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
+}
+.gato-setting .gato-setting__control table.striped > tbody > :nth-child(odd),
+.gato-ui table.widefat.striped > tbody > :nth-child(odd) {
+    background: transparent;
+}
+
+/* Sticky bar at the bottom: save, run */
+.gato-savebar {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    margin-top: 16px;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius) var(--gato-radius) 0 0;
+    padding: 12px var(--gato-card-padding-x);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, .06);
+}
+.gato-savebar__status {
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text-muted);
+}
+.gato-savebar__status strong {
+    color: var(--gato-text);
+}
+.gato-savebar__status.is-error,
+.gato-savebar__status.is-error strong {
+    color: var(--gato-danger);
+}
+.gato-savebar__actions {
+    display: flex;
+    gap: 8px;
+}
+.gato-savebar__actions .button {
+    margin: 0;
+}

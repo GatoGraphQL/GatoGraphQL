@@ -312,7 +312,7 @@ The `Block` interface (and, as such, the `GeneralBlock` type) contains the follo
 
 As currently there is only one Block type mapping blocks –`GeneralBlock`– it makes sense to have `CustomPost.blocks` (and also `Block.innerBlocks`) retrieve this type directly, instead of the `BlockUnion` type.
 
-We can do this in the Settings page under the Blocks tab, by ticking on option `Use single type instead of union type?`:
+We can do this in the Settings page under the Blocks tab, by ticking on option `Use single type instead of union type`:
 
 <div class="img-width-1024" markdown=1>
 

@@ -8,6 +8,7 @@ use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsControlHelpers;
 use PoP\Root\Services\AbstractBasicService;
 
 use function __;
@@ -16,6 +17,7 @@ use function esc_html;
 use function function_exists;
 use function get_settings_errors;
 use function is_string;
+use function preg_split;
 use function sprintf;
 use function trim;
 
@@ -162,9 +164,14 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
                     $values[$name] = !empty($values[$name]);
                 } elseif ($type === Properties::TYPE_INT) {
                     $values[$name] = (int) ($values[$name] ?? null);
-                    // If the value is below its minimum, reset to the default one
-                    $minNumber = $itemSetting[Properties::MIN_NUMBER] ?? null;
-                    if ($minNumber !== null && $values[$name] < $minNumber) {
+                    // If the value is out of its range, reset to the default one
+                    if (
+                        SettingsControlHelpers::isNumberOutOfRange(
+                            $values[$name],
+                            $itemSetting[Properties::MIN_NUMBER] ?? null,
+                            $itemSetting[Properties::MAX_NUMBER] ?? null,
+                        )
+                    ) {
                         $values[$name] = $moduleResolver->getSettingsDefaultValue($module, $option);
                     }
                 } elseif (
@@ -174,7 +181,7 @@ class SettingsNormalizer extends AbstractBasicService implements SettingsNormali
                     // Check if the type is array, but it's delivered as a string via a textarea
                     $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
                     if (empty($possibleValues)) {
-                        $values[$name] = explode("\n", $values[$name]);
+                        $values[$name] = preg_split('/\r\n|\r|\n/', $values[$name]) ?: [];
                     }
                 } elseif (
                     $type === Properties::TYPE_ARRAY

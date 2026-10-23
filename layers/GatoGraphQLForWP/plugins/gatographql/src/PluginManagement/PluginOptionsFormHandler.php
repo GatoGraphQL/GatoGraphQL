@@ -12,6 +12,9 @@ use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
+use function in_array;
+use function is_array;
+
 /**
  * Helper class with functions to set the configuration in PoP components.
  */
@@ -123,7 +126,7 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         string $option,
     ): mixed {
         global $pagenow;
-        if ($pagenow !== 'options.php') {
+        if ($pagenow !== 'options.php' && $pagenow !== 'admin-post.php') {
             return $value;
         }
 
@@ -134,10 +137,21 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
+    /**
+     * The form is posted to options.php to save a single tab, or
+     * to admin-post.php to save the changes of several tabs at once
+     */
     protected function checkIsExpectedSubmittedForm(string $module, string $option): bool
     {
+        global $pagenow;
+        $optionsFormName = $this->getSettingsCategoryOptionsFormName($module);
+        if ($pagenow === 'admin-post.php') {
+            $saveAll = App::request(SettingsMenuPage::SAVE_ALL);
+            $tabs = is_array($saveAll) ? ($saveAll[SettingsMenuPage::SAVE_ALL_TABS] ?? []) : [];
+            return is_array($tabs) && in_array($optionsFormName, $tabs, true);
+        }
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        return $formOrigin === $this->getSettingsCategoryOptionsFormName($module);
+        return $formOrigin === $optionsFormName;
     }
 
     protected function getSettingsCategoryOptionsFormName(string $module): string

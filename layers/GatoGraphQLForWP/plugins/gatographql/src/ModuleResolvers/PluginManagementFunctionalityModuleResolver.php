@@ -7,6 +7,8 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 use GatoGraphQL\GatoGraphQL\Constants\ResetSettingsOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\CustomPostTypeRegistryFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -14,10 +16,23 @@ use GatoGraphQL\GatoGraphQL\Registries\SettingsCategoryRegistryInterface;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\LicenseActionHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 
+use function array_keys;
 use function esc_html;
+use function function_exists;
 use function get_post_type_object;
+use function get_settings_errors;
 use function get_submit_button;
+use function in_array;
+use function preg_replace;
+use function sprintf;
+use function str_starts_with;
+use function strlen;
+use function substr;
+use function trim;
+use function wp_strip_all_tags;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -35,6 +50,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     public final const OPTION_USE_RESTRICTIVE_OR_NOT_DEFAULT_BEHAVIOR = 'use-restrictive-or-not-default-behavior';
     public final const OPTION_DELETE_DATA_ON_UNINSTALL = 'delete-data-on-uninstall';
     public final const OPTION_DELETE_CONTENT_ON_UNINSTALL = 'delete-content-on-uninstall';
+
+    /**
+     * The code of the notice of a license operation (activate,
+     * deactivate or validate), followed by the extension's slug
+     */
+    public final const LICENSE_OPERATION_NOTICE_CODE_PREFIX = 'license_activation_';
 
     private ?MarkdownContentParserInterface $markdownContentParser = null;
     private ?SettingsCategoryRegistryInterface $settingsCategoryRegistry = null;
@@ -162,13 +183,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
             $commercialExtensionSlugProductNames = $extensionManager->getCommercialExtensionSlugProductNames();
             $activateExtensionLicensesTitle = $this->getActivateExtensionLicensesTitle();
             if ($commercialExtensionSlugProductNames !== []) {
-                $ulPlaceholder = '<ul><li>%s</li></ul>';
-                $handlingLicenseMessageItems = [
-                    \__('Adding a license key will <strong>activate the plugin</strong>', 'gatographql'),
-                    \__('Removing an existing license key will <strong>deactivate the plugin</strong>', 'gatographql'),
-                    \__('Updating a license key will first <strong>deactivate the plugin</strong> (using the previous license key) and then <strong>activate the plugin</strong> again (using the new license key)', 'gatographql'),
-                    \__('Not updating a license key will <strong>validate the status of the plugin</strong>', 'gatographql'),
-                ];
+                $licenseActionsFieldName = sprintf(
+                    '%s[%s]',
+                    $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver(SettingsCategoryResolver::PLUGIN_MANAGEMENT)->getOptionsFormName(SettingsCategoryResolver::PLUGIN_MANAGEMENT),
+                    SettingsMenuPage::LICENSE_ACTION_BUTTON_ID
+                );
                 $option = self::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS;
                 $moduleSettings[] = [
                     Properties::INPUT => $option,
@@ -178,28 +197,22 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     ),
                     Properties::TITLE => $activateExtensionLicensesTitle,
                     Properties::DESCRIPTION => sprintf(
-                        '%s<br/><br/>%s',
-                        sprintf(
-                            \__('Enter the license keys from the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:', 'gatographql'),
-                            $this->getGatoGraphQLShopName()
-                        ),
-                        $this->getCollapsible(
-                            sprintf(
-                                '%s%s',
-                                \__('When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:', 'gatographql'),
-                                sprintf(
-                                    $ulPlaceholder,
-                                    implode(
-                                        '</li><li>',
-                                        $handlingLicenseMessageItems
-                                    )
-                                ),
-                            ),
-                            \__('(Show details: When are licenses activated, deactivated or validated?)', 'gatographql')
-                        ),
+                        \__('Enter each license key from the %s, then activate it.', 'gatographql'),
+                        $this->getGatoGraphQLShopName()
+                    ),
+                    Properties::HELP => sprintf(
+                        '<p>%s</p><ul><li>%s</li><li>%s</li></ul><p>%s</p>',
+                        \__('The button beside each license acts on that license only:', 'gatographql'),
+                        \__('<strong>Activate</strong> activates the key you entered, or the new key that replaces the previous one.', 'gatographql'),
+                        \__('<strong>Validate</strong> checks the status of an active license, and <strong>Deactivate</strong> frees its site and removes its key (also when you clear the key).', 'gatographql'),
+                        \__('The button below the licenses does all of it at once: it activates every key you entered, and deactivates every license whose key you cleared.', 'gatographql'),
                     ),
                     Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                     Properties::KEY_LABELS => $commercialExtensionSlugProductNames,
+                    Properties::KEY_STATUSES => $this->getCommercialExtensionLicenseStatuses(array_keys($commercialExtensionSlugProductNames)),
+                    Properties::KEY_ACTIONS => $this->getCommercialExtensionLicenseActions(array_keys($commercialExtensionSlugProductNames)),
+                    Properties::KEY_ACTIONS_FIELD => $licenseActionsFieldName,
+                    Properties::KEY_EDIT_ACTIONS => $this->getCommercialExtensionLicenseEditActions(array_keys($commercialExtensionSlugProductNames)),
                     Properties::SUBTYPE => Properties::TYPE_PASSWORD,
                 ];
                 /**
@@ -218,10 +231,22 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 $activateExtensionsButtonsHTML = '';
                 if (function_exists('get_submit_button')) {
                     $activateExtensionsButtonsHTML = get_submit_button(
-                        \__('Activate licenses (or Deactivate/Validate)', 'gatographql'),
-                        'primary',
+                        \__('Apply license changes', 'gatographql'),
+                        'secondary',
                         $activateButtonName,
-                        false
+                        false,
+                        [
+                            'data-entry-batch' => '',
+                            'data-label-none' => \__('Activate licenses', 'gatographql'),
+                            'data-label-changed-one' => \__('Activate 1 license', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-changed-many' => \__('Activate %s licenses', 'gatographql'),
+                            'data-label-cleared-one' => \__('Deactivate 1 license', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-cleared-many' => \__('Deactivate %s licenses', 'gatographql'),
+                            /* translators: %s: number of licenses */
+                            'data-label-mixed' => \__('Apply %s license changes', 'gatographql'),
+                        ]
                     );
                 }
                 $moduleSettings[] = [
@@ -261,11 +286,11 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     'reset-settings-button'
                 ),
-                Properties::TITLE => \__('Reset the Gato GraphQL Settings?', 'gatographql'),
+                Properties::TITLE => \__('Reset the settings', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><p>%s</p>',
                     sprintf(
-                        \__('Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code>) to their default values.', 'gatographql'),
+                        \__('Restore every setting under tabs <code>%s</code>, <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> to its default value.', 'gatographql'),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::ENDPOINT_CONFIGURATION)->getName(SettingsCategoryResolver::ENDPOINT_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_CONFIGURATION),
                         $settingsCategoryRegistry->getSettingsCategoryResolver(SettingsCategoryResolver::SCHEMA_TYPE_CONFIGURATION)->getName(SettingsCategoryResolver::SCHEMA_TYPE_CONFIGURATION),
@@ -284,10 +309,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p><br/><table class="wp-list-table widefat striped"><thead><tr><th>%s</th><th>%s</th><th>%s</th></tr></thead><tbody><tr>%s</tr></tbody></table>',
-                    \__('When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:', 'gatographql'),
+                    \__('You can reset to restrictive or non-restrictive defaults:', 'gatographql'),
                     \__('Feature', 'gatographql'),
-                    \__('Non-restrictive behavior', 'gatographql'),
-                    \__('Restrictive behavior', 'gatographql'),
+                    \__('Non-restrictive', 'gatographql'),
+                    \__('Restrictive', 'gatographql'),
                     implode(
                         '</tr><tr>',
                         [
@@ -303,24 +328,24 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 '</td><td>',
                                 [
                                     \__('“Sensitive” data fields', 'gatographql'),
-                                    \__('Added to the schema', 'gatographql'),
-                                    \__('Not added to the schema', 'gatographql'),
+                                    \__('In the schema', 'gatographql'),
+                                    \__('Not in the schema', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Settings from <code>wp_options</code>', 'gatographql'),
-                                    \__('No options are queryable by non-administrators', 'gatographql'),
-                                    \__('Only a few predefined options are queryable by non-administrators', 'gatographql'),
+                                    \__('Non-admins can query no options', 'gatographql'),
+                                    \__('Non-admins can query a few predefined options', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('Meta (posts, users, comments, taxonomies)', 'gatographql'),
-                                    \__('All keys are queryable', 'gatographql'),
-                                    \__('No keys are queryable', 'gatographql'),
+                                    \__('Queries can read every key', 'gatographql'),
+                                    \__('Queries can read no keys', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
@@ -335,16 +360,16 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                                 '</td><td>',
                                 [
                                     \__('Environment variables (extension)', 'gatographql'),
-                                    \__('All environment variables and PHP constants are queryable', 'gatographql'),
-                                    \__('No environment variables or PHP constants are queryable', 'gatographql'),
+                                    \__('Queries can read every environment variable and PHP constant', 'gatographql'),
+                                    \__('Queries can read no environment variables or PHP constants', 'gatographql'),
                                 ]
                             ) . '</td>',
                             '<td>' . implode(
                                 '</td><td>',
                                 [
                                     \__('HTTP Client requests (extension)', 'gatographql'),
-                                    \__('All URLs can be requested', 'gatographql'),
-                                    \__('No URL can be requested', 'gatographql'),
+                                    \__('Queries can request any URL', 'gatographql'),
+                                    \__('Queries can request no URL', 'gatographql'),
                                 ]
                             ) . '</td>',
                         ]
@@ -363,12 +388,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ),
                 Properties::DESCRIPTION => sprintf(
                     '<p>%s</p>',
-                    \__('Choose if to use restrictive or non-restrictive default settings.', 'gatographql'),
+                    \__('The defaults to reset to.', 'gatographql'),
                 ),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
-                    ResetSettingsOptions::RESTRICTIVE => \__('Use the restrictive default behavior for the Settings', 'gatographql'),
-                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Use the non-restrictive default behavior for the Settings', 'gatographql'),
+                    ResetSettingsOptions::RESTRICTIVE => \__('Restrictive defaults', 'gatographql'),
+                    ResetSettingsOptions::NON_RESTRICTIVE => \__('Non-restrictive defaults', 'gatographql'),
                 ],
                 Properties::CSS_STYLE => 'display: none;',
             ];
@@ -411,8 +436,25 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Delete all plugin data when deleting the plugin?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Remove everything the plugin has stored on this site: its settings, the license records of its extensions, the metadata it added to your content and users, its database tables, and its cache and log files. Removing a license record does not release the license on the marketplace: to use it on another site, first clear its key under Activate Plugins and Extensions and save.', 'gatographql'),
+                Properties::TITLE => \__('Delete all plugin data', 'gatographql'),
+                Properties::DESCRIPTION => \__('Deleting the plugin also removes everything it stored on this site.', 'gatographql'),
+                Properties::HELP => sprintf(
+                    '%s<ul><li>%s</li></ul>%s',
+                    \__('It removes:', 'gatographql'),
+                    implode(
+                        '</li><li>',
+                        [
+                            \__('Its settings', 'gatographql'),
+                            \__('The license records of its extensions', 'gatographql'),
+                            \__('The metadata it added to your content and users', 'gatographql'),
+                            \__('Its database tables, and its cache and log files', 'gatographql'),
+                        ]
+                    ),
+                    sprintf(
+                        \__('Removing a license record does not release the license on the marketplace. To use it on another site, first click <strong>Deactivate</strong> beside it under <strong>%s</strong>.', 'gatographql'),
+                        $this->getActivateExtensionLicensesTitle()
+                    ),
+                ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -423,9 +465,12 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Also delete the entries created with the plugin?', 'gatographql'),
+                Properties::TITLE => \__('Also delete the plugin\'s entries', 'gatographql'),
                 Properties::DESCRIPTION => $this->getDeleteContentOnUninstallDescription(),
                 Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::DEPENDS_ON => [
+                    self::OPTION_DELETE_DATA_ON_UNINSTALL => true,
+                ],
             ];
 
             /**
@@ -484,13 +529,166 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
         $customPostTypeNames = array_values(array_unique($customPostTypeNames));
 
         if ($customPostTypeNames === []) {
-            return \__('Remove the entries you created and edited through the plugin. Only applies when deleting all plugin data.', 'gatographql');
+            return \__('Also remove the entries you created and edited through the plugin.', 'gatographql');
         }
 
         return sprintf(
-            \__('Remove the entries you created and edited through the plugin: %s. Only applies when deleting all plugin data.', 'gatographql'),
-            implode(\__(', ', 'gatographql'), $customPostTypeNames)
+            '%s%s',
+            \__('Also remove the entries you created and edited through the plugin.', 'gatographql'),
+            $this->getCollapsible(
+                sprintf(
+                    \__('These entries: %s.', 'gatographql'),
+                    implode(\__(', ', 'gatographql'), $customPostTypeNames)
+                )
+            )
         );
+    }
+
+    /**
+     * The status of the license of each commercial extension, as
+     * stored when it was last activated, deactivated or validated,
+     * or the error the last attempt produced
+     *
+     * @param string[] $extensionSlugs
+     * @return array<string,array{label:string,tone:string,detail?:string,detailTone?:string}>
+     */
+    protected function getCommercialExtensionLicenseStatuses(array $extensionSlugs): array
+    {
+        $activatedLicenses = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        $failures = $this->getCommercialExtensionLicenseOperationFailures();
+        $statuses = [];
+        foreach ($extensionSlugs as $extensionSlug) {
+            $activatedLicense = $activatedLicenses[$extensionSlug] ?? null;
+            $status = $activatedLicense === null
+                ? [
+                    'label' => \__('Not activated', 'gatographql'),
+                    'tone' => Properties::KEY_STATUS_TONE_NEUTRAL,
+                ]
+                : $this->getCommercialExtensionLicenseStatus($activatedLicense);
+            $failure = $failures[$extensionSlug] ?? null;
+            if ($failure !== null && $failure['type'] === 'error') {
+                $status = [
+                    'label' => \__('Error', 'gatographql'),
+                    'tone' => Properties::KEY_STATUS_TONE_DANGER,
+                ];
+            }
+            if ($failure !== null) {
+                $status['detail'] = trim(wp_strip_all_tags((string) preg_replace('#<br\s*/?>#i', ' ', $failure['message'])));
+                $status['detailTone'] = $failure['type'] === 'error'
+                    ? Properties::KEY_STATUS_TONE_DANGER
+                    : Properties::KEY_STATUS_TONE_WARNING;
+            }
+            $statuses[$extensionSlug] = $status;
+        }
+        return $statuses;
+    }
+
+    /**
+     * The button beside each license: "Activate" when not active yet,
+     * "Validate" and "Deactivate" once it is.
+     *
+     * @param string[] $extensionSlugs
+     * @return array<string,array<string,string>>
+     */
+    protected function getCommercialExtensionLicenseActions(array $extensionSlugs): array
+    {
+        $activatedLicenses = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
+        $actions = [];
+        foreach ($extensionSlugs as $extensionSlug) {
+            if (!isset($activatedLicenses[$extensionSlug])) {
+                $actions[$extensionSlug] = [
+                    LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_ACTIVATE, $extensionSlug) => \__('Activate', 'gatographql'),
+                ];
+                continue;
+            }
+            $actions[$extensionSlug] = [
+                LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_VALIDATE, $extensionSlug) => \__('Validate', 'gatographql'),
+                LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_DEACTIVATE, $extensionSlug) => \__('Deactivate', 'gatographql'),
+            ];
+        }
+        return $actions;
+    }
+
+    /**
+     * Once a license key is edited, its row offers the step to take: to
+     * activate the key entered, or to deactivate the license whose key
+     * was cleared.
+     *
+     * @param string[] $extensionSlugs
+     * @return array<string,array<string,array<string,string>>>
+     */
+    protected function getCommercialExtensionLicenseEditActions(array $extensionSlugs): array
+    {
+        $editActions = [];
+        foreach ($extensionSlugs as $extensionSlug) {
+            $editActions[$extensionSlug] = [
+                Properties::KEY_EDIT_CHANGED => [
+                    LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_ACTIVATE, $extensionSlug) => \__('Activate', 'gatographql'),
+                ],
+                Properties::KEY_EDIT_CLEARED => [
+                    LicenseActionHelpers::getActionValue(LicenseActionHelpers::ACTION_DEACTIVATE, $extensionSlug) => \__('Deactivate', 'gatographql'),
+                ],
+            ];
+        }
+        return $editActions;
+    }
+
+    /**
+     * @return array{label:string,tone:string}
+     */
+    protected function getCommercialExtensionLicenseStatus(CommercialExtensionActivatedLicenseObjectProperties $activatedLicense): array
+    {
+        return match ($activatedLicense->status) {
+            LicenseStatus::ACTIVE => [
+                'label' => \__('Active', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_SUCCESS,
+            ],
+            LicenseStatus::EXPIRED => [
+                'label' => \__('Expired', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_WARNING,
+            ],
+            LicenseStatus::DISABLED => [
+                'label' => \__('Disabled', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_DANGER,
+            ],
+            LicenseStatus::UNREGISTERED => [
+                'label' => \__('Not activated', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_NEUTRAL,
+            ],
+            LicenseStatus::INACTIVE,
+            LicenseStatus::OTHER => [
+                'label' => \__('Inactive', 'gatographql'),
+                'tone' => Properties::KEY_STATUS_TONE_WARNING,
+            ],
+        };
+    }
+
+    /**
+     * The errors (the license is not valid) and warnings (the license
+     * server could not be reached) of the last attempt to activate,
+     * deactivate or validate the licenses, by extension, back from
+     * options.php
+     *
+     * @return array<string,array{type:string,message:string}>
+     */
+    protected function getCommercialExtensionLicenseOperationFailures(): array
+    {
+        if (!function_exists('get_settings_errors')) {
+            return [];
+        }
+        $failures = [];
+        foreach (get_settings_errors() as $settingsError) {
+            $code = $settingsError['code'];
+            $type = $settingsError['type'];
+            if (!str_starts_with($code, self::LICENSE_OPERATION_NOTICE_CODE_PREFIX) || !in_array($type, ['error', 'warning'], true)) {
+                continue;
+            }
+            $failures[substr($code, strlen(self::LICENSE_OPERATION_NOTICE_CODE_PREFIX))] = [
+                'type' => $type,
+                'message' => $settingsError['message'],
+            ];
+        }
+        return $failures;
     }
 
     protected function getGatoGraphQLShopName(): string

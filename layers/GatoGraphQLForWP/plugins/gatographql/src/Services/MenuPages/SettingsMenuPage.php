@@ -6,18 +6,23 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Targets;
-use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
 use GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface;
 use GatoGraphQL\GatoGraphQL\Settings\Options;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\LicenseActionHelpers;
+use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 
 use function __;
 use function add_action;
+use function array_keys;
+use function get_option;
+use function is_array;
 use function update_option;
 
 /**
@@ -28,21 +33,13 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     public final const RESET_SETTINGS_BUTTON_ID = 'submit-reset-settings';
     public final const ACTIVATE_EXTENSIONS_BUTTON_ID = 'submit-activate-extensions';
     public final const SAVE_UNINSTALL_SETTINGS_BUTTON_ID = 'submit-save-uninstall-settings';
+    // The button beside a license key: its value says what to do, and on which license
+    public final const LICENSE_ACTION_BUTTON_ID = 'submit-license-action';
 
-    private ?ModuleRegistryInterface $moduleRegistry = null;
     private ?LicenseValidationServiceInterface $licenseValidationService = null;
     private ?ContainerManagerInterface $containerManager = null;
     private ?OptionNamespacerInterface $optionNamespacer = null;
 
-    final protected function getModuleRegistry(): ModuleRegistryInterface
-    {
-        if ($this->moduleRegistry === null) {
-            /** @var ModuleRegistryInterface */
-            $moduleRegistry = $this->instanceManager->getInstance(ModuleRegistryInterface::class);
-            $this->moduleRegistry = $moduleRegistry;
-        }
-        return $this->moduleRegistry;
-    }
     final protected function getLicenseValidationService(): LicenseValidationServiceInterface
     {
         if ($this->licenseValidationService === null) {
@@ -159,6 +156,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                 if (
                     !isset($values[self::RESET_SETTINGS_BUTTON_ID])
                     && !isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])
+                    && !isset($values[self::LICENSE_ACTION_BUTTON_ID])
                     && !isset($values[self::SAVE_UNINSTALL_SETTINGS_BUTTON_ID])
                 ) {
                     return;
@@ -186,7 +184,44 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                     return;
                 }
 
-                // If pressed on the "Activate (Extensions)" button...
+                // If pressed on the button beside a license key: act on that license only
+                if (isset($values[self::LICENSE_ACTION_BUTTON_ID])) {
+                    $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    /** @var array<string,mixed> */
+                    $storedLicenseKeys = is_array($oldValue[$settingOptionName] ?? null) ? $oldValue[$settingOptionName] : [];
+                    /** @var array<string,mixed> */
+                    $submittedLicenseKeys = is_array($values[$settingOptionName] ?? null) ? $values[$settingOptionName] : [];
+                    $licenseKeys = LicenseActionHelpers::getLicenseKeysForAction(
+                        $values[self::LICENSE_ACTION_BUTTON_ID],
+                        $storedLicenseKeys,
+                        $submittedLicenseKeys,
+                    );
+                    // Keep every other license key as stored, whatever was typed in its field
+                    $values[$settingOptionName] = $licenseKeys === null ? $storedLicenseKeys : $licenseKeys['store'];
+                    $this->restoreDBOptionValuesForNonSubmittedFormSections(
+                        $settingsCategory,
+                        [
+                            [
+                                PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                                PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS,
+                            ],
+                        ],
+                        $oldValue,
+                        $values,
+                    );
+                    if ($licenseKeys === null) {
+                        return;
+                    }
+                    $this->getLicenseValidationService()->activateDeactivateValidateGatoGraphQLCommercialExtensions(
+                        $licenseKeys['previous'],
+                        $licenseKeys['submitted'],
+                        PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
+                    );
+                    $this->keepLicenseKeysStillActivated($licenseKeys['previous'], $licenseKeys['submitted'], $settingsCategory, $settingOptionName);
+                    return;
+                }
+
+                // If pressed on the button that applies the license key changes...
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
@@ -202,11 +237,17 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
 
                     // Retrieve the previously-stored license keys, and the newly-submitted license keys
                     $settingOptionName = $this->getModuleRegistry()->getModuleResolver(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS)->getSettingOptionName(PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS, PluginManagementFunctionalityModuleResolver::OPTION_COMMERCIAL_EXTENSION_LICENSE_KEYS);
+                    $licenseKeys = LicenseActionHelpers::getLicenseKeysToSave(
+                        is_array($oldValue[$settingOptionName] ?? null) ? $oldValue[$settingOptionName] : [],
+                        is_array($values[$settingOptionName] ?? null) ? $values[$settingOptionName] : [],
+                        array_keys(SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties()),
+                    );
                     $this->getLicenseValidationService()->activateDeactivateValidateGatoGraphQLCommercialExtensions(
-                        $oldValue[$settingOptionName] ?? [],
-                        $values[$settingOptionName] ?? [],
+                        $licenseKeys['previous'],
+                        $licenseKeys['submitted'],
                         PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
+                    $this->keepLicenseKeysStillActivated($licenseKeys['previous'], $licenseKeys['submitted'], $settingsCategory, $settingOptionName);
                     return;
                 }
 
@@ -280,6 +321,51 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                 )
             );
         }
+    }
+
+    /**
+     * A license whose key was cleared or changed stays activated with its
+     * previous key when deactivating it, or activating the new key, failed
+     * (eg: the license server could not be reached): store the previous
+     * key back, so the license can still be deactivated later.
+     *
+     * @param array<string,string> $previousLicenseKeys Extension slug => license key before the action
+     * @param array<string,string> $submittedLicenseKeys Extension slug => license key acted on
+     */
+    protected function keepLicenseKeysStillActivated(
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
+        string $settingsCategory,
+        string $settingOptionName,
+    ): void {
+        /** @var mixed */
+        $activatedLicenseEntries = get_option($this->getOptionNamespacer()->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES), []);
+        if (!is_array($activatedLicenseEntries)) {
+            return;
+        }
+        $licenseKeysToKeep = [];
+        foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
+            if (
+                $previousLicenseKey === ''
+                || ($submittedLicenseKeys[$extensionSlug] ?? '') === $previousLicenseKey
+                || !is_array($activatedLicenseEntries[$extensionSlug] ?? null)
+                || ($activatedLicenseEntries[$extensionSlug][LicenseProperties::LICENSE_KEY] ?? null) !== $previousLicenseKey
+            ) {
+                continue;
+            }
+            $licenseKeysToKeep[$extensionSlug] = $previousLicenseKey;
+        }
+        if ($licenseKeysToKeep === []) {
+            return;
+        }
+        $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
+        $storedValues = get_option($dbOptionName, []);
+        if (!is_array($storedValues)) {
+            return;
+        }
+        $storedLicenseKeys = is_array($storedValues[$settingOptionName] ?? null) ? $storedValues[$settingOptionName] : [];
+        $storedValues[$settingOptionName] = [...$storedLicenseKeys, ...$licenseKeysToKeep];
+        update_option($dbOptionName, $storedValues);
     }
 
     /**

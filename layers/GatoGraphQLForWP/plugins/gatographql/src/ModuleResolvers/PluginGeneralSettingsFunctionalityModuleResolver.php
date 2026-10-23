@@ -104,7 +104,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General', 'gatographql'),
             self::LOGS => \__('Logs', 'gatographql'),
-            self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
+            self::SERVER_IP_CONFIGURATION => \__('Server IP', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql'),
             default => $module,
         };
@@ -186,14 +186,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Enable the Schema tutorial?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><span class="more-info">%s</span>', 'gatographql'),
-                        $this->getSettingsItemHelpLinkHTML(
-                            'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
-                            \__('Enabling the Schema Tutorial page', 'gatographql')
-                        )
-                    ),
+                    Properties::TITLE => \__('Enable the Schema tutorial', 'gatographql'),
+                    Properties::DESCRIPTION => \__('Add a menu page that explains the GraphQL schema, element by element.', 'gatographql'),
+                    Properties::DOCS_URL => 'https://gatographql.com/guides/config/enabling-the-schema-tutorial-page',
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
@@ -209,14 +204,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Plugin setup: Install Persisted Queries for common admin tasks?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?<br/><span class="more-info">%s</span>', 'gatographql'),
-                        $this->getSettingsItemHelpLinkHTML(
-                            'https://gatographql.com/guides/config/managing-plugin-setup-data',
-                            \__('Managing the plugin\'s setup data', 'gatographql')
-                        )
-                    ),
+                    Properties::TITLE => \__('Install Persisted Queries for admin tasks', 'gatographql'),
+                    Properties::DESCRIPTION => \__('Create Persisted Queries for common admin tasks when installing or updating the plugin.', 'gatographql'),
+                    Properties::DOCS_URL => 'https://gatographql.com/guides/config/managing-plugin-setup-data',
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
@@ -229,14 +219,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Display admin notice with release notes?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?<br/><span class="more-info">%s</span>', 'gatographql'),
-                        $this->getSettingsItemHelpLinkHTML(
-                            'https://gatographql.com/guides/config/displaying-the-plugins-new-features',
-                            \__('Displaying the plugin\'s new features', 'gatographql')
-                        )
-                    ),
+                    Properties::TITLE => \__('Show the release notes after upgrading', 'gatographql'),
+                    Properties::DESCRIPTION => \__('After an upgrade, an admin notice links to the latest release notes.', 'gatographql'),
+                    Properties::DOCS_URL => 'https://gatographql.com/guides/config/displaying-the-plugins-new-features',
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
@@ -249,14 +234,10 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Organize these settings under tabs?', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
-                        \__('Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on "Save Changes" to be applied<br/><span class="more-info">%s</span>', 'gatographql'),
-                        $this->getSettingsItemHelpLinkHTML(
-                            'https://gatographql.com/guides/config/printing-the-settings-page-with-tabs-or-long-format',
-                            \__('Printing the Settings page with tabs or long format', 'gatographql')
-                        )
-                    ),
+                    Properties::TITLE => \__('Organize these settings under tabs', 'gatographql'),
+                    Properties::DESCRIPTION => \__('Show each module of this page under its own tab.', 'gatographql'),
+                    Properties::HELP => \__('The page shows the new layout once you save the settings.', 'gatographql'),
+                    Properties::DOCS_URL => 'https://gatographql.com/guides/config/printing-the-settings-page-with-tabs-or-long-format',
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
@@ -271,6 +252,16 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 $logsDir
             );
 
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'group-logging'
+                ),
+                Properties::TITLE => \__('Logging', 'gatographql'),
+                Properties::CONTROL => Properties::CONTROL_GROUP,
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
             $option = self::OPTION_ENABLE_LOGS;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -278,16 +269,14 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Enable logs?', 'gatographql'),
+                Properties::TITLE => \__('Enable logs', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Enable storing GraphQL execution logs, accessible via the <strong>%s</strong> menu. %s', 'gatographql'),
-                    \__('Logs', 'gatographql'),
-                    $this->getCollapsible(
-                        sprintf(
-                            \__('<br/>Log files are stored under folder <code>%s</code>.<br/></br><strong>Important:</strong> Log files can be very large, so it\'s recommended to clear them after a while.', 'gatographql'),
-                            $relativeLogFolder,
-                        ),
-                    )
+                    \__('Store the GraphQL execution logs, to browse under the <strong>%s</strong> menu.', 'gatographql'),
+                    \__('Logs', 'gatographql')
+                ),
+                Properties::HELP => sprintf(
+                    \__('The plugin stores the log files under folder <code>%s</code>.<br/><br/>Log files can grow very large, so clear them every now and then.', 'gatographql'),
+                    $relativeLogFolder,
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -305,6 +294,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $severityKeyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
+                Properties::DEPENDS_ON => [
+                    self::OPTION_ENABLE_LOGS => true,
+                ],
             ];
 
             $option = self::OPTION_ENABLE_REVERSE_LOG_ORDER;
@@ -314,17 +306,21 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Reverse log order?', 'gatographql'),
-                Properties::DESCRIPTION => \__('Display newer log entries first when viewing a log file', 'gatographql'),
+                Properties::TITLE => \__('Newest entries first', 'gatographql'),
+                Properties::DESCRIPTION => \__('A log file shows its newest entries at the top.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::DEPENDS_ON => [
+                    self::OPTION_ENABLE_LOGS => true,
+                ],
             ];
 
             $moduleSettings[] = [
                 Properties::NAME => $this->getSettingOptionName(
                     $module,
-                    'divider'
+                    'group-notifications'
                 ),
-                Properties::DESCRIPTION => '<hr/>',
+                Properties::TITLE => \__('Notifications', 'gatographql'),
+                Properties::CONTROL => Properties::CONTROL_GROUP,
                 Properties::TYPE => Properties::TYPE_NULL,
             ];
 
@@ -335,9 +331,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Enable log notifications?', 'gatographql'),
+                Properties::TITLE => \__('Enable log notifications', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Show a badge with the number of log entries in the <strong>%s</strong> menu', 'gatographql'),
+                    \__('The <strong>%s</strong> menu shows a badge with the number of new entries.', 'gatographql'),
                     \__('Logs', 'gatographql')
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
@@ -351,19 +347,13 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $option
                 ),
                 Properties::TITLE => \__('Enable log notifications by severity', 'gatographql'),
-                Properties::DESCRIPTION => \__('Indicate which severities are included in the badge\'s count', 'gatographql'),
+                Properties::DESCRIPTION => \__('The severities that the badge counts.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_PROPERTY_ARRAY,
                 Properties::KEY_LABELS => $severityKeyLabels,
                 Properties::SUBTYPE => Properties::TYPE_BOOL,
-            ];
-
-            $moduleSettings[] = [
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    'divider'
-                ),
-                Properties::DESCRIPTION => '<hr/>',
-                Properties::TYPE => Properties::TYPE_NULL,
+                Properties::DEPENDS_ON => [
+                    self::OPTION_ENABLE_LOG_COUNT_BADGES => true,
+                ],
             ];
         } elseif ($module === self::SERVER_IP_CONFIGURATION) {
             // If any extension depends on this, it shall enable it
@@ -375,10 +365,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('$_SERVER property name to retrieve the client IP', 'gatographql'),
-                    Properties::DESCRIPTION => sprintf(
+                    Properties::TITLE => \__('Client IP property', 'gatographql'),
+                    Properties::DESCRIPTION => \__('The property in <code>$_SERVER</code> that holds the visitor\'s IP address.', 'gatographql'),
+                    Properties::HELP => sprintf(
                         '%s<br/><br/>%s<ul>%s</ul>',
-                        \__('The visitor\'s IP address is retrieved from under the <code>$_SERVER</code> global variable, by default under property <code>\'REMOTE_ADDR\'</code>; depending on the platform or hosting provider, a different property may need to be used.', 'gatographql'),
+                        \__('The default property is <code>\'REMOTE_ADDR\'</code>. Some platforms and hosting providers use a different one.', 'gatographql'),
                         \__('For instance:', 'gatographql'),
                         '<li>' . implode(
                             '</li><li>',
@@ -410,14 +401,9 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Which users can edit the schema?', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class="more-info">%s</span>', 'gatographql'),
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
-                        \__('Managing who can edit the schema', 'gatographql')
-                    )
-                ),
+                Properties::TITLE => \__('Who can edit the schema', 'gatographql'),
+                Properties::DESCRIPTION => \__('The users who can create and update Persisted Queries, Custom Endpoints and others.', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/managing-who-can-edit-the-schema',
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => $possibleValues,
             ];
@@ -467,10 +453,11 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         }
 
         return sprintf(
-            \__('Indicate which severities are enabled for logging. %s', 'gatographql'),
+            '%s%s',
+            \__('The severities that the plugin logs.', 'gatographql'),
             $this->getCollapsible(
                 sprintf(
-                    \__('<br/>Available severities:<br/><ul>%s</ul>', 'gatographql'),
+                    '<ul>%s</ul>',
                     implode('', $severityItems)
                 )
             )

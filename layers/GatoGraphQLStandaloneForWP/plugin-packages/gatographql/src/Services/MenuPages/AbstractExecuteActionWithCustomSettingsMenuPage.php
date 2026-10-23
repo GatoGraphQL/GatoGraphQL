@@ -12,15 +12,39 @@ use PoP\ComponentModel\App;
 use PoP\ComponentModel\Configuration\RequestHelpers;
 use PoP\ComponentModel\Misc\GeneralUtils;
 
+use function __;
+use function array_key_first;
+use function basename;
+use function esc_html;
+use function esc_url;
+use function get_post_type_object;
+use function get_taxonomy;
+use function home_url;
+use function is_string;
+use function ltrim;
+use function parse_str;
+use function parse_url;
+use function preg_match;
+use function sprintf;
+use function submit_button;
+use function wp_validate_redirect;
+
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
     public final const SUBMIT_BUTTON_NAME = 'gatographql-execute-action';
 
     /**
-     * The upstream method will print several <form> tags,
-     * for the different settings categories.
-     *
-     * Combine them all into a single <form> tag.
+     * The settings of all categories are submitted together, in
+     * a single form, to execute the action with them
+     */
+    protected function printsSingleFormForAllCategories(): bool
+    {
+        return true;
+    }
+
+    /**
+     * The upstream method prints the settings of all the categories,
+     * without <form> tags. Wrap them all into a single <form> tag.
      */
     public function print(): void
     {
@@ -31,15 +55,6 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         if ($content === false) {
             return;
         }
-
-        $content = str_replace(
-            [
-                '<form method="post" action="options.php">',
-                '</form>',
-            ],
-            '',
-            $content
-        );
 
         // Remove the inputs from the content that will be overridden
         $inputNamesToRemove = [
@@ -101,7 +116,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         $sendbackURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_SENDBACK_URL);
 
         ?>
-        <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
+        <form method="post" action="<?php echo esc_url($this->getAbsoluteURL($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
 
             <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
@@ -128,6 +143,115 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
             <?php RequestHelpers::maybePrintXDebugInputsInForm() ?>
         </form>
         <?php
+    }
+
+    /**
+     * The bar at the bottom of the page: back to the screen the
+     * entities were selected on, and the button to run the action
+     */
+    protected function printPageFooter(): void
+    {
+        $settingsCategoryRegistry = $this->getSettingsCategoryRegistry();
+        $settingsCategoryResolvers = $settingsCategoryRegistry->getSettingsCategorySettingsCategoryResolvers();
+        $settingsCategory = (string) array_key_first($settingsCategoryResolvers);
+        $settingsCategoryResolver = $settingsCategoryResolvers[$settingsCategory] ?? null;
+        $backURL = $this->getOriginScreenURL();
+        $backLabel = $backURL === '' ? '' : sprintf(
+            __('Back to %s', 'gatographql'),
+            $this->getOriginScreenLabel($backURL)
+        );
+        ?>
+        <div class="gato-savebar gato-runbar">
+            <span class="gato-savebar__status">
+                <?php if ($backURL !== '') : ?>
+                    <a href="<?php echo esc_url($backURL) ?>" class="gato-runbar__back"><span aria-hidden="true">← </span><?php echo esc_html($backLabel) ?></a>
+                <?php endif; ?>
+            </span>
+            <span class="gato-savebar__actions">
+                <?php
+                if ($settingsCategoryResolver !== null) {
+                    submit_button(
+                        $this->getSubmitButtonLabel($settingsCategoryResolver, $settingsCategory),
+                        'primary',
+                        $this->getSubmitButtonName($settingsCategoryResolver, $settingsCategory),
+                        false
+                    );
+                }
+                ?>
+            </span>
+        </div>
+        <?php
+    }
+
+    /**
+     * The screen the entities were selected on, to go back to
+     */
+    protected function getOriginScreenURL(): string
+    {
+        $url = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_SENDBACK_URL);
+        if ($url === '') {
+            $url = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_URL);
+        }
+        if ($url === '') {
+            return '';
+        }
+        return wp_validate_redirect($this->getAbsoluteURL($url), '');
+    }
+
+    /**
+     * The URL of a path on this site's host (eg: the request URI of the
+     * screen the entities were selected on, which already holds the path
+     * of a site in a subdirectory, so `home_url()` would add it twice)
+     */
+    protected function getAbsoluteURL(string $url): string
+    {
+        if (preg_match('#^https?://#', $url)) {
+            return $url;
+        }
+        $homeURL = home_url();
+        $scheme = (string) parse_url($homeURL, PHP_URL_SCHEME);
+        $host = (string) parse_url($homeURL, PHP_URL_HOST);
+        $port = parse_url($homeURL, PHP_URL_PORT);
+        return sprintf(
+            '%s://%s%s/%s',
+            $scheme,
+            $host,
+            $port !== null && $port !== false ? ':' . $port : '',
+            ltrim($url, '/')
+        );
+    }
+
+    /**
+     * The name of the screen the entities were selected on: the post
+     * type or taxonomy listed, or else the screen's own name
+     */
+    protected function getOriginScreenLabel(string $url): string
+    {
+        $path = (string) parse_url($url, PHP_URL_PATH);
+        $query = [];
+        parse_str((string) parse_url($url, PHP_URL_QUERY), $query);
+        $screen = basename($path);
+        if ($screen === 'edit.php') {
+            $postType = is_string($query['post_type'] ?? null) ? $query['post_type'] : 'post';
+            $postTypeObject = get_post_type_object($postType);
+            if ($postTypeObject !== null) {
+                return $postTypeObject->labels->name;
+            }
+        }
+        if ($screen === 'edit-tags.php' || $screen === 'term.php') {
+            $taxonomy = is_string($query['taxonomy'] ?? null) ? $query['taxonomy'] : 'post_tag';
+            $taxonomyObject = get_taxonomy($taxonomy);
+            if ($taxonomyObject !== false) {
+                return $taxonomyObject->labels->name;
+            }
+        }
+        if ($screen === 'users.php') {
+            return __('Users', 'gatographql');
+        }
+        if ($screen === 'upload.php') {
+            return __('Media', 'gatographql');
+        }
+        return __('the previous screen', 'gatographql');
     }
 
     /**

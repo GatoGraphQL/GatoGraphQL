@@ -19,6 +19,8 @@
 ## Improvements
 
 - Upgraded GraphiQL to version 5.4.0 ([#3440](https://github.com/GatoGraphQL/GatoGraphQL/pull/3440))
+- Redesigned the Settings page: settings grouped by topic, all the sections of a tab on one scroll (the tabs down the side follow it), a search across all tabs, the changes of every tab saved with one click, and controls that fit each setting (switches, option toggles, tag inputs, and "Set all to" on per-entry lists), a one-line description per setting with its details behind an "i" button, a button beside each license to activate, validate or deactivate it alone, JSON fields that indent their value and flag invalid JSON, and shorter tab names (eg: "General" for "Plugin Configuration") ([#3448](https://github.com/GatoGraphQL/GatoGraphQL/pull/3448))
+- Each license under "Plugin Management > Activate Licenses" shows its status (active on how many sites, expired, not activated), and the error of the last activation or validation that failed ([#3448](https://github.com/GatoGraphQL/GatoGraphQL/pull/3448))
 
 ## Fixed
 
@@ -44,3 +46,4 @@
 - Extensions are no longer set up once more with every query run with the internal GraphQL server, such as during a translation, and the plugin's blocks, admin notices and API endpoints no longer add their WordPress hooks a second time ([#3443](https://github.com/GatoGraphQL/GatoGraphQL/pull/3443))
 - A value written with the meta mutations, such as `updateCustomPostMeta`, keeps its backslashes, which were being removed when storing it ([#3446](https://github.com/GatoGraphQL/GatoGraphQL/pull/3446))
 - The text of a Subhead block (`core/subhead`), which WordPress no longer registers but older posts still hold, is now read from the block's HTML ([#3447](https://github.com/GatoGraphQL/GatoGraphQL/pull/3447))
+- The entries of a list setting saved on the Settings page no longer end with a hidden line break ([#3448](https://github.com/GatoGraphQL/GatoGraphQL/pull/3448))

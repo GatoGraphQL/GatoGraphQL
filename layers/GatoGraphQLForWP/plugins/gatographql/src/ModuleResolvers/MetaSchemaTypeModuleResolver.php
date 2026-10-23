@@ -255,111 +255,48 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
             ])
         ) {
             $entriesTitle = \__('Meta keys', 'gatographql');
-            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line).', 'gatographql');
+            $metaKeyDesc = \__('List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s.', 'gatographql');
             $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gatographql');
             $userMetaHeadsUpDesc = $headsUpDesc . \__('<br/>The roles/capabilities, session tokens and application password keys are never accessible to non-administrators, regardless of this list. Other protected keys (those prefixed with <code>_</code>) are also hidden from non-administrators by default, but can be exposed by adding them to this list as an exact entry (not a regex), under the "allow" behavior. Administrators can always access all keys.', 'gatographql');
             $entryDesc = \__('<strong>Example:</strong> Any of these entries match meta key <code>"%1$s"</code>: %2$s', 'gatographql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
             $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
             $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gatographql');
-            $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
-            $moduleDescriptions = [
-                self::SCHEMA_CUSTOMPOST_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'custom posts'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        '_edit_last',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    '_edit_last',
-                                    '/_edit_.*/',
-                                    '#_edit_([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_USER_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'users'
-                    ),
-                    $userMetaHeadsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'last_name',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'last_name',
-                                    '/last_.*/',
-                                    '#last_([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_COMMENT_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'comments'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'description',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'description',
-                                    '/desc.*/',
-                                    '#desc([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
-                self::SCHEMA_TAXONOMY_META => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
-                    sprintf(
-                        $metaKeyDesc,
-                        'taxonomies (tags and categories)'
-                    ),
-                    $headsUpDesc,
-                    sprintf(
-                        $entryDesc,
-                        'description',
-                        sprintf(
-                            $ulPlaceholder,
-                            implode(
-                                '</code></li><li><code>',
-                                [
-                                    'description',
-                                    '/desc.*/',
-                                    '#desc([a-zA-Z]*)#',
-                                ]
-                            )
-                        )
-                    ),
-                    $defaultValueDesc,
-                ),
+            $sensitiveDataDescPlaceholder = \__('Only Schema Configurations that expose sensitive data show the %s.', 'gatographql');
+            $sensitiveDataHelp = \__('To show them, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration.', 'gatographql');
+            $moduleEntities = [
+                self::SCHEMA_CUSTOMPOST_META => 'custom posts',
+                self::SCHEMA_USER_META => 'users',
+                self::SCHEMA_COMMENT_META => 'comments',
+                self::SCHEMA_TAXONOMY_META => 'taxonomies (tags and categories)',
+            ];
+            $moduleHeadsUpDescriptions = [
+                self::SCHEMA_CUSTOMPOST_META => $headsUpDesc,
+                self::SCHEMA_USER_META => $userMetaHeadsUpDesc,
+                self::SCHEMA_COMMENT_META => $headsUpDesc,
+                self::SCHEMA_TAXONOMY_META => $headsUpDesc,
+            ];
+            $moduleExampleEntries = [
+                self::SCHEMA_CUSTOMPOST_META => [
+                    '_edit_last',
+                    '/_edit_.*/',
+                    '#_edit_([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_USER_META => [
+                    'last_name',
+                    '/last_.*/',
+                    '#last_([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_COMMENT_META => [
+                    'description',
+                    '/desc.*/',
+                    '#desc([a-zA-Z]*)#',
+                ],
+                self::SCHEMA_TAXONOMY_META => [
+                    'description',
+                    '/desc.*/',
+                    '#desc([a-zA-Z]*)#',
+                ],
             ];
             $entityNames = [
                 self::SCHEMA_META => sprintf(\__('%s (interface)', 'gatographql'), $this->getWithMetaInterfaceTypeResolver()->getTypeName()),
@@ -385,8 +322,33 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                         $option
                     ),
                     Properties::TITLE => $entriesTitle,
-                    Properties::DESCRIPTION => $moduleDescriptions[$module],
+                    Properties::DESCRIPTION => sprintf(
+                        '%s<br/>%s',
+                        sprintf(
+                            $metaKeyDesc,
+                            $moduleEntities[$module]
+                        ),
+                        $defaultValueDesc,
+                    ),
+                    Properties::HELP => sprintf(
+                        '%s<hr/>%s',
+                        $moduleHeadsUpDescriptions[$module],
+                        sprintf(
+                            $entryDesc,
+                            $moduleExampleEntries[$module][0],
+                            sprintf(
+                                $ulPlaceholder,
+                                implode(
+                                    '</code></li><li><code>',
+                                    $moduleExampleEntries[$module]
+                                )
+                            )
+                        )
+                    ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
+                    Properties::SEARCH_KEYWORDS => [
+                        \__('custom fields', 'gatographql'),
+                    ],
                 ];
 
                 $option = ModuleSettingOptions::BEHAVIOR;
@@ -398,11 +360,11 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Behavior', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        '%s %s%s',
-                        \__('Are the entries being allowed or denied access to?', 'gatographql'),
-                        \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
+                        '%s%s',
+                        \__('Whether queries can read only the meta keys, or all but them.', 'gatographql'),
                         $defaultValueDesc,
                     ),
+                    Properties::HELP => \__('<ul><li>Allow access: queries can read the meta keys, and nothing else.</li><li>Deny access: queries can read every meta key except these.</li></ul>', 'gatographql'),
                     Properties::TYPE => Properties::TYPE_STRING,
                     Properties::POSSIBLE_VALUES => [
                         Behaviors::ALLOW->value => \__('Allow access', 'gatographql'),
@@ -432,6 +394,7 @@ class MetaSchemaTypeModuleResolver extends AbstractModuleResolver
                         $entityNames[$module]
                     ),
                 ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

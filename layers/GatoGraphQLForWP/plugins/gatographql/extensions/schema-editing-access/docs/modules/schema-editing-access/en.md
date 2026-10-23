@@ -28,7 +28,7 @@ Assign capability `gatogql_manage_graphql_schema` to any user role or any specif
 
 You can also select a group of user roles which can edit the GraphQL schema.
 
-The appropriate configuration must be selected from the dropdown in the "Plugin Configuration > Schema Editing Access" tab on the Settings page:
+The appropriate configuration must be selected from the dropdown in the "General > Schema Editing Access" tab on the Settings page:
 
 - `Users with capability: "gatogql_manage_graphql_schema"`
 - `Users with role: "administrator"`

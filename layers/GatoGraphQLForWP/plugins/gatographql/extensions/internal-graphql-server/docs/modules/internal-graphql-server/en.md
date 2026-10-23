@@ -90,7 +90,7 @@ Please notice that class `GraphQLServer` is not ready before the WordPress core 
 
 <!-- ## Schema Configuration
 
-By default, the internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server Configuration > Internal GraphQL Server".
+By default, the internal GraphQL Server applies the Schema Configuration selected in the Settings page, under tab "Server > Internal GraphQL Server".
 
 <div class="img-width-1024" markdown=1>
 

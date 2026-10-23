@@ -698,11 +698,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
         // Common variables to set the limit on the schema types
         $limitArg = 'limit';
         $unlimitedValue = -1;
-        $defaultLimitMessagePlaceholder = \__('Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited.', 'gatographql');
-        $maxLimitMessagePlaceholder = \__('Maximum number of results from querying %s. Use <code>%s</code> for unlimited.', 'gatographql');
+        $defaultLimitMessagePlaceholder = \__('How many %s a query returns when it passes no <code>%s</code>.', 'gatographql');
+        $maxLimitMessagePlaceholder = \__('The most %s a query can return.', 'gatographql');
+        $unlimitedHelp = sprintf(
+            \__('Use <code>%s</code> for no limit.', 'gatographql'),
+            $unlimitedValue
+        );
         $sensitiveDataTitlePlaceholder = \__('Treat %s as “sensitive” data', 'gatographql');
-        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> data is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
-        $taxonomyDescPlaceholder = \__('This list contains all the "%1$shierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". Each %2$s taxonomy\'s associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist.', 'gatographql');
+        $sensitiveDataDescPlaceholder = \__('Only Schema Configurations that expose sensitive data show the %s.', 'gatographql');
+        $sensitiveDataGroupDesc = \__('Only Schema Configurations that expose sensitive data show these fields.', 'gatographql');
+        $sensitiveDataHelp = \__('To show them, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration.', 'gatographql');
+        $taxonomyHelpPlaceholder = \__('The list shows the %1$s taxonomies of the queryable custom post types (those in "Included custom post types", under "Custom Posts"), with these types under <code>(CPT: ...)</code>.<br/><br/>Is a %1$s taxonomy missing? Then add all of its custom post types to that list.', 'gatographql');
         $defaultValueDesc = $this->getDefaultValueDescription($this->getName($module));
         // Do the if one by one, so that the SELECT do not get evaluated unless needed
         if (
@@ -730,6 +736,17 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
             $entities = $moduleEntities[$module];
             $defaultLimitOption = ModuleSettingOptions::LIST_DEFAULT_LIMIT;
             $maxLimitOption = ModuleSettingOptions::LIST_MAX_LIMIT;
+            if ($module === self::SCHEMA_CUSTOMPOSTS) {
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-limits'
+                    ),
+                    Properties::TITLE => \__('Limits', 'gatographql'),
+                    Properties::CONTROL => Properties::CONTROL_GROUP,
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+            }
             $moduleSettings[] = [
                 Properties::INPUT => $defaultLimitOption,
                 Properties::NAME => $this->getSettingOptionName(
@@ -743,9 +760,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 Properties::DESCRIPTION => sprintf(
                     $defaultLimitMessagePlaceholder,
                     $entities,
-                    $limitArg,
-                    $unlimitedValue
+                    $limitArg
                 ),
+                Properties::HELP => $unlimitedHelp,
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
             ];
@@ -761,9 +778,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
-                    $entities,
-                    $unlimitedValue,
+                    $entities
                 ),
+                Properties::HELP => $unlimitedHelp,
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
             ];
@@ -775,6 +792,16 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 foreach ($possibleCustomPostTypes as $value) {
                     $possibleValues[$value] = $value;
                 }
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-types'
+                    ),
+                    Properties::TITLE => \__('Custom post types', 'gatographql'),
+                    Properties::CONTROL => Properties::CONTROL_GROUP,
+                    Properties::TYPE => Properties::TYPE_NULL,
+                ];
+
                 // Set the setting
                 $option = ModuleSettingOptions::CUSTOMPOST_TYPES;
                 $moduleSettings[] = [
@@ -785,18 +812,24 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included custom post types', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gatographql'),
+                        '%s%s',
+                        \__('The custom post types that queries can fetch.', 'gatographql'),
+                        $defaultValueDesc,
+                    ),
+                    Properties::HELP => sprintf(
+                        \__('Queries fetch them via <code>%s</code>. Each custom post type gets its own type in the schema when it has one (such as <code>%s</code> or <code>%s</code>), or else <code>%s</code>.', 'gatographql'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
                         $this->getPostObjectTypeResolver()->getTypeName(),
                         $this->getPageObjectTypeResolver()->getTypeName(),
                         $this->getGenericCustomPostObjectTypeResolver()->getTypeName(),
-                        $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
-                        $defaultValueDesc,
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
                     // Fetch all Schema Configurations from the DB
                     Properties::POSSIBLE_VALUES => $possibleValues,
                     Properties::IS_MULTIPLE => true,
+                    Properties::SEARCH_KEYWORDS => [
+                        'CPT',
+                    ],
                 ];
 
                 $option = self::OPTION_USE_SINGLE_TYPE_INSTEAD_OF_UNION_TYPE;
@@ -806,13 +839,29 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $module,
                         $option
                     ),
-                    Properties::TITLE => \__('Use single type instead of union type?', 'gatographql'),
+                    Properties::TITLE => \__('Use single type instead of union type', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
-                        \__('If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?', 'gatographql'),
+                        \__('When <code>%s</code> holds only one type, return that type instead.', 'gatographql'),
                         $this->getCustomPostUnionTypeResolver()->getTypeName(),
+                    ),
+                    Properties::HELP => sprintf(
+                        \__('For instance, with only <code>%s</code> in the union, fields return <code>%s</code> instead of <code>%s</code>.', 'gatographql'),
                         $this->getPostObjectTypeResolver()->getTypeName(),
+                        $this->getPostObjectTypeResolver()->getTypeName(),
+                        $this->getCustomPostUnionTypeResolver()->getTypeName(),
                     ),
                     Properties::TYPE => Properties::TYPE_BOOL,
+                ];
+
+                $moduleSettings[] = [
+                    Properties::NAME => $this->getSettingOptionName(
+                        $module,
+                        'group-sensitive-data'
+                    ),
+                    Properties::TITLE => \__('Sensitive data', 'gatographql'),
+                    Properties::DESCRIPTION => $sensitiveDataGroupDesc,
+                    Properties::CONTROL => Properties::CONTROL_GROUP,
+                    Properties::TYPE => Properties::TYPE_NULL,
                 ];
 
                 $option = self::OPTION_TREAT_CUSTOMPOST_STATUS_AS_SENSITIVE_DATA;
@@ -826,10 +875,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataTitlePlaceholder,
                         \__('custom post status', 'gatographql'),
                     ),
-                    Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('custom post status', 'gatographql'),
-                    ),
+                    Properties::HELP => $sensitiveDataHelp,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
 
@@ -842,12 +888,10 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => sprintf(
                         $sensitiveDataTitlePlaceholder,
-                        \__('custom post raw content fields (<code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>)', 'gatographql'),
+                        \__('custom post raw content', 'gatographql'),
                     ),
-                    Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('custom post raw content fields (<code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>)', 'gatographql'),
-                    ),
+                    Properties::DESCRIPTION => \__('Fields <code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>.', 'gatographql'),
+                    Properties::HELP => $sensitiveDataHelp,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
 
@@ -862,10 +906,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataTitlePlaceholder,
                         \__('custom post edit link', 'gatographql'),
                     ),
-                    Properties::DESCRIPTION => sprintf(
-                        $sensitiveDataDescPlaceholder,
-                        \__('custom post edit link', 'gatographql'),
-                    ),
+                    Properties::HELP => $sensitiveDataHelp,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_USERS) {
@@ -884,6 +925,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataDescPlaceholder,
                         \__('user email', 'gatographql'),
                     ),
+                    Properties::HELP => $sensitiveDataHelp,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             } elseif ($module === self::SCHEMA_TAGS) {
@@ -913,19 +955,21 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included tag taxonomies', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
+                        '%s%s',
+                        \__('The tag taxonomies that queries can fetch.', 'gatographql'),
+                        $defaultValueDesc,
+                    ),
+                    Properties::HELP => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
-                            $taxonomyDescPlaceholder,
-                            \__('non-', 'gatographql'),
-                            \__('tag', 'gatographql'),
-                        ),
-                        sprintf(
-                            \__('Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gatographql'),
+                            \__('Queries fetch them via <code>%s</code>. Each tag taxonomy gets its own type in the schema when it has one (such as <code>%s</code>), or else <code>%s</code>.', 'gatographql'),
                             $this->getTagUnionTypeResolver()->getTypeName(),
                             $this->getPostTagObjectTypeResolver()->getTypeName(),
                             $this->getGenericTagObjectTypeResolver()->getTypeName(),
-                            $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
-                            $defaultValueDesc,
+                        ),
+                        sprintf(
+                            $taxonomyHelpPlaceholder,
+                            \__('tag', 'gatographql'),
                         )
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
@@ -960,19 +1004,21 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     ),
                     Properties::TITLE => \__('Included category taxonomies', 'gatographql'),
                     Properties::DESCRIPTION => sprintf(
+                        '%s%s',
+                        \__('The category taxonomies that queries can fetch.', 'gatographql'),
+                        $defaultValueDesc,
+                    ),
+                    Properties::HELP => sprintf(
                         '%s<br/><br/>%s',
                         sprintf(
-                            $taxonomyDescPlaceholder,
-                            '',
-                            \__('category', 'gatographql'),
-                        ),
-                        sprintf(
-                            \__('Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s', 'gatographql'),
+                            \__('Queries fetch them via <code>%s</code>. Each category taxonomy gets its own type in the schema when it has one (such as <code>%s</code>), or else <code>%s</code>.', 'gatographql'),
                             $this->getCategoryUnionTypeResolver()->getTypeName(),
                             $this->getPostCategoryObjectTypeResolver()->getTypeName(),
                             $this->getGenericCategoryObjectTypeResolver()->getTypeName(),
-                            $this->getPressCtrlToSelectMoreThanOneOptionLabel(),
-                            $defaultValueDesc,
+                        ),
+                        sprintf(
+                            $taxonomyHelpPlaceholder,
+                            \__('category', 'gatographql'),
                         )
                     ),
                     Properties::TYPE => Properties::TYPE_ARRAY,
@@ -996,6 +1042,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                         $sensitiveDataDescPlaceholder,
                         \__('menu item raw title', 'gatographql'),
                     ),
+                    Properties::HELP => $sensitiveDataHelp,
                     Properties::TYPE => Properties::TYPE_BOOL,
                 ];
             }
@@ -1007,9 +1054,9 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Use single type instead of union type?', 'gatographql'),
+                Properties::TITLE => \__('Use single type instead of union type', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?', 'gatographql'),
+                    \__('When <code>%s</code> holds only <code>%s</code>, return that type instead.', 'gatographql'),
                     $this->getBlockUnionTypeResolver()->getTypeName(),
                     $this->getGeneralBlockObjectTypeResolver()->getTypeName(),
                 ),
@@ -1031,9 +1078,20 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataDescPlaceholder,
                     \__('block type registry', 'gatographql'),
                 ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_COMMENTS) {
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'group-limits'
+                ),
+                Properties::TITLE => \__('Limits', 'gatographql'),
+                Properties::CONTROL => Properties::CONTROL_GROUP,
+                Properties::TYPE => Properties::TYPE_NULL,
+            ];
+
             $option = self::OPTION_ROOT_COMMENT_LIST_DEFAULT_LIMIT;
             $moduleSettings[] = [
                 Properties::INPUT => $option,
@@ -1041,13 +1099,13 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default limit for querying comments in the Root', 'gatographql'),
+                Properties::TITLE => \__('Default limit for comments in the Root', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    $defaultLimitMessagePlaceholder,
-                    '<code>Root.comments</code>',
-                    $limitArg,
-                    $unlimitedValue
+                    \__('How many comments <code>%s</code> returns when the query passes no <code>%s</code>.', 'gatographql'),
+                    'Root.comments',
+                    $limitArg
                 ),
+                Properties::HELP => $unlimitedHelp,
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
             ];
@@ -1059,17 +1117,14 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Default limit for querying comments under a custom post or comment', 'gatographql'),
+                Properties::TITLE => \__('Default limit for comments under a post or comment', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    $defaultLimitMessagePlaceholder,
-                    sprintf(
-                        \__('%s and %s', 'gatographql'),
-                        '<code>Commentable.comments</code>',
-                        '<code>Comment.responses</code>'
-                    ),
-                    $limitArg,
-                    $unlimitedValue
+                    \__('How many comments <code>%s</code> and <code>%s</code> return when the query passes no <code>%s</code>.', 'gatographql'),
+                    'Commentable.comments',
+                    'Comment.responses',
+                    $limitArg
                 ),
+                Properties::HELP => $unlimitedHelp,
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
             ];
@@ -1081,14 +1136,25 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Max limit for querying comments', 'gatographql'),
+                Properties::TITLE => \__('Max limit for comments', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
                     $maxLimitMessagePlaceholder,
-                    \__('comments', 'gatographql'),
-                    $unlimitedValue,
+                    \__('comments', 'gatographql')
                 ),
+                Properties::HELP => $unlimitedHelp,
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => -1,
+            ];
+
+            $moduleSettings[] = [
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    'group-sensitive-data'
+                ),
+                Properties::TITLE => \__('Sensitive data', 'gatographql'),
+                Properties::DESCRIPTION => $sensitiveDataGroupDesc,
+                Properties::CONTROL => Properties::CONTROL_GROUP,
+                Properties::TYPE => Properties::TYPE_NULL,
             ];
 
             $option = self::OPTION_TREAT_COMMENT_STATUS_AS_SENSITIVE_DATA;
@@ -1102,10 +1168,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataTitlePlaceholder,
                     \__('comment status', 'gatographql'),
                 ),
-                Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('comment status', 'gatographql'),
-                ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -1120,22 +1183,31 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataTitlePlaceholder,
                     \__('comment raw content', 'gatographql'),
                 ),
-                Properties::DESCRIPTION => sprintf(
-                    $sensitiveDataDescPlaceholder,
-                    \__('comment raw content', 'gatographql'),
-                ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_SETTINGS) {
             $entriesTitle = \__('Settings entries', 'gatographql');
-            $headsUpDesc = \__('<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions).', 'gatographql');
-            $entryDesc = \__('<strong>Example:</strong> Any of these entries match option name <code>"%1$s"</code>: %2$s', 'gatographql');
+            $headsUpDesc = \__('An entry between <code>/</code> or <code>#</code> works as a regex (regular expression).', 'gatographql');
+            $entryDesc = \__('For instance, any of these entries matches option <code>"%1$s"</code>: %2$s', 'gatographql');
             $ulPlaceholder = '<ul><li><code>%s</code></li></ul>';
-            $moduleDescriptions = [
-                self::SCHEMA_SETTINGS => sprintf(
-                    \__('%1$s<hr/>%2$s<hr/>%3$s%4$s', 'gatographql'),
+            $option = ModuleSettingOptions::ENTRIES;
+            $moduleSettings[] = [
+                Properties::INPUT => $option,
+                Properties::NAME => $this->getSettingOptionName(
+                    $module,
+                    $option
+                ),
+                Properties::TITLE => $entriesTitle,
+                Properties::DESCRIPTION => sprintf(
+                    '%s%s',
+                    \__('The options that queries can, or cannot, read.', 'gatographql'),
+                    $defaultValueDesc,
+                ),
+                Properties::HELP => sprintf(
+                    '%s<br/><br/>%s<br/><br/>%s',
                     sprintf(
-                        \__('List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line).', 'gatographql'),
+                        \__('Fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> read them.', 'gatographql'),
                         'optionValue',
                         'optionValues',
                         'optionObjectValue',
@@ -1156,20 +1228,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                                 ]
                             )
                         )
-                    ),
-                    $defaultValueDesc,
+                    )
                 ),
-            ];
-            $option = ModuleSettingOptions::ENTRIES;
-            $moduleSettings[] = [
-                Properties::INPUT => $option,
-                Properties::NAME => $this->getSettingOptionName(
-                    $module,
-                    $option
-                ),
-                Properties::TITLE => $entriesTitle,
-                Properties::DESCRIPTION => $moduleDescriptions[$module],
                 Properties::TYPE => Properties::TYPE_ARRAY,
+                Properties::SEARCH_KEYWORDS => [
+                    'wp_options',
+                ],
             ];
 
             $option = ModuleSettingOptions::BEHAVIOR;
@@ -1181,11 +1245,11 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => \__('Behavior', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    '%s %s%s',
-                    \__('Are the entries being allowed or denied access to?', 'gatographql'),
-                    \__('<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>', 'gatographql'),
+                    '%s%s',
+                    \__('Whether queries can read only the entries, or all but them.', 'gatographql'),
                     $defaultValueDesc,
                 ),
+                Properties::HELP => \__('<ul><li>Allow access: queries can read the entries, and nothing else.</li><li>Deny access: queries can read everything except the entries.</li></ul>', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_STRING,
                 Properties::POSSIBLE_VALUES => [
                     Behaviors::ALLOW->value => \__('Allow access', 'gatographql'),
@@ -1202,11 +1266,12 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => \__('Default avatar size', 'gatographql'),
                 Properties::DESCRIPTION => sprintf(
-                    \__('Size of the avatar (in pixels) when not providing argument <code>"size"</code> in field <code>%s.avatar</code>', 'gatographql'),
+                    \__('The avatar size when <code>%s.avatar</code> passes no <code>size</code>.', 'gatographql'),
                     $this->getUserObjectTypeResolver()->getTypeName()
                 ),
                 Properties::TYPE => Properties::TYPE_INT,
                 Properties::MIN_NUMBER => 1,
+                Properties::UNIT => \__('pixels', 'gatographql'),
             ];
         } elseif ($module === self::SCHEMA_USER_ROLES) {
             $option = self::OPTION_TREAT_USER_ROLE_AS_SENSITIVE_DATA;
@@ -1224,6 +1289,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataDescPlaceholder,
                     \__('user roles', 'gatographql'),
                 ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
 
@@ -1242,6 +1308,7 @@ class SchemaTypeModuleResolver extends AbstractModuleResolver
                     $sensitiveDataDescPlaceholder,
                     \__('user capabilities', 'gatographql'),
                 ),
+                Properties::HELP => $sensitiveDataHelp,
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

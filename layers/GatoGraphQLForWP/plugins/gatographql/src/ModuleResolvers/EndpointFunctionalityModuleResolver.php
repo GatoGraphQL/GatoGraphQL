@@ -183,13 +183,8 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
                     $option
                 ),
                 Properties::TITLE => \__('Endpoint path', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('URL path to expose the single GraphQL endpoint<br/><span class="more-info">%s</span>', 'gatographql'),
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint',
-                        \__('Configuring the single endpoint', 'gatographql')
-                    )
-                ),
+                Properties::DESCRIPTION => \__('The URL path of the single GraphQL endpoint.', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/enabling-and-configuring-the-single-endpoint',
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }
@@ -203,23 +198,31 @@ class EndpointFunctionalityModuleResolver extends AbstractEndpointFunctionalityM
         ) {
             $description = match ($module) {
                 self::PRIVATE_ENDPOINT => sprintf(
-                    \__('Schema Configuration to use in the private endpoint <code>%1$s</code>.<br/><br/>The private endpoint powers the admin\'s <a href="%2$s" target="_blank">GraphiQL%5$s</a> and <a href="%3$s" target="_blank">Interactive Schema%5$s</a> clients, and can be used to <a href="%4$s" target="_blank">feed data to blocks%5$s</a>.', 'gatographql'),
-                    ltrim(
-                        GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
-                        '/'
+                    '%s%s',
+                    sprintf(
+                        \__('The Schema Configuration of private endpoint <code>%s</code>.', 'gatographql'),
+                        ltrim(
+                            GeneralUtils::removeDomain($this->getEndpointHelpers()->getAdminGraphQLEndpoint()),
+                            '/'
+                        )
                     ),
-                    \admin_url(sprintf(
-                        'admin.php?page=%s',
-                        $this->getGraphiQLMenuPage()->getScreenID()
-                    )),
-                    \admin_url(sprintf(
-                        'admin.php?page=%s',
-                        $this->getGraphQLVoyagerMenuPage()->getScreenID()
-                    )),
-                    'https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/',
-                    HTMLCodes::OPEN_IN_NEW_WINDOW,
+                    $this->getCollapsible(
+                        sprintf(
+                            \__('The private endpoint powers the admin\'s <a href="%1$s" target="_blank">GraphiQL%4$s</a> and <a href="%2$s" target="_blank">Interactive Schema%4$s</a> clients, and can <a href="%3$s" target="_blank">feed data to blocks%4$s</a>.', 'gatographql'),
+                            \admin_url(sprintf(
+                                'admin.php?page=%s',
+                                $this->getGraphiQLMenuPage()->getScreenID()
+                            )),
+                            \admin_url(sprintf(
+                                'admin.php?page=%s',
+                                $this->getGraphQLVoyagerMenuPage()->getScreenID()
+                            )),
+                            'https://gatographql.com/guides/code/feeding-data-to-blocks-in-the-editor/',
+                            HTMLCodes::OPEN_IN_NEW_WINDOW,
+                        )
+                    ),
                 ),
-                self::SINGLE_ENDPOINT => \__('Schema Configuration to use in the Single Endpoint', 'gatographql'),
+                self::SINGLE_ENDPOINT => \__('The Schema Configuration of the single endpoint.', 'gatographql'),
             };
             // Build all the possible values by fetching all the Schema Configuration posts
             $possibleValues = [

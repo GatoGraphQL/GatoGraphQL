@@ -68,6 +68,41 @@ trait EnqueuePluginAssetsTrait
     }
 
     /**
+     * The look and behavior shared by the admin screens of the Gato
+     * plugins, drawn inside a wrapper with the classes from
+     * `getAdminUIThemeClass()`.
+     *
+     * @return string The handle of the stylesheet and of the script
+     */
+    protected function enqueueAdminUIAssets(): string
+    {
+        $this->enqueueMainPluginAssetStyle('gatographql-ui-theme', 'assets/css/gato-ui-theme.css');
+        $themeHandle = 'gatographql-ui-theme';
+        $themeStylesheet = PluginApp::getMainPlugin()->getAdminUIThemeStylesheet();
+        if ($themeStylesheet !== null) {
+            $this->enqueuePluginAssetStyle(
+                $themeStylesheet['plugin'],
+                'gatographql-ui-theme-override',
+                $themeStylesheet['path'],
+                [$themeHandle]
+            );
+            $themeHandle = 'gatographql-ui-theme-override';
+        }
+        $this->enqueueMainPluginAssetStyle('gatographql-ui', 'assets/css/gato-ui.css', [$themeHandle]);
+        $this->enqueueMainPluginAssetScript('gatographql-ui', 'assets/js/gato-ui.js', [], true);
+        return 'gatographql-ui';
+    }
+
+    /**
+     * The class of the wrapper of an admin screen drawn with the shared
+     * look
+     */
+    protected function getAdminUIThemeClass(): string
+    {
+        return 'gato-ui';
+    }
+
+    /**
      * @param string $assetRelativePath The asset's path relative to the main plugin's folder
      * @param string[] $dependencies
      */

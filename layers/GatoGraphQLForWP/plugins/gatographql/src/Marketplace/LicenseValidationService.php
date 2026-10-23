@@ -14,6 +14,7 @@ use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseDomainNotValidException
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
 use GatoGraphQL\GatoGraphQL\MarketplaceProviders\MarketplaceProviderCommercialExtensionActivationServiceInterface;
+use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginStaticModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Registries\MarketplaceProviderCommercialExtensionActivationServiceRegistryInterface;
@@ -410,7 +411,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         $type = ($e instanceof LicenseOperationNotSuccessfulException || $e instanceof LicenseDomainNotValidException) ? 'error' : 'warning';
         add_settings_error(
             $formSettingName,
-            'license_activation_' . $extensionSlug,
+            PluginManagementFunctionalityModuleResolver::LICENSE_OPERATION_NOTICE_CODE_PREFIX . $extensionSlug,
             $errorMessage,
             $type
         );
@@ -482,7 +483,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         // Show the success message to the admin
         add_settings_error(
             $formSettingName,
-            'license_activation_' . $extensionSlug,
+            PluginManagementFunctionalityModuleResolver::LICENSE_OPERATION_NOTICE_CODE_PREFIX . $extensionSlug,
             $successMessage,
             'success'
         );
@@ -494,7 +495,7 @@ class LicenseValidationService extends AbstractBasicService implements LicenseVa
         // Show the error message to the admin
         add_settings_error(
             $formSettingName,
-            'license_activation_' . $extensionSlug,
+            PluginManagementFunctionalityModuleResolver::LICENSE_OPERATION_NOTICE_CODE_PREFIX . $extensionSlug,
             sprintf(
                 /*\__(*/                'The license key provided for "%1$s" is meant to be used with "%2$s". As such, "%1$s" has not been enabled. Please use the right license key to enable it.<br/>If you need help, send an email to support@gatographql.com (providing the purchased license keys).'/*, 'gatographql')*/,
                 $extensionName,

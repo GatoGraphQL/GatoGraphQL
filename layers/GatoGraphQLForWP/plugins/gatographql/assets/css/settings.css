@@ -1,30 +1,424 @@
 /**
- * Fix for header padding in table in
- * "Settings => Plugin Management => Reset Settings"
+ * Settings page layout, on top of gato-ui.css
  */
-.gatographql-settings-section .form-table th {
-    padding-left: 10px;
+
+/* As wide as the dashboards, at most */
+.gato-settings.wrap {
+    max-width: var(--gato-page-max-width);
+}
+.gato-settings .wp-header-end {
+    margin: 0;
 }
 
-/* .gatographql-settings-section input[type="color"], */
-/* .gatographql-settings-section input[type="date"],
-.gatographql-settings-section input[type="datetime-local"],
-.gatographql-settings-section input[type="datetime"], */
-.gatographql-settings-section input[type="email"],
-/* .gatographql-settings-section input[type="month"], */
-/* .gatographql-settings-section input[type="number"], */
-.gatographql-settings-section input[type="password"],
-.gatographql-settings-section input[type="search"],
-/* .gatographql-settings-section input[type="tel"], */
-.gatographql-settings-section input[type="text"],
-/* .gatographql-settings-section input[type="time"], */
-.gatographql-settings-section input[type="url"],
-/* .gatographql-settings-section input[type="week"], */
-.gatographql-settings-section select,
-.gatographql-settings-section textarea {
-    width: -moz-available;
+.gato-settings__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+.gato-settings__top h1 {
+    padding-bottom: 4px;
 }
 
+/* Search all settings */
+.gato-search {
+    position: relative;
+    width: 380px;
+    max-width: 100%;
+}
+.gato-search__field {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    padding: 0 10px;
+    height: 36px;
+    box-sizing: border-box;
+    color: var(--gato-text-muted);
+}
+.gato-search__field:focus-within {
+    border-color: var(--gato-accent);
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-ui .gato-search__input,
+.gato-ui .gato-search__input:focus {
+    border: 0;
+    box-shadow: none;
+    outline: 0;
+    flex: 1;
+    min-width: 0;
+    font-size: var(--gato-font-size-sm);
+    background: transparent;
+    padding: 0;
+}
+.gato-search__results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 30;
+    margin-top: 4px;
+    max-height: 60vh;
+    overflow: auto;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+    padding: 4px 0;
+}
+.gato-search__result {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 100%;
+    text-align: left;
+    padding: 8px 14px;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+}
+.gato-search__result:hover,
+.gato-search__result.is-active {
+    background: var(--gato-accent-soft);
+}
+.gato-search__result-title {
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text);
+    font-weight: 500;
+}
+.gato-search__result-path {
+    font-size: var(--gato-font-size-xs);
+    color: var(--gato-text-muted);
+}
+.gato-search__empty {
+    padding: 8px 14px;
+    font-size: var(--gato-font-size-sm);
+    color: var(--gato-text-muted);
+}
+.gato-setting.is-found {
+    animation: gato-found 2s ease-out;
+}
+@keyframes gato-found {
+    0%, 40% {
+        background: var(--gato-accent-soft);
+        box-shadow: inset 3px 0 0 var(--gato-accent);
+    }
+    100% {
+        background: transparent;
+        box-shadow: none;
+    }
+}
+
+/* Primary tabs: on one line, the ones that do not fit go under "More" */
+.gato-settings .gato-tabs {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: flex-end;
+    gap: 2px;
+    position: relative;
+    z-index: 21;
+    padding: 0;
+    border-bottom: var(--gato-border-width) solid var(--gato-border);
+}
+.gato-settings.has-js .gato-tabs {
+    overflow: visible;
+}
+.gato-settings .gato-tabs > a.nav-tab,
+.gato-tabs__more-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0 0 calc(-1 * var(--gato-border-width));
+    padding: 10px 14px;
+    border: 0;
+    border-bottom: var(--gato-tab-indicator-width) solid transparent;
+    border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
+    background: transparent;
+    color: var(--gato-tab-text);
+    font-size: var(--gato-font-size);
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color .15s, background-color .15s, border-color .15s;
+}
+.gato-settings .gato-tabs > a.nav-tab:hover,
+.gato-tabs__more-button:hover {
+    background: var(--gato-tab-bg-hover);
+    color: var(--gato-tab-text-hover);
+}
+.gato-settings .gato-tabs > a.nav-tab-active,
+.gato-settings .gato-tabs > a.nav-tab-active:hover,
+.gato-settings .gato-tabs > a.nav-tab-active:focus,
+.gato-tabs__more-button.is-active {
+    background: transparent;
+    color: var(--gato-tab-text-active);
+    border-bottom-color: var(--gato-tab-indicator);
+    font-weight: 600;
+}
+.gato-settings .gato-tabs > a.nav-tab:focus-visible,
+.gato-tabs__more-button:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-settings .gato-tabs > a.nav-tab.is-overflowing {
+    display: none;
+}
+.gato-tabs__more {
+    position: relative;
+    flex-shrink: 0;
+}
+.gato-tabs__more-button {
+    font-family: inherit;
+    cursor: pointer;
+}
+.gato-tabs__menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    min-width: 240px;
+    margin-top: 4px;
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .12);
+    padding: 4px 0;
+    display: flex;
+    flex-direction: column;
+}
+.gato-tabs__menu-item {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    padding: 9px 14px;
+    font-size: var(--gato-font-size);
+    font-weight: 400;
+    color: var(--gato-text);
+    text-decoration: none;
+    background: transparent;
+    border: 0;
+    text-align: left;
+    cursor: pointer;
+    font-family: inherit;
+}
+.gato-tabs__menu-item:hover,
+.gato-tabs__menu-item:focus {
+    background: var(--gato-accent-soft);
+}
+.gato-tabs__menu-item.is-active {
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--gato-accent);
+}
+
+/* Secondary tabs: a side nav */
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container {
+    gap: 24px;
+    align-items: flex-start;
+    padding-top: 16px;
+}
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav {
+    background: var(--gato-surface);
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius);
+    overflow: auto;
+    padding: 0;
+    margin: 0;
+    position: sticky;
+    top: 44px;
+}
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 12px;
+    margin: 0;
+    border: 0;
+    border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
+    background: transparent;
+    color: #2c3338;
+    font-size: var(--gato-font-size-sm);
+    font-weight: 400;
+    line-height: 1.4;
+}
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab:last-child {
+    border-bottom: 0;
+}
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab:hover {
+    background: var(--gato-surface-alt);
+}
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab-active,
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab-active:hover {
+    background: var(--gato-accent-soft);
+    color: var(--gato-text);
+    font-weight: 600;
+    box-shadow: inset 3px 0 0 var(--gato-accent);
+}
+
+/* The sections fill the width beside the side nav, whatever their content, so that opening a help panel does not widen them */
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+/* A module's settings */
+.gato-module {
+    min-width: 0;
+    /* Once its tab down the side scrolls to it (WordPress already leaves room for the admin bar) */
+    scroll-margin-top: 16px;
+}
+.gato-settings .gato-module__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0 0 12px;
+    font-size: 19px;
+    font-weight: 600;
+}
+/* What the whole section does, behind the "i" beside its title */
+.gato-module__help > .gato-help {
+    margin: -4px 0 12px;
+}
+.gato-settings .gato-module + .gato-module {
+    margin-top: var(--gato-section-gap);
+}
+
+/* A setting */
+.gato-setting {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 24px;
+    align-items: center;
+    align-content: flex-start;
+    justify-content: space-between;
+    padding: var(--gato-row-padding-y) var(--gato-card-padding-x);
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+}
+.gato-card__head + .gato-setting,
+.gato-card > .gato-setting:first-child {
+    border-top: 0;
+}
+.gato-setting__main {
+    flex: 1 1 320px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.gato-setting__title {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    align-items: center;
+    font-weight: 500;
+}
+.gato-setting__title label {
+    cursor: pointer;
+}
+.gato-setting__title a {
+    font-size: var(--gato-font-size-xs);
+    font-weight: 400;
+}
+.gato-setting__description {
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-sm);
+}
+.gato-setting__description p:first-child {
+    margin-top: 0;
+}
+.gato-setting__description p:last-child {
+    margin-bottom: 0;
+}
+/* What applies to all the sections of the tab, once above them */
+.gato-tab-intro {
+    margin-bottom: var(--gato-section-gap);
+}
+.gato-setting__dependency {
+    display: none;
+    font-size: var(--gato-font-size-xs);
+    color: var(--gato-text-muted);
+}
+.gato-setting.is-inactive > .gato-setting__control,
+.gato-setting.is-inactive .gato-setting__title,
+.gato-setting.is-inactive .gato-setting__description {
+    opacity: .5;
+}
+.gato-setting.is-inactive .gato-setting__dependency {
+    display: block;
+}
+.gato-setting__control {
+    flex: 0 1 auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    min-width: 0;
+    max-width: 100%;
+}
+/*
+ * The help opens right under the description, on a line of its own, so
+ * that opening it does not move the control beside the title; when the
+ * control takes the whole row, the help goes between the two
+ */
+.gato-setting > .gato-help {
+    flex: 1 1 100%;
+    order: 3;
+    margin-top: 0;
+}
+.gato-setting--wide > .gato-help {
+    order: 1;
+}
+.gato-setting--wide > .gato-setting__control {
+    order: 2;
+    flex: 1 1 100%;
+    display: block;
+}
+.gato-setting--content > .gato-setting__control {
+    display: block;
+}
+
+/* Per-tab Save buttons: replaced by the bar, when there is JavaScript */
+.gato-settings .gato-settings-form .submit {
+    padding: 0;
+    margin: 16px 0 0;
+}
+.gato-settings.has-save-all .gato-settings-form[data-save-with-others="1"] .gato-tab-submit,
+.gato-settings.has-save-all .gato-settings-form[data-save-with-others="1"] p.submit {
+    display: none;
+}
+
+/* Settings info */
 .settings-info {
     color: darkcyan;
+}
+
+@media (max-width: 782px) {
+    .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container {
+        flex-direction: column;
+    }
+    .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav {
+        position: static;
+        width: 100%;
+        max-height: none;
+    }
+    .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+
+/* A dot beside the title of a setting with an unsaved change, as beside its tabs */
+.gato-settings .gato-setting.is-changed > .gato-setting__main > .gato-setting__title > :first-child::after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background: var(--gato-warning);
+    vertical-align: middle;
 }
