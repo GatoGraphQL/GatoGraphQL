@@ -20,6 +20,7 @@ interface ModuleRegistryInterface
         bool $onlyWithVisibleSettings = false,
         ?string $settingsCategory = null,
     ): array;
+    public function isModuleRegistered(string $module): bool;
     /**
      * @throws ModuleNotExistsException If module does not exist
      */

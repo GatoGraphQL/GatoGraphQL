@@ -113,6 +113,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         foreach ($mappings as $mapping) {
             /** @var string */
             $module = $mapping['module'];
+            /**
+             * A module registered only under some condition (eg: while
+             * another plugin is active) has no settings otherwise
+             */
+            if (!$moduleRegistry->isModuleRegistered($module)) {
+                continue;
+            }
             /** @var string|bool */
             $condition = $mapping['condition'] ?? true;
             // Check if the hook must be executed always (condition => 'any') or with
