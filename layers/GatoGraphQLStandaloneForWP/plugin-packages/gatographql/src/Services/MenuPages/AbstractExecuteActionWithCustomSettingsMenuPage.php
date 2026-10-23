@@ -26,6 +26,7 @@ use function parse_url;
 use function preg_match;
 use function sprintf;
 use function submit_button;
+use function wp_validate_redirect;
 
 abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractSettingsMenuPage
 {
@@ -154,16 +155,15 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         $settingsCategory = (string) array_key_first($settingsCategoryResolvers);
         $settingsCategoryResolver = $settingsCategoryResolvers[$settingsCategory] ?? null;
         $backURL = $this->getOriginScreenURL();
+        $backLabel = $backURL === '' ? '' : sprintf(
+            __('Back to %s', 'gatographql'),
+            $this->getOriginScreenLabel($backURL)
+        );
         ?>
         <div class="gato-savebar gato-runbar">
             <span class="gato-savebar__status">
                 <?php if ($backURL !== '') : ?>
-                    <a href="<?php echo esc_url($backURL) ?>" class="gato-runbar__back"><span aria-hidden="true">← </span><?php
-                        echo esc_html(sprintf(
-                            __('Back to %s', 'gatographql'),
-                            $this->getOriginScreenLabel($backURL)
-                        ))
-                    ?></a>
+                    <a href="<?php echo esc_url($backURL) ?>" class="gato-runbar__back"><span aria-hidden="true">← </span><?php echo esc_html($backLabel) ?></a>
                 <?php endif; ?>
             </span>
             <span class="gato-savebar__actions">
@@ -197,7 +197,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         if (!preg_match('#^https?://#', $url)) {
             $url = home_url($url);
         }
-        return $url;
+        return wp_validate_redirect($url, '');
     }
 
     /**
