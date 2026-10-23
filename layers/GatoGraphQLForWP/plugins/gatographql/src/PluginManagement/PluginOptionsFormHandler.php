@@ -6,12 +6,15 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecycleHooks;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
 
+use function did_action;
 use function in_array;
 use function is_array;
 
@@ -44,7 +47,18 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         string $module,
     ): array {
         if (($this->normalizedModuleOptionValuesCache[$settingsCategory][$module] ?? null) === null) {
-            $instanceManager = SystemInstanceManagerFacade::getInstance();
+            /**
+             * Once the Application container has booted (eg: on a "Save all
+             * changes" request, which runs on "admin_post"), normalize with
+             * it: the settings of some modules depend on services that only
+             * the Application container has (eg: the AI translation
+             * extensions print the prompt placeholders, and the meta modules
+             * print the types with meta). Before then (eg: while the plugin
+             * configures itself), only the System container is available.
+             */
+            $instanceManager = did_action(PluginLifecycleHooks::BOOT_EXTENSION) > 0
+                ? InstanceManagerFacade::getInstance()
+                : SystemInstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
 
