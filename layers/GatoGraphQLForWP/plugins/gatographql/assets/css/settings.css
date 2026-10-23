@@ -141,6 +141,8 @@
     border-bottom: var(--gato-tab-indicator-width) solid transparent;
     border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
     background: transparent;
+    /* The hover background stops above the bottom line of the tabs, which shows through the transparent indicator */
+    background-clip: padding-box;
     color: var(--gato-tab-text);
     font-size: var(--gato-font-size);
     font-weight: 500;
