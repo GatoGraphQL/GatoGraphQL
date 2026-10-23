@@ -76,18 +76,30 @@ trait EnqueuePluginAssetsTrait
      */
     protected function enqueueAdminUIAssets(): string
     {
-        $this->enqueueMainPluginAssetStyle('gatographql-ui', 'assets/css/gato-ui.css');
+        $this->enqueueMainPluginAssetStyle('gatographql-ui-theme', 'assets/css/gato-ui-theme.css');
+        $themeHandle = 'gatographql-ui-theme';
+        $themeStylesheet = PluginApp::getMainPlugin()->getAdminUIThemeStylesheet();
+        if ($themeStylesheet !== null) {
+            $this->enqueuePluginAssetStyle(
+                $themeStylesheet['plugin'],
+                'gatographql-ui-theme-override',
+                $themeStylesheet['path'],
+                [$themeHandle]
+            );
+            $themeHandle = 'gatographql-ui-theme-override';
+        }
+        $this->enqueueMainPluginAssetStyle('gatographql-ui', 'assets/css/gato-ui.css', [$themeHandle]);
         $this->enqueueMainPluginAssetScript('gatographql-ui', 'assets/js/gato-ui.js', [], true);
         return 'gatographql-ui';
     }
 
     /**
-     * The classes of the wrapper of an admin screen drawn with the shared
-     * look, themed for the main plugin.
+     * The class of the wrapper of an admin screen drawn with the shared
+     * look
      */
     protected function getAdminUIThemeClass(): string
     {
-        return 'gato-ui gato-ui--' . PluginApp::getMainPlugin()->getAdminUIThemeSlug();
+        return 'gato-ui';
     }
 
     /**

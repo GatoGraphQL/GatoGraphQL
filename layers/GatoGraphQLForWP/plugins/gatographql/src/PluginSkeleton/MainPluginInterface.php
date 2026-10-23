@@ -17,10 +17,13 @@ interface MainPluginInterface extends PluginInterface
     public function getPluginIconSVG(): string;
 
     /**
-     * The color theme of the plugin's admin screens: the
-     * `gato-ui--{slug}` class, which sets the CSS variables.
+     * The stylesheet that overrides the CSS variables of the admin
+     * screens (eg: the accent color), loaded after Gato GraphQL's own,
+     * or `null` to keep these.
+     *
+     * @return array{plugin:PluginInterface,path:string}|null The plugin, and the stylesheet's path within its folder
      */
-    public function getAdminUIThemeSlug(): string;
+    public function getAdminUIThemeStylesheet(): ?array;
 
     /**
      * Install a feature's data, recording its version once done, and

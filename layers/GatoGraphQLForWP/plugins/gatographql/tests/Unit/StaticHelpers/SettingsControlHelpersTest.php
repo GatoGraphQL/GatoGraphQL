@@ -52,7 +52,7 @@ class SettingsControlHelpersTest extends TestCase
                 Properties::CONTROL_SELECT,
             ],
             'long labels are a dropdown' => [
-                [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'Translation posts must already exist', 'b' => 'Create them']],
+                [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'The entries must already be there', 'b' => 'Create them']],
                 Properties::CONTROL_SELECT,
             ],
             'values appended at runtime are a dropdown' => [
