@@ -1906,6 +1906,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             wp_die(esc_html__('Sorry, you are not allowed to manage options for this site.', 'gatographql'), 403);
         }
 
+        $savedTabNames = [];
         $expectedFieldCount = (int) ($saveAll[self::SAVE_ALL_FIELD_COUNT] ?? 0);
         $receivedFieldCount = SettingsControlHelpers::countLeafValues($post);
         if ($expectedFieldCount !== $receivedFieldCount) {
@@ -1920,25 +1921,53 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 'error'
             );
         } else {
-            $this->saveAllChangesInTabs($post, $saveAll);
+            $savedTabNames = $this->saveAllChangesInTabs($post, $saveAll);
         }
 
         $transientName = $this->getSaveAllNoticesTransientName();
         /**
-         * The notices of the batches sent before, in this same save (a save
-         * left unfinished must not add its notices to the next one)
+         * The notices and the tabs saved of the batches sent before, in
+         * this same save (a save left unfinished must not add its notices
+         * to the next one)
          *
-         * @var array<array<string,string>>
+         * @var array{notices?:array<array<string,string>>,savedTabNames?:string[]}
          */
-        $previousNotices = $isFirst ? [] : (get_transient($transientName) ?: []);
-        $notices = array_merge($previousNotices, get_settings_errors());
+        $previousBatches = $isFirst ? [] : get_transient($transientName);
+        if (!is_array($previousBatches)) {
+            $previousBatches = [];
+        }
+        $notices = array_merge($previousBatches['notices'] ?? [], get_settings_errors());
+        $savedTabNames = array_merge($previousBatches['savedTabNames'] ?? [], $savedTabNames);
         if ($isPartial) {
-            set_transient($transientName, $notices, 300);
+            set_transient(
+                $transientName,
+                [
+                    'notices' => $notices,
+                    'savedTabNames' => $savedTabNames,
+                ],
+                300
+            );
             wp_send_json([
                 'notices' => $notices,
             ]);
         }
         delete_transient($transientName);
+
+        /**
+         * If some tab failed, in any batch, say which ones were saved
+         */
+        $hasErrors = array_filter($notices, static fn (array $notice): bool => ($notice['type'] ?? '') === 'error') !== [];
+        if ($hasErrors && $savedTabNames !== []) {
+            $notices[] = [
+                'setting' => 'general',
+                'code' => 'gato_save_all_saved_tabs',
+                'message' => sprintf(
+                    __('The changes in these tabs were saved: %s.', 'gatographql'),
+                    esc_html(implode(__(', ', 'gatographql'), $savedTabNames))
+                ),
+                'type' => 'success',
+            ];
+        }
 
         /**
          * As options.php: a request that raised no message says so
@@ -1963,8 +1992,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     /**
      * @param array<string,mixed> $post
      * @param array<string,mixed> $saveAll
+     * @return string[] The names of the tabs saved
      */
-    protected function saveAllChangesInTabs(array $post, array $saveAll): void
+    protected function saveAllChangesInTabs(array $post, array $saveAll): array
     {
         /**
          * Submitted by the browser, so not to be trusted
@@ -1984,10 +2014,8 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         }
 
         $savedTabNames = [];
-        $hasErrors = false;
         foreach ($tabs as $optionsFormOrigin) {
             if (!is_string($optionsFormOrigin) || !isset($settingsCategoryResolvers[$optionsFormOrigin])) {
-                $hasErrors = true;
                 add_settings_error(
                     'general',
                     'gato_save_all_unknown_tab',
@@ -2006,7 +2034,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
 
             $nonce = $nonces[$optionsFormOrigin] ?? '';
             if (!is_string($nonce) || !wp_verify_nonce($nonce, $optionsFormOrigin . '-options')) {
-                $hasErrors = true;
                 add_settings_error(
                     'general',
                     'gato_save_all_expired',
@@ -2022,7 +2049,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             /** @var string */
             $capability = apply_filters("option_page_capability_{$optionsFormOrigin}", 'manage_options');
             if (!current_user_can($capability)) {
-                $hasErrors = true;
                 add_settings_error(
                     'general',
                     'gato_save_all_not_allowed',
@@ -2044,20 +2070,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             $savedTabNames[] = $tabName;
         }
 
-        /**
-         * If some tab failed, say which ones were saved
-         */
-        if ($hasErrors && $savedTabNames !== []) {
-            add_settings_error(
-                'general',
-                'gato_save_all_saved_tabs',
-                sprintf(
-                    __('The changes in these tabs were saved: %s.', 'gatographql'),
-                    esc_html(implode(__(', ', 'gatographql'), $savedTabNames))
-                ),
-                'success'
-            );
-        }
+        return $savedTabNames;
     }
 
     protected function getSaveAllNoticesTransientName(): string

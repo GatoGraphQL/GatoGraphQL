@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\Container\ContainerManagerInterface;
 use GatoGraphQL\GatoGraphQL\Facades\Settings\InstalledDataSettingsManagerFacade;
+use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseProperties;
 use GatoGraphQL\GatoGraphQL\Marketplace\LicenseValidationServiceInterface;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
@@ -323,9 +324,10 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
     }
 
     /**
-     * A license whose key was cleared stays activated when its
-     * deactivation failed (eg: the license server could not be reached):
-     * store its key back, so the license can be deactivated later.
+     * A license whose key was cleared or changed stays activated with its
+     * previous key when deactivating it, or activating the new key, failed
+     * (eg: the license server could not be reached): store the previous
+     * key back, so the license can still be deactivated later.
      *
      * @param array<string,string> $previousLicenseKeys Extension slug => license key before the action
      * @param array<string,string> $submittedLicenseKeys Extension slug => license key acted on
@@ -345,8 +347,9 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
         foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
             if (
                 $previousLicenseKey === ''
-                || ($submittedLicenseKeys[$extensionSlug] ?? '') !== ''
-                || !isset($activatedLicenseEntries[$extensionSlug])
+                || ($submittedLicenseKeys[$extensionSlug] ?? '') === $previousLicenseKey
+                || !is_array($activatedLicenseEntries[$extensionSlug] ?? null)
+                || ($activatedLicenseEntries[$extensionSlug][LicenseProperties::LICENSE_KEY] ?? null) !== $previousLicenseKey
             ) {
                 continue;
             }

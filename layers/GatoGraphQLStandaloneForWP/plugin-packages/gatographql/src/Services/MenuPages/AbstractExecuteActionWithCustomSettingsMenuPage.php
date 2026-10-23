@@ -21,6 +21,7 @@ use function get_post_type_object;
 use function get_taxonomy;
 use function home_url;
 use function is_string;
+use function ltrim;
 use function parse_str;
 use function parse_url;
 use function preg_match;
@@ -115,7 +116,7 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         $sendbackURL = $this->getBulkActionParam(Params::BULK_ACTION_ORIGIN_SENDBACK_URL);
 
         ?>
-        <form method="post" action="<?php echo esc_url(home_url($bulkActionOriginURL)); ?>">
+        <form method="post" action="<?php echo esc_url($this->getAbsoluteURL($bulkActionOriginURL)); ?>">
             <?php echo $content; ?>
 
             <?php /** Re-add all the same inputs as in the request (that includes the nonce, and the action) */ ?>
@@ -194,10 +195,30 @@ abstract class AbstractExecuteActionWithCustomSettingsMenuPage extends AbstractS
         if ($url === '') {
             return '';
         }
-        if (!preg_match('#^https?://#', $url)) {
-            $url = home_url($url);
+        return wp_validate_redirect($this->getAbsoluteURL($url), '');
+    }
+
+    /**
+     * The URL of a path on this site's host (eg: the request URI of the
+     * screen the entities were selected on, which already holds the path
+     * of a site in a subdirectory, so `home_url()` would add it twice)
+     */
+    protected function getAbsoluteURL(string $url): string
+    {
+        if (preg_match('#^https?://#', $url)) {
+            return $url;
         }
-        return wp_validate_redirect($url, '');
+        $homeURL = home_url();
+        $scheme = (string) parse_url($homeURL, PHP_URL_SCHEME);
+        $host = (string) parse_url($homeURL, PHP_URL_HOST);
+        $port = parse_url($homeURL, PHP_URL_PORT);
+        return sprintf(
+            '%s://%s%s/%s',
+            $scheme,
+            $host,
+            $port !== null && $port !== false ? ':' . $port : '',
+            ltrim($url, '/')
+        );
     }
 
     /**
