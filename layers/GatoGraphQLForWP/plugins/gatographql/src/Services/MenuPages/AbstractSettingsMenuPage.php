@@ -1412,7 +1412,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             <?php endif; ?>
             <div class="gato-grid<?php echo $entryControl === Properties::CONTROL_INPUT ? ' gato-grid--single' : '' ?>">
                 <?php
-                /** @var array<string|int,array{label:string,tone?:string,detail?:string}> */
+                /** @var array<string|int,array{label:string,tone?:string,detail?:string,detailTone?:string}> */
                 $keyStatuses = $itemSetting[Properties::KEY_STATUSES] ?? [];
                 /** @var array<string|int,array<string,string>> */
                 $keyActions = $itemSetting[Properties::KEY_ACTIONS] ?? [];
@@ -1925,17 +1925,17 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         }
 
         $transientName = $this->getSaveAllNoticesTransientName();
+        $previousBatches = $isFirst ? [] : get_transient($transientName);
+        if (!is_array($previousBatches)) {
+            $previousBatches = [];
+        }
         /**
          * The notices and the tabs saved of the batches sent before, in
          * this same save (a save left unfinished must not add its notices
          * to the next one)
          *
-         * @var array{notices?:array<array<string,string>>,savedTabNames?:string[]}
+         * @var array{notices?:array<array<string,string>>,savedTabNames?:string[]} $previousBatches
          */
-        $previousBatches = $isFirst ? [] : get_transient($transientName);
-        if (!is_array($previousBatches)) {
-            $previousBatches = [];
-        }
         $notices = array_merge($previousBatches['notices'] ?? [], get_settings_errors());
         $savedTabNames = array_merge($previousBatches['savedTabNames'] ?? [], $savedTabNames);
         if ($isPartial) {
