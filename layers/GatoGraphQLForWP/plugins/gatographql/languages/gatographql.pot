@@ -1265,7 +1265,7 @@ msgstr ""
 #: CMSSchema/packages/custompost-tag-mutations/src/FieldResolvers/ObjectType/SetTagsOnCustomPostObjectTypeFieldResolverTrait.php:15
 #: CMSSchema/packages/custompost-tag-mutations/src/MutationResolvers/AbstractSetTagsOnCustomPostMutationResolver.php:190
 #: CMSSchema/packages/custompost-tag-mutations/src/TypeResolvers/InputObjectType/AbstractSetTagsOnGenericCustomPostInputObjectTypeResolver.php:32
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:366
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:303
 msgid "custom post"
 msgstr ""
 
@@ -3357,7 +3357,7 @@ msgstr ""
 #: CMSSchema/packages/meta-mutations/src/MutationResolvers/MutateEntityMetaMutationResolverTrait.php:204
 #: CMSSchema/packages/meta/src/FieldResolvers/ObjectType/AbstractWithMetaObjectTypeFieldResolver.php:137
 #: CMSSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:253
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:139
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:143
 #: Engine/packages/component-model/src/TypeResolvers/InputObjectType/OneofInputObjectTypeResolverTrait.php:57
 #: Engine/packages/component-model/src/TypeResolvers/UnionType/AbstractUnionTypeResolver.php:394
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:58
@@ -5829,6 +5829,7 @@ msgstr ""
 
 #: CMSSchema/packages/users/src/FieldResolvers/ObjectType/AbstractUserObjectTypeFieldResolver.php:120
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:374
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:249
 msgid "Users"
 msgstr ""
 
@@ -5965,7 +5966,7 @@ msgstr ""
 msgid "The value for 'maxAge' must either be a positive number, or '0' to avoid caching"
 msgstr ""
 
-#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1055
+#: Engine/packages/component-model/src/DirectiveResolvers/AbstractFieldDirectiveResolver.php:1066
 msgid "Positions of the additional fields to be affected by the directive, relative from the directive (as an array of positive integers)"
 msgstr ""
 
@@ -6104,44 +6105,79 @@ msgstr ""
 msgid "Resolving the nested directive(s) in meta directive '%s' produced errors"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:41
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:55
 #, php-format
 msgid "Field '%s' could not be processed due to the error(s) from its arguments"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:42
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:56
 #, php-format
 msgid "Non-nullable field '%s' cannot return null"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:43
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:57
 #, php-format
 msgid "Field '%s' must not return an array, but returned '%s'"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:44
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:58
 #, php-format
 msgid "Field '%s' must return an array, but returned '%s'"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:45
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:59
 #, php-format
 msgid "Field '%s' must not return an array with null items"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:46
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:60
 #, php-format
 msgid "Array value in field '%s' must not contain arrays, but returned '%s'"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:47
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:61
 #, php-format
 msgid "Field '%s' must return an array of arrays, but returned '%s'"
 msgstr ""
 
-#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:48
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:62
 #, php-format
 msgid "Field '%s' must not return an array of arrays with null items"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:63
+#, php-format
+msgid "Directive '%s' set non-nullable field '%s' to null"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:64
+#, php-format
+msgid "Directive '%s' added a null item to field '%s', whose items are non-nullable"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:65
+#, php-format
+msgid "Directive '%s' added a null item to an inner list of field '%s', whose items are non-nullable"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:66
+#, php-format
+msgid "Directive '%s' (or a directive nested within it) set non-nullable field '%s' to null"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:67
+#, php-format
+msgid "Directive '%s' (or a directive nested within it) added a null item to field '%s', whose items are non-nullable"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:68
+#, php-format
+msgid "Directive '%s' (or a directive nested within it) added a null item to an inner list of field '%s', whose items are non-nullable"
+msgstr ""
+
+#: Engine/packages/component-model/src/FeedbackItemProviders/FieldResolutionErrorFeedbackItemProvider.php:69
+#, php-format
+msgid "Value '%s' of field '%s' cannot be coerced to type '%s'"
 msgstr ""
 
 #: Engine/packages/component-model/src/FeedbackItemProviders/InputValueCoercionGraphQLSpecErrorFeedbackItemProvider.php:68
@@ -6266,43 +6302,43 @@ msgstr ""
 msgid ". "
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:146
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:143
 msgid "Indicate if the object is of a given type"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:147
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:144
 msgid "Indicate if the object implements a given interface"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:148
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:145
 msgid "Indicate if the object is part of a given union type"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:149
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:146
 msgid "Indicate if the object is of a given type or implements a given interface"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:150
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:147
 msgid "Indicate if the object is all of the given types or interfaces"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:183
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:180
 msgid "The type name to compare against"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:184
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:181
 msgid "The interface name to compare against"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:185
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:182
 msgid "The union type name to compare against"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:186
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:183
 msgid "The type or interface name to compare against"
 msgstr ""
 
-#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:187
+#: Engine/packages/component-model/src/FieldResolvers/ObjectType/CoreGlobalObjectTypeFieldResolver.php:184
 msgid "The types and interface names to compare against"
 msgstr ""
 
@@ -6388,7 +6424,8 @@ msgstr ""
 
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:541
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1966
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
@@ -6432,7 +6469,7 @@ msgstr ""
 msgid "..."
 msgstr ""
 
-#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:209
+#: Engine/packages/component-model/src/TypeResolvers/EnumType/AbstractEnumTypeResolver.php:235
 #, php-format
 msgid "Enum value '%s' is deprecated: %s"
 msgstr ""
@@ -6453,7 +6490,7 @@ msgstr ""
 msgid "Wildcard type representing any of GraphQL's scalar types that is represented via a string (including the built-in types, String and ID, and custom types, such as HTML or Email)"
 msgstr ""
 
-#: Engine/packages/component-model/src/TypeResolvers/ScalarType/BooleanScalarTypeResolver.php:56
+#: Engine/packages/component-model/src/TypeResolvers/ScalarType/BooleanScalarTypeResolver.php:88
 msgid "The Boolean scalar type represents `true` or `false`."
 msgstr ""
 
@@ -6465,7 +6502,7 @@ msgstr ""
 msgid "The Float scalar type represents float numbers."
 msgstr ""
 
-#: Engine/packages/component-model/src/TypeResolvers/ScalarType/IDScalarTypeResolver.php:30
+#: Engine/packages/component-model/src/TypeResolvers/ScalarType/IDScalarTypeResolver.php:34
 msgid "The ID scalar type represents a unique identifier."
 msgstr ""
 
@@ -6473,7 +6510,7 @@ msgstr ""
 msgid "The Int scalar type represents non-fractional signed whole numeric values."
 msgstr ""
 
-#: Engine/packages/component-model/src/TypeResolvers/ScalarType/StringScalarTypeResolver.php:27
+#: Engine/packages/component-model/src/TypeResolvers/ScalarType/StringScalarTypeResolver.php:34
 msgid "The String scalar type represents textual data, represented as UTF-8 character sequences."
 msgstr ""
 
@@ -6504,8 +6541,8 @@ msgid "The following names have not been implemented by the CMS: \"%s\". Hence, 
 msgstr ""
 
 #: Engine/packages/engine/src/Engine/Engine.php:32
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:901
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:948
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:943
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:992
 msgid "\", \""
 msgstr ""
 
@@ -6723,7 +6760,7 @@ msgid "Unexpected string escaped character '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLParserErrorFeedbackItemProvider.php:46
-msgid "Can\\t recognize token type"
+msgid "Can't recognize token type"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLParserErrorFeedbackItemProvider.php:47
@@ -6731,186 +6768,200 @@ msgstr ""
 msgid "Unexpected token '%s'"
 msgstr ""
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:115
-#, php-format
-msgid "Operation name '%s' is duplicated"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:116
-msgid "When the document contains more than one operation, there can be no anonymous operation"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:118
-#, php-format
-msgid "There is no field '%s' on type '%s'"
-msgstr ""
-
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:119
 #, php-format
-msgid "The response for field '%s' on object with ID '%s' is ambiguous, as the previous (and non equivalent) field '%s' must also be printed under key '%s'"
+msgid "The schema does not support '%s' operations"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:120
 #, php-format
-msgid "Field '%s' from type '%s' is not a connection"
+msgid "Operation name '%s' is duplicated"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:121
-#, php-format
-msgid "On field '%1$s' of type '%2$s', there is no argument with name '%3$s'"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:122
-#, php-format
-msgid "On directive '%1$s', there is no argument with name '%2$s'"
+msgid "When the document contains more than one operation, there can be no anonymous operation"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:123
 #, php-format
-msgid "Argument '%s' is duplicated"
+msgid "There is no field '%s' on type '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:124
 #, php-format
-msgid "Mandatory argument '%1$s' in field '%2$s' of type '%3$s' has not been provided"
+msgid "The response for field '%s' on object with ID '%s' is ambiguous, as the previous (and non equivalent) field '%s' must also be printed under key '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:125
 #, php-format
-msgid "Argument '%1$s' in field '%2$s' of type '%3$s' cannot be null"
+msgid "Field '%s' from type '%s' is not a connection"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:126
 #, php-format
-msgid "Mandatory argument '%1$s' in directive '%2$s' has not been provided"
+msgid "On field '%1$s' of type '%2$s', there is no argument with name '%3$s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:127
 #, php-format
-msgid "Argument '%1$s' in directive '%2$s' cannot be null"
+msgid "On directive '%1$s', there is no argument with name '%2$s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:128
 #, php-format
-msgid "Fragment name '%s' is duplicated"
+msgid "Argument '%s' is duplicated"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:129
 #, php-format
-msgid "Fragment spread type '%s' is not defined in the schema"
+msgid "Mandatory argument '%1$s' in field '%2$s' of type '%3$s' has not been provided"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:130
 #, php-format
-msgid "The target type of fragment'%s' must have kind UNION, INTERFACE, or OBJECT."
+msgid "Argument '%1$s' in field '%2$s' of type '%3$s' cannot be null"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:131
 #, php-format
-msgid "Fragment '%s' is not used"
+msgid "Mandatory argument '%1$s' in directive '%2$s' has not been provided"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:132
 #, php-format
-msgid "Fragment '%s' is not defined in document"
+msgid "Argument '%1$s' in directive '%2$s' cannot be null"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:133
 #, php-format
+msgid "Fragment name '%s' is duplicated"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:134
+#, php-format
+msgid "Fragment spread type '%s' is not defined in the schema"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:135
+#, php-format
+msgid "The target type of fragment'%s' must have kind UNION, INTERFACE, or OBJECT."
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:136
+#, php-format
+msgid "Fragment '%s' is not used"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:137
+#, php-format
+msgid "Fragment '%s' is not defined in document"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:138
+#, php-format
 msgid "Fragment '%s' is cyclical"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:140
-#, php-format
-msgid "There is no input field '%s' in input object '%s'"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:141
-#, php-format
-msgid "Input object has duplicate key '%s'"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:142
-#, php-format
-msgid "Mandatory input field '%s' in input object '%s' has not been provided"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:143
-#, php-format
-msgid "Input field '%s' in input object '%s' cannot be null"
-msgstr ""
-
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:144
-#, php-format
-msgid "There is no directive with name '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:145
 #, php-format
-msgid "Directive '%s' is not supported at this directive location, or for this node in the GraphQL query"
+msgid "There is no input field '%s' in input object '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:146
 #, php-format
-msgid "Directive '%s' can be executed only once"
+msgid "Input object has duplicate key '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:147
 #, php-format
-msgid "Variable name '%s' is duplicated"
+msgid "Mandatory input field '%s' in input object '%s' has not been provided"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:148
 #, php-format
-msgid "Variable '%s' must be of Input type, but type '%s' is not (UNION, INTERFACE, or OBJECT types are not allowed)"
+msgid "Input field '%s' in input object '%s' cannot be null"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:149
 #, php-format
-msgid "Variable '%s' has not been defined in the operation"
+msgid "There is no directive with name '%s'"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:150
 #, php-format
-msgid "Variable '%s' is not used"
+msgid "Directive '%s' is not supported at this directive location, or for this node in the GraphQL query"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:151
 #, php-format
-msgid "Non-nullable variable '%s' has not been provided"
+msgid "Directive '%s' can be executed only once"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:152
 #, php-format
-msgid "Operation with name '%s' does not exist"
+msgid "Variable name '%s' is duplicated"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:153
-msgid "When the document contains more than one operation, the operation name to execute must be provided"
+#, php-format
+msgid "Variable '%s' must be of Input type, but type '%s' is not (UNION, INTERFACE, or OBJECT types are not allowed)"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:154
-msgid "The document is empty"
+#, php-format
+msgid "Variable '%s' has not been defined in the operation"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:155
+#, php-format
+msgid "Variable '%s' is not used"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:156
+#, php-format
+msgid "Non-nullable variable '%s' has not been provided"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:157
+#, php-format
+msgid "Variable '%1$s' of type '%2$s' cannot be used where type '%3$s' is expected"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:158
+#, php-format
+msgid "Operation with name '%s' does not exist"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:159
+msgid "When the document contains more than one operation, the operation name to execute must be provided"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:160
+msgid "The document is empty"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLSpecErrorFeedbackItemProvider.php:161
 msgid "No operations defined in the document"
 msgstr ""
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:38
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:40
 msgid "Subscriptions are currently not supported"
 msgstr ""
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:39
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:41
 msgid "Fragment Definition Directives are currently not supported"
 msgstr ""
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:40
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:42
 msgid "Variable Definition Directives are currently not supported"
 msgstr ""
 
-#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:41
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:43
 msgid "Only up to 2 levels of List modifiers are supported (eg: `[[String]]`)"
+msgstr ""
+
+#: Engine/packages/graphql-parser/src/FeedbackItemProviders/GraphQLUnsupportedFeatureErrorFeedbackItemProvider.php:44
+msgid "Dynamic variables cannot be used in the directives of fragments"
 msgstr ""
 
 #: Engine/packages/graphql-parser/src/Spec/Parser/Ast/Argument.php:104
@@ -7094,14 +7145,14 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:463
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:554
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:264
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:274
 msgid "Enabled"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:493
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:387
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:32
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:95
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/SettingsMenuPage.php:92
 msgid "Settings"
 msgstr ""
 
@@ -7111,7 +7162,9 @@ msgid "Enable"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:268
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:651
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:334
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:278
 msgid "Disabled"
 msgstr ""
 
@@ -7150,27 +7203,27 @@ msgstr ""
 msgid "Schema Configurations"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:59
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:67
 msgid "Module enabled successfully"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:61
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:69
 msgid "Modules enabled successfully"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:63
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:71
 msgid "Module disabled successfully"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:65
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:73
 msgid "Modules disabled successfully"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:77
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:85
 msgid "Operation successful"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:130
+#: GatoGraphQLForWP/plugins/gatographql/src/ConditionalOnContext/Admin/SystemServices/TableActions/ModuleListTableAction.php:138
 #, php-format
 msgid "This URL is either stale or not valid. Please <a href=\"%s\">click here to reload the page</a>, and try again"
 msgstr ""
@@ -7248,6 +7301,7 @@ msgid "All sources"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:127
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1188
 msgid "Filter"
 msgstr ""
 
@@ -7342,104 +7396,80 @@ msgid "Configure caching of expensive computations performed when executing a Gr
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CachingFunctionalityModuleResolver.php:101
-msgid "Cache parsed GraphQL queries?"
+msgid "Cache parsed GraphQL queries"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CachingFunctionalityModuleResolver.php:102
+msgid "Store parsed queries on disk, to reuse them across requests."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CachingFunctionalityModuleResolver.php:103
-#, php-format
-msgid "Persist parsed GraphQL document ASTs across requests, by storing them to disk. %s"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CachingFunctionalityModuleResolver.php:105
-msgid "<br/>Speeds up persisted queries significantly (parsing of a large persisted query takes seconds and is identical on every request); has no effect on ad-hoc queries that change each time."
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:90
-msgid "GraphiQL for Single Endpoint"
+msgid "This speeds up persisted queries a lot: parsing a large one takes seconds, and gives the same result on every request.<br/><br/>It does nothing for ad-hoc queries, which change each time."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:91
+msgid "GraphiQL for Single Endpoint"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:92
 msgid "Interactive Schema for Single Endpoint"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:113
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:114
 #, php-format
 msgid "Make a public GraphiQL client available under <code>%s</code>, to execute queries against the single endpoint. It requires pretty permalinks enabled"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:118
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:119
 #, php-format
 msgid "Make a public Interactive Schema client available under <code>%s</code>, to visualize the schema accessible through the single endpoint. It requires pretty permalinks enabled"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:158
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:176
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:173
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:186
 msgid "Client path"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:160
-#, php-format
-msgid "URL path to access the public GraphiQL client<br/><span class=\"more-info\">%s</span>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:174
+msgid "The URL path of the public GraphiQL client."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:163
-msgid "Configuring the GraphiQL client for the single endpoint"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:178
-#, php-format
-msgid "URL path to access the public Interactive Schema client<br/><span class=\"more-info\">%s</span>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:181
-msgid "Configuring the Voyager client for the single endpoint"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:27
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:487
-#: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
-#: Schema/packages/logger/src/Log/Logger.php:119
-#: Schema/packages/logger/src/Log/Logger.php:136
-#: Schema/packages/logger/src/Log/Logger.php:143
-#, php-format
-msgid "%s %s"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/ClientFunctionalityModuleResolver.php:187
+msgid "The URL path of the public Interactive Schema client."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:28
-msgid "This configuration value is the default one for the schema configuration."
+msgid "This value is the default, which a Schema Configuration can override. The endpoint uses it when:"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:32
-msgid "It will be used whenever:"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:43
+msgid "It has no Schema Configuration"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:44
+msgid "Its Schema Configuration is <code>\"None\"</code>"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:46
+#, php-format
+msgid "Its Schema Configuration does not have block <code>%s</code>"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:49
-msgid "The endpoint does not have a Schema Configuration assigned to it"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:50
-msgid "The endpoint has Schema Configuration <code>\"None\"</code> assigned to it"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:52
-#, php-format
-msgid "Block <code>%s</code> has not been added to the selected Schema Configuration"
+msgid "That block in its Schema Configuration has value <code>\"Default\"</code>"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:55
-msgid "The block in the Schema Configuration has value <code>\"Default\"</code>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:61
 msgid "Press <code>ctrl</code> or <code>shift</code> keys to select more than one."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:88
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:82
 #, php-format
 msgid "'%2$s' on the website"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:88
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/CommonModuleResolverTrait.php:82
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:946
 msgid "Help"
 msgstr ""
 
@@ -7451,61 +7481,60 @@ msgstr ""
 msgid "Create a hierarchy of API endpoints extending from other endpoints, and inheriting their properties"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:98
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:99
 msgid "Private Endpoint"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:99
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:100
 msgid "Single Endpoint"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:110
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:111
 #, php-format
 msgid "Private GraphQL endpoint, accessible only within the wp-admin, under <code>%s</code>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:114
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:115
 #, php-format
 msgid "Expose the single GraphQL endpoint under <code>%s</code>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:171
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:185
 msgid "Endpoint path"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:173
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:186
+msgid "The URL path of the single GraphQL endpoint."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:203
 #, php-format
-msgid "URL path to expose the single GraphQL endpoint<br/><span class=\"more-info\">%s</span>"
+msgid "The Schema Configuration of private endpoint <code>%s</code>."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:176
-msgid "Configuring the single endpoint"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:192
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:211
 #, php-format
-msgid "Schema Configuration to use in the private endpoint <code>%1$s</code>.<br/><br/>The private endpoint powers the admin's <a href=\"%2$s\" target=\"_blank\">GraphiQL%5$s</a> and <a href=\"%3$s\" target=\"_blank\">Interactive Schema%5$s</a> clients, and can be used to <a href=\"%4$s\" target=\"_blank\">feed data to blocks%5$s</a>."
+msgid "The private endpoint powers the admin's <a href=\"%1$s\" target=\"_blank\">GraphiQL%4$s</a> and <a href=\"%2$s\" target=\"_blank\">Interactive Schema%4$s</a> clients, and can <a href=\"%3$s\" target=\"_blank\">feed data to blocks%4$s</a>."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:208
-msgid "Schema Configuration to use in the Single Endpoint"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:225
+msgid "The Schema Configuration of the single endpoint."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:212
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:229
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/EndpointSchemaConfigurationBlock.php:118
 msgid "None"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:228
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:93
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:245
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:99
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/EndpointSchemaConfigurationBlock.php:147
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:238
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:248
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:74
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
 msgid "Schema Configuration"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:229
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/EndpointFunctionalityModuleResolver.php:246
 msgid "Default Schema Configuration"
 msgstr ""
 
@@ -8034,11 +8063,10 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:258
 #, php-format
-msgid "List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s (one entry per line)."
+msgid "List of all the meta keys, to either allow or deny access to, when querying fields <code>metaValue</code> and <code>metaValues</code> on %s."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:259
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1131
 msgid "<strong>Heads up:</strong> Entries surrounded with <code>/</code> or <code>#</code> are evaluated as regex (regular expressions)."
 msgstr ""
 
@@ -8052,73 +8080,72 @@ msgid "<strong>Example:</strong> Any of these entries match meta key <code>\"%1$
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:264
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:703
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:707
 #, php-format
 msgid "Treat %s as “sensitive” data"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:265
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:704
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:523
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:708
 #, php-format
-msgid "If checked, the <strong>%s</strong> data is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled"
+msgid "Only Schema Configurations that expose sensitive data show the %s."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:268
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:292
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:316
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:340
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1136
-#, php-format
-msgid "%1$s<hr/>%2$s<hr/>%3$s%4$s"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:266
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:710
+msgid "To show them, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:365
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:302
 #, php-format
 msgid "%s (interface)"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:304
 msgid "user"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:368
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:305
 msgid "comment"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:369
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:306
 msgid "taxonomy"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:399
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1182
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:350
+msgid "custom fields"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:361
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1246
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:53
 msgid "Behavior"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:402
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1185
-msgid "Are the entries being allowed or denied access to?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:364
+msgid "Whether queries can read only the meta keys, or all but them."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:403
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1186
-msgid "<ul><li>Allow access: only the configured entries can be accessed, and no other can.</li><li>Deny access: the configured entries cannot be accessed, all other entries can.</li></ul>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:367
+msgid "<ul><li>Allow access: queries can read the meta keys, and nothing else.</li><li>Deny access: queries can read every meta key except these.</li></ul>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:408
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1191
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:370
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1255
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:55
 msgid "Allow access"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:409
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1192
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:371
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1256
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AllowAccessToEntriesBlockTrait.php:56
 msgid "Deny access"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:424
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:431
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:386
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MetaSchemaTypeModuleResolver.php:393
 #, php-format
 msgid "%s meta keys"
 msgstr ""
@@ -8368,38 +8395,45 @@ msgstr ""
 msgid "Treat the %s as “sensitive” data"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:523
-#, php-format
-msgid "If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled"
-msgstr ""
-
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:534
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:538
-msgid "<code>authorID</code> input (when creating/updating custom posts)"
+msgid "<code>authorID</code> input"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:550
-msgid "Reject unsafe URLs"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:538
+msgid "<code>authorID</code> input, to create and update custom posts"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:540
+msgid "To show it, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:551
-msgid "Do not allow creating media items from unsafe URLs (such as <code>https://testing-site.local</code>)"
+msgid "Reject unsafe URLs"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:552
+msgid "Refuse to create media items from unsafe URLs."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/MutationSchemaTypeModuleResolver.php:553
+msgid "Such as <code>https://testing-site.local</code>."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:105
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
 msgid "General"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:106
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:284
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:341
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:337
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:139
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/LogsMenuPage.php:156
 msgid "Logs"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:107
-msgid "Server IP Configuration"
+msgid "Server IP"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:116
@@ -8419,641 +8453,748 @@ msgid "Grant access to users other than admins to edit the GraphQL schema"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:189
-msgid "Enable the Schema tutorial?"
+msgid "Enable the Schema tutorial"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:191
-#, php-format
-msgid "Add a tutorial page explaining all elements of the GraphQL schema offered by Gato GraphQL, accessible from the menu navigation on the left<br/><span class=\"more-info\">%s</span>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:190
+msgid "Add a menu page that explains the GraphQL schema, element by element."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:194
-msgid "Enabling the Schema Tutorial page"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:207
+msgid "Install Persisted Queries for admin tasks"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:212
-msgid "Plugin setup: Install Persisted Queries for common admin tasks?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:208
+msgid "Create Persisted Queries for common admin tasks when installing or updating the plugin."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:214
-#, php-format
-msgid "When installing or updating the plugin, enable the creation of Persisted Queries that tackle common admin tasks for WordPress?<br/><span class=\"more-info\">%s</span>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:222
+msgid "Show the release notes after upgrading"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:217
-msgid "Managing the plugin's setup data"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:232
-msgid "Display admin notice with release notes?"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:234
-#, php-format
-msgid "Immediately after upgrading the plugin, show an admin notice with a link to the latest release notes?<br/><span class=\"more-info\">%s</span>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:223
+msgid "After an upgrade, an admin notice links to the latest release notes."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:237
-msgid "Displaying the plugin's new features"
+msgid "Organize these settings under tabs"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:252
-msgid "Organize these settings under tabs?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:238
+msgid "Show each module of this page under its own tab."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:254
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:239
+msgid "The page shows the new layout once you save the settings."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:260
+msgid "Logging"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:272
+msgid "Enable logs"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:274
 #, php-format
-msgid "Have all options in this Settings page be organized under tabs, one tab per module.<br/>After ticking the checkbox, must click on \"Save Changes\" to be applied<br/><span class=\"more-info\">%s</span>"
+msgid "Store the GraphQL execution logs, to browse under the <strong>%s</strong> menu."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:257
-msgid "Printing the Settings page with tabs or long format"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:281
-msgid "Enable logs?"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:283
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:278
 #, php-format
-msgid "Enable storing GraphQL execution logs, accessible via the <strong>%s</strong> menu. %s"
+msgid "The plugin stores the log files under folder <code>%s</code>.<br/><br/>Log files can grow very large, so clear them every now and then."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:287
-#, php-format
-msgid "<br/>Log files are stored under folder <code>%s</code>.<br/></br><strong>Important:</strong> Log files can be very large, so it's recommended to clear them after a while."
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:303
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:292
 msgid "Enable logs by severity"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:317
-msgid "Reverse log order?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:309
+msgid "Newest entries first"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:318
-msgid "Display newer log entries first when viewing a log file"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:310
+msgid "A log file shows its newest entries at the top."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:338
-msgid "Enable log notifications?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:322
+msgid "Notifications"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:340
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:334
+msgid "Enable log notifications"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:336
 #, php-format
-msgid "Show a badge with the number of log entries in the <strong>%s</strong> menu"
+msgid "The <strong>%s</strong> menu shows a badge with the number of new entries."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:353
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:349
 msgid "Enable log notifications by severity"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:354
-msgid "Indicate which severities are included in the badge's count"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:350
+msgid "The severities that the badge counts."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:378
-msgid "$_SERVER property name to retrieve the client IP"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:368
+msgid "Client IP property"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:381
-msgid "The visitor's IP address is retrieved from under the <code>$_SERVER</code> global variable, by default under property <code>'REMOTE_ADDR'</code>; depending on the platform or hosting provider, a different property may need to be used."
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:369
+msgid "The property in <code>$_SERVER</code> that holds the visitor's IP address."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:382
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:372
+msgid "The default property is <code>'REMOTE_ADDR'</code>. Some platforms and hosting providers use a different one."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:373
 msgid "For instance:"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:386
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:377
 msgid "Cloudflare might use <code>'HTTP_CF_CONNECTING_IP'</code>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:387
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:378
 msgid "AWS might use <code>'HTTP_X_FORWARDED_FOR'</code>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:388
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:379
 msgid "others"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:413
-msgid "Which users can edit the schema?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:404
+msgid "Who can edit the schema"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:415
-#, php-format
-msgid "Indicate which users can edit the schema (i.e. creating and updating Persisted Queries, Custom Endpoints, and others)<br/><span class=\"more-info\">%s</span>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:405
+msgid "The users who can create and update Persisted Queries, Custom Endpoints and others."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:418
-msgid "Managing who can edit the schema"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:446
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:432
 msgid "Critical issues that prevent the operation from completing"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:447
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:433
 msgid "Non-critical issues that may affect the operation"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:448
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:434
 msgid "General information about the operation"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:449
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:435
 msgid "Detailed information for debugging purposes"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:470
-#, php-format
-msgid "Indicate which severities are enabled for logging. %s"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:457
+msgid "The severities that the plugin logs."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:473
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:474
+#: GraphQLByPoP/packages/graphql-server/src/Registries/SchemaDefinitionReferenceRegistry.php:349
+#: Schema/packages/logger/src/Log/Logger.php:119
+#: Schema/packages/logger/src/Log/Logger.php:136
+#: Schema/packages/logger/src/Log/Logger.php:143
 #, php-format
-msgid "<br/>Available severities:<br/><ul>%s</ul>"
+msgid "%s %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:489
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:476
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:571
 msgid "Error"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:490
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:477
 msgid "Warning"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:491
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:478
 msgid "Info"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:492
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginGeneralSettingsFunctionalityModuleResolver.php:479
 msgid "Debug"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:110
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:131
 msgid "Activate Plugins and Extensions"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:111
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:132
 msgid "Reset Settings"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:112
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:133
 msgid "Uninstall"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:121
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:142
 #, php-format
 msgid "Activate Plugins and Extensions from the %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:124
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:145
 msgid "Restore the Gato GraphQL Settings to default values"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:125
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:146
 msgid "Choose what happens to the data stored by the plugin when the plugin is deleted"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:167
-msgid "Adding a license key will <strong>activate the plugin</strong>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:168
-msgid "Removing an existing license key will <strong>deactivate the plugin</strong>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:169
-msgid "Updating a license key will first <strong>deactivate the plugin</strong> (using the previous license key) and then <strong>activate the plugin</strong> again (using the new license key)"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:170
-msgid "Not updating a license key will <strong>validate the status of the plugin</strong>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:183
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:200
 #, php-format
-msgid "Enter the license keys from the %s, and click on <strong>Activate licenses (or Deactivate/Validate)</strong>:"
+msgid "Enter each license key from the %s, then activate it."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:189
-msgid "When clicking on <strong>Activate licenses (or Deactivate/Validate)</strong>, one of the following actions will take place:"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:205
+msgid "The button beside each license acts on that license only:"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:198
-msgid "(Show details: When are licenses activated, deactivated or validated?)"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:206
+msgid "<strong>Activate</strong> activates the key you entered, or the new key that replaces the previous one."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:221
-msgid "Activate licenses (or Deactivate/Validate)"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:207
+msgid "<strong>Validate</strong> checks the status of an active license, and <strong>Deactivate</strong> frees its site and removes its key (also when you clear the key)."
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:208
+msgid "The button below the licenses does all of it at once: it activates every key you entered, and deactivates every license whose key you cleared."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:234
+msgid "Apply license changes"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:240
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:41
+msgid "Activate licenses"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:241
+msgid "Activate 1 license"
+msgstr ""
+
+#. translators: %s: number of licenses
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:243
 #, php-format
-msgid "<em>There are no Bundles or Extensions from the %s installed</em>"
+msgid "Activate %s licenses"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:257
-msgid "Show options to reset the Settings"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:244
+msgid "Deactivate 1 license"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:264
-msgid "Reset the Gato GraphQL Settings?"
+#. translators: %s: number of licenses
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:246
+#, php-format
+msgid "Deactivate %s licenses"
+msgstr ""
+
+#. translators: %s: number of licenses
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:248
+#, php-format
+msgid "Apply %s license changes"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:268
 #, php-format
-msgid "Restore all settings (under tabs <code>%s</code>, <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code>) to their default values."
+msgid "<em>There are no Bundles or Extensions from the %s installed</em>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:287
-msgid "When the settings are reset, the default values can follow a restrictive or non-restrictive behavior:"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:288
-msgid "Feature"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:282
+msgid "Show options to reset the Settings"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:289
-msgid "Non-restrictive behavior"
+msgid "Reset the settings"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:290
-msgid "Restrictive behavior"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:293
+#, php-format
+msgid "Restore every setting under tabs <code>%s</code>, <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> to its default value."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:305
-msgid "“Sensitive” data fields"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:306
-msgid "Added to the schema"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:307
-msgid "Not added to the schema"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:312
+msgid "You can reset to restrictive or non-restrictive defaults:"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:313
-msgid "Settings from <code>wp_options</code>"
+msgid "Feature"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:314
-msgid "No options are queryable by non-administrators"
+msgid "Non-restrictive"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:315
-msgid "Only a few predefined options are queryable by non-administrators"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:321
-msgid "Meta (posts, users, comments, taxonomies)"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:322
-msgid "All keys are queryable"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:323
-msgid "No keys are queryable"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:329
-msgid "Max limit to query entities (posts, users, etc)"
+msgid "Restrictive"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:330
-msgid "Unlimited"
+msgid "“Sensitive” data fields"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:331
-msgid "Limited"
+msgid "In the schema"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:337
-msgid "Environment variables (extension)"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:332
+msgid "Not in the schema"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:338
-msgid "All environment variables and PHP constants are queryable"
+msgid "Settings from <code>wp_options</code>"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:339
-msgid "No environment variables or PHP constants are queryable"
+msgid "Non-admins can query no options"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:345
-msgid "HTTP Client requests (extension)"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:340
+msgid "Non-admins can query a few predefined options"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:346
-msgid "All URLs can be requested"
+msgid "Meta (posts, users, comments, taxonomies)"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:347
-msgid "No URL can be requested"
+msgid "Queries can read every key"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:366
-msgid "Choose if to use restrictive or non-restrictive default settings."
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:348
+msgid "Queries can read no keys"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:354
+msgid "Max limit to query entities (posts, users, etc)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:355
+msgid "Unlimited"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:356
+msgid "Limited"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:362
+msgid "Environment variables (extension)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:363
+msgid "Queries can read every environment variable and PHP constant"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:364
+msgid "Queries can read no environment variables or PHP constants"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:370
-msgid "Use the restrictive default behavior for the Settings"
+msgid "HTTP Client requests (extension)"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:371
-msgid "Use the non-restrictive default behavior for the Settings"
+msgid "Queries can request any URL"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:372
+msgid "Queries can request no URL"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:391
+msgid "The defaults to reset to."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:395
+msgid "Restrictive defaults"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:396
+msgid "Non-restrictive defaults"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:416
 msgid "Confirm: Reset Settings"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:414
-msgid "Delete all plugin data when deleting the plugin?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:439
+msgid "Delete all plugin data"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:415
-msgid "Remove everything the plugin has stored on this site: its settings, the license records of its extensions, the metadata it added to your content and users, its database tables, and its cache and log files. Removing a license record does not release the license on the marketplace: to use it on another site, first clear its key under Activate Plugins and Extensions and save."
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:440
+msgid "Deleting the plugin also removes everything it stored on this site."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:426
-msgid "Also delete the entries created with the plugin?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:443
+msgid "It removes:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:447
+msgid "Its settings"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:448
+msgid "The license records of its extensions"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:449
+msgid "The metadata it added to your content and users"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:450
+msgid "Its database tables, and its cache and log files"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:454
+#, php-format
+msgid "Removing a license record does not release the license on the marketplace. To use it on another site, first click <strong>Deactivate</strong> beside it under <strong>%s</strong>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:468
+msgid "Also delete the plugin's entries"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:494
 msgid "Save Uninstall Settings"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:487
-msgid "Remove the entries you created and edited through the plugin. Only applies when deleting all plugin data."
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:532
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:537
+msgid "Also remove the entries you created and edited through the plugin."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:491
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:540
 #, php-format
-msgid "Remove the entries you created and edited through the plugin: %s. Only applies when deleting all plugin data."
+msgid "These entries: %s."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:498
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:564
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:655
+msgid "Not activated"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:600
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:626
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:34
+msgid "Activate"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:605
+msgid "Validate"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:606
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:629
+msgid "Deactivate"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:643
+msgid "Active"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:647
+msgid "Expired"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:660
+msgid "Inactive"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:696
 msgid "Gato Plugins Store"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:503
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:701
 msgid "Activate Licenses"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:94
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:100
 msgid "Schema Namespacing"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:95
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:232
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:243
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigResponseHeadersBlock.php:53
 msgid "Response Headers"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:96
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:102
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractControlBlock.php:185
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGlobalFieldsBlock.php:65
 msgid "Global Fields"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:97
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:103
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigComposableDirectivesBlock.php:36
 msgid "Composable Directives"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:98
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:104
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigMultiFieldDirectivesBlock.php:36
 msgid "Multi-Field Directives"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:99
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:105
 msgid "Mutations"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:100
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:106
 msgid "Nested Mutations"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:101
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigExposeSensitiveDataBlock.php:35
 msgid "Expose Sensitive Data in the Schema"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:102
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:108
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSelfFieldsBlock.php:36
 msgid "Self Fields"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:103
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:109
 msgid "Global ID Field"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:111
-msgid "Customize the schema accessible to different endpoints, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:112
-msgid "Automatically namespace types with a vendor/project name, to avoid naming collisions"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:113
-msgid "Provide custom headers to add to the API response"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:114
-msgid "Fields added to all types in the schema, generally for executing functionality (not retrieving data)"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:115
-msgid "Have directives modify the behavior of other directives"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:116
-msgid "A single directive can be applied to multiple fields, for performance and extended use cases"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:117
-msgid "Modify data by executing mutations"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:110
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGraphQLSpecComplianceBlock.php:68
+msgid "GraphQL Spec Compliance"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:118
-msgid "Execute mutations from any type in the schema, not only from the root"
+msgid "Customize the schema accessible to different endpoints, by applying a custom configuration (involving namespacing, access control, cache control, and others) to the grand schema"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:119
-msgid "Expose “sensitive” data elements in the schema"
+msgid "Automatically namespace types with a vendor/project name, to avoid naming collisions"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:120
-msgid "Expose \"self\" fields in the schema"
+msgid "Provide custom headers to add to the API response"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:121
+msgid "Fields added to all types in the schema, generally for executing functionality (not retrieving data)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:122
+msgid "Have directives modify the behavior of other directives"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:123
+msgid "A single directive can be applied to multiple fields, for performance and extended use cases"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:124
+msgid "Modify data by executing mutations"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:125
+msgid "Execute mutations from any type in the schema, not only from the root"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:126
+msgid "Expose “sensitive” data elements in the schema"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:127
+msgid "Expose \"self\" fields in the schema"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:128
 msgid "Uniquely identify objects via field <code>globalID</code> on all types of the GraphQL schema"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:213
-msgid "Namespace the schema?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:129
+msgid "Follow the GraphQL spec where Gato GraphQL behaves differently by default: pass a <code>null</code> in a non-null field up to its nearest nullable parent, coerce the scalar and enum values, and add the response path to errors"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:215
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:227
+msgid "Namespace the schema"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:229
 #, php-format
-msgid "Namespace types in the GraphQL schema?<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "Add a namespace to the types in the GraphQL schema.%s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:219
-msgid "Namespacing the schema"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:235
-msgid "Provide custom headers to add to the API response. One header per line, with format: <code>{header name}: {header value}</code>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:239
-msgid "Adding custom headers to the GraphQL response (CORS)"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:247
-msgid "Do not expose"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:248
-msgid "Expose under the Root type only"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:246
+msgid "Custom headers that the API response adds."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:249
-msgid "Expose under all types"
+msgid "One header per entry, with format <code>{header name}: {header value}</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:256
+msgid "Do not expose"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:257
+msgid "Root type only"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:258
-msgid "Schema exposure."
+msgid "All types"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:260
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:267
+msgid "Schema exposure"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:269
 #, php-format
-msgid "Under what types to expose global fields.<br/>%s<br/><span class=\"more-info\">%s</span>"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:264
-msgid "Hiding Global Fields"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:278
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigMultiFieldDirectivesBlock.php:31
-msgid "Enable multi-field directives?"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:280
-#, php-format
-msgid "Enable having a single directive be applied to multiple fields.<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "The types that show the global fields in the schema.%s"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:284
-msgid "Using multi-field directives"
+msgid "Enable multi-field directives"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:297
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigComposableDirectivesBlock.php:31
-msgid "Enable composable directives?"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:299
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:286
 #, php-format
-msgid "Enable adding composable directives (also called \"meta-directives\", such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>) to the schema.<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "Apply a single directive to several fields.%s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:303
-msgid "Using composable directives"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:300
+msgid "Enable composable directives"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:310
-msgid "Use payload types for mutations"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:302
+#, php-format
+msgid "Add composable directives (or \"meta-directives\") to the schema.%s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:305
+msgid "Such as <code>@underEachArrayItem</code>, <code>@underArrayItem</code> and <code>@underJSONObjectProperty</code>."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:311
-msgid "Use payload types for mutations, and add fields to query those payload objects"
+msgid "Payload types"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:312
-msgid "Do not use payload types for mutations (i.e. return the mutated entity)"
+msgid "Payload types + queries"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:321
-msgid "Use payload types for all mutations in the schema?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:313
+msgid "Mutated entity"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:323
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:322
+msgid "What mutations return"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:324
 #, php-format
-msgid "Use payload types for mutations in the schema?<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "A payload object, or the mutated entity itself.%s"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:327
-msgid "Returning a payload object or the mutated entity for mutations"
+msgid "<ul><li><strong>Payload types</strong>: each mutation returns a payload object, which holds the status (success or failure), and the errors or the mutated entity.</li><li><strong>Payload types + queries</strong>: the same, and the schema also adds query fields to fetch those payload objects again.</li><li><strong>Mutated entity</strong>: each mutation returns the mutated entity, or <code>null</code> when it fails. The errors go under the top-level <code>errors</code> entry of the response.</li></ul>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:339
-msgid "<strong>Use payload types for mutations</strong>:<br/><br/>Mutation fields will return a payload object type, on which we can query the status of the mutation (success or failure), and the error messages (if any) or the successfully mutated entity.<br/><br/><strong>Use payload types for mutations, and add fields to query those payload objects</strong>:<br/><br/>In addition, query fields will be added to retrieve once again those payload objects.<br/><br/><strong>Do not use payload types for mutations (i.e. return the mutated entity)</strong>:<br/><br/>Mutation fields will directly return the mutated entity in case of success or <code>null</code> in case of failure, and any error message will be displayed in the JSON response's top-level <code>errors</code> entry.</li></ul>"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:335
+msgid "Enabled, keep all root fields"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:344
-msgid "Do not enable nested mutations"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:336
+msgid "Enabled, drop redundant root fields"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:345
-msgid "Enable nested mutations, keeping all mutation fields in the root"
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginDataSetup/PluginDataSetupService.php:38
+msgid "Nested mutations"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:346
-msgid "Enable nested mutations, removing the redundant mutation fields from the root"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:355
-msgid "Mutation Scheme:"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:357
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:347
 #, php-format
-msgid "Select the mutation scheme to use in the schema.<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "Run mutations on any type, not only on the root.%s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:361
-msgid "Using nested mutations"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:350
+msgid "With nested mutations, another field may do what a <code>Root</code> mutation does. Then the <code>Root</code> mutation is redundant, and the schema can drop it.<br/><br/>For instance, <code>Post.update</code> makes <code>Root.updatePost</code> redundant."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:372
-msgid "<strong>Redundant fields:</strong><br/><br/>When nested mutations are enabled, a mutation operation in the <code>Root</code> type may find that another mutation will execute the same operation. As such, the <code>Root</code> mutation could be considered redundant, and removed from the schema.<br/><br/>For instance, if mutation field <code>Post.update</code> is available, mutation field <code>Root.updatePost</code> could be removed."
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:363
+msgid "Add “sensitive” fields to the schema"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:383
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigExposeSensitiveDataBlock.php:30
-msgid "Add “sensitive” fields to the schema?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:365
+#, php-format
+msgid "Show the fields that can give access to private data.%s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:368
+msgid "Such as field <code>Root.roles</code> and field argument <code>Root.posts(status:)</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:380
+msgid "Expose the self fields"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:382
+#, php-format
+msgid "Add field <code>self</code> to all types in the schema.%s"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:385
-#, php-format
-msgid "Expose “sensitive” data elements in the GraphQL schema (such as field <code>Root.roles</code>, field arg <code>Root.posts(status:)</code>, and others), which provide access to potentially private user data.<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "Field <code>self</code> returns the same object it applies to, so you can adapt the shape of the response."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:389
-msgid "Querying “sensitive” data fields"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:393
+msgid "Pass a null up to the nearest nullable parent"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:402
-msgid "Expose the self fields to all types in the schema?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:394
+msgid "A <code>null</code> in a non-null field goes up to its nullable parent."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:395
+msgid "When a non-null field (or an item in a list of non-null items) is <code>null</code>, the response passes that <code>null</code> up to its nearest nullable parent (or to <code>data</code>), as the GraphQL spec defines.<br/><br/>When disabled, the response prints that field as <code>null</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:398
+msgid "Coerce scalar and enum values"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:399
+msgid "Print built-in scalars and enums as their type demands."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:400
+msgid "The response coerces those values to their type, as the GraphQL spec defines: it prints an <code>ID</code> as a string, such as <code>\"1\"</code>, and adds an error when it cannot coerce a value.<br/><br/>When disabled, the response prints the values as they are, such as <code>1</code> for an <code>ID</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:403
+msgid "Add the response path to errors"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:404
-#, php-format
-msgid "Expose the <code>self</code> field in the GraphQL schema, which returns an instance of the same object (for whichever type it is applied on), which can be used to adapt the shape of the GraphQL response.<br/>%s<br/><span class=\"more-info\">%s</span>"
+msgid "Each error says where in the response it happened."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:405
+msgid "Every error gets entry <code>path</code> with its position in the response, such as <code>[\"posts\", 1, \"title\"]</code>, as the GraphQL spec defines. Then an error that happens in several positions shows once for each of them.<br/><br/>Gato GraphQL always prints the path of the error in the query, under <code>extensions.path</code>."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:408
-msgid "Querying 'self' fields"
+msgid "Return no data on request errors"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:409
+msgid "A query with errors runs nothing, and returns only the errors."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:410
+msgid "The server validates the whole query against the schema before running it, as the GraphQL spec defines. Errors include a field that does not exist, or an argument value of the wrong type. Then the response holds only the errors, without entry <code>data</code>.<br/><br/>When disabled, the server still resolves the valid fields."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:372
@@ -9073,6 +9214,7 @@ msgid "User Avatars"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:378
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:252
 msgid "Media"
 msgstr ""
 
@@ -9125,7 +9267,7 @@ msgid "Query %1$s, through type <code>%2$s</code> added to the schema"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:398
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:722
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:728
 msgid "posts"
 msgstr ""
 
@@ -9134,13 +9276,13 @@ msgid "Retrieve the (Gutenberg) blocks contained in the custom post"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:404
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:723
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:729
 msgid "users"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:409
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1221
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1225
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1286
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1290
 msgid "user roles"
 msgstr ""
 
@@ -9149,7 +9291,7 @@ msgid "user avatars"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:419
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:728
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:734
 msgid "pages"
 msgstr ""
 
@@ -9158,7 +9300,7 @@ msgid "media elements"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:429
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1087
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1142
 msgid "comments"
 msgstr ""
 
@@ -9171,7 +9313,7 @@ msgid "post categories"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:444
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:725
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:731
 msgid "menus"
 msgstr ""
 
@@ -9205,191 +9347,251 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:701
 #, php-format
-msgid "Number of results from querying %s when argument <code>%s</code> is not provided. Use <code>%s</code> for unlimited."
+msgid "How many %s a query returns when it passes no <code>%s</code>."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:702
 #, php-format
-msgid "Maximum number of results from querying %s. Use <code>%s</code> for unlimited."
+msgid "The most %s a query can return."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:705
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:704
 #, php-format
-msgid "This list contains all the \"%1$shierarchical\" taxonomies which are associated to queryable custom posts, i.e. those selected in \"Included custom post types\" in the Settings for \"Custom Posts\". Each %2$s taxonomy's associated custom post types is shown under <code>(CPT: ...)</code>. If your desired %2$s taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist."
+msgid "Use <code>%s</code> for no limit."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:721
-msgid "custom posts"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:709
+msgid "Only Schema Configurations that expose sensitive data show these fields."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:724
-msgid "media items"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:726
-msgid "tags"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:711
+#, php-format
+msgid "The list shows the %1$s taxonomies of the queryable custom post types (those in \"Included custom post types\", under \"Custom Posts\"), with these types under <code>(CPT: ...)</code>.<br/><br/>Is a %1$s taxonomy missing? Then add all of its custom post types to that list."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:727
+msgid "custom posts"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:730
+msgid "media items"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:732
+msgid "tags"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:733
 msgid "categories"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:740
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:745
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1090
+msgid "Limits"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:757
 #, php-format
 msgid "Default limit for %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:759
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:776
 #, php-format
 msgid "Max limit for %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:786
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:800
+msgid "Custom post types"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:813
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaCustomPostsBlock.php:69
 msgid "Included custom post types"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:788
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:816
+msgid "The custom post types that queries can fetch."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:820
 #, php-format
-msgid "Select the custom post types that can be queried, to be accessible via <code>%s</code>. A custom post type will be represented by its own type in the schema if available (such as <code>%s</code> or <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s"
+msgid "Queries fetch them via <code>%s</code>. Each custom post type gets its own type in the schema when it has one (such as <code>%s</code> or <code>%s</code>), or else <code>%s</code>."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:809
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1010
-msgid "Use single type instead of union type?"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:842
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1057
+msgid "Use single type instead of union type"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:811
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:844
 #, php-format
-msgid "If type <code>%s</code> is composed of only one type (eg: <code>%s</code>), then directly return this single type, instead of the union type?"
+msgid "When <code>%s</code> holds only one type, return that type instead."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:827
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:831
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:848
+#, php-format
+msgid "For instance, with only <code>%s</code> in the union, fields return <code>%s</code> instead of <code>%s</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:861
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1154
+msgid "Sensitive data"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:876
 msgid "custom post status"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:845
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:849
-msgid "custom post raw content fields (<code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>)"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:891
+msgid "custom post raw content"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:863
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:867
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:893
+msgid "Fields <code>rawContent</code>, <code>rawTitle</code> and <code>rawExcerpt</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:907
 msgid "custom post edit link"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:881
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:885
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:922
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:926
 msgid "user email"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:898
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:945
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:940
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:989
 #, php-format
 msgid "%s (CPT: \"%s\")"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:914
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:956
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaTagsBlock.php:69
 msgid "Included tag taxonomies"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:919
-msgid "non-"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:959
+msgid "The tag taxonomies that queries can fetch."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:920
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:965
+#, php-format
+msgid "Queries fetch them via <code>%s</code>. Each tag taxonomy gets its own type in the schema when it has one (such as <code>%s</code>), or else <code>%s</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:972
 msgid "tag"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:923
-#, php-format
-msgid "Select the tag taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:961
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1005
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaCategoriesBlock.php:69
 msgid "Included category taxonomies"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:967
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1008
+msgid "The category taxonomies that queries can fetch."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1014
+#, php-format
+msgid "Queries fetch them via <code>%s</code>. Each category taxonomy gets its own type in the schema when it has one (such as <code>%s</code>), or else <code>%s</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1021
 msgid "category"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:970
-#, php-format
-msgid "Select the category taxonomies that can be queried, to be accessible via <code>%s</code>. A tag taxonomy will be represented by its own type in the schema if available (such as <code>%s</code>) or, otherwise, via <code>%s</code>.<br/>%s<br/>%s"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:993
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:997
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1039
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1043
 msgid "menu item raw title"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1012
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1059
 #, php-format
-msgid "If type <code>%s</code> is composed of only one type (<code>%s</code>), then directly return this single type, instead of the union type?"
+msgid "When <code>%s</code> holds only <code>%s</code>, return that type instead."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1028
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1032
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1075
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1079
 msgid "block type registry"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1044
-msgid "Default limit for querying comments in the Root"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1102
+msgid "Default limit for comments in the Root"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1062
-msgid "Default limit for querying comments under a custom post or comment"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1066
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1104
 #, php-format
-msgid "%s and %s"
+msgid "How many comments <code>%s</code> returns when the query passes no <code>%s</code>."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1084
-msgid "Max limit for querying comments"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1120
+msgid "Default limit for comments under a post or comment"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1103
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1107
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1122
+#, php-format
+msgid "How many comments <code>%s</code> and <code>%s</code> return when the query passes no <code>%s</code>."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1139
+msgid "Max limit for comments"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1169
 msgid "comment status"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1121
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1125
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1184
 msgid "comment raw content"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1130
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1190
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigSchemaSettingsBlock.php:37
 msgid "Settings entries"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1132
-#, php-format
-msgid "<strong>Example:</strong> Any of these entries match option name <code>\"%1$s\"</code>: %2$s"
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1191
+msgid "An entry between <code>/</code> or <code>#</code> works as a regex (regular expression)."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1138
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1192
 #, php-format
-msgid "List of all the option names, to either allow or deny access to, when querying fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> (one entry per line)."
+msgid "For instance, any of these entries matches option <code>\"%1$s\"</code>: %2$s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1203
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1204
+msgid "The options that queries can, or cannot, read."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1210
+#, php-format
+msgid "Fields <code>%s</code>, <code>%s</code>, <code>%s</code> and <code>%s</code> read them."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1249
+msgid "Whether queries can read only the entries, or all but them."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1252
+msgid "<ul><li>Allow access: queries can read the entries, and nothing else.</li><li>Deny access: queries can read everything except the entries.</li></ul>"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1267
 msgid "Default avatar size"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1205
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1269
 #, php-format
-msgid "Size of the avatar (in pixels) when not providing argument <code>\"size\"</code> in field <code>%s.avatar</code>"
+msgid "The avatar size when <code>%s.avatar</code> passes no <code>size</code>."
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1239
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1243
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1274
+msgid "pixels"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1305
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaTypeModuleResolver.php:1309
 msgid "user capabilities"
 msgstr ""
 
@@ -9418,17 +9620,13 @@ msgstr ""
 msgid "Documentation on using the Gato GraphQL"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:134
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:135
 #, php-format
 msgid "Plugin <strong>Gato GraphQL</strong> has been updated to version <code>%s</code>. <strong><a href=\"%s\" class=\"%s\">Check out what's new</a></strong> | <a href=\"%s\">Disable this admin notice in the Settings</a>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:283
+#: GatoGraphQLForWP/plugins/gatographql/src/Plugin.php:300
 msgid "Go PRO"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginDataSetup/PluginDataSetupService.php:38
-msgid "Nested mutations"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/PluginDataSetup/PluginDataSetupService.php:96
@@ -9492,16 +9690,16 @@ msgstr ""
 msgid "Gato GraphQL PRO"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1487
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1490
 msgid "<p><em>(This message is visible only by the admin.)</em></p>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1489
+#: GatoGraphQLForWP/plugins/gatographql/src/PluginSkeleton/AbstractMainPlugin.php:1492
 #, php-format
 msgid "<p>Something went wrong initializing plugin <strong>%s</strong> (so it has not been loaded):</p><code>%s</code><p>Stack trace:</p><pre>%s</pre>"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Registries/ModuleRegistry.php:135
+#: GatoGraphQLForWP/plugins/gatographql/src/Registries/ModuleRegistry.php:139
 #, php-format
 msgid "Module '%s' does not exist"
 msgstr ""
@@ -9548,7 +9746,7 @@ msgstr ""
 msgid "Schema Configuration for GraphQL"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:404
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/AbstractBlock.php:412
 #, php-format
 msgid "You need to run `npm start` or `npm run build` for the \"%s\" block first."
 msgstr ""
@@ -9624,6 +9822,14 @@ msgstr ""
 msgid "❌ No"
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigComposableDirectivesBlock.php:31
+msgid "Enable composable directives?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigExposeSensitiveDataBlock.php:30
+msgid "Add “sensitive” fields to the schema?"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGlobalFieldsBlock.php:48
 msgid "⚫️ Do not expose"
 msgstr ""
@@ -9638,6 +9844,26 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGlobalFieldsBlock.php:56
 msgid "Schema exposure:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGraphQLSpecComplianceBlock.php:49
+msgid "Pass a null up to the nearest nullable parent?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGraphQLSpecComplianceBlock.php:50
+msgid "Coerce scalar and enum values?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGraphQLSpecComplianceBlock.php:51
+msgid "Add the response path to errors?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigGraphQLSpecComplianceBlock.php:52
+msgid "Return no data on request errors?"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigMultiFieldDirectivesBlock.php:31
+msgid "Enable multi-field directives?"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/Blocks/SchemaConfigMutationSchemeBlock.php:46
@@ -9745,62 +9971,62 @@ msgstr ""
 msgid "Parent %s:"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:62
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:63
 msgid "Execute"
 msgstr ""
 
 #. translators: %s: Post title.
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:97
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:98
 #, php-format
 msgid "Preview source &#8220;%s&#8221;"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:98
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:99
 msgid "Preview source"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:104
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:126
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:105
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:127
 #, php-format
 msgid "%s &#8220;%s&#8221;"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:119
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:120
 #, php-format
 msgid "View source &#8220;%s&#8221;"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:120
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:121
 msgid "View source"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:156
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:166
 msgid "Access forbidden"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:234
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:244
 msgid "State"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:263
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:273
 #, php-format
 msgid "✅ %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:267
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:277
 #, php-format
 msgid "❌ %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:279
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:289
 msgid "\"None\" selected"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:283
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:293
 msgid "(None)"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:289
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:299
 msgid "(not found)"
 msgstr ""
 
@@ -9981,6 +10207,7 @@ msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPageAttachers/TopMenuPageAttacher.php:127
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/GraphQLVoyagerMenuPage.php:56
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:59
 msgid "Schema"
 msgstr ""
 
@@ -10125,20 +10352,194 @@ msgstr ""
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:304
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:380
 msgid "There are no items to be configured"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:525
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:449
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:450
+msgid "Search all settings"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:691
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1179
+msgid "No unsaved changes"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:693
+msgid "Discard"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:694
+msgid "Save all changes"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:971
+msgid "Docs"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:971
+msgid "(opens in a new tab)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1083
+#, php-format
+msgid "Turn off “%s” to use this."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1084
+#, php-format
+msgid "Turn on “%s” to use this."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1090
+#, php-format
+msgid "Set “%1$s” to “%2$s” to use this."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1093
+msgid "” or “"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1112
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr ""
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:890
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1178
+#, php-format
+msgid "More (%s)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1180
+msgid "1 unsaved change:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1181
+#, php-format
+msgid "%s unsaved changes:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1182
+msgid "Saving…"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1183
+#, php-format
+msgid "The \"%s\" tab has more fields than the server accepts in one request, so it can't be saved. To save it, raise the PHP setting max_input_vars."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1184
+#, php-format
+msgid "The changes could not be saved: %s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1185
+#, php-format
+msgid "This is not valid JSON: %s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1186
+msgid "Fix the JSON in 1 field to save the changes:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1187
+#, php-format
+msgid "Fix the JSON in %s fields to save the changes:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1189
+#, php-format
+msgid "%1$s of %2$s selected"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1190
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1399
+msgid "Set all to:"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1191
+msgid "Add an entry, then press Enter"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1192
+#, php-format
+msgid "Remove %s"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1193
+msgid "No settings found"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1194
+#, php-format
+msgid "%s settings found"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1195
+msgid "Unsaved changes"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1229
+msgid "On"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1229
+msgid "Off"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1529
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1530
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1531
+msgid "Show"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1532
+msgid "Hide"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1568
+msgid "Manage"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1871
 #, php-format
 msgid "Save All Changes ('%s' tab)"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1906
+msgid "Sorry, you are not allowed to manage options for this site."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1917
+#, php-format
+msgid "Nothing was saved: the server received %1$s of the %2$s fields sent. Try again, or save each tab on its own."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1965
+#, php-format
+msgid "The changes in these tabs were saved: %s."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1979
+msgid "Settings saved."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2023
+#, php-format
+msgid "Tab \"%s\" can't be saved with the others."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2041
+#, php-format
+msgid "The changes in tab \"%s\" were not saved, as the page had expired. Please reload the page, and save them again."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2056
+#, php-format
+msgid "You are not allowed to save the settings in tab \"%s\"."
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:85
@@ -10336,7 +10737,6 @@ msgid "Endpoint"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:67
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
 msgid "Endpoint Configuration"
 msgstr ""
 
@@ -10345,6 +10745,7 @@ msgid "Functionality"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:69
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
 msgid "Integrations"
 msgstr ""
 
@@ -10366,6 +10767,7 @@ msgid "Plugin Management"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/ModuleTypeResolvers/ModuleTypeResolver.php:75
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
 msgid "Server"
 msgstr ""
 
@@ -10435,30 +10837,75 @@ msgstr ""
 msgid "endpoint categories"
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/SettingsNormalizer.php:222
+#, php-format
+msgid "\"%1$s\" in \"%2$s\""
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/SettingsNormalizer.php:270
+#, php-format
+msgid "Option %1$s was not saved, as %2$s. It keeps value \"%3$s\"."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/SettingsNormalizer.php:286
+#, php-format
+msgid "Option %1$s: page \"%2$s\" has path \"%3$s\" too, so it can't be accessed anymore."
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/SettingsNormalizer.php:349
+#, php-format
+msgid "it is already used by \"%s\""
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:44
+msgid "it is empty"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:59
+#, php-format
+msgid "it contains unsupported characters (%s). Use only letters, numbers, \"-\" and \"_\", and \"/\" to separate the parts of the path"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:71
+msgid "it contains \"//\""
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:76
+#, php-format
+msgid "it is longer than %s characters"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:85
+#, php-format
+msgid "the paths under \"%s\" are handled by the WordPress REST API"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:100
+#, php-format
+msgid "\"%s\" is a WordPress folder"
+msgstr ""
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Settings/URLPathSettingValidator.php:107
+#, php-format
+msgid "\"%s\" is used by the WordPress feeds"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/AbstractSettingsCategoryResolver.php:25
 #: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/AbstractSettingsCategoryResolver.php:35
 #, php-format
 msgid "Unsupported Settings Category '%s'"
 msgstr ""
 
+#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:58
+msgid "Endpoints"
+msgstr ""
+
 #: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:60
-msgid "Schema Elements Configuration"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:61
-msgid "Server Configuration"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:62
-msgid "Plugin Configuration"
+msgid "Schema Elements"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:63
-msgid "Service Configuration"
-msgstr ""
-
-#: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:64
-msgid "Plugin Integration Configuration"
+msgid "Services"
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/SettingsCategoryResolvers/SettingsCategoryResolver.php:65
@@ -10518,14 +10965,6 @@ msgstr ""
 msgid "Adapt the behavior of the plugin using the Advanced Mode"
 msgstr ""
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:34
-msgid "Activate"
-msgstr ""
-
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:41
-msgid "Activate licenses"
-msgstr ""
-
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:55
 #, php-format
 msgid "%s — Support"
@@ -10540,11 +10979,20 @@ msgstr ""
 msgid "Send your message to our support team:"
 msgstr ""
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:87
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:102
 msgid "No IDs were selected."
 msgstr ""
 
-#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:153
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:160
+#, php-format
+msgid "Back to %s"
+msgstr ""
+
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:254
+msgid "the previous screen"
+msgstr ""
+
+#: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Services/MenuPages/AbstractExecuteActionWithCustomSettingsMenuPage.php:277
 #, php-format
 msgid "The following IDs were selected: <strong>%s</strong>"
 msgstr ""
@@ -10714,17 +11162,17 @@ msgstr ""
 msgid "Get the Mutation Root type"
 msgstr ""
 
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:106
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:105
 msgid "The GraphQL schema, exposing what fields can be queried"
 msgstr ""
 
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:107
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:114
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:106
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:116
 msgid "Obtain a specific type from the schema"
 msgstr ""
 
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:128
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:136
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:127
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:138
 msgid "The name of the type"
 msgstr ""
 
@@ -10732,27 +11180,31 @@ msgstr ""
 msgid "Is the schema namespaced?"
 msgstr ""
 
-#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:109
-msgid "The type, accessible from the root, that resolves queries"
-msgstr ""
-
 #: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:110
-msgid "The type, accessible from the root, that resolves mutations"
+msgid "The schema's description"
 msgstr ""
 
 #: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:111
-msgid "The type, accessible from the root, that resolves subscriptions"
+msgid "The type, accessible from the root, that resolves queries"
 msgstr ""
 
 #: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:112
-msgid "All types registered in the data graph"
+msgid "The type, accessible from the root, that resolves mutations"
 msgstr ""
 
 #: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:113
-msgid "All directives registered in the data graph"
+msgid "The type, accessible from the root, that resolves subscriptions"
+msgstr ""
+
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:114
+msgid "All types registered in the data graph"
 msgstr ""
 
 #: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:115
+msgid "All directives registered in the data graph"
+msgstr ""
+
+#: GraphQLByPoP/packages/graphql-server/src/FieldResolvers/ObjectType/SchemaObjectTypeFieldResolver.php:117
 #: GraphQLByPoP/packages/graphql-server/src/TypeResolvers/ObjectType/SchemaExtensionsObjectTypeResolver.php:16
 msgid "Extensions (custom metadata) added to the GraphQL schema"
 msgstr ""
@@ -11232,20 +11684,20 @@ msgstr ""
 msgid "Custom scalar representing an XML string"
 msgstr ""
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:275
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:346
 msgid "Cannot provide blocks to exclude and include at the same time"
 msgstr ""
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:292
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:364
 #, php-format
 msgid "Error parsing post ID %d: This post does not appear to contain block content."
 msgstr ""
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:295
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:367
 msgid "This fields is designed to parse Gutenberg blocks and can not read classic editor content."
 msgstr ""
 
-#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:340
+#: WPSchema/packages/block-content-parser/src/BlockContentParser.php:412
 msgid "This post either does not contain block content, or its block content has errors. (Edit the post within the WordPress editor, fix the errors, save, and try again.)"
 msgstr ""
 
@@ -11337,8 +11789,16 @@ msgstr ""
 msgid "(Gutenberg) Flattened array containing the block data items (as JSON objects) in a custom post, and replacing property 'innerBlocks' with 'innerBlockPositions', indicating the position of the inner blocks in the array (starting from 0)"
 msgstr ""
 
-#: WPSchema/packages/blocks/src/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php:177
+#: WPSchema/packages/blocks/src/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php:181
 msgid "Indicate if to use the HTML5 parser when converting block content. When parsing HTML5, the parser will convert non-regular breaking spaces, such as \"U+00A0\", to \"&nbsp;\" entities."
+msgstr ""
+
+#: WPSchema/packages/blocks/src/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php:182
+msgid "Indicate if to add the blocks of a synced pattern (block `core/block`) as its inner blocks"
+msgstr ""
+
+#: WPSchema/packages/blocks/src/FieldResolvers/ObjectType/CustomPostObjectTypeFieldResolver.php:183
+msgid "Indicate if to replace the block attributes bound to a source (such as a post meta, or an override in a synced pattern) with the value from that source"
 msgstr ""
 
 #: WPSchema/packages/blocks/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:95
