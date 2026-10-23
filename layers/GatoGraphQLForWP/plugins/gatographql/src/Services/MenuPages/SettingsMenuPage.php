@@ -20,6 +20,7 @@ use GatoGraphQL\GatoGraphQL\StaticHelpers\SettingsHelpers;
 use function __;
 use function add_action;
 use function array_keys;
+use function get_option;
 use function is_array;
 use function update_option;
 
@@ -215,10 +216,11 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                         $licenseKeys['submitted'],
                         PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
+                    $this->keepLicenseKeysStillActivated($licenseKeys['previous'], $licenseKeys['submitted'], $settingsCategory, $settingOptionName);
                     return;
                 }
 
-                // If pressed on the "Save license keys" button...
+                // If pressed on the button that applies the license key changes...
                 if (isset($values[self::ACTIVATE_EXTENSIONS_BUTTON_ID])) {
                     $this->restoreDBOptionValuesForNonSubmittedFormSections(
                         $settingsCategory,
@@ -244,6 +246,7 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                         $licenseKeys['submitted'],
                         PluginManagementFunctionalityModuleResolver::ACTIVATE_EXTENSIONS,
                     );
+                    $this->keepLicenseKeysStillActivated($licenseKeys['previous'], $licenseKeys['submitted'], $settingsCategory, $settingOptionName);
                     return;
                 }
 
@@ -317,6 +320,49 @@ class SettingsMenuPage extends AbstractSettingsMenuPage
                 )
             );
         }
+    }
+
+    /**
+     * A license whose key was cleared stays activated when its
+     * deactivation failed (eg: the license server could not be reached):
+     * store its key back, so the license can be deactivated later.
+     *
+     * @param array<string,string> $previousLicenseKeys Extension slug => license key before the action
+     * @param array<string,string> $submittedLicenseKeys Extension slug => license key acted on
+     */
+    protected function keepLicenseKeysStillActivated(
+        array $previousLicenseKeys,
+        array $submittedLicenseKeys,
+        string $settingsCategory,
+        string $settingOptionName,
+    ): void {
+        /** @var mixed */
+        $activatedLicenseEntries = get_option($this->getOptionNamespacer()->namespaceOption(Options::COMMERCIAL_EXTENSION_ACTIVATED_LICENSE_ENTRIES), []);
+        if (!is_array($activatedLicenseEntries)) {
+            return;
+        }
+        $licenseKeysToKeep = [];
+        foreach ($previousLicenseKeys as $extensionSlug => $previousLicenseKey) {
+            if (
+                $previousLicenseKey === ''
+                || ($submittedLicenseKeys[$extensionSlug] ?? '') !== ''
+                || !isset($activatedLicenseEntries[$extensionSlug])
+            ) {
+                continue;
+            }
+            $licenseKeysToKeep[$extensionSlug] = $previousLicenseKey;
+        }
+        if ($licenseKeysToKeep === []) {
+            return;
+        }
+        $dbOptionName = $this->getSettingsCategoryRegistry()->getSettingsCategoryResolver($settingsCategory)->getDBOptionName($settingsCategory);
+        $storedValues = get_option($dbOptionName, []);
+        if (!is_array($storedValues)) {
+            return;
+        }
+        $storedLicenseKeys = is_array($storedValues[$settingOptionName] ?? null) ? $storedValues[$settingOptionName] : [];
+        $storedValues[$settingOptionName] = [...$storedLicenseKeys, ...$licenseKeysToKeep];
+        update_option($dbOptionName, $storedValues);
     }
 
     /**

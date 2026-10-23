@@ -26,10 +26,13 @@ use function get_post_type_object;
 use function get_settings_errors;
 use function get_submit_button;
 use function in_array;
+use function preg_replace;
 use function sprintf;
 use function str_starts_with;
 use function strlen;
 use function substr;
+use function trim;
+use function wp_strip_all_tags;
 
 class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityModuleResolver
 {
@@ -447,7 +450,10 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                             \__('Its database tables, and its cache and log files', 'gatographql'),
                         ]
                     ),
-                    \__('Removing a license record does not release the license on the marketplace. To use it on another site, first clear its key under Activate Plugins and Extensions, and save.', 'gatographql'),
+                    sprintf(
+                        \__('Removing a license record does not release the license on the marketplace. To use it on another site, first click <strong>Deactivate</strong> beside it under <strong>%s</strong>.', 'gatographql'),
+                        $this->getActivateExtensionLicensesTitle()
+                    ),
                 ),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
@@ -567,7 +573,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                 ];
             }
             if ($failure !== null) {
-                $status['detail'] = $failure['message'];
+                $status['detail'] = trim(wp_strip_all_tags((string) preg_replace('#<br\s*/?>#i', ' ', $failure['message'])));
                 $status['detailTone'] = $failure['type'] === 'error'
                     ? Properties::KEY_STATUS_TONE_DANGER
                     : Properties::KEY_STATUS_TONE_WARNING;
