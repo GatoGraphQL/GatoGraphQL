@@ -259,6 +259,12 @@
     box-shadow: inset 3px 0 0 var(--gato-accent);
 }
 
+/* The sections fill the width beside the side nav, whatever their content, so that opening a help panel does not widen them */
+.gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-content {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
 /* A module's settings */
 .gato-module {
     min-width: 0;
@@ -266,9 +272,16 @@
     scroll-margin-top: 16px;
 }
 .gato-settings .gato-module__title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
     margin: 0 0 12px;
     font-size: 19px;
     font-weight: 600;
+}
+/* What the whole section does, behind the "i" beside its title */
+.gato-module__help > .gato-help {
+    margin: -4px 0 12px;
 }
 .gato-settings .gato-module + .gato-module {
     margin-top: var(--gato-section-gap);
@@ -346,7 +359,21 @@
     min-width: 0;
     max-width: 100%;
 }
+/*
+ * The help opens right under the description, on a line of its own, so
+ * that opening it does not move the control beside the title; when the
+ * control takes the whole row, the help goes between the two
+ */
+.gato-setting > .gato-help {
+    flex: 1 1 100%;
+    order: 3;
+    margin-top: 0;
+}
+.gato-setting--wide > .gato-help {
+    order: 1;
+}
 .gato-setting--wide > .gato-setting__control {
+    order: 2;
     flex: 1 1 100%;
     display: block;
 }

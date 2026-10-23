@@ -85,4 +85,6 @@ class Properties
     public final const CONTROL_INPUT = 'input';
     public final const CONTROL_GRID = 'grid';
     public final const CONTROL_CHIPS = 'chips';
+    // On a TYPE_NULL item: what the whole section does (its HELP), behind the "i" beside the title of the section
+    public final const CONTROL_SECTION_HELP = 'sectionHelp';
 }

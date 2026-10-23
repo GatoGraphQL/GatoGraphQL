@@ -164,6 +164,18 @@ class SettingsControlHelpersTest extends TestCase
         $this->assertSame(1, count($groups));
     }
 
+    public function testSectionHelpGoesBesideTheTitleAndNotInACard(): void
+    {
+        $sectionHelp = [Properties::NAME => 'section-help', Properties::TYPE => Properties::TYPE_NULL, Properties::CONTROL => Properties::CONTROL_SECTION_HELP, Properties::HELP => '<p>What it does</p>'];
+        $setting = [Properties::NAME => 'a', Properties::TYPE => Properties::TYPE_BOOL];
+        $this->assertSame('<p>What it does</p>', SettingsControlHelpers::getSectionHelp([$sectionHelp, $setting]));
+        $this->assertSame('', SettingsControlHelpers::getSectionHelp([$setting]));
+        $this->assertSame(
+            [['heading' => null, 'settings' => [$setting]]],
+            SettingsControlHelpers::getGroups([$sectionHelp, $setting])
+        );
+    }
+
     public function testJSONIsIndented(): void
     {
         $this->assertSame("{\n    \"reasoning_effort\": \"none\",\n    \"kwargs\": {\n        \"url\": \"https://a.b/c\"\n    }\n}", SettingsControlHelpers::formatJSON('{"reasoning_effort":"none","kwargs":{"url":"https://a.b/c"}}'));

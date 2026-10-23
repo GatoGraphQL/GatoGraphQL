@@ -57,7 +57,7 @@
     --gato-field-width: 360px;
     --gato-number-field-width: 150px;
     --gato-affix-field-width: 96px;
-    --gato-affix-unit-width: 96px;
+    --gato-entry-action-width: 96px;
     --gato-tab-text: var(--gato-text-muted);
     --gato-tab-text-hover: var(--gato-text);
     --gato-tab-bg-hover: var(--gato-accent-soft);
@@ -152,7 +152,7 @@
 /* The button beside an entry (eg: a license), or its "⋯" menu: all as wide, for the fields to line up */
 .gato-ui .gato-input-group > .gato-entry-action,
 .gato-ui .gato-entry-menu > summary.gato-entry-action {
-    min-width: var(--gato-affix-unit-width);
+    min-width: var(--gato-entry-action-width);
     text-align: center;
 }
 .gato-entry-menu {
@@ -233,6 +233,13 @@
     padding: 10px var(--gato-card-padding-x) 0;
     color: var(--gato-text-muted);
     font-size: var(--gato-font-size-sm);
+}
+
+.gato-card__help {
+    padding: 0 var(--gato-card-padding-x);
+}
+.gato-card__help > .gato-help {
+    margin-top: 10px;
 }
 
 /* Help: an "i" button beside a title, and the panel it opens (gato-ui.js) */
@@ -563,7 +570,6 @@
 .gato-affix__unit {
     display: inline-flex;
     align-items: center;
-    min-width: var(--gato-affix-unit-width);
     box-sizing: border-box;
     padding: 0 10px;
     background: var(--gato-surface-alt);

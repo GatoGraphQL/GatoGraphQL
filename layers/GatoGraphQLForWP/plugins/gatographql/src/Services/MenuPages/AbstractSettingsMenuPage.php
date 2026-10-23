@@ -536,9 +536,23 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                      * tabs down the side scroll to them (see settings.js)
                                                      */
                                                     foreach ($categorySettingsItems as $item) {
+                                                        /** @var array<array<string,mixed>> */
+                                                        $moduleItemSettings = $item['settings'];
+                                                        $sectionHelp = SettingsControlHelpers::getSectionHelp($moduleItemSettings);
+                                                        $sectionHelpID = 'help-' . $item['id'];
                                                         ?>
                                                         <div id="<?php echo esc_attr($item['id']) ?>" class="gatographql-settings-section gato-module" data-module-name="<?php echo esc_attr($item['name']) ?>"<?php echo $item['id'] === $activeModule ? ' data-module-requested="1"' : '' ?>>
-                                                            <h2 class="gato-module__title"><?php echo esc_html($item['name']) ?></h2>
+                                                            <h2 class="gato-module__title">
+                                                                <span><?php echo esc_html($item['name']) ?></span>
+                                                                <?php if ($sectionHelp !== '') : ?>
+                                                                    <?php $this->printHelpToggle($sectionHelpID) ?>
+                                                                <?php endif; ?>
+                                                            </h2>
+                                                            <?php if ($sectionHelp !== '') : ?>
+                                                                <div class="gato-module__help">
+                                                                    <?php $this->printHelpPanel($sectionHelpID, $sectionHelp, null) ?>
+                                                                </div>
+                                                            <?php endif; ?>
                                                             <?php $this->printModuleSettings($optionsFormName, $item) ?>
                                                         </div>
                                                         <?php
@@ -670,14 +684,30 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     $headingTitle = $heading[Properties::TITLE] ?? '';
                     /** @var string */
                     $headingDescription = $heading[Properties::DESCRIPTION] ?? '';
+                    $headingDescriptionHelp = SettingsControlHelpers::splitDescriptionHelp($headingDescription);
+                    $headingDescription = $headingDescriptionHelp['description'];
+                    /** @var string */
+                    $headingHelp = $heading[Properties::HELP] ?? '';
+                    $headingHelp = trim(implode('<br/><br/>', array_filter([$headingHelp, $headingDescriptionHelp['help']])));
+                    /** @var string */
+                    $headingName = $heading[Properties::NAME] ?? '';
+                    $headingHelpID = 'help-' . $headingName;
                     ?>
                     <div class="gato-card__head">
                         <span class="gato-card__heading">
                             <span class="gato-card__title"><?php echo esc_html($this->getGroupTitle($headingTitle)) ?></span>
+                            <?php if ($headingHelp !== '') : ?>
+                                <?php $this->printHelpToggle($headingHelpID) ?>
+                            <?php endif; ?>
                         </span>
                     </div>
                     <?php if (trim($headingDescription) !== '') : ?>
                         <div class="gato-card__description"><?php echo $headingDescription; ?></div>
+                    <?php endif; ?>
+                    <?php if ($headingHelp !== '') : ?>
+                        <div class="gato-card__help">
+                            <?php $this->printHelpPanel($headingHelpID, $headingHelp, null) ?>
+                        </div>
                     <?php endif; ?>
                 <?php endif; ?>
                 <?php
@@ -803,9 +833,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     <?php if (trim($description) !== '' && $control !== Properties::CONTROL_CONTENT) : ?>
                         <div class="gato-setting__description"><?php echo $description ?></div>
                     <?php endif; ?>
-                    <?php if ($hasHelp) : ?>
-                        <?php $this->printHelpPanel($helpID, $help, $docsURL) ?>
-                    <?php endif; ?>
                     <?php if ($dependsOn !== null) : ?>
                         <div class="gato-setting__dependency"><?php echo esc_html($dependsOn['message']) ?></div>
                     <?php endif; ?>
@@ -816,6 +843,15 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 $this->printControl($control, $optionsFormName, $module, $itemSetting, $hasTitle ? $titleID : null);
                 ?>
             </div>
+            <?php if ($hasHelp) : ?>
+                <?php
+                /**
+                 * On a line of its own, across the row, so that opening
+                 * it does not move the control beside the title
+                 */
+                $this->printHelpPanel($helpID, $help, $docsURL);
+                ?>
+            <?php endif; ?>
         </div>
         <?php
     }

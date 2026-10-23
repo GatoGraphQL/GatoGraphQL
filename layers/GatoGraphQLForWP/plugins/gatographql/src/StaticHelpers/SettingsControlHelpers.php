@@ -211,6 +211,9 @@ class SettingsControlHelpers
         $group = ['heading' => null, 'settings' => []];
         foreach ($itemSettings as $itemSetting) {
             $control = self::getControl($itemSetting);
+            if ($control === Properties::CONTROL_SECTION_HELP) {
+                continue;
+            }
             if ($control === Properties::CONTROL_GROUP) {
                 $groups[] = $group;
                 $group = ['heading' => $itemSetting, 'settings' => []];
@@ -238,6 +241,28 @@ class SettingsControlHelpers
             $nonEmptyGroups[] = $group;
         }
         return $nonEmptyGroups;
+    }
+
+    /**
+     * What the whole section does, from its items with control
+     * CONTROL_SECTION_HELP, shown behind the "i" beside its title
+     *
+     * @param array<array<string,mixed>> $itemSettings
+     */
+    public static function getSectionHelp(array $itemSettings): string
+    {
+        $helps = [];
+        foreach ($itemSettings as $itemSetting) {
+            if (self::getControl($itemSetting) !== Properties::CONTROL_SECTION_HELP) {
+                continue;
+            }
+            /** @var string */
+            $help = $itemSetting[Properties::HELP] ?? '';
+            if (trim($help) !== '') {
+                $helps[] = $help;
+            }
+        }
+        return implode('', $helps);
     }
 
     /**
