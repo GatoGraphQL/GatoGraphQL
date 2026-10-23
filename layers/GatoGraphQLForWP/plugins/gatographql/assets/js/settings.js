@@ -183,7 +183,7 @@
 
 	/**
 	 * Show (or go to) the panel of a setting: its primary tab,
-	 * and its secondary tab
+	 * and the tab down the side of its section
 	 */
 	function revealSetting( page, setting ) {
 		const primaryPanel = setting.closest( '#gatographql-primary-settings-nav-tab-content > .tab-content' );
@@ -193,12 +193,9 @@
 				tab.click();
 			}
 		}
-		const modulePanel = setting.closest( '.gatographql-settings-section' );
-		if ( modulePanel && modulePanel.classList.contains( 'tab-content' ) && modulePanel.style.display === 'none' ) {
-			const sideTab = primaryPanel && primaryPanel.querySelector( 'a.nav-tab[data-tab-target="#' + CSS.escape( modulePanel.id ) + '"]' );
-			if ( sideTab ) {
-				sideTab.click();
-			}
+		const section = setting.closest( '.gatographql-settings-section' );
+		if ( section ) {
+			page.dispatchEvent( new CustomEvent( 'gato:go-to-section', { detail: { section } } ) );
 		}
 	}
 
@@ -216,6 +213,152 @@
 			parts.push( modulePanel.dataset.moduleName );
 		}
 		return parts.join( ' › ' );
+	}
+
+	/**
+	 * The tabs down the side of a primary tab: all its sections are shown,
+	 * one below the other. Clicking a tab scrolls to its section, and as
+	 * the page scrolls, the tab of the section that has reached the top of
+	 * the window becomes the active one.
+	 */
+	function initSectionNav( page ) {
+		const navs = Array.from( page.querySelectorAll( '.gato-sidenav' ) ).map( ( wrapper ) => {
+			const links = Array.from( wrapper.querySelectorAll( ':scope > a.nav-tab[data-tab-target]' ) );
+			return {
+				panel: wrapper.closest( '#gatographql-primary-settings-nav-tab-content > .tab-content' ),
+				links,
+				sections: links.map( ( link ) => document.querySelector( link.dataset.tabTarget ) ),
+			};
+		} ).filter( ( nav ) => nav.panel && nav.sections.every( Boolean ) );
+		if ( ! navs.length ) {
+			return;
+		}
+
+		/**
+		 * The section gone to (by clicking its tab, or a search result)
+		 * stays active until the user scrolls, as a short section at the
+		 * bottom of the page may never reach the top of the window
+		 */
+		let pinned = null;
+
+		const getShownNav = () => navs.find( ( nav ) => nav.panel.style.display !== 'none' );
+
+		const setActive = ( nav, index ) => {
+			nav.links.forEach( ( link, linkIndex ) => link.classList.toggle( 'nav-tab-active', linkIndex === index ) );
+		};
+
+		/**
+		 * The last section that has reached the top of the window (below
+		 * the admin bar), or the last one once the page cannot scroll
+		 * any further
+		 */
+		const TOP_LINE = 120;
+		const getMainIndex = ( nav ) => {
+			const lastIndex = nav.sections.length - 1;
+			if ( window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2 ) {
+				return lastIndex;
+			}
+			let index = 0;
+			nav.sections.forEach( ( section, sectionIndex ) => {
+				if ( section.getBoundingClientRect().top <= TOP_LINE ) {
+					index = sectionIndex;
+				}
+			} );
+			return index;
+		};
+
+		const update = () => {
+			const nav = getShownNav();
+			if ( ! nav ) {
+				return;
+			}
+			if ( pinned && pinned.nav === nav ) {
+				setActive( nav, pinned.index );
+				return;
+			}
+			pinned = null;
+			setActive( nav, getMainIndex( nav ) );
+		};
+
+		let frame = 0;
+		const scheduleUpdate = () => {
+			if ( ! frame ) {
+				frame = window.requestAnimationFrame( () => {
+					frame = 0;
+					update();
+				} );
+			}
+		};
+
+		const goTo = ( nav, index, behavior ) => {
+			pinned = { nav, index };
+			setActive( nav, index );
+			nav.sections[ index ].scrollIntoView( { behavior, block: 'start' } );
+		};
+
+		navs.forEach( ( nav ) => nav.links.forEach( ( link, index ) => {
+			link.addEventListener( 'click', ( event ) => {
+				event.preventDefault();
+				goTo( nav, index, 'smooth' );
+			} );
+		} ) );
+
+		page.addEventListener( 'gato:go-to-section', ( event ) => {
+			const nav = navs.find( ( candidate ) => candidate.sections.includes( event.detail.section ) );
+			if ( nav ) {
+				pinned = { nav, index: nav.sections.indexOf( event.detail.section ) };
+				setActive( nav, pinned.index );
+			}
+		} );
+
+		/**
+		 * Captured, so that it comes before what the user does pins a
+		 * section again (eg: pressing Enter on a search result)
+		 */
+		const SCROLL_KEYS = [ 'ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' ' ];
+		const unpin = ( event ) => {
+			if ( event.type === 'keydown' && ( ! SCROLL_KEYS.includes( event.key ) || event.target.closest( 'input, select, textarea, [contenteditable]' ) ) ) {
+				return;
+			}
+			// Dragging the scrollbar
+			if ( event.type === 'mousedown' && event.target !== document.documentElement ) {
+				return;
+			}
+			pinned = null;
+		};
+		[ 'wheel', 'touchmove', 'keydown', 'mousedown' ].forEach( ( type ) => {
+			window.addEventListener( type, unpin, { capture: true, passive: true } );
+		} );
+		window.addEventListener( 'scroll', scheduleUpdate, { passive: true } );
+		window.addEventListener( 'resize', scheduleUpdate );
+		page.querySelectorAll( ':scope > .nav-tab-container > .nav-tab-wrapper > a.nav-tab' ).forEach( ( tab ) => {
+			tab.addEventListener( 'click', scheduleUpdate );
+		} );
+
+		// The address names the section to open the page on
+		const requested = page.querySelector( '.gatographql-settings-section[data-module-requested]' );
+		const requestedNav = requested && navs.find( ( nav ) => nav.sections.includes( requested ) );
+		if ( requestedNav && requestedNav === getShownNav() ) {
+			const requestedIndex = requestedNav.sections.indexOf( requested );
+			goTo( requestedNav, requestedIndex, 'auto' );
+			/**
+			 * Other scripts may still change what is above it as the page
+			 * loads (eg: a provider's model picker, once it gets its
+			 * models, or a notice), moving it away: go to it again, until
+			 * the user scrolls or goes elsewhere
+			 */
+			if ( window.ResizeObserver ) {
+				const observer = new ResizeObserver( () => {
+					if ( ! pinned || pinned.nav !== requestedNav || pinned.index !== requestedIndex ) {
+						observer.disconnect();
+						return;
+					}
+					requested.scrollIntoView( { block: 'start' } );
+				} );
+				observer.observe( document.body );
+			}
+		}
+		update();
 	}
 
 	/**
@@ -345,6 +488,31 @@
 		};
 		page.addEventListener( 'change', update );
 		update();
+	}
+
+	/**
+	 * A button group that does not fit on one line is shown as a
+	 * list, one option below the other, instead of wrapping
+	 */
+	function initButtonGroups( page ) {
+		const groups = Array.from( page.querySelectorAll( '.gato-seg' ) );
+		if ( ! groups.length || ! window.ResizeObserver ) {
+			return;
+		}
+		const fit = ( group ) => {
+			group.classList.remove( 'is-stacked' );
+			const options = Array.from( group.children );
+			if ( options.length < 2 || ! group.offsetParent ) {
+				return;
+			}
+			const top = options[ 0 ].offsetTop;
+			group.classList.toggle( 'is-stacked', options.some( ( option ) => option.offsetTop !== top ) );
+		};
+		const observer = new ResizeObserver( ( entries ) => {
+			entries.forEach( ( entry ) => entry.target.querySelectorAll( '.gato-seg' ).forEach( fit ) );
+		} );
+		const containers = new Set( groups.map( ( group ) => group.closest( '.gato-grid__row, .gato-setting' ) || group.parentElement ) );
+		containers.forEach( ( container ) => observer.observe( container ) );
 	}
 
 	/**
@@ -487,104 +655,13 @@
 	}
 
 	/**
-	 * The value of an entry that "Reset" puts back
-	 */
-	function getDefaultValues( element ) {
-		const defaultValue = element.dataset.default;
-		if ( element.tagName === 'SELECT' && element.multiple ) {
-			try {
-				return JSON.parse( defaultValue );
-			} catch ( error ) {
-				return [];
-			}
-		}
-		if ( element.type === 'checkbox' ) {
-			return defaultValue === '1' ? [ element.value ] : [];
-		}
-		return [ defaultValue ];
-	}
-
-	function resetToDefault( container ) {
-		const form = container.closest( 'form' );
-		if ( ! form ) {
-			return;
-		}
-		const done = [];
-		container.querySelectorAll( '[data-default]' ).forEach( ( element ) => {
-			if ( element.type === 'checkbox' ) {
-				element.checked = element.dataset.default === '1';
-				element.dispatchEvent( new Event( 'change', { bubbles: true } ) );
-				return;
-			}
-			if ( done.includes( element.name ) ) {
-				return;
-			}
-			done.push( element.name );
-			setFieldValues( form, element.name, getDefaultValues( element ) );
-		} );
-	}
-
-	/**
-	 * Is the entry (of a grid) other than its default value?
-	 */
-	function isEntryChanged( row ) {
-		const form = row.closest( 'form' );
-		const element = row.querySelector( '[data-default]' );
-		if ( ! form || ! element ) {
-			return false;
-		}
-		return ! sameValues( getFieldValues( form, element.name ), getDefaultValues( element ) );
-	}
-
-	/**
-	 * Grids: "Set all to", filter, and show only the entries
-	 * other than the default
+	 * Grids: "Set all to", and filter the entries when there are many
 	 */
 	function initGrids( page ) {
 		page.querySelectorAll( '[data-grid]' ).forEach( ( grid ) => {
 			const form = grid.closest( 'form' );
 			const rows = Array.from( grid.querySelectorAll( '.gato-grid__row' ) );
 			const filter = grid.querySelector( '[data-grid-filter]' );
-			const showButtons = Array.from( grid.querySelectorAll( '[data-grid-show]' ) );
-			const summary = grid.querySelector( '.gato-grid-field__summary' );
-			let showOnlyChanged = false;
-
-			const getRowName = ( row ) => {
-				const element = row.querySelector( 'input[name], select[name]' );
-				return element ? element.name : null;
-			};
-			const update = () => {
-				const term = filter ? filter.value.trim().toLowerCase() : '';
-				let changedCount = 0;
-				const valueCounts = new Map();
-				rows.forEach( ( row ) => {
-					const isChanged = isEntryChanged( row );
-					row.classList.toggle( 'is-changed', isChanged );
-					if ( isChanged ) {
-						changedCount++;
-					}
-					row.hidden = ( term !== '' && ! row.dataset.search.includes( term ) ) || ( showOnlyChanged && ! isChanged );
-					// Only options are summarized, never typed values (eg: keys)
-					const select = row.querySelector( 'select' );
-					const radio = row.querySelector( 'input[type=radio]:checked' );
-					let label = null;
-					if ( select ) {
-						label = Array.from( select.selectedOptions ).map( ( option ) => option.textContent.trim() ).join( ', ' );
-					} else if ( radio ) {
-						label = radio.nextElementSibling.textContent.trim();
-					}
-					if ( label !== null ) {
-						valueCounts.set( label, ( valueCounts.get( label ) || 0 ) + 1 );
-					}
-				} );
-				if ( showButtons.length ) {
-					showButtons[ 0 ].textContent = format( l10n.showAll, rows.length );
-					showButtons[ 1 ].textContent = format( l10n.showNotDefault, changedCount );
-				}
-				if ( summary ) {
-					summary.textContent = Array.from( valueCounts.entries() ).map( ( [ label, count ] ) => count + ' ' + label ).join( ' · ' );
-				}
-			};
 
 			grid.querySelectorAll( '[data-set-all]' ).forEach( ( link ) => {
 				link.addEventListener( 'click', ( event ) => {
@@ -593,9 +670,9 @@
 						return;
 					}
 					rows.filter( ( row ) => ! row.hidden ).forEach( ( row ) => {
-						const name = getRowName( row );
-						if ( name ) {
-							setFieldValues( form, name, [ link.dataset.setAll ] );
+						const element = row.querySelector( 'input[name], select[name]' );
+						if ( element ) {
+							setFieldValues( form, element.name, [ link.dataset.setAll ] );
 						}
 					} );
 				} );
@@ -603,26 +680,13 @@
 			if ( filter ) {
 				filter.placeholder = l10n.filter;
 				filter.setAttribute( 'aria-label', l10n.filter );
-				filter.addEventListener( 'input', update );
-			}
-			showButtons.forEach( ( button ) => {
-				button.addEventListener( 'click', () => {
-					showOnlyChanged = button.dataset.gridShow === 'changed';
-					showButtons.forEach( ( other ) => other.setAttribute( 'aria-pressed', String( other === button ) ) );
-					update();
+				filter.addEventListener( 'input', () => {
+					const term = filter.value.trim().toLowerCase();
+					rows.forEach( ( row ) => {
+						row.hidden = term !== '' && ! row.dataset.search.includes( term );
+					} );
 				} );
-			} );
-			grid.addEventListener( 'change', update );
-			update();
-		} );
-	}
-
-	function initResetLinks( page ) {
-		page.querySelectorAll( '.gato-setting__reset' ).forEach( ( link ) => {
-			link.addEventListener( 'click', ( event ) => {
-				event.preventDefault();
-				resetToDefault( link.closest( '.gato-setting' ) );
-			} );
+			}
 		} );
 	}
 
@@ -930,9 +994,10 @@
 		initChecklists( page );
 		initGrids( page );
 		initPasswordToggles( page );
-		initResetLinks( page );
+		initButtonGroups( page );
 		initDependencies( page );
 		initSearch( page );
+		initSectionNav( page );
 		const moreTabs = initMoreTabs( page );
 		initSaveAll( page, moreTabs );
 	}

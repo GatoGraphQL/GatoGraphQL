@@ -41,8 +41,12 @@ class SettingsControlHelpersTest extends TestCase
                 [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'Only']],
                 Properties::CONTROL_SELECT,
             ],
-            'more than 4 options are a dropdown' => [
+            '5 short options are segmented' => [
                 [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D', 'e' => 'E']],
+                Properties::CONTROL_SEGMENTED,
+            ],
+            'more than 5 options are a dropdown' => [
+                [Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'A', 'b' => 'B', 'c' => 'C', 'd' => 'D', 'e' => 'E', 'f' => 'F']],
                 Properties::CONTROL_SELECT,
             ],
             'long labels are a dropdown' => [
@@ -158,29 +162,13 @@ class SettingsControlHelpersTest extends TestCase
         $this->assertSame(1, count($groups));
     }
 
-    #[DataProvider('provideDiffersFromDefault')]
-    public function testDiffersFromDefault(mixed $value, mixed $defaultValue, bool $expected): void
+    public function testFullWidthInputIsAskedFor(): void
     {
-        $this->assertSame($expected, SettingsControlHelpers::differsFromDefault($value, $defaultValue));
-    }
-
-    /**
-     * @return array<string,array{0:mixed,1:mixed,2:bool}>
-     */
-    public static function provideDiffersFromDefault(): array
-    {
-        return [
-            'same bool' => [true, true, false],
-            'bool against truthy string' => [true, '1', false],
-            'different bool' => [false, true, true],
-            'int against numeric string' => [120, '120', false],
-            'different int' => [60, 120, true],
-            'list in another order' => [['page', 'post'], ['post', 'page'], false],
-            'list with another entry' => [['page', 'post', 'product'], ['post', 'page'], true],
-            'map with keys in another order' => [['es' => 'default', 'fr' => 'none'], ['fr' => 'none', 'es' => 'default'], false],
-            'map with another value' => [['es' => 'default', 'fr' => 'none'], ['es' => 'default', 'fr' => 'default'], true],
-            'null against empty string' => [null, '', false],
-        ];
+        $this->assertTrue(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::FULL_WIDTH => true]));
+        $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING]));
+        $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::FULL_WIDTH => false]));
+        $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::USE_TEXTAREA => true, Properties::FULL_WIDTH => true]));
+        $this->assertFalse(SettingsControlHelpers::isFullWidthInput([Properties::TYPE => Properties::TYPE_STRING, Properties::POSSIBLE_VALUES => ['a' => 'A', 'b' => 'B'], Properties::FULL_WIDTH => true]));
     }
 
     public function testSelectedValueComparesAsStrings(): void

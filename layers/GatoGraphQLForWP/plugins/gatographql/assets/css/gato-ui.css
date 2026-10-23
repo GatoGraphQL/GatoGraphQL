@@ -23,6 +23,7 @@
     --gato-accent-soft: color-mix(in srgb, var(--gato-accent) 7%, #fff);
     --gato-accent-ring: color-mix(in srgb, var(--gato-accent) 28%, #fff);
     --gato-accent-alt: color-mix(in srgb, var(--gato-accent) 72%, #fff);
+    --gato-accent-tint: color-mix(in srgb, var(--gato-accent) 12%, #fff);
     --gato-on-accent: #fff;
     accent-color: var(--gato-accent);
 }
@@ -52,6 +53,17 @@
     --gato-card-padding-x: 18px;
     --gato-row-padding-y: 14px;
     --gato-section-gap: 30px;
+    --gato-page-max-width: 1280px;
+    --gato-field-width: 360px;
+    --gato-number-field-width: 150px;
+    --gato-affix-field-width: 96px;
+    --gato-affix-unit-width: 96px;
+    --gato-tab-text: var(--gato-text-muted);
+    --gato-tab-text-hover: var(--gato-text);
+    --gato-tab-bg-hover: var(--gato-accent-soft);
+    --gato-tab-text-active: var(--gato-accent);
+    --gato-tab-indicator: var(--gato-accent);
+    --gato-tab-indicator-width: 2px;
     --gato-switch-width: 36px;
     --gato-switch-height: 20px;
     --gato-warning: #dba617;
@@ -79,7 +91,11 @@
 .gato-ui a:active {
     color: var(--gato-accent-hover);
 }
-.gato-ui a:focus,
+.gato-ui a:focus {
+    box-shadow: none;
+    outline: none;
+}
+.gato-ui a:focus-visible,
 .gato-ui button:focus-visible,
 .gato-ui input:focus-visible,
 .gato-ui select:focus,
@@ -124,6 +140,15 @@
     background: var(--gato-accent-soft);
 }
 
+/* A button beside a field is as tall as the field */
+.gato-ui .gato-input-group > .button {
+    min-height: var(--gato-control-height);
+    height: var(--gato-control-height);
+    line-height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
 /* Cards */
 .gato-card {
     background: var(--gato-surface);
@@ -151,10 +176,6 @@
     font-weight: 600;
     font-size: var(--gato-font-size);
 }
-.gato-card__count {
-    color: var(--gato-text-muted);
-    font-size: var(--gato-font-size-xs);
-}
 .gato-card__description {
     padding: 10px var(--gato-card-padding-x) 0;
     color: var(--gato-text-muted);
@@ -178,7 +199,6 @@
     padding: 0 7px;
     white-space: nowrap;
 }
-.gato-badge--changed,
 .gato-badge--warning {
     color: var(--gato-warning-text);
     background: var(--gato-warning-soft);
@@ -306,6 +326,22 @@
 .gato-seg__option input:focus-visible + span {
     box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
 }
+/* Too wide for one line: one option below the other (see settings.js) */
+.gato-seg.is-stacked {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.gato-seg.is-stacked .gato-seg__option span,
+.gato-seg.is-stacked.gato-seg--buttons > button {
+    width: 100%;
+    white-space: normal;
+}
+.gato-seg.is-stacked .gato-seg__option + .gato-seg__option,
+.gato-seg.is-stacked.gato-seg--buttons > button + button {
+    border-left: 0;
+    border-top: var(--gato-border-width) solid var(--gato-border-control);
+}
 .gato-seg--sm .gato-seg__option span,
 .gato-seg--sm.gato-seg--buttons > button {
     height: calc(var(--gato-control-height-sm) - 2 * var(--gato-border-width));
@@ -323,11 +359,15 @@
     max-width: 100%;
 }
 .gato-ui .gato-input {
-    width: 300px;
+    width: var(--gato-field-width);
     padding: 0 var(--gato-control-padding-x);
 }
 .gato-ui .gato-input--number {
-    width: 110px;
+    width: var(--gato-number-field-width);
+}
+.gato-setting--wide .gato-input-group,
+.gato-setting--wide .gato-input:not(.gato-input--number) {
+    width: 100%;
 }
 .gato-ui .gato-select {
     min-width: 220px;
@@ -349,16 +389,59 @@
     padding: 8px 10px;
     box-sizing: border-box;
 }
+/* Text to read or copy, not to edit */
+.gato-ui textarea[readonly],
+.gato-ui textarea:disabled {
+    background: var(--gato-surface-alt);
+    border-color: var(--gato-border);
+    color: var(--gato-text);
+    border-radius: var(--gato-radius-inner);
+    box-shadow: none;
+}
+
+/* A field with its unit inside, at its end: all of them as wide */
+.gato-affix {
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: var(--gato-border-width) solid var(--gato-border-control);
+    border-radius: var(--gato-radius-control);
+    background: var(--gato-surface);
+    overflow: hidden;
+}
+.gato-affix:focus-within {
+    border-color: var(--gato-accent);
+    box-shadow: 0 0 0 2px var(--gato-accent-ring);
+}
+.gato-ui .gato-affix .gato-input,
+.gato-ui .gato-affix .gato-input:focus {
+    flex: 0 0 auto;
+    width: var(--gato-affix-field-width);
+    min-width: 0;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+}
+.gato-affix__unit {
+    display: inline-flex;
+    align-items: center;
+    min-width: var(--gato-affix-unit-width);
+    box-sizing: border-box;
+    padding: 0 10px;
+    background: var(--gato-surface-alt);
+    border-left: var(--gato-border-width) solid var(--gato-border);
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-xs);
+    white-space: nowrap;
+}
 .gato-input-group {
     display: inline-flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
     max-width: 100%;
-}
-.gato-input-group__unit {
-    color: var(--gato-text-muted);
-    font-size: var(--gato-font-size-sm);
 }
 .gato-ui .gato-filter {
     min-height: var(--gato-control-height-sm);
@@ -490,13 +573,24 @@
     background: var(--gato-surface);
     cursor: pointer;
 }
+.gato-chip span::before {
+    content: "";
+    box-sizing: border-box;
+    width: 14px;
+    height: 14px;
+    border-radius: 3px;
+    border: 1.5px solid var(--gato-border-control);
+    background: var(--gato-surface) no-repeat center / 10px 10px;
+    flex-shrink: 0;
+}
 .gato-chip input:checked + span {
-    background: var(--gato-accent);
+    background: var(--gato-accent-soft);
     border-color: var(--gato-accent);
-    color: var(--gato-on-accent);
 }
 .gato-chip input:checked + span::before {
-    content: "✓";
+    border-color: var(--gato-accent);
+    background-color: var(--gato-accent);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");
 }
 .gato-chip input:focus-visible + span {
     box-shadow: 0 0 0 2px var(--gato-accent-ring);
@@ -515,20 +609,6 @@
     flex-wrap: wrap;
     gap: 10px;
     align-items: center;
-    justify-content: space-between;
-    background: var(--gato-surface-alt);
-    border-radius: var(--gato-radius-inner);
-    padding: 8px 10px;
-}
-.gato-grid-field__tools {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    align-items: center;
-}
-.gato-grid-field__summary {
-    color: var(--gato-text-muted);
-    font-size: var(--gato-font-size-xs);
 }
 .gato-setall {
     display: flex;
@@ -543,21 +623,31 @@
 }
 .gato-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
-    column-gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
+    column-gap: 32px;
 }
+.gato-grid--single {
+    grid-template-columns: minmax(0, 1fr);
+}
+.gato-ui .gato-grid--single .gato-input {
+    width: var(--gato-field-width);
+}
+/* The label on one side (it wraps when long), the control on the other */
 .gato-grid__row {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
     align-items: center;
-    justify-content: space-between;
-    gap: 6px 10px;
+    gap: 4px 16px;
+    min-height: 44px;
     padding: 6px 0;
     border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
     min-width: 0;
 }
+.gato-grid__row > :not(.gato-grid__label):not(.gato-grid__detail) {
+    max-width: 100%;
+}
 .gato-grid__detail {
-    flex: 1 1 100%;
+    grid-column: 1 / -1;
     font-size: var(--gato-font-size-xs);
     color: var(--gato-text-muted);
 }
@@ -567,19 +657,11 @@
 .gato-grid__detail--warning {
     color: var(--gato-warning-text);
 }
-.gato-grid__row.is-changed .gato-grid__label-text::after {
-    content: "";
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gato-warning);
-    margin-left: 6px;
-    vertical-align: middle;
-}
 .gato-grid__label {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
     min-width: 0;
 }
 .gato-grid__label-text {
@@ -592,7 +674,49 @@
     padding: 0;
 }
 
-/* Tables */
+/* Tables. Those printed within a setting (eg: by an extension) take the
+   same look, whichever their classes. */
+.gato-setting .gato-setting__control table,
+.gato-setting .gato-setting__control table.widefat {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100%;
+    margin: 8px 0;
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-inner);
+    overflow: hidden;
+    background: var(--gato-surface);
+    box-shadow: none;
+    font-size: var(--gato-font-size-sm);
+}
+.gato-setting .gato-setting__control table th,
+.gato-setting .gato-setting__control table td {
+    padding: 8px 12px;
+    border: 0;
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+    background: transparent;
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.5;
+    text-align: left;
+    vertical-align: top;
+}
+.gato-setting .gato-setting__control table tr:first-child > * {
+    border-top: 0;
+}
+.gato-setting .gato-setting__control table thead th,
+.gato-setting .gato-setting__control table tbody th {
+    font-weight: 500;
+    color: var(--gato-text-muted);
+    background: var(--gato-surface-alt);
+}
+.gato-setting .gato-setting__control table thead th {
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
+}
+.gato-setting .gato-setting__control table.striped > tbody > :nth-child(odd) {
+    background: transparent;
+}
 .gato-table {
     border-collapse: collapse;
     width: 100%;

@@ -50,6 +50,8 @@ class Properties
     public final const HELP = 'help';
     // Link to the docs page about the setting
     public final const DOCS_URL = 'docsURL';
+    // A text field that takes the whole width of the row (eg: a message, a URL), instead of sitting beside the title
+    public final const FULL_WIDTH = 'fullWidth';
     // Unit after a number field (eg: "seconds")
     public final const UNIT = 'unit';
     // Example value shown inside an empty field

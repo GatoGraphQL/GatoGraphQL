@@ -6,19 +6,16 @@ namespace GatoGraphQL\GatoGraphQL\StaticHelpers;
 
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 
-use function array_is_list;
 use function array_map;
 use function count;
 use function in_array;
 use function is_array;
 use function is_bool;
 use function is_scalar;
-use function ksort;
 use function mb_strlen;
 use function mb_strtolower;
 use function mb_substr;
 use function preg_match;
-use function sort;
 use function strip_tags;
 use function trim;
 
@@ -32,8 +29,8 @@ class SettingsControlHelpers
      * Up to this many options, each this short at most, are shown
      * all at once as a segmented control, instead of a dropdown
      */
-    public final const SEGMENTED_MAX_OPTIONS = 4;
-    public final const SEGMENTED_MAX_LABEL_LENGTH = 22;
+    public final const SEGMENTED_MAX_OPTIONS = 5;
+    public final const SEGMENTED_MAX_LABEL_LENGTH = 24;
     public final const GRID_SEGMENTED_MAX_OPTIONS = 3;
     public final const GRID_SEGMENTED_MAX_LABEL_LENGTH = 20;
 
@@ -119,6 +116,19 @@ class SettingsControlHelpers
     }
 
     /**
+     * A field to type free text in (eg: a message, a URL), which
+     * takes the whole width of the row, as its definition asks.
+     * Short values (an ID, a name, a number) stay beside the title.
+     *
+     * @param array<string,mixed> $itemSetting
+     */
+    public static function isFullWidthInput(array $itemSetting): bool
+    {
+        return self::getControl($itemSetting) === Properties::CONTROL_INPUT
+            && ($itemSetting[Properties::FULL_WIDTH] ?? false);
+    }
+
+    /**
      * The control for each entry within a grid (one per key)
      *
      * @param array<string,mixed> $itemSetting
@@ -198,40 +208,6 @@ class SettingsControlHelpers
             $nonEmptyGroups[] = $group;
         }
         return $nonEmptyGroups;
-    }
-
-    /**
-     * Whether the stored value is other than the default one.
-     * Lists are compared in any order, and a boolean against
-     * the truthiness of the other value.
-     */
-    public static function differsFromDefault(mixed $value, mixed $defaultValue): bool
-    {
-        return self::normalizeForComparison($value) !== self::normalizeForComparison($defaultValue);
-    }
-
-    protected static function normalizeForComparison(mixed $value): mixed
-    {
-        if (is_bool($value)) {
-            return $value ? '1' : '';
-        }
-        if ($value === null) {
-            return '';
-        }
-        if (is_array($value)) {
-            if (array_is_list($value)) {
-                $normalized = array_map(self::normalizeForComparison(...), $value);
-                sort($normalized);
-                return $normalized;
-            }
-            $normalized = array_map(self::normalizeForComparison(...), $value);
-            ksort($normalized);
-            return $normalized;
-        }
-        if (is_scalar($value)) {
-            return (string) $value;
-        }
-        return $value;
     }
 
     /**

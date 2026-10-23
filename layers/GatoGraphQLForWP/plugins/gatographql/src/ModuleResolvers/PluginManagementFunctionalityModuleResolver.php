@@ -557,13 +557,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     {
         return match ($activatedLicense->status) {
             LicenseStatus::ACTIVE => [
-                'label' => $activatedLicense->activationLimit > 0
-                    ? sprintf(
-                        \_n('Active · %1$s/%2$s site', 'Active · %1$s/%2$s sites', $activatedLicense->activationLimit, 'gatographql'),
-                        $activatedLicense->activationUsage,
-                        $activatedLicense->activationLimit
-                    )
-                    : \__('Active', 'gatographql'),
+                'label' => \__('Active', 'gatographql'),
                 'tone' => Properties::KEY_STATUS_TONE_SUCCESS,
             ],
             LicenseStatus::EXPIRED => [

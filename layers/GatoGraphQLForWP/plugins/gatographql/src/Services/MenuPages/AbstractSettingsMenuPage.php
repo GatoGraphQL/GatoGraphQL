@@ -101,6 +101,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     public final const SAVE_ALL_IS_PARTIAL = 'isPartial';
 
     /**
+     * A grid with more entries than this can be filtered
+     */
+    public final const GRID_FILTER_MIN_ENTRIES = 12;
+
+    /**
      * @var array<array<string,mixed>>
      */
     protected ?array $settingsItems = null;
@@ -304,15 +309,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         return false;
     }
 
-    /**
-     * Whether to flag the settings whose value is other than the
-     * default one, with a link to reset them
-     */
-    protected function showSettingsChangedFromDefault(): bool
-    {
-        return !$this->printsSingleFormForAllCategories();
-    }
-
     public function getSaveAllActionName(): string
     {
         return $this->getScreenID() . '_save_all';
@@ -416,6 +412,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         <div id="gato-search-results" class="gato-search__results" role="listbox" hidden></div>
                     </div>
                 </div>
+                <hr class="wp-header-end">
                 <?php settings_errors(); ?>
                 <div class="nav-tab-container">
                     <!-- Tabs -->
@@ -530,17 +527,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                 ?>
                                                     <!-- Panels -->
                                                     <?php
-                                                    $sectionClass = $printModuleSettingsWithTabs ? 'tab-content' : '';
+                                                    /**
+                                                     * All the sections are printed one below the other, and the
+                                                     * tabs down the side scroll to them (see settings.js)
+                                                     */
                                                     foreach ($categorySettingsItems as $item) {
-                                                        $sectionStyle = '';
-                                                        if ($printModuleSettingsWithTabs) {
-                                                            $sectionStyle = sprintf(
-                                                                'display: %s;',
-                                                                $item['id'] === $activeModuleID ? 'block' : 'none'
-                                                            );
-                                                        }
                                                         ?>
-                                                        <div id="<?php echo esc_attr($item['id']) ?>" class="gatographql-settings-section gato-module <?php echo esc_attr($sectionClass) ?>" style="<?php echo esc_attr($sectionStyle) ?>" data-module-name="<?php echo esc_attr($item['name']) ?>">
+                                                        <div id="<?php echo esc_attr($item['id']) ?>" class="gatographql-settings-section gato-module" data-module-name="<?php echo esc_attr($item['name']) ?>"<?php echo $item['id'] === $activeModule ? ' data-module-requested="1"' : '' ?>>
                                                             <h2 class="gato-module__title"><?php echo esc_html($item['name']) ?></h2>
                                                             <?php $this->printModuleSettings($optionsFormName, $item) ?>
                                                         </div>
@@ -663,40 +656,27 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $module = $item['module'];
         /** @var array<array<string,mixed>> */
         $itemSettings = $item['settings'];
+        /** @var string */
+        $moduleName = $item['name'];
         foreach (SettingsControlHelpers::getGroups($itemSettings) as $group) {
             $heading = $group['heading'];
-            $settingsCount = count(array_filter(
-                $group['settings'],
-                fn (array $itemSetting) => isset($itemSetting[Properties::INPUT])
-            ));
             ?>
             <section class="gato-card">
                 <?php if ($heading !== null) : ?>
                     <?php
                     /** @var string */
                     $headingTitle = $heading[Properties::TITLE] ?? '';
-                    /** @var string|null */
-                    $headingScope = $heading[Properties::SCOPE] ?? null;
+                    $headingScope = $this->getGroupScope($heading, $moduleName);
                     /** @var string */
                     $headingDescription = $heading[Properties::DESCRIPTION] ?? '';
                     ?>
                     <div class="gato-card__head">
                         <span class="gato-card__heading">
                             <span class="gato-card__title"><?php echo esc_html($this->getGroupTitle($headingTitle)) ?></span>
-                            <?php if ($headingScope !== null && $headingScope !== '') : ?>
+                            <?php if ($headingScope !== null) : ?>
                                 <span class="gato-scope"><?php echo esc_html($headingScope) ?></span>
                             <?php endif; ?>
                         </span>
-                        <?php if ($settingsCount > 1) : ?>
-                            <span class="gato-card__count">
-                                <?php
-                                echo esc_html(sprintf(
-                                    __('%s settings', 'gatographql'),
-                                    $settingsCount
-                                ));
-                                ?>
-                            </span>
-                        <?php endif; ?>
                     </div>
                     <?php if (trim($headingDescription) !== '') : ?>
                         <div class="gato-card__description"><?php echo $headingDescription; ?></div>
@@ -710,6 +690,23 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             </section>
             <?php
         }
+    }
+
+    /**
+     * The scope of a group, as text. None when it only repeats
+     * the name of the section it is in.
+     *
+     * @param array<string,mixed> $heading
+     */
+    protected function getGroupScope(array $heading, string $moduleName): ?string
+    {
+        /** @var string */
+        $scope = $heading[Properties::SCOPE] ?? '';
+        $scope = trim(wp_strip_all_tags($scope));
+        if ($scope === '' || strtolower($scope) === strtolower(trim(wp_strip_all_tags($moduleName)))) {
+            return null;
+        }
+        return $scope;
     }
 
     /**
@@ -761,7 +758,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         /** @var string|null */
         $option = $itemSetting[Properties::INPUT] ?? null;
 
-        $isChanged = $option !== null && $this->showSettingsChangedFromDefault() && $this->isSettingChangedFromDefault($module, $itemSetting);
         $dependsOn = $this->getDependsOn($optionsFormName, $module, $itemSetting, $moduleItemSettings);
 
         $isWide = in_array($control, [
@@ -771,7 +767,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             Properties::CONTROL_TAGS,
             Properties::CONTROL_TEXTAREA,
             Properties::CONTROL_CHIPS,
-        ]);
+        ]) || SettingsControlHelpers::isFullWidthInput($itemSetting);
         $searchText = $option === null ? '' : $this->getSearchText([$title, $description, $help, implode(' ', $searchKeywords)]);
         $settingClasses = [
             'gatographql-settings-item',
@@ -800,7 +796,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         >
             <?php if ($hasTitle || trim($description) !== '' || $help !== '' || $dependsOn !== null) : ?>
                 <div class="gato-setting__main">
-                    <?php if ($hasTitle || $isChanged || $docsURL !== null) : ?>
+                    <?php if ($hasTitle || $docsURL !== null) : ?>
                         <div class="gato-setting__title">
                             <?php if ($hasTitle) : ?>
                                 <?php if ($this->isLabelableControl($control)) : ?>
@@ -808,10 +804,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 <?php else : ?>
                                     <span id="<?php echo esc_attr($titleID) ?>"><?php echo $title ?></span>
                                 <?php endif; ?>
-                            <?php endif; ?>
-                            <?php if ($isChanged) : ?>
-                                <span class="gato-badge gato-badge--changed"><?php esc_html_e('Changed', 'gatographql') ?></span>
-                                <a href="#" class="gato-setting__reset" data-js-only hidden><?php esc_html_e('Reset', 'gatographql') ?></a>
                             <?php endif; ?>
                             <?php if ($docsURL !== null) : ?>
                                 <a href="<?php echo esc_url($docsURL) ?>" class="gato-setting__docs" target="_blank" rel="noopener noreferrer"><?php esc_html_e('Docs', 'gatographql') ?><span aria-hidden="true"> ↗</span><span class="screen-reader-text"><?php esc_html_e('(opens in a new tab)', 'gatographql') ?></span></a>
@@ -887,35 +879,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * Get the value of the setting to compare against its default one
-     *
-     * @param array<string,mixed> $itemSetting
-     */
-    protected function isSettingChangedFromDefault(string $module, array $itemSetting): bool
-    {
-        /** @var string */
-        $option = $itemSetting[Properties::INPUT];
-        $value = $this->getOptionValue($module, $option);
-        $defaultValue = $this->getOptionDefaultValue($module, $option);
-        if (($itemSetting[Properties::TYPE] ?? null) === Properties::TYPE_PROPERTY_ARRAY) {
-            /** @var array<string|int,string> */
-            $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
-            foreach (array_keys($keyLabels) as $key) {
-                if (
-                    SettingsControlHelpers::differsFromDefault(
-                        $this->getPropertyArrayEntryValue($value, $key, $itemSetting),
-                        $this->getPropertyArrayEntryValue($defaultValue, $key, $itemSetting),
-                    )
-                ) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return SettingsControlHelpers::differsFromDefault($value, $defaultValue);
-    }
-
-    /**
      * The value for a key of a Property Array, or the default
      * value for an entry when it has none
      *
@@ -930,11 +893,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             return false;
         }
         return $itemSetting[Properties::DEFAULT_VALUE] ?? null;
-    }
-
-    protected function getOptionDefaultValue(string $module, string $option): mixed
-    {
-        return $this->getModuleRegistry()->getModuleResolver($module)->getSettingsDefaultValue($module, $option);
     }
 
     /**
@@ -1086,8 +1044,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 'hide' => __('Hide', 'gatographql'),
                 'filter' => __('Filter', 'gatographql'),
                 'selectedCount' => __('%1$s of %2$s selected', 'gatographql'),
-                'showAll' => __('All (%s)', 'gatographql'),
-                'showNotDefault' => __('Not default (%s)', 'gatographql'),
                 'setAllTo' => __('Set all to:', 'gatographql'),
                 'addEntry' => __('Add an entry, then press Enter', 'gatographql'),
                 'removeEntry' => __('Remove %s', 'gatographql'),
@@ -1112,26 +1068,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
-     * The attribute holding the default value, for "Reset"
-     */
-    protected function getDefaultValueAttribute(mixed $defaultValue): string
-    {
-        if (!$this->showSettingsChangedFromDefault()) {
-            return '';
-        }
-        if (is_array($defaultValue)) {
-            return sprintf('data-default="%s"', esc_attr((string) json_encode(array_values(array_map(
-                fn (mixed $value) => is_scalar($value) ? (string) $value : '',
-                $defaultValue
-            )))));
-        }
-        if (is_bool($defaultValue)) {
-            return sprintf('data-default="%s"', $defaultValue ? '1' : '');
-        }
-        return sprintf('data-default="%s"', esc_attr(is_scalar($defaultValue) ? (string) $defaultValue : ''));
-    }
-
-    /**
      * Display a checkbox field, as a switch
      *
      * @param array<string,mixed> $itemSetting
@@ -1143,10 +1079,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         /** @var string */
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
         ?>
             <label class="gato-switch">
-                <input type="checkbox" class="gato-switch__input" name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> <?php echo $this->getDefaultValueAttribute((bool) $defaultValue) ?> />
+                <input type="checkbox" class="gato-switch__input" name="<?php echo esc_attr($optionsFormName . '[' . $name . ']'); ?>" id="<?php echo esc_attr($name); ?>" value="1" <?php checked(1, $value); ?> />
                 <span class="gato-switch__track" aria-hidden="true"><span class="gato-switch__knob"></span></span>
                 <span class="gato-switch__state" aria-hidden="true"><span class="gato-switch__on"><?php esc_html_e('On', 'gatographql') ?></span><span class="gato-switch__off"><?php esc_html_e('Off', 'gatographql') ?></span></span>
             </label>
@@ -1178,7 +1113,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         /** @var string */
         $input = $itemSetting[Properties::INPUT];
         $value = $this->getOptionValue($module, $input);
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
         $isNumber = isset($itemSetting[Properties::TYPE]) && $itemSetting[Properties::TYPE] === Properties::TYPE_INT;
         $minNumber = null;
         $maxNumber = null;
@@ -1204,13 +1138,16 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php if ($placeholder !== null) : ?>
                     placeholder="<?php echo esc_attr($placeholder) ?>"
                 <?php endif; ?>
-                <?php echo $this->getDefaultValueAttribute($defaultValue) ?>
+               
             ><?php echo esc_textarea(is_scalar($value) ? (string) $value : '') ?></textarea>
             <?php
             return;
         }
         ?>
             <span class="gato-input-group">
+                <?php if ($unit !== null) : ?>
+                    <span class="gato-affix">
+                <?php endif; ?>
                 <input
                     name="<?php echo esc_attr($fieldName); ?>"
                     id="<?php echo esc_attr($name); ?>"
@@ -1234,10 +1171,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     <?php } else { ?>
                         type="text"
                     <?php } ?>
-                    <?php echo $this->getDefaultValueAttribute($defaultValue) ?>
+                   
                 />
                 <?php if ($unit !== null) : ?>
-                    <span class="gato-input-group__unit"><?php echo esc_html($unit) ?></span>
+                        <span class="gato-affix__unit"><?php echo esc_html($unit) ?></span>
+                    </span>
                 <?php endif; ?>
                 <?php if ($isPassword) : ?>
                     <button type="button" class="button gato-password-toggle" aria-controls="<?php echo esc_attr($name) ?>" aria-pressed="false" data-js-only hidden><?php esc_html_e('Show', 'gatographql') ?></button>
@@ -1263,7 +1201,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         if (!is_array($value)) {
             $value = $value === null ? [] : [$value];
         }
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
         /** @var array<string|int,string> */
         $keyLabels = $itemSetting[Properties::KEY_LABELS] ?? [];
         /** @var array<string|int,string> */
@@ -1280,7 +1217,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php foreach ($keyLabels as $key => $label) : ?>
                     <?php $id = $name . '_' . $key; ?>
                     <label class="gato-chip" for="<?php echo esc_attr($id) ?>">
-                        <input type="checkbox" name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo esc_attr($id); ?>" value="1" <?php checked(true, (bool) $this->getPropertyArrayEntryValue($value, $key, $itemSetting)); ?> <?php echo $this->getDefaultValueAttribute((bool) $this->getPropertyArrayEntryValue($defaultValue, $key, $itemSetting)) ?> />
+                        <input type="checkbox" name="<?php echo esc_attr($optionsFormName . '[' . $name . '][' . $key . ']'); ?>" id="<?php echo esc_attr($id); ?>" value="1" <?php checked(true, (bool) $this->getPropertyArrayEntryValue($value, $key, $itemSetting)); ?> />
                         <span><?php echo esc_html($label); ?></span>
                     </label>
                 <?php endforeach; ?>
@@ -1289,20 +1226,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             return;
         }
 
-        $isBig = count($keyLabels) > 6;
+        $isBig = count($keyLabels) > self::GRID_FILTER_MIN_ENTRIES;
         $canSetAll = $possibleValues !== [] && !$isMultiple;
         ?>
         <div class="gato-grid-field" data-grid>
             <?php if ($isBig) : ?>
                 <div class="gato-grid-field__bar" data-js-only hidden>
-                    <span class="gato-grid-field__tools">
-                        <input type="search" class="gato-filter" data-grid-filter />
-                        <span class="gato-seg gato-seg--sm gato-seg--buttons" role="group">
-                            <button type="button" data-grid-show="all" aria-pressed="true"></button>
-                            <button type="button" data-grid-show="changed" aria-pressed="false"></button>
-                        </span>
-                    </span>
-                    <span class="gato-grid-field__summary" aria-live="polite"></span>
+                    <input type="search" class="gato-filter" data-grid-filter />
                 </div>
             <?php endif; ?>
             <?php if ($canSetAll) : ?>
@@ -1321,7 +1251,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     ?>
                 </div>
             <?php endif; ?>
-            <div class="gato-grid">
+            <div class="gato-grid<?php echo $entryControl === Properties::CONTROL_INPUT ? ' gato-grid--single' : '' ?>">
                 <?php
                 /** @var array<string|int,array{label:string,tone?:string,detail?:string}> */
                 $keyStatuses = $itemSetting[Properties::KEY_STATUSES] ?? [];
@@ -1330,7 +1260,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     $id = $name . '_' . $key;
                     $entryName = $optionsFormName . '[' . $name . '][' . $key . ']';
                     $entryValue = $this->getPropertyArrayEntryValue($value, $key, $itemSetting);
-                    $entryDefaultValue = $this->getPropertyArrayEntryValue($defaultValue, $key, $itemSetting);
                     $showKey = strtolower(trim((string) $key)) !== strtolower(trim($label));
                     $labelID = 'label-' . $id;
                     ?>
@@ -1362,7 +1291,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 <?php else : ?>
                                     type="text"
                                 <?php endif; ?>
-                                <?php echo $this->getDefaultValueAttribute($entryDefaultValue) ?>
+                               
                             >
                             <?php
                         } elseif ($entryControl === Properties::CONTROL_SEGMENTED) {
@@ -1371,7 +1300,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 $id,
                                 $possibleValues,
                                 [$entryValue],
-                                $entryDefaultValue,
                                 $labelID,
                                 true
                             );
@@ -1386,7 +1314,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                     multiple="multiple"
                                     size="10"
                                 <?php endif; ?>
-                                <?php echo $this->getDefaultValueAttribute($entryDefaultValue) ?>
+                               
                             >
                             <?php $this->printSelectOptions($possibleValues, $currentValues, !$isMultiple); ?>
                             </select>
@@ -1452,7 +1380,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         string $id,
         array $possibleValues,
         array $currentValues,
-        mixed $defaultValue,
         ?string $labelledByID,
         bool $isSmall,
     ): void {
@@ -1464,7 +1391,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             $hasChecked = true;
             break;
         }
-        $defaultValueAttribute = $this->getDefaultValueAttribute($defaultValue);
         ?>
         <span
             class="gato-seg<?php echo $isSmall ? ' gato-seg--sm' : '' ?>"
@@ -1489,7 +1415,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                         id="<?php echo esc_attr($radioID) ?>"
                         value="<?php echo esc_attr((string) $optionValue) ?>"
                         <?php checked(true, $isChecked) ?>
-                        <?php echo $defaultValueAttribute ?>
                     />
                     <span><?php echo esc_html($optionLabel) ?></span>
                 </label>
@@ -1522,7 +1447,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
             $name,
             $possibleValues,
             is_array($value) ? $value : [$value],
-            $this->getOptionDefaultValue($module, $input),
             $titleID,
             false
         );
@@ -1542,10 +1466,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         $value = $this->getOptionValue($module, $input);
         if (!is_array($value)) {
             $value = $value === null ? [] : [$value];
-        }
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
-        if (!is_array($defaultValue)) {
-            $defaultValue = $defaultValue === null ? [] : [$defaultValue];
         }
         /** @var array<string|int,string> */
         $possibleValues = $itemSetting[Properties::POSSIBLE_VALUES] ?? [];
@@ -1589,7 +1509,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             id="<?php echo esc_attr($checkboxID) ?>"
                             value="<?php echo esc_attr((string) $optionValue) ?>"
                             <?php checked(true, SettingsControlHelpers::isSelectedValue($optionValue, $value)) ?>
-                            <?php echo $this->getDefaultValueAttribute(SettingsControlHelpers::isSelectedValue($optionValue, $defaultValue)) ?>
+                           
                         />
                         <span><?php echo esc_html($optionLabel) ?></span>
                     </label>
@@ -1634,7 +1554,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         if ($sortValues) {
             ksort($possibleValues);
         }
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
         ?>
             <select
                 name="<?php echo esc_attr($optionsFormName . '[' . $name . ']' . ($isMultiple ? '[]' : '')); ?>"
@@ -1644,7 +1563,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     multiple="multiple"
                     size="10"
                 <?php endif; ?>
-                <?php echo $this->getDefaultValueAttribute($defaultValue) ?>
+               
             >
             <?php $this->printSelectOptions($possibleValues, $value, !$isMultiple); ?>
             </select>
@@ -1668,10 +1587,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         if (!is_array($value)) {
             $value = $value === null || $value === '' ? [] : [$value];
         }
-        $defaultValue = $this->getOptionDefaultValue($module, $input);
-        if (!is_array($defaultValue)) {
-            $defaultValue = $defaultValue === null || $defaultValue === '' ? [] : [$defaultValue];
-        }
         /** @var string|null */
         $placeholder = $itemSetting[Properties::PLACEHOLDER] ?? null;
         $isTags = SettingsControlHelpers::getControl($itemSetting) === Properties::CONTROL_TAGS;
@@ -1687,9 +1602,6 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php endif; ?>
                 <?php if ($placeholder !== null) : ?>
                     placeholder="<?php echo esc_attr($placeholder) ?>"
-                <?php endif; ?>
-                <?php if ($this->showSettingsChangedFromDefault()) : ?>
-                    data-default="<?php echo esc_attr(implode("\n", array_map(fn (mixed $entry) => is_scalar($entry) ? (string) $entry : '', $defaultValue))) ?>"
                 <?php endif; ?>
             ><?php echo esc_textarea(implode("\n", array_map(fn (mixed $entry) => is_scalar($entry) ? (string) $entry : '', $value))) ?></textarea>
         <?php

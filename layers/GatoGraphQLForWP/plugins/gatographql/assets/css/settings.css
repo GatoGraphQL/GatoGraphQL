@@ -2,6 +2,14 @@
  * Settings page layout, on top of gato-ui.css
  */
 
+/* As wide as the dashboards, at most */
+.gato-settings.wrap {
+    max-width: var(--gato-page-max-width);
+}
+.gato-settings .wp-header-end {
+    margin: 0;
+}
+
 .gato-settings__top {
     display: flex;
     flex-wrap: wrap;
@@ -111,21 +119,51 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: flex-end;
+    gap: 2px;
     position: relative;
     z-index: 21;
+    padding: 0;
+    border-bottom: var(--gato-border-width) solid var(--gato-border);
 }
 .gato-settings.has-js .gato-tabs {
     overflow: visible;
 }
-.gato-settings .gato-tabs > a.nav-tab {
+.gato-settings .gato-tabs > a.nav-tab,
+.gato-tabs__more-button {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     white-space: nowrap;
     flex-shrink: 0;
+    margin: 0 0 calc(-1 * var(--gato-border-width));
+    padding: 10px 14px;
+    border: 0;
+    border-bottom: var(--gato-tab-indicator-width) solid transparent;
+    border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
+    background: transparent;
+    color: var(--gato-tab-text);
+    font-size: var(--gato-font-size);
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color .15s, background-color .15s, border-color .15s;
 }
-.gato-settings .gato-tabs > a.nav-tab-active {
-    background: #f0f0f1;
+.gato-settings .gato-tabs > a.nav-tab:hover,
+.gato-tabs__more-button:hover {
+    background: var(--gato-tab-bg-hover);
+    color: var(--gato-tab-text-hover);
+}
+.gato-settings .gato-tabs > a.nav-tab-active,
+.gato-settings .gato-tabs > a.nav-tab-active:hover,
+.gato-settings .gato-tabs > a.nav-tab-active:focus,
+.gato-tabs__more-button.is-active {
+    background: transparent;
+    color: var(--gato-tab-text-active);
+    border-bottom-color: var(--gato-tab-indicator);
+    font-weight: 600;
+}
+.gato-settings .gato-tabs > a.nav-tab:focus-visible,
+.gato-tabs__more-button:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
 }
 .gato-settings .gato-tabs > a.nav-tab.is-overflowing {
     display: none;
@@ -133,28 +171,10 @@
 .gato-tabs__more {
     position: relative;
     flex-shrink: 0;
-    margin-left: .5em;
 }
 .gato-tabs__more-button {
-    display: inline-flex;
-    gap: 6px;
-    align-items: center;
-    padding: 5px 10px;
-    font-size: 14px;
-    line-height: 1.71428571;
-    font-weight: 600;
     font-family: inherit;
-    color: var(--gato-accent);
-    background: transparent;
-    border: 1px solid transparent;
     cursor: pointer;
-    white-space: nowrap;
-}
-.gato-tabs__more-button.is-active {
-    color: var(--gato-text);
-    background: #f0f0f1;
-    border-color: #c3c4c7;
-    border-bottom-color: #f0f0f1;
 }
 .gato-tabs__menu {
     position: absolute;
@@ -242,13 +262,15 @@
 /* A module's settings */
 .gato-module {
     min-width: 0;
+    /* Once its tab down the side scrolls to it (WordPress already leaves room for the admin bar) */
+    scroll-margin-top: 16px;
 }
 .gato-settings .gato-module__title {
     margin: 0 0 12px;
     font-size: 19px;
     font-weight: 600;
 }
-.gato-settings .wrap:not(.vertical-tabs) .gato-module + .gato-module {
+.gato-settings .gato-module + .gato-module {
     margin-top: var(--gato-section-gap);
 }
 
