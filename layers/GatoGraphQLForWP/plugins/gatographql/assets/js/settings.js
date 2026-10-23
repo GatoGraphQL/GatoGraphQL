@@ -1176,6 +1176,17 @@
 					goToInvalidJSONField( page, invalidJSONFields[ 0 ] );
 					return;
 				}
+				/**
+				 * options.php goes back to the referer, the URL the page
+				 * was loaded with: point it at the tab shown now, as
+				 * "Save all changes" does (eg: activating a license, from
+				 * the Plugin Management tab)
+				 */
+				const referer = form.querySelector( 'input[name="_wp_http_referer"]' );
+				if ( referer ) {
+					const url = new URL( getRedirectURL() );
+					referer.value = url.pathname + url.search;
+				}
 				submittingForms.add( form );
 			} );
 		} );
