@@ -31,7 +31,7 @@ The property name to use can be configured in the "General > Server IP" section 
 
 <div class="img-width-1024" markdown=1>
 
-![Configuring the $_SERVER property name to retrieve the client IP](../../images/settings-general-client-ip-address-server-property-name.webp "Configuring the $_SERVER property name to retrieve the client IP")
+![Configuring the Client IP property](../../images/settings-general-client-ip-address-server-property-name.webp "Configuring the Client IP property")
 
 </div>
 
