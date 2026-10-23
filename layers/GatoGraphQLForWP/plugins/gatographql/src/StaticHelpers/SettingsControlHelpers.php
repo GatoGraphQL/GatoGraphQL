@@ -329,8 +329,9 @@ class SettingsControlHelpers
     }
 
     /**
-     * A JSON value, indented to read it. A value that is not valid
-     * JSON stays as it is, for the user to fix it.
+     * A JSON value, indented to read it. A value that is not valid JSON,
+     * or that indenting would write differently (eg: `1.0` printed as
+     * `1`, or `"\u00e9"` as `"é"`), stays as it is.
      */
     public static function formatJSON(string $value): string
     {
@@ -338,31 +339,48 @@ class SettingsControlHelpers
             return $value;
         }
         $decoded = json_decode($value);
-        if ($decoded === null && trim($value) !== 'null') {
+        if (json_last_error() !== JSON_ERROR_NONE) {
             return $value;
         }
-        $formatted = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        return $formatted === false ? $value : $formatted;
+        $formatted = json_encode($decoded, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_PRESERVE_ZERO_FRACTION);
+        if ($formatted === false || !self::isSameJSON($formatted, $value)) {
+            return $value;
+        }
+        return $formatted;
     }
 
     /**
-     * Whether both texts hold the same JSON, however indented. A text
-     * that is not valid JSON is the same only as the very same text.
+     * Whether both texts hold the same JSON, written the same but for
+     * the whitespace between its tokens. A text that is not valid JSON
+     * is the same only as the very same text.
      */
     public static function isSameJSON(string $value, string $otherValue): bool
     {
         if ($value === $otherValue) {
             return true;
         }
-        $decoded = json_decode($value, true);
+        json_decode($value);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return false;
         }
-        $otherDecoded = json_decode($otherValue, true);
+        json_decode($otherValue);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return false;
         }
-        return $decoded === $otherDecoded;
+        return self::removeJSONWhitespace($value) === self::removeJSONWhitespace($otherValue);
+    }
+
+    /**
+     * The JSON text without the whitespace between its tokens (the one
+     * within its strings stays)
+     */
+    private static function removeJSONWhitespace(string $value): string
+    {
+        return (string) preg_replace_callback(
+            '/"(?:[^"\\\\]|\\\\.)*"|\s+/s',
+            fn (array $matches): string => $matches[0][0] === '"' ? $matches[0] : '',
+            $value
+        );
     }
 
     /**

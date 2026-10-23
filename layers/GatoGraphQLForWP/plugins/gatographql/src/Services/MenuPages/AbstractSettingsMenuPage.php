@@ -99,6 +99,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     public final const SAVE_ALL_FIELD_COUNT = 'fieldCount';
     public final const SAVE_ALL_REDIRECT = 'redirect';
     public final const SAVE_ALL_IS_PARTIAL = 'isPartial';
+    public final const SAVE_ALL_IS_FIRST = 'isFirst';
 
     /**
      * A grid with more entries than this can be filtered
@@ -562,6 +563,16 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                                         $optionsFormOrigin,
                                                         $time,
                                                     );
+                                                } else {
+                                                    /**
+                                                     * The category is submitted also when none of its
+                                                     * fields is (eg: all its switches turned off), so its
+                                                     * values are not taken as missing, and replaced with
+                                                     * the defaults
+                                                     */
+                                                    ?>
+                                                    <input type="hidden" name="<?php echo esc_attr($optionsFormName)?>[<?php echo esc_attr(self::FORM_FIELD_LAST_SAVED_TIMESTAMP) ?>]" value="<?php echo esc_attr((string)$time) ?>">
+                                                    <?php
                                                 }
                                                 ?>
                                                     <!-- Panels -->
@@ -1169,7 +1180,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 'oneChange' => __('1 unsaved change:', 'gatographql'),
                 'manyChanges' => __('%s unsaved changes:', 'gatographql'),
                 'saving' => __('Saving…', 'gatographql'),
-                'tooManyFields' => __('The "%s" tab has more fields than the server accepts in one request (max_input_vars), so it can\'t be saved from here.', 'gatographql'),
+                'tooManyFields' => __('The "%s" tab has more fields than the server accepts in one request, so it can\'t be saved. To save it, raise the PHP setting max_input_vars.', 'gatographql'),
                 'saveFailed' => __('The changes could not be saved: %s', 'gatographql'),
                 'invalidJSON' => __('This is not valid JSON: %s', 'gatographql'),
                 'oneInvalidJSON' => __('Fix the JSON in 1 field to save the changes:', 'gatographql'),
@@ -1889,6 +1900,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         /** @var array<string,mixed> */
         $saveAll = $post[self::SAVE_ALL] ?? [];
         $isPartial = !empty($saveAll[self::SAVE_ALL_IS_PARTIAL]);
+        $isFirst = !empty($saveAll[self::SAVE_ALL_IS_FIRST]);
 
         if (!current_user_can('manage_options')) {
             wp_die(esc_html__('Sorry, you are not allowed to manage options for this site.', 'gatographql'), 403);
@@ -1912,8 +1924,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         }
 
         $transientName = $this->getSaveAllNoticesTransientName();
-        /** @var array<array<string,string>> */
-        $previousNotices = get_transient($transientName) ?: [];
+        /**
+         * The notices of the batches sent before, in this same save (a save
+         * left unfinished must not add its notices to the next one)
+         *
+         * @var array<array<string,string>>
+         */
+        $previousNotices = $isFirst ? [] : (get_transient($transientName) ?: []);
         $notices = array_merge($previousNotices, get_settings_errors());
         if ($isPartial) {
             set_transient($transientName, $notices, 300);

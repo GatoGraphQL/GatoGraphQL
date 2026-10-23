@@ -535,7 +535,7 @@
 	 * The JSON textareas within the element whose value is not valid JSON
 	 */
 	function getInvalidJSONFields( element ) {
-		return Array.from( element.querySelectorAll( 'textarea[data-json]' ) ).filter( ( textarea ) => getJSONError( textarea ) !== '' );
+		return Array.from( element.querySelectorAll( 'textarea[data-json]' ) ).filter( ( textarea ) => textarea.value !== textarea.defaultValue && getJSONError( textarea ) !== '' );
 	}
 
 	/**
@@ -591,7 +591,7 @@
 				const value = textarea.value;
 				const parsed = JSON.parse( value );
 				const formatted = JSON.stringify( parsed, null, 4 );
-				if ( reformat && formatted !== value ) {
+				if ( reformat && formatted !== value && value !== textarea.defaultValue ) {
 					textarea.value = formatted;
 					textarea.dispatchEvent( new Event( 'input', { bubbles: true } ) );
 				}
@@ -681,6 +681,44 @@
 			};
 			rows.forEach( ( row ) => row.querySelector( 'input.gato-input' ).addEventListener( 'input', updateAll ) );
 			updateAll();
+		} );
+	}
+
+	/**
+	 * Enter in a field does what that field is for, instead of submitting
+	 * its form through the form's first submit button (which may be the
+	 * hidden button of another entry): in a field the form doesn't submit
+	 * (eg: a filter), nothing; in an entry with buttons beside it (eg: a
+	 * license key), the step its button takes; in a tab saved with the
+	 * others, "Save all changes".
+	 */
+	function initEnterKey( page ) {
+		const NON_TEXT_TYPES = [ 'button', 'submit', 'reset', 'checkbox', 'radio', 'file', 'image' ];
+		page.addEventListener( 'keydown', ( event ) => {
+			const input = event.target;
+			if ( event.key !== 'Enter' || ! ( input instanceof HTMLInputElement ) || NON_TEXT_TYPES.includes( input.type ) ) {
+				return;
+			}
+			if ( ! input.name ) {
+				event.preventDefault();
+				return;
+			}
+			const row = input.closest( '.gato-grid__row' );
+			if ( row && row.querySelector( '[data-entry-edit]' ) ) {
+				event.preventDefault();
+				const step = Array.from( row.querySelectorAll( '[data-entry-edit], [data-entry-step]' ) ).find( ( button ) => ! button.hidden );
+				if ( step ) {
+					step.click();
+				}
+				return;
+			}
+			const saveButton = page.querySelector( '.gato-savebar__save' );
+			if ( page.classList.contains( 'has-save-all' ) && input.form && input.form.dataset.saveWithOthers === '1' && saveButton ) {
+				event.preventDefault();
+				if ( ! saveButton.disabled ) {
+					saveButton.click();
+				}
+			}
 		} );
 	}
 
@@ -910,7 +948,7 @@
 			}
 			const changedForms = savableForms.filter( ( form ) => changedByForm.get( form ).length > 0 );
 			const total = changedForms.reduce( ( sum, form ) => sum + changedByForm.get( form ).length, 0 );
-			const invalidJSONFields = Array.from( page.querySelectorAll( 'textarea[data-json][aria-invalid="true"]' ) ).filter( ( textarea ) => changedForms.includes( textarea.form ) );
+			const invalidJSONFields = Array.from( page.querySelectorAll( 'textarea[data-json][aria-invalid="true"]' ) ).filter( ( textarea ) => changedForms.includes( textarea.form ) && textarea.value !== textarea.defaultValue );
 			saveButton.disabled = total === 0 || invalidJSONFields.length > 0;
 			discardButton.disabled = total === 0;
 			status.classList.remove( 'is-error' );
@@ -1006,7 +1044,7 @@
 		 * The fields of the request, the meta ones first, so that
 		 * PHP drops the fields past max_input_vars, never these
 		 */
-		const buildRequestEntries = ( batchForms, isPartial ) => {
+		const buildRequestEntries = ( batchForms, isPartial, isFirst ) => {
 			const prefix = 'gato-save-all';
 			const meta = [ [ 'action', page.dataset.saveAllAction ] ];
 			batchForms.forEach( ( form ) => {
@@ -1016,6 +1054,9 @@
 			meta.push( [ prefix + '[redirect]', getRedirectURL() ] );
 			if ( isPartial ) {
 				meta.push( [ prefix + '[isPartial]', '1' ] );
+			}
+			if ( isFirst ) {
+				meta.push( [ prefix + '[isFirst]', '1' ] );
 			}
 			const fields = batchForms.flatMap( getEntries );
 			const fieldCount = meta.length + 1 + fields.length;
@@ -1089,9 +1130,9 @@
 			discardButton.disabled = true;
 			status.textContent = l10n.saving;
 			try {
-				for ( const batch of batches.slice( 0, -1 ) ) {
+				for ( const [ index, batch ] of batches.slice( 0, -1 ).entries() ) {
 					const body = new URLSearchParams();
-					buildRequestEntries( batch, true ).forEach( ( [ name, value ] ) => body.append( name, value ) );
+					buildRequestEntries( batch, true, index === 0 ).forEach( ( [ name, value ] ) => body.append( name, value ) );
 					const response = await fetch( page.dataset.saveAllUrl, {
 						method: 'POST',
 						credentials: 'same-origin',
@@ -1110,11 +1151,11 @@
 				return;
 			}
 			changedForms.forEach( ( form ) => submittingForms.add( form ) );
-			submitNatively( buildRequestEntries( batches[ batches.length - 1 ], false ) );
+			submitNatively( buildRequestEntries( batches[ batches.length - 1 ], false, batches.length === 1 ) );
 		};
 
 		const discard = () => {
-			forms.forEach( ( form ) => {
+			savableForms.forEach( ( form ) => {
 				const snapshot = initialValues.get( form );
 				getChangedSettings( form ).forEach( ( setting ) => {
 					getFieldNames( setting ).forEach( ( name ) => {
@@ -1192,6 +1233,7 @@
 		initSectionNav( page );
 		const moreTabs = initMoreTabs( page );
 		initSaveAll( page, moreTabs );
+		initEnterKey( page );
 	}
 
 	if ( document.readyState === 'loading' ) {

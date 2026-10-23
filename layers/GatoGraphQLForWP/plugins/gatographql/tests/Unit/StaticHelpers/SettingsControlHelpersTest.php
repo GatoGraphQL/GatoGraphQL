@@ -275,4 +275,17 @@ class SettingsControlHelpersTest extends TestCase
         $this->assertTrue(SettingsControlHelpers::isSameJSON('{oops', '{oops'));
         $this->assertFalse(SettingsControlHelpers::isSameJSON('', 'null'));
     }
+
+    public function testIndentingJSONNeverChangesItsValue(): void
+    {
+        $this->assertSame("{\n    \"temperature\": 1.0\n}", SettingsControlHelpers::formatJSON('{"temperature":1.0}'));
+        $this->assertSame('{"id":12345678901234567890}', SettingsControlHelpers::formatJSON('{"id":12345678901234567890}'));
+        $this->assertSame('{oops', SettingsControlHelpers::formatJSON('{oops'));
+        $this->assertSame("{\n    \"a\": [\n        1,\n        \"b\"\n    ]\n}", SettingsControlHelpers::formatJSON('{"a":[1,"b"]}'));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{"temperature":1.0}', '{"temperature":1}'));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{"id":12345678901234567890}', '{"id":12345678901234567891}'));
+        $this->assertSame('{"name":"\\u00e9"}', SettingsControlHelpers::formatJSON('{"name":"\\u00e9"}'));
+        $this->assertTrue(SettingsControlHelpers::isSameJSON('{"a": "x y", "b": []}', "{\n    \"a\": \"x y\",\n    \"b\": []\n}"));
+        $this->assertFalse(SettingsControlHelpers::isSameJSON('{"a":"x y"}', '{"a":"xy"}'));
+    }
 }
