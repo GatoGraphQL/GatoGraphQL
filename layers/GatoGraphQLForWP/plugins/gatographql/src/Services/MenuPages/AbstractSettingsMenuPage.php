@@ -1133,8 +1133,8 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 'tooManyFields' => __('The "%s" tab has more fields than the server accepts in one request (max_input_vars), so it can\'t be saved from here.', 'gatographql'),
                 'saveFailed' => __('The changes could not be saved: %s', 'gatographql'),
                 'invalidJSON' => __('This is not valid JSON: %s', 'gatographql'),
-                'show' => __('Show', 'gatographql'),
-                'hide' => __('Hide', 'gatographql'),
+                'oneInvalidJSON' => __('Fix the JSON in 1 field to save the changes:', 'gatographql'),
+                'manyInvalidJSON' => __('Fix the JSON in %s fields to save the changes:', 'gatographql'),
                 'filter' => __('Filter', 'gatographql'),
                 'selectedCount' => __('%1$s of %2$s selected', 'gatographql'),
                 'setAllTo' => __('Set all to:', 'gatographql'),
@@ -1253,6 +1253,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                 <?php if ($unit !== null) : ?>
                     <span class="gato-affix">
                 <?php endif; ?>
+                <?php if ($isPassword) : ?>
+                    <span class="gato-password">
+                <?php endif; ?>
                 <input
                     name="<?php echo esc_attr($fieldName); ?>"
                     id="<?php echo esc_attr($name); ?>"
@@ -1278,12 +1281,13 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                     <?php } ?>
                    
                 />
+                <?php if ($isPassword) : ?>
+                        <?php $this->printPasswordToggle($name); ?>
+                    </span>
+                <?php endif; ?>
                 <?php if ($unit !== null) : ?>
                         <span class="gato-affix__unit"><?php echo esc_html($unit) ?></span>
                     </span>
-                <?php endif; ?>
-                <?php if ($isPassword) : ?>
-                    <button type="button" class="button gato-password-toggle" aria-controls="<?php echo esc_attr($name) ?>" aria-pressed="false" data-js-only hidden><?php esc_html_e('Show', 'gatographql') ?></button>
                 <?php endif; ?>
             </span>
         <?php
@@ -1393,6 +1397,9 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                             <?php if ($entryActions !== []) : ?>
                                 <span class="gato-input-group">
                             <?php endif; ?>
+                            <?php if ($isPassword) : ?>
+                                <span class="gato-password">
+                            <?php endif; ?>
                             <input
                                 name="<?php echo esc_attr($entryName); ?>"
                                 id="<?php echo esc_attr($id) ?>"
@@ -1406,6 +1413,10 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
                                 <?php endif; ?>
                                
                             >
+                            <?php if ($isPassword) : ?>
+                                    <?php $this->printPasswordToggle($id); ?>
+                                </span>
+                            <?php endif; ?>
                             <?php if ($entryActions !== []) : ?>
                                 <?php $this->printEntryActions((string) $keyActionsField, $entryActions, $label); ?>
                                 </span>
@@ -1451,8 +1462,30 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
     }
 
     /**
+     * Print the "eye" button, within a password field, that shows
+     * or hides its value
+     */
+    protected function printPasswordToggle(string $inputID): void
+    {
+        ?>
+        <button
+            type="button"
+            class="gato-password-toggle"
+            aria-controls="<?php echo esc_attr($inputID) ?>"
+            aria-pressed="false"
+            aria-label="<?php esc_attr_e('Show', 'gatographql') ?>"
+            title="<?php esc_attr_e('Show', 'gatographql') ?>"
+            data-label-show="<?php esc_attr_e('Show', 'gatographql') ?>"
+            data-label-hide="<?php esc_attr_e('Hide', 'gatographql') ?>"
+            data-js-only
+            hidden
+        ><span class="dashicons dashicons-visibility" aria-hidden="true"></span></button>
+        <?php
+    }
+
+    /**
      * The buttons beside an entry, which submit the form with their value
-     * under that field: one shows as a button, more go in a "⋯" menu.
+     * under that field: one shows as a button, more go in a "Manage" menu.
      *
      * @param array<string,string> $actions value => label
      */
@@ -1468,7 +1501,7 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         }
         ?>
         <details class="gato-entry-menu">
-            <summary class="button gato-entry-action" aria-label="<?php echo esc_attr(sprintf(__('Actions for %s', 'gatographql'), $entryLabel)) ?>"><span aria-hidden="true">⋯</span></summary>
+            <summary class="button gato-entry-action"><?php esc_html_e('Manage', 'gatographql') ?><span class="screen-reader-text"> <?php echo esc_html($entryLabel) ?></span><span class="gato-entry-menu__chevron" aria-hidden="true"></span></summary>
             <span class="gato-entry-menu__items">
                 <?php foreach ($actions as $actionValue => $actionLabel) : ?>
                     <button type="submit" class="gato-entry-menu__item" name="<?php echo esc_attr($fieldName) ?>" value="<?php echo esc_attr($actionValue) ?>"><?php echo esc_html($actionLabel) ?></button>

@@ -104,7 +104,7 @@ class PluginGeneralSettingsFunctionalityModuleResolver extends AbstractFunctiona
         return match ($module) {
             self::GENERAL => \__('General', 'gatographql'),
             self::LOGS => \__('Logs', 'gatographql'),
-            self::SERVER_IP_CONFIGURATION => \__('Server IP Configuration', 'gatographql'),
+            self::SERVER_IP_CONFIGURATION => \__('Server IP', 'gatographql'),
             self::SCHEMA_EDITING_ACCESS => \__('Schema Editing Access', 'gatographql'),
             default => $module,
         };

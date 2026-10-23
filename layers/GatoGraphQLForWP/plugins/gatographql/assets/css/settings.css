@@ -410,3 +410,15 @@
         width: 100%;
     }
 }
+
+/* A dot beside the title of a setting with an unsaved change, as beside its tabs */
+.gato-settings .gato-setting.is-changed > .gato-setting__main > .gato-setting__title > :first-child::after {
+    content: "";
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    margin-left: 8px;
+    border-radius: 50%;
+    background: var(--gato-warning);
+    vertical-align: middle;
+}

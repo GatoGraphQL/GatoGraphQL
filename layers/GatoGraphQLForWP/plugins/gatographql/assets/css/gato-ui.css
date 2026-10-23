@@ -57,7 +57,7 @@
     --gato-field-width: 360px;
     --gato-number-field-width: 150px;
     --gato-affix-field-width: 96px;
-    --gato-entry-action-width: 96px;
+    --gato-entry-action-width: 100px;
     --gato-tab-text: var(--gato-text-muted);
     --gato-tab-text-hover: var(--gato-text);
     --gato-tab-bg-hover: var(--gato-accent-soft);
@@ -149,7 +149,7 @@
     padding-bottom: 0;
 }
 
-/* The button beside an entry (eg: a license), or its "⋯" menu: all as wide, for the fields to line up */
+/* The button beside an entry (eg: a license), or its "Manage" menu: all as wide, for the fields to line up */
 .gato-ui .gato-input-group > .gato-entry-action,
 .gato-ui .gato-entry-menu > summary.gato-entry-action {
     min-width: var(--gato-entry-action-width);
@@ -166,11 +166,23 @@
     line-height: calc(var(--gato-control-height) - 2 * var(--gato-border-width));
     padding-top: 0;
     padding-bottom: 0;
-    font-size: 16px;
-    letter-spacing: 1px;
+    white-space: nowrap;
 }
 .gato-entry-menu > summary::-webkit-details-marker {
     display: none;
+}
+.gato-entry-menu__chevron {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-left: 8px;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-3px) rotate(45deg);
+    transition: transform .15s ease;
+}
+.gato-entry-menu[open] .gato-entry-menu__chevron {
+    transform: translateY(1px) rotate(-135deg);
 }
 .gato-entry-menu__items {
     position: absolute;
@@ -493,6 +505,52 @@
 .gato-setting--wide .gato-input:not(.gato-input--number) {
     width: 100%;
 }
+
+/* A password field, with the "eye" button that shows its value within it */
+.gato-password {
+    position: relative;
+    display: inline-flex;
+    max-width: 100%;
+    min-width: 0;
+}
+.gato-ui .gato-password > .gato-input {
+    min-width: 0;
+}
+.gato-setting--wide .gato-password:not(.gato-grid__row .gato-password) {
+    flex: 1 1 auto;
+    width: 100%;
+}
+.gato-ui .gato-password > .gato-input {
+    padding-right: calc(var(--gato-control-height) + 4px);
+}
+.gato-password-toggle {
+    position: absolute;
+    top: 50%;
+    right: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: calc(var(--gato-control-height) - 8px);
+    height: calc(var(--gato-control-height) - 8px);
+    padding: 0;
+    border: 0;
+    border-radius: var(--gato-radius-control);
+    background: transparent;
+    color: var(--gato-text-muted);
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+.gato-password-toggle[hidden] {
+    display: none;
+}
+.gato-password-toggle:hover,
+.gato-password-toggle[aria-pressed="true"] {
+    color: var(--gato-accent);
+}
+.gato-password-toggle:focus-visible {
+    outline: 2px solid var(--gato-accent);
+    outline-offset: 0;
+}
 .gato-ui .gato-select {
     min-width: 220px;
 }
@@ -774,22 +832,33 @@
 .gato-ui .gato-grid--single .gato-input {
     width: var(--gato-field-width);
 }
-/* The label on one side (it wraps when long), the control on the other */
+/* The label on one side (it wraps when long), the control on the other.
+   Where both don't fit side by side, the control goes below the label,
+   to the right, rather than over it. */
 .gato-grid__row {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-end;
     gap: 4px 16px;
     min-height: 44px;
     padding: 6px 0;
     border-bottom: var(--gato-border-width) solid var(--gato-border-subtle);
     min-width: 0;
 }
+.gato-grid__row > .gato-grid__label {
+    flex: 1 1 200px;
+}
 .gato-grid__row > :not(.gato-grid__label):not(.gato-grid__detail) {
+    flex: 0 1 auto;
     max-width: 100%;
+    min-width: 0;
+}
+.gato-grid__row > .gato-input-group {
+    justify-content: flex-end;
 }
 .gato-grid__detail {
-    grid-column: 1 / -1;
+    flex: 1 1 100%;
     font-size: var(--gato-font-size-xs);
     color: var(--gato-text-muted);
 }
@@ -816,10 +885,12 @@
     padding: 0;
 }
 
-/* Tables. Those printed within a setting (eg: by an extension) take the
+/* Tables. Those printed within a setting (eg: by an extension), and the
+   WordPress tables of a screen of the kit (eg: a dashboard), take the
    same look, whichever their classes. */
 .gato-setting .gato-setting__control table,
-.gato-setting .gato-setting__control table.widefat {
+.gato-setting .gato-setting__control table.widefat,
+.gato-ui table.widefat {
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
@@ -832,7 +903,9 @@
     font-size: var(--gato-font-size-sm);
 }
 .gato-setting .gato-setting__control table th,
-.gato-setting .gato-setting__control table td {
+.gato-setting .gato-setting__control table td,
+.gato-ui table.widefat th,
+.gato-ui table.widefat td {
     padding: 8px 12px;
     border: 0;
     border-top: var(--gato-border-width) solid var(--gato-border-subtle);
@@ -843,20 +916,27 @@
     text-align: left;
     vertical-align: top;
 }
-.gato-setting .gato-setting__control table tr:first-child > * {
+.gato-setting .gato-setting__control table tr:first-child > *,
+.gato-ui table.widefat tr:first-child > * {
     border-top: 0;
 }
 .gato-setting .gato-setting__control table thead th,
-.gato-setting .gato-setting__control table tbody th {
+.gato-setting .gato-setting__control table tbody th,
+.gato-ui table.widefat thead th,
+.gato-ui table.widefat thead td {
     font-weight: 500;
     color: var(--gato-text-muted);
     background: var(--gato-surface-alt);
 }
-.gato-setting .gato-setting__control table thead th {
+.gato-setting .gato-setting__control table thead th,
+.gato-ui table.widefat thead th,
+.gato-ui table.widefat thead td {
+    border-bottom: 0;
     font-size: var(--gato-font-size-xs);
     font-weight: 600;
 }
-.gato-setting .gato-setting__control table.striped > tbody > :nth-child(odd) {
+.gato-setting .gato-setting__control table.striped > tbody > :nth-child(odd),
+.gato-ui table.widefat.striped > tbody > :nth-child(odd) {
     background: transparent;
 }
 .gato-table {
@@ -902,7 +982,8 @@
 .gato-savebar__status strong {
     color: var(--gato-text);
 }
-.gato-savebar__status.is-error {
+.gato-savebar__status.is-error,
+.gato-savebar__status.is-error strong {
     color: var(--gato-danger);
 }
 .gato-savebar__actions {
@@ -1059,7 +1140,7 @@ button.gato-track__stop:focus-visible .gato-track__dot {
 }
 .gato-ui .gato-stage-table th,
 .gato-ui .gato-stage-table td {
-    padding: 7px 10px;
+    padding: 8px 12px;
     border: 0;
     color: var(--gato-text);
     font-size: var(--gato-font-size-sm);
@@ -1083,11 +1164,9 @@ button.gato-track__stop:focus-visible .gato-track__dot {
     text-align: center;
 }
 .gato-ui .gato-stage-table .gato-stage-table__measure {
-    font-size: 11px;
-    font-weight: 400;
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
     color: var(--gato-text-muted);
-    text-transform: uppercase;
-    letter-spacing: .04em;
 }
 .gato-ui .gato-stage-table .gato-stage-table__group,
 .gato-ui .gato-stage-table .gato-stage-table__group-start {
@@ -1095,9 +1174,6 @@ button.gato-track__stop:focus-visible .gato-track__dot {
 }
 .gato-ui .gato-stage-table tbody tr > * {
     border-top: var(--gato-border-width) solid var(--gato-border-subtle);
-}
-.gato-ui .gato-stage-table tbody tr:nth-child(even) > * {
-    background: color-mix(in srgb, var(--gato-surface-alt) 50%, var(--gato-surface));
 }
 .gato-ui .gato-stage-table .is-empty {
     color: var(--gato-text-faint);

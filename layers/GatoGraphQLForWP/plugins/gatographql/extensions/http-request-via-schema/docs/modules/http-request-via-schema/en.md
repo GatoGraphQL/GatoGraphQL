@@ -27,7 +27,7 @@ For instance:
 - Cloudflare might use `'HTTP_CF_CONNECTING_IP'`
 - AWS might use `'HTTP_X_FORWARDED_FOR'`
 
-The property name to use can be configured in the "Plugin Configuration > Server IP Configuration" tab on the Settings page:
+The property name to use can be configured in the "General > Server IP" section on the Settings page:
 
 <div class="img-width-1024" markdown=1>
 

@@ -516,6 +516,55 @@
 	}
 
 	/**
+	 * Why the value of a JSON textarea is not valid JSON,
+	 * or an empty string when it is
+	 */
+	function getJSONError( textarea ) {
+		if ( textarea.value.trim() === '' ) {
+			return '';
+		}
+		try {
+			JSON.parse( textarea.value );
+		} catch ( exception ) {
+			return format( l10n.invalidJSON, exception.message );
+		}
+		return '';
+	}
+
+	/**
+	 * The JSON textareas within the element whose value is not valid JSON
+	 */
+	function getInvalidJSONFields( element ) {
+		return Array.from( element.querySelectorAll( 'textarea[data-json]' ) ).filter( ( textarea ) => getJSONError( textarea ) !== '' );
+	}
+
+	/**
+	 * The name of a JSON field, with its section, as several
+	 * sections may have a field with the same title
+	 */
+	function getJSONFieldName( textarea ) {
+		const setting = textarea.closest( '.gato-setting' );
+		const title = setting && setting.querySelector( '.gato-setting__title > label, .gato-setting__title > span' );
+		const section = textarea.closest( '.gatographql-settings-section' );
+		return [
+			section && section.dataset.moduleName,
+			title ? title.textContent.trim() : textarea.name,
+		].filter( Boolean ).join( ' › ' );
+	}
+
+	/**
+	 * Show the setting of a JSON field that is not valid, with its error,
+	 * and place the cursor in it
+	 */
+	function goToInvalidJSONField( page, textarea ) {
+		const setting = textarea.closest( '.gato-setting' ) || textarea;
+		revealSetting( page, setting );
+		textarea.dispatchEvent( new CustomEvent( 'gato:check-json' ) );
+		setting.scrollIntoView( { behavior: 'smooth', block: 'center' } );
+		textarea.focus( { preventScroll: true } );
+	}
+
+	/**
 	 * JSON textareas: on leaving the field, indent its value,
 	 * or say why it is not valid JSON
 	 */
@@ -523,26 +572,24 @@
 		page.querySelectorAll( 'textarea[data-json]' ).forEach( ( textarea ) => {
 			const error = document.getElementById( textarea.getAttribute( 'aria-describedby' ) );
 			const showError = ( message ) => {
+				const wasInvalid = textarea.getAttribute( 'aria-invalid' ) === 'true';
 				textarea.setAttribute( 'aria-invalid', String( message !== '' ) );
 				if ( error ) {
 					error.textContent = message;
 					error.hidden = message === '';
 				}
+				if ( wasInvalid !== ( message !== '' ) ) {
+					textarea.dispatchEvent( new CustomEvent( 'gato:json-checked', { bubbles: true } ) );
+				}
 			};
 			const check = ( reformat ) => {
+				const message = getJSONError( textarea );
+				showError( message );
+				if ( message !== '' || textarea.value.trim() === '' ) {
+					return;
+				}
 				const value = textarea.value;
-				if ( value.trim() === '' ) {
-					showError( '' );
-					return;
-				}
-				let parsed;
-				try {
-					parsed = JSON.parse( value );
-				} catch ( exception ) {
-					showError( format( l10n.invalidJSON, exception.message ) );
-					return;
-				}
-				showError( '' );
+				const parsed = JSON.parse( value );
 				const formatted = JSON.stringify( parsed, null, 4 );
 				if ( reformat && formatted !== value ) {
 					textarea.value = formatted;
@@ -550,6 +597,7 @@
 				}
 			};
 			textarea.addEventListener( 'blur', () => check( true ) );
+			textarea.addEventListener( 'gato:check-json', () => check( false ) );
 			textarea.addEventListener( 'input', () => {
 				if ( textarea.getAttribute( 'aria-invalid' ) === 'true' ) {
 					check( false );
@@ -570,8 +618,13 @@
 			button.addEventListener( 'click', () => {
 				const show = input.type === 'password';
 				input.type = show ? 'text' : 'password';
-				button.textContent = show ? l10n.hide : l10n.show;
 				button.setAttribute( 'aria-pressed', String( show ) );
+				const label = show ? button.dataset.labelHide : button.dataset.labelShow;
+				button.setAttribute( 'aria-label', label );
+				button.title = label;
+				const icon = button.querySelector( '.dashicons' );
+				icon.classList.toggle( 'dashicons-visibility', ! show );
+				icon.classList.toggle( 'dashicons-hidden', show );
 			} );
 		} );
 	}
@@ -781,6 +834,9 @@
 
 			forms.forEach( ( form ) => {
 				const changed = changedByForm.get( form );
+				form.querySelectorAll( '.gato-setting' ).forEach( ( setting ) => {
+					setting.classList.toggle( 'is-changed', changed.includes( setting ) );
+				} );
 				const tab = getTab( form );
 				if ( tab ) {
 					tab.querySelector( '.gato-dot' ).hidden = changed.length === 0;
@@ -799,7 +855,8 @@
 			}
 			const changedForms = savableForms.filter( ( form ) => changedByForm.get( form ).length > 0 );
 			const total = changedForms.reduce( ( sum, form ) => sum + changedByForm.get( form ).length, 0 );
-			saveButton.disabled = total === 0;
+			const invalidJSONFields = Array.from( page.querySelectorAll( 'textarea[data-json][aria-invalid="true"]' ) ).filter( ( textarea ) => changedForms.includes( textarea.form ) );
+			saveButton.disabled = total === 0 || invalidJSONFields.length > 0;
 			discardButton.disabled = total === 0;
 			status.classList.remove( 'is-error' );
 			if ( total === 0 ) {
@@ -807,6 +864,26 @@
 				return;
 			}
 			status.replaceChildren();
+			if ( invalidJSONFields.length ) {
+				const strong = document.createElement( 'strong' );
+				strong.textContent = invalidJSONFields.length === 1 ? l10n.oneInvalidJSON : format( l10n.manyInvalidJSON, invalidJSONFields.length );
+				status.append( strong, ' ' );
+				invalidJSONFields.forEach( ( textarea, index ) => {
+					if ( index > 0 ) {
+						status.append( ' · ' );
+					}
+					const link = document.createElement( 'a' );
+					link.href = '#' + textarea.id;
+					link.textContent = getJSONFieldName( textarea );
+					link.addEventListener( 'click', ( event ) => {
+						event.preventDefault();
+						goToInvalidJSONField( page, textarea );
+					} );
+					status.append( link );
+				} );
+				status.classList.add( 'is-error' );
+				return;
+			}
 			const strong = document.createElement( 'strong' );
 			strong.textContent = total === 1 ? l10n.oneChange : format( l10n.manyChanges, total );
 			status.append( strong, ' ' );
@@ -938,6 +1015,12 @@
 			if ( ! changedForms.length ) {
 				return;
 			}
+			const invalidJSONFields = changedForms.flatMap( getInvalidJSONFields );
+			if ( invalidJSONFields.length ) {
+				update();
+				goToInvalidJSONField( page, invalidJSONFields[ 0 ] );
+				return;
+			}
 			let batches;
 			try {
 				batches = getBatches( changedForms );
@@ -990,10 +1073,19 @@
 		};
 
 		forms.forEach( ( form ) => {
-			form.addEventListener( 'submit', () => submittingForms.add( form ) );
+			form.addEventListener( 'submit', ( event ) => {
+				const invalidJSONFields = getInvalidJSONFields( form );
+				if ( invalidJSONFields.length ) {
+					event.preventDefault();
+					goToInvalidJSONField( page, invalidJSONFields[ 0 ] );
+					return;
+				}
+				submittingForms.add( form );
+			} );
 		} );
 		page.addEventListener( 'input', update );
 		page.addEventListener( 'change', update );
+		page.addEventListener( 'gato:json-checked', update );
 		window.addEventListener( 'beforeunload', ( event ) => {
 			if ( isSaving || ! isDirty() ) {
 				return;
