@@ -1024,6 +1024,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
      * The value for a key of a Property Array, or the default
      * value for an entry when it has none
      *
+     * The default can differ per entry, given as [key => value]:
+     * an entry added after the setting was saved (eg: the post type of
+     * a plugin activated later) then shows the value the plugin uses
+     * for it, and not the one shared by all entries.
+     *
      * @param array<string,mixed> $itemSetting
      */
     protected function getPropertyArrayEntryValue(mixed $value, string|int $key, array $itemSetting): mixed
@@ -1034,7 +1039,11 @@ abstract class AbstractSettingsMenuPage extends AbstractPluginMenuPage
         if (($itemSetting[Properties::SUBTYPE] ?? null) === Properties::TYPE_BOOL && ($itemSetting[Properties::POSSIBLE_VALUES] ?? []) === []) {
             return false;
         }
-        return $itemSetting[Properties::DEFAULT_VALUE] ?? null;
+        $defaultValue = $itemSetting[Properties::DEFAULT_VALUE] ?? null;
+        if (is_array($defaultValue)) {
+            return $defaultValue[$key] ?? null;
+        }
+        return $defaultValue;
     }
 
     /**

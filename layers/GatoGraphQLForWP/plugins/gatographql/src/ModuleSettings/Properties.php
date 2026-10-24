@@ -14,6 +14,7 @@ class Properties
     public final const CAN_BE_EMPTY = 'canBeEmpty';
     public final const SORT_VALUES = 'sortValues';
     public final const APPEND_VALUE_IF_NON_EXISTING = 'appendValueIfNonExisting';
+    // On a TYPE_PROPERTY_ARRAY: the value of an entry the stored setting does not have yet, or [key => value] when it differs per entry (eg: post types an extension translates by default)
     public final const DEFAULT_VALUE = 'defaultValue';
     // Used to define additional Settings pages that the item can be printed on.
     public final const FORM_TARGETS = 'formTargets';
