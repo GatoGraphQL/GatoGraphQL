@@ -101,45 +101,9 @@ body.is-gatographql-customer .hide-for-customers {
     font-weight: 600;
 }
 
-/* Tabs: as those of the Settings page */
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2px;
-    margin: 0 0 24px;
-    padding: 0;
-    border-bottom: var(--gato-border-width) solid var(--gato-border-strong);
-}
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab {
-    float: none;
-    margin: 0 0 calc(-1 * var(--gato-border-width));
-    padding: 10px 16px;
-    border: 0;
-    border-bottom: var(--gato-tab-indicator-width) solid transparent;
-    border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
-    background: transparent;
-    /* The hover background stops above the bottom line of the tabs, which shows through the transparent indicator */
-    background-clip: padding-box;
-    color: var(--gato-tab-text);
-    font-size: var(--gato-font-size);
-    font-weight: 500;
-    line-height: 1.4;
-    transition: color .15s, background-color .15s, border-color .15s;
-}
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab:hover {
-    background: var(--gato-tab-bg-hover);
-    color: var(--gato-tab-text-hover);
-}
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active,
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active:hover,
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab-active:focus {
-    background: transparent;
-    color: var(--gato-tab-text-active);
-    border-bottom-color: var(--gato-tab-indicator);
-    font-weight: 600;
-}
-.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper > a.nav-tab:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
+/* Tabs: the Tabs of gato-ui.css */
+.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper.gato-tabs {
+    margin-bottom: 24px;
 }
 .gato-about.wrap .tab-content > * + * {
     margin-top: 24px;
@@ -340,7 +304,7 @@ body.is-gatographql-customer .gato-about.wrap .tab-content > .hide-for-customers
 }
 .gato-ui .gato-about__version-list > a:hover {
     border-color: var(--gato-accent-alt);
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
     color: var(--gato-accent);
 }
 

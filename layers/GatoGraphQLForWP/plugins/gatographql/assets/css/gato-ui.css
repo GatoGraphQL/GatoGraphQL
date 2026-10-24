@@ -51,7 +51,7 @@
 }
 .gato-ui .button-primary:hover,
 .gato-ui .button-primary:focus {
-    background: var(--gato-accent-hover);
+    background-color: var(--gato-accent-hover);
     border-color: var(--gato-accent-hover);
     color: var(--gato-on-accent);
 }
@@ -68,7 +68,7 @@
 .gato-ui .button:not(.button-primary):hover {
     color: var(--gato-accent-hover);
     border-color: var(--gato-accent-hover);
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
 }
 
 /* A button beside a field is as tall as the field */
@@ -142,7 +142,59 @@
 }
 .gato-entry-menu__item:hover,
 .gato-entry-menu__item:focus-visible {
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
+}
+
+/* Tabs: the line below them shows under every tab, also the hovered one.
+   States set background-color only: the "background" shorthand would reset
+   background-clip, and the hover background would cover the line */
+.gato-ui .nav-tab-wrapper.gato-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 2px;
+    margin: 0;
+    padding: 0;
+    border-bottom: var(--gato-border-width) solid var(--gato-border);
+}
+.gato-ui .gato-tabs > a.nav-tab,
+.gato-ui .gato-tabs__more-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    float: none;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin: 0 0 calc(-1 * var(--gato-border-width));
+    padding: 10px 14px;
+    border: 0;
+    border-bottom: var(--gato-tab-indicator-width) solid transparent;
+    border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
+    background-color: transparent;
+    background-clip: padding-box;
+    color: var(--gato-tab-text);
+    font-size: var(--gato-font-size);
+    font-weight: 500;
+    line-height: 1.4;
+    transition: color .15s, background-color .15s, border-color .15s;
+}
+.gato-ui .gato-tabs > a.nav-tab:hover,
+.gato-ui .gato-tabs__more-button:hover {
+    background-color: var(--gato-tab-bg-hover);
+    color: var(--gato-tab-text-hover);
+}
+.gato-ui .gato-tabs > a.nav-tab-active,
+.gato-ui .gato-tabs > a.nav-tab-active:hover,
+.gato-ui .gato-tabs > a.nav-tab-active:focus,
+.gato-ui .gato-tabs__more-button.is-active {
+    background-color: transparent;
+    color: var(--gato-tab-text-active);
+    border-bottom-color: var(--gato-tab-indicator);
+    font-weight: 600;
+}
+.gato-ui .gato-tabs > a.nav-tab:focus-visible,
+.gato-ui .gato-tabs__more-button:focus-visible {
+    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
 }
 
 /* Cards */
@@ -204,7 +256,7 @@
 .gato-ui .gato-help-toggle:hover,
 .gato-ui .gato-help-toggle[aria-expanded="true"] {
     color: var(--gato-accent);
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
 }
 .gato-help {
     margin-top: 8px;
@@ -327,7 +379,7 @@
     transition: left .15s;
 }
 .gato-switch__input:checked + .gato-switch__track {
-    background: var(--gato-accent);
+    background-color: var(--gato-accent);
 }
 .gato-switch__input:checked + .gato-switch__track .gato-switch__knob {
     left: calc(var(--gato-switch-width) - var(--gato-switch-height) + 2px);
@@ -387,7 +439,7 @@
 }
 .gato-seg__option input:checked + span,
 .gato-seg--buttons > button[aria-pressed="true"] {
-    background: var(--gato-accent);
+    background-color: var(--gato-accent);
     color: var(--gato-on-accent);
 }
 .gato-seg__option input:focus-visible + span {
@@ -554,7 +606,7 @@
     border: 0;
     border-radius: 0;
     box-shadow: none;
-    background: transparent;
+    background-color: transparent;
 }
 .gato-affix__unit {
     display: inline-flex;
@@ -715,7 +767,7 @@
     flex-shrink: 0;
 }
 .gato-chip input:checked + span {
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
     border-color: var(--gato-accent);
 }
 .gato-chip input:checked + span::before {
