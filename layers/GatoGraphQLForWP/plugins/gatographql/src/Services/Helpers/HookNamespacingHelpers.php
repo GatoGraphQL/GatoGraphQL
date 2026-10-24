@@ -8,6 +8,9 @@ use GatoGraphQL\GatoGraphQL\PluginApp;
 
 class HookNamespacingHelpers
 {
+    /**
+     * @return non-empty-string
+     */
     public function namespaceHook(string $hookName): string
     {
         return PluginApp::getMainPlugin()->getPluginNamespace() . ':' . $hookName;
