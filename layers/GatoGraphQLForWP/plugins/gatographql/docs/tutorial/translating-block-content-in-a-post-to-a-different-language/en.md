@@ -4,7 +4,7 @@ This tutorial lesson demonstrates translating a post to the desired language, wi
 
 As we've seen in a previous lesson, we are able to modify properties contained within the post's blocks, while not affecting the block structure, and store the content again.
 
-Translation will follow the same idea, applying directive `@strTranslate` (provided by the [**Google Translate**](https://gatographql.com/extensions/google-translate/) extension) which translates content via the Google Translate API.
+Translation will follow the same idea, applying directive `@strTranslate` (provided by the [**Translation**](https://gatographql.com/extensions/translation/) extension), which translates content via the default API provider (eg: Google Translate).
 
 After executing the GraphQL query, we can keep editing the translated blog post in the block editor. Check the video:
 

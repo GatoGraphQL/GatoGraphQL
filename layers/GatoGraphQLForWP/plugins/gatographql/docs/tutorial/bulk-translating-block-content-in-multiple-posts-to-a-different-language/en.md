@@ -1,6 +1,6 @@
 # Lesson 12: Bulk translating block content in multiple posts to a different language
 
-The previous tutorial lesson demonstrated how to translate a post. This lesson is the equivalent but translating multiple posts at once (in bulk), while executing a single call to the Google Translate API containing all text to translate from all the posts.
+The previous tutorial lesson demonstrated how to translate a post. This lesson is the equivalent but translating multiple posts at once (in bulk), while executing a single call to the translation provider's API containing all text to translate from all the posts.
 
 <div class="doc-highlight" markdown=1>
 
@@ -8,7 +8,7 @@ The previous tutorial lesson demonstrated how to translate a post. This lesson i
 
 Translating multiple posts in a single GraphQL request provides better results than executing multiple GraphQL requests translating one post each.
 
-That's because we are able to provide all text to translate, for all fields and for all posts, to a single `@strTranslate` execution (as demonstrated in the GraphQL query below). As Google Translate will then receive more data, enhancing its context, it will be able to provide more accurate translations.
+That's because we are able to provide all text to translate, for all fields and for all posts, to a single `@strTranslate` execution (as demonstrated in the GraphQL query below). As the translation provider will then receive more data, enhancing its context, it will be able to provide more accurate translations.
 
 </div>
 

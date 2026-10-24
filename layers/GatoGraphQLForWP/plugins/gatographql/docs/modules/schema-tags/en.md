@@ -74,7 +74,7 @@ Type `GenericCustomPost` has field `tags`, to retrieve the custom tags added to 
 
 The tag taxonomies that can be queried must be explicitly configured. This can be done in 2 places.
 
-In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
+In the Schema Configuration applied to the endpoint, by turning on the **Use custom configuration** toggle under **Customize configuration?** and then selecting the desired items:
 
 <div class="img-width-1024" markdown=1>
 
@@ -84,7 +84,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 _This list contains all the "non-hierarchical" taxonomies which are associated to queryable custom posts, i.e. those selected in "Included custom post types" in the Settings for "Custom Posts". If your desired tag taxonomy does not appear here, make sure that all of its associated custom post types are in that allowlist._
 
-Otherwise, the value defined under section "Included tag taxonomies" in the Settings page for `Schema Custom Posts` is used:
+Otherwise, the plugin uses the value of **Included tag taxonomies** in the Settings, under **Schema Elements > Tags**:
 
 <div class="img-width-1024" markdown=1>
 
@@ -94,7 +94,7 @@ Otherwise, the value defined under section "Included tag taxonomies" in the Sett
 
 ## Additional configuration
 
-Through the Settings for `Schema Tags`, we can also define:
+Through the Settings under **Schema Elements > Tags**, we can also define:
 
 - The default number of elements to retrieve (i.e. when field argument `limit` is not set) when querying for a list of any tag taxonomy
 - The maximum number of elements that can be retrieved in a single query execution

@@ -105,7 +105,7 @@ For instance, this query retrieves entries from multiple CPTS:
 
 The custom post types that can be queried must be explicitly configured. This can be done in 2 places.
 
-In the Schema Configuration applied to the endpoint, by selecting option `"Use custom configuration"` under "Customize configuration? (Or use default from Settings?)" and then selecting the desired items:
+In the Schema Configuration applied to the endpoint, by turning on the **Use custom configuration** toggle under **Customize configuration?** and then selecting the desired items:
 
 <div class="img-width-1024" markdown=1>
 
@@ -113,7 +113,7 @@ In the Schema Configuration applied to the endpoint, by selecting option `"Use c
 
 </div>
 
-Otherwise, the value defined under section "Included custom post types" in the Settings page for `Schema Custom Posts` is used:
+Otherwise, the plugin uses the value of **Included custom post types** in the Settings, under **Schema Elements > Custom Posts**:
 
 <div class="img-width-1024" markdown=1>
 
