@@ -15,14 +15,8 @@
 
 ## {our-channels-title}
 
-<div class="gato-about__channels">
-<a class="gato-card gato-about__channel" href="https://gatographql.com" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"></path></svg></span><span class="gato-about__channel-label">{website-label}</span><span class="gato-about__channel-url">gatographql.com</span></a>
-<a class="gato-card gato-about__channel" href="https://github.com/GatoGraphQL/GatoGraphQL" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5l5 5"></path><path d="M16 7l5 5l-5 5"></path><path d="M14 4l-4 16"></path></svg></span><span class="gato-about__channel-label">{source-code-label}</span><span class="gato-about__channel-url">github.com/GatoGraphQL/GatoGraphQL</span></a>
-<a class="gato-card gato-about__channel" href="https://www.youtube.com/@GatoPlugins" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="4"></rect><path d="M10 9l5 3l-5 3z"></path></svg></span><span class="gato-about__channel-label">{youtube-label}</span><span class="gato-about__channel-url">youtube.com/@GatoPlugins</span></a>
-<a class="gato-card gato-about__channel" href="https://gatographql.com/contact" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6l9-6"></path></svg></span><span class="gato-about__channel-label">{contact-label}</span><span class="gato-about__channel-url">gatographql.com/contact</span></a>
-</div>
-
-<div class="gato-card gato-about__newsletter">
+<div class="gato-card gato-about__connect">
+<div class="gato-about__newsletter">
 <div class="gato-about__newsletter-text">
 <h3>{newsletter-title}</h3>
 <p>{newsletter-description}</p>
@@ -38,6 +32,14 @@
 </p>
 <button type="submit" class="button button-primary">{subscribe-button}</button>
 </form>
+</div>
+<div class="gato-about__channels">
+<span class="gato-about__channels-title">{find-us-label}</span>
+<a class="gato-about__channel" href="https://gatographql.com" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18"></path><path d="M12 3a14 14 0 0 1 0 18a14 14 0 0 1 0-18"></path></svg></span><span class="gato-about__channel-label">{website-label}</span></a>
+<a class="gato-about__channel" href="https://github.com/GatoGraphQL/GatoGraphQL" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5l5 5"></path><path d="M16 7l5 5l-5 5"></path><path d="M14 4l-4 16"></path></svg></span><span class="gato-about__channel-label">{source-code-label}</span></a>
+<a class="gato-about__channel" href="https://www.youtube.com/@GatoPlugins" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="4"></rect><path d="M10 9l5 3l-5 3z"></path></svg></span><span class="gato-about__channel-label">{youtube-label}</span></a>
+<a class="gato-about__channel" href="https://gatographql.com/contact" target="_blank"><span class="gato-about__channel-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="M3 7l9 6l9-6"></path></svg></span><span class="gato-about__channel-label">{contact-label}</span></a>
+</div>
 </div>
 
 ## {release-notes-title}
