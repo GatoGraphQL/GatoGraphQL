@@ -210,10 +210,6 @@ body.is-gatographql-customer .gato-about.wrap .tab-content > .hide-for-customers
     display: flex;
     color: var(--gato-accent);
 }
-/* GitHub's own mark, dark as on GitHub */
-.gato-about__channel-icon--github {
-    color: #1f2328;
-}
 
 @media screen and (max-width: 600px) {
     .gato-about__newsletter,
