@@ -471,7 +471,7 @@ abstract class AbstractContentParser extends AbstractBasicService implements Con
                 $contentStarter
                 . '<div class="gatographql-tabpanel" data-tab-content-target="#' . $navContentUniqueID . ' > .tab-content' . '">'
                 .   '<div class="nav-tab-container">'
-                .     '<h2 class="nav-tab-wrapper">'
+                .     '<h2 class="nav-tab-wrapper gato-tabs">'
                 .       $panelTabs
                 .     '</h2>'
                 .     '<div id="' . $navContentUniqueID . '" class="nav-tab-content">'

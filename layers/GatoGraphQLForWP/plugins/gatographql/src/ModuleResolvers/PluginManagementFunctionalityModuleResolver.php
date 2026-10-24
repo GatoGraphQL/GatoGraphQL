@@ -547,7 +547,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     /**
      * The status of the license of each commercial extension, as
      * stored when it was last activated, deactivated or validated,
-     * or the error the last attempt produced
+     * and the message the last attempt produced
      *
      * @param string[] $extensionSlugs
      * @return array<string,array{label:string,tone:string,detail?:string,detailTone?:string}>
@@ -555,7 +555,7 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     protected function getCommercialExtensionLicenseStatuses(array $extensionSlugs): array
     {
         $activatedLicenses = SettingsHelpers::getCommercialExtensionActivatedLicenseObjectProperties();
-        $failures = $this->getCommercialExtensionLicenseOperationFailures();
+        $operationNotices = $this->getCommercialExtensionLicenseOperationNotices();
         $statuses = [];
         foreach ($extensionSlugs as $extensionSlug) {
             $activatedLicense = $activatedLicenses[$extensionSlug] ?? null;
@@ -565,18 +565,20 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
                     'tone' => Properties::KEY_STATUS_TONE_NEUTRAL,
                 ]
                 : $this->getCommercialExtensionLicenseStatus($activatedLicense);
-            $failure = $failures[$extensionSlug] ?? null;
-            if ($failure !== null && $failure['type'] === 'error') {
+            $operationNotice = $operationNotices[$extensionSlug] ?? null;
+            if ($operationNotice !== null && $operationNotice['type'] === 'error') {
                 $status = [
                     'label' => \__('Error', 'gatographql'),
                     'tone' => Properties::KEY_STATUS_TONE_DANGER,
                 ];
             }
-            if ($failure !== null) {
-                $status['detail'] = trim(wp_strip_all_tags((string) preg_replace('#<br\s*/?>#i', ' ', $failure['message'])));
-                $status['detailTone'] = $failure['type'] === 'error'
-                    ? Properties::KEY_STATUS_TONE_DANGER
-                    : Properties::KEY_STATUS_TONE_WARNING;
+            if ($operationNotice !== null) {
+                $status['detail'] = trim(wp_strip_all_tags((string) preg_replace('#<br\s*/?>#i', ' ', $operationNotice['message'])));
+                $status['detailTone'] = match ($operationNotice['type']) {
+                    'error' => Properties::KEY_STATUS_TONE_DANGER,
+                    'warning' => Properties::KEY_STATUS_TONE_WARNING,
+                    default => Properties::KEY_STATUS_TONE_SUCCESS,
+                };
             }
             $statuses[$extensionSlug] = $status;
         }
@@ -664,31 +666,36 @@ class PluginManagementFunctionalityModuleResolver extends AbstractFunctionalityM
     }
 
     /**
-     * The errors (the license is not valid) and warnings (the license
-     * server could not be reached) of the last attempt to activate,
-     * deactivate or validate the licenses, by extension, back from
-     * options.php
+     * The outcome of the last attempt to activate, deactivate or
+     * validate the licenses, by extension, back from options.php:
+     * the success message, or else the error (the license is not
+     * valid) or warning (the license server could not be reached),
+     * which takes precedence over it
      *
      * @return array<string,array{type:string,message:string}>
      */
-    protected function getCommercialExtensionLicenseOperationFailures(): array
+    protected function getCommercialExtensionLicenseOperationNotices(): array
     {
         if (!function_exists('get_settings_errors')) {
             return [];
         }
-        $failures = [];
+        $operationNotices = [];
         foreach (get_settings_errors() as $settingsError) {
             $code = $settingsError['code'];
             $type = $settingsError['type'];
-            if (!str_starts_with($code, self::LICENSE_OPERATION_NOTICE_CODE_PREFIX) || !in_array($type, ['error', 'warning'], true)) {
+            if (!str_starts_with($code, self::LICENSE_OPERATION_NOTICE_CODE_PREFIX) || !in_array($type, ['error', 'warning', 'success'], true)) {
                 continue;
             }
-            $failures[substr($code, strlen(self::LICENSE_OPERATION_NOTICE_CODE_PREFIX))] = [
+            $extensionSlug = substr($code, strlen(self::LICENSE_OPERATION_NOTICE_CODE_PREFIX));
+            if ($type === 'success' && isset($operationNotices[$extensionSlug])) {
+                continue;
+            }
+            $operationNotices[$extensionSlug] = [
                 'type' => $type,
                 'message' => $settingsError['message'],
             ];
         }
-        return $failures;
+        return $operationNotices;
     }
 
     protected function getGatoGraphQLShopName(): string

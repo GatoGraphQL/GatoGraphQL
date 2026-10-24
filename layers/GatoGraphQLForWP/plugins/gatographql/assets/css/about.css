@@ -1,3 +1,8 @@
+/**
+ * About page (and the Support page of a standalone plugin), on top of
+ * gato-ui.css
+ */
+
 .show-for-customers {
     display: none;
 }
@@ -6,4 +11,407 @@ body.is-gatographql-customer .show-for-customers {
 }
 body.is-gatographql-customer .hide-for-customers {
     display: none;
+}
+
+/* As wide as the Settings page and the dashboards, at most */
+.gato-about.wrap {
+    max-width: var(--gato-page-max-width);
+}
+.gato-about .wp-header-end {
+    margin: 0;
+}
+.gato-about h3 {
+    margin: 0;
+    font-size: var(--gato-font-size);
+    font-weight: 600;
+}
+.gato-about p {
+    margin: 0;
+}
+
+/* Header: logo, title and tagline, and the version */
+.gato-about__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 8px 0 20px;
+}
+.gato-about__identity {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: 0;
+}
+.gato-about__logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    box-sizing: border-box;
+    border: var(--gato-border-width) solid var(--gato-accent-ring);
+    border-radius: 14px;
+    background: var(--gato-accent-soft);
+}
+.gato-about__logo img {
+    max-width: 48px;
+    max-height: 48px;
+}
+.gato-about__heading {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+}
+.gato-about .gato-about__heading h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1.3;
+}
+.gato-about__tagline {
+    color: var(--gato-text-muted);
+}
+.gato-about__version {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--gato-accent-soft);
+    color: var(--gato-accent);
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
+    white-space: nowrap;
+}
+.gato-about__version::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+}
+.gato-about .gato-about__license-status {
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: var(--gato-font-size-xs);
+    line-height: 1.4;
+    font-weight: 600;
+}
+
+/* Tabs: the Tabs of gato-ui.css */
+.gato-about .gatographql-tabpanel > .nav-tab-container > .nav-tab-wrapper.gato-tabs {
+    margin-bottom: 24px;
+}
+.gato-about.wrap .tab-content > * + * {
+    margin-top: 24px;
+}
+/* The note for non-customers is hidden for customers */
+body.is-gatographql-customer .gato-about.wrap .tab-content > .hide-for-customers + .show-for-customers {
+    margin-top: 0;
+}
+
+/* Cards */
+.gato-about .gato-card {
+    margin: 0;
+}
+
+/* Our channels: the newsletter, and the channels below it, in one card */
+.gato-about__connect {
+    overflow: hidden;
+}
+.gato-about__newsletter {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 24px 48px;
+    padding: 32px;
+}
+.gato-about__newsletter-text {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 300px;
+    min-width: 0;
+}
+.gato-about .gato-about__newsletter-text h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+}
+.gato-about__newsletter-text p {
+    margin: 0;
+    color: var(--gato-text-muted);
+    line-height: 1.5;
+}
+.gato-about__newsletter-form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 12px;
+    flex: 2 1 480px;
+}
+.gato-about__newsletter-form .gato-about__field {
+    flex: 1 1 160px;
+}
+.gato-about__newsletter-form .gato-about__field--wide {
+    flex-basis: 220px;
+}
+.gato-about__channels {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px 12px;
+    padding: 18px 32px;
+    background-color: var(--gato-surface-alt);
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+}
+.gato-about__channels-title {
+    margin-right: 4px;
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-sm);
+    font-weight: 600;
+}
+.gato-ui a.gato-about__channel {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 40px;
+    box-sizing: border-box;
+    padding: 0 14px;
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: 999px;
+    background-color: var(--gato-surface);
+    color: var(--gato-text);
+    font-weight: 500;
+    text-decoration: none;
+    transition: border-color .15s, color .15s;
+}
+.gato-ui a.gato-about__channel:hover {
+    border-color: var(--gato-accent);
+    color: var(--gato-accent);
+}
+.gato-ui a.gato-about__channel:focus-visible {
+    border-color: var(--gato-accent);
+}
+/* The arrow of a link that opens in a new tab */
+.gato-about__channel::after {
+    content: "\2197";
+    color: var(--gato-text-faint);
+    font-size: 13px;
+}
+.gato-about__channel:hover::after {
+    color: var(--gato-accent);
+}
+.gato-about__channel-icon {
+    display: flex;
+    color: var(--gato-accent);
+}
+
+@media screen and (max-width: 600px) {
+    .gato-about__newsletter,
+    .gato-about__channels {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+/* Fields */
+.gato-about__field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+.gato-about__field label {
+    font-size: var(--gato-font-size-sm);
+    font-weight: 600;
+}
+.gato-ui .gato-about__field .gato-input,
+.gato-ui .gato-about__field .gato-textarea {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+.gato-ui .gato-about__field .gato-input {
+    min-height: 36px;
+}
+.gato-ui .gato-about__field .gato-textarea {
+    font-family: inherit;
+    min-height: 200px;
+    resize: vertical;
+}
+.gato-ui .gato-about .button {
+    min-height: 36px;
+    line-height: 34px;
+    padding: 0 18px;
+}
+
+/* Release notes */
+.gato-about__current-release {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 24px;
+}
+.gato-about__current-release-version {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.gato-about__current-release-number {
+    color: var(--gato-accent);
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1;
+}
+.gato-about__intro {
+    color: var(--gato-text-muted);
+}
+.gato-about.wrap .tab-content > .gato-about__intro + * {
+    margin-top: 10px;
+}
+.gato-about__versions {
+    overflow: hidden;
+}
+.gato-about__version-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 20px;
+    padding: 12px var(--gato-card-padding-x);
+}
+.gato-about__version-group + .gato-about__version-group {
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+}
+.gato-about__version-group-label {
+    flex: 0 0 80px;
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-xs);
+    font-weight: 600;
+}
+.gato-about__version-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1 1 400px;
+}
+.gato-ui .gato-about__version-list > a {
+    display: inline-flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: 999px;
+    background: var(--gato-surface-alt);
+    color: var(--gato-text);
+    font-size: var(--gato-font-size-sm);
+    font-variant-numeric: tabular-nums;
+    text-decoration: none;
+}
+.gato-ui .gato-about__version-list > a:hover {
+    border-color: var(--gato-accent-alt);
+    background-color: var(--gato-accent-soft);
+    color: var(--gato-accent);
+}
+
+/* Support */
+.gato-about__notice {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+    padding: 32px;
+}
+.gato-about__notice p {
+    flex: 1 1 320px;
+    color: var(--gato-text-muted);
+    line-height: 1.5;
+}
+.gato-about__notice-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: var(--gato-accent-soft);
+    color: var(--gato-accent);
+}
+.gato-about__support {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 24px;
+}
+.gato-about__support-form {
+    flex: 999 1 560px;
+    overflow: hidden;
+}
+.gato-about__support-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 24px;
+}
+.gato-about__field-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+.gato-about__license-data {
+    border: var(--gato-border-width) solid var(--gato-border);
+    border-radius: var(--gato-radius-inner);
+    background: var(--gato-surface-alt);
+}
+.gato-about__license-data > summary {
+    padding: 10px 14px;
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+}
+.gato-ui .gato-about__license-data > textarea,
+.gato-ui .gato-about__license-data > textarea:disabled {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 10px 14px;
+    border: 0;
+    border-top: var(--gato-border-width) solid var(--gato-border);
+    border-radius: 0 0 var(--gato-radius-inner) var(--gato-radius-inner);
+    background: transparent;
+    box-shadow: none;
+    color: var(--gato-text-muted);
+    font-family: Menlo, Consolas, monospace;
+    font-size: var(--gato-font-size-xs);
+    line-height: 1.6;
+    resize: vertical;
+}
+.gato-about__support-footer {
+    display: flex;
+    justify-content: flex-end;
+    padding: 16px 24px;
+    border-top: var(--gato-border-width) solid var(--gato-border-subtle);
+    background: var(--gato-surface-alt);
+}
+.gato-about__aside {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1 1 260px;
+    padding: var(--gato-card-padding-x);
+}
+.gato-about__aside p {
+    color: var(--gato-text-muted);
+    font-size: var(--gato-font-size-sm);
+    line-height: 1.5;
 }
