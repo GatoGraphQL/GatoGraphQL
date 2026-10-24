@@ -145,8 +145,6 @@ class AboutMenuPage extends AbstractDocsMenuPage
             '{plugin-icon}' => sprintf('<img src="%s" alt="">', esc_attr($mainPlugin->getPluginIconSVG())),
             '{our-channels-title}' => __('Our channels', 'gatographql'),
             '{website-label}' => __('Website', 'gatographql'),
-            '{source-code-label}' => __('Source code', 'gatographql'),
-            '{youtube-label}' => __('YouTube channel', 'gatographql'),
             '{contact-label}' => __('Contact', 'gatographql'),
             '{find-us-label}' => __('Find us on', 'gatographql'),
             '{newsletter-title}' => sprintf(__('Stay up to date with %s', 'gatographql'), $pluginName),
