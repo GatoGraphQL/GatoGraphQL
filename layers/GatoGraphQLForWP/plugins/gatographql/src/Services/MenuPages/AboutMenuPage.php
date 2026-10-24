@@ -103,7 +103,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
                 $replacements[$search] = sprintf(
                     '%s value="%s"',
                     $search,
-                    $valueInject
+                    esc_attr($valueInject ?? '')
                 );
             }
             $textareaInputValueInjections = [
@@ -112,14 +112,18 @@ class AboutMenuPage extends AbstractDocsMenuPage
             foreach ($textareaInputValueInjections as $search => $valueInject) {
                 $replacements[$search . '</textarea>'] = sprintf(
                     '%s</textarea>',
-                    $valueInject
+                    esc_textarea($valueInject)
                 );
             }
         }
 
         $content = str_replace(array_keys($replacements), array_values($replacements), $content);
 
-        return sprintf('<div class="wrap" markdown=1>%s</div>', $content);
+        return sprintf(
+            '<div class="wrap %s gato-about">%s</div>',
+            esc_attr($this->getAdminUIThemeClass()),
+            $content
+        );
     }
 
     /**
@@ -137,27 +141,33 @@ class AboutMenuPage extends AbstractDocsMenuPage
         return [
             '{title}' => sprintf(__('About %s', 'gatographql'), $pluginName),
             '{tagline}' => __('Powerful and flexible GraphQL server for WordPress.', 'gatographql'),
+            '{version}' => sprintf(__('Version %s', 'gatographql'), $mainPlugin->getPluginVersion()),
+            '{gato-logo}' => sprintf('<img src="%s" alt="">', esc_url($mainPlugin->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-suki.png')),
             '{our-channels-title}' => __('Our channels', 'gatographql'),
-            '{website-label}' => __('Website:', 'gatographql'),
-            '{source-code-label}' => __('Source code:', 'gatographql'),
-            '{youtube-label}' => __('YouTube channel:', 'gatographql'),
-            '{contact-label}' => __('Contact:', 'gatographql'),
-            '{newsletter-intro}' => sprintf(__('<strong>Subscribe to our newsletter</strong> to receive timely updates about %s:', 'gatographql'), $pluginName),
-            '{name-label}' => __('Name:', 'gatographql'),
-            '{email-label}' => __('Email:', 'gatographql'),
+            '{website-label}' => __('Website', 'gatographql'),
+            '{contact-label}' => __('Contact', 'gatographql'),
+            '{find-us-label}' => __('Find us on', 'gatographql'),
+            '{newsletter-title}' => sprintf(__('Stay up to date with %s', 'gatographql'), $pluginName),
+            '{newsletter-description}' => __('Subscribe to the newsletter to hear about new releases, features and guides.', 'gatographql'),
+            '{name-label}' => __('Name', 'gatographql'),
+            '{email-label}' => __('Email', 'gatographql'),
             '{subscribe-button}' => __('Subscribe', 'gatographql'),
             '{release-notes-title}' => __('Release Notes', 'gatographql'),
             '{release-notes-intro}' => __('New features released on each version:', 'gatographql'),
             '{current}' => __('current', 'gatographql'),
+            '{read-release-notes-button}' => __('Read the release notes', 'gatographql'),
             '{support-title}' => __('Support', 'gatographql'),
             '{support-customers-note}' => __('Support is provided to customers of any Gato GraphQL product with an active license.', 'gatographql'),
             '{support-intro}' => __('Send your message to the Gato GraphQL Support team:', 'gatographql'),
-            '{your-name-label}' => __('Your name:', 'gatographql'),
-            '{your-email-label}' => __('Your email:', 'gatographql'),
-            '{subject-label}' => __('Subject:', 'gatographql'),
-            '{message-label}' => __('Message:', 'gatographql'),
+            '{license-active}' => __('License active', 'gatographql'),
+            '{your-name-label}' => __('Your name', 'gatographql'),
+            '{your-email-label}' => __('Your email', 'gatographql'),
+            '{subject-label}' => __('Subject', 'gatographql'),
+            '{message-label}' => __('Message', 'gatographql'),
             '{send-message-button}' => __('Send message', 'gatographql'),
             '{license-data-label}' => __('Attached extension license data', 'gatographql'),
+            '{license-data-title}' => __('Your license data', 'gatographql'),
+            '{license-data-description}' => __('The form attaches it to your message, so the support team can identify your site.', 'gatographql'),
             '{plugin-name}' => $pluginName,
             '{contact-form-url}' => $mainPlugin->getPluginDomainURL() . '/__forms/support.html',
         ];
@@ -186,11 +196,11 @@ class AboutMenuPage extends AbstractDocsMenuPage
 
     protected function enqueueAboutPageAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-
+        $adminUIHandle = $this->enqueueAdminUIAssets();
         $this->enqueueMainPluginAssetStyle(
             'gatographql-about',
-            'assets/css/about.css'
+            'assets/css/about.css',
+            [$adminUIHandle]
         );
     }
 }

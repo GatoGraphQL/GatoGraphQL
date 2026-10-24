@@ -52,7 +52,7 @@
     flex: 1;
     min-width: 0;
     font-size: var(--gato-font-size-sm);
-    background: transparent;
+    background-color: transparent;
     padding: 0;
 }
 .gato-search__results {
@@ -84,7 +84,7 @@
 }
 .gato-search__result:hover,
 .gato-search__result.is-active {
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
 }
 .gato-search__result-title {
     font-size: var(--gato-font-size-sm);
@@ -114,58 +114,14 @@
     }
 }
 
-/* Primary tabs: on one line, the ones that do not fit go under "More" */
-.gato-settings .gato-tabs {
-    display: flex;
+/* Primary tabs (the Tabs of gato-ui.css): on one line, the ones that do not fit go under "More" */
+.gato-settings .nav-tab-wrapper.gato-tabs {
     flex-wrap: nowrap;
-    align-items: flex-end;
-    gap: 2px;
     position: relative;
     z-index: 21;
-    padding: 0;
-    border-bottom: var(--gato-border-width) solid var(--gato-border);
 }
-.gato-settings.has-js .gato-tabs {
+.gato-settings.has-js .nav-tab-wrapper.gato-tabs {
     overflow: visible;
-}
-.gato-settings .gato-tabs > a.nav-tab,
-.gato-tabs__more-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin: 0 0 calc(-1 * var(--gato-border-width));
-    padding: 10px 14px;
-    border: 0;
-    border-bottom: var(--gato-tab-indicator-width) solid transparent;
-    border-radius: var(--gato-radius-control) var(--gato-radius-control) 0 0;
-    background: transparent;
-    /* The hover background stops above the bottom line of the tabs, which shows through the transparent indicator */
-    background-clip: padding-box;
-    color: var(--gato-tab-text);
-    font-size: var(--gato-font-size);
-    font-weight: 500;
-    line-height: 1.4;
-    transition: color .15s, background-color .15s, border-color .15s;
-}
-.gato-settings .gato-tabs > a.nav-tab:hover,
-.gato-tabs__more-button:hover {
-    background: var(--gato-tab-bg-hover);
-    color: var(--gato-tab-text-hover);
-}
-.gato-settings .gato-tabs > a.nav-tab-active,
-.gato-settings .gato-tabs > a.nav-tab-active:hover,
-.gato-settings .gato-tabs > a.nav-tab-active:focus,
-.gato-tabs__more-button.is-active {
-    background: transparent;
-    color: var(--gato-tab-text-active);
-    border-bottom-color: var(--gato-tab-indicator);
-    font-weight: 600;
-}
-.gato-settings .gato-tabs > a.nav-tab:focus-visible,
-.gato-tabs__more-button:focus-visible {
-    box-shadow: inset 0 0 0 2px var(--gato-accent-ring);
 }
 .gato-settings .gato-tabs > a.nav-tab.is-overflowing {
     display: none;
@@ -209,7 +165,7 @@
 }
 .gato-tabs__menu-item:hover,
 .gato-tabs__menu-item:focus {
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
 }
 .gato-tabs__menu-item.is-active {
     font-weight: 600;
@@ -251,11 +207,11 @@
     border-bottom: 0;
 }
 .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab:hover {
-    background: var(--gato-surface-alt);
+    background-color: var(--gato-surface-alt);
 }
 .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab-active,
 .gato-settings .gatographql-tabpanel.vertical-tabs > .nav-tab-container > .nav-tab-wrapper.gato-sidenav > a.nav-tab-active:hover {
-    background: var(--gato-accent-soft);
+    background-color: var(--gato-accent-soft);
     color: var(--gato-text);
     font-weight: 600;
     box-shadow: inset 3px 0 0 var(--gato-accent);
