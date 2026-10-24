@@ -1,6 +1,6 @@
 <div class="gato-about__header">
 <div class="gato-about__identity">
-<div class="gato-about__logo">{plugin-icon}</div>
+<div class="gato-about__logo">{gato-logo}</div>
 <div class="gato-about__heading">
 <h1>{title}</h1>
 <p class="gato-about__tagline">{support-intro}</p>

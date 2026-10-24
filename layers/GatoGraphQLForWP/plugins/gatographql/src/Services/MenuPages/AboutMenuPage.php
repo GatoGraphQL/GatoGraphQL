@@ -103,7 +103,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
                 $replacements[$search] = sprintf(
                     '%s value="%s"',
                     $search,
-                    esc_attr($valueInject)
+                    esc_attr($valueInject ?? '')
                 );
             }
             $textareaInputValueInjections = [
@@ -142,7 +142,7 @@ class AboutMenuPage extends AbstractDocsMenuPage
             '{title}' => sprintf(__('About %s', 'gatographql'), $pluginName),
             '{tagline}' => __('Powerful and flexible GraphQL server for WordPress.', 'gatographql'),
             '{version}' => sprintf(__('Version %s', 'gatographql'), $mainPlugin->getPluginVersion()),
-            '{plugin-icon}' => sprintf('<img src="%s" alt="">', esc_attr($mainPlugin->getPluginIconSVG())),
+            '{gato-logo}' => sprintf('<img src="%s" alt="">', esc_url($mainPlugin->getPluginURL() . 'assets/img/logos/GatoGraphQL-logo-suki.png')),
             '{our-channels-title}' => __('Our channels', 'gatographql'),
             '{website-label}' => __('Website', 'gatographql'),
             '{contact-label}' => __('Contact', 'gatographql'),
