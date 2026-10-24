@@ -41,7 +41,7 @@ Children persisted queries can override variables defined in the parent query. F
 
 ## How to use
 
-In the custom endpoint or persisted query, in the Document settings, there is section `Page Attributes` with a dropdown of all other entities, to select as the parent:
+In the custom endpoint or persisted query editor, the sidebar shows a **Parent** row. Click it to choose the parent from a dropdown of all the other entities:
 
 <div class="img-width-1024" markdown=1>
 

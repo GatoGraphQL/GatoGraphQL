@@ -7,7 +7,7 @@ For this situation, it makes sense to implement an architecture where:
 - All content is published to (and edited in) a single upstream WordPress site, which acts as the single source of truth for content
 - Suitable content is distributed to (but not edited in) each of the regional downstream WordPress sites
 
-This tutorial lesson will demonstrate how to implement this architecture, with the upstream WordPress site needing to have the relevant Gato GraphQL extensions active, while the downstream sites need only have the free Gato GraphQL plugin.
+This tutorial lesson will demonstrate how to implement this architecture. The upstream WordPress site needs the relevant Gato GraphQL extensions active, while the downstream sites need only the Gato GraphQL plugin plus the [**Response Error Trigger**](https://gatographql.com/extensions/response-error-trigger/) extension (which provides directive `@fail`).
 
 ## GraphQL query to synchronize content from upstream to downstream sites
 
