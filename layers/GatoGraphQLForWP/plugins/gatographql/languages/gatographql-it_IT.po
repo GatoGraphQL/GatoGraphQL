@@ -2975,7 +2975,7 @@ msgstr "Unione dei resolver di tipo 'post personalizzato'"
 msgid "Mime type '%s' is not allowed"
 msgstr "Il tipo MIME '%s' non è consentito"
 
-#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:414
+#: CMSSchema/packages/media-mutations-wp/src/TypeAPIs/MediaTypeMutationAPI.php:415
 msgid "The file's mime type is not allowed"
 msgstr "Il tipo MIME del file non è consentito"
 
@@ -6127,12 +6127,12 @@ msgstr "Dimensione dell'avatar"
 msgid "User avatar"
 msgstr "Avatar utente"
 
-#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:162
+#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:161
 #, php-format
 msgid "The user with ID '%s' could not be deleted"
 msgstr "Impossibile eliminare l'utente con ID '%s'"
 
-#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:181
+#: CMSSchema/packages/user-mutations-wp/src/TypeAPIs/UserTypeMutationAPI.php:180
 msgid "User mutations are not supported on a multisite network"
 msgstr "Le mutation degli utenti non sono supportate su una rete multisito"
 
@@ -7628,7 +7628,7 @@ msgstr ""
 #: Engine/packages/component-model/src/MutationResolvers/AbstractOneofMutationResolver.php:107
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:310
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:541
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1966
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1975
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/TutorialMenuPage.php:140
 #: Schema/packages/schema-commons/src/TypeResolvers/ScalarType/AbstractEnumStringScalarTypeResolver.php:136
 msgid ", "
@@ -8444,33 +8444,34 @@ msgid "Browse documentation&#x2197;"
 msgstr "Sfoglia la documentazione&#x2197;"
 
 #. translators: %s: Plugin name and version.
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:213
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:212
 #, php-format
 msgctxt "plugin"
 msgid "Get extension %s"
 msgstr "Ottieni l'estensione %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:229
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:228
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractModuleDocsMenuPage.php:294
 msgid "Website"
 msgstr "Sito web"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:243
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:242
 msgid ""
 "Ooops something went wrong: No extensions found. Please contact the admin."
 msgstr ""
 "Oops, qualcosa è andato storto: nessuna estensione trovata. Contatta "
 "l'amministratore."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:393
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:392
 msgid "Missing an Extension?"
 msgstr "Manca un'estensione?"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:396
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:395
 msgid "Request an Extension"
 msgstr "Richiedi un'estensione"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:397
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:396
 msgid ""
 "Needing an integration with a 3rd-party plugin? Let us know, and we can work "
 "on an extension."
@@ -8478,7 +8479,7 @@ msgstr ""
 "Hai bisogno di un'integrazione con un plugin di terze parti? Faccelo sapere "
 "e possiamo sviluppare un'estensione."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:398
+#: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/AbstractExtensionListTable.php:397
 msgid "Contact <strong>Gato GraphQL</strong>"
 msgstr "Contatta <strong>Gato GraphQL</strong>"
 
@@ -8569,7 +8570,7 @@ msgid "Enable"
 msgstr "Abilita"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Admin/Tables/ModuleListTable.php:511
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:651
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:653
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/SchemaConfigurationFunctionalityModuleResolver.php:334
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/CustomPostTypes/AbstractGraphQLEndpointCustomPostType.php:278
 msgid "Disabled"
@@ -8722,7 +8723,7 @@ msgid "All sources"
 msgstr "Tutte le sorgenti"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Log/Controllers/FileHandler/FileListTable.php:127
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1188
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1197
 msgid "Filter"
 msgstr "Filtra"
 
@@ -10624,42 +10625,42 @@ msgid "These entries: %s."
 msgstr "Queste voci: %s."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:564
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:655
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:657
 msgid "Not activated"
 msgstr "Non attivata"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:600
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:626
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:602
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:628
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:34
 msgid "Activate"
 msgstr "Attiva"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:605
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:607
 msgid "Validate"
 msgstr "Convalida"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:606
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:629
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:608
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:631
 msgid "Deactivate"
 msgstr "Disattiva"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:643
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:645
 msgid "Active"
 msgstr "Attiva"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:647
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:649
 msgid "Expired"
 msgstr "Scaduta"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:660
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:662
 msgid "Inactive"
 msgstr "Inattiva"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:696
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:703
 msgid "Gato Plugins Store"
 msgstr "Gato Plugins Store"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:701
+#: GatoGraphQLForWP/plugins/gatographql/src/ModuleResolvers/PluginManagementFunctionalityModuleResolver.php:708
 msgid "Activate Licenses"
 msgstr "Attiva licenze"
 
@@ -12220,74 +12221,78 @@ msgstr "Informazioni"
 msgid "Oops, there was a problem loading the page"
 msgstr "Ops, si è verificato un problema durante il caricamento della pagina"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:138
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
 #, php-format
 msgid "About %s"
 msgstr "Informazioni su %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:139
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
 msgid "Powerful and flexible GraphQL server for WordPress."
 msgstr "Server GraphQL potente e flessibile per WordPress."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:140
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
+#, php-format
+msgid "Version %s"
+msgstr "Versione %s"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
 msgid "Our channels"
 msgstr "I nostri canali"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:141
-msgid "Website:"
-msgstr "Sito web:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:142
-msgid "Source code:"
-msgstr "Codice sorgente:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:143
-msgid "YouTube channel:"
-msgstr "Canale YouTube:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:144
-msgid "Contact:"
-msgstr "Contatto:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:145
-#, php-format
-msgid ""
-"<strong>Subscribe to our newsletter</strong> to receive timely updates about "
-"%s:"
-msgstr ""
-"<strong>Iscriviti alla nostra newsletter</strong> per ricevere aggiornamenti "
-"tempestivi su %s:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:146
-msgid "Name:"
-msgstr "Nome:"
-
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:147
-msgid "Email:"
-msgstr "Email:"
-
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:148
+msgid "Contact"
+msgstr "Contatti"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
+msgid "Find us on"
+msgstr "Trovaci su"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
+#, php-format
+msgid "Stay up to date with %s"
+msgstr "Resta aggiornato con %s"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
+msgid ""
+"Subscribe to the newsletter to hear about new releases, features and guides."
+msgstr ""
+"Iscriviti alla newsletter per ricevere novità su nuove versioni, "
+"funzionalità e guide."
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
+msgid "Name"
+msgstr "Nome"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
+msgid "Email"
+msgstr "Email"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
 msgid "Subscribe"
 msgstr "Iscriviti"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:149
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
 msgid "Release Notes"
 msgstr "Note di rilascio"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:150
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
 msgid "New features released on each version:"
 msgstr "Nuove funzionalità rilasciate in ogni versione:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:151
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
 msgid "current"
 msgstr "corrente"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:152
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
+msgid "Read the release notes"
+msgstr "Leggi le note di rilascio"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
 #: GatoGraphQLStandaloneForWP/plugin-packages/gatographql/src/Overrides/Upstream/Services/MenuPages/AboutMenuPage.php:35
 msgid "Support"
 msgstr "Supporto"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:153
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
 msgid ""
 "Support is provided to customers of any Gato GraphQL product with an active "
 "license."
@@ -12295,33 +12300,49 @@ msgstr ""
 "Il supporto è fornito ai clienti di qualsiasi prodotto Gato GraphQL con una "
 "licenza attiva."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:154
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:161
 msgid "Send your message to the Gato GraphQL Support team:"
 msgstr "Invia il tuo messaggio al team di supporto di Gato GraphQL:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:155
-msgid "Your name:"
-msgstr "Il tuo nome:"
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:162
+msgid "License active"
+msgstr "Licenza attiva"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:156
-msgid "Your email:"
-msgstr "La tua email:"
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:163
+msgid "Your name"
+msgstr "Il tuo nome"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:157
-msgid "Subject:"
-msgstr "Oggetto:"
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:164
+msgid "Your email"
+msgstr "La tua email"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:158
-msgid "Message:"
-msgstr "Messaggio:"
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:165
+msgid "Subject"
+msgstr "Oggetto"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:159
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:166
+msgid "Message"
+msgstr "Messaggio"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:167
 msgid "Send message"
 msgstr "Invia messaggio"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:160
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:168
 msgid "Attached extension license data"
 msgstr "Dati della licenza dell'estensione allegata"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:169
+msgid "Your license data"
+msgstr "I dati della tua licenza"
+
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AboutMenuPage.php:170
+msgid ""
+"The form attaches it to your message, so the support team can identify your "
+"site."
+msgstr ""
+"Il modulo li allega al tuo messaggio, così il team di supporto può "
+"identificare il tuo sito."
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractExtensionModuleDocumentationMenuPage.php:78
 #, php-format
@@ -12371,7 +12392,7 @@ msgid "Search all settings"
 msgstr "Cerca in tutte le impostazioni"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:691
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1179
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1188
 msgid "No unsaved changes"
 msgstr "Nessuna modifica non salvata"
 
@@ -12391,51 +12412,51 @@ msgstr "Documentazione"
 msgid "(opens in a new tab)"
 msgstr "(si apre in una nuova scheda)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1083
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1092
 #, php-format
 msgid "Turn off “%s” to use this."
 msgstr "Disattiva “%s” per usare questa opzione."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1084
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1093
 #, php-format
 msgid "Turn on “%s” to use this."
 msgstr "Attiva “%s” per usare questa opzione."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1090
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1099
 #, php-format
 msgid "Set “%1$s” to “%2$s” to use this."
 msgstr "Imposta “%1$s” su “%2$s” per usare questa opzione."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1093
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1102
 msgid "” or “"
 msgstr "” o “"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1112
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1121
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractTableMenuPage.php:20
 #: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractVerticalTabDocsMenuPage.php:208
 #, php-format
 msgid "%s — %s"
 msgstr "%s — %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1178
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1187
 #, php-format
 msgid "More (%s)"
 msgstr "Altro (%s)"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1180
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1189
 msgid "1 unsaved change:"
 msgstr "1 modifica non salvata:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1181
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1190
 #, php-format
 msgid "%s unsaved changes:"
 msgstr "%s modifiche non salvate:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1182
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1191
 msgid "Saving…"
 msgstr "Salvataggio in corso…"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1183
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1192
 #, php-format
 msgid ""
 "The \"%s\" tab has more fields than the server accepts in one request, so it "
@@ -12445,89 +12466,89 @@ msgstr ""
 "richiesta, quindi non può essere salvata. Per salvarla, aumenta "
 "l'impostazione PHP max_input_vars."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1184
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1193
 #, php-format
 msgid "The changes could not be saved: %s"
 msgstr "Non è stato possibile salvare le modifiche: %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1185
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1194
 #, php-format
 msgid "This is not valid JSON: %s"
 msgstr "Questo non è un JSON valido: %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1186
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1195
 msgid "Fix the JSON in 1 field to save the changes:"
 msgstr "Correggi il JSON in 1 campo per salvare le modifiche:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1187
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1196
 #, php-format
 msgid "Fix the JSON in %s fields to save the changes:"
 msgstr "Correggi il JSON in %s campi per salvare le modifiche:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1189
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1198
 #, php-format
 msgid "%1$s of %2$s selected"
 msgstr "%1$s di %2$s selezionati"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1190
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1399
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1199
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1408
 msgid "Set all to:"
 msgstr "Imposta tutti su:"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1191
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1200
 msgid "Add an entry, then press Enter"
 msgstr "Aggiungi una voce, poi premi Invio"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1192
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1201
 #, php-format
 msgid "Remove %s"
 msgstr "Rimuovi %s"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1193
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1202
 msgid "No settings found"
 msgstr "Nessuna impostazione trovata"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1194
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1203
 #, php-format
 msgid "%s settings found"
 msgstr "%s impostazioni trovate"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1195
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1204
 msgid "Unsaved changes"
 msgstr "Modifiche non salvate"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1229
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1238
 msgid "On"
 msgstr "Attivo"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1229
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1238
 msgid "Off"
 msgstr "Disattivo"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1529
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1530
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1531
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1538
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1539
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1540
 msgid "Show"
 msgstr "Mostra"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1532
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1541
 msgid "Hide"
 msgstr "Nascondi"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1568
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1577
 msgid "Manage"
 msgstr "Gestisci"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1871
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1880
 #, php-format
 msgid "Save All Changes ('%s' tab)"
 msgstr "Salva tutte le modifiche (scheda '%s')"
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1906
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1915
 msgid "Sorry, you are not allowed to manage options for this site."
 msgstr "Spiacenti, non hai il permesso di gestire le opzioni di questo sito."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1917
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1926
 #, php-format
 msgid ""
 "Nothing was saved: the server received %1$s of the %2$s fields sent. Try "
@@ -12536,21 +12557,21 @@ msgstr ""
 "Non è stato salvato nulla: il server ha ricevuto %1$s dei %2$s campi "
 "inviati. Riprova, oppure salva ogni scheda separatamente."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1965
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1974
 #, php-format
 msgid "The changes in these tabs were saved: %s."
 msgstr "Le modifiche in queste schede sono state salvate: %s."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1979
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:1988
 msgid "Settings saved."
 msgstr "Impostazioni salvate."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2023
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2032
 #, php-format
 msgid "Tab \"%s\" can't be saved with the others."
 msgstr "La scheda \"%s\" non può essere salvata insieme alle altre."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2041
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2050
 #, php-format
 msgid ""
 "The changes in tab \"%s\" were not saved, as the page had expired. Please "
@@ -12559,7 +12580,7 @@ msgstr ""
 "Le modifiche nella scheda \"%s\" non sono state salvate perché la pagina era "
 "scaduta. Ricarica la pagina e salvale di nuovo."
 
-#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2056
+#: GatoGraphQLForWP/plugins/gatographql/src/Services/MenuPages/AbstractSettingsMenuPage.php:2065
 #, php-format
 msgid "You are not allowed to save the settings in tab \"%s\"."
 msgstr "Non hai il permesso di salvare le impostazioni nella scheda \"%s\"."
@@ -14804,6 +14825,44 @@ msgstr "Ordina per nicename dell'utente"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordina per email dell'utente"
+
+#~ msgid "Website:"
+#~ msgstr "Sito web:"
+
+#~ msgid "Source code:"
+#~ msgstr "Codice sorgente:"
+
+#~ msgid "YouTube channel:"
+#~ msgstr "Canale YouTube:"
+
+#~ msgid "Contact:"
+#~ msgstr "Contatto:"
+
+#, php-format
+#~ msgid ""
+#~ "<strong>Subscribe to our newsletter</strong> to receive timely updates "
+#~ "about %s:"
+#~ msgstr ""
+#~ "<strong>Iscriviti alla nostra newsletter</strong> per ricevere "
+#~ "aggiornamenti tempestivi su %s:"
+
+#~ msgid "Name:"
+#~ msgstr "Nome:"
+
+#~ msgid "Email:"
+#~ msgstr "Email:"
+
+#~ msgid "Your name:"
+#~ msgstr "Il tuo nome:"
+
+#~ msgid "Your email:"
+#~ msgstr "La tua email:"
+
+#~ msgid "Subject:"
+#~ msgstr "Oggetto:"
+
+#~ msgid "Message:"
+#~ msgstr "Messaggio:"
 
 #~ msgid "Can\\t recognize token type"
 #~ msgstr "Impossibile riconoscere il tipo di token"
