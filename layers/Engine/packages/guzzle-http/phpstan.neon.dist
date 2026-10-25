@@ -7,6 +7,3 @@ parameters:
         - 
             message: '#Variable \$response might not be defined\.#'
             path: src/Services/GuzzleService.php
-        - 
-            message: '#Variable \$results might not be defined\.#'
-            path: src/Services/GuzzleService.php

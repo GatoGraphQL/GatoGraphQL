@@ -194,6 +194,8 @@ class BeforeAppIsLoadedStaticHelpers
      * This will resolve to:
      *
      *   gatographql:before_app_is_loaded:graphql_endpoint_paths
+     *
+     * @return non-empty-string
      */
     final protected static function getGraphQLEndpointPathsHookName(): string
     {

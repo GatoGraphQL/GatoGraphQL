@@ -148,7 +148,6 @@ class UserTypeMutationAPI extends AbstractBasicService implements UserTypeMutati
         $this->assertNotMultisite();
 
         // `wp_delete_user` lives in the admin includes
-        // @phpstan-ignore-next-line
         require_once ABSPATH . 'wp-admin/includes/user.php';
 
         $reassign = $reassignAuthorContentToUserID === null

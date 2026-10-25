@@ -175,9 +175,10 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
     /**
      * @param array<string,mixed> $sourceRet
      * @param array<string|int,mixed>|null $ret
+     * @param-out array<string|int,mixed> $ret
      * @param FieldInterface[] $fields
-     * @param array<string,array<string|int,array<string,mixed>>> $databases
-     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string|int|null>|string|integer $objectIDorIDs The object ID inside a list of IDs can be null if returning a null value in a field connection of type List
      * @param array<string> $typeOutputKeyPaths
      * @param array<string|int> $responsePath The path to the response position where the data is added
@@ -202,7 +203,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 $ret[] = [];
                 $position = count($ret) - 1;
                 $resolvedObjectRet = &$ret[$position];
-                // @phpstan-ignore-next-line
                 $isNullObject = $this->addObjectData($sourceRet, $resolvedObjectRet, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, [...$responsePath, $position], $concatenateField);
                 unset($resolvedObjectRet);
                 if ($isNullObject) {
@@ -213,16 +213,16 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             return $hasNullItem;
         }
         $objectID = $objectIDorIDs;
-        // @phpstan-ignore-next-line
         return $this->addObjectData($sourceRet, $ret, $fields, $databases, $unionTypeOutputKeyIDs, $objectID, $objectKeyPath, $typeOutputKeyPaths, $responsePath, $concatenateField);
     }
 
     /**
      * @param array<string,mixed> $sourceRet
-     * @param array<string,mixed>|null $resolvedObjectRet
+     * @param array<string|int,mixed>|null $resolvedObjectRet
+     * @param-out array<string|int,mixed> $resolvedObjectRet
      * @param FieldInterface[] $fields
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>> $databases
-     * @param array<string,array<string|int,array<string,array<string|int>|string|int|null>>> $unionTypeOutputKeyIDs
+     * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $unionTypeOutputKeyIDs
      * @param array<string> $typeOutputKeyPaths
      * @param array<string|int> $responsePath The path to the response position of the object
      * @return bool If the object must be `null` (as some Non-Null field within it is `null`)
@@ -367,7 +367,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
             $nextField = ($concatenateField ? $objectKeyPath . Constants::RELATIONAL_FIELD_PATH_SEPARATOR : '') . $relationalFieldOutputKey;
 
             // The type with ID may be stored under $unionTypeOutputKeyIDs
-            // @phpstan-ignore-next-line
             $unionTypeOutputKeyID = $unionTypeOutputKeyIDs[$typeOutputKey][$objectID][$relationalField] ?? null;
 
             /**
@@ -390,7 +389,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 }
                 $resolvedObjectNestedPropertyRet = &$resolvedObjectRet;
                 $objectIDorIDs = $unionTypeOutputKeyID ?? $resolvedObject[$relationalField];
-                // @phpstan-ignore-next-line
                 $isNullNestedObject = $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, $nextField, $typeOutputKeyPaths, $fieldResponsePath);
                 unset($resolvedObjectNestedPropertyRet);
                 /**
@@ -427,7 +425,6 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
                 }
             }
             $objectIDorIDs = $unionTypeOutputKeyID ?? $resolvedObject[$relationalField];
-            // @phpstan-ignore-next-line
             $hasNullObjectOrItem = $this->addData($sourceRet, $resolvedObjectNestedPropertyRet, $relationalNestedFields, $databases, $unionTypeOutputKeyIDs, $objectIDorIDs, $nextField, $typeOutputKeyPaths, $fieldResponsePath);
             unset($resolvedObjectNestedPropertyRet);
             if (!$hasNullObjectOrItem) {
@@ -535,7 +532,7 @@ class MirrorQueryDataStructureFormatter extends AbstractJSONDataStructureFormatt
      * Return `false` if there is an error.
      *
      * @param array<string,mixed> $sourceRet
-     * @param array<string,mixed> $resolvedObjectRet
+     * @param array<string|int,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function validateObjectData(

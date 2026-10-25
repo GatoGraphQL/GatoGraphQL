@@ -162,7 +162,6 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         ?string $filename,
         array $mediaItemData,
     ): string|int {
-        // @phpstan-ignore-next-line
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         /**
@@ -329,7 +328,6 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string $mimeType,
         array $mediaItemData
     ): string|int {
-        // @phpstan-ignore-next-line
         require_once ABSPATH . 'wp-admin/includes/file.php';
 
         $filesize = filesize($file);
@@ -403,7 +401,10 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
     }
 
     /**
+     * An empty filename has no mime type, so it throws too.
+     *
      * @throws MediaItemCRUDMutationException If the mime type is not allowed
+     * @phpstan-assert non-empty-string $filename
      */
     protected function getFileMimeTypeOrThrowError(string $filename): string
     {
@@ -479,7 +480,6 @@ class MediaTypeMutationAPI extends AbstractBasicService implements MediaTypeMuta
         string $filename,
         array $mediaItemData
     ): void {
-        // @phpstan-ignore-next-line
         require_once ABSPATH . 'wp-admin/includes/image.php';
 
         $mediaItemMetaData = \wp_generate_attachment_metadata((int) $mediaItemID, $filename);
