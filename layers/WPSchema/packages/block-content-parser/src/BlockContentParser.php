@@ -428,9 +428,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     protected function parseBlocksWithoutWhitespace(string $content): array
     {
         return array_values(array_filter(parse_blocks($content), function ($block) {
-            // @phpstan-ignore-next-line
             $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
-            // @phpstan-ignore-next-line
             return ! $is_whitespace_block;
         }));
     }

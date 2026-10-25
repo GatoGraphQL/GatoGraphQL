@@ -236,12 +236,13 @@ class ExecutableDocumentTest extends UpstreamExecutableDocumentTest
     #[DataProvider('getNonCompositeTypeQueries')]
     public function testNonCompositeTypeFragmentSpread(string $query): void
     {
-        $types = [
+        $type = match ($this->dataName()) {
             'scalar' => 'String',
             'enum' => 'CustomPostStatusEnum',
-        ];
+            default => $this->fail('The data set names no type.'),
+        };
         $this->expectException(InvalidRequestException::class);
-        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_3, [$types[$this->dataName()]]))->getMessage());
+        $this->expectExceptionMessage((new FeedbackItemResolution(GraphQLSpecErrorFeedbackItemProvider::class, GraphQLSpecErrorFeedbackItemProvider::E_5_5_1_3, [$type]))->getMessage());
         $document = $this->getParser()->parse($query);
         $context = new Context();
         $executableDocument = $this->createExecutableDocument($document, $context);

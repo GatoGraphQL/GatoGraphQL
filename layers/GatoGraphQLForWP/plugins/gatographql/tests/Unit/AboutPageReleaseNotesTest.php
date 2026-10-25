@@ -37,12 +37,18 @@ class AboutPageReleaseNotesTest extends TestCase
     public function testTheCurrentReleaseIsThePluginsVersion(): void
     {
         $about = (string) file_get_contents(self::ABOUT_FILE);
-        $this->assertSame(1, preg_match('#<span class="gato-about__current-release-number">([0-9.]+)</span>#', $about, $numberMatches), 'The About page shows no current version.');
-        $this->assertSame(1, preg_match('#<a class="button button-primary" href="\.\./\.\./release-notes/([0-9.]+)/en\.md">#', $about, $linkMatches), 'The About page does not link the release notes of the current version.');
+        if (preg_match('#<span class="gato-about__current-release-number">([0-9.]+)</span>#', $about, $numberMatches) !== 1) {
+            $this->fail('The About page shows no current version.');
+        }
+        if (preg_match('#<a class="button button-primary" href="\.\./\.\./release-notes/([0-9.]+)/en\.md">#', $about, $linkMatches) !== 1) {
+            $this->fail('The About page does not link the release notes of the current version.');
+        }
         $this->assertSame($numberMatches[1], $linkMatches[1], 'The current version and the release notes it links differ.');
 
         $plugin = (string) file_get_contents(self::PLUGIN_DIR . '/gatographql.php');
-        $this->assertSame(1, preg_match('#^Version:\s*(\d+\.\d+)\.#m', $plugin, $versionMatches));
+        if (preg_match('#^Version:\s*(\d+\.\d+)\.#m', $plugin, $versionMatches) !== 1) {
+            $this->fail('The plugin declares no version.');
+        }
         $this->assertSame($versionMatches[1], $numberMatches[1], 'The About page does not show the version of the plugin as the current one.');
 
         $releaseNotesVersions = $this->getReleaseNotesVersions();

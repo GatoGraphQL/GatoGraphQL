@@ -807,7 +807,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
     }
 
     /**
-     * @param array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> $entries
+     * @param array<string,SplObjectStorage<FieldInterface,array<mixed>>> $entries
      * @return array<int,mixed[]>
      */
     protected function reformatSchemaEntries(array $entries): array
@@ -973,7 +973,7 @@ class GraphQLDataStructureFormatter extends MirrorQueryDataStructureFormatter
      * @see https://spec.graphql.org/draft/#sec-Field-Selection-Merging     *
      *
      * @param array<string,mixed> $sourceRet
-     * @param array<string,mixed> $resolvedObjectRet
+     * @param array<string|int,mixed> $resolvedObjectRet
      * @param SplObjectStorage<FieldInterface,mixed> $resolvedObject
      */
     protected function validateObjectData(

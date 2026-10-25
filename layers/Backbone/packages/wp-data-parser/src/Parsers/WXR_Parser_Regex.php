@@ -54,23 +54,26 @@ class WXR_Parser_Regex
                 }
 
                 if (false !== strpos($importline, '<wp:base_site_url>')) {
-                    preg_match('|<wp:base_site_url>(.*?)</wp:base_site_url>|is', $importline, $url);
-                    $this->base_url = $url[1];
+                    if (preg_match('|<wp:base_site_url>(.*?)</wp:base_site_url>|is', $importline, $url) === 1) {
+                        $this->base_url = $url[1];
+                    }
                     continue;
                 }
 
                 if (false !== strpos($importline, '<wp:base_blog_url>')) {
-                    preg_match('|<wp:base_blog_url>(.*?)</wp:base_blog_url>|is', $importline, $blog_url);
-                    $this->base_blog_url = $blog_url[1];
+                    if (preg_match('|<wp:base_blog_url>(.*?)</wp:base_blog_url>|is', $importline, $blog_url) === 1) {
+                        $this->base_blog_url = $blog_url[1];
+                    }
                     continue;
                 } else {
                     $this->base_blog_url = $this->base_url;
                 }
 
                 if (false !== strpos($importline, '<wp:author>')) {
-                    preg_match('|<wp:author>(.*?)</wp:author>|is', $importline, $author);
-                    $a = $this->process_author($author[1]);
-                    $this->authors[$a['author_login']] = $a;
+                    if (preg_match('|<wp:author>(.*?)</wp:author>|is', $importline, $author) === 1) {
+                        $a = $this->process_author($author[1]);
+                        $this->authors[$a['author_login']] = $a;
+                    }
                     continue;
                 }
 

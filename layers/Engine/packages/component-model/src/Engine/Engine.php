@@ -1902,9 +1902,9 @@ class Engine extends AbstractBasicService implements EngineInterface
                 if ($add_meta) {
                     if (
                         $combined_datasetcomponentmeta = array_merge_recursive(
-                            $immutable_datasetcomponentmeta ?? [],
-                            $mutableonmodel_datasetcomponentmeta ?? [],
-                            $mutableonrequest_datasetcomponentmeta ?? []
+                            $immutable_datasetcomponentmeta,
+                            $mutableonmodel_datasetcomponentmeta,
+                            $mutableonrequest_datasetcomponentmeta
                         )
                     ) {
                         $ret['datasetcomponentmeta'] = $has_extra_routes ? array($current_uri => $combined_datasetcomponentmeta) : $combined_datasetcomponentmeta;
@@ -1940,8 +1940,8 @@ class Engine extends AbstractBasicService implements EngineInterface
      * subsequent drains within the same pass do not re-fetch fields already
      * loaded by an earlier drain.
      *
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,mixed>>>> $databases
      * @param array<string,array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>>> $unionTypeOutputKeyIDs
      * @param array<string,array<string|int,SplObjectStorage<FieldInterface,array<string|int>>>> $combinedUnionTypeOutputKeyIDs
@@ -2150,8 +2150,8 @@ class Engine extends AbstractBasicService implements EngineInterface
 
     /**
      * @param array<string|int,object> $idObjects
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
      */
     private function transferFeedback(
         array $idObjects,

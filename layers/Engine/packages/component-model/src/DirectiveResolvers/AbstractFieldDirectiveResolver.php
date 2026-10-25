@@ -1621,7 +1621,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     ): void {
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
-                $resolvedIDFieldValues[$id][$field] = null;
+                $resolvedIDFieldValues[$id]->offsetSet($field, null);
             }
         }
     }

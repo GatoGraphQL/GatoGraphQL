@@ -13,6 +13,3 @@ parameters:
 		- 
 			message: '#Parameter \#1 \$string of function trim expects string, string\|null given\.#'
 			path: src/BlockContentParser.php
-		-
-			message: '#Used function get_block_bindings_supported_attributes not found\.#'
-			path: src/BlockContentParser.php
