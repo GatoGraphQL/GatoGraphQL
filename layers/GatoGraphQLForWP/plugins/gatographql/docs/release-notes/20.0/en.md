@@ -47,3 +47,4 @@
 - A value written with the meta mutations, such as `updateCustomPostMeta`, keeps its backslashes, which were being removed when storing it ([#3446](https://github.com/GatoGraphQL/GatoGraphQL/pull/3446))
 - The text of a Subhead block (`core/subhead`), which WordPress no longer registers but older posts still hold, is now read from the block's HTML ([#3447](https://github.com/GatoGraphQL/GatoGraphQL/pull/3447))
 - The entries of a list setting saved on the Settings page no longer end with a hidden line break ([#3448](https://github.com/GatoGraphQL/GatoGraphQL/pull/3448))
+- An Application Password now works on the WordPress REST API for the plugin's own post types, so a script or an AI agent can create a persisted query via `POST /wp-json/wp/v2/graphql-query`. The REST API had no route for them, even for an admin, as the plugin registered its post types before WordPress authenticated the user ([#3460](https://github.com/GatoGraphQL/GatoGraphQL/pull/3460))

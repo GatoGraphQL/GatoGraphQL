@@ -284,6 +284,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 * Fixed - A value written with the meta mutations, such as <code>updateCustomPostMeta</code>, keeps its backslashes, which were being removed when storing it (#3446)
 * Fixed - The text of a Subhead block (<code>core/subhead</code>), which WordPress no longer registers but older posts still hold, is now read from the block's HTML (#3447)
 * Fixed - The entries of a list setting saved on the Settings page no longer end with a hidden line break (#3448)
+* Fixed - An Application Password now works on the WordPress REST API for the plugin's own post types, so a script or an AI agent can create a persisted query via <code>POST /wp-json/wp/v2/graphql-query</code>. The REST API had no route for them, even for an admin, as the plugin registered its post types before WordPress authenticated the user (#3460)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)
