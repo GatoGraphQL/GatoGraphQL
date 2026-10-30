@@ -10,7 +10,9 @@ use GatoGraphQL\GatoGraphQL\Services\Helpers\HookNamespacingHelpers;
 use PoPAPI\APIEndpoints\EndpointUtils;
 
 use function add_filter;
+use function home_url;
 use function remove_filter;
+use function rest_get_url_prefix;
 
 /**
  * These methods cannot rely on the container,
@@ -143,7 +145,44 @@ class BeforeAppIsLoadedStaticHelpers
             return $isAPIRequest;
         }
 
-        return static::isPublicGraphQLAPIRequest();
+        return static::isPublicGraphQLAPIRequest() || static::isRESTAPIRequest();
+    }
+
+    /**
+     * Is this a request to the WordPress REST API?
+     *
+     * WordPress only knows it on "parse_request", when it defines REST_REQUEST,
+     * and only then accepts an Application Password. But Gato GraphQL registers
+     * its custom post types on "init", earlier, with `show_in_rest` depending on
+     * the user. Until this check, an Application Password request was still
+     * anonymous at that point, so the REST API had no route for them
+     * (eg: `POST /wp-json/wp/v2/graphql-query` gave "rest_no_route", even for
+     * an admin), while the editor (logged in with a cookie) worked.
+     *
+     * Recognizing the request from its URL, the same way WordPress routes it,
+     * only brings forward the authentication that WordPress would do anyway.
+     */
+    public static function isRESTAPIRequest(): bool
+    {
+        // phpcs:disable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+        // Plain permalinks: any URL with a `rest_route` query var is served by the REST API
+        if (!empty($_GET['rest_route'])) {
+            return true;
+        }
+        $requestPath = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH);
+        // phpcs:enable SlevomatCodingStandard.Variables.DisallowSuperGlobalVariable.DisallowedSuperGlobalVariable
+        if (!is_string($requestPath) || $requestPath === '') {
+            return false;
+        }
+        // Under the site's own path (eg: a subdirectory install), with or without "index.php"
+        $homePath = rtrim((string) parse_url(home_url('/'), PHP_URL_PATH), '/');
+        $restPrefix = trim(rest_get_url_prefix(), '/');
+        foreach ([$homePath . '/' . $restPrefix, $homePath . '/index.php/' . $restPrefix] as $restPath) {
+            if ($requestPath === $restPath || str_starts_with($requestPath, $restPath . '/')) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
