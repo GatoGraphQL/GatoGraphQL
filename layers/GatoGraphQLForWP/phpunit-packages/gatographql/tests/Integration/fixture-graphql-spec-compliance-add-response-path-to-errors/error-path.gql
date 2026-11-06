@@ -1,0 +1,9 @@
+query {
+  users(pagination: { limit: 2 }, sort: { by: ID, order: ASC }) {
+    id
+    # The input expects an Int, but passing a String
+    avatar(size: "Sixty") {
+      id
+    }
+  }
+}

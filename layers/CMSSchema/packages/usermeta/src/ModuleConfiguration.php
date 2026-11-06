@@ -6,7 +6,7 @@ namespace PoPCMSSchema\UserMeta;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
@@ -26,15 +26,15 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getUserMetaBehavior(): string
+    public function getUserMetaBehavior(): Behaviors
     {
         $envVariable = Environment::USER_META_BEHAVIOR;
         $defaultValue = Behaviors::ALLOW;
 
-        return $this->retrieveConfigurationValueOrUseDefault(
+        return Behaviors::tryFrom($this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
-            $defaultValue,
-        );
+            $defaultValue->value,
+        )) ?? $defaultValue;
     }
 
     public function treatUserMetaKeysAsSensitiveData(): bool

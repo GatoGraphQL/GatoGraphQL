@@ -10,6 +10,8 @@ use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use WP_Error;
 use stdClass;
 
+use function wp_slash;
+
 trait EntityMetaTypeMutationAPITrait
 {
     use TypeMutationAPITrait;
@@ -75,7 +77,7 @@ trait EntityMetaTypeMutationAPITrait
                     $this->executeDeleteEntityMeta($entityID, $key);
                     continue;
                 }
-                $value = $this->maybeConvertStdClassToArray($value);
+                $value = $this->prepareMetaValueToStore($value);
                 $this->executeUpdateEntityMeta($entityID, $key, $value);
                 continue;
             }
@@ -83,7 +85,7 @@ trait EntityMetaTypeMutationAPITrait
             // $numberItems > 1
             $this->executeDeleteEntityMeta($entityID, $key);
             foreach ($values as $value) {
-                $value = $this->maybeConvertStdClassToArray($value);
+                $value = $this->prepareMetaValueToStore($value);
                 $this->executeAddEntityMeta($entityID, $key, $value, false);
             }
         }
@@ -99,7 +101,7 @@ trait EntityMetaTypeMutationAPITrait
         mixed $value,
         bool $single = false,
     ): int {
-        $value = $this->maybeConvertStdClassToArray($value);
+        $value = $this->prepareMetaValueToStore($value);
         $result = $this->executeAddEntityMeta($entityID, $key, $value, $single);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(
@@ -109,6 +111,15 @@ trait EntityMetaTypeMutationAPITrait
         $this->handleMaybeError($result);
         /** @var int $result */
         return $result;
+    }
+
+    /**
+     * WordPress unslashes the value it is given to store, so it must be
+     * slashed first, or every backslash in it is lost.
+     */
+    protected function prepareMetaValueToStore(mixed $value): mixed
+    {
+        return wp_slash($this->maybeConvertStdClassToArray($value));
     }
 
     /**
@@ -139,7 +150,7 @@ trait EntityMetaTypeMutationAPITrait
         mixed $value,
         mixed $prevValue = null,
     ): string|int|bool {
-        $value = $this->maybeConvertStdClassToArray($value);
+        $value = $this->prepareMetaValueToStore($value);
         $result = $this->executeUpdateEntityMeta($entityID, $key, $value, $prevValue ?? '');
         $this->handleMaybeError($result);
         if ($result === false) {
@@ -166,7 +177,7 @@ trait EntityMetaTypeMutationAPITrait
         string $key,
         mixed $value = null,
     ): void {
-        $result = $this->executeDeleteEntityMeta($entityID, $key, $value);
+        $result = $this->executeDeleteEntityMeta($entityID, $key, $value === null ? null : wp_slash($value));
         $this->handleMaybeError($result);
         if ($result === false) {
             throw $this->getEntityMetaCRUDMutationException(

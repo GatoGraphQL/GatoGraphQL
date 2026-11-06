@@ -553,6 +553,14 @@
                     },
                     "fields": [
                         {
+                            "name": "description",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": []
+                        },
+                        {
                             "name": "directives",
                             "extensions": {
                                 "isMutation": false,
@@ -877,10 +885,10 @@
                     ]
                 },
                 {
-                    "name": "DirectiveLocation",
+                    "name": "__DirectiveLocation",
                     "extensions": {
-                        "elementName": "DirectiveLocation",
-                        "namespacedName": "DirectiveLocation",
+                        "elementName": "__DirectiveLocation",
+                        "namespacedName": "__DirectiveLocation",
                         "possibleValues": null
                     },
                     "fields": null,
@@ -1003,10 +1011,10 @@
                     ]
                 },
                 {
-                    "name": "TypeKind",
+                    "name": "__TypeKind",
                     "extensions": {
-                        "elementName": "TypeKind",
-                        "namespacedName": "TypeKind",
+                        "elementName": "__TypeKind",
+                        "namespacedName": "__TypeKind",
                         "possibleValues": null
                     },
                     "fields": null,

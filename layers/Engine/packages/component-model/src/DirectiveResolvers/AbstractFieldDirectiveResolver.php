@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\DirectiveResolvers;
 
+use BackedEnum;
 use Exception;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionManagerInterface;
 use PoP\ComponentModel\AttachableExtensions\AttachableExtensionTrait;
+use PoP\ComponentModel\DirectivePipeline\DirectiveNullabilityValidationServiceInterface;
 use PoP\ComponentModel\DirectivePipeline\DirectivePipelineUtils;
 use PoP\ComponentModel\Directives\DirectiveKinds;
 use PoP\ComponentModel\Directives\DirectiveLocations;
@@ -35,6 +37,7 @@ use PoP\ComponentModel\Schema\SchemaDefinition;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
+use PoP\ComponentModel\TypeResolvers\EnumType\EnumTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputObjectType\InputObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
@@ -135,6 +138,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     private ?VersioningServiceInterface $versioningService = null;
     private ?IntScalarTypeResolver $intScalarTypeResolver = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
+    private ?DirectiveNullabilityValidationServiceInterface $directiveNullabilityValidationService = null;
 
     final protected function getSemverHelperService(): SemverHelperServiceInterface
     {
@@ -189,6 +193,15 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this->schemaCastingService = $schemaCastingService;
         }
         return $this->schemaCastingService;
+    }
+    final protected function getDirectiveNullabilityValidationService(): DirectiveNullabilityValidationServiceInterface
+    {
+        if ($this->directiveNullabilityValidationService === null) {
+            /** @var DirectiveNullabilityValidationServiceInterface */
+            $directiveNullabilityValidationService = $this->instanceManager->getInstance(DirectiveNullabilityValidationServiceInterface::class);
+            $this->directiveNullabilityValidationService = $directiveNullabilityValidationService;
+        }
+        return $this->directiveNullabilityValidationService;
     }
 
     /**
@@ -246,20 +259,51 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
             $this->prepareDirectiveCacheFields = $fields;
             return;
         }
-        $this->directiveDataAccessor = $this->createDirectiveDataAccessor($directiveArgs);
+        $this->directiveDataAccessor = $this->createDirectiveDataAccessor(
+            $directiveArgs,
+            $this->directive->hasArgumentReferencingPromise()
+                ? $this->getBackedEnumClassesByDirectiveArgName($relationalTypeResolver)
+                : [],
+        );
         $this->prepareDirectiveCacheTypeResolver = $relationalTypeResolver;
         $this->prepareDirectiveCacheFields = $fields;
     }
 
     /**
      * @param array<string,mixed> $directiveArgs
+     * @param array<string,class-string<BackedEnum>> $backedEnumClassesByArgName
      */
     public function createDirectiveDataAccessor(
         array $directiveArgs,
+        array $backedEnumClassesByArgName = [],
     ): DirectiveDataAccessorInterface {
         return new DirectiveDataAccessor(
             $directiveArgs,
+            $backedEnumClassesByArgName,
         );
+    }
+
+    /**
+     * The directive args of an enum type backed by a PHP enum,
+     * whose value provided via a promise must still be coerced.
+     *
+     * @return array<string,class-string<BackedEnum>>
+     */
+    protected function getBackedEnumClassesByDirectiveArgName(RelationalTypeResolverInterface $relationalTypeResolver): array
+    {
+        $backedEnumClassesByArgName = [];
+        foreach ($this->getDirectiveArgumentsSchemaDefinition($relationalTypeResolver) as $directiveArgName => $directiveArgSchemaDefinition) {
+            $directiveArgTypeResolver = $directiveArgSchemaDefinition[SchemaDefinition::TYPE_RESOLVER];
+            if (!($directiveArgTypeResolver instanceof EnumTypeResolverInterface)) {
+                continue;
+            }
+            $backedEnumClass = $directiveArgTypeResolver->getBackedEnumClass();
+            if ($backedEnumClass === null) {
+                continue;
+            }
+            $backedEnumClassesByArgName[$directiveArgName] = $backedEnumClass;
+        }
+        return $backedEnumClassesByArgName;
     }
 
     /**
@@ -1315,6 +1359,17 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
         // For instance, executing ?query=posts.id|title<default,translate(from:en,to:es)> will fail
         // after directive "default", so directive "translate" must not even execute
         if (!$this->needsSomeIDFieldToExecute() || $this->hasSomeIDField($idFieldSet)) {
+            $directiveNullabilityValidationService = $this->getDirectiveNullabilityValidationService();
+            $directiveNullabilityValidationSnapshot = $directiveNullabilityValidationService->mustValidateDirectivePipeline()
+                ? $directiveNullabilityValidationService->takeSnapshot(
+                    $relationalTypeResolver,
+                    $idFieldSet,
+                    $idObjects,
+                    $resolvedIDFieldValues,
+                    $engineIterationFeedbackStore,
+                )
+                : null;
+
             // If the directive resolver throws an Exception,
             // catch it and add objectErrors
             $feedbackItemResolution = null;
@@ -1402,6 +1457,19 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
                     $idFieldSet,
                     $pipelineIDFieldSet,
                     $astNode ?? $this->directive,
+                    $resolvedIDFieldValues,
+                    $engineIterationFeedbackStore,
+                );
+            }
+
+            if ($directiveNullabilityValidationSnapshot !== null) {
+                $directiveNullabilityValidationService->trackNullabilityViolations(
+                    $directiveNullabilityValidationSnapshot,
+                    $this,
+                    $this->directive,
+                    $relationalTypeResolver,
+                    $idFieldSet,
+                    $idObjects,
                     $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
                 );
@@ -1553,7 +1621,7 @@ abstract class AbstractFieldDirectiveResolver extends AbstractDirectiveResolver 
     ): void {
         foreach ($idFieldSet as $id => $fieldSet) {
             foreach ($fieldSet->fields as $field) {
-                $resolvedIDFieldValues[$id][$field] = null;
+                $resolvedIDFieldValues[$id]->offsetSet($field, null);
             }
         }
     }

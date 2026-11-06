@@ -73,7 +73,7 @@ class WrappingTypeOrSchemaDefinitionReferenceObjectTypeDataLoader extends Abstra
             || $this->getGraphQLSyntaxService()->isListWrappingType($typeID)
         ) {
             // Store the single WrappingType instance in a dictionary
-            $objectTypeResolverClass = get_class();
+            $objectTypeResolverClass = self::class;
             if ($this->getObjectDictionary()->has($objectTypeResolverClass, $typeID)) {
                 return $this->getObjectDictionary()->get($objectTypeResolverClass, $typeID);
             }

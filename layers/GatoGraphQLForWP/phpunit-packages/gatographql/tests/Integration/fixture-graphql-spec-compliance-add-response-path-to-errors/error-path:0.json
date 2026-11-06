@@ -1,0 +1,38 @@
+{
+    "errors": [
+        {
+            "message": "Cannot cast value 'Sixty' for type 'Int'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 19
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "\"Sixty\"",
+                    "(size: \"Sixty\")",
+                    "avatar(size: \"Sixty\") { ... }",
+                    "users(pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "User",
+                "field": "avatar(size: \"Sixty\") { ... }",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        }
+    ],
+    "data": {
+        "users": [
+            {
+                "id": 1,
+                "avatar": null
+            },
+            {
+                "id": 2,
+                "avatar": null
+            }
+        ]
+    }
+}

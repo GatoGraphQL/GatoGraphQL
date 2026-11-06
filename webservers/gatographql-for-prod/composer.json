@@ -49,9 +49,11 @@
         ],
         "init-server": "@start-server",
         "start-server": [
-            "lando start"
+            "lando start",
+            "@route-in-lando-proxy"
         ],
         "destroy-server": "lando destroy -y",
+        "route-in-lando-proxy": "python3 ../shared/composer-scripts/route-in-lando-proxy.py",
         "reset-db": [
             "Composer\\Config::disableProcessTimeout",
             "lando wp db reset --yes",
@@ -69,7 +71,8 @@
         "create-users-within-container": "/bin/bash /app/_shared-webserver/setup/create-users.sh",
         "rebuild-server": [
             "Composer\\Config::disableProcessTimeout",
-            "lando rebuild appserver -y"
+            "lando rebuild appserver -y",
+            "@route-in-lando-proxy"
         ],
         "stop-server": "lando stop",
         "log-server-errors": [

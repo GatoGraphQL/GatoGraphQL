@@ -6,6 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use GatoGraphQL\GatoGraphQL\ContentProcessors\MarkdownContentParserInterface;
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\Plugin;
 use GatoGraphQL\GatoGraphQL\SettingsCategoryResolvers\SettingsCategoryResolver;
@@ -139,6 +140,20 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
     }
 
     /**
+     * @return array<string,URLPathSettingType> Key: option, value: the kind of URL path
+     */
+    public function getURLPathSettingOptions(string $module): array
+    {
+        return match ($module) {
+            self::GRAPHIQL_FOR_SINGLE_ENDPOINT,
+            self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT => [
+                ModuleSettingOptions::PATH => URLPathSettingType::ENDPOINT,
+            ],
+            default => parent::getURLPathSettingOptions($module),
+        };
+    }
+
+    /**
      * Array with the inputs to show as settings for the module
      *
     * @return array<array<string,mixed>> List of settings for the module, each entry is an array with property => value
@@ -156,13 +171,8 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $option
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public GraphiQL client<br/><span class="more-info">%s</span>', 'gatographql'),
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
-                        \__('Configuring the GraphiQL client for the single endpoint', 'gatographql')
-                    )
-                ),
+                Properties::DESCRIPTION => \__('The URL path of the public GraphiQL client.', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/configuring-the-graphiql-client-for-the-single-endpoint',
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         } elseif ($module === self::INTERACTIVE_SCHEMA_FOR_SINGLE_ENDPOINT) {
@@ -174,13 +184,8 @@ class ClientFunctionalityModuleResolver extends AbstractFunctionalityModuleResol
                     $option
                 ),
                 Properties::TITLE => \__('Client path', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('URL path to access the public Interactive Schema client<br/><span class="more-info">%s</span>', 'gatographql'),
-                    $this->getSettingsItemHelpLinkHTML(
-                        'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
-                        \__('Configuring the Voyager client for the single endpoint', 'gatographql')
-                    )
-                ),
+                Properties::DESCRIPTION => \__('The URL path of the public Interactive Schema client.', 'gatographql'),
+                Properties::DOCS_URL => 'https://gatographql.com/guides/config/configuring-the-voyager-client-for-the-single-endpoint',
                 Properties::TYPE => Properties::TYPE_STRING,
             ];
         }

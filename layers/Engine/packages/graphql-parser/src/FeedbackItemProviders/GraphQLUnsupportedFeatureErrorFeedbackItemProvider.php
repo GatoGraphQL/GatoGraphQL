@@ -13,6 +13,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
     public final const E_2 = '2';
     public final const E_3 = '3';
     public final const E_4 = '4';
+    public final const E_5 = '5';
 
     protected function getNamespace(): string
     {
@@ -29,6 +30,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
             self::E_2,
             self::E_3,
             self::E_4,
+            self::E_5,
         ];
     }
 
@@ -39,6 +41,7 @@ class GraphQLUnsupportedFeatureErrorFeedbackItemProvider extends AbstractFeedbac
             self::E_2 => $this->__('Fragment Definition Directives are currently not supported', 'gatographql'),
             self::E_3 => $this->__('Variable Definition Directives are currently not supported', 'gatographql'),
             self::E_4 => $this->__('Only up to 2 levels of List modifiers are supported (eg: `[[String]]`)', 'gatographql'),
+            self::E_5 => $this->__('Dynamic variables cannot be used in the directives of fragments', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };
     }

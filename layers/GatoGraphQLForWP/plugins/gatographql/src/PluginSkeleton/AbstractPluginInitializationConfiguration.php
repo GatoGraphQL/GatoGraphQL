@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
 use GatoGraphQL\GatoGraphQL\App;
 use GatoGraphQL\GatoGraphQL\AppHelpers;
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Facades\Instances\PluginOptionsFormHandlerFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
@@ -113,6 +113,13 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
         foreach ($mappings as $mapping) {
             /** @var string */
             $module = $mapping['module'];
+            /**
+             * A module registered only under some condition (eg: while
+             * another plugin is active) has no settings otherwise
+             */
+            if (!$moduleRegistry->isModuleRegistered($module)) {
+                continue;
+            }
             /** @var string|bool */
             $condition = $mapping['condition'] ?? true;
             // Check if the hook must be executed always (condition => 'any') or with
@@ -249,7 +256,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
              * The internal server receives the same configuration
              * as the default admin endpoint
              */
-            $endpointGroup = AdminGraphQLEndpointGroups::DEFAULT;
+            $endpointGroup = AdminGraphQLEndpointGroups::DEFAULT->value;
         }
         $predefinedAdminEndpointModuleClassConfiguration = $endpointGroup !== null
             ? $this->getPredefinedAdminEndpointModuleClassConfiguration($endpointGroup)
@@ -276,7 +283,7 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
     {
         return apply_filters(
             HookNames::ADMIN_ENDPOINT_GROUP_MODULE_CONFIGURATION,
-            $this->doGetPredefinedAdminEndpointModuleClassConfiguration($endpointGroup),
+            $this->doGetPredefinedAdminEndpointModuleClassConfiguration(AdminGraphQLEndpointGroups::tryFrom($endpointGroup)),
             $endpointGroup
         );
     }
@@ -285,9 +292,10 @@ abstract class AbstractPluginInitializationConfiguration implements PluginInitia
      * Get the fixed configuration for all components required in the plugin
      * when requesting some specific group in the admin endpoint
      *
+     * @param AdminGraphQLEndpointGroups|null $endpointGroup `null` when requesting a custom admin endpoint group
      * @return array<class-string<ModuleInterface>,array<string,mixed>> [key]: Module class, [value]: Configuration
      */
-    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(string $endpointGroup): array
+    protected function doGetPredefinedAdminEndpointModuleClassConfiguration(?AdminGraphQLEndpointGroups $endpointGroup): array
     {
         return [];
     }

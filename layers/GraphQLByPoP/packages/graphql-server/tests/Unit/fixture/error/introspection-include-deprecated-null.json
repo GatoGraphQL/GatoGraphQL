@@ -1,0 +1,31 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'includeDeprecated' in field 'fields' of type '__Type' cannot be null",
+      "locations": [
+        {
+          "line": 3,
+          "column": 31
+        }
+      ],
+      "extensions": {
+        "path": [
+          "null",
+          "(includeDeprecated: null)",
+          "fields(includeDeprecated: null) { ... }",
+          "__type(name: \"QueryRoot\") { ... }",
+          "query { ... }"
+        ],
+        "type": "__Type",
+        "field": "fields(includeDeprecated: null) { ... }",
+        "code": "gql@5.4.2.1[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+      }
+    }
+  ],
+  "data": {
+    "__type": {
+      "fields": null
+    }
+  }
+}

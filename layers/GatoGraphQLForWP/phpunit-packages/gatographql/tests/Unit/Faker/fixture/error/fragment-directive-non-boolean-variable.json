@@ -1,0 +1,25 @@
+{
+  "errors": [
+    {
+      "message": "Variable 'limit' of type 'Int!' cannot be used where type 'Boolean!' is expected",
+      "locations": [
+        {
+          "line": 3,
+          "column": 30
+        }
+      ],
+      "extensions": {
+        "path": [
+          "$limit",
+          "(if: $limit)",
+          "@include(if: $limit)",
+          "...on Post { ... }",
+          "posts(pagination: {limit: $limit}) { ... }",
+          "query GetPosts($limit: Int!) { ... }"
+        ],
+        "code": "gql@5.8.5[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-All-Variable-Usages-are-Allowed"
+      }
+    }
+  ]
+}

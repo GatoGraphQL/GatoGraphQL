@@ -1,0 +1,10 @@
+{
+    "data": {
+        "__schema": {
+            "queryType": {
+                "name": "QueryRoot"
+            }
+        },
+        "__type": null
+    }
+}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels;
 
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
+
 class CommercialExtensionActivatedLicenseObjectProperties
 {
     /**
@@ -14,7 +16,7 @@ class CommercialExtensionActivatedLicenseObjectProperties
     public function __construct(
         public readonly string $licenseKey,
         public readonly array $apiResponsePayload,
-        public readonly string $status,
+        public readonly LicenseStatus $status,
         public readonly ?string $instanceID,
         public readonly ?string $instanceName,
         public readonly int $activationUsage,

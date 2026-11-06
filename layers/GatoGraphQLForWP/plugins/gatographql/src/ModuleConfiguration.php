@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL;
 
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
 
@@ -275,22 +275,27 @@ class ModuleConfiguration extends AbstractModuleConfiguration
     }
 
     /**
-     * @return string[]
+     * @return LoggerSeverity[]
      */
     public function enableLogCountBadgesBySeverity(): array
     {
         $envVariable = Environment::ENABLE_LOG_COUNT_BADGES_BY_SEVERITY;
         $defaultValue = [
-            LoggerSeverity::ERROR,
-            LoggerSeverity::WARNING,
+            LoggerSeverity::ERROR->value,
+            LoggerSeverity::WARNING->value,
         ];
         $callback = EnvironmentValueHelpers::commaSeparatedStringToArray(...);
 
-        return $this->retrieveConfigurationValueOrUseDefault(
+        /** @var string[] */
+        $severities = $this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
             $defaultValue,
             $callback,
         );
+        return array_values(array_filter(array_map(
+            LoggerSeverity::tryFrom(...),
+            $severities
+        )));
     }
 
     public function enableReverseLogOrder(): bool

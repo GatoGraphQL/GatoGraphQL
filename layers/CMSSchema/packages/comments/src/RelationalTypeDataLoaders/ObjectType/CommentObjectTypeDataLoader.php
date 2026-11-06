@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\RelationalTypeDataLoaders\ObjectType;
 
-use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
@@ -46,10 +46,10 @@ class CommentObjectTypeDataLoader extends AbstractObjectTypeQueryableDataLoader
                     CommentTypes::PINGBACK,
                 ],
                 'status' => [
-                    CommentStatus::APPROVE,
-                    CommentStatus::HOLD,
-                    CommentStatus::SPAM,
-                    CommentStatus::TRASH,
+                    CommentStatus::APPROVE->value,
+                    CommentStatus::HOLD->value,
+                    CommentStatus::SPAM->value,
+                    CommentStatus::TRASH->value,
                 ],
                 'custompost-status' => $this->getAllCustomPostStatuses(),
             ],

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoP\GraphQLParser\AST;
 
+use PoP\GraphQLParser\Enums\FragmentInclusionDirectiveName;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
@@ -99,5 +100,30 @@ class ASTHelperService extends AbstractBasicService implements ASTHelperServiceI
         /** @var RelationalField */
         $againstRelationalField = $oppositeField;
         return $thisRelationalField->isEquivalentTo($againstRelationalField, $fragments);
+    }
+
+    /**
+     * The value of argument `if` is either a Boolean or an operation
+     * variable (dynamic variables are not supported in fragments),
+     * so it is known before resolving the query.
+     *
+     * @see https://spec.graphql.org/September2025/#sec-Field-Collection
+     */
+    public function isFragmentBondIncluded(FragmentReference|InlineFragment $fragmentBond): bool
+    {
+        foreach ($fragmentBond->getDirectives() as $directive) {
+            $directiveName = FragmentInclusionDirectiveName::tryFrom($directive->getName());
+            if ($directiveName === null) {
+                continue;
+            }
+            $condition = $directive->getArgumentValue('if') === true;
+            if ($directiveName === FragmentInclusionDirectiveName::Skip && $condition) {
+                return false;
+            }
+            if ($directiveName === FragmentInclusionDirectiveName::Include && !$condition) {
+                return false;
+            }
+        }
+        return true;
     }
 }

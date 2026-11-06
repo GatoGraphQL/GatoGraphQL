@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\Feedback;
 
 use PoP\ComponentModel\App;
-use PoP\ComponentModel\Constants\DatabasesOutputModes;
 use PoP\ComponentModel\Constants\Response;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Enums\DatabasesOutputModes;
 use PoP\ComponentModel\Feedback\ObjectResolutionFeedbackInterface;
 use PoP\ComponentModel\Feedback\QueryFeedbackInterface;
 use PoP\ComponentModel\Module;
@@ -44,8 +44,8 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
      * into the output.
      *
      * @param array<string,mixed> $data
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
      * @return array<string,mixed>
      */
     public function combineAndAddFeedbackEntries(
@@ -144,7 +144,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     }
 
     /**
-     * @param array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>> $entries
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>> $entries
      * @param array<string,mixed> $ret
      */
     protected function maybeCombineAndAddObjectOrSchemaEntries(array &$ret, string $name, array $entries): void
@@ -153,6 +153,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             return;
         }
 
+        /** @var DatabasesOutputModes */
         $dboutputmode = App::getState('dboutputmode');
 
         // Combine all the databases or send them separate
@@ -161,38 +162,36 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             return;
         }
 
-        if ($dboutputmode === DatabasesOutputModes::COMBINED) {
-            // Filter to make sure there are entries
-            if ($entries = array_filter($entries)) {
-                /** @var array<string,SplObjectStorage<FieldInterface,array<string,mixed>>> */
-                $combined_databases = [];
-                foreach ($entries as $database_name => $database) {
-                    foreach ($database as $typeOutputKey => $fieldEntries) {
-                        /** @var SplObjectStorage<FieldInterface,array<string,mixed>> */
-                        $combinedDatabasesType = $combined_databases[$typeOutputKey] ?? new SplObjectStorage();
-                        /** @var FieldInterface $field */
-                        foreach ($fieldEntries as $field) {
-                            /** @var array<string,mixed> */
-                            $combinedDatabasesTypeField = $combinedDatabasesType[$field] ?? [];
-                            /** @var array<string,mixed> */
-                            $entries = $fieldEntries[$field];
-                            $combinedDatabasesTypeField = array_merge(
-                                $combinedDatabasesTypeField,
-                                $entries
-                            );
-                            $combinedDatabasesType[$field] = $combinedDatabasesTypeField;
-                        }
-                        $combined_databases[$typeOutputKey] = $combinedDatabasesType;
+        // Filter to make sure there are entries
+        if ($entries = array_filter($entries)) {
+            /** @var array<string,SplObjectStorage<FieldInterface,array<mixed>>> */
+            $combined_databases = [];
+            foreach ($entries as $database_name => $database) {
+                foreach ($database as $typeOutputKey => $fieldEntries) {
+                    /** @var SplObjectStorage<FieldInterface,array<mixed>> */
+                    $combinedDatabasesType = $combined_databases[$typeOutputKey] ?? new SplObjectStorage();
+                    /** @var FieldInterface $field */
+                    foreach ($fieldEntries as $field) {
+                        /** @var array<mixed> */
+                        $combinedDatabasesTypeField = $combinedDatabasesType[$field] ?? [];
+                        /** @var array<mixed> */
+                        $entries = $fieldEntries[$field];
+                        $combinedDatabasesTypeField = array_merge(
+                            $combinedDatabasesTypeField,
+                            $entries
+                        );
+                        $combinedDatabasesType[$field] = $combinedDatabasesTypeField;
                     }
+                    $combined_databases[$typeOutputKey] = $combinedDatabasesType;
                 }
-                $ret[$name] = $combined_databases;
             }
+            $ret[$name] = $combined_databases;
         }
     }
 
     /**
-     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationEntries
-     * @param array<string,array<string,SplObjectStorage<FieldInterface,mixed>>> $destination
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> $iterationEntries
+     * @param array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>> $destination
      */
     protected function addFeedbackEntries(
         SplObjectStorage $iterationEntries,
@@ -208,7 +207,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $entries = $iterationEntries[$iterationRelationalTypeResolver];
             $dbNameEntries = $databaseEntryManager->moveEntriesWithoutIDUnderDBName($entries, $iterationRelationalTypeResolver);
             foreach ($dbNameEntries as $dbName => $entries) {
-                /** @var SplObjectStorage<FieldInterface,mixed> */
+                /** @var SplObjectStorage<FieldInterface,array<mixed>> */
                 $destinationSplObjectStorage = $destination[$dbName][$typeOutputKey] ?? new SplObjectStorage();
                 $destinationSplObjectStorage->addAll($entries);
                 $destination[$dbName][$typeOutputKey] = $destinationSplObjectStorage;
@@ -218,14 +217,14 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
 
     /**
      * @param array<string|int,object> $idObjects
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
      */
     public function transferObjectFeedback(
         array $idObjects,
         ObjectResolutionFeedbackStore $objectResolutionFeedbackStore,
         array &$objectFeedbackEntries,
     ): void {
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectErrors = new SplObjectStorage();
         foreach ([...$objectResolutionFeedbackStore->getErrors(), ...$objectResolutionFeedbackStore->getPartialErrors()] as $objectFeedbackError) {
             $this->transferObjectFeedbackEntries(
@@ -238,7 +237,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $objectFeedbackEntries[FeedbackCategories::ERROR]
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectWarnings = new SplObjectStorage();
         foreach ($objectResolutionFeedbackStore->getWarnings() as $objectFeedbackWarning) {
             $this->transferObjectFeedbackEntries(
@@ -251,7 +250,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $objectFeedbackEntries[FeedbackCategories::WARNING]
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectDeprecations = new SplObjectStorage();
         foreach ($objectResolutionFeedbackStore->getDeprecations() as $objectFeedbackDeprecation) {
             $this->transferObjectFeedbackEntries(
@@ -264,7 +263,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $objectFeedbackEntries[FeedbackCategories::DEPRECATION]
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectNotices = new SplObjectStorage();
         foreach ($objectResolutionFeedbackStore->getNotices() as $objectFeedbackNotice) {
             $this->transferObjectFeedbackEntries(
@@ -277,7 +276,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $objectFeedbackEntries[FeedbackCategories::NOTICE]
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectSuggestions = new SplObjectStorage();
         foreach ($objectResolutionFeedbackStore->getSuggestions() as $objectFeedbackSuggestion) {
             $this->transferObjectFeedbackEntries(
@@ -290,7 +289,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $objectFeedbackEntries[FeedbackCategories::SUGGESTION]
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationObjectLogs = new SplObjectStorage();
         foreach ($objectResolutionFeedbackStore->getLogs() as $objectFeedbackLog) {
             $this->transferObjectFeedbackEntries(
@@ -305,7 +304,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     }
 
     /**
-     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationObjectFeedbackEntries
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> $iterationObjectFeedbackEntries
      */
     private function transferObjectFeedbackEntries(
         ObjectResolutionFeedbackInterface $objectFeedback,
@@ -313,7 +312,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     ): void {
         $relationalTypeResolver = $objectFeedback->getRelationalTypeResolver();
         if ($relationalTypeResolver instanceof UnionTypeResolverInterface) {
-            /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+            /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
             $targetIterationObjectFeedbackEntries = new SplObjectStorage();
 
             /** @var UnionTypeResolverInterface */
@@ -339,7 +338,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
                 $idTargetObjectTypeResolverIDFieldSet[$id] = $fieldSet;
                 $targetObjectTypeResolverIDFieldSet[$idTargetObjectTypeResolver] = $idTargetObjectTypeResolverIDFieldSet;
 
-                /** @var SplObjectStorage<FieldInterface,mixed> */
+                /** @var SplObjectStorage<FieldInterface,array<mixed>> */
                 $idTargetObjectFeedbackEntries = $targetIterationObjectFeedbackEntries[$idTargetObjectTypeResolver] ?? new SplObjectStorage();
                 foreach ($fieldSet->fields as $field) {
                     if (
@@ -373,7 +372,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     }
 
     /**
-     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationObjectFeedbackEntries
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> $iterationObjectFeedbackEntries
      * @param array<string|int,EngineIterationFieldSet> $idFieldSet
      */
     private function doTransferObjectFeedbackEntries(
@@ -384,7 +383,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackCommonEntry($objectFeedback);
         $fieldIDs = MethodHelpers::orderIDsByDirectFields($idFieldSet);
-        /** @var SplObjectStorage<FieldInterface,mixed> */
+        /** @var SplObjectStorage<FieldInterface,array<mixed>> */
         $objectFeedbackEntries = $iterationObjectFeedbackEntries[$relationalTypeResolver] ?? new SplObjectStorage();
         /** @var FieldInterface $field */
         foreach ($fieldIDs as $field) {
@@ -403,13 +402,13 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     }
 
     /**
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
      */
     public function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,
         array &$schemaFeedbackEntries,
     ): void {
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaErrors = new SplObjectStorage();
         foreach ([...$schemaFeedbackStore->getErrors(), ...$schemaFeedbackStore->getPartialErrors()] as $schemaFeedbackError) {
             $this->transferSchemaFeedbackEntries(
@@ -422,7 +421,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $schemaFeedbackEntries[FeedbackCategories::ERROR],
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaWarnings = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getWarnings() as $schemaFeedbackWarning) {
             $this->transferSchemaFeedbackEntries(
@@ -435,7 +434,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $schemaFeedbackEntries[FeedbackCategories::WARNING],
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaDeprecations = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getDeprecations() as $schemaFeedbackDeprecation) {
             $this->transferSchemaFeedbackEntries(
@@ -448,7 +447,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $schemaFeedbackEntries[FeedbackCategories::DEPRECATION],
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaNotices = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getNotices() as $schemaFeedbackNotice) {
             $this->transferSchemaFeedbackEntries(
@@ -461,7 +460,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $schemaFeedbackEntries[FeedbackCategories::NOTICE],
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaSuggestions = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getSuggestions() as $schemaFeedbackSuggestion) {
             $this->transferSchemaFeedbackEntries(
@@ -474,7 +473,7 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
             $schemaFeedbackEntries[FeedbackCategories::SUGGESTION],
         );
 
-        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> */
+        /** @var SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> */
         $iterationSchemaLogs = new SplObjectStorage();
         foreach ($schemaFeedbackStore->getLogs() as $schemaFeedbackLog) {
             $this->transferSchemaFeedbackEntries(
@@ -489,14 +488,14 @@ class FeedbackEntryManager extends AbstractBasicService implements FeedbackEntry
     }
 
     /**
-     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,mixed>> $iterationSchemaFeedbackEntries
+     * @param SplObjectStorage<RelationalTypeResolverInterface,SplObjectStorage<FieldInterface,array<mixed>>> $iterationSchemaFeedbackEntries
      */
     private function transferSchemaFeedbackEntries(
         SchemaFeedbackInterface $schemaFeedback,
         SplObjectStorage $iterationSchemaFeedbackEntries
     ): void {
         $entry = $this->getObjectOrSchemaFeedbackCommonEntry($schemaFeedback);
-        /** @var SplObjectStorage<FieldInterface,mixed> */
+        /** @var SplObjectStorage<FieldInterface,array<mixed>> */
         $schemaFeedbackEntries = $iterationSchemaFeedbackEntries[$schemaFeedback->getRelationalTypeResolver()] ?? new SplObjectStorage();
         foreach ($schemaFeedback->getFields() as $field) {
             $fieldSchemaFeedbackEntries = $schemaFeedbackEntries[$field] ?? [];

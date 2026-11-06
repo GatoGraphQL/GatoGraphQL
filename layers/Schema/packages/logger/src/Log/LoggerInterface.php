@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\Logger\Log;
 
+use PoPSchema\Logger\Enums\LoggerSeverity;
+
 interface LoggerInterface
 {
     /**
@@ -16,7 +18,7 @@ interface LoggerInterface
      * @param array<string,mixed>|null $context
      */
     public function log(
-        string $severity,
+        LoggerSeverity $severity,
         string $message,
         string $loggerSource = LoggerSources::INFO,
         ?array $context = null,

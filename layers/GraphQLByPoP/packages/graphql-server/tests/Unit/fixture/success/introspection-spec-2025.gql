@@ -1,0 +1,40 @@
+{
+  __schema {
+    description
+  }
+  wrappingTypes: __type(name: "QueryRoot") {
+    fields(includeDeprecated: true) {
+      name
+      type {
+        kind
+        name
+        ofType {
+          kind
+          name
+          ofType {
+            kind
+            name
+          }
+        }
+      }
+    }
+  }
+  typeKind: __type(name: "__TypeKind") {
+    kind
+    enumValues {
+      name
+    }
+  }
+  directiveLocation: __type(name: "__DirectiveLocation") {
+    kind
+    enumValues {
+      name
+    }
+  }
+  include: __schema {
+    directives {
+      name
+      locations
+    }
+  }
+}

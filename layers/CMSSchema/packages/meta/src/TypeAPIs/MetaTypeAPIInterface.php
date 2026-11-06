@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Meta\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
+
 interface MetaTypeAPIInterface
 {
     public function validateIsMetaKeyAllowed(string $key): bool;
@@ -13,5 +15,5 @@ interface MetaTypeAPIInterface
      * @return string[]
      */
     public function getAllowOrDenyMetaEntries(): array;
-    public function getAllowOrDenyMetaBehavior(): string;
+    public function getAllowOrDenyMetaBehavior(): Behaviors;
 }

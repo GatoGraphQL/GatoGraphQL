@@ -298,7 +298,7 @@ This will produce:
 
 ## Configuration
 
-To enable or disable composable directives in the GraphQL schema, go to the "Composable Directives" module on the Settings page, and tick/untick the checkbox for `Enable composable directives?`:
+To enable or disable composable directives in the GraphQL schema, go to the "Composable Directives" module on the Settings page, and tick/untick the checkbox for `Enable composable directives`:
 
 <div class="img-width-1024" markdown=1>
 

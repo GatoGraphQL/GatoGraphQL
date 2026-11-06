@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ConfigurationCache;
 
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\PluginSkeleton\MainPluginInfoInterface;
@@ -107,7 +107,7 @@ abstract class AbstractCacheConfigurationManager extends AbstractBasicService im
          * Service Container) with the unique exception of
          * Low-Level Persisted Query Editing, so then can't reuse the cache.
          */
-        if ($endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT) {
+        if ($endpointGroup !== AdminGraphQLEndpointGroups::DEFAULT->value) {
             $suffix .= '_' . sanitize_file_name($endpointGroup);
         }
         return $suffix;

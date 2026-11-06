@@ -19,7 +19,6 @@ use GatoGraphQL\GatoGraphQL\ObjectModels\AbstractDependedOnWordPressTheme;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\ModulesMenuPage;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\UserSettingsManagerInterface;
@@ -705,18 +704,12 @@ class ModuleListTable extends AbstractItemListTable
     {
         parent::enqueueAssets();
 
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         /**
          * Fix the issues with the WP List Table
          */
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-module-list-table',
-            $mainPluginURL . 'assets/css/module-list-table.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/module-list-table.css'
         );
     }
 

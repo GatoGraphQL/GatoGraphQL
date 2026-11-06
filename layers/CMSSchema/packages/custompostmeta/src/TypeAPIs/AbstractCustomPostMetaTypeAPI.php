@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CustomPostMeta\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\CustomPostMeta\Module;
 use PoPCMSSchema\CustomPostMeta\ModuleConfiguration;
@@ -38,7 +39,7 @@ abstract class AbstractCustomPostMetaTypeAPI extends AbstractMetaTypeAPI impleme
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getCustomPostMetaEntries();
     }
-    public function getAllowOrDenyMetaBehavior(): string
+    public function getAllowOrDenyMetaBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

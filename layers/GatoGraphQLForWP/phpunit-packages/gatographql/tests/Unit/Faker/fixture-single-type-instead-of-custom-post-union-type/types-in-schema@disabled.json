@@ -14,79 +14,79 @@
                         {
                             "name": "ancestors",
                             "type": {
-                                "name": "[Page!]"
+                                "name": null
                             }
                         },
                         {
                             "name": "childCount",
                             "type": {
-                                "name": "Int!"
+                                "name": null
                             }
                         },
                         {
                             "name": "children",
                             "type": {
-                                "name": "[Page!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "content",
                             "type": {
-                                "name": "HTML!"
+                                "name": null
                             }
                         },
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnumString!"
+                                "name": null
                             }
                         },
                         {
                             "name": "date",
                             "type": {
-                                "name": "DateTime!"
+                                "name": null
                             }
                         },
                         {
                             "name": "dateStr",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "excerpt",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isStatus",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "modifiedDate",
                             "type": {
-                                "name": "DateTime!"
+                                "name": null
                             }
                         },
                         {
                             "name": "modifiedDateStr",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
@@ -98,43 +98,43 @@
                         {
                             "name": "self",
                             "type": {
-                                "name": "Page!"
+                                "name": null
                             }
                         },
                         {
                             "name": "slug",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "slugPath",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "status",
                             "type": {
-                                "name": "CustomPostStatusEnum!"
+                                "name": null
                             }
                         },
                         {
                             "name": "title",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "url",
                             "type": {
-                                "name": "URL!"
+                                "name": null
                             }
                         },
                         {
                             "name": "urlPath",
                             "type": {
-                                "name": "URLAbsolutePath!"
+                                "name": null
                             }
                         }
                     ]
@@ -152,25 +152,25 @@
                         {
                             "name": "customPostCount",
                             "type": {
-                                "name": "Int!"
+                                "name": null
                             }
                         },
                         {
                             "name": "customPosts",
                             "type": {
-                                "name": "[CustomPostUnion!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
@@ -182,19 +182,19 @@
                         {
                             "name": "pageCount",
                             "type": {
-                                "name": "Int!"
+                                "name": null
                             }
                         },
                         {
                             "name": "pages",
                             "type": {
-                                "name": "[Page!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "self",
                             "type": {
-                                "name": "QueryRoot!"
+                                "name": null
                             }
                         }
                     ]
@@ -212,25 +212,25 @@
                         {
                             "name": "customPostCount",
                             "type": {
-                                "name": "Int!"
+                                "name": null
                             }
                         },
                         {
                             "name": "customPosts",
                             "type": {
-                                "name": "[CustomPostUnion!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
@@ -242,19 +242,19 @@
                         {
                             "name": "pageCount",
                             "type": {
-                                "name": "Int!"
+                                "name": null
                             }
                         },
                         {
                             "name": "pages",
                             "type": {
-                                "name": "[Page!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "self",
                             "type": {
-                                "name": "Root!"
+                                "name": null
                             }
                         }
                     ]
@@ -266,13 +266,13 @@
                         {
                             "name": "fieldDirectiveSupportedTypeNamesOrDescriptions",
                             "type": {
-                                "name": "[String!]"
+                                "name": null
                             }
                         },
                         {
                             "name": "needsDataToExecute",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         }
                     ]
@@ -284,7 +284,7 @@
                         {
                             "name": "isSensitiveDataElement",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         }
                     ]
@@ -296,19 +296,19 @@
                         {
                             "name": "isGlobal",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isMutation",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isSensitiveDataElement",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         }
                     ]
@@ -320,7 +320,7 @@
                         {
                             "name": "isSensitiveDataElement",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         }
                     ]
@@ -332,19 +332,19 @@
                         {
                             "name": "elementName",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "namespacedName",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "possibleValues",
                             "type": {
-                                "name": "[String!]"
+                                "name": null
                             }
                         }
                     ]
@@ -356,7 +356,7 @@
                         {
                             "name": "isNamespaced",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         }
                     ]
@@ -368,7 +368,7 @@
                         {
                             "name": "args",
                             "type": {
-                                "name": "[__InputValue!]!"
+                                "name": null
                             }
                         },
                         {
@@ -380,37 +380,37 @@
                         {
                             "name": "extensions",
                             "type": {
-                                "name": "_DirectiveExtensions!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isRepeatable",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "locations",
                             "type": {
-                                "name": "[DirectiveLocation!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "name",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         }
                     ]
@@ -434,31 +434,31 @@
                         {
                             "name": "extensions",
                             "type": {
-                                "name": "_EnumValueExtensions!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isDeprecated",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "name",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         }
                     ]
@@ -470,7 +470,7 @@
                         {
                             "name": "args",
                             "type": {
-                                "name": "[__InputValue!]!"
+                                "name": null
                             }
                         },
                         {
@@ -488,37 +488,37 @@
                         {
                             "name": "extensions",
                             "type": {
-                                "name": "_FieldExtensions!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isDeprecated",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "name",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "type",
                             "type": {
-                                "name": "__Type!"
+                                "name": null
                             }
                         }
                     ]
@@ -542,31 +542,31 @@
                         {
                             "name": "extensions",
                             "type": {
-                                "name": "_InputValueExtensions!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "name",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "type",
                             "type": {
-                                "name": "__Type!"
+                                "name": null
                             }
                         }
                     ]
@@ -576,27 +576,33 @@
                     "possibleTypes": null,
                     "fields": [
                         {
+                            "name": "description",
+                            "type": {
+                                "name": "String"
+                            }
+                        },
+                        {
                             "name": "directives",
                             "type": {
-                                "name": "[__Directive!]!"
+                                "name": null
                             }
                         },
                         {
                             "name": "extensions",
                             "type": {
-                                "name": "_SchemaExtensions!"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
@@ -608,7 +614,7 @@
                         {
                             "name": "queryType",
                             "type": {
-                                "name": "__Type!"
+                                "name": null
                             }
                         },
                         {
@@ -626,7 +632,7 @@
                         {
                             "name": "types",
                             "type": {
-                                "name": "[__Type!]!"
+                                "name": null
                             }
                         }
                     ]
@@ -644,7 +650,7 @@
                         {
                             "name": "enumValues",
                             "type": {
-                                "name": "[__EnumValue!]"
+                                "name": null
                             }
                         },
                         {
@@ -656,43 +662,43 @@
                         {
                             "name": "fields",
                             "type": {
-                                "name": "[__Field!]"
+                                "name": null
                             }
                         },
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "inputFields",
                             "type": {
-                                "name": "[__InputValue!]"
+                                "name": null
                             }
                         },
                         {
                             "name": "interfaces",
                             "type": {
-                                "name": "[__Type!]"
+                                "name": null
                             }
                         },
                         {
                             "name": "isOneOf",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "kind",
                             "type": {
-                                "name": "TypeKind!"
+                                "name": null
                             }
                         },
                         {
@@ -710,7 +716,7 @@
                         {
                             "name": "possibleTypes",
                             "type": {
-                                "name": "[__Type!]"
+                                "name": null
                             }
                         },
                         {
@@ -782,85 +788,85 @@
                         {
                             "name": "content",
                             "type": {
-                                "name": "HTML!"
+                                "name": null
                             }
                         },
                         {
                             "name": "customPostType",
                             "type": {
-                                "name": "CustomPostEnumString!"
+                                "name": null
                             }
                         },
                         {
                             "name": "date",
                             "type": {
-                                "name": "DateTime!"
+                                "name": null
                             }
                         },
                         {
                             "name": "dateStr",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "excerpt",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "isStatus",
                             "type": {
-                                "name": "Boolean!"
+                                "name": null
                             }
                         },
                         {
                             "name": "modifiedDate",
                             "type": {
-                                "name": "DateTime!"
+                                "name": null
                             }
                         },
                         {
                             "name": "modifiedDateStr",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "slug",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "slugPath",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "status",
                             "type": {
-                                "name": "CustomPostStatusEnum!"
+                                "name": null
                             }
                         },
                         {
                             "name": "title",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "url",
                             "type": {
-                                "name": "URL!"
+                                "name": null
                             }
                         },
                         {
                             "name": "urlPath",
                             "type": {
-                                "name": "URLAbsolutePath!"
+                                "name": null
                             }
                         }
                     ]
@@ -900,13 +906,13 @@
                         {
                             "name": "globalID",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         },
                         {
                             "name": "id",
                             "type": {
-                                "name": "ID!"
+                                "name": null
                             }
                         }
                     ]
@@ -922,19 +928,19 @@
                         {
                             "name": "slug",
                             "type": {
-                                "name": "String!"
+                                "name": null
                             }
                         },
                         {
                             "name": "url",
                             "type": {
-                                "name": "URL!"
+                                "name": null
                             }
                         },
                         {
                             "name": "urlPath",
                             "type": {
-                                "name": "URLAbsolutePath!"
+                                "name": null
                             }
                         }
                     ]
@@ -955,17 +961,17 @@
                     "fields": null
                 },
                 {
-                    "name": "DirectiveLocation",
-                    "possibleTypes": null,
-                    "fields": null
-                },
-                {
                     "name": "OrderEnum",
                     "possibleTypes": null,
                     "fields": null
                 },
                 {
-                    "name": "TypeKind",
+                    "name": "__DirectiveLocation",
+                    "possibleTypes": null,
+                    "fields": null
+                },
+                {
+                    "name": "__TypeKind",
                     "possibleTypes": null,
                     "fields": null
                 },

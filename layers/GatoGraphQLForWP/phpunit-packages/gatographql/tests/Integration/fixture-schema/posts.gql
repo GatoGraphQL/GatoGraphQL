@@ -58,67 +58,67 @@ query {
     urlPath
   }
 
-  postsByAuthorIDs: posts(filter: { author: { ids: 5 } }) {
+  postsByAuthorIDs: posts(sort: { by: ID, order: DESC }, filter: { author: { ids: 5 } }) {
     id
     title
   }
-  postsByAuthorSlug: posts(filter: { author: { slug: "blogger" } }) {
+  postsByAuthorSlug: posts(sort: { by: ID, order: DESC }, filter: { author: { slug: "blogger" } }) {
     id
     title
   }
-  postsByCategoryIDs: posts(filter: { categories: { includeBy: { ids: [1] } } }) {
+  postsByCategoryIDs: posts(sort: { by: ID, order: DESC }, filter: { categories: { includeBy: { ids: [1] } } }) {
     id
     title
   }
-  postsByDateQuery: posts(filter: { dateQuery: { before: "2020-04-20" } }) {
+  postsByDateQuery: posts(sort: { by: ID, order: DESC }, filter: { dateQuery: { before: "2020-04-20" } }) {
     id
     title
   }
-  postsByExcludeAuthorIDs: posts(filter: { author: { excludeIDs: 5 } }) {
+  postsByExcludeAuthorIDs: posts(sort: { by: ID, order: DESC }, filter: { author: { excludeIDs: 5 } }) {
     id
     title
   }
-  postsByExcludeIDs: posts(filter: { excludeIDs: [1, 1128] }) {
+  postsByExcludeIDs: posts(sort: { by: ID, order: DESC }, filter: { excludeIDs: [1, 1128] }) {
     id
     title
   }
-  postsByHasPassword: posts(filter: { hasPassword: true }) {
+  postsByHasPassword: posts(sort: { by: ID, order: DESC }, filter: { hasPassword: true }) {
     id
     title
   }
-  emptyPostsByIds: posts(filter: { ids: [] }) {
+  emptyPostsByIds: posts(sort: { by: ID, order: DESC }, filter: { ids: [] }) {
     id
     title
   }
-  postsByIds: posts(filter: { ids: [1, 1128] }) {
+  postsByIds: posts(sort: { by: ID, order: DESC }, filter: { ids: [1, 1128] }) {
     id
     title
   }
-  postsByIsSticky: posts(filter: { isSticky: true }) {
+  postsByIsSticky: posts(sort: { by: ID, order: DESC }, filter: { isSticky: true }) {
     id
     title
   }
-  postsByMetaQuery: posts(filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }) {
+  postsByMetaQuery: posts(sort: { by: ID, order: DESC }, filter: { metaQuery: { key: "_thumbnail_id", compareBy: { key: { operator: EXISTS } } } }) {
     id
     title
   }
-  postsByPassword: posts(filter: { password: "password" }) {
+  postsByPassword: posts(sort: { by: ID, order: DESC }, filter: { password: "password" }) {
     id
     title
   }
-  postsBySearch: posts(filter: { search: "hello" }) {
+  postsBySearch: posts(sort: { by: ID, order: DESC }, filter: { search: "hello" }) {
     id
     title
   }
-  postsByStatus: posts(filter: { status: draft }) {
+  postsByStatus: posts(sort: { by: ID, order: DESC }, filter: { status: draft }) {
     id
     title
   }
-  postsByTagIDs: posts(filter: { tags: { includeBy: { ids: [8, 9] } } }) {
+  postsByTagIDs: posts(sort: { by: ID, order: DESC }, filter: { tags: { includeBy: { ids: [8, 9] } } }) {
     id
     title
   }
-  postsByTagSlugs: posts(filter: { tags: { includeBy: { slugs: ["plugin", "release"] } } }) {
+  postsByTagSlugs: posts(sort: { by: ID, order: DESC }, filter: { tags: { includeBy: { slugs: ["plugin", "release"] } } }) {
     id
     title
   }

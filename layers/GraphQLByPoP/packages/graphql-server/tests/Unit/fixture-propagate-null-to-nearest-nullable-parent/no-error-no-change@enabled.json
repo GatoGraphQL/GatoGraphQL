@@ -1,0 +1,31 @@
+{
+    "data": {
+        "__type": {
+            "name": "__EnumValue",
+            "kind": "OBJECT",
+            "fields": [
+                {
+                    "name": "deprecationReason"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "extensions"
+                },
+                {
+                    "name": "globalID"
+                },
+                {
+                    "name": "id"
+                },
+                {
+                    "name": "isDeprecated"
+                },
+                {
+                    "name": "name"
+                }
+            ]
+        }
+    }
+}

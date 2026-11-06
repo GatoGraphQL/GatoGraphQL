@@ -1,0 +1,10 @@
+<?php
+
+declare(strict_types=1);
+
+namespace GraphQLByPoP\GraphQLServer\Unit;
+
+class EnabledPropagateNullToNearestNullableParentFixtureQueryExecutionGraphQLServerTest extends AbstractPropagateNullToNearestNullableParentFixtureQueryExecutionGraphQLServerTestCase
+{
+    use EnabledFixtureQueryExecutionGraphQLServerTestCaseTrait;
+}

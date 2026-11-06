@@ -1,0 +1,131 @@
+{
+    "data": {
+        "postWithNestedSyncedPattern": {
+            "id": 1119,
+            "notResolved": [
+                {
+                    "name": "core/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
+                }
+            ],
+            "blocks": [
+                {
+                    "name": "core/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "contentSource": "<!-- wp:block {\"ref\":1132,\"content\":[]} /-->",
+                    "innerBlocks": [
+                        {
+                            "name": "core/group",
+                            "attributes": {
+                                "tagName": "div"
+                            },
+                            "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n<div class=\"wp-block-group\">\n\t<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"I want to translate this content, which is inside some nested block (it seems)\",\"dropCap\":false} -->\n\t\t<p>I want to translate this content, which is inside some nested block (it seems)</p>\n\t\t<!-- /wp:paragraph -->\n\t</div>\n\t<!-- /wp:group -->\n</div>\n<!-- /wp:group -->",
+                            "innerBlocks": [
+                                {
+                                    "name": "core/group",
+                                    "attributes": {
+                                        "tagName": "div"
+                                    },
+                                    "contentSource": "<!-- wp:group {\"tagName\":\"div\"} -->\n\t<div class=\"wp-block-group\">\n\t\t<!-- wp:paragraph {\"content\":\"I want to translate this content, which is inside some nested block (it seems)\",\"dropCap\":false} -->\n\t\t<p>I want to translate this content, which is inside some nested block (it seems)</p>\n\t\t<!-- /wp:paragraph -->\n\t</div>\n\t<!-- /wp:group -->",
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core/paragraph",
+                                            "attributes": {
+                                                "content": "I want to translate this content, which is inside some nested block (it seems)",
+                                                "dropCap": false
+                                            },
+                                            "contentSource": "<!-- wp:paragraph {\"content\":\"I want to translate this content, which is inside some nested block (it seems)\",\"dropCap\":false} -->\n\t\t<p>I want to translate this content, which is inside some nested block (it seems)</p>\n\t\t<!-- /wp:paragraph -->"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "blockDataItems": [
+                {
+                    "name": "core/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    },
+                    "innerBlocks": [
+                        {
+                            "name": "core/group",
+                            "attributes": {
+                                "tagName": "div"
+                            },
+                            "innerBlocks": [
+                                {
+                                    "name": "core/group",
+                                    "attributes": {
+                                        "tagName": "div"
+                                    },
+                                    "innerBlocks": [
+                                        {
+                                            "name": "core/paragraph",
+                                            "attributes": {
+                                                "content": "I want to translate this content, which is inside some nested block (it seems)",
+                                                "dropCap": false
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "blockFlattenedDataItems": [
+                {
+                    "name": "core/paragraph",
+                    "attributes": {
+                        "className": "layout-column-2",
+                        "content": "Phosfluorescently morph intuitive relationships rather than customer directed human capital. Dynamically customize turnkey information whereas orthogonal processes. Assertively deliver superior leadership skills whereas holistic outsourcing. Enthusiastically iterate enabled best practices vis-a-vis 24/365 communities.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "core/paragraph",
+                    "attributes": {
+                        "content": "This rhyming poem is the spark that can reignite the fires within you. It challenges you to go out and live your life in the present moment as a \u201chero\u201d and leave your mark on this world.",
+                        "dropCap": false
+                    }
+                },
+                {
+                    "name": "core/block",
+                    "attributes": {
+                        "ref": 1132,
+                        "content": []
+                    }
+                },
+                {
+                    "name": "core/group",
+                    "attributes": {
+                        "tagName": "div"
+                    }
+                },
+                {
+                    "name": "core/group",
+                    "attributes": {
+                        "tagName": "div"
+                    }
+                },
+                {
+                    "name": "core/paragraph",
+                    "attributes": {
+                        "content": "I want to translate this content, which is inside some nested block (it seems)",
+                        "dropCap": false
+                    }
+                }
+            ]
+        }
+    }
+}

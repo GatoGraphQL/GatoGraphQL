@@ -6,6 +6,7 @@ namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Component\Component;
+use PoP\ComponentModel\Enums\DataSources;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalLeafComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\ConditionalRelationalComponentFieldNode;
 use PoP\ComponentModel\GraphQLEngine\Model\ComponentModelSpec\LeafComponentFieldNode;
@@ -151,7 +152,7 @@ interface ComponentProcessorInterface
     /**
      * @param array<string,mixed> $props
      */
-    public function getDatasource(Component $component, array &$props): string;
+    public function getDatasource(Component $component, array &$props): DataSources;
     /**
      * @return string|int|array<string|int>|null
      * @param array<string,mixed> $props

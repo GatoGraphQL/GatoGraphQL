@@ -99,7 +99,7 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
                     }
                 }
 
-                $resolvedIDFieldValues[$id][$field] = $this->transformValue(
+                $resolvedIDFieldValues[$id]->offsetSet($field, $this->transformValue(
                     $resolvedIDFieldValues[$id][$field],
                     $id,
                     $field,
@@ -107,7 +107,7 @@ abstract class AbstractTransformFieldValueFieldDirectiveResolver extends Abstrac
                     $succeedingPipelineIDFieldSet,
                     $resolvedIDFieldValues,
                     $engineIterationFeedbackStore,
-                );
+                ));
             }
         }
 

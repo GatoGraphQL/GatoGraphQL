@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace PoPSchema\HTTPRequests\Enums;
 
-class HTTPRequestMethodEnum
+enum HTTPRequestMethodEnum: string
 {
-    public final const GET = 'GET';
-    public final const POST = 'POST';
-    public final const PUT = 'PUT';
-    public final const DELETE = 'DELETE';
-    public final const PATCH = 'PATCH';
-    public final const HEAD = 'HEAD';
-    public final const OPTIONS = 'OPTIONS';
+    case GET = 'GET';
+    case POST = 'POST';
+    case PUT = 'PUT';
+    case DELETE = 'DELETE';
+    case PATCH = 'PATCH';
+    case HEAD = 'HEAD';
+    case OPTIONS = 'OPTIONS';
 }

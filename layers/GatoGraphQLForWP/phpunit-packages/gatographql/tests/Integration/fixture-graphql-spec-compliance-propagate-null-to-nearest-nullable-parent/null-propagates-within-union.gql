@@ -1,0 +1,21 @@
+query {
+  customPost(by: { id: 1 }) {
+    __typename
+    ... on Post {
+      id
+      author {
+        id
+        posts(pagination: { limit: "Five" }) {
+          id
+        }
+      }
+    }
+  }
+  page: customPost(by: { id: 2 }) {
+    __typename
+    ... on Page {
+      id
+      title
+    }
+  }
+}

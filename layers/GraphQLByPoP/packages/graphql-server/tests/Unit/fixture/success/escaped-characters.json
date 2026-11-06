@@ -1,0 +1,10 @@
+{
+  "data": {
+    "fixedLengthUnicode": {
+      "name": "QueryRoot"
+    },
+    "variableLengthUnicode": {
+      "name": "QueryRoot"
+    }
+  }
+}

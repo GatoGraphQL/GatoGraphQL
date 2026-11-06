@@ -1,0 +1,23 @@
+{
+  "data": {
+    "rootTypename": "QueryRoot",
+    "posts": [
+      {
+        "id": 1724,
+        "title": "Keyboard navigation",
+        "includedInlineFragment": "keyboard-navigation",
+        "includedInlineFragmentWithoutTypeCondition": "https://www.mysite.com/keyboard-navigation",
+        "inlineFragmentWithoutTypeConditionOrDirectives": "publish",
+        "includedByBothDirectives": 4
+      },
+      {
+        "id": 358,
+        "title": "Post Format: Standard",
+        "includedInlineFragment": "post-format-standard",
+        "includedInlineFragmentWithoutTypeCondition": "https://www.mysite.com/post-format-standard",
+        "inlineFragmentWithoutTypeConditionOrDirectives": "publish",
+        "includedByBothDirectives": 0
+      }
+    ]
+  }
+}

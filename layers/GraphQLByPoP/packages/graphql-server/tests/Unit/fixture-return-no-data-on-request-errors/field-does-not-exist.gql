@@ -1,0 +1,12 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+  }
+  __type(name: "__Field") {
+    name
+    # Type "__Type" has no field "nonExistingField"
+    nonExistingField
+  }
+}

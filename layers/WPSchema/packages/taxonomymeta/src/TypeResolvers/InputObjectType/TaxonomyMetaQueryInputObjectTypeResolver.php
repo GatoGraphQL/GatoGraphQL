@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\TaxonomyMeta\TypeResolvers\InputObjectType;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\TaxonomyMeta\Module;
 use PoPCMSSchema\TaxonomyMeta\ModuleConfiguration;
@@ -25,7 +26,7 @@ class TaxonomyMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObj
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getTaxonomyMetaEntries();
     }
-    protected function getAllowOrDenyBehavior(): string
+    protected function getAllowOrDenyBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

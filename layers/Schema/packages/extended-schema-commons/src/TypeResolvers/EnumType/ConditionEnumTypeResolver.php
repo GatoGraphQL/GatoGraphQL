@@ -13,15 +13,8 @@ class ConditionEnumTypeResolver extends AbstractEnumTypeResolver
     {
         return 'ConditionEnum';
     }
-    /**
-     * @return string[]
-     */
-    public function getEnumValues(): array
+    public function getBackedEnumClass(): ?string
     {
-        return [
-            ConditionEnum::IS_NULL,
-            ConditionEnum::IS_EMPTY,
-            ConditionEnum::ALWAYS,
-        ];
+        return ConditionEnum::class;
     }
 }

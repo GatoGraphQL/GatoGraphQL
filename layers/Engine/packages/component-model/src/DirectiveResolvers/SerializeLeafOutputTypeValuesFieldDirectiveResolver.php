@@ -87,7 +87,7 @@ final class SerializeLeafOutputTypeValuesFieldDirectiveResolver extends Abstract
             /** @var FieldInterface $field */
             foreach ($serializedFieldValues as $field) {
                 $serializedValue = $serializedFieldValues[$field];
-                $resolvedIDFieldValues[$id][$field] = $serializedValue;
+                $resolvedIDFieldValues[$id]->offsetSet($field, $serializedValue);
             }
         }
     }

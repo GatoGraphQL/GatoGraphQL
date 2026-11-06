@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\PluginSkeleton;
 
+use GatoGraphQL\GatoGraphQL\PluginAppGraphQLServerNames;
 use GatoGraphQL\GatoGraphQL\PluginAppHooks;
 use PoP\Root\Helpers\ClassHelpers;
 use PoP\Root\Module\ModuleInterface;
@@ -129,10 +130,21 @@ abstract class AbstractExtension extends AbstractPlugin implements ExtensionInte
 
         /**
          * Priority 100: before Gato GraphQL is initialized
+         *
+         * The hook is triggered once per AppThread (by the standard
+         * GraphQL server, and again by every internal GraphQL server),
+         * but the lifecycle hooks are WordPress hooks, global to the
+         * request: added once, they already run for every AppThread.
+         * Adding them again would initialize/configure/boot the
+         * extension once more in every internal GraphQL server.
          */
         \add_action(
             PluginAppHooks::INITIALIZE_APP,
-            function (): void {
+            function (string $pluginAppGraphQLServerName): void {
+                if ($pluginAppGraphQLServerName !== PluginAppGraphQLServerNames::EXTERNAL) {
+                    return;
+                }
+
                 /**
                  * Initialize/configure/boot this extension plugin
                  */

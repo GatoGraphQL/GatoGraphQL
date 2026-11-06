@@ -4,12 +4,29 @@ declare(strict_types=1);
 
 namespace PoP\ComponentModel\TypeResolvers\EnumType;
 
+use BackedEnum;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\DeprecatableInputTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\LeafOutputTypeResolverInterface;
 
 interface EnumTypeResolverInterface extends ConcreteTypeResolverInterface, DeprecatableInputTypeResolverInterface, LeafOutputTypeResolverInterface
 {
+    /**
+     * Opt-in: the string-backed native PHP enum whose cases are the
+     * values of this GraphQL enum.
+     *
+     * When provided, the input value is coerced into the enum case
+     * (so field/directive arguments and input fields are read as the
+     * enum, never as a string), the enum case is serialized into its
+     * value when printed in the response, and the enum values default
+     * to the enum's cases.
+     *
+     * The PHP enum is the closed set of values, so the enum values
+     * must not be extended via hooks.
+     *
+     * @return class-string<BackedEnum>|null
+     */
+    public function getBackedEnumClass(): ?string;
     /**
      * The values in the enum
      *

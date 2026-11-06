@@ -6,7 +6,7 @@ namespace GatoGraphQL\GatoGraphQL\Services\Blocks;
 
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\BehaviorHelpers;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 trait AllowAccessToEntriesBlockTrait
 {
@@ -18,11 +18,11 @@ trait AllowAccessToEntriesBlockTrait
     protected function getDefaultBehaviorLocalizedData(): array
     {
         return [
-            'defaultBehavior' => $this->getDefaultBehavior(),
+            'defaultBehavior' => $this->getDefaultBehavior()->value,
         ];
     }
 
-    protected function getDefaultBehavior(): string
+    protected function getDefaultBehavior(): Behaviors
     {
         $useRestrictiveDefaults = BehaviorHelpers::areRestrictiveDefaultsEnabled();
         return $useRestrictiveDefaults ? Behaviors::ALLOW : Behaviors::DENY;
@@ -35,7 +35,7 @@ trait AllowAccessToEntriesBlockTrait
     {
         $placeholder = '<p><strong>%s</strong></p>%s';
         $entries = $attributes[BlockAttributeNames::ENTRIES] ?? [];
-        $behavior = $attributes[BlockAttributeNames::BEHAVIOR] ?? $this->getDefaultBehavior();
+        $behavior = Behaviors::tryFrom($attributes[BlockAttributeNames::BEHAVIOR] ?? '') ?? $this->getDefaultBehavior();
         return sprintf(
             $placeholder,
             $this->getRenderBlockLabel(),
@@ -54,7 +54,6 @@ trait AllowAccessToEntriesBlockTrait
             match ($behavior) {
                 Behaviors::ALLOW => sprintf('✅ %s', $this->__('Allow access', 'gatographql')),
                 Behaviors::DENY => sprintf('❌ %s', $this->__('Deny access', 'gatographql')),
-                default => $behavior,
             }
         );
     }

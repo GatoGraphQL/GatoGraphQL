@@ -1,0 +1,164 @@
+{
+  "data": {
+    "__schema": {
+      "description": null
+    },
+    "wrappingTypes": {
+      "fields": [
+        {
+          "name": "globalID",
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "id",
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            }
+          }
+        },
+        {
+          "name": "self",
+          "type": {
+            "kind": "NON_NULL",
+            "name": null,
+            "ofType": {
+              "kind": "OBJECT",
+              "name": "QueryRoot",
+              "ofType": null
+            }
+          }
+        }
+      ]
+    },
+    "typeKind": {
+      "kind": "ENUM",
+      "enumValues": [
+        {
+          "name": "ENUM"
+        },
+        {
+          "name": "INPUT_OBJECT"
+        },
+        {
+          "name": "INTERFACE"
+        },
+        {
+          "name": "LIST"
+        },
+        {
+          "name": "NON_NULL"
+        },
+        {
+          "name": "OBJECT"
+        },
+        {
+          "name": "SCALAR"
+        },
+        {
+          "name": "UNION"
+        }
+      ]
+    },
+    "directiveLocation": {
+      "kind": "ENUM",
+      "enumValues": [
+        {
+          "name": "ARGUMENT_DEFINITION"
+        },
+        {
+          "name": "ENUM"
+        },
+        {
+          "name": "ENUM_VALUE"
+        },
+        {
+          "name": "FIELD"
+        },
+        {
+          "name": "FIELD_DEFINITION"
+        },
+        {
+          "name": "FRAGMENT_DEFINITION"
+        },
+        {
+          "name": "FRAGMENT_SPREAD"
+        },
+        {
+          "name": "INLINE_FRAGMENT"
+        },
+        {
+          "name": "INPUT_FIELD_DEFINITION"
+        },
+        {
+          "name": "INPUT_OBJECT"
+        },
+        {
+          "name": "INTERFACE"
+        },
+        {
+          "name": "MUTATION"
+        },
+        {
+          "name": "OBJECT"
+        },
+        {
+          "name": "QUERY"
+        },
+        {
+          "name": "SCALAR"
+        },
+        {
+          "name": "SCHEMA"
+        },
+        {
+          "name": "SUBSCRIPTION"
+        },
+        {
+          "name": "UNION"
+        },
+        {
+          "name": "VARIABLE_DEFINITION"
+        }
+      ]
+    },
+    "include": {
+      "directives": [
+        {
+          "name": "cacheControl",
+          "locations": [
+            "FIELD_DEFINITION"
+          ]
+        },
+        {
+          "name": "include",
+          "locations": [
+            "FIELD",
+            "FRAGMENT_SPREAD",
+            "INLINE_FRAGMENT"
+          ]
+        },
+        {
+          "name": "skip",
+          "locations": [
+            "FIELD",
+            "FRAGMENT_SPREAD",
+            "INLINE_FRAGMENT"
+          ]
+        }
+      ]
+    }
+  }
+}

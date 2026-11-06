@@ -24,6 +24,12 @@ class DataToAppendAndRemoveDataSource
                 'friendsofphp/php-cs-fixer' => '^3.5',
                 'slevomat/coding-standard' => '^7.0',
                 'wp-cli/i18n-command' => '^2.7',
+                /**
+                 * wp-cli/wp-cli has no stable 2.13 release, and its `main`
+                 * branch moved to 3.0, while wp-cli/i18n-command 2.7.3
+                 * requires `^2.13`. Pin the last 2.13 commit of `main`.
+                 */
+                'wp-cli/wp-cli' => 'dev-main#7b3a8f56ee053ef74e325d554ea6352d699fe506 as 2.13.x-dev',
             ],
             'autoload' => [
                 'psr-4' => [

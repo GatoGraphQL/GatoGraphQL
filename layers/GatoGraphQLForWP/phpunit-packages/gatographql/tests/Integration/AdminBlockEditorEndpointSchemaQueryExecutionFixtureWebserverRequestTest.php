@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Integration\AbstractFixtureEndpointWebserverRequestTestCase;
 use PHPUnitForGatoGraphQL\WebserverRequests\WordPressAuthenticatedUserWebserverRequestTestCaseTrait;
 
@@ -26,7 +26,7 @@ class AdminBlockEditorEndpointSchemaQueryExecutionFixtureWebserverRequestTest ex
     {
         return sprintf(
             'wp-admin/edit.php?page=gatographql&action=run_query&endpoint_group=%s',
-            AdminGraphQLEndpointGroups::BLOCK_EDITOR
+            AdminGraphQLEndpointGroups::BLOCK_EDITOR->value
         );
     }
 }

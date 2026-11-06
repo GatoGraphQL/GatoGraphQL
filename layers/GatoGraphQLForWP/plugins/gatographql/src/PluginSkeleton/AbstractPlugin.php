@@ -605,20 +605,7 @@ abstract class AbstractPlugin implements PluginInterface
         return PluginMetadata::PLUGIN_NAMESPACE;
     }
 
-    /**
-     * Delegated to the method this one replaced, so that a plugin built on
-     * an earlier version, which overrides that one, keeps the names of its
-     * entity types.
-     */
     public function getPluginNamespaceForEntityTypeNames(): string
-    {
-        return $this->getPluginNamespaceForDB();
-    }
-
-    /**
-     * @deprecated 19.3.0 Override {@see getPluginNamespaceForEntityTypeNames()} instead
-     */
-    public function getPluginNamespaceForDB(): string
     {
         return PluginMetadata::PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES;
     }

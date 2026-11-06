@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\Comments\ComponentProcessors\FormInputs;
 
-use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use PoPCMSSchema\Comments\Constants\CommentTypes;
 use PoPCMSSchema\Comments\FilterInputs\CommentStatusFilterInput;
 use PoPCMSSchema\Comments\FilterInputs\CommentTypesFilterInput;
@@ -229,7 +229,7 @@ class FilterInputComponentProcessor extends AbstractFilterInputComponentProcesso
                 CommentTypes::COMMENT,
             ],
             self::COMPONENT_FILTERINPUT_COMMENT_STATUS => [
-                CommentStatus::APPROVE,
+                CommentStatus::APPROVE->value,
             ],
             default => null,
         };

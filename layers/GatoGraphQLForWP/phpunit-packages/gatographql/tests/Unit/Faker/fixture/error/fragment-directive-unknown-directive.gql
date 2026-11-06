@@ -1,0 +1,7 @@
+{
+  ...F @nope
+}
+
+fragment F on QueryRoot {
+  id
+}

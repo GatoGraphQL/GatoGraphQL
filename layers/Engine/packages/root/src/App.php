@@ -27,6 +27,7 @@ class App implements AppInterface
 {
     protected static bool $initialized = false;
     protected static AppThreadInterface $appThread;
+    protected static ?AppThreadInterface $mainAppThread = null;
 
     /**
      * This function must be invoked at the very beginning,
@@ -47,6 +48,31 @@ class App implements AppInterface
     public static function getAppThread(): AppThreadInterface
     {
         return self::$appThread;
+    }
+
+    /**
+     * Indicate which AppThread is the main one, when several are
+     * initialized within the same request (eg: the internal GraphQL
+     * server boots its own AppThread within a WordPress request).
+     */
+    public static function setMainAppThread(?AppThreadInterface $mainAppThread): void
+    {
+        self::$mainAppThread = $mainAppThread;
+    }
+
+    /**
+     * Indicate if the current AppThread is the main one.
+     *
+     * Hooks that are global to the request, and not owned by the
+     * AppThread (eg: WordPress' `add_action`), must be added by the
+     * main AppThread only, or every AppThread would add them again.
+     *
+     * When no main AppThread has been set, every AppThread is the
+     * main one (eg: a single application).
+     */
+    public static function isMainAppThread(): bool
+    {
+        return self::$mainAppThread === null || self::$appThread === self::$mainAppThread;
     }
 
     public static function isInitialized(): bool

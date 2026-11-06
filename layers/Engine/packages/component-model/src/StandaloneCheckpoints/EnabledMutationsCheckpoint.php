@@ -7,8 +7,10 @@ namespace PoP\ComponentModel\StandaloneCheckpoints;
 use PoP\ComponentModel\FeedbackItemProviders\CheckpointErrorFeedbackItemProvider;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocumentInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\AstInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\MutationOperation;
 use PoP\GraphQLParser\Spec\Parser\Ast\OperationInterface;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
@@ -67,6 +69,42 @@ class EnabledMutationsCheckpoint extends AbstractStandaloneCheckpoint
             }
         }
 
+        /**
+         * A field within a Fragment can be executed by any
+         * of the Operations that reference that Fragment,
+         * so all of them must be a Mutation
+         */
+        if ($astNodeTopMostAncestor instanceof Fragment) {
+            foreach ($this->getExecutedOperationsReferencingFragment($astNodeTopMostAncestor) as $operation) {
+                if (!($operation instanceof MutationOperation)) {
+                    return new FeedbackItemResolution(
+                        CheckpointErrorFeedbackItemProvider::class,
+                        CheckpointErrorFeedbackItemProvider::E2
+                    );
+                }
+            }
+        }
+
         return parent::validateCheckpoint();
+    }
+
+    /**
+     * @return OperationInterface[]
+     */
+    protected function getExecutedOperationsReferencingFragment(Fragment $fragment): array
+    {
+        /** @var ExecutableDocumentInterface|null */
+        $executableDocument = App::hasState('executable-document-ast') ? App::getState('executable-document-ast') : null;
+        if ($executableDocument === null) {
+            return [];
+        }
+        $requestedOperation = $executableDocument->getRequestedOperation();
+        $executedOperations = $executableDocument->getMultipleOperationsToExecute()
+            ?? ($requestedOperation !== null ? [$requestedOperation] : []);
+        $document = $executableDocument->getDocument();
+        return array_values(array_filter(
+            $executedOperations,
+            fn (OperationInterface $operation) => $document->isFragmentReferencedInOperation($fragment, $operation)
+        ));
     }
 }

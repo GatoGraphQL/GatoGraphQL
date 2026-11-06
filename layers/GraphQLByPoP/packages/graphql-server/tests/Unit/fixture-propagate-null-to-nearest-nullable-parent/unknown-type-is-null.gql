@@ -1,0 +1,9 @@
+query {
+  # There is no type "NonExistingType", so __type is null
+  unknown: __type(name: "NonExistingType") {
+    name
+  }
+  known: __type(name: "__EnumValue") {
+    name
+  }
+}

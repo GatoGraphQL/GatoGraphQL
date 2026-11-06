@@ -1,0 +1,11 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+  }
+  __type(name: "__Field") {
+    # Field "name" has no argument "format"
+    name(format: "uppercase")
+  }
+}

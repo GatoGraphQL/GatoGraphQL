@@ -65,6 +65,14 @@ class AppStateProvider extends AbstractAppStateProvider
         $fieldTypeModifiersForSerialization = new SplObjectStorage();
         $state['field-type-modifiers-for-serialization'] = $fieldTypeModifiersForSerialization;
 
+        /**
+         * How many directive pipelines are being executed, one
+         * within another. The pipeline started by the engine has
+         * depth 1, and those started by meta directives (to resolve
+         * their nested directives) have depth 2 or more.
+         */
+        $state['directive-pipeline-depth'] = 0;
+
         // For Validating if the Directive supports only certain types
         $state['field-type-resolver-for-supported-directive-resolution'] = null;
 

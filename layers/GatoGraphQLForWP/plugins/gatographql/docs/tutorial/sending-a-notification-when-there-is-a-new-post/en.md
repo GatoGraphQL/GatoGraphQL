@@ -72,7 +72,7 @@ Let's see next how to trigger the execution of the GraphQL query.
 
 ## Option 1: Trigger always by reacting to WordPress hooks
 
-We hook into the WordPress core action `new_to_publish`, retrieve the data from the newly-created post, and execute the GraphQL query defined above against the internal GraphQL server (provided via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
+We hook into the WordPress core action `new_to_publish`, retrieve the data from the newly-published post, and execute the GraphQL query defined above against the internal GraphQL server (provided via the [**Internal GraphQL Server**](https://gatographql.com/extensions/internal-graphql-server/) extension):
 
 ```php
 use GatoGraphQL\InternalGraphQLServer\GraphQLServer;
@@ -110,20 +110,22 @@ This class provides 3 static methods to execute queries:
 
 </div>
 
-This GraphQL query will be executed whenever a new post is created or, to be more precise, whenever WordPress function `wp_insert_post` is invoked (as this function triggers hook `new_to_publish`):
+The hook executes this GraphQL query whenever you publish a new post or, to be more precise, whenever WordPress function `wp_insert_post` creates a post with status `publish` (as the function then triggers hook `new_to_publish`). A post that you create as a draft triggers `new_to_draft` instead, so it sends no email:
 
 ```php
 $postID = wp_insert_post([
-  'post_title' => 'Hello world!'
+  'post_title' => 'Hello world!',
+  'post_status' => 'publish'
 ]);
 ```
 
-This is also the case when executing another GraphQL query that executes the `createPost` mutation (as its resolver, in PHP code, invokes function `wp_insert_post`):
+The same happens when another GraphQL query executes the `createPost` mutation with `status: publish` (as its resolver, in PHP code, invokes function `wp_insert_post`):
 
 ```graphql
 mutation CreatePost {
   createPost(input: {
     title: "Hello world!"
+    status: publish
   }) {
     status
     postID
@@ -142,7 +144,7 @@ For instance, let' say we are executing a GraphQL query against the single endpo
 | **(External) GraphQL Server** | **Internal GraphQL Server** |
 | --- | --- |
 | Execute GraphQL query against the single endpoint, using its own Schema Configuration | _(not active)_ |
-| Create a post; this triggers `new_to_publish` | _(not active)_ |
+| Create and publish a post; this triggers `new_to_publish` | _(not active)_ |
 | _(waiting...)_ | React to `new_to_publish` hook: Spin the Internal GraphQL server, using its own Schema Configuration |
 | _(waiting...)_ | Execute the query to send an email |
 | _(waiting...)_ | Send email, end of that query |

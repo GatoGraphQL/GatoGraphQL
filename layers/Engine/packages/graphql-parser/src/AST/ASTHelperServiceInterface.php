@@ -7,6 +7,8 @@ namespace PoP\GraphQLParser\AST;
 use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\GraphQLParser\Spec\Parser\Ast\Fragment;
 use PoP\GraphQLParser\Spec\Parser\Ast\FragmentBondInterface;
+use PoP\GraphQLParser\Spec\Parser\Ast\FragmentReference;
+use PoP\GraphQLParser\Spec\Parser\Ast\InlineFragment;
 
 interface ASTHelperServiceInterface
 {
@@ -28,4 +30,10 @@ interface ASTHelperServiceInterface
         FieldInterface $oppositeField,
         array $fragments
     ): bool;
+
+    /**
+     * Indicate if the fragment spread or inline fragment must be
+     * included, as decided by its `@include` and `@skip` directives
+     */
+    public function isFragmentBondIncluded(FragmentReference|InlineFragment $fragmentBond): bool;
 }

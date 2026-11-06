@@ -10,6 +10,7 @@ use PoP\ComponentModel\AttachableExtensions\AttachableExtensionGroups;
 use PoP\ComponentModel\Checkpoints\CheckpointInterface;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\Engine\EngineIterationFieldSet;
+use PoP\ComponentModel\Enums\OutputValueNullabilityViolations;
 use PoP\ComponentModel\FeedbackItemProviders\ErrorFeedbackItemProvider;
 use PoP\ComponentModel\FeedbackItemProviders\FieldResolutionErrorFeedbackItemProvider;
 use PoP\ComponentModel\Feedback\EngineIterationFeedbackStore;
@@ -28,9 +29,9 @@ use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
 use PoP\ComponentModel\QueryResolution\InputObjectSubpropertyFieldDataAccessor;
 use PoP\ComponentModel\Resolvers\ObjectTypeOrFieldDirectiveResolverTrait;
 use PoP\ComponentModel\Response\OutputServiceInterface;
+use PoP\ComponentModel\Schema\OutputValueNullabilityServiceInterface;
 use PoP\ComponentModel\Schema\SchemaCastingServiceInterface;
 use PoP\ComponentModel\Schema\SchemaDefinition;
-use PoP\ComponentModel\Schema\SchemaTypeModifiers;
 use PoP\ComponentModel\StandaloneCheckpoints\EnabledMutationsCheckpoint;
 use PoP\ComponentModel\TypeResolvers\AbstractRelationalTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
@@ -49,9 +50,20 @@ use SplObjectStorage;
 use WeakMap;
 use stdClass;
 
+use function array_filter;
+use function str_contains;
+
 abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver implements ObjectTypeResolverInterface
 {
     use ObjectTypeOrFieldDirectiveResolverTrait;
+
+    /**
+     * Separates the field name from the field instance's ID in the keys
+     * of the field resolvers cached per field instance. Field names
+     * cannot hold it, so a key holding it was cached under a field
+     * instance.
+     */
+    private const FIELD_INSTANCE_CACHE_KEY_SEPARATOR = ' #';
 
     /**
      * Cache of which objectTypeFieldResolvers will process the given field
@@ -134,6 +146,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
     private ?ObjectSerializationManagerInterface $objectSerializationManager = null;
     private ?SchemaCastingServiceInterface $schemaCastingService = null;
     private ?EngineInterface $engine = null;
+    private ?OutputValueNullabilityServiceInterface $outputValueNullabilityService = null;
 
     final protected function getDangerouslyNonSpecificScalarTypeScalarTypeResolver(): DangerouslyNonSpecificScalarTypeScalarTypeResolver
     {
@@ -180,6 +193,15 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         }
         return $this->engine;
     }
+    final protected function getOutputValueNullabilityService(): OutputValueNullabilityServiceInterface
+    {
+        if ($this->outputValueNullabilityService === null) {
+            /** @var OutputValueNullabilityServiceInterface */
+            $outputValueNullabilityService = $this->instanceManager->getInstance(OutputValueNullabilityServiceInterface::class);
+            $this->outputValueNullabilityService = $outputValueNullabilityService;
+        }
+        return $this->outputValueNullabilityService;
+    }
 
     public function __construct()
     {
@@ -188,6 +210,26 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
         $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
         parent::__construct();
+    }
+
+    /**
+     * Of the field resolvers cached per field, only those cached under
+     * a field instance are dropped. Those cached under a field name hold
+     * for the schema, not for an execution.
+     */
+    public function resetASTNodeCaches(): void
+    {
+        parent::resetASTNodeCaches();
+        $this->fieldArgsCache = new SplObjectStorage();
+        $this->fieldObjectTypeResolverObjectFieldDataCache = new SplObjectStorage();
+        $this->fieldDataAccessorForMutationCache = new SplObjectStorage();
+        $this->fieldDataAccessorForObjectCorrespondingToEngineIterationCache = new SplObjectStorage();
+        $this->executableObjectTypeFieldResolverForFieldCache = null;
+        $this->objectTypeFieldResolversForFieldOrFieldNameCache = array_filter(
+            $this->objectTypeFieldResolversForFieldOrFieldNameCache,
+            fn (string $cacheKey): bool => !str_contains($cacheKey, self::FIELD_INSTANCE_CACHE_KEY_SEPARATOR),
+            ARRAY_FILTER_USE_KEY
+        );
     }
 
     /**
@@ -503,9 +545,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
          * All other conditions, check them when enabled by configuration.
          */
         if ($value === null) {
-            $fieldTypeModifiers = $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName());
-            $fieldTypeIsNonNullable = ($fieldTypeModifiers & SchemaTypeModifiers::NON_NULLABLE) === SchemaTypeModifiers::NON_NULLABLE;
-            if ($fieldTypeIsNonNullable) {
+            $nullabilityViolation = $this->getOutputValueNullabilityService()->getNullabilityViolation(
+                $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName()),
+                $value,
+            );
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_VALUE) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
@@ -544,6 +588,11 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
             if ($fieldTypeResolver === $this->getDangerouslyNonSpecificScalarTypeScalarTypeResolver()) {
                 return $value;
             }
+
+            $nullabilityViolation = $this->getOutputValueNullabilityService()->getNullabilityViolation(
+                $objectTypeFieldResolver->getFieldTypeModifiers($this, $field->getName()),
+                $value,
+            );
 
             /**
              * Execute the validation, return an error if it fails
@@ -597,15 +646,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return null;
             }
-            $fieldIsNonNullArrayItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY] ?? false;
-            if (
-                $fieldIsNonNullArrayItemsType
-                && is_array($value)
-                && array_filter(
-                    $value,
-                    fn (mixed $arrayItem) => $arrayItem === null
-                )
-            ) {
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_ARRAY_ITEM) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
@@ -668,18 +709,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
                 );
                 return null;
             }
-            $fieldIsNonNullArrayOfArraysItemsType = $fieldSchemaDefinition[SchemaDefinition::IS_NON_NULLABLE_ITEMS_IN_ARRAY_OF_ARRAYS] ?? false;
-            if (
-                $fieldIsNonNullArrayOfArraysItemsType
-                && is_array($value)
-                && array_filter(
-                    $value,
-                    fn (?array $arrayItem) => $arrayItem === null ? false : array_filter(
-                        $arrayItem,
-                        fn (mixed $arrayItemItem) => $arrayItemItem === null
-                    ) !== [],
-                )
-            ) {
+            if ($nullabilityViolation === OutputValueNullabilityViolations::NULL_ARRAY_OF_ARRAYS_ITEM) {
                 $objectTypeFieldResolutionFeedbackStore->addError(
                     new ObjectTypeFieldResolutionFeedback(
                         new FeedbackItemResolution(
@@ -1185,7 +1215,7 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
              * field name is not enough to cache: The resolver is specific
              * to the Field object
              */
-            $cacheKey = $field->getName() . ' #' . spl_object_id($field);
+            $cacheKey = $field->getName() . self::FIELD_INSTANCE_CACHE_KEY_SEPARATOR . spl_object_id($field);
         } else {
             $cacheKey = $fieldOrFieldName;
         }
@@ -1584,6 +1614,113 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         FieldInterface $field,
         ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
     ): ?array {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        $fieldArgs = $this->getCoercedFieldArgs(
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($fieldArgs === null) {
+            return null;
+        }
+
+        /** @var ObjectTypeFieldResolverInterface */
+        $objectTypeFieldResolver = $this->getExecutableObjectTypeFieldResolverForField($field);
+
+        /**
+         * Perform validations
+         */
+        $this->validateInvariableOnObjectResolutionFieldData(
+            $fieldArgs,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return null;
+        }
+
+        /**
+         * If there is a promise, this method cannot be executed.
+         * It will be done later, after promises are resolved
+         * to an actual value when resolving the object.
+         */
+        if (!$field->hasArgumentReferencingPromise()) {
+            $this->validateVariableOnObjectResolutionFieldData(
+                $fieldArgs,
+                $field,
+                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
+                $objectTypeFieldResolutionFeedbackStore,
+            );
+            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
+                return null;
+            }
+        }
+
+        return $fieldArgs;
+    }
+
+    /**
+     * Validate the Field Arguments against the schema only,
+     * without executing the validations that depend on the
+     * state of the application (such as the user being
+     * logged-in, or a mutation being allowed), or that are
+     * customized by the field resolver:
+     *
+     * - no non-existing argument has been provided
+     * - the argument values can be coerced to their type
+     * - no mandatory argument is missing or is null
+     *
+     * These are the "request errors" defined in the GraphQL spec,
+     * which can be detected before executing the query.
+     *
+     * @see https://spec.graphql.org/draft/#sec-Validation.Arguments
+     */
+    public function validateFieldArgsAgainstSchema(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): void {
+        $errorCount = $objectTypeFieldResolutionFeedbackStore->getErrorCount();
+        $fieldArgs = $this->getCoercedFieldArgs(
+            $field,
+            $objectTypeFieldResolutionFeedbackStore,
+        );
+        if ($fieldArgs === null) {
+            return;
+        }
+
+        /** @var array<string,mixed> */
+        $fieldArgsSchemaDefinition = $this->getFieldArgumentsSchemaDefinition($field);
+        $this->validateOnlyExistingFieldArguments(
+            $fieldArgs,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
+        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
+            return;
+        }
+
+        if ($field->hasArgumentReferencingPromise()) {
+            return;
+        }
+        $this->validateNonMissingOrNullMandatoryFieldArguments(
+            $fieldArgs,
+            $fieldArgsSchemaDefinition,
+            $field,
+            $objectTypeFieldResolutionFeedbackStore
+        );
+    }
+
+    /**
+     * Add the default values to the Field Arguments,
+     * coerce them, and allow the field resolver to
+     * inject additional arguments
+     *
+     * @return array<string,mixed>|null null if there was a coercion error
+     */
+    protected function getCoercedFieldArgs(
+        FieldInterface $field,
+        ObjectTypeFieldResolutionFeedbackStore $objectTypeFieldResolutionFeedbackStore,
+    ): ?array {
         $fieldArgs = $field->getArgumentKeyValues();
 
         /**
@@ -1622,46 +1759,12 @@ abstract class AbstractObjectTypeResolver extends AbstractRelationalTypeResolver
         /**
          * Allow to inject additional arguments
          */
-        $fieldArgs = $objectTypeFieldResolver->prepareFieldArgs(
+        return $objectTypeFieldResolver->prepareFieldArgs(
             $fieldArgs,
             $this,
             $field,
             $objectTypeFieldResolutionFeedbackStore
         );
-        if ($fieldArgs === null) {
-            return null;
-        }
-
-        /**
-         * Perform validations
-         */
-        $this->validateInvariableOnObjectResolutionFieldData(
-            $fieldArgs,
-            $field,
-            $objectTypeFieldResolutionFeedbackStore,
-        );
-        if ($objectTypeFieldResolutionFeedbackStore->getErrorCount() > $errorCount) {
-            return null;
-        }
-
-        /**
-         * If there is a promise, this method cannot be executed.
-         * It will be done later, after promises are resolved
-         * to an actual value when resolving the object.
-         */
-        if (!$field->hasArgumentReferencingPromise()) {
-            $this->validateVariableOnObjectResolutionFieldData(
-                $fieldArgs,
-                $field,
-                !$objectTypeFieldResolver->validateMutationOnObject($this, $field->getName()),
-                $objectTypeFieldResolutionFeedbackStore,
-            );
-            if ($objectTypeFieldResolutionFeedbackStore->getErrors() !== []) {
-                return null;
-            }
-        }
-
-        return $fieldArgs;
     }
 
     /**

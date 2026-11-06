@@ -1,0 +1,76 @@
+/**
+ * The CSS variables of Gato UI, the look shared by the admin screens of
+ * the Gato plugins: the accent color, and the sizes, radius, spacing and
+ * neutral colors. The main plugin can override them with its own
+ * stylesheet, loaded after this one.
+ */
+
+/* Accent color */
+.gato-ui {
+    --gato-accent: #7c3aed;
+    --gato-accent-hover: #6d28d9;
+}
+
+/* Derived from the accent */
+.gato-ui {
+    --gato-accent-soft: color-mix(in srgb, var(--gato-accent) 7%, #fff);
+    --gato-accent-ring: color-mix(in srgb, var(--gato-accent) 28%, #fff);
+    --gato-accent-alt: color-mix(in srgb, var(--gato-accent) 72%, #fff);
+    --gato-accent-tint: color-mix(in srgb, var(--gato-accent) 12%, #fff);
+    --gato-on-accent: #fff;
+    accent-color: var(--gato-accent);
+    /* WordPress draws its checkboxes, radios and focus rings with these */
+    --wp-admin-theme-color: var(--gato-accent);
+    --wp-admin-theme-color-darker-10: var(--gato-accent-hover);
+    --wp-admin-theme-color-darker-20: color-mix(in srgb, var(--gato-accent-hover) 85%, #000);
+}
+
+/* Shape and neutral colors */
+.gato-ui {
+    --gato-font-size: 14px;
+    --gato-font-size-sm: 13px;
+    --gato-font-size-xs: 12px;
+    --gato-text: #1d2327;
+    --gato-text-muted: #50575e;
+    --gato-text-faint: #a7aaad;
+    --gato-surface: #fff;
+    --gato-surface-alt: #f6f7f7;
+    --gato-border: #dcdcde;
+    --gato-border-subtle: #f0f0f1;
+    --gato-border-strong: #c3c4c7;
+    --gato-border-control: #8c8f94;
+    --gato-border-width: 1px;
+    --gato-radius: 8px;
+    --gato-radius-inner: 6px;
+    --gato-radius-control: 4px;
+    --gato-control-height: 32px;
+    --gato-control-height-sm: 28px;
+    --gato-control-padding-x: 10px;
+    --gato-button-padding-x: 14px;
+    --gato-card-padding-x: 18px;
+    --gato-row-padding-y: 14px;
+    --gato-section-gap: 30px;
+    --gato-page-max-width: 1280px;
+    --gato-field-width: 360px;
+    --gato-number-field-width: 150px;
+    --gato-affix-field-width: 96px;
+    --gato-entry-action-width: 100px;
+    --gato-tab-text: var(--gato-text-muted);
+    --gato-tab-text-hover: var(--gato-text);
+    --gato-tab-bg-hover: var(--gato-accent-soft);
+    --gato-tab-text-active: var(--gato-accent);
+    --gato-tab-indicator: var(--gato-accent);
+    --gato-tab-indicator-width: 2px;
+    --gato-switch-width: 36px;
+    --gato-switch-height: 20px;
+    --gato-warning: #dba617;
+    --gato-warning-text: #8a5a00;
+    --gato-warning-soft: #fcf9e8;
+    --gato-success: #00a32a;
+    --gato-success-text: #007017;
+    --gato-success-soft: #edfaef;
+    --gato-danger: #b32d2e;
+    --gato-danger-soft: #fcf0f1;
+    --gato-danger-hover: #8a2424;
+    --gato-info: #72aee6;
+}

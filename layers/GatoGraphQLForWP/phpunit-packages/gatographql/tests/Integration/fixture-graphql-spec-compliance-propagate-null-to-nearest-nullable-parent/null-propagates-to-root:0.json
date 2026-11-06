@@ -1,0 +1,31 @@
+{
+    "errors": [
+        {
+            "message": "Cannot cast value 'Five' for type 'Int'",
+            "locations": [
+                {
+                    "line": 6,
+                    "column": 21
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{limit: \"Five\"}",
+                    "(pagination: {limit: \"Five\"})",
+                    "posts(pagination: {limit: \"Five\"}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "posts(pagination: {limit: \"Five\"}) { ... }",
+                "code": "gql@5.6.1[16]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        }
+    ],
+    "data": {
+        "me": {
+            "id": 1
+        },
+        "posts": null
+    }
+}

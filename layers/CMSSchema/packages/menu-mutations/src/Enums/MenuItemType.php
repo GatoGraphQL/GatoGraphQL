@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\MenuMutations\Enums;
 
-class MenuItemType
+enum MenuItemType: string
 {
-    public final const CUSTOM = 'custom';
-    public final const POST_TYPE = 'post_type';
-    public final const TAXONOMY = 'taxonomy';
+    case CUSTOM = 'custom';
+    case POST_TYPE = 'post_type';
+    case TAXONOMY = 'taxonomy';
 }

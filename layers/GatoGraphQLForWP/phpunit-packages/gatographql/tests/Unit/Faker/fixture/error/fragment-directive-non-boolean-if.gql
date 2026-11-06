@@ -1,0 +1,7 @@
+{
+  ...F @skip(if: "yes")
+}
+
+fragment F on QueryRoot {
+  id
+}

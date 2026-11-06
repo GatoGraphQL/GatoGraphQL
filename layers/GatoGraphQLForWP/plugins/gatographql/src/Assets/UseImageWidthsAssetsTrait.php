@@ -4,21 +4,15 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Assets;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
-
 trait UseImageWidthsAssetsTrait
 {
+    use EnqueuePluginAssetsTrait;
+
     protected function enqueueImageWidthsAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-image-widths',
-            $mainPluginURL . 'assets/css/image-widths.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/image-widths.css'
         );
     }
 }

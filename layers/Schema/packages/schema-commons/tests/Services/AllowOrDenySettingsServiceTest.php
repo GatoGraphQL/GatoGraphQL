@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Services;
 
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PHPUnit\Framework\TestCase;
 
 class AllowOrDenySettingsServiceTest extends TestCase

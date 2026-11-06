@@ -11,7 +11,7 @@ use GatoGraphQL\GatoGraphQL\Exception\ExtensionNotRegisteredException;
 use GatoGraphQL\GatoGraphQL\Exception\ModuleNotExistsException;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\ModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SettingsCategoryRegistryFacade;
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\PluginManagementFunctionalityModuleResolver;
 use GatoGraphQL\GatoGraphQL\ObjectModels\ActiveLicenseCommercialExtensionData;
 use GatoGraphQL\GatoGraphQL\PluginApp;
@@ -342,6 +342,18 @@ class ExtensionManager extends AbstractPluginManager
     public function getBundlingExtension(string $extensionClass): ?BundleExtensionInterface
     {
         return $this->bundledExtensionClassBundlingExtensionClasses[$extensionClass] ?? null;
+    }
+
+    /**
+     * The bundle the extension is installed with, or the extension itself
+     * when it is installed standalone: the plugin whose file, version and
+     * base name are those of the installed extension.
+     *
+     * @param class-string<ExtensionInterface> $extensionClass
+     */
+    public function getBundlingOrStandaloneExtension(string $extensionClass): ExtensionInterface
+    {
+        return $this->getBundlingExtension($extensionClass) ?? $this->getExtension($extensionClass);
     }
 
     /**

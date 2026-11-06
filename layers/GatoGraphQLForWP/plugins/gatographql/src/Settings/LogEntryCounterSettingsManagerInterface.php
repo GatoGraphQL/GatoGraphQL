@@ -4,30 +4,32 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
+use PoPSchema\Logger\Enums\LoggerSeverity;
+
 interface LogEntryCounterSettingsManagerInterface
 {
     /**
-     * @param string|string[] $severityOrSeverities
+     * @param LoggerSeverity|LoggerSeverity[] $severityOrSeverities
      */
-    public function getLogCount(string|array $severityOrSeverities): int;
+    public function getLogCount(LoggerSeverity|array $severityOrSeverities): int;
     /**
-     * @param string[] $severities
-     * @return array<string,int>
+     * @param LoggerSeverity[] $severities
+     * @return array<string,int> Key: severity value, Value: logCount
      */
     public function getLogCountBySeverity(array $severities): array;
     /**
-     * @param string[] $severities
-     * @return string[]
+     * @param LoggerSeverity[] $severities
+     * @return LoggerSeverity[]
      */
     public function sortSeveritiesByHighestLevel(array $severities): array;
-    public function storeLogCount(string $severity, int $logCount): void;
-    public function increaseLogCount(string $severity): void;
+    public function storeLogCount(LoggerSeverity $severity, int $logCount): void;
+    public function increaseLogCount(LoggerSeverity $severity): void;
     /**
      * @param array<string,int> $severityLogCounts Key: severity, Value: logCount
      */
     public function storeLogCounts(array $severityLogCounts): void;
     /**
-     * @param string[] $severities
+     * @param LoggerSeverity[] $severities
      */
     public function removeLogCounts(array $severities): void;
 }

@@ -6,6 +6,7 @@ namespace PoPWPSchema\BlockContentParser;
 
 use DOMNode;
 use PoPWPSchema\BlockContentParser\Exception\BlockContentParserException;
+use PoPCMSSchema\CustomPosts\TypeAPIs\CustomPostTypeAPIInterface;
 use PoPWPSchema\BlockContentParser\ObjectModels\BlockContentParserPayload;
 use PoP\ComponentModel\StaticHelpers\MethodHelpers;
 use PoP\DOMCrawler\Crawler;
@@ -13,26 +14,123 @@ use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use stdClass;
 use Throwable;
+use WP_Block;
 use WP_Block_Type;
 use WP_Block_Type_Registry;
 use WP_Error;
 use WP_Post;
 
+use function array_key_exists;
+use function function_exists;
+use function get_block_bindings_source;
+use function get_block_bindings_supported_attributes;
+use function get_object_vars;
 use function get_post;
+use function get_post_type;
 use function has_blocks;
+use function is_array;
+use function is_numeric;
+use function is_string;
 use function parse_blocks;
 
 /**
  * This class is based on class `ContentParser`
  * from project `Automattic/vip-block-data-api`,
- * released under `v1.0.0`.
+ * released under `v1.0.0`, with the parsing fixes
+ * released up to `v1.4.12` integrated.
  *
  * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
- * @see https://github.com/Automattic/vip-block-data-api/tree/1.0.0
+ * @see https://github.com/Automattic/vip-block-data-api/blob/9f0a86db300fd37555bb76843f0662bd1c4f0dfb/src/parser/content-parser.php
+ * @see https://github.com/Automattic/vip-block-data-api/tree/1.4.12
  */
 class BlockContentParser extends AbstractBasicService implements BlockContentParserInterface
 {
+    /**
+     * The block that HTML outside of any block is, as the editor shows it:
+     * the Classic block. `parse_blocks()` gives such HTML no name at all.
+     */
+    private const FREEFORM_BLOCK_NAME = 'core/freeform';
+
+    /**
+     * The block that references a synced pattern (formerly
+     * "reusable block"), stored as a `wp_block` post
+     */
+    private const SYNCED_PATTERN_BLOCK_NAME = 'core/block';
+
+    /**
+     * The block attributes that can be bound to a source, by block,
+     * for WordPress versions before 6.9, which has no function
+     * `get_block_bindings_supported_attributes()`
+     *
+     * @var array<string,string[]>
+     */
+    private const BLOCK_BINDINGS_SUPPORTED_ATTRIBUTES = [
+        'core/paragraph' => ['content'],
+        'core/heading' => ['content'],
+        'core/image' => ['id', 'url', 'title', 'alt'],
+        'core/button' => ['url', 'text', 'linkTarget', 'rel'],
+    ];
+
+    /**
+     * Attributes that WordPress registers without the source their value is
+     * saved in, by block and attribute name.
+     *
+     * Since WordPress 7.1, `core/html` declares its `content` with no source
+     * (only `"role": "local"`), while the block goes on saving it as its
+     * inner HTML. Read as unsourced, the attribute was looked for in the
+     * block's delimiter, where it never is, so the block came back with no
+     * content at all.
+     *
+     * @var array<string,array<string,string>>
+     */
+    private const ATTRIBUTE_SOURCES_MISSING_FROM_REGISTRATION = [
+        'core/html' => [
+            'content' => 'raw',
+        ],
+    ];
+
+    /**
+     * The attributes of blocks that WordPress no longer registers, but
+     * that posts may still hold, by block and attribute name.
+     *
+     * `core/subhead` was dropped from WordPress, and its posts keep it
+     * as it was saved: the text in its `<p>`. Unregistered, its text
+     * was not read at all.
+     *
+     * @var array<string,array<string,array<string,string>>>
+     */
+    private const UNREGISTERED_BLOCK_ATTRIBUTES = [
+        'core/subhead' => [
+            'content' => [
+                'type' => 'string',
+                'source' => 'html',
+                'selector' => 'p',
+            ],
+        ],
+    ];
+
     private bool $includeInnerContent = false;
+    private bool $resolveSyncedPatterns = false;
+    private bool $resolveBlockBindings = false;
+    /**
+     * The synced patterns being resolved, to stop a pattern
+     * that (directly or not) references itself
+     *
+     * @var array<int,true>
+     */
+    private array $resolvingSyncedPatternIDs = [];
+
+    private ?CustomPostTypeAPIInterface $customPostTypeAPI = null;
+
+    final protected function getCustomPostTypeAPI(): CustomPostTypeAPIInterface
+    {
+        if ($this->customPostTypeAPI === null) {
+            /** @var CustomPostTypeAPIInterface */
+            $customPostTypeAPI = $this->instanceManager->getInstance(CustomPostTypeAPIInterface::class);
+            $this->customPostTypeAPI = $customPostTypeAPI;
+        }
+        return $this->customPostTypeAPI;
+    }
 
     /**
      * @param array<string,mixed> $options An associative array of options. Can contain keys:
@@ -59,15 +157,15 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
                 return null;
             }
         }
-        $customPostContent = $customPost->post_content;
+        $customPostContent = (string) $this->getCustomPostTypeAPI()->getRawContent($customPost);
         // If the post has no content, don't parse it or it'll produce an error
-        if ($customPostContent === '') {
+        if (trim($customPostContent) === '') {
             return new BlockContentParserPayload(
                 [],
                 null
             );
         }
-        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->setParsingOptions($options);
         $parsedBlockData = $this->parse($customPostContent, $customPost->ID, $options);
         return $this->processParsedBlockData($parsedBlockData);
     }
@@ -148,9 +246,19 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         string $customPostContent,
         array $options = [],
     ): BlockContentParserPayload {
-        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->setParsingOptions($options);
         $parsedBlockData = $this->parse($customPostContent, null, $options);
         return $this->processParsedBlockData($parsedBlockData);
+    }
+
+    /**
+     * @param array<string,mixed> $options
+     */
+    protected function setParsingOptions(array $options): void
+    {
+        $this->includeInnerContent = $options['include-inner-content'] ?? false;
+        $this->resolveSyncedPatterns = $options['resolve-synced-patterns'] ?? false;
+        $this->resolveBlockBindings = $options['resolve-block-bindings'] ?? false;
     }
 
     /**
@@ -159,7 +267,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      * All code below has been copied from `ContentParser`
      * from project `Automattic/vip-block-data-api`.
      *
-     * @see https://github.com/Automattic/vip-block-data-api/blob/585e000e9fa2388e2c4039bde6dd324620ab0ff9/src/parser/content-parser.php
+     * @see https://github.com/Automattic/vip-block-data-api/blob/9f0a86db300fd37555bb76843f0662bd1c4f0dfb/src/parser/content-parser.php
      *
      * ----------------------------------------------------------------
      */
@@ -243,9 +351,10 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $this->post_id  = $post_id;
         $this->warnings = [];
 
-        $has_blocks = has_blocks($post_content);
+        // An empty `post_content` fails `has_blocks` check, but is still valid.
+        $has_content = trim($post_content) !== '';
 
-        if (! $has_blocks) {
+        if ($has_content && ! has_blocks($post_content)) {
             // $error_message = join(' ', [
             //     sprintf('Error parsing post ID %d: This post does not appear to contain block content.', $post_id),
             //     'The VIP Block Data API is designed to parse Gutenberg blocks and can not read classic editor content.',
@@ -264,18 +373,18 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $parsing_error = false;
 
         try {
-            $blocks = parse_blocks($post_content);
-            $blocks = array_values(array_filter($blocks, function ($block) {
-                // @phpstan-ignore-next-line
-                $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
-                // @phpstan-ignore-next-line
-                return ! $is_whitespace_block;
-            }));
+            $blocks = $this->parseBlocksWithoutWhitespace($post_content);
 
             $registered_blocks = $this->block_registry->get_all_registered();
 
-            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $options) {
-                return $this->source_block($block, $registered_blocks, $options);
+            $context = [];
+            if ($post_id !== null) {
+                $context['postId'] = $post_id;
+                $context['postType'] = get_post_type($post_id);
+            }
+
+            $sourced_blocks = array_map(function ($block) use ($registered_blocks, $options, $context) {
+                return $this->source_block($block, $registered_blocks, $options, $context);
             }, $blocks);
 
             $sourced_blocks = array_values(array_filter($sourced_blocks));
@@ -311,9 +420,24 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     }
 
     /**
+     * Parse the blocks, removing the whitespace between them
+     * (which `parse_blocks()` returns as blocks with no name)
+     *
+     * @return array<array<string,mixed>>
+     */
+    protected function parseBlocksWithoutWhitespace(string $content): array
+    {
+        return array_values(array_filter(parse_blocks($content), function ($block) {
+            $is_whitespace_block = ( null === $block['blockName'] && empty(trim($block['innerHTML'])) );
+            return ! $is_whitespace_block;
+        }));
+    }
+
+    /**
      * @param array<string,mixed> $block
      * @param WP_Block_Type[] $registered_blocks
      * @param array<string,mixed> $options
+     * @param array<string,mixed> $context The context available to the block (eg: `postId`), as when rendering it
      *
      * @return array<string,mixed>|null
      *
@@ -321,15 +445,22 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block(array $block, array $registered_blocks, array $options = []): ?array
+    protected function source_block(array $block, array $registered_blocks, array $options = [], array $context = []): ?array
     {
-        $block_name = $block['blockName'];
+        /**
+         * HTML between the blocks of a post (one the editor converted only in
+         * part, or written to the database directly) comes from the parser
+         * with no name. Read as is, it failed the whole post, every block in
+         * it included, for not being block content.
+         */
+        $block_name = $block['blockName'] ?? self::FREEFORM_BLOCK_NAME;
+        $block['blockName'] = $block_name;
 
         if (! $this->should_block_be_included($block, $block_name, $options)) {
             return null;
         }
 
-        if (! isset($registered_blocks[ $block_name ])) {
+        if (! isset($registered_blocks[ $block_name ]) && ! isset(self::UNREGISTERED_BLOCK_ATTRIBUTES[ $block_name ])) {
             /** @var ModuleConfiguration */
             $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
             if ($moduleConfiguration->addMissingBlockWarning()) {
@@ -340,11 +471,18 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $useHTML5Parser = $options['use-html5-parser'] ?? true;
 
         $block_definition            = $registered_blocks[ $block_name ] ?? null;
-        $block_definition_attributes = $block_definition->attributes ?? [];
+        $block_definition_attributes = $block_definition->attributes ?? self::UNREGISTERED_BLOCK_ATTRIBUTES[ $block_name ] ?? [];
 
         $block_attributes = $block['attrs'];
 
         foreach ($block_definition_attributes as $block_attribute_name => $block_attribute_definition) {
+            if (
+                !isset($block_attribute_definition['source'])
+                && isset(self::ATTRIBUTE_SOURCES_MISSING_FROM_REGISTRATION[$block_name][$block_attribute_name])
+            ) {
+                $block_attribute_definition['source'] = self::ATTRIBUTE_SOURCES_MISSING_FROM_REGISTRATION[$block_name][$block_attribute_name];
+            }
+
             $attribute_source        = $block_attribute_definition['source'] ?? null;
             $attribute_default_value = $block_attribute_definition['default'] ?? null;
 
@@ -378,11 +516,31 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             // Enter the <body> tag for block parsing
             $crawler = $crawler->filter('body');
 
-            $attribute_value = $this->source_attribute($crawler, $block_attribute_definition);
+            /**
+             * A block rendered in PHP can keep a sourced attribute in its
+             * delimiter attributes (Etch does with the `content` of
+             * `etch/text`), and that is where WordPress reads it from when
+             * rendering the block. When the HTML holds no value for it, the
+             * delimiter's is the attribute's, not the default.
+             */
+            $attribute_value = $this->source_attribute_value($crawler, $block_attribute_definition);
+            if (null === $attribute_value) {
+                if (isset($block_attributes[ $block_attribute_name ])) {
+                    continue;
+                }
+                $attribute_value = $attribute_default_value;
+            }
 
             if (null !== $attribute_value) {
                 $block_attributes[ $block_attribute_name ] = $attribute_value;
             }
+        }
+
+        if ($this->resolveBlockBindings) {
+            $block_attributes = array_merge(
+                $block_attributes,
+                $this->getBlockBindingsAttributes($block, $context)
+            );
         }
 
         // Sourced attributes already pass through the HTML5 DOM crawler above (which
@@ -406,8 +564,8 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         if (isset($block['innerBlocks'])) {
-            $inner_blocks = array_map(function ($block) use ($registered_blocks, $options) {
-                return $this->source_block($block, $registered_blocks, $options);
+            $inner_blocks = array_map(function ($block) use ($registered_blocks, $options, $context) {
+                return $this->source_block($block, $registered_blocks, $options, $context);
             }, $block['innerBlocks']);
 
             $inner_blocks = array_values(array_filter($inner_blocks));
@@ -417,9 +575,16 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             }
         }
 
+        if ($this->resolveSyncedPatterns && $block_name === self::SYNCED_PATTERN_BLOCK_NAME) {
+            $inner_blocks = $this->getSyncedPatternInnerBlocks($block, $registered_blocks, $options, $context);
+            if ($inner_blocks !== []) {
+                $sourced_block['innerBlocks'] = $inner_blocks;
+            }
+        }
+
         if ($this->is_debug_enabled()) {
             $sourced_block['debug'] = [
-                'block_definition_attributes' => $block_definition->attributes,
+                'block_definition_attributes' => $block_definition_attributes,
             ];
         }
 
@@ -439,6 +604,154 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         }
 
         return $sourced_block;
+    }
+
+    /**
+     * The blocks of the synced pattern referenced by a `core/block`
+     * block, as its inner blocks. As when WordPress renders it,
+     * the pattern must be published and not password-protected,
+     * and its blocks receive the overrides set in the referencing
+     * block (attribute `content`) as context `pattern/overrides`.
+     *
+     * The pattern's blocks are parsed from its content (instead of
+     * rendering the pattern), so each block appears once, under
+     * its own parent.
+     *
+     * @param array<string,mixed> $block
+     * @param WP_Block_Type[] $registered_blocks
+     * @param array<string,mixed> $options
+     * @param array<string,mixed> $context
+     * @return array<array<string,mixed>>
+     */
+    protected function getSyncedPatternInnerBlocks(array $block, array $registered_blocks, array $options, array $context): array
+    {
+        /** @var array<string,mixed> */
+        $attrs = $block['attrs'];
+        $ref = $attrs['ref'] ?? null;
+        if (!is_numeric($ref)) {
+            return [];
+        }
+        $syncedPatternID = (int) $ref;
+        if (isset($this->resolvingSyncedPatternIDs[$syncedPatternID])) {
+            return [];
+        }
+
+        $syncedPattern = get_post($syncedPatternID);
+        if (
+            !($syncedPattern instanceof WP_Post)
+            || $syncedPattern->post_type !== 'wp_block'
+            || $syncedPattern->post_status !== 'publish'
+            || $syncedPattern->post_password !== ''
+        ) {
+            return [];
+        }
+
+        if (isset($attrs['content'])) {
+            $context['pattern/overrides'] = $attrs['content'];
+        }
+
+        $this->resolvingSyncedPatternIDs[$syncedPatternID] = true;
+        try {
+            $inner_blocks = array_map(
+                fn (array $innerBlock) => $this->source_block($innerBlock, $registered_blocks, $options, $context),
+                $this->parseBlocksWithoutWhitespace($syncedPattern->post_content)
+            );
+        } finally {
+            unset($this->resolvingSyncedPatternIDs[$syncedPatternID]);
+        }
+        return array_values(array_filter($inner_blocks));
+    }
+
+    /**
+     * The values of the block's attributes bound to a source (via
+     * the Block Bindings API), such as a post meta, or an override
+     * in a synced pattern.
+     *
+     * Same logic as in `WP_Block::process_block_bindings()`,
+     * without rendering the block.
+     *
+     * @param array<string,mixed> $block
+     * @param array<string,mixed> $context
+     * @return array<string,mixed>
+     */
+    protected function getBlockBindingsAttributes(array $block, array $context): array
+    {
+        /** @var string */
+        $block_name = $block['blockName'];
+        /** @var array<string,mixed> */
+        $attrs = $block['attrs'];
+        $bindings = $attrs['metadata']['bindings'] ?? null;
+        if (!is_array($bindings) || $bindings === []) {
+            return [];
+        }
+        $supported_attributes = $this->getBlockBindingsSupportedAttributes($block_name);
+        if ($supported_attributes === []) {
+            return [];
+        }
+
+        $computed_attributes = [];
+
+        /**
+         * A default binding for pattern overrides applies
+         * to all the supported attributes
+         */
+        if (($bindings['__default']['source'] ?? null) === 'core/pattern-overrides') {
+            $updated_bindings = [];
+            foreach ($supported_attributes as $attribute_name) {
+                $updated_bindings[$attribute_name] = $bindings[$attribute_name] ?? ['source' => 'core/pattern-overrides'];
+            }
+            $bindings = $updated_bindings;
+            /** @var array<string,mixed> */
+            $metadata = $attrs['metadata'];
+            $computed_attributes['metadata'] = array_merge(
+                $metadata,
+                ['bindings' => $bindings]
+            );
+        }
+
+        $block_instance = new WP_Block($block, $context, $this->block_registry);
+        foreach ($bindings as $attribute_name => $block_binding) {
+            if (
+                !in_array($attribute_name, $supported_attributes, true)
+                || !is_array($block_binding)
+                || !is_string($block_binding['source'] ?? null)
+            ) {
+                continue;
+            }
+            $block_binding_source = get_block_bindings_source($block_binding['source']);
+            if ($block_binding_source === null) {
+                continue;
+            }
+            /**
+             * Property `uses_context` was added in WordPress 6.7
+             *
+             * @var string[]
+             */
+            $uses_context = get_object_vars($block_binding_source)['uses_context'] ?? [];
+            foreach ($uses_context as $context_name) {
+                if (array_key_exists($context_name, $context)) {
+                    $block_instance->context[$context_name] = $context[$context_name];
+                }
+            }
+            /** @var array<string,mixed> */
+            $source_args = !empty($block_binding['args']) && is_array($block_binding['args']) ? $block_binding['args'] : [];
+            $source_value = $block_binding_source->get_value($source_args, $block_instance, $attribute_name);
+            if ($source_value !== null) {
+                $computed_attributes[$attribute_name] = $source_value;
+            }
+        }
+        return $computed_attributes;
+    }
+
+    /**
+     * @return string[]
+     */
+    protected function getBlockBindingsSupportedAttributes(string $block_name): array
+    {
+        if (function_exists('get_block_bindings_supported_attributes')) {
+            return get_block_bindings_supported_attributes($block_name);
+        }
+        return self::BLOCK_BINDINGS_SUPPORTED_ATTRIBUTES[$block_name] ?? [];
     }
 
     /**
@@ -467,17 +780,36 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
     /**
      * @param array<string,mixed> $block_attribute_definition
      *
-     * @return mixed[]|string|null
+     * @return mixed The sourced value, or else the attribute's default, which can be of any type
      *
      * @access private
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): array|string|null
+    protected function source_attribute(Crawler $crawler, array $block_attribute_definition): mixed
     {
-        $attribute_value         = null;
-        $attribute_default_value = $block_attribute_definition['default'] ?? null;
-        $attribute_source        = $block_attribute_definition['source'];
+        $attribute_value = $this->source_attribute_value($crawler, $block_attribute_definition);
+
+        if (null === $attribute_value) {
+            $attribute_value = $block_attribute_definition['default'] ?? null;
+        }
+
+        return $attribute_value;
+    }
+
+    /**
+     * @param array<string,mixed> $block_attribute_definition
+     *
+     * @return mixed The sourced value, or null when the HTML holds none
+     *
+     * @access private
+     *
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function source_attribute_value(Crawler $crawler, array $block_attribute_definition): mixed
+    {
+        $attribute_value  = null;
+        $attribute_source = $block_attribute_definition['source'];
 
         // See block attribute sources:
         // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#value-source
@@ -509,11 +841,26 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
             $attribute_value = $this->source_block_children($crawler, $block_attribute_definition);
         }
 
-        if (null === $attribute_value) {
-            $attribute_value = $attribute_default_value;
-        }
-
         return $attribute_value;
+    }
+
+    /**
+     * Select the elements matching the selector within the node,
+     * as `querySelectorAll` does in the editor, so the node itself
+     * is never a match.
+     *
+     * `Crawler::filter()` also matches the node itself, so selector
+     * `*` (as used by the `anchor` block support) matched the `<body>`
+     * wrapping the block, which has no attributes, and the attribute
+     * came back empty.
+     *
+     * @see https://github.com/Automattic/vip-block-data-api/pull/71
+     *
+     * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
+     */
+    protected function filter_by_selector(Crawler $crawler, string $selector): Crawler
+    {
+        return $crawler->children()->filter($selector);
     }
 
     /**
@@ -524,7 +871,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
      *
      * phpcs:disable PSR1.Methods.CamelCapsMethodName.NotCamelCaps
      */
-    protected function source_block_attribute(Crawler $crawler, array $block_attribute_definition): ?string
+    protected function source_block_attribute(Crawler $crawler, array $block_attribute_definition): string|bool|null
     {
         // 'attribute' sources:
         // https://developer.wordpress.org/block-editor/reference-guides/block-api/block-attributes/#attribute-source
@@ -534,11 +881,17 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
             $attribute_value = $crawler->attr($attribute);
+            if ('boolean' === ($block_attribute_definition['type'] ?? null)) {
+                // HTML boolean attributes are true when present, even if written as
+                // controls="false". Omit the attribute to mean false; preserve that false
+                // instead of replacing it with the block's default.
+                $attribute_value = null !== $attribute_value;
+            }
         }
 
         return $attribute_value;
@@ -561,7 +914,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -602,7 +955,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -629,7 +982,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -657,7 +1010,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector    = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         $attribute_values = $crawler->each(function ($node) use ($query_items) {
@@ -696,7 +1049,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() > 0) {
@@ -786,7 +1139,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector         = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         if ($crawler->count() === 0) {
@@ -838,7 +1191,7 @@ class BlockContentParser extends AbstractBasicService implements BlockContentPar
         $selector        = $block_attribute_definition['selector'] ?? null;
 
         if (null !== $selector) {
-            $crawler = $crawler->filter($selector);
+            $crawler = $this->filter_by_selector($crawler, $selector);
         }
 
         $node       = $crawler->getNode(0);

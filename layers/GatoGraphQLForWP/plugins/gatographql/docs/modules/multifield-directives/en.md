@@ -132,7 +132,7 @@ query GetLoggedInUserNameAndSurname {
 
 ## Configuration
 
-To enable or disable multi-field directives in the GraphQL schema, go to the "Multi-Field Directives" module on the Settings page, and tick/untick the checkbox for `Enable multi-field directives?`:
+To enable or disable multi-field directives in the GraphQL schema, go to the "Multi-Field Directives" module on the Settings page, and tick/untick the checkbox for `Enable multi-field directives`:
 
 <div class="img-width-1024" markdown=1>
 

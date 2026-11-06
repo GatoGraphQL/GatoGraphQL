@@ -1,0 +1,13 @@
+query {
+  user(by: { id: 1 }) {
+    id
+    # Non-nullable field, so the null is passed to the nullable "user"
+    posts(pagination: { limit: "Five" }) {
+      id
+    }
+  }
+  post(by: { id: 1 }) {
+    id
+    title
+  }
+}

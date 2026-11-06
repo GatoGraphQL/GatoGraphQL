@@ -12,11 +12,12 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
     use WithFieldsOrFragmentBondsTrait;
 
     /**
+     * @param string|null $typeName The type condition, or `null` if the inline fragment has none (then it applies to the enclosing type)
      * @param array<FieldInterface|FragmentBondInterface> $fieldsOrFragmentBonds
      * @param Directive[] $directives
      */
     public function __construct(
-        protected readonly string $typeName,
+        protected readonly ?string $typeName,
         array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,
@@ -54,8 +55,8 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
             );
         }
         return sprintf(
-            '...on %s%s {%s}',
-            $this->typeName,
+            '...%s%s {%s}',
+            $this->typeName !== null ? 'on ' . $this->typeName : '',
             $strInlineFragmentDirectives,
             $strInlineFragmentFieldsOrFragmentBonds,
         );
@@ -63,13 +64,16 @@ class InlineFragment extends AbstractAst implements FragmentBondInterface, WithD
 
     protected function doAsASTNodeString(): string
     {
+        if ($this->typeName === null) {
+            return '... { ... }';
+        }
         return sprintf(
             '...on %s { ... }',
             $this->typeName,
         );
     }
 
-    public function getTypeName(): string
+    public function getTypeName(): ?string
     {
         return $this->typeName;
     }

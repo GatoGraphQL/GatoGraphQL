@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
 use GatoGraphQL\GatoGraphQL\ModuleResolvers\EndpointFunctionalityModuleResolver;
-use GatoGraphQL\GatoGraphQL\PluginApp;
 use GatoGraphQL\GatoGraphQL\Registries\ModuleRegistryInterface;
 
 /**
@@ -64,38 +63,28 @@ class GraphQLVoyagerMenuPage extends AbstractPluginMenuPage
     {
         parent::enqueueAssets();
 
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         // CSS
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-voyager-client',
-            $mainPluginURL . 'assets/css/voyager-client.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/voyager-client.css'
         );
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-voyager',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.css',
-            array(),
-            $mainPluginVersion
+            'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.css'
         );
 
         // JS: execute them all in the footer
         $this->enqueueReactAssets(true);
-        \wp_enqueue_script(
+        $this->enqueueMainPluginAssetScript(
             'gatographql-voyager',
-            $mainPluginURL . 'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.standalone.js',
+            'vendor/graphql-by-pop/graphql-clients-for-wp/clients/voyager/assets/vendors/voyager.standalone.js',
             array('gatographql-react-dom'),
-            $mainPluginVersion,
             true
         );
-        \wp_enqueue_script(
+        $this->enqueueMainPluginAssetScript(
             'gatographql-voyager-client',
-            $mainPluginURL . 'assets/js/voyager-client.js',
+            'assets/js/voyager-client.js',
             array('gatographql-voyager'),
-            $mainPluginVersion,
             true
         );
 

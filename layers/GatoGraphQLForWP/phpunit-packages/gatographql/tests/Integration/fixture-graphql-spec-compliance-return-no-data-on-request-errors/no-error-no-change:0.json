@@ -1,0 +1,16 @@
+{
+    "data": {
+        "post": {
+            "id": 1,
+            "title": "Hello world!"
+        },
+        "users": [
+            {
+                "id": 6
+            },
+            {
+                "id": 5
+            }
+        ]
+    }
+}

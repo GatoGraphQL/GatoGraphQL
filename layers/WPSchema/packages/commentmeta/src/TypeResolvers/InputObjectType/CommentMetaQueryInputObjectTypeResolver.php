@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\CommentMeta\TypeResolvers\InputObjectType;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\CommentMeta\Module;
 use PoPCMSSchema\CommentMeta\ModuleConfiguration;
@@ -25,7 +26,7 @@ class CommentMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObje
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getCommentMetaEntries();
     }
-    protected function getAllowOrDenyBehavior(): string
+    protected function getAllowOrDenyBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

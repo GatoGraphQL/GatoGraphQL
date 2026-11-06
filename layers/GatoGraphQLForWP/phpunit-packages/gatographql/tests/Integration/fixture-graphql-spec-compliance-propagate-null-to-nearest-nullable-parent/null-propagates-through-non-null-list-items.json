@@ -1,0 +1,26 @@
+{
+    "errors": [
+        {
+            "message": "Type 'Date' must be provided with format 'Y-m-d'",
+            "locations": [
+                {
+                    "line": 5,
+                    "column": 23
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "{dateQuery: {before: \"Yesterday at noon\"}}",
+                    "(filter: {dateQuery: {before: \"Yesterday at noon\"}})",
+                    "postCount(filter: {dateQuery: {before: \"Yesterday at noon\"}})",
+                    "users(pagination: {limit: 2}, sort: {by: ID, order: ASC}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "User",
+                "field": "postCount(filter: {dateQuery: {before: \"Yesterday at noon\"}})",
+                "code": "PoPSchema\/SchemaCommons@e1"
+            }
+        }
+    ],
+    "data": null
+}

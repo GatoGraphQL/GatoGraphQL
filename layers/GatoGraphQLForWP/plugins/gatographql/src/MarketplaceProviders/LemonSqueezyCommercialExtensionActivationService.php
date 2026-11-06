@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
@@ -155,7 +155,7 @@ class LemonSqueezyCommercialExtensionActivationService extends AbstractMarketpla
      *
      * @see https://docs.lemonsqueezy.com/guides/tutorials/license-keys#license-key-statuses
      */
-    protected function convertStatus(string $status): string
+    protected function convertStatus(string $status): LicenseStatus
     {
         return match ($status) {
             'active' => LicenseStatus::ACTIVE,

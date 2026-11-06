@@ -1,0 +1,12 @@
+{
+  # No member type of the union has field "nonExistingField"
+  customPosts(
+    filter: { ids: [1, 2] }
+    pagination: { limit: 2 }
+    sort: { by: ID, order: ASC }
+  ) {
+    __typename
+    id
+    nonExistingField
+  }
+}

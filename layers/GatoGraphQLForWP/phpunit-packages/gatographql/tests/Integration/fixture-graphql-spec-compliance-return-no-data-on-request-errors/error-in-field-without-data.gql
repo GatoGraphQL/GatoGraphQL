@@ -1,0 +1,11 @@
+{
+  # There is no post with ID 99999, so its fields are never resolved
+  post(by: { id: 99999 }) {
+    id
+    # Type "Post" has no field "nonExistingField"
+    nonExistingField
+  }
+  users(pagination: { limit: 2 }) {
+    id
+  }
+}

@@ -1,0 +1,10 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+  }
+  __type(name: "__Field") {
+    name @nonExistingDirective
+  }
+}

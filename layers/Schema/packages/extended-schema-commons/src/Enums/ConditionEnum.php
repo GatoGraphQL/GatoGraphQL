@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PoPSchema\ExtendedSchemaCommons\Enums;
 
-class ConditionEnum
+enum ConditionEnum: string
 {
-    public final const IS_NULL = 'IS_NULL';
-    public final const IS_EMPTY = 'IS_EMPTY';
-    public final const ALWAYS = 'ALWAYS';
+    case IS_NULL = 'IS_NULL';
+    case IS_EMPTY = 'IS_EMPTY';
+    case ALWAYS = 'ALWAYS';
 }

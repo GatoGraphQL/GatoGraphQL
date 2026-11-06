@@ -1,0 +1,35 @@
+{
+    "errors": [
+        {
+            "message": "On field 'name' of type '__Type', there is no argument with name 'format'",
+            "locations": [
+                {
+                    "line": 9,
+                    "column": 10
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "(format: \"uppercase\")",
+                    "name(format: \"uppercase\")",
+                    "__type(name: \"__Field\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Type",
+                "field": "name(format: \"uppercase\")",
+                "code": "gql@5.4.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Argument-Names"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "queryType": {
+                "name": "QueryRoot"
+            }
+        },
+        "__type": {
+            "name": null
+        }
+    }
+}

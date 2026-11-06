@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace PoPCMSSchema\Settings\TypeAPIs;
 
 use PoPCMSSchema\Settings\Exception\OptionNotAllowedException;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 interface SettingsTypeAPIInterface
 {
@@ -24,5 +25,5 @@ interface SettingsTypeAPIInterface
      * @return string[]
      */
     public function getAllowOrDenyOptionEntries(): array;
-    public function getAllowOrDenyOptionBehavior(): string;
+    public function getAllowOrDenyOptionBehavior(): Behaviors;
 }

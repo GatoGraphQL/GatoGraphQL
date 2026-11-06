@@ -266,13 +266,13 @@
                     "passingInputObject": null
                 },
                 {
-                    "name": "DirectiveLocation",
+                    "name": "__DirectiveLocation",
                     "passingFloat": null,
                     "passingArray": null,
                     "passingInputObject": null
                 },
                 {
-                    "name": "TypeKind",
+                    "name": "__TypeKind",
                     "passingFloat": null,
                     "passingArray": null,
                     "passingInputObject": null

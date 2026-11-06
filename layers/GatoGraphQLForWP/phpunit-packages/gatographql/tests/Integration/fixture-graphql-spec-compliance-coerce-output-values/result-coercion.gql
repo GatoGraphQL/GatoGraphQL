@@ -1,0 +1,11 @@
+query {
+  posts(pagination: { limit: 2 }, sort: { by: ID, order: ASC }) {
+    id
+    title
+    status
+    commentCount
+    author {
+      id
+    }
+  }
+}

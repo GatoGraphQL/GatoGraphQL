@@ -50,7 +50,7 @@
         "start-server": [
             "@purge-cache",
             "lando start",
-            "@restart-lando-proxy"
+            "@route-in-lando-proxy"
         ],
         "destroy-server": "lando destroy -y",
         "reset-db": [
@@ -59,6 +59,18 @@
             "lando wp db reset --yes",
             "@install-site"
         ],
+        "snapshot-db": "lando composer snapshot-db-within-container",
+        "snapshot-db-within-container": [
+            "Composer\\Config::disableProcessTimeout",
+            "mkdir -p /app/tmp",
+            "wp db export /app/tmp/db-snapshot.sql"
+        ],
+        "restore-db": [
+            "Composer\\Config::disableProcessTimeout",
+            "@purge-cache",
+            "lando composer restore-db-within-container"
+        ],
+        "restore-db-within-container": "wp db import /app/tmp/db-snapshot.sql",
         "reset-domain": "lando wp search-replace \"$(lando wp option get siteurl | grep -E -o 'localhost:[0-9]+')\" \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site": "lando composer install-site-within-container -- \"$(lando info | grep -E -o 'https:\/\/localhost:[0-9]+' | grep -E -o 'localhost:[0-9]+')\"",
         "install-site-within-container": [
@@ -78,16 +90,17 @@
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "lando rebuild appserver -y",
-            "@restart-lando-proxy"
+            "@route-in-lando-proxy"
         ],
         "rebuild-app-and-server": [
             "Composer\\Config::disableProcessTimeout",
             "@purge-cache",
             "@update-deps",
             "lando rebuild appserver -y",
-            "@restart-lando-proxy"
+            "@route-in-lando-proxy"
         ],
         "stop-server": "lando stop",
+        "route-in-lando-proxy": "python3 ../shared/composer-scripts/route-in-lando-proxy.py",
         "restart-lando-proxy": "proxy=$(docker ps -q --filter name=landoproxyhyperion5000gandalfedition_proxy); if [ -n \"$proxy\" ]; then echo '>>> Restarting Lando shared proxy so Traefik re-scans running app containers (fixes *.lndo.site 404s; see .lando.yml header)...'; docker restart $proxy; else echo '>>> Lando shared proxy not running (proxy likely OFF in ~/.lando/config.yml); skipping proxy restart.'; fi",
         "symlink-vendor-for-gatographql-plugin": [
             "php -r \"copy('../../layers/GatoGraphQLForWP/plugins/gatographql/composer.json', '../../layers/GatoGraphQLForWP/plugins/gatographql/composer.local.json');\"",

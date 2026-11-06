@@ -5,9 +5,6 @@ parameters:
 		- tests
 	ignoreErrors:
 		- 
-			message: '#Cannot access property \$attributes on WP_Block_Type\|null\.#'
-			path: src/BlockContentParser.php
-		- 
 			message: '#Cannot access property \$nodeValue on DOMNode\|null\.#'
 			path: src/BlockContentParser.php
 		- 

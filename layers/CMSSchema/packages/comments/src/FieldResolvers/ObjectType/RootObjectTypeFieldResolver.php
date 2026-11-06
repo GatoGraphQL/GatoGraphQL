@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Comments\FieldResolvers\ObjectType;
 
 use PoPCMSSchema\Comments\ComponentProcessors\FormInputs\FilterInputComponentProcessor;
 use PoPCMSSchema\Comments\ComponentProcessors\SingleCommentFilterInputContainerComponentProcessor;
-use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use PoPCMSSchema\Comments\Module;
 use PoPCMSSchema\Comments\ModuleConfiguration;
 use PoPCMSSchema\Comments\TypeAPIs\CommentTypeAPIInterface;
@@ -241,7 +241,7 @@ class RootObjectTypeFieldResolver extends AbstractQueryableObjectTypeFieldResolv
          * If "status" is admin and won't be shown, then default to "approve" only
          */
         if (!array_key_exists('status', $query)) {
-            $query['status'] = CommentStatus::APPROVE;
+            $query['status'] = CommentStatus::APPROVE->value;
         }
         switch ($fieldDataAccessor->getFieldName()) {
             case 'commentCount':

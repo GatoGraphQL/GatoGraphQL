@@ -22,6 +22,9 @@ abstract class AbstractRESTController extends WP_REST_Controller
 
         $namespace = $this->getNamespace();
         foreach ($routeOptions as $route => $routeOptions) {
+            if (!$route) {
+                continue;
+            }
             register_rest_route(
                 $namespace,
                 $route,
@@ -30,6 +33,9 @@ abstract class AbstractRESTController extends WP_REST_Controller
         }
     }
 
+    /**
+     * @return non-falsy-string
+     */
     final protected function getNamespace(): string
     {
         $namespace = sprintf(

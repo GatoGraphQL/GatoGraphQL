@@ -1,0 +1,11 @@
+{
+  "data": {
+    "__typename": "QueryRoot",
+    "rootType": "QueryRoot",
+    "posts": [
+      {
+        "id": 1724
+      }
+    ]
+  }
+}

@@ -10,15 +10,16 @@ use GatoGraphQL\GatoGraphQL\Facades\UserSettingsManagerFacade;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ResponseStatus;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Enums\ParamValues;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\RESTResponse;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_REST_Server;
 
+use function array_map;
 use function rest_ensure_response;
 use function rest_url;
 
@@ -88,12 +89,18 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
     protected function validateState(string $value): bool|WP_Error
     {
-        if (!in_array($value, self::MODULE_STATES)) {
+        if (!in_array(ParamValues::tryFrom($value), self::MODULE_STATES, true)) {
             return new WP_Error(
                 '1',
                 sprintf(
                     __('Parameter \'state\' can only have one of these values: \'%s\'', 'gatographql-testing'),
-                    implode(__('\', \'', 'gatographql-testing'), self::MODULE_STATES)
+                    implode(
+                        __('\', \'', 'gatographql-testing'),
+                        array_map(
+                            fn (ParamValues $moduleState): string => $moduleState->value,
+                            self::MODULE_STATES
+                        )
+                    )
                 ),
                 [
                     Params::STATE => $value,
@@ -235,7 +242,7 @@ class ModulesAdminRESTController extends AbstractAdminRESTController
 
             if ($moduleState !== null) {
                 $moduleIDValues = [
-                    $moduleID => $moduleState === ParamValues::ENABLED,
+                    $moduleID => ParamValues::from($moduleState) === ParamValues::ENABLED,
                 ];
                 $userSettingsManager = UserSettingsManagerFacade::getInstance();
                 $userSettingsManager->setModulesEnabled($moduleIDValues);

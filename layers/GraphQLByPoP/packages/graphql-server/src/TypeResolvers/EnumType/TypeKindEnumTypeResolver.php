@@ -10,7 +10,7 @@ class TypeKindEnumTypeResolver extends AbstractIntrospectionEnumTypeResolver
 {
     public function getTypeName(): string
     {
-        return 'TypeKind';
+        return '__TypeKind';
     }
     /**
      * @return string[]

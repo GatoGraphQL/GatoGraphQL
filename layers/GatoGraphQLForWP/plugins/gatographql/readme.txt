@@ -1,7 +1,7 @@
 === Gato GraphQL ===
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
-Requires at least: 6.1
+Requires at least: 6.5
 Tested up to: 7.1
 Stable tag: 19.3.0
 Requires PHP: 8.1
@@ -246,6 +246,45 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 20.0.0 =
+* Breaking changes - Bumped the minimum required WordPress version to 6.5 (#3405)
+* Breaking changes - Removed <code>AbstractPlugin::getPluginNamespaceForDB()</code> and <code>PluginMetadata::PLUGIN_NAMESPACE_FOR_DB</code>: an extension overriding the method must override <code>getPluginNamespaceForEntityTypeNames()</code> instead, and one reading the constant must read <code>PLUGIN_NAMESPACE_FOR_ENTITY_TYPE_NAMES</code>
+* Breaking changes - The "Settings" block in the Schema Configuration now defaults to "Allow access", as the "Settings" module does, so a configuration that never set the behavior allows only its listed options to non-administrators (#3409)
+* Breaking changes - Constant classes that hold a set of values are now native PHP enums, under namespace <code>…\Enums</code> instead of <code>…\Constants</code> (such as <code>LoggerSeverity</code>, <code>Behaviors</code>, <code>CommentStatus</code> and <code>LicenseStatus</code>). Code using one of their values as a string must read <code>->value</code>, and methods that receive or return those values, such as <code>LoggerInterface::log()</code>, now take and return the enum (#3414)
+* Breaking changes - Introspection follows the GraphQL spec: the <code>name</code> of the <code>LIST</code> and <code>NON_NULL</code> types is <code>null</code>, enums <code>TypeKind</code> and <code>DirectiveLocation</code> are renamed as <code>__TypeKind</code> and <code>__DirectiveLocation</code>, and argument <code>includeDeprecated</code> is non-null (<code>Boolean! = false</code>) (#3437)
+* Added - Added module "GraphQL Spec Compliance", with options to follow the GraphQL spec where Gato GraphQL behaves differently: pass a <code>null</code> in a non-null field up to its nearest nullable parent, coerce scalar and enum values (printing <code>ID</code> as a string), add the response <code>path</code> to errors, and return no data on request errors (validating the query before executing it). All of them are disabled by default (#3432, #3434)
+* Added - Fields <code>blocks</code>, <code>blockDataItems</code> and <code>blockFlattenedDataItems</code> can add the blocks of synced patterns (argument <code>resolveSyncedPatterns</code>) and the values of block bindings, such as pattern overrides (argument <code>resolveBlockBindings</code>) (#3436)
+* Added - Operations, fragments and variables in the GraphQL query can have descriptions, as in the September 2025 edition of the GraphQL spec (#3437)
+* Added - Strings in the GraphQL query can contain the escape sequences <code>\t</code> and <code>\u{1F600}</code>, and characters encoded as surrogate pairs, such as <code>\uD83D\uDE00</code> (#3437)
+* Added - Field <code>__Schema.description</code> (#3437)
+* Improved - Upgraded GraphiQL to version 5.4.0 (#3440)
+* Improved - Redesigned the Settings page: settings grouped by topic, all the sections of a tab on one scroll (the tabs down the side follow it), a search across all tabs, the changes of every tab saved with one click, and controls that fit each setting (switches, option toggles, tag inputs, and "Set all to" on per-entry lists), a one-line description per setting with its details behind an "i" button, a button beside each license to activate, validate or deactivate it alone, JSON fields that indent their value and flag invalid JSON, and shorter tab names (eg: "General" for "Plugin Configuration") (#3448)
+* Improved - Each license under "Plugin Management > Activate Licenses" shows its status (active on how many sites, expired, not activated), and the error of the last activation or validation that failed (#3448)
+* Fixed - The content of a Custom HTML block (<code>core/html</code>) is read again on WordPress 7.1, which registers it without saying it is kept in the block's HTML, so the block came back with no content (#3415)
+* Fixed - A request that runs many GraphQL queries, such as a translation run over many entities, no longer runs out of memory (#3419)
+* Fixed - A post with HTML outside of its blocks, such as one converted to blocks only in part, can now be read as blocks, that HTML being a Classic block (<code>core/freeform</code>). The whole post used to fail for not being block content (#3420)
+* Fixed - In a bundle, such as Gato AI Translations for Polylang, a doc that is only in English now shows the notice linking to the website in your language (#3425)
+* Fixed - The plugin's docs, and their links to the website, are in the language each user picked for the admin, not in the site's language (#3426)
+* Fixed - A post no longer fails to be read as blocks when one of its blocks leaves out an attribute that defaults to true/false or a number, such as a Video block without <code>controls</code> (#3427)
+* Fixed - A block's true/false attribute read from its HTML, such as <code>autoplay</code> or <code>controls</code> in a Video block, is now <code>true</code> when the HTML attribute is there and <code>false</code> when it is not, instead of an empty string or the block's default (#3427)
+* Fixed - A block attribute whose selector is <code>*</code> is now read from the block's own HTML element (#3427)
+* Fixed - A post whose content is only whitespace now has no blocks, instead of failing for not being block content (#3427)
+* Fixed - A fragment spread within several fragments now resolves its fields in each of them, also when one of those fragments does not apply, which made the fields go missing from the others (#3428)
+* Fixed - An inline fragment within a fragment, such as <code>... on Post { title }</code>, is now only applied to objects of its type (#3428)
+* Fixed - The paths in the Settings, such as the path of the single endpoint or the base slug of the persisted queries, are now validated: a path that would break the endpoint or the site, such as one with unsupported characters or already used by another endpoint, is not saved, and an error explains why (#3435)
+* Fixed - Fragment spreads and inline fragments can be used at the root of an operation, such as <code>query { ...RootFields }</code> (#3437)
+* Fixed - A GraphQL query starting with a Unicode byte order mark is no longer a syntax error (#3437)
+* Fixed - A <code>mutation</code> operation is a request error when mutations are disabled, as the schema has no mutation type (#3437)
+* Fixed - With nested mutations enabled, a mutation within a fragment can no longer be executed by a <code>query</code> operation (#3437)
+* Fixed - Directives <code>@include</code> and <code>@skip</code> can be applied to fragment spreads and inline fragments, and inline fragments can omit the type condition, such as <code>... @include(if: $withDetails) { id }</code> (#3438)
+* Fixed - A block attribute kept in the block's comment, such as the text of an Etch <code>etch/text</code> block, is now read from there when the block's HTML does not hold it, instead of coming back empty (#3441)
+* Fixed - The plugin's WordPress hooks, such as its REST API routes and AJAX handlers, are no longer added a second time after a query is run with the internal GraphQL server, such as during a translation (#3442)
+* Fixed - Extensions are no longer set up once more with every query run with the internal GraphQL server, such as during a translation, and the plugin's blocks, admin notices and API endpoints no longer add their WordPress hooks a second time (#3443)
+* Fixed - A value written with the meta mutations, such as <code>updateCustomPostMeta</code>, keeps its backslashes, which were being removed when storing it (#3446)
+* Fixed - The text of a Subhead block (<code>core/subhead</code>), which WordPress no longer registers but older posts still hold, is now read from the block's HTML (#3447)
+* Fixed - The entries of a list setting saved on the Settings page no longer end with a hidden line break (#3448)
+* Fixed - An Application Password now works on the WordPress REST API for the plugin's own post types, so a script or an AI agent can create a persisted query via <code>POST /wp-json/wp/v2/graphql-query</code>. The REST API had no route for them, even for an admin, as the plugin registered its post types before WordPress authenticated the user (#3460)
 
 = 19.3.0 =
 * Added - Documentation for the FluentCart integration (#3379)

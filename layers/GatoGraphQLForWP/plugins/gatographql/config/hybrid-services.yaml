@@ -19,6 +19,9 @@ services:
     GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface:
         class: \GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizer
 
+    GatoGraphQL\GatoGraphQL\Settings\URLPathSettingValidatorInterface:
+        class: \GatoGraphQL\GatoGraphQL\Settings\URLPathSettingValidator
+
     GatoGraphQL\GatoGraphQL\Settings\OptionNamespacerInterface:
         class: \GatoGraphQL\GatoGraphQL\Settings\OptionNamespacer
         

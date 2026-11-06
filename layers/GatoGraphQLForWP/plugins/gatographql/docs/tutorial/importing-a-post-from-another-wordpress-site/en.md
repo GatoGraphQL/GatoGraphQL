@@ -13,14 +13,14 @@ The resources referenced in the post must all exist locally:
 - The author
 - The featured image (if any)
 - The categories
-- (Tags also, however if these do not already exist, they are created together with the post, so it's not an issue)
+- (Tags also, however if these do not already exist, `createPost` creates them together with the post, so it's not an issue)
 
 As the common identifier for resources between the upstream and local sites, we use:
 
 - Slugs for categories, tags and media items
 - Usernames for users
 
-If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import.
+If any of the resources does not exist in the local site, the GraphQL query prints an error and halts the import. You can then create the missing resources in the local site (eg: with mutations `createUser`, `createPostCategory` and `createMediaItem`), and execute the query again.
 
 ```graphql
 query InitializeDynamicVariables
@@ -630,13 +630,3 @@ This query:
 ```
 
 </div>
-
-## [WIP] Automatically importing missing resources
-
-The Gato GraphQL schema must be upgraded with mutations to:
-
-- Create/update users ([#2456](https://github.com/GatoGraphQL/GatoGraphQL/issues/2456))
-- Create/update categories ([#2457](https://github.com/GatoGraphQL/GatoGraphQL/issues/2457))
-- Upload media items, or import them from a URL ([#2458](https://github.com/GatoGraphQL/GatoGraphQL/issues/2458))
-
-This is a work in progress. Once these mutations are supported, we can then have the GraphQL query automatically import each of the missing resources.

@@ -1,0 +1,52 @@
+query GetPosts(
+  $yes: Boolean!
+  $no: Boolean!
+) {
+  ...RootFields @include(if: $yes)
+  ...SkippedRootFields @include(if: $no)
+  posts(pagination: { limit: 2 }) {
+    id
+    ...PostTitle @include(if: $yes)
+    ...PostDate @skip(if: $yes)
+    ... on Post @include(if: $yes) {
+      includedInlineFragment: slug
+    }
+    ... on Post @skip(if: true) {
+      skippedInlineFragment: slug
+    }
+    ... @include(if: $yes) {
+      includedInlineFragmentWithoutTypeCondition: url
+    }
+    ... @include(if: false) {
+      skippedInlineFragmentWithoutTypeCondition: url
+    }
+    ... {
+      inlineFragmentWithoutTypeConditionOrDirectives: status
+    }
+    ... @skip(if: $no) @include(if: $yes) {
+      includedByBothDirectives: commentCount
+    }
+    ... @skip(if: $yes) @include(if: $yes) {
+      skippedByOneDirective: commentCount
+    }
+    ... @include(if: false) {
+      id
+    }
+  }
+}
+
+fragment RootFields on QueryRoot {
+  rootTypename: __typename
+}
+
+fragment SkippedRootFields on QueryRoot {
+  skippedRootTypename: __typename
+}
+
+fragment PostTitle on Post {
+  title
+}
+
+fragment PostDate on Post {
+  date
+}

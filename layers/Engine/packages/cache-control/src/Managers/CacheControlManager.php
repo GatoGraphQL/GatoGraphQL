@@ -22,7 +22,7 @@ class CacheControlManager extends AbstractBasicService implements CacheControlMa
      */
     public function getEntriesForFields(): array
     {
-        return $this->fieldEntries ?? [];
+        return $this->fieldEntries;
     }
 
     /**
@@ -30,7 +30,7 @@ class CacheControlManager extends AbstractBasicService implements CacheControlMa
      */
     public function getEntriesForDirectives(): array
     {
-        return $this->directiveEntries ?? [];
+        return $this->directiveEntries;
     }
 
     /**
@@ -39,7 +39,7 @@ class CacheControlManager extends AbstractBasicService implements CacheControlMa
     public function addEntriesForFields(array $fieldEntries): void
     {
         $this->fieldEntries = array_merge(
-            $this->fieldEntries ?? [],
+            $this->fieldEntries,
             $fieldEntries
         );
     }
@@ -49,7 +49,7 @@ class CacheControlManager extends AbstractBasicService implements CacheControlMa
     public function addEntriesForDirectives(array $directiveEntries): void
     {
         $this->directiveEntries = array_merge(
-            $this->directiveEntries ?? [],
+            $this->directiveEntries,
             $directiveEntries
         );
     }

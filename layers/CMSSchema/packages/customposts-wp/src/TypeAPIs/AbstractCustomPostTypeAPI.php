@@ -6,6 +6,7 @@ namespace PoPCMSSchema\CustomPostsWP\TypeAPIs;
 
 use PoPCMSSchema\CustomPostsWP\Constants\QueryOptions;
 use PoPCMSSchema\CustomPosts\Constants\CustomPostOrderBy;
+use PoPCMSSchema\CustomPosts\Constants\HookNames;
 use PoPCMSSchema\CustomPosts\Enums\CustomPostStatus;
 use PoPCMSSchema\CustomPosts\Module;
 use PoPCMSSchema\CustomPosts\ModuleConfiguration;
@@ -395,7 +396,6 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
         // Function get_sample_permalink comes from the file below, so it must be included
         // Code below copied from `function get_sample_permalink_html`
-        // @phpstan-ignore-next-line
         include_once ABSPATH . 'wp-admin/includes/post.php';
         list($permalink, $post_name) = get_sample_permalink($customPostID, null, null);
         return str_replace(['%pagename%', '%postname%'], $post_name, $permalink);
@@ -505,12 +505,11 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
 
     public function getContent(string|int|object $customPostObjectOrID): ?string
     {
-        /** @var WP_Post|null */
-        $customPost = $this->getCustomPostObject($customPostObjectOrID);
-        if ($customPost === null) {
+        $rawContent = $this->getRawContent($customPostObjectOrID);
+        if ($rawContent === null) {
             return null;
         }
-        return \apply_filters('the_content', $customPost->post_content);
+        return \apply_filters('the_content', $rawContent);
     }
 
     public function getRawContent(string|int|object $customPostObjectOrID): ?string
@@ -521,7 +520,12 @@ abstract class AbstractCustomPostTypeAPI extends UpstreamAbstractCustomPostTypeA
             return null;
         }
 
-        return $customPost->post_content;
+        /** @var string */
+        return App::applyFilters(
+            HookNames::CUSTOMPOST_RAW_CONTENT,
+            $customPost->post_content,
+            $customPost
+        );
     }
 
     public function getPublishedDate(string|int|object $customPostObjectOrID, bool $gmt = false): ?string

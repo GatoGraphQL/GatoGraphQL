@@ -1,0 +1,41 @@
+{
+    "data": {
+        "__schema": {
+            "queryType": {
+                "name": "QueryRoot"
+            }
+        },
+        "__type": {
+            "name": "__Field",
+            "fields": [
+                {
+                    "name": "args"
+                },
+                {
+                    "name": "deprecationReason"
+                },
+                {
+                    "name": "description"
+                },
+                {
+                    "name": "extensions"
+                },
+                {
+                    "name": "globalID"
+                },
+                {
+                    "name": "id"
+                },
+                {
+                    "name": "isDeprecated"
+                },
+                {
+                    "name": "name"
+                },
+                {
+                    "name": "type"
+                }
+            ]
+        }
+    }
+}

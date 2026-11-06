@@ -98,13 +98,9 @@ class CachingFunctionalityModuleResolver extends AbstractFunctionalityModuleReso
                     $module,
                     $option
                 ),
-                Properties::TITLE => \__('Cache parsed GraphQL queries?', 'gatographql'),
-                Properties::DESCRIPTION => sprintf(
-                    \__('Persist parsed GraphQL document ASTs across requests, by storing them to disk. %s', 'gatographql'),
-                    $this->getCollapsible(
-                        \__('<br/>Speeds up persisted queries significantly (parsing of a large persisted query takes seconds and is identical on every request); has no effect on ad-hoc queries that change each time.', 'gatographql')
-                    )
-                ),
+                Properties::TITLE => \__('Cache parsed GraphQL queries', 'gatographql'),
+                Properties::DESCRIPTION => \__('Store parsed queries on disk, to reuse them across requests.', 'gatographql'),
+                Properties::HELP => \__('This speeds up persisted queries a lot: parsing a large one takes seconds, and gives the same result on every request.<br/><br/>It does nothing for ad-hoc queries, which change each time.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         }

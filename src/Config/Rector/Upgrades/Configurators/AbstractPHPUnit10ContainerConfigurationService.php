@@ -12,7 +12,7 @@ abstract class AbstractPHPUnit10ContainerConfigurationService extends AbstractCo
     public function configureContainer(): void
     {
         $this->rectorConfig->sets([
-            PHPUnitSetList::PHPUNIT_100,
+            PHPUnitSetList::COMPOSER_BASED,
         ]);
 
         // Rector relies on autoload setup of your project; Composer autoload is included by default; to add more:

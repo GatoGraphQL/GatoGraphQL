@@ -6,7 +6,7 @@ namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
 use GatoGraphQL\GatoGraphQL\Constants\ModuleSettingOptions;
 use PHPUnitForGatoGraphQL\WebserverRequests\Environment;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends AbstractChangeLoggedInUserModifyPluginSettingsFixtureEndpointWebserverRequestTestCase
 {
@@ -32,7 +32,7 @@ class SettingsModifyPluginSettingsFixtureEndpointWebserverRequestTest extends Ab
 
     protected function getPluginSettingsNewValue(): mixed
     {
-        return Behaviors::DENY;
+        return Behaviors::DENY->value;
     }
 
     protected function getDifferentLoginUsername(): string

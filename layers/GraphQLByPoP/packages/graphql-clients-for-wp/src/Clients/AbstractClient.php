@@ -34,6 +34,14 @@ abstract class AbstractClient extends AbstractEndpointHandler
     public function initialize(): void
     {
         /**
+         * The service is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
+        /**
          * Subject to the endpoint having been defined.
          *
          * Execute on "init" to make sure that the CPT has been defined,

@@ -37,7 +37,7 @@ By default, the following data elements are treated as “sensitive” (they can
 
 **Menu Items:**
 
-- `rawTitle`
+- `rawLabel`
 
 ## Inspecting the “sensitive” data elements via schema introspection
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Admin\Tables;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 use WP_List_Table;
 
 /**
@@ -12,6 +12,7 @@ use WP_List_Table;
  */
 abstract class AbstractItemListTable extends WP_List_Table implements ItemListTableInterface
 {
+    use EnqueuePluginAssetsTrait;
     use ItemListTableTrait;
 
     /**
@@ -56,18 +57,12 @@ abstract class AbstractItemListTable extends WP_List_Table implements ItemListTa
      */
     public function enqueueAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         /**
          * Fix the issues with the WP List Table
          */
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-wp-list-table-fix',
-            $mainPluginURL . 'assets/css/wp-list-table-fix.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/wp-list-table-fix.css'
         );
     }
 

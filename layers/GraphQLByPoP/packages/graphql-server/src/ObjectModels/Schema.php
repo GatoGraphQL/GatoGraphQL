@@ -112,6 +112,13 @@ class Schema
     {
         return $this->id;
     }
+    /**
+     * The schema has no description
+     */
+    public function getDescription(): ?string
+    {
+        return null;
+    }
     public function getQueryRootObjectTypeID(): string
     {
         $graphQLSchemaDefinitionService = GraphQLSchemaDefinitionServiceFacade::getInstance();

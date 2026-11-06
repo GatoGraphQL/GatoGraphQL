@@ -84,7 +84,7 @@ When the GraphQL document contains multiple operations, we indicate to the serve
 
 Starting from this initial operation, the server will collect all operations to execute, which are defined by adding directive `depends(on: [...])`, and execute them in the corresponding order respecting the dependencies.
 
-Directive argument `operations` receives an array of operation names (`[String]`), or we can also provide a single operation name (`String`).
+Directive argument `on` receives an array of operation names (`[String!]`), or we can also provide a single operation name (`String`).
 
 In this query, we pass `?operationName=Four`, and the executed operations (whether `query` or `mutation`) will be `["One", "Two", "Three", "Four"]`:
 

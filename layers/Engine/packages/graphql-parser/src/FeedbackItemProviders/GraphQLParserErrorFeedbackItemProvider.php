@@ -43,7 +43,7 @@ class GraphQLParserErrorFeedbackItemProvider extends AbstractFeedbackItemProvide
             self::E_2 => $this->__('Can\'t parse argument', 'gatographql'),
             self::E_3 => $this->__('Invalid string unicode escape sequence \'%s\'', 'gatographql'),
             self::E_4 => $this->__('Unexpected string escaped character \'%s\'', 'gatographql'),
-            self::E_5 => $this->__('Can\t recognize token type', 'gatographql'),
+            self::E_5 => $this->__('Can\'t recognize token type', 'gatographql'),
             self::E_6 => $this->__('Unexpected token \'%s\'', 'gatographql'),
             default => parent::getMessagePlaceholder($code),
         };

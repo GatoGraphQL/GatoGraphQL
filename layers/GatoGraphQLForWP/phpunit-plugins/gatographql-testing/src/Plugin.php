@@ -231,26 +231,26 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-tag-three',
+            'bricks_post_tag',
             [],
             $this->getTaxonomyArgs(
                 false,
-                __('Dummy Tag (Three)'),
-                __('Dummy Tags (Three)'),
-                __('dummy tag (three)'),
-                __('dummy tags (three)'),
+                __('Bricks Post Tag'),
+                __('Bricks Post Tags'),
+                __('bricks post tag'),
+                __('bricks post tags'),
             )
         );
 
         \register_taxonomy(
-            'dummy-tag-four',
+            'elementor_post_tag',
             [],
             $this->getTaxonomyArgs(
                 false,
-                __('Dummy Tag (Four)'),
-                __('Dummy Tags (Four)'),
-                __('dummy tag (four)'),
-                __('dummy tags (four)'),
+                __('Elementor Post Tag'),
+                __('Elementor Post Tags'),
+                __('elementor post tag'),
+                __('elementor post tags'),
             )
         );
 
@@ -291,26 +291,26 @@ class Plugin
         );
 
         \register_taxonomy(
-            'dummy-category-three',
+            'bricks_post_category',
             [],
             $this->getTaxonomyArgs(
                 true,
-                __('Dummy Category (Three)'),
-                __('Dummy Categories (Three)'),
-                __('dummy category (three)'),
-                __('dummy categories (three)'),
+                __('Bricks Post Category'),
+                __('Bricks Post Categories'),
+                __('bricks post category'),
+                __('bricks post categories'),
             )
         );
 
         \register_taxonomy(
-            'dummy-category-four',
+            'elementor_post_category',
             [],
             $this->getTaxonomyArgs(
                 true,
-                __('Dummy Category (Four)'),
-                __('Dummy Categories (Four)'),
-                __('dummy category (four)'),
-                __('dummy categories (four)'),
+                __('Elementor Post Category'),
+                __('Elementor Post Categories'),
+                __('elementor post category'),
+                __('elementor post categories'),
             )
         );
 
@@ -343,28 +343,28 @@ class Plugin
         );
 
         \register_post_type(
-            'dummy-cpt-three',
+            'bricks_post',
             $this->getCustomPostTypeArgs(
                 [
-                    'dummy-tag-three',
-                    'dummy-category-three',
+                    'bricks_post_tag',
+                    'bricks_post_category',
                 ],
-                __('Dummy CPT (Three)'),
-                __('Dummy CPTs (Three)'),
-                __('dummy CPTs (three)'),
+                __('Bricks Post'),
+                __('Bricks Posts'),
+                __('bricks posts'),
             )
         );
 
         \register_post_type(
-            'dummy-cpt-four',
+            'elementor_post',
             $this->getCustomPostTypeArgs(
                 [
-                    'dummy-tag-four',
-                    'dummy-category-four',
+                    'elementor_post_tag',
+                    'elementor_post_category',
                 ],
-                __('Dummy CPT (Four)'),
-                __('Dummy CPTs (Four)'),
-                __('dummy CPTs (four)'),
+                __('Elementor Post'),
+                __('Elementor Posts'),
+                __('elementor posts'),
             )
         );
     }

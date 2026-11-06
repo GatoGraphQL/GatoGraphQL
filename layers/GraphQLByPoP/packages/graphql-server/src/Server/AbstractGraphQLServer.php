@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace GraphQLByPoP\GraphQLServer\Server;
 
+use GraphQLByPoP\GraphQLServer\Validation\RequestValidationServiceInterface;
 use PoPAPI\API\HelperServices\ApplicationStateFillerServiceInterface;
 use PoP\ComponentModel\App;
 use PoP\ComponentModel\Engine\EngineInterface;
 use PoP\ComponentModel\ExtendedSpec\Execution\ExecutableDocument;
+use PoP\GraphQLParser\ExtendedSpec\Execution\ExecutableDocumentInterface;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\HttpFoundation\Response;
 use PoP\Root\Services\StandaloneServiceTrait;
@@ -18,6 +20,7 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
 
     private ?ApplicationStateFillerServiceInterface $applicationStateFillerService = null;
     private ?EngineInterface $engine = null;
+    private ?RequestValidationServiceInterface $requestValidationService = null;
 
     final protected function getApplicationStateFillerService(): ApplicationStateFillerServiceInterface
     {
@@ -36,6 +39,15 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $this->engine = $engine;
         }
         return $this->engine;
+    }
+    final protected function getRequestValidationService(): RequestValidationServiceInterface
+    {
+        if ($this->requestValidationService === null) {
+            /** @var RequestValidationServiceInterface */
+            $requestValidationService = InstanceManagerFacade::getInstance()->getInstance(RequestValidationServiceInterface::class);
+            $this->requestValidationService = $requestValidationService;
+        }
+        return $this->requestValidationService;
     }
 
     /**
@@ -73,6 +85,20 @@ abstract class AbstractGraphQLServer implements GraphQLServerInterface
             $variables,
             $operationName,
         );
+
+        /**
+         * If the GraphQL query has request errors, do not execute it
+         */
+        /** @var ExecutableDocumentInterface|null */
+        $executableDocument = App::getState('executable-document-ast');
+        if (
+            $executableDocument !== null
+            && !$this->getRequestValidationService()->maybeValidateExecutableDocumentAgainstSchema($executableDocument)
+        ) {
+            $appStateManager = App::getAppStateManager();
+            $appStateManager->override('executable-document-ast', null);
+            $appStateManager->override('does-api-query-have-errors', true);
+        }
 
         /**
          * Create and stack a new Response object, to be

@@ -35,6 +35,14 @@ class TemplateHookSet extends AbstractHookSet
 
     protected function init(): void
     {
+        /**
+         * The hook set is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
         \add_filter(
             'template_include',
             $this->getTemplate(...),

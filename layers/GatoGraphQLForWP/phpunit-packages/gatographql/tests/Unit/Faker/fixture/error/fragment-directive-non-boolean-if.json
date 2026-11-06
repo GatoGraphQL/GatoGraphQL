@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "message": "Cannot cast value '\"yes\"' for type 'Boolean'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 14
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(if: \"yes\")",
+          "@skip(if: \"yes\")",
+          "...F",
+          "query { ... }"
+        ],
+        "code": "gql@5.6.1[16]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Values-of-Correct-Type"
+      }
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+    "errors": [
+        {
+            "message": "Mandatory argument 'by' in field 'post' of type 'QueryRoot' has not been provided",
+            "locations": [
+                {
+                    "line": 3,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "post { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "post { ... }",
+                "code": "gql@5.4.2.1[a]",
+                "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+            }
+        }
+    ],
+    "data": {
+        "post": null,
+        "users": [
+            {
+                "id": 6
+            },
+            {
+                "id": 5
+            }
+        ]
+    }
+}

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Services;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
+
 interface AllowOrDenySettingsServiceInterface
 {
     /**
@@ -12,5 +14,5 @@ interface AllowOrDenySettingsServiceInterface
      *
      * @param string[] $entries
      */
-    public function isEntryAllowed(string $name, array $entries, string $behavior): bool;
+    public function isEntryAllowed(string $name, array $entries, Behaviors $behavior): bool;
 }

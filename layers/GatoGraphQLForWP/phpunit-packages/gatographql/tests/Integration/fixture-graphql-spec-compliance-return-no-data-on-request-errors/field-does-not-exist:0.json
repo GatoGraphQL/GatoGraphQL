@@ -1,0 +1,39 @@
+{
+    "errors": [
+        {
+            "message": "There is no field 'nonExistingField' on type 'Post'",
+            "locations": [
+                {
+                    "line": 6,
+                    "column": 5
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "nonExistingField",
+                    "post(by: {id: 1}) { ... }",
+                    "query { ... }"
+                ],
+                "type": "Post",
+                "field": "nonExistingField",
+                "code": "gql@5.3.1",
+                "specifiedBy": "https://spec.graphql.org/draft/#sec-Field-Selections"
+            }
+        }
+    ],
+    "data": {
+        "post": {
+            "id": 1,
+            "title": "Hello world!",
+            "nonExistingField": null
+        },
+        "users": [
+            {
+                "id": 6
+            },
+            {
+                "id": 5
+            }
+        ]
+    }
+}

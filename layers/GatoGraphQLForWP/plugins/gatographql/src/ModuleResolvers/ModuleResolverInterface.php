@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
@@ -109,6 +110,15 @@ interface ModuleResolverInterface
      * Default value for an option set by the module
      */
     public function getSettingsDefaultValue(string $module, string $option): mixed;
+
+    /**
+     * The options whose value is a URL path (such as the path
+     * of the single endpoint), which must then be validated
+     *
+     * @return array<string,URLPathSettingType> Key: option, value: the kind of URL path
+     */
+    public function getURLPathSettingOptions(string $module): array;
+
     public function isEnabledByDefault(string $module): bool;
     // public function getURL(string $module): ?string;
     public function getSlug(string $module): string;

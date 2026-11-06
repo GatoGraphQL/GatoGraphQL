@@ -13,7 +13,7 @@ class DirectiveLocationEnumTypeResolver extends AbstractIntrospectionEnumTypeRes
 {
     public function getTypeName(): string
     {
-        return 'DirectiveLocation';
+        return '__DirectiveLocation';
     }
 
     /**

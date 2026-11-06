@@ -79,6 +79,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldNamesToResolve(): array
     {
         return [
+            'description',
             'queryType',
             'mutationType',
             'subscriptionType',
@@ -106,6 +107,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldDescription(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ?string
     {
         return match ($fieldName) {
+            'description' => $this->__('The schema\'s description', 'gatographql'),
             'queryType' => $this->__('The type, accessible from the root, that resolves queries', 'gatographql'),
             'mutationType' => $this->__('The type, accessible from the root, that resolves mutations', 'gatographql'),
             'subscriptionType' => $this->__('The type, accessible from the root, that resolves subscriptions', 'gatographql'),
@@ -155,6 +157,7 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
         /** @var Schema */
         $schema = $object;
         return match ($fieldDataAccessor->getFieldName()) {
+            'description' => $schema->getDescription(),
             'queryType' => $schema->getQueryRootObjectTypeID(),
             'mutationType' => $schema->getMutationRootObjectTypeID(),
             'subscriptionType' => $schema->getSubscriptionRootObjectTypeID(),
@@ -180,6 +183,8 @@ class SchemaObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeResolver(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): ConcreteTypeResolverInterface
     {
         return match ($fieldName) {
+            'description'
+                => $this->getStringScalarTypeResolver(),
             'queryType',
             'mutationType',
             'subscriptionType',

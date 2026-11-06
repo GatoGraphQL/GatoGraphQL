@@ -57,6 +57,7 @@
         "symplify/monorepo-builder": "^10.2.2",
         "szepeviktor/phpstan-wordpress": "^2.0",
         "wp-cli/i18n-command": "^2.7",
+        "wp-cli/wp-cli": "dev-main#7b3a8f56ee053ef74e325d554ea6352d699fe506 as 2.13.x-dev",
         "wp-coding-standards/wpcs": "^3.0"
     },
     "autoload": {
@@ -423,6 +424,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/leoloso/symplify-autowire-array-parameter.git"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/leoloso/symplify-composer-json-manipulator.git"
         },
         {
@@ -436,10 +441,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/leoloso/symplify-symplify-kernel.git"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/leoloso/symplify-autowire-array-parameter.git"
         }
     ],
     "replace": {
@@ -689,6 +690,8 @@
         "init-server-prod": "composer init-server -d webservers/gatographql-for-prod",
         "start-server": "composer start-server -d webservers/gatographql",
         "start-server-prod": "composer start-server -d webservers/gatographql-for-prod",
+        "route-in-lando-proxy": "composer route-in-lando-proxy -d webservers/gatographql",
+        "route-in-lando-proxy-prod": "composer route-in-lando-proxy -d webservers/gatographql-for-prod",
         "destroy-server": "composer destroy-server -d webservers/gatographql",
         "destroy-server-prod": "composer destroy-server -d webservers/gatographql-for-prod",
         "reset-db": [
@@ -708,6 +711,8 @@
             "composer reset-domain -d webservers/gatographql-for-prod"
         ],
         "install-site": "composer install-site -d webservers/gatographql",
+        "snapshot-db": "composer snapshot-db -d webservers/gatographql",
+        "restore-db": "composer restore-db -d webservers/gatographql",
         "import-data": "composer import-data -d webservers/gatographql",
         "create-users": "composer create-users -d webservers/gatographql",
         "update-deps": "composer update-deps -d webservers/gatographql",
@@ -810,14 +815,18 @@
         "ssh-server-prod": "SSH into the Lando webserver for PROD with the 'Gato GraphQL' demo site",
         "build-server": "Initialize the Lando webserver with the 'Gato GraphQL' demo site, for development. To be executed only the first time",
         "build-server-prod": "Initialize the Lando webserver with the 'Gato GraphQL' demo site, for production. To be executed only the first time",
-        "init-server": "Alias of 'start-server",
-        "start-server": "Start the Lando webserver with the 'Gato GraphQL' demo site, for development",
-        "start-server-prod": "Start the Lando webserver for PROD with the 'Gato GraphQL' demo site, for development",
+        "init-server": "Alias of 'start-server'. On a 404 or 502 at its .lndo.site domain afterwards, run route-in-lando-proxy (never restart the Lando proxy: it drops the requests in flight to every other devserver)",
+        "start-server": "Start the Lando webserver with the 'Gato GraphQL' demo site, for development. On a 404 or 502 at its .lndo.site domain afterwards, run route-in-lando-proxy (never restart the Lando proxy: it drops the requests in flight to every other devserver)",
+        "start-server-prod": "Start the Lando webserver for PROD with the 'Gato GraphQL' demo site, for development. On a 404 or 502 at its .lndo.site domain afterwards, run route-in-lando-proxy-prod (never restart the Lando proxy: it drops the requests in flight to every other devserver)",
+        "route-in-lando-proxy": "Route the Lando webserver through the shared Lando proxy via its hot-reloaded config folder, which fixes a 404 or 502 on its .lndo.site domain without restarting the proxy",
+        "route-in-lando-proxy-prod": "Route the Lando webserver for PROD through the shared Lando proxy via its hot-reloaded config folder, which fixes a 404 or 502 on its .lndo.site domain without restarting the proxy",
         "destroy-server": "Destroy the Lando webserver with the 'Gato GraphQL' demo site",
         "destroy-server-prod": "Destroy the Lando webserver with the 'Gato GraphQL' demo site for PROD",
         "reset-db": "Resets the WordPress database",
         "reset-domain": "Resets the Lando domain in the WordPress site (for when not using proxy)",
         "install-site": "Installs the WordPress site",
+        "snapshot-db": "Export the database of the webserver to its tmp/db-snapshot.sql",
+        "restore-db": "Put the database of the webserver back to its last snapshot",
         "import-data": "Imports pre-defined data into the DB (posts, users, CPTs, etc)",
         "update-deps": "Update the Composer dependencies for the 'Gato GraphQL' demo site",
         "optimize-autoloader": "Optimizes the Composer autoloaders for all the plugins installed in the webserver",

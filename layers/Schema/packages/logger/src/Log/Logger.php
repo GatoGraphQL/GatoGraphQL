@@ -5,10 +5,8 @@ declare(strict_types=1);
 namespace PoPSchema\Logger\Log;
 
 use DateTimeInterface;
-use InvalidArgumentException;
 use PoPSchema\Logger\Constants\LoggerContext;
-use PoPSchema\Logger\Constants\LoggerSeverity;
-use PoPSchema\Logger\Constants\LoggerSigns;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use PoPSchema\Logger\Module;
 use PoPSchema\Logger\ModuleConfiguration;
 use PoP\ComponentModel\App;
@@ -49,7 +47,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
      * @param array<string,mixed>|null $context
      */
     public function log(
-        string $severity,
+        LoggerSeverity $severity,
         string $message,
         string $loggerSource = LoggerSources::INFO,
         ?array $context = null,
@@ -61,7 +59,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
             return;
         }
 
-        if (!in_array($severity, $moduleConfiguration->enableLogsBySeverity())) {
+        if (!in_array($severity, $moduleConfiguration->enableLogsBySeverity(), true)) {
             return;
         }
 
@@ -84,7 +82,7 @@ class Logger extends AbstractBasicService implements LoggerInterface
     protected function logMessage(
         string $logFile,
         string $message,
-        string $severity,
+        LoggerSeverity $severity,
         ?array $context = null,
     ): void {
         /**
@@ -114,12 +112,8 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return "$loggerSource.log";
     }
 
-    protected function getMessageWithLogSeverity(string $severity, string $message): string
+    protected function getMessageWithLogSeverity(LoggerSeverity $severity, string $message): string
     {
-        if (!in_array($severity, LoggerSeverity::ALL)) {
-            throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity));
-        }
-
         if ($this->isDryRun) {
             $message = sprintf(
                 $this->__('%s %s', 'gatographql'),
@@ -129,10 +123,13 @@ class Logger extends AbstractBasicService implements LoggerInterface
         }
 
         if ($this->addSpacePaddingToLogSeverity()) {
-            $padLength = max(array_map('strlen', LoggerSeverity::ALL));
-            $messageSeverity = str_pad($severity, $padLength);
+            $padLength = max(array_map(
+                fn (LoggerSeverity $loggerSeverity): int => strlen($loggerSeverity->value),
+                LoggerSeverity::cases()
+            ));
+            $messageSeverity = str_pad($severity->value, $padLength);
         } else {
-            $messageSeverity = $severity;
+            $messageSeverity = $severity->value;
         }
 
         $message = sprintf(
@@ -162,15 +159,9 @@ class Logger extends AbstractBasicService implements LoggerInterface
         return false;
     }
 
-    protected function getLoggerSeveritySign(string $severity): string
+    protected function getLoggerSeveritySign(LoggerSeverity $severity): string
     {
-        return match ($severity) {
-            LoggerSeverity::ERROR => LoggerSigns::ERROR,
-            LoggerSeverity::WARNING => LoggerSigns::WARNING,
-            LoggerSeverity::INFO => LoggerSigns::INFO,
-            LoggerSeverity::DEBUG => LoggerSigns::DEBUG,
-            default => throw new InvalidArgumentException(sprintf('Invalid severity: "%s"', $severity)),
-        };
+        return $severity->sign();
     }
 
     protected function maybeCreateLogFile(string $filename): bool

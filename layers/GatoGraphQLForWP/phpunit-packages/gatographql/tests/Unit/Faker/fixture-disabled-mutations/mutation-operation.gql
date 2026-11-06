@@ -1,0 +1,11 @@
+query GetPosts {
+  posts(pagination: { limit: 1 }) {
+    id
+  }
+}
+
+mutation CreatePost {
+  createPost(input: { title: "Some title" }) {
+    status
+  }
+}

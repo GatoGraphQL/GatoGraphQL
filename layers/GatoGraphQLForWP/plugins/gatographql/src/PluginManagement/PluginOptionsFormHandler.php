@@ -6,11 +6,17 @@ namespace GatoGraphQL\GatoGraphQL\PluginManagement;
 
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemModuleRegistryFacade;
 use GatoGraphQL\GatoGraphQL\Facades\Registries\SystemSettingsCategoryRegistryFacade;
+use GatoGraphQL\GatoGraphQL\PluginSkeleton\PluginLifecycleHooks;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\SettingsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\SettingsNormalizerInterface;
 use PoPAPI\APIEndpoints\EndpointUtils;
 use PoP\Root\App;
+use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use PoP\Root\Facades\Instances\SystemInstanceManagerFacade;
+
+use function did_action;
+use function in_array;
+use function is_array;
 
 /**
  * Helper class with functions to set the configuration in PoP components.
@@ -41,7 +47,18 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         string $module,
     ): array {
         if (($this->normalizedModuleOptionValuesCache[$settingsCategory][$module] ?? null) === null) {
-            $instanceManager = SystemInstanceManagerFacade::getInstance();
+            /**
+             * Once the Application container has booted (eg: on a "Save all
+             * changes" request, which runs on "admin_post"), normalize with
+             * it: the settings of some modules depend on services that only
+             * the Application container has (eg: the AI translation
+             * extensions print the prompt placeholders, and the meta modules
+             * print the types with meta). Before then (eg: while the plugin
+             * configures itself), only the System container is available.
+             */
+            $instanceManager = did_action(PluginLifecycleHooks::BOOT_EXTENSION) > 0
+                ? InstanceManagerFacade::getInstance()
+                : SystemInstanceManagerFacade::getInstance();
             /** @var SettingsNormalizerInterface */
             $settingsNormalizer = $instanceManager->getInstance(SettingsNormalizerInterface::class);
 
@@ -123,7 +140,7 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         string $option,
     ): mixed {
         global $pagenow;
-        if ($pagenow !== 'options.php') {
+        if ($pagenow !== 'options.php' && $pagenow !== 'admin-post.php') {
             return $value;
         }
 
@@ -134,10 +151,21 @@ class PluginOptionsFormHandler implements PluginOptionsFormHandlerInterface
         return $this->doOverrideValueFromForm($value, $module, $option);
     }
 
+    /**
+     * The form is posted to options.php to save a single tab, or
+     * to admin-post.php to save the changes of several tabs at once
+     */
     protected function checkIsExpectedSubmittedForm(string $module, string $option): bool
     {
+        global $pagenow;
+        $optionsFormName = $this->getSettingsCategoryOptionsFormName($module);
+        if ($pagenow === 'admin-post.php') {
+            $saveAll = App::request(SettingsMenuPage::SAVE_ALL);
+            $tabs = is_array($saveAll) ? ($saveAll[SettingsMenuPage::SAVE_ALL_TABS] ?? []) : [];
+            return is_array($tabs) && in_array($optionsFormName, $tabs, true);
+        }
         $formOrigin = App::request(SettingsMenuPage::FORM_ORIGIN);
-        return $formOrigin === $this->getSettingsCategoryOptionsFormName($module);
+        return $formOrigin === $optionsFormName;
     }
 
     protected function getSettingsCategoryOptionsFormName(string $module): string

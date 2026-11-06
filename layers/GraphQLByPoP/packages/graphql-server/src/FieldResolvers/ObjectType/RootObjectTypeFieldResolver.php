@@ -92,8 +92,7 @@ class RootObjectTypeFieldResolver extends AbstractObjectTypeFieldResolver
     public function getFieldTypeModifiers(ObjectTypeResolverInterface $objectTypeResolver, string $fieldName): int
     {
         return match ($fieldName) {
-            '__schema',
-            '__type'
+            '__schema'
                 => SchemaTypeModifiers::NON_NULLABLE,
             default
                 => parent::getFieldTypeModifiers($objectTypeResolver, $fieldName),

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\CustomPostTypes;
 
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Constants\BlockAttributeNames;
 use GatoGraphQL\GatoGraphQL\Constants\HookNames;
 use GatoGraphQL\GatoGraphQL\Constants\RequestParams;
@@ -149,6 +150,15 @@ abstract class AbstractGraphQLEndpointCustomPostType extends AbstractCustomPostT
     public function initialize(): void
     {
         parent::initialize();
+
+        /**
+         * The parent adds its hooks for the main application only, and so
+         * does this one: the internal GraphQL server would add it a second
+         * time.
+         */
+        if (!AppHelpers::isMainAppThread()) {
+            return;
+        }
 
         // Execute at the beginning. If access is forbidden, the process must end
         \add_action('init', function (): void {

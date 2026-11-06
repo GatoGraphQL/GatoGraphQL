@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\Hooks;
 
+use GatoGraphQL\GatoGraphQL\AppHelpers;
 use GatoGraphQL\GatoGraphQL\Security\UserAuthorizationInterface;
 use GatoGraphQL\GatoGraphQL\Services\Helpers\EndpointHelpers;
 use PoP\Root\Hooks\AbstractHookSet;
@@ -30,6 +31,19 @@ class PrintEndpointInEditorHookSet extends AbstractHookSet
             $this->endpointHelpers = $endpointHelpers;
         }
         return $this->endpointHelpers;
+    }
+
+    /**
+     * For the main application only: the internal GraphQL server
+     * instantiates every hook set again, and would add the hook a second
+     * time.
+     */
+    public function isServiceEnabled(): bool
+    {
+        if (!AppHelpers::isMainAppThread()) {
+            return false;
+        }
+        return parent::isServiceEnabled();
     }
 
     protected function init(): void

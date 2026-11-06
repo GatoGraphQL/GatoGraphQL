@@ -7,7 +7,7 @@ namespace PoPCMSSchema\CommentMutationsWP\TypeAPIs;
 use PoP\Root\Services\AbstractBasicService;
 use PoPCMSSchema\CommentMutations\Exception\CommentCRUDMutationException;
 use PoPCMSSchema\CommentMutations\TypeAPIs\CommentTypeMutationAPIInterface;
-use PoPCMSSchema\Comments\Constants\CommentStatus;
+use PoPCMSSchema\Comments\Enums\CommentStatus;
 use WP_Error;
 
 use function get_comment;
@@ -146,19 +146,13 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
      */
     public function setCommentStatus(
         string|int $commentID,
-        string $commentStatus,
+        CommentStatus $commentStatus,
     ): void {
         $wpCommentStatus = match ($commentStatus) {
             CommentStatus::APPROVE => 'approve',
             CommentStatus::HOLD => 'hold',
             CommentStatus::SPAM => 'spam',
             CommentStatus::TRASH => 'trash',
-            default => throw new CommentCRUDMutationException(
-                sprintf(
-                    $this->__('Unsupported comment status \'%s\'', 'gatographql'),
-                    $commentStatus
-                )
-            ),
         };
 
         $resultOrError = wp_set_comment_status((int) $commentID, $wpCommentStatus, true);
@@ -216,7 +210,7 @@ class CommentTypeMutationAPI extends AbstractBasicService implements CommentType
         if ($comment === null) {
             return false;
         }
-        return $comment->comment_approved === CommentStatus::TRASH;
+        return $comment->comment_approved === CommentStatus::TRASH->value;
     }
 
     public function canUserEditComment(

@@ -299,12 +299,12 @@
     ],
     "postsByAuthorSlug": [
       {
-        "id": 1210,
-        "title": "PHP-only blocks (combinations)"
-      },
-      {
         "id": 1212,
         "title": "All blocks with entity references"
+      },
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
       },
       {
         "id": 1200,
@@ -333,16 +333,16 @@
         "title": "All blocks with entity references"
       },
       {
-        "id": 1142,
-        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+        "id": 1150,
+        "title": "Post with old format of the Gutenberg `core/list` block"
       },
       {
         "id": 1146,
         "title": "Post with corrupted non-breaking space"
       },
       {
-        "id": 1150,
-        "title": "Post with old format of the Gutenberg `core/list` block"
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
       },
       {
         "id": 1140,
@@ -369,28 +369,28 @@
     ],
     "postsByExcludeAuthorIDs": [
       {
-        "id": 1210,
-        "title": "PHP-only blocks (combinations)"
-      },
-      {
         "id": 1212,
         "title": "All blocks with entity references"
+      },
+      {
+        "id": 1210,
+        "title": "PHP-only blocks (combinations)"
       },
       {
         "id": 1200,
         "title": "PHP-only blocks"
       },
       {
-        "id": 1142,
-        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
+        "id": 1150,
+        "title": "Post with old format of the Gutenberg `core/list` block"
       },
       {
         "id": 1146,
         "title": "Post with corrupted non-breaking space"
       },
       {
-        "id": 1150,
-        "title": "Post with old format of the Gutenberg `core/list` block"
+        "id": 1142,
+        "title": "Post with internal links, also in meta (entries starting with internal_link_)"
       },
       {
         "id": 1140,

@@ -520,7 +520,7 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
     {
         $moduleSettings = parent::getSettings($module);
         $sensitiveDataTitlePlaceholder = \__('Treat the %s as “sensitive” data', 'gatographql');
-        $sensitiveDataDescPlaceholder = \__('If checked, the <strong>%s</strong> is exposed in the schema only if the Schema Configuration has option <code>Expose Sensitive Data in the Schema</code> enabled', 'gatographql');
+        $sensitiveDataDescPlaceholder = \__('Only Schema Configurations that expose sensitive data show the %s.', 'gatographql');
         if ($module === self::SCHEMA_CUSTOMPOST_USER_MUTATIONS) {
             $option = self::OPTION_TREAT_AUTHOR_INPUT_IN_CUSTOMPOST_MUTATION_AS_SENSITIVE_DATA;
             $moduleSettings[] = [
@@ -531,12 +531,13 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                 ),
                 Properties::TITLE => sprintf(
                     $sensitiveDataTitlePlaceholder,
-                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gatographql'),
+                    \__('<code>authorID</code> input', 'gatographql'),
                 ),
                 Properties::DESCRIPTION => sprintf(
                     $sensitiveDataDescPlaceholder,
-                    \__('<code>authorID</code> input (when creating/updating custom posts)', 'gatographql'),
+                    \__('<code>authorID</code> input, to create and update custom posts', 'gatographql'),
                 ),
+                Properties::HELP => \__('To show it, enable option <code>Expose Sensitive Data in the Schema</code> in the Schema Configuration.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
             ];
         } elseif ($module === self::SCHEMA_MEDIA_MUTATIONS) {
@@ -548,8 +549,12 @@ class MutationSchemaTypeModuleResolver extends AbstractModuleResolver
                     $option
                 ),
                 Properties::TITLE => \__('Reject unsafe URLs', 'gatographql'),
-                Properties::DESCRIPTION => \__('Do not allow creating media items from unsafe URLs (such as <code>https://testing-site.local</code>)', 'gatographql'),
+                Properties::DESCRIPTION => \__('Refuse to create media items from unsafe URLs.', 'gatographql'),
+                Properties::HELP => \__('Such as <code>https://testing-site.local</code>.', 'gatographql'),
                 Properties::TYPE => Properties::TYPE_BOOL,
+                Properties::SEARCH_KEYWORDS => [
+                    'SSRF',
+                ],
             ];
         }
 

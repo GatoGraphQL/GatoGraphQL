@@ -125,6 +125,10 @@ class ModuleRegistry implements ModuleRegistryInterface
         }
         return array_values($modules);
     }
+    public function isModuleRegistered(string $module): bool
+    {
+        return isset($this->moduleResolversByModule[$module]);
+    }
     /**
      * @throws ModuleNotExistsException If module does not exist
      */

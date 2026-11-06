@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\ModuleResolvers;
 
+use GatoGraphQL\GatoGraphQL\Enums\URLPathSettingType;
+use GatoGraphQL\GatoGraphQL\ModuleSettings\Properties;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnInactiveWordPressPlugin;
 use GatoGraphQL\GatoGraphQL\ObjectModels\DependedOnActiveWordPressTheme;
@@ -142,6 +144,22 @@ abstract class AbstractModuleResolver extends AbstractBasicService implements Mo
     }
 
     /**
+     * What the whole section does, which the Settings page shows behind
+     * the "i" beside the title of the section
+     *
+     * @return array<string,mixed>
+     */
+    protected function getSectionHelpSetting(string $module, string $help): array
+    {
+        return [
+            Properties::NAME => $this->getSettingOptionName($module, 'section-help'),
+            Properties::TYPE => Properties::TYPE_NULL,
+            Properties::CONTROL => Properties::CONTROL_SECTION_HELP,
+            Properties::HELP => $help,
+        ];
+    }
+
+    /**
      * The category where to display the settings:
      *
      * - Endpoint Configuration
@@ -166,6 +184,14 @@ abstract class AbstractModuleResolver extends AbstractBasicService implements Mo
     public function getSettingsDefaultValue(string $module, string $option): mixed
     {
         return null;
+    }
+
+    /**
+     * @return array<string,URLPathSettingType> Key: option, value: the kind of URL path
+     */
+    public function getURLPathSettingOptions(string $module): array
+    {
+        return [];
     }
 
     public function isEnabledByDefault(string $module): bool

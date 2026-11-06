@@ -9,16 +9,13 @@ use PoP\ComponentModel\Feedback\ObjectTypeFieldResolutionFeedbackStore;
 use PoP\ComponentModel\Module;
 use PoP\ComponentModel\ModuleConfiguration;
 use PoP\ComponentModel\QueryResolution\FieldDataAccessorInterface;
-use PoP\ComponentModel\Registries\TypeRegistryInterface;
-use PoP\ComponentModel\Schema\SchemaDefinitionTokens;
 use PoP\ComponentModel\Schema\SchemaTypeModifiers;
+use PoP\ComponentModel\Schema\TypeConditionServiceInterface;
 use PoP\ComponentModel\TypeResolvers\ConcreteTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\InputTypeResolverInterface;
-use PoP\ComponentModel\TypeResolvers\InterfaceType\InterfaceTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ObjectType\ObjectTypeResolverInterface;
 use PoP\ComponentModel\TypeResolvers\ScalarType\BooleanScalarTypeResolver;
 use PoP\ComponentModel\TypeResolvers\ScalarType\StringScalarTypeResolver;
-use PoP\ComponentModel\TypeResolvers\UnionType\UnionTypeResolverInterface;
 use PoP\GraphQLParser\Spec\Parser\RuntimeLocation;
 use PoP\GraphQLParser\Spec\Parser\Ast\Argument;
 use PoP\GraphQLParser\Spec\Parser\Ast\ArgumentValue\Literal;
@@ -29,7 +26,7 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
 {
     private ?StringScalarTypeResolver $stringScalarTypeResolver = null;
     private ?BooleanScalarTypeResolver $booleanScalarTypeResolver = null;
-    private ?TypeRegistryInterface $typeRegistry = null;
+    private ?TypeConditionServiceInterface $typeConditionService = null;
 
     final protected function getStringScalarTypeResolver(): StringScalarTypeResolver
     {
@@ -49,14 +46,14 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
         }
         return $this->booleanScalarTypeResolver;
     }
-    final protected function getTypeRegistry(): TypeRegistryInterface
+    final protected function getTypeConditionService(): TypeConditionServiceInterface
     {
-        if ($this->typeRegistry === null) {
-            /** @var TypeRegistryInterface */
-            $typeRegistry = $this->instanceManager->getInstance(TypeRegistryInterface::class);
-            $this->typeRegistry = $typeRegistry;
+        if ($this->typeConditionService === null) {
+            /** @var TypeConditionServiceInterface */
+            $typeConditionService = $this->instanceManager->getInstance(TypeConditionServiceInterface::class);
+            $this->typeConditionService = $typeConditionService;
         }
-        return $this->typeRegistry;
+        return $this->typeConditionService;
     }
 
     /**
@@ -212,94 +209,22 @@ class CoreGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
     ): mixed {
         switch ($fieldDataAccessor->getFieldName()) {
             case '_isObjectType':
-                $typeName = $fieldDataAccessor->getValue('type');
-                // If the provided typeName contains the namespace separator, then compare by qualifiedType
-                if (str_contains($typeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR)) {
-                    /**
-                     * @todo Replace the code below with:
-                     *
-                     *     return $typeName === $objectTypeResolver->getNamespacedTypeName();
-                     *
-                     * Currently, because the GraphQL spec doesn't support namespaces,
-                     * we are using "_" as the namespace separator, instead of "/".
-                     * But this character can also be part of the Type name!
-                     * So only temporarily, compare both the namespaced and the
-                     * normal type name, until can use "/".
-                     *
-                     * @see https://github.com/graphql/graphql-spec/issues/163
-                     */
-                    return
-                        $typeName === $objectTypeResolver->getNamespacedTypeName()
-                        || $typeName === $objectTypeResolver->getTypeName();
-                }
-                return $typeName === $objectTypeResolver->getTypeName();
+                return $this->getTypeConditionService()->isObjectType(
+                    $objectTypeResolver,
+                    $fieldDataAccessor->getValue('type'),
+                );
 
             case '_implements':
-                $interface = $fieldDataAccessor->getValue('interface');
-                $implementedInterfaceTypeResolvers = $objectTypeResolver->getImplementedInterfaceTypeResolvers();
-                // If the provided interface contains the namespace separator, then compare by qualifiedInterface
-                $useNamespaced = str_contains($interface, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
-                $implementedInterfaceNames = array_map(
-                    function (InterfaceTypeResolverInterface $interfaceTypeResolver) use ($useNamespaced): string {
-                        if ($useNamespaced) {
-                            return $interfaceTypeResolver->getNamespacedTypeName();
-                        }
-                        return $interfaceTypeResolver->getTypeName();
-                    },
-                    $implementedInterfaceTypeResolvers
+                return $this->getTypeConditionService()->implementsInterface(
+                    $objectTypeResolver,
+                    $fieldDataAccessor->getValue('interface'),
                 );
-                /**
-                 * @todo Remove the block of code below.
-                 *
-                 * Currently, because the GraphQL spec doesn't support namespaces,
-                 * we are using "_" as the namespace separator, instead of "/".
-                 * But this character can also be part of the Interface name!
-                 * So only temporarily, also add the interface names to the
-                 * array to compare, until can use "/".
-                 *
-                 * @see https://github.com/graphql/graphql-spec/issues/163
-                 *
-                 * -- Begin code --
-                 */
-                if ($useNamespaced) {
-                    $implementedInterfaceNames = array_merge(
-                        $implementedInterfaceNames,
-                        array_map(
-                            function (InterfaceTypeResolverInterface $interfaceTypeResolver): string {
-                                return $interfaceTypeResolver->getTypeName();
-                            },
-                            $implementedInterfaceTypeResolvers
-                        )
-                    );
-                }
-                /**
-                 * -- End code --
-                 */
-                return in_array($interface, $implementedInterfaceNames);
 
             case '_isInUnionType':
-                $unionTypeName = $fieldDataAccessor->getValue('type');
-                $unionTypeResolvers = $this->getTypeRegistry()->getUnionTypeResolvers();
-                $foundUnionTypeResolver = null;
-                /**
-                 * If the provided unionTypeName contains the namespace separator, then compare by qualifiedType
-                 * @see https://github.com/graphql/graphql-spec/issues/163
-                 */
-                $isNamespacedUnionTypeName = str_contains($unionTypeName, SchemaDefinitionTokens::NAMESPACE_SEPARATOR);
-                foreach ($unionTypeResolvers as $unionTypeResolver) {
-                    if (
-                        $unionTypeName === $unionTypeResolver->getTypeName()
-                        || ($isNamespacedUnionTypeName && $unionTypeName === $unionTypeResolver->getNamespacedTypeName())
-                    ) {
-                        $foundUnionTypeResolver = $unionTypeResolver;
-                        break;
-                    }
-                }
-                if ($foundUnionTypeResolver === null) {
+                $unionTypeResolver = $this->getTypeConditionService()->getUnionTypeResolver($fieldDataAccessor->getValue('type'));
+                if ($unionTypeResolver === null) {
                     return false;
                 }
-                /** @var UnionTypeResolverInterface */
-                $unionTypeResolver = $foundUnionTypeResolver;
                 return $unionTypeResolver->getTargetObjectTypeResolver($object) === $objectTypeResolver;
 
             case '_isTypeOrImplements':

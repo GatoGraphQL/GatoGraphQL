@@ -36,6 +36,14 @@ class ModuleListTableAction extends AbstractListTableAction
      */
     public function initialize(): void
     {
+        /**
+         * The service is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
+
         \add_action('admin_notices', $this->maybeAddAdminNotice(...));
     }
 

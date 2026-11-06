@@ -286,6 +286,20 @@ class Document implements DocumentInterface
     }
 
     /**
+     * Indicate if the Fragment is referenced within the Operation,
+     * either directly or via other Fragments.
+     */
+    public function isFragmentReferencedInOperation(Fragment $fragment, OperationInterface $operation): bool
+    {
+        foreach ($this->getFragmentReferencesInOperation($operation) as $fragmentReference) {
+            if ($fragmentReference->getName() === $fragment->getName()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Gather all the FragmentReference within the Operation.
      *
      * @return FragmentReference[]
@@ -534,7 +548,8 @@ class Document implements DocumentInterface
                 }
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds())
+                    $this->getVariableReferencesInFieldsOrFragments($fragment->getFieldsOrFragmentBonds()),
+                    $this->getVariableReferencesInDirectives($fragmentReference->getDirectives())
                 );
                 continue;
             }
@@ -543,7 +558,8 @@ class Document implements DocumentInterface
                 $inlineFragment = $fieldOrFragmentBond;
                 $variableReferences = array_merge(
                     $variableReferences,
-                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds())
+                    $this->getVariableReferencesInFieldsOrFragments($inlineFragment->getFieldsOrFragmentBonds()),
+                    $this->getVariableReferencesInDirectives($inlineFragment->getDirectives())
                 );
                 continue;
             }
@@ -969,7 +985,10 @@ class Document implements DocumentInterface
         }
         /** @var FragmentReference */
         $fragmentReference = $fieldOrFragmentBond;
-        // Nothing to set here
+        foreach ($fragmentReference->getDirectives() as $directive) {
+            $astNodeAncestors[$directive] = $fragmentReference;
+            $this->setASTNodeAncestorsUnderDirective($astNodeAncestors, $directive);
+        }
     }
 
     /**

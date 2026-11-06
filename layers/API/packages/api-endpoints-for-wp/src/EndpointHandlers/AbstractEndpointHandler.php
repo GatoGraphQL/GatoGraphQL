@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPAPI\APIEndpointsForWP\EndpointHandlers;
 
+use PoP\Root\App;
 use PoPAPI\APIEndpoints\AbstractEndpointHandler as UpstreamAbstractEndpointHandler;
 
 abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
@@ -14,6 +15,14 @@ abstract class AbstractEndpointHandler extends UpstreamAbstractEndpointHandler
     public function initialize(): void
     {
         parent::initialize();
+
+        /**
+         * The service is initialized once per AppThread, but WordPress hooks are global
+         * to the request
+         */
+        if (!App::isMainAppThread()) {
+            return;
+        }
 
         /**
          * Subject to the endpoint having been defined

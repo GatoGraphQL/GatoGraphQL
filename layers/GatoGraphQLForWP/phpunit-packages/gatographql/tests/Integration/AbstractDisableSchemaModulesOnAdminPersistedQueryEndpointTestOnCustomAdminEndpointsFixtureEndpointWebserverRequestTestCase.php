@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PHPUnitForGatoGraphQL\GatoGraphQL\Integration;
 
-use GatoGraphQL\GatoGraphQL\Constants\AdminGraphQLEndpointGroups;
+use GatoGraphQL\GatoGraphQL\Enums\AdminGraphQLEndpointGroups;
 
 abstract class AbstractDisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase extends AbstractDisableSchemaModulesOnPrivateEndpointTestOnCustomAdminEndpointsFixtureEndpointWebserverRequestTestCase
 {
@@ -21,6 +21,6 @@ abstract class AbstractDisableSchemaModulesOnAdminPersistedQueryEndpointTestOnCu
 
     protected static function getAdminEndpointGroup(): string
     {
-        return AdminGraphQLEndpointGroups::PERSISTED_QUERY;
+        return AdminGraphQLEndpointGroups::PERSISTED_QUERY->value;
     }
 }

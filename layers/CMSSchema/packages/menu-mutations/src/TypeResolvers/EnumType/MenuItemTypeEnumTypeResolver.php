@@ -14,21 +14,14 @@ class MenuItemTypeEnumTypeResolver extends AbstractEnumTypeResolver
         return 'MenuItemTypeEnum';
     }
 
-    /**
-     * @return string[]
-     */
-    public function getEnumValues(): array
+    public function getBackedEnumClass(): ?string
     {
-        return [
-            MenuItemType::CUSTOM,
-            MenuItemType::POST_TYPE,
-            MenuItemType::TAXONOMY,
-        ];
+        return MenuItemType::class;
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
-        return match ($enumValue) {
+        return match (MenuItemType::tryFrom($enumValue)) {
             MenuItemType::CUSTOM => $this->__('Custom link menu item', 'gatographql'),
             MenuItemType::POST_TYPE => $this->__('Menu item linking to a post type object', 'gatographql'),
             MenuItemType::TAXONOMY => $this->__('Menu item linking to a taxonomy term', 'gatographql'),

@@ -1,0 +1,28 @@
+﻿"""
+Operation description
+"""
+query GetData(
+  "Variable description"
+  $limit: Int!
+  """
+  Another variable description
+  """
+  $offset: Int!
+) {
+  ...RootFields
+  ... on QueryRoot {
+    posts(pagination: { limit: $limit, offset: $offset }) {
+      id
+    }
+  }
+}
+
+"Fragment description"
+fragment RootFields on QueryRoot {
+  __typename
+  ...NestedRootFields
+}
+
+fragment NestedRootFields on QueryRoot {
+  rootType: __typename
+}

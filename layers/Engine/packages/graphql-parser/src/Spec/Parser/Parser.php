@@ -68,6 +68,11 @@ class Parser extends Tokenizer implements ParserInterface
                     $this->fragments[] = $this->parseFragment();
                     break;
 
+                case Token::TYPE_STRING:
+                case Token::TYPE_BLOCK_STRING:
+                    $this->parseExecutableDefinitionDescription();
+                    break;
+
                 default:
                     throw new SyntaxErrorParserException(
                         new FeedbackItemResolution(
@@ -86,6 +91,24 @@ class Parser extends Tokenizer implements ParserInterface
             $this->operations,
             $this->fragments,
         );
+    }
+
+    /**
+     * Descriptions on operations and fragments document them,
+     * without affecting their execution, so they are skipped.
+     *
+     * A description must be followed by an operation type or
+     * "fragment" (the query shorthand can't have a description).
+     *
+     * @throws SyntaxErrorParserException
+     * @see https://spec.graphql.org/September2025/#sec-Descriptions
+     */
+    protected function parseExecutableDefinitionDescription(): void
+    {
+        $this->lex();
+        if (!$this->matchMulti([Token::TYPE_QUERY, Token::TYPE_MUTATION, Token::TYPE_SUBSCRIPTION, Token::TYPE_FRAGMENT])) {
+            throw $this->createUnexpectedException($this->peek());
+        }
     }
 
     /**
@@ -168,8 +191,7 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            $fieldOrFragmentBond = $this->parseBodyItem($type);
-            $fieldsOrFragmentBonds[] = $fieldOrFragmentBond;
+            $fieldsOrFragmentBonds[] = $this->parseFieldOrFragmentBond($type);
         }
 
         $this->afterParsingFieldsOrFragmentBonds();
@@ -244,22 +266,63 @@ class Parser extends Tokenizer implements ParserInterface
         while (!$this->match(Token::TYPE_RBRACE) && !$this->end()) {
             $this->eatMulti([Token::TYPE_COMMA]);
 
-            if ($this->match(Token::TYPE_FRAGMENT_REFERENCE)) {
-                $this->lex();
-
-                if ($this->eat(Token::TYPE_ON)) {
-                    $fieldsOrFragmentBonds[] = $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
-                } else {
-                    $fieldsOrFragmentBonds[] = $this->parseFragmentReference();
-                }
-            } else {
-                $fieldsOrFragmentBonds[] = $this->parseBodyItem($token);
-            }
+            $fieldsOrFragmentBonds[] = $this->parseFieldOrFragmentBond($token);
         }
 
         $this->expect(Token::TYPE_RBRACE);
 
         return $fieldsOrFragmentBonds;
+    }
+
+    /**
+     * Parse a field, a fragment spread or an inline fragment
+     */
+    protected function parseFieldOrFragmentBond(string $type): FieldInterface|FragmentBondInterface
+    {
+        if (!$this->match(Token::TYPE_FRAGMENT_REFERENCE)) {
+            return $this->parseBodyItem($type);
+        }
+
+        $fragmentReferenceToken = $this->lex();
+
+        if ($this->eat(Token::TYPE_ON)) {
+            return $this->parseBodyItem(Token::TYPE_INLINE_FRAGMENT);
+        }
+
+        if ($this->matchMulti([Token::TYPE_AT, Token::TYPE_LBRACE])) {
+            return $this->parseInlineFragmentWithoutTypeCondition($fragmentReferenceToken);
+        }
+
+        return $this->parseFragmentReference();
+    }
+
+    /**
+     * An inline fragment without a type condition, such as
+     * `... @include(if: $foo) { id }`, applies to the enclosing type.
+     *
+     * @throws SyntaxErrorParserException
+     * @see https://spec.graphql.org/September2025/#sec-Inline-Fragments
+     */
+    protected function parseInlineFragmentWithoutTypeCondition(Token $fragmentReferenceToken): InlineFragment
+    {
+        $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
+
+        if (!$this->match(Token::TYPE_LBRACE)) {
+            throw $this->createUnexpectedException($this->peek());
+        }
+
+        $this->beforeParsingFieldsOrFragmentBonds();
+
+        /** @var array<FieldInterface|FragmentBondInterface> */
+        $fieldsOrFragmentBonds = $this->parseBody(Token::TYPE_QUERY);
+
+        $this->afterParsingFieldsOrFragmentBonds();
+
+        if (!$fieldsOrFragmentBonds) {
+            throw $this->createUnexpectedTokenTypeException($this->lookAhead->getType());
+        }
+
+        return $this->createInlineFragment(null, $fieldsOrFragmentBonds, $directives, $this->getTokenLocation($fragmentReferenceToken));
     }
 
     /**
@@ -274,6 +337,13 @@ class Parser extends Tokenizer implements ParserInterface
 
         while (!$this->match(Token::TYPE_RPAREN) && !$this->end()) {
             $this->eat(Token::TYPE_COMMA);
+
+            /**
+             * Skip the variable's description, as it doesn't affect execution
+             *
+             * @see https://spec.graphql.org/September2025/#sec-Descriptions
+             */
+            $this->eatMulti([Token::TYPE_STRING, Token::TYPE_BLOCK_STRING]);
 
             /** @var Token|null */
             $variableToken = $this->eat(Token::TYPE_VARIABLE);
@@ -466,17 +536,23 @@ class Parser extends Tokenizer implements ParserInterface
     protected function parseFragmentReference(): FragmentReference
     {
         $nameToken = $this->eatIdentifierToken();
+        $directives = $this->match(Token::TYPE_AT) ? $this->parseDirectiveList() : [];
         return $this->createFragmentReference(
             $nameToken->getData(),
-            $this->getTokenLocation($nameToken)
+            $this->getTokenLocation($nameToken),
+            $directives,
         );
     }
 
+    /**
+     * @param Directive[] $directives
+     */
     protected function createFragmentReference(
         string $name,
         Location $location,
+        array $directives = [],
     ): FragmentReference {
-        return new FragmentReference($name, $location);
+        return new FragmentReference($name, $location, $directives);
     }
 
     /**
@@ -590,7 +666,7 @@ class Parser extends Tokenizer implements ParserInterface
      * @param Directive[] $directives
      */
     protected function createInlineFragment(
-        string $typeName,
+        ?string $typeName,
         array $fieldsOrFragmentBonds,
         array $directives,
         Location $location,

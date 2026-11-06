@@ -1,0 +1,14 @@
+{
+  # Field "isSticky" exists in type "Post", but not in type "Page",
+  # so it is not a request error (pages produce an error when
+  # resolving the field)
+  customPosts(
+    filter: { ids: [1, 2] }
+    pagination: { limit: 2 }
+    sort: { by: ID, order: ASC }
+  ) {
+    __typename
+    id
+    isSticky
+  }
+}

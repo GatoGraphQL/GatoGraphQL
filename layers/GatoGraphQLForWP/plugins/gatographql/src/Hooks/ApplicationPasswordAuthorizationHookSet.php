@@ -57,7 +57,7 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     {
         add_filter(
             'application_password_is_api_request',
-            $this->isGraphQLAPIRequest(...),
+            $this->isAPIRequest(...),
             PHP_INT_MAX // Execute last
         );
 
@@ -73,7 +73,13 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
     }
 
     /**
-     * Check if requesting a GraphQL endpoint.
+     * Check if requesting a GraphQL endpoint, or the REST API.
+     *
+     * The REST API is also checked so that the custom post types (persisted
+     * queries, schema configurations, etc) can be created and edited via
+     * `/wp-json/wp/v2/...` with an Application Password.
+     *
+     * @see BeforeAppIsLoadedStaticHelpers::isRESTAPIRequest()
      *
      * Because the AppStateProviders have not been initialized yet,
      * we can't check ->doingJSON().
@@ -87,13 +93,14 @@ class ApplicationPasswordAuthorizationHookSet extends AbstractHookSet
      * endpoints (i.e. not for `wp-admin/edit.php?page=gatographql&action=run_query`
      * or any of those).
      */
-    public function isGraphQLAPIRequest(bool $isAPIRequest): bool
+    public function isAPIRequest(bool $isAPIRequest): bool
     {
         if ($isAPIRequest) {
             return $isAPIRequest;
         }
 
-        return $this->getPrematureRequestService()->isPubliclyExposedGraphQLAPIRequest();
+        return $this->getPrematureRequestService()->isPubliclyExposedGraphQLAPIRequest()
+            || BeforeAppIsLoadedStaticHelpers::isRESTAPIRequest();
     }
 
     /**

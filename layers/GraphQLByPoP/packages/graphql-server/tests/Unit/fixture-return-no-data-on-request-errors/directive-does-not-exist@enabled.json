@@ -1,0 +1,25 @@
+{
+    "errors": [
+        {
+            "message": "There is no directive with name 'nonExistingDirective'",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 11
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "@nonExistingDirective",
+                    "name @nonExistingDirective",
+                    "__type(name: \"__Field\") { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Type",
+                "field": "name @nonExistingDirective",
+                "code": "gql@5.7.1",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Directives-Are-Defined"
+            }
+        }
+    ]
+}

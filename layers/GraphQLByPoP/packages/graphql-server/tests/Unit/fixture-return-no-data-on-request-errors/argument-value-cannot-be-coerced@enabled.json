@@ -1,0 +1,26 @@
+{
+    "errors": [
+        {
+            "message": "Argument 'ofKinds' cannot receive an array containing arrays as elements",
+            "locations": [
+                {
+                    "line": 7,
+                    "column": 25
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "[[\"query\"]]",
+                    "(ofKinds: [[\"query\"]])",
+                    "directives(ofKinds: [[\"query\"]]) { ... }",
+                    "__schema { ... }",
+                    "query { ... }"
+                ],
+                "type": "__Schema",
+                "field": "directives(ofKinds: [[\"query\"]]) { ... }",
+                "code": "gql@5.6.1[11]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Values-of-Correct-Type"
+            }
+        }
+    ]
+}

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace PoPSchema\SchemaCommons\Enums;
 
-class OperationStatusEnum
+enum OperationStatusEnum: string
 {
-    public final const SUCCESS = 'SUCCESS';
-    public final const FAILURE = 'FAILURE';
+    case SUCCESS = 'SUCCESS';
+    case FAILURE = 'FAILURE';
 }

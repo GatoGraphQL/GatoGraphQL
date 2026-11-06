@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\MarketplaceProviders;
 
-use GatoGraphQL\GatoGraphQL\Marketplace\Constants\LicenseStatus;
+use GatoGraphQL\GatoGraphQL\Marketplace\Enums\LicenseStatus;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\HTTPRequestNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\Exception\LicenseOperationNotSuccessfulException;
 use GatoGraphQL\GatoGraphQL\Marketplace\ObjectModels\CommercialExtensionActivatedLicenseObjectProperties;
@@ -193,7 +193,7 @@ abstract class AbstractMarketplaceProviderCommercialExtensionActivationService e
      * Convert the status: from the value used by the Marketplace Provider,
      * to the constants used by Gato GraphQL.
      */
-    abstract protected function convertStatus(string $status): string;
+    abstract protected function convertStatus(string $status): LicenseStatus;
 
     /**
      * @return array<string,mixed>

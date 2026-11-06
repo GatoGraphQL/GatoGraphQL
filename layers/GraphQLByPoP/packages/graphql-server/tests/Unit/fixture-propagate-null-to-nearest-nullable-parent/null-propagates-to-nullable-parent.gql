@@ -1,0 +1,12 @@
+query {
+  __type(name: "__EnumValue") {
+    name
+    fields {
+      name
+      # Non-nullable field "args" has no argument "includeDeprecated"
+      args(includeDeprecated: "yes") {
+        name
+      }
+    }
+  }
+}

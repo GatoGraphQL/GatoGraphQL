@@ -1,0 +1,31 @@
+{
+    "errors": [
+        {
+            "message": "Mandatory argument 'name' in field '__type' of type 'QueryRoot' has not been provided",
+            "locations": [
+                {
+                    "line": 8,
+                    "column": 3
+                }
+            ],
+            "extensions": {
+                "path": [
+                    "__type { ... }",
+                    "query { ... }"
+                ],
+                "type": "QueryRoot",
+                "field": "__type { ... }",
+                "code": "gql@5.4.2.1[a]",
+                "specifiedBy": "https:\/\/spec.graphql.org\/draft\/#sec-Required-Arguments"
+            }
+        }
+    ],
+    "data": {
+        "__schema": {
+            "queryType": {
+                "name": "QueryRoot"
+            }
+        },
+        "__type": null
+    }
+}

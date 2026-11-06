@@ -1,0 +1,17 @@
+{
+  "errors": [
+    {
+      "message": "Invalid string unicode escape sequence '{110000}'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 17
+        }
+      ],
+      "extensions": {
+        "code": "gqlparser@3",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Language"
+      }
+    }
+  ]
+}

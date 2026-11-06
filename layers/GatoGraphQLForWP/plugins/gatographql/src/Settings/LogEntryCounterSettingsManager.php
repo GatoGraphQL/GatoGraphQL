@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace GatoGraphQL\GatoGraphQL\Settings;
 
 use GatoGraphQL\GatoGraphQL\Facades\Settings\OptionNamespacerFacade;
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 
 use function delete_option;
 use function get_option;
@@ -21,17 +21,17 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     }
 
     /**
-     * @param string|string[] $severityOrSeverities
+     * @param LoggerSeverity|LoggerSeverity[] $severityOrSeverities
      */
-    public function getLogCount(string|array $severityOrSeverities): int
+    public function getLogCount(LoggerSeverity|array $severityOrSeverities): int
     {
         $severities = is_array($severityOrSeverities) ? $severityOrSeverities : [$severityOrSeverities];
         return array_sum($this->getLogCountBySeverity($severities));
     }
 
     /**
-     * @param string[] $severities
-     * @return array<string,int>
+     * @param LoggerSeverity[] $severities
+     * @return array<string,int> Key: severity value, Value: logCount
      */
     public function getLogCountBySeverity(array $severities): array
     {
@@ -40,20 +40,20 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
 
         $logCountsBySeverity = [];
         foreach ($severities as $severity) {
-            $logCountsBySeverity[$severity] = $logCounts[strtolower($severity)] ?? 0;
+            $logCountsBySeverity[$severity->value] = $logCounts[strtolower($severity->value)] ?? 0;
         }
         return $logCountsBySeverity;
     }
 
     /**
-     * @param string[] $severities
-     * @return string[]
+     * @param LoggerSeverity[] $severities
+     * @return LoggerSeverity[]
      */
     public function sortSeveritiesByHighestLevel(array $severities): array
     {
-        return array_values(array_intersect(
-            LoggerSeverity::ALL,
-            $severities,
+        return array_values(array_filter(
+            LoggerSeverity::cases(),
+            fn (LoggerSeverity $severity): bool => in_array($severity, $severities, true),
         ));
     }
 
@@ -62,12 +62,12 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
         return $this->getOptionNamespacer()->namespaceOption($option);
     }
 
-    public function storeLogCount(string $severity, int $logCount): void
+    public function storeLogCount(LoggerSeverity $severity, int $logCount): void
     {
-        $this->storeLogCounts([$severity => $logCount]);
+        $this->storeLogCounts([$severity->value => $logCount]);
     }
 
-    public function increaseLogCount(string $severity): void
+    public function increaseLogCount(LoggerSeverity $severity): void
     {
         $this->storeLogCount($severity, $this->getLogCount($severity) + 1);
     }
@@ -96,7 +96,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
     }
 
     /**
-     * @param string[] $severities
+     * @param LoggerSeverity[] $severities
      */
     public function removeLogCounts(array $severities): void
     {
@@ -109,7 +109,7 @@ class LogEntryCounterSettingsManager implements LogEntryCounterSettingsManagerIn
          */
         $logCounts = get_option($option, []);
         foreach ($severities as $severity) {
-            unset($logCounts[strtolower($severity)]);
+            unset($logCounts[strtolower($severity->value)]);
         }
 
         /**

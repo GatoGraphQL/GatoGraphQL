@@ -33,7 +33,7 @@ while IFS= read -r locale; do
     if [ -f "$po" ]; then
         msgmerge --quiet --update --backup=none --no-fuzzy-matching "$po" "$POT"
     else
-        msginit --no-translator --no-wrap --locale="$locale" --input="$POT" --output-file="$po"
+        msginit --no-translator --locale="$locale" --input="$POT" --output-file="$po"
     fi
     echo "    $po"
 done < "$LOCALES_FILE"

@@ -1,0 +1,24 @@
+{
+  "errors": [
+    {
+      "message": "Argument 'if' in directive 'include' cannot be null",
+      "locations": [
+        {
+          "line": 2,
+          "column": 21
+        }
+      ],
+      "extensions": {
+        "path": [
+          "null",
+          "(if: null)",
+          "@include(if: null)",
+          "...F",
+          "query { ... }"
+        ],
+        "code": "gql@5.4.2.1[d]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Required-Arguments"
+      }
+    }
+  ]
+}

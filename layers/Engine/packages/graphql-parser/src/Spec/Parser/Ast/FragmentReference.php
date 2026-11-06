@@ -6,20 +6,38 @@ namespace PoP\GraphQLParser\Spec\Parser\Ast;
 
 use PoP\GraphQLParser\Spec\Parser\Location;
 
-class FragmentReference extends AbstractAst implements FragmentBondInterface
+class FragmentReference extends AbstractAst implements FragmentBondInterface, WithDirectivesInterface
 {
+    use WithDirectivesTrait;
+
+    /**
+     * @param Directive[] $directives
+     */
     public function __construct(
         protected readonly string $name,
         Location $location,
+        array $directives = [],
     ) {
         parent::__construct($location);
+        $this->setDirectives($directives);
     }
 
     protected function doAsQueryString(): string
     {
+        $strDirectives = '';
+        if ($this->directives !== []) {
+            $strDirectives = ' ' . implode(
+                ' ',
+                array_map(
+                    fn (Directive $directive) => $directive->asQueryString(),
+                    $this->directives
+                )
+            );
+        }
         return sprintf(
-            '...%s',
-            $this->name
+            '...%s%s',
+            $this->name,
+            $strDirectives
         );
     }
 

@@ -44,7 +44,7 @@ mutation {
     user {
       id
       name
-      roles
+      roleNames
     }
     errors {
       __typename
@@ -75,7 +75,7 @@ mutation {
     user {
       id
       email
-      roles
+      roleNames
     }
     errors {
       __typename

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPWPSchema\UserMeta\TypeResolvers\InputObjectType;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\UserMeta\Module;
 use PoPCMSSchema\UserMeta\ModuleConfiguration;
@@ -25,7 +26,7 @@ class UserMetaQueryInputObjectTypeResolver extends AbstractMetaQueryInputObjectT
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getUserMetaEntries();
     }
-    protected function getAllowOrDenyBehavior(): string
+    protected function getAllowOrDenyBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

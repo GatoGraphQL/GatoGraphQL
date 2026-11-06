@@ -1,0 +1,11 @@
+{
+  post(by: { id: 1 }) {
+    id
+    title
+    # Type "Post" has no field "nonExistingField"
+    nonExistingField
+  }
+  users(pagination: { limit: 2 }) {
+    id
+  }
+}

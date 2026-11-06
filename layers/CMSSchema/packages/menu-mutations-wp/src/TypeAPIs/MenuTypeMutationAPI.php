@@ -294,17 +294,10 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             $titleAttribute = sanitize_text_field($titleAttribute);
         }
 
-        $itemType = (string) ($menuItemData[MutationInputProperties::ITEM_TYPE] ?? '');
-        $itemType = trim($itemType);
-        $itemType = in_array(
-            $itemType,
-            [
-                MenuItemType::CUSTOM,
-                MenuItemType::POST_TYPE,
-                MenuItemType::TAXONOMY,
-            ],
-            true,
-        ) ? $itemType : '';
+        $itemType = $menuItemData[MutationInputProperties::ITEM_TYPE] ?? null;
+        if (!($itemType instanceof MenuItemType)) {
+            $itemType = MenuItemType::tryFrom(trim((string) ($itemType ?? '')));
+        }
 
         $objectType = (string) ($menuItemData[MutationInputProperties::OBJECT_TYPE] ?? '');
         $objectType = trim($objectType);
@@ -318,7 +311,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
         /**
          * Backward-compatible behavior: if `itemType` is not provided, try to infer it.
          */
-        if ($itemType === '' && $objectID > 0) {
+        if ($itemType === null && $objectID > 0) {
             $postType = get_post_type($objectID);
             if (is_string($postType) && $postType !== '') {
                 $itemType = MenuItemType::POST_TYPE;

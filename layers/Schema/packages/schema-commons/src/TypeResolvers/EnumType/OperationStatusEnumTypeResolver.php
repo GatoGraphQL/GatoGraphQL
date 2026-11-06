@@ -14,20 +14,14 @@ class OperationStatusEnumTypeResolver extends AbstractEnumTypeResolver
         return 'OperationStatusEnum';
     }
 
-    /**
-     * @return string[]
-     */
-    public function getEnumValues(): array
+    public function getBackedEnumClass(): ?string
     {
-        return [
-            OperationStatusEnum::SUCCESS,
-            OperationStatusEnum::FAILURE,
-        ];
+        return OperationStatusEnum::class;
     }
 
     public function getEnumValueDescription(string $enumValue): ?string
     {
-        return match ($enumValue) {
+        return match (OperationStatusEnum::tryFrom($enumValue)) {
             OperationStatusEnum::SUCCESS => $this->__('Success', 'gatographql'),
             OperationStatusEnum::FAILURE => $this->__('Failure', 'gatographql'),
             default => parent::getEnumValueDescription($enumValue),

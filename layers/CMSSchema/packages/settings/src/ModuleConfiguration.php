@@ -6,7 +6,7 @@ namespace PoPCMSSchema\Settings;
 
 use PoP\Root\Module\AbstractModuleConfiguration;
 use PoP\Root\Module\EnvironmentValueHelpers;
-use PoPSchema\SchemaCommons\Constants\Behaviors;
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 
 class ModuleConfiguration extends AbstractModuleConfiguration
 {
@@ -26,14 +26,14 @@ class ModuleConfiguration extends AbstractModuleConfiguration
         );
     }
 
-    public function getSettingsBehavior(): string
+    public function getSettingsBehavior(): Behaviors
     {
         $envVariable = Environment::SETTINGS_BEHAVIOR;
         $defaultValue = Behaviors::ALLOW;
 
-        return $this->retrieveConfigurationValueOrUseDefault(
+        return Behaviors::tryFrom($this->retrieveConfigurationValueOrUseDefault(
             $envVariable,
-            $defaultValue,
-        );
+            $defaultValue->value,
+        )) ?? $defaultValue;
     }
 }

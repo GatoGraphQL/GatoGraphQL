@@ -407,7 +407,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                         $arrayItemField = $this->getArrayItemField($field, $arrayItemAlias);
                         $nestedFieldDataAccessProvider->duplicateFieldData($field, $arrayItemField);
                         // Place into the current object
-                        $resolvedIDFieldValues[$id][$arrayItemField] = $value;
+                        $resolvedIDFieldValues[$id]->offsetSet($arrayItemField, $value);
                         // Place it into list of fields to process
                         $arrayItemIDsProperties[$id]->fields[] = $arrayItemField;
                         $arrayItemEntriesForField[] = [$arrayItemField, $key];
@@ -914,7 +914,7 @@ abstract class AbstractApplyNestedDirectivesOnArrayOrObjectItemsFieldDirectiveRe
                 $value,
             );
         }
-        $resolvedIDFieldValues[$id][$field] = $value;
+        $resolvedIDFieldValues[$id]->offsetSet($field, $value);
     }
 
     /**

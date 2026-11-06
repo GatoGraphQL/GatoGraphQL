@@ -21,6 +21,9 @@ class HookManager implements HookManagerInterface
     }
     public function applyFilters(string $tag, mixed $value, mixed ...$args): mixed
     {
+        if ($tag === '') {
+            return $value;
+        }
         return \apply_filters($tag, $value, ...$args);
     }
     public function addAction(string $tag, callable $function_to_add, int $priority = 10, int $accepted_args = 1): void
@@ -33,6 +36,9 @@ class HookManager implements HookManagerInterface
     }
     public function doAction(string $tag, mixed ...$args): void
     {
+        if ($tag === '') {
+            return;
+        }
         \do_action($tag, ...$args);
     }
 }

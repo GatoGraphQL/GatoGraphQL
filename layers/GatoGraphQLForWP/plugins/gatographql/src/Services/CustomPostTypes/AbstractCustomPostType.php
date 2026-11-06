@@ -963,7 +963,11 @@ abstract class AbstractCustomPostType extends AbstractAutomaticallyInstantiatedS
      */
     public function registerCustomPostType(): void
     {
-        \register_post_type($this->getCustomPostType(), $this->getCustomPostTypeArgs());
+        $customPostType = strtolower($this->getCustomPostType());
+        if ($customPostType === '') {
+            return;
+        }
+        \register_post_type($customPostType, $this->getCustomPostTypeArgs());
     }
 
     /**

@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\ComponentProcessors;
 
 use PoP\ComponentModel\Component\Component;
-use PoP\ComponentModel\Constants\DataSources;
 use PoP\ComponentModel\Constants\HookNames;
 use PoP\ComponentModel\Constants\PaginationParams;
+use PoP\ComponentModel\Enums\DataSources;
 use PoP\ComponentModel\QueryInputOutputHandlers\ActionExecutionQueryInputOutputHandler;
 use PoP\ComponentModel\QueryInputOutputHandlers\QueryInputOutputHandlerInterface;
 use PoP\ComponentModel\RelationalTypeDataLoaders\ObjectType\ObjectTypeQueryableDataLoaderInterface;
@@ -113,6 +113,7 @@ trait QueryDataComponentProcessorTrait
     public function getObjectIDOrIDs(Component $component, array &$props, array &$data_properties): string|int|array|null
     {
         // Prepare the Query to get data from the DB
+        /** @var DataSources|null */
         $datasource = $data_properties[DataloadingConstants::DATASOURCE] ?? null;
         if ($datasource === DataSources::MUTABLEONREQUEST && !($data_properties[DataloadingConstants::IGNOREREQUESTPARAMS] ?? null)) {
             // Merge with $_POST/$_GET, so that params passed through the URL can be used for the query (eg: ?limit=5)

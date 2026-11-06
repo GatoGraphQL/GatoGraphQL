@@ -4,36 +4,31 @@ declare(strict_types=1);
 
 namespace GatoGraphQL\GatoGraphQL\Services\MenuPages;
 
-use GatoGraphQL\GatoGraphQL\PluginApp;
+use GatoGraphQL\GatoGraphQL\Assets\EnqueuePluginAssetsTrait;
 
 /**
  * Menu page that uses tabpanels to organize its content
  */
 trait UseTabpanelMenuPageTrait
 {
+    use EnqueuePluginAssetsTrait;
+
     /**
      * Enqueue the required assets
      */
     protected function enqueueTabpanelAssets(): void
     {
-        $mainPlugin = PluginApp::getMainPlugin();
-        $mainPluginURL = $mainPlugin->getPluginURL();
-        $mainPluginVersion = $mainPlugin->getPluginVersion();
-
         /**
          * Add tabs to the documentation
          */
-        \wp_enqueue_style(
+        $this->enqueueMainPluginAssetStyle(
             'gatographql-tabpanel',
-            $mainPluginURL . 'assets/css/tabpanel.css',
-            array(),
-            $mainPluginVersion
+            'assets/css/tabpanel.css'
         );
-        \wp_enqueue_script(
+        $this->enqueueMainPluginAssetScript(
             'gatographql-tabpanel',
-            $mainPluginURL . 'assets/js/tabpanel.js',
-            array('jquery'),
-            $mainPluginVersion
+            'assets/js/tabpanel.js',
+            array('jquery')
         );
     }
 }

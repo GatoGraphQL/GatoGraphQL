@@ -1,0 +1,32 @@
+# Fragment `CompletePostFields` is referenced twice, once from the
+# query (where it applies) and once from `CompletePageFields` (where
+# it never applies, as `Page` is not a `Post`). Not applying it in the
+# 2nd reference must not prevent it from being applied in the 1st one.
+{
+  posts(pagination: { limit: 1 }) {
+    __typename
+    ...CompletePostFields
+  }
+  pages(pagination: { limit: 1 }) {
+    __typename
+    ...CompletePageFields
+  }
+}
+
+fragment CompletePostFields on Post {
+  ...PostFields
+}
+
+fragment CompletePageFields on Page {
+  ...CompletePostFields
+  ...PageFields
+}
+
+fragment PostFields on Post {
+  title
+  slug
+}
+
+fragment PageFields on Page {
+  status
+}

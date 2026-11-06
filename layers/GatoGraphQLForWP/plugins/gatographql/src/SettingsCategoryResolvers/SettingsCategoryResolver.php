@@ -55,13 +55,13 @@ class SettingsCategoryResolver extends AbstractSettingsCategoryResolver
     public function getName(string $settingsCategory): string
     {
         return match ($settingsCategory) {
-            self::ENDPOINT_CONFIGURATION => $this->__('Endpoint Configuration', 'gatographql'),
-            self::SCHEMA_CONFIGURATION => $this->__('Schema Configuration', 'gatographql'),
-            self::SCHEMA_TYPE_CONFIGURATION => $this->__('Schema Elements Configuration', 'gatographql'),
-            self::SERVER_CONFIGURATION => $this->__('Server Configuration', 'gatographql'),
-            self::PLUGIN_CONFIGURATION => $this->__('Plugin Configuration', 'gatographql'),
-            self::SERVICE_CONFIGURATION => $this->__('Service Configuration', 'gatographql'),
-            self::PLUGIN_INTEGRATION_CONFIGURATION => $this->__('Plugin Integration Configuration', 'gatographql'),
+            self::ENDPOINT_CONFIGURATION => $this->__('Endpoints', 'gatographql'),
+            self::SCHEMA_CONFIGURATION => $this->__('Schema', 'gatographql'),
+            self::SCHEMA_TYPE_CONFIGURATION => $this->__('Schema Elements', 'gatographql'),
+            self::SERVER_CONFIGURATION => $this->__('Server', 'gatographql'),
+            self::PLUGIN_CONFIGURATION => $this->__('General', 'gatographql'),
+            self::SERVICE_CONFIGURATION => $this->__('Services', 'gatographql'),
+            self::PLUGIN_INTEGRATION_CONFIGURATION => $this->__('Integrations', 'gatographql'),
             self::EXTERNAL_TOOLS => $this->__('External Tools', 'gatographql'),
             self::API_KEYS => $this->__('API Keys', 'gatographql'),
             self::PLUGIN_MANAGEMENT => $this->__('Plugin Management', 'gatographql'),

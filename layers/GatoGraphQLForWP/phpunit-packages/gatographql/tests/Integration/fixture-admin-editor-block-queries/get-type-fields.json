@@ -4737,6 +4737,9 @@
                     "namespacedName": "__Schema",
                     "fields": [
                         {
+                            "name": "description"
+                        },
+                        {
                             "name": "directives"
                         },
                         {
@@ -4860,7 +4863,7 @@
                     "namespacedName": "CustomPostEnumString",
                     "fields": null,
                     "kind": "SCALAR",
-                    "description": "Custom post types (available for querying via the API). Possible values: `dummy-cpt`, `dummy-cpt-four`, `dummy-cpt-three`, `dummy-cpt-two`, `page`, `post`, `wp_block`."
+                    "description": "Custom post types (available for querying via the API). Possible values: `bricks_post`, `dummy-cpt`, `dummy-cpt-two`, `elementor_post`, `page`, `post`, `wp_block`."
                 },
                 {
                     "name": "DangerouslyNonSpecificScalar",
@@ -6343,13 +6346,6 @@
                     "description": null
                 },
                 {
-                    "name": "DirectiveLocation",
-                    "namespacedName": "DirectiveLocation",
-                    "fields": null,
-                    "kind": "ENUM",
-                    "description": null
-                },
-                {
                     "name": "FilterCustomPostStatusEnum",
                     "namespacedName": "FilterCustomPostStatusEnum",
                     "fields": null,
@@ -6441,15 +6437,22 @@
                     "description": null
                 },
                 {
-                    "name": "TypeKind",
-                    "namespacedName": "TypeKind",
+                    "name": "UserOrderByEnum",
+                    "namespacedName": "UserOrderByEnum",
                     "fields": null,
                     "kind": "ENUM",
                     "description": null
                 },
                 {
-                    "name": "UserOrderByEnum",
-                    "namespacedName": "UserOrderByEnum",
+                    "name": "__DirectiveLocation",
+                    "namespacedName": "__DirectiveLocation",
+                    "fields": null,
+                    "kind": "ENUM",
+                    "description": null
+                },
+                {
+                    "name": "__TypeKind",
+                    "namespacedName": "__TypeKind",
                     "fields": null,
                     "kind": "ENUM",
                     "description": null

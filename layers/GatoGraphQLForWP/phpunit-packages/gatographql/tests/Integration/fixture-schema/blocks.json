@@ -743,9 +743,11 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         },
-                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
+                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
                         "innerBlocks": null
                     },
                     {
@@ -761,11 +763,15 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
-                        "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                        "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"autoplay\":false,\"caption\":\"Test video of a road in a city\",\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"playsInline\":false} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                         "innerBlocks": null
                     },
                     {
@@ -898,8 +904,10 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -1859,7 +1867,9 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         }
                     },
                     {
@@ -1875,9 +1885,13 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         }
                     },
                     {
@@ -2002,7 +2016,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        }
                     },
                     {
                         "name": "core\/block",
@@ -2974,7 +2990,9 @@
                         "name": "core\/audio",
                         "attributes": {
                             "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                            "caption": "\"Broke for free\" song"
+                            "caption": "\"Broke for free\" song",
+                            "autoplay": false,
+                            "loop": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -2992,9 +3010,13 @@
                                 }
                             ],
                             "caption": "Test video of a road in a city",
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
-                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                            "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -3129,7 +3151,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -3763,8 +3787,10 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -3863,7 +3889,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        }
                     },
                     {
                         "name": "core\/code",
@@ -3961,7 +3989,9 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -4360,9 +4390,11 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         },
-                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><\/figure>\n<!-- \/wp:audio -->",
+                        "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><\/figure>\n<!-- \/wp:audio -->",
                         "innerBlocks": null
                     },
                     {
@@ -4377,12 +4409,16 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
-                        "contentSource": "<!-- wp:video {\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\",\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\"><\/video><\/figure>\n<!-- \/wp:video -->",
+                        "contentSource": "<!-- wp:video {\"autoplay\":false,\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\",\"playsInline\":false,\"tracks\":[]} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4\"><\/video><\/figure>\n<!-- \/wp:video -->",
                         "innerBlocks": null
                     },
                     {
@@ -4396,14 +4432,18 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cstrong\\u003eThis is a HTML block.\\u003c\/strong\\u003e\"} -->\n<strong>This is a HTML block.<\/strong>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
-                        "contentSource": "<!-- wp:html -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        },
+                        "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eNode 1\\u003c\/p\\u003e\\u003cp\\u003eNode 2\\u003c\/p\\u003e\"} -->\n<p>Node 1<\/p><p>Node 2<\/p>\n<!-- \/wp:html -->",
                         "innerBlocks": null
                     },
                     {
@@ -4436,7 +4476,9 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         }
                     },
                     {
@@ -4449,10 +4491,14 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         }
                     },
                     {
@@ -4464,11 +4510,15 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        }
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {}
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        }
                     },
                     {
                         "name": "core\/heading",
@@ -4498,7 +4548,9 @@
                     {
                         "name": "core\/audio",
                         "attributes": {
-                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3"
+                            "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
+                            "autoplay": false,
+                            "loop": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -4515,10 +4567,14 @@
                     {
                         "name": "core\/video",
                         "attributes": {
-                            "controls": "",
+                            "controls": true,
                             "preload": "metadata",
                             "src": "https:\/\/archive.org\/download\/SlowMotionFlame\/slomoflame_512kb.mp4",
-                            "tracks": []
+                            "tracks": [],
+                            "autoplay": false,
+                            "loop": false,
+                            "muted": false,
+                            "playsInline": false
                         },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
@@ -4534,13 +4590,17 @@
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<strong>This is a HTML block.<\/strong>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
                     {
                         "name": "core\/html",
-                        "attributes": {},
+                        "attributes": {
+                            "content": "<p>Node 1<\/p><p>Node 2<\/p>"
+                        },
                         "innerBlockPositions": null,
                         "parentBlockPosition": null
                     },
@@ -9846,8 +9906,10 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
-                    "contentSource": "<!-- wp:html -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    },
+                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cdiv\\u003e\\n\\t\\u003ch4\\u003e\\n\\t\\tDid you know?\\n\\t\\u003c\/h4\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tWe are not rich by what we possess but by what we can do without.\\n\\t\\u003c\/p\\u003e\\n\\t\\u003cp\\u003e\\n\\t\\tPatience is the strength of the weak, impatience is the weakness of the strong.\\n\\t\\u003c\/p\\u003e\\n\\u003c\/div\\u003e\"} -->\n<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -9946,7 +10008,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {}
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    }
                 },
                 {
                     "name": "core\/code",
@@ -10044,7 +10108,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
+                    "attributes": {
+                        "content": "<div>\n\t<h4>\n\t\tDid you know?\n\t<\/h4>\n\t<p>\n\t\tWe are not rich by what we possess but by what we can do without.\n\t<\/p>\n\t<p>\n\t\tPatience is the strength of the weak, impatience is the weakness of the strong.\n\t<\/p>\n<\/div>"
+                    },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },
@@ -10584,9 +10650,11 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     },
-                    "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\"} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
+                    "contentSource": "<!-- wp:audio {\"src\":\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\",\"caption\":\"\\u0022Broke for free\\u0022 song\",\"autoplay\":false,\"loop\":false} -->\n<figure class=\"wp-block-audio\"><audio controls src=\"https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3\"><\/audio><figcaption class=\"wp-element-caption\">\"Broke for free\" song<\/figcaption><\/figure>\n<!-- \/wp:audio -->",
                     "innerBlocks": null
                 },
                 {
@@ -10602,11 +10670,15 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     },
-                    "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"caption\":\"Test video of a road in a city\",\"controls\":\"\",\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
+                    "contentSource": "<!-- wp:video {\"id\":132,\"tracks\":[{\"src\":\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\",\"kind\":\"subtitles\",\"srcLang\":\"en\",\"label\":\"English subtitles\"}],\"autoplay\":false,\"caption\":\"Test video of a road in a city\",\"controls\":true,\"loop\":false,\"muted\":false,\"preload\":\"metadata\",\"src\":\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\",\"playsInline\":false} -->\n<figure class=\"wp-block-video\"><video controls src=\"https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4\"><track src=\"https:\/\/download.samplelib.com\/vtt\/road-en.vtt\" kind=\"subtitles\" srclang=\"en\" label=\"English subtitles\"\/><\/video><figcaption class=\"wp-element-caption\">Test video of a road in a city<\/figcaption><\/figure>\n<!-- \/wp:video -->",
                     "innerBlocks": null
                 },
                 {
@@ -10739,8 +10811,10 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
-                    "contentSource": "<!-- wp:html -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
+                    "contentSource": "<!-- wp:html {\"content\":\"\\u003cp\\u003eCustom HTML here, maybe need to process, maybe not\\u003c\/p\\u003e\"} -->\n<p>Custom HTML here, maybe need to process, maybe not<\/p>\n<!-- \/wp:html -->",
                     "innerBlocks": null
                 },
                 {
@@ -11700,7 +11774,9 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     }
                 },
                 {
@@ -11716,9 +11792,13 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     }
                 },
                 {
@@ -11843,7 +11923,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {}
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    }
                 },
                 {
                     "name": "core\/block",
@@ -12815,7 +12897,9 @@
                     "name": "core\/audio",
                     "attributes": {
                         "src": "https:\/\/freemusicarchive.org\/file\/music\/WFMU\/Broke_For_Free\/Directionless_EP\/Broke_For_Free_-_01_-_Night_Owl.mp3",
-                        "caption": "\"Broke for free\" song"
+                        "caption": "\"Broke for free\" song",
+                        "autoplay": false,
+                        "loop": false
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12833,9 +12917,13 @@
                             }
                         ],
                         "caption": "Test video of a road in a city",
-                        "controls": "",
+                        "controls": true,
                         "preload": "metadata",
-                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4"
+                        "src": "https:\/\/download.samplelib.com\/mp4\/sample-5s.mp4",
+                        "autoplay": false,
+                        "loop": false,
+                        "muted": false,
+                        "playsInline": false
                     },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
@@ -12970,7 +13058,9 @@
                 },
                 {
                     "name": "core\/html",
-                    "attributes": {},
+                    "attributes": {
+                        "content": "<p>Custom HTML here, maybe need to process, maybe not<\/p>"
+                    },
                     "innerBlockPositions": null,
                     "parentBlockPosition": null
                 },

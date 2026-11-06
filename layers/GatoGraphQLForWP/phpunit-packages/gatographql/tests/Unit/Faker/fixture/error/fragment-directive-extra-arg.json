@@ -1,0 +1,23 @@
+{
+  "errors": [
+    {
+      "message": "On directive 'include', there is no argument with name 'foo'",
+      "locations": [
+        {
+          "line": 2,
+          "column": 27
+        }
+      ],
+      "extensions": {
+        "path": [
+          "(foo: 1)",
+          "@include(if: true, foo: 1)",
+          "...F",
+          "query { ... }"
+        ],
+        "code": "gql@5.4.1[b]",
+        "specifiedBy": "https://spec.graphql.org/draft/#sec-Argument-Names"
+      }
+    }
+  ]
+}

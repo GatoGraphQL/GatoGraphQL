@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PoPCMSSchema\CommentMeta\TypeAPIs;
 
+use PoPSchema\SchemaCommons\Enums\Behaviors;
 use PoP\Root\App;
 use PoPCMSSchema\CommentMeta\Module;
 use PoPCMSSchema\CommentMeta\ModuleConfiguration;
@@ -38,7 +39,7 @@ abstract class AbstractCommentMetaTypeAPI extends AbstractMetaTypeAPI implements
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();
         return $moduleConfiguration->getCommentMetaEntries();
     }
-    public function getAllowOrDenyMetaBehavior(): string
+    public function getAllowOrDenyMetaBehavior(): Behaviors
     {
         /** @var ModuleConfiguration */
         $moduleConfiguration = App::getModule(Module::class)->getConfiguration();

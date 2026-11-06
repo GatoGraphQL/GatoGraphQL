@@ -1,0 +1,11 @@
+query {
+  __schema {
+    queryType {
+      name
+    }
+  }
+  # Argument "name" is mandatory
+  __type {
+    name
+  }
+}

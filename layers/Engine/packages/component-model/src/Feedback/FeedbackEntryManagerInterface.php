@@ -17,8 +17,8 @@ interface FeedbackEntryManagerInterface
      * into the output.
      *
      * @param array<string,mixed> $data
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
      * @return array<string,mixed>
      */
     public function combineAndAddFeedbackEntries(
@@ -43,7 +43,7 @@ interface FeedbackEntryManagerInterface
 
     /**
      * @param array<string|int,object> $idObjects
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $objectFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $objectFeedbackEntries
      */
     public function transferObjectFeedback(
         array $idObjects,
@@ -52,7 +52,7 @@ interface FeedbackEntryManagerInterface
     ): void;
 
     /**
-     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<string,mixed>>>>> $schemaFeedbackEntries
+     * @param array<string,array<string,array<string,SplObjectStorage<FieldInterface,array<mixed>>>>> $schemaFeedbackEntries
      */
     public function transferSchemaFeedback(
         SchemaFeedbackStore $schemaFeedbackStore,

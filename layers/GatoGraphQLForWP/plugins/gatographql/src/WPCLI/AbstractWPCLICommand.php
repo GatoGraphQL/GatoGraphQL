@@ -10,7 +10,7 @@ use GatoGraphQL\GatoGraphQL\ModuleConfiguration;
 use GatoGraphQL\GatoGraphQL\Services\MenuPages\LogsMenuPage;
 use GatoGraphQL\GatoGraphQL\Settings\LogEntryCounterSettingsManagerInterface;
 use GatoGraphQL\GatoGraphQL\StaticHelpers\WPCLIHelpers;
-use PoPSchema\Logger\Constants\LoggerSeverity;
+use PoPSchema\Logger\Enums\LoggerSeverity;
 use PoP\ComponentModel\App;
 use PoP\Root\Facades\Instances\InstanceManagerFacade;
 use WP_CLI;
@@ -182,7 +182,7 @@ abstract class AbstractWPCLICommand
 
     protected function storeLogsBySeverity(): void
     {
-        $this->logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
+        $this->logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::cases());
     }
 
     /**
@@ -193,10 +193,10 @@ abstract class AbstractWPCLICommand
      */
     protected function computeLogsBySeverityDelta(): array
     {
-        $logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::ALL);
+        $logCountBySeverity = $this->getLogEntryCounterSettingsManager()->getLogCountBySeverity(LoggerSeverity::cases());
         $logCountBySeverityDelta = [];
-        foreach (LoggerSeverity::ALL as $severity) {
-            $logCountBySeverityDelta[$severity] = $logCountBySeverity[$severity] - ($this->logCountBySeverity[$severity] ?? 0);
+        foreach (LoggerSeverity::cases() as $severity) {
+            $logCountBySeverityDelta[$severity->value] = $logCountBySeverity[$severity->value] - ($this->logCountBySeverity[$severity->value] ?? 0);
         }
         return $logCountBySeverityDelta;
     }
@@ -212,14 +212,14 @@ abstract class AbstractWPCLICommand
         }
 
         $highestLevelSeverity = $this->getLogEntryCounterSettingsManager()->sortSeveritiesByHighestLevel($severitiesWithLogCountDelta)[0];
-        $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity];
+        $logCountDelta = (string) $logCountBySeverityDelta[$highestLevelSeverity->value];
 
         $message = sprintf(
             $logCountDelta > 1
                 ? __('There are %d new log entries with severity %s', 'gatographql')
                 : __('There is %d new log entry with severity %s', 'gatographql'),
             $logCountDelta,
-            $highestLevelSeverity
+            $highestLevelSeverity->value
         );
 
         if ($highestLevelSeverity === LoggerSeverity::ERROR) {
@@ -254,7 +254,7 @@ abstract class AbstractWPCLICommand
      * Use the severities enabled for the LogCountBadge.
      *
      * @param array<string,int> $logCountBySeverityDelta
-     * @return string[]
+     * @return LoggerSeverity[]
      */
     protected function getSeveritiesWithLogCountDelta(array $logCountBySeverityDelta, bool $onlyIncludeLogNotificationsSeverities): array
     {
@@ -272,14 +272,17 @@ abstract class AbstractWPCLICommand
 
             $logCountBySeverityDelta = array_filter(
                 $logCountBySeverityDelta,
-                fn (string $severity): bool => in_array($severity, $severities),
+                fn (string $severity): bool => in_array(LoggerSeverity::tryFrom($severity), $severities, true),
                 ARRAY_FILTER_USE_KEY
             );
         }
 
-        return array_keys(array_filter(
-            $logCountBySeverityDelta,
-            fn (int $logCountDelta): bool => $logCountDelta > 0
-        ));
+        return array_map(
+            LoggerSeverity::from(...),
+            array_keys(array_filter(
+                $logCountBySeverityDelta,
+                fn (int $logCountDelta): bool => $logCountDelta > 0
+            ))
+        );
     }
 }

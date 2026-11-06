@@ -22,21 +22,15 @@ trait CommonModuleResolverTrait
         ?array $applicableItems = null
     ): string {
         $applicableItems ??= $this->getDefaultValueApplicableItems($blockTitle);
-        return $this->getSettingsInfoContent(
+        return $this->getCollapsible(
             sprintf(
-                \__('%s %s', 'gatographql'),
-                \__('This configuration value is the default one for the schema configuration.', 'gatographql'),
-                $this->getCollapsible(
-                    sprintf(
-                        '<br/>%s<ul><li>%s</li></ul>',
-                        \__('It will be used whenever:', 'gatographql'),
-                        implode(
-                            '</li><li>',
-                            $applicableItems
-                        )
-                    ),
+                '%s<ul><li>%s</li></ul>',
+                \__('This value is the default, which a Schema Configuration can override. The endpoint uses it when:', 'gatographql'),
+                implode(
+                    '</li><li>',
+                    $applicableItems
                 )
-            )
+            ),
         );
     }
 
@@ -46,13 +40,13 @@ trait CommonModuleResolverTrait
     protected function getDefaultValueApplicableItems(string $blockTitle): array
     {
         return [
-            \__('The endpoint does not have a Schema Configuration assigned to it', 'gatographql'),
-            \__('The endpoint has Schema Configuration <code>"None"</code> assigned to it', 'gatographql'),
+            \__('It has no Schema Configuration', 'gatographql'),
+            \__('Its Schema Configuration is <code>"None"</code>', 'gatographql'),
             sprintf(
-                \__('Block <code>%s</code> has not been added to the selected Schema Configuration', 'gatographql'),
+                \__('Its Schema Configuration does not have block <code>%s</code>', 'gatographql'),
                 $blockTitle
             ),
-            \__('The block in the Schema Configuration has value <code>"Default"</code>', 'gatographql')
+            \__('That block in its Schema Configuration has value <code>"Default"</code>', 'gatographql')
         ];
     }
 

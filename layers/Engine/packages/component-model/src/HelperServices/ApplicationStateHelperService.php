@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace PoP\ComponentModel\HelperServices;
 
 use PoP\Root\App;
-use PoP\ComponentModel\Constants\Outputs;
+use PoP\ComponentModel\Enums\Outputs;
 
 class ApplicationStateHelperService implements ApplicationStateHelperServiceInterface
 {

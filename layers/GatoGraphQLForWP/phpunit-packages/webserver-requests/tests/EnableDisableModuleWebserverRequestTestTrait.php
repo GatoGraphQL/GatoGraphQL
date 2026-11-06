@@ -7,8 +7,8 @@ namespace PHPUnitForGatoGraphQL\WebserverRequests;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\ExecuteRESTWebserverRequestTestCaseTrait;
-use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\ParamValues;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Constants\Params;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Enums\ParamValues;
 use PHPUnitForGatoGraphQL\GatoGraphQL\Constants\RESTAPIEndpoints;
 
 trait EnableDisableModuleWebserverRequestTestTrait
@@ -26,7 +26,7 @@ trait EnableDisableModuleWebserverRequestTestTrait
             $this->getModuleID($dataName),
         );
         $options = $this->getRESTEndpointRequestOptions();
-        $options[RequestOptions::QUERY][Params::STATE] = $moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED;
+        $options[RequestOptions::QUERY][Params::STATE] = ($moduleEnabled ? ParamValues::ENABLED : ParamValues::DISABLED)->value;
         $response = $client->post(
             $endpointURL,
             $options,
