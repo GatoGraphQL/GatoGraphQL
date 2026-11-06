@@ -44,15 +44,21 @@
 
 <div class="gato-card gato-about__current-release">
 <div class="gato-about__current-release-version">
-<span class="gato-about__current-release-number">20.0</span>
+<span class="gato-about__current-release-number">20.1</span>
 <span class="gato-badge gato-badge--success">{current}</span>
 </div>
-<a class="button button-primary" href="../../release-notes/20.0/en.md">{read-release-notes-button}</a>
+<a class="button button-primary" href="../../release-notes/20.1/en.md">{read-release-notes-button}</a>
 </div>
 
 <p class="gato-about__intro">{release-notes-intro}</p>
 
 <div class="gato-card gato-about__versions">
+<div class="gato-about__version-group">
+<span class="gato-about__version-group-label">20.x</span>
+<div class="gato-about__version-list">
+<a href="../../release-notes/20.0/en.md">20.0</a>
+</div>
+</div>
 <div class="gato-about__version-group">
 <span class="gato-about__version-group-label">19.x</span>
 <div class="gato-about__version-list">
