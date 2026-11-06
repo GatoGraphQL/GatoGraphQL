@@ -8,7 +8,7 @@ For security reasons, which options can be queried must be explicitly configured
 
 The following `Root` fields receive argument `name` and retrieve the corresponding option from the `wp_options` table:
 
-- `optionValue: AnyBuiltInScalar`
+- `optionValue: String`
 - `optionValues: [AnyBuiltInScalar]`
 - `optionObjectValue: JSONObject`
 
