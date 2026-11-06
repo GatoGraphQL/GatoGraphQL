@@ -12,7 +12,7 @@ Domain scalar, such as `https://mysite.com` or `http://www.mysite.org`
 
 ### `IP`
 
-IP scalar, including both IPv4 (such as `192.168.0.1`) and IPv6 (such as `2001:0db8:85a3:08d3:1319:8a2e:0370:7334`
+IP scalar, including both IPv4 (such as `192.168.0.1`) and IPv6 (such as `2001:0db8:85a3:08d3:1319:8a2e:0370:7334`)
 
 ### `IPv4`
 
@@ -56,8 +56,10 @@ UUID (universally unique identifier) scalar, such as `25770975-0c3d-4ff0-ba27-a0
 
 ## Introspection
 
-When installing the Gato GraphQL plugin, these custom scalars will be available to be used in your application.
+The Gato GraphQL plugin makes these custom scalars available to your application, and you can use any of them as the type of a variable in your query.
 
-However, please notice that currently they are not referenced anywhere in the WordPress GraphQL schema, and as such they do not appear on the clients (GraphiQL and Interactive Schema). This is because a custom scalar type must be referenced to appear on the GraphQL schema, as [defined by the spec for built-in scalars](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars):
+However, a custom scalar type must be referenced to appear on the GraphQL schema, as [the spec defines for built-in scalars](https://spec.graphql.org/October2021/#sec-Scalars.Built-in-Scalars):
 
 > When returning the set of types from the `__Schema` introspection type, all referenced built-in scalars must be included. If a built-in scalar type is not referenced anywhere in a schema (there is no field, argument, or input field of that type) then it must not be included.
+
+So the types that no field references (such as `UUID` and `MACAddress`) don't appear on the clients (GraphiQL and Interactive Schema).

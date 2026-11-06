@@ -8,13 +8,13 @@ In other words, considering a hypothetical scalar type `AnyScalar` that handles 
 - `[AnyScalar]`
 - `[[AnyScalar]]`
 
-_Please notice: While this feature is readily available in Gato GraphQL, it is not used by the WordPress schema. Several Gato GraphQL extensions do make use of it. For instance, check the fields added by extension **PHP Functions via Schema** (such as `_echo`) to see examples of it._
+The WordPress schema uses this type for the meta fields (`metaValue` and `metaValues`), and several Gato GraphQL extensions use it too. For instance, the fields that the **PHP Functions via Schema** extension adds (such as `_echo`) return it.
 
 ## Description
 
 Fields cannot be defined to return all potential combinations of types and their modifiers: a single value, a list of values, or a list of list of values.
 
-For instance, field `optionValue` returns type `AnyBuiltInScalar` (i.e. it can handle any of [GraphQL's built-in scalar types](https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars)), but it can only retrieve a single value, and not a list of values. If we need to retrieve a list of values, then we need to use field `optionValues` instead, which returns `[AnyBuiltInScalar]`.
+For instance, field `optionValue` returns type `String`, so it can only retrieve a single value. To retrieve a list of values, we need field `optionValues` instead, which returns `[AnyBuiltInScalar]` (i.e. a list holding any of [GraphQL's built-in scalar types](https://spec.graphql.org/draft/#sec-Scalars.Built-in-Scalars)).
 
 However, being able to return either a single value, a list of values, or a list of lists of values, always from the same field, is useful for the "function" fields (as those provided by the **PHP Functions via Schema** extension), as these provide functionalities which are (in many cases) independent of the type or cardinality of the value.
 
