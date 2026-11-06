@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 20.1.0 - DATE
 
+### Improvements
+
+- Send the `GatoPlugins` user agent on the license and update requests to the Gato Store (#3463)
+
 ## 20.0.0 - 06/11/2026
 
 ### Breaking changes

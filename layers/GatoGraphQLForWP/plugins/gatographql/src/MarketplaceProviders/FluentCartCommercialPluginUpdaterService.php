@@ -10,6 +10,8 @@ use GatoGraphQL\GatoGraphQL\MarketplaceProviders\AbstractMarketplaceProviderComm
 use stdClass;
 use WP_Error;
 
+use function add_filter;
+
 /**
  * Based on code from FluentCart's `PluginUpdater` class
  *
@@ -51,14 +53,28 @@ class FluentCartCommercialPluginUpdaterService extends AbstractMarketplaceProvid
     use FluentCartMarketplaceProviderServiceTrait;
 
     /**
+     * @param array<string,string> $licenseKeys Key: Extension Slug, Value: License Key
+     */
+    public function setupMarketplacePluginUpdaterForExtensions(
+        array $licenseKeys,
+    ): void {
+        parent::setupMarketplacePluginUpdaterForExtensions($licenseKeys);
+
+        if ($licenseKeys === []) {
+            return;
+        }
+
+        add_filter('http_request_args', $this->addUserAgentToFluentCartRequest(...), 10, 2);
+    }
+
+    /**
      * Fetch the update info from the remote server running the FluentCart plugin.
      */
     protected function getRemotePluginData(CommercialPluginUpdatedPluginData $pluginData): array|WP_Error
     {
-        $url = 'https://store.gatoplugins.com';
         $fullUrl = add_query_arg([
             'fluent-cart' => 'get_license_version',
-        ], $url);
+        ], $this->getFluentCartAPIBaseURL());
 
         $payload = [
             'item_id'          => $pluginData->marketplaceProductIDs[MarketplaceVersion::V2_FLUENTCART] ?? null,
