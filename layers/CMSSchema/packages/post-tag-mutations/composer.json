@@ -14,10 +14,10 @@
     ],
     "require": {
         "php": "^8.1",
-        "pop-cms-schema/custompost-tag-mutations": "^20.0.1",
-        "pop-cms-schema/post-mutations": "^20.0.1",
-        "pop-cms-schema/post-tags": "^20.0.1",
-        "pop-cms-schema/tag-mutations": "^20.0.1"
+        "pop-cms-schema/custompost-tag-mutations": "^20.1",
+        "pop-cms-schema/post-mutations": "^20.1",
+        "pop-cms-schema/post-tags": "^20.1",
+        "pop-cms-schema/tag-mutations": "^20.1"
     },
     "require-dev": {
         "phpstan/phpstan": "^2.1",
@@ -43,7 +43,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "20.0-dev"
+            "dev-master": "20.1-dev"
         }
     },
     "config": {
