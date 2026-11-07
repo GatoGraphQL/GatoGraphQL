@@ -64,7 +64,7 @@ class SortInputObjectTypeResolver extends AbstractQueryableInputObjectTypeResolv
 
     public function getTypeDescription(): ?string
     {
-        return $this->__('Input to sort custom posts', 'gatographql');
+        return $this->__('Input to sort the results', 'gatographql');
     }
 
     /**
