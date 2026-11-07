@@ -5307,7 +5307,7 @@
                     "namespacedName": "CommentSortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "CreateMediaItemFromContentInput",
@@ -5391,7 +5391,7 @@
                     "namespacedName": "CustomPostSortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "CustomPostTagsFilterInput",
@@ -5510,7 +5510,7 @@
                     "namespacedName": "MediaItemSortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "MenuByInput",
@@ -5538,7 +5538,7 @@
                     "namespacedName": "MenuSortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "MetaKeysFilterInput",
@@ -5713,7 +5713,7 @@
                     "namespacedName": "RootCreateCustomPostInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to update a custom post"
+                    "description": "Input to create a custom post"
                 },
                 {
                     "name": "RootCreateGenericCategoryInput",
@@ -5748,7 +5748,7 @@
                     "namespacedName": "RootCreatePageInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to update a custom post"
+                    "description": "Input to create a custom post"
                 },
                 {
                     "name": "RootCreatePostCategoryInput",
@@ -5762,7 +5762,7 @@
                     "namespacedName": "RootCreatePostInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to update a custom post"
+                    "description": "Input to create a custom post"
                 },
                 {
                     "name": "RootCreatePostTagInput",
@@ -6238,7 +6238,7 @@
                     "namespacedName": "TaxonomySortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "TaxonomyTaxonomiesFilterInput",
@@ -6287,7 +6287,7 @@
                     "namespacedName": "UserSortInput",
                     "fields": null,
                     "kind": "INPUT_OBJECT",
-                    "description": "Input to sort custom posts"
+                    "description": "Input to sort the results"
                 },
                 {
                     "name": "UsersFilterInput",

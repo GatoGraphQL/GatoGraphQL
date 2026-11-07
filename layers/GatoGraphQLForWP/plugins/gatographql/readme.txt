@@ -249,6 +249,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 
 = 20.1.0 =
 * Improved - Send the <code>GatoPlugins</code> user agent on the license and update requests to the Gato Store (#3463)
+* Improved - Fix the descriptions of the sort input and the input to create a custom post (#3464)
 
 = 20.0.0 =
 * Breaking changes - Bumped the minimum required WordPress version to 6.5 (#3405)

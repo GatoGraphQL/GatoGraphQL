@@ -939,7 +939,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -1924,7 +1924,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -2636,7 +2636,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -2750,7 +2750,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -2842,7 +2842,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -2934,7 +2934,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -3709,7 +3709,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -3782,7 +3782,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -4075,7 +4075,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -7622,7 +7622,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -7657,7 +7657,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -7940,7 +7940,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -7975,7 +7975,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -8046,7 +8046,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -8293,7 +8293,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -14272,7 +14272,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -14364,7 +14364,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -15517,7 +15517,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -15641,7 +15641,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -15733,7 +15733,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -16541,7 +16541,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -16619,7 +16619,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -16855,7 +16855,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -16917,7 +16917,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -17247,7 +17247,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -17703,7 +17703,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -17970,7 +17970,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -18125,7 +18125,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -18273,7 +18273,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -18447,7 +18447,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -18695,7 +18695,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MediaItemSortInput",
@@ -18817,7 +18817,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MenuSortInput",
@@ -18965,7 +18965,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -19139,7 +19139,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -19261,7 +19261,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MediaItemSortInput",
@@ -19409,7 +19409,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -19557,7 +19557,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -19948,7 +19948,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -20077,7 +20077,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -20232,7 +20232,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -20417,7 +20417,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -20490,7 +20490,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -20552,7 +20552,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -20835,7 +20835,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -20908,7 +20908,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -21095,7 +21095,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "UserSortInput",
@@ -22168,7 +22168,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -22323,7 +22323,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -22471,7 +22471,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -22617,7 +22617,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -22652,7 +22652,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -22935,7 +22935,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -22970,7 +22970,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -23041,7 +23041,7 @@
                             "args": [
                                 {
                                     "name": "input",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -23288,7 +23288,7 @@
                             "args": [
                                 {
                                     "name": "inputs",
-                                    "description": "Input to update a custom post",
+                                    "description": "Input to create a custom post",
                                     "type": {
                                         "kind": "NON_NULL",
                                         "name": null,
@@ -23705,7 +23705,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -25914,7 +25914,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MediaItemSortInput",
@@ -26036,7 +26036,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MenuSortInput",
@@ -26184,7 +26184,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -26358,7 +26358,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -26480,7 +26480,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "MediaItemSortInput",
@@ -26628,7 +26628,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -26776,7 +26776,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -27167,7 +27167,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -27296,7 +27296,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -27451,7 +27451,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -27636,7 +27636,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -27709,7 +27709,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -27771,7 +27771,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -29538,7 +29538,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -29611,7 +29611,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "TaxonomySortInput",
@@ -31706,7 +31706,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "UserSortInput",
@@ -37145,7 +37145,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -37715,7 +37715,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CustomPostSortInput",
@@ -40479,7 +40479,7 @@
                                 },
                                 {
                                     "name": "sort",
-                                    "description": "Input to sort custom posts",
+                                    "description": "Input to sort the results",
                                     "type": {
                                         "kind": "INPUT_OBJECT",
                                         "name": "CommentSortInput",
@@ -42770,7 +42770,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "CommentSortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
@@ -43491,7 +43491,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "CustomPostSortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
@@ -44430,7 +44430,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "MediaItemSortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
@@ -44691,7 +44691,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "MenuSortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
@@ -46269,7 +46269,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreateCustomPostInput",
-                    "description": "Input to update a custom post",
+                    "description": "Input to create a custom post",
                     "fields": null,
                     "inputFields": [
                         {
@@ -46826,7 +46826,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePageInput",
-                    "description": "Input to update a custom post",
+                    "description": "Input to create a custom post",
                     "fields": null,
                     "inputFields": [
                         {
@@ -47056,7 +47056,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "RootCreatePostInput",
-                    "description": "Input to update a custom post",
+                    "description": "Input to create a custom post",
                     "fields": null,
                     "inputFields": [
                         {
@@ -53429,7 +53429,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "TaxonomySortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
@@ -53992,7 +53992,7 @@
                 {
                     "kind": "INPUT_OBJECT",
                     "name": "UserSortInput",
-                    "description": "Input to sort custom posts",
+                    "description": "Input to sort the results",
                     "fields": null,
                     "inputFields": [
                         {
