@@ -37,7 +37,7 @@ class FluentCartMarketplaceProviderServiceTraitTest extends TestCase
     {
         $this->assertSame(
             ['timeout' => 15, 'user-agent' => self::USER_AGENT],
-            $this->createService()->addUserAgentToFluentCartRequest(['timeout' => 15], $url),
+            $this->addUserAgent(['timeout' => 15], $url),
         );
     }
 
@@ -62,7 +62,7 @@ class FluentCartMarketplaceProviderServiceTraitTest extends TestCase
 
         $this->assertSame(
             $args,
-            $this->createService()->addUserAgentToFluentCartRequest($args, $url),
+            $this->addUserAgent($args, $url),
         );
     }
 
@@ -78,9 +78,13 @@ class FluentCartMarketplaceProviderServiceTraitTest extends TestCase
         ];
     }
 
-    private function createService(): object
+    /**
+     * @param array<string,mixed> $args
+     * @return array<string,mixed>
+     */
+    private function addUserAgent(array $args, string $url): array
     {
-        return new class {
+        $service = new class {
             use FluentCartMarketplaceProviderServiceTrait;
 
             protected function getFluentCartRequestPluginVersion(): string
@@ -88,5 +92,6 @@ class FluentCartMarketplaceProviderServiceTraitTest extends TestCase
                 return '20.1.0';
             }
         };
+        return $service->addUserAgentToFluentCartRequest($args, $url);
     }
 }

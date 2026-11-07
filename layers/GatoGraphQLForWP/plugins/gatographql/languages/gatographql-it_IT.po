@@ -1953,6 +1953,11 @@ msgstr ""
 "Fornisci lo slug path del genitore del custom post (inclusi tutti gli slug "
 "degli antenati, es: \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Input per creare un contenuto personalizzato"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Input per filtrare i custom post dell'utente autenticato"
@@ -5462,8 +5467,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Limita i risultati. Il numero massimo consentito è '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Input per ordinare i post personalizzati"
+msgid "Input to sort the results"
+msgstr "Input per ordinare i risultati"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8797,7 +8802,7 @@ msgstr ""
 "decodificata come JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Errore sconosciuto"
 
@@ -14825,6 +14830,9 @@ msgstr "Ordina per nicename dell'utente"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ordina per email dell'utente"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Input per ordinare i post personalizzati"
 
 #~ msgid "Website:"
 #~ msgstr "Sito web:"

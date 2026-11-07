@@ -1821,6 +1821,11 @@ msgstr ""
 "커스텀 포스트 상위 항목 슬러그 경로 제공(모든 조상 슬러그 포함, 예: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "사용자 지정 게시물을 생성하기 위한 입력"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "로그인된 사용자의 커스텀 포스트를 필터링하기 위한 입력"
@@ -5023,8 +5028,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "결과를 제한합니다. 허용되는 최대 수량은 '%s'입니다"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "커스텀 게시물 정렬을 위한 입력"
+msgid "Input to sort the results"
+msgstr "결과를 정렬하기 위한 입력"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8211,7 +8216,7 @@ msgstr ""
 "라이선스 API(엔드포인트: \"%s\")의 응답을 JSON으로 디코딩할 수 없습니다"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "알 수 없는 오류"
 
@@ -14074,6 +14079,9 @@ msgstr "사용자 닉네임 슬러그 순으로 정렬"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "사용자 이메일 순으로 정렬"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "커스텀 게시물 정렬을 위한 입력"
 
 #~ msgid "Website:"
 #~ msgstr "웹사이트:"

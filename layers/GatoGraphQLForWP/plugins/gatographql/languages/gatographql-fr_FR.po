@@ -2014,6 +2014,11 @@ msgstr ""
 "Fournir le chemin de slug du parent de l'article personnalisé (incluant tous "
 "les slugs ancêtres, ex. : \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Entrée pour créer un article personnalisé"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr ""
@@ -5605,8 +5610,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Limiter les résultats. Le nombre maximum autorisé est '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Entrée pour trier les contenus personnalisés"
+msgid "Input to sort the results"
+msgstr "Entrée pour trier les résultats"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -9003,7 +9008,7 @@ msgstr ""
 "être décodée en JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
@@ -15107,6 +15112,9 @@ msgstr "Trier par nom d'usage de l'utilisateur"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Trier par e-mail de l'utilisateur"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Entrée pour trier les contenus personnalisés"
 
 #~ msgid "Website:"
 #~ msgstr "Site web :"

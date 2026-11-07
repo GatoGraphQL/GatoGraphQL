@@ -1664,6 +1664,11 @@ msgstr ""
 msgid "Provide the custom post parent slug path (including all ancestor slugs, eg: \"ancestor-slug/post-slug\")"
 msgstr ""
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr ""
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr ""
@@ -4536,7 +4541,7 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr ""
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
+msgid "Input to sort the results"
 msgstr ""
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
@@ -7367,7 +7372,7 @@ msgid "The response from the license API (endpoint: \"%s\") could not be decoded
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr ""
 

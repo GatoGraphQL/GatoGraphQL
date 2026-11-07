@@ -1976,6 +1976,11 @@ msgstr ""
 "Geef het slugpad van de bovenliggende pagina van het aangepaste bericht op "
 "(inclusief alle voorouder-slugs, bijv.: \"voorouder-slug/bericht-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Invoer om een custom post aan te maken"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr ""
@@ -5479,8 +5484,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Beperk de resultaten. Het maximaal toegestane aantal is '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Invoer om aangepaste berichten te sorteren"
+msgid "Input to sort the results"
+msgstr "Invoer om de resultaten te sorteren"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8804,7 +8809,7 @@ msgstr ""
 "gedecodeerd als JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Onbekende fout"
 
@@ -14840,6 +14845,9 @@ msgstr "Sorteren op gebruikers nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sorteren op gebruikers-e-mailadres"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Invoer om aangepaste berichten te sorteren"
 
 #~ msgid "Website:"
 #~ msgstr "Website:"

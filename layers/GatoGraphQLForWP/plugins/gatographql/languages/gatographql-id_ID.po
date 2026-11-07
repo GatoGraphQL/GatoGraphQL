@@ -1886,6 +1886,11 @@ msgstr ""
 "Berikan jalur slug induk custom post (termasuk semua slug leluhur, mis: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Input untuk membuat custom post"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Input untuk memfilter custom post milik pengguna yang sedang login"
@@ -5229,8 +5234,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Batasi hasil. Jumlah maksimum yang diizinkan adalah '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Input untuk mengurutkan custom post"
+msgid "Input to sort the results"
+msgstr "Input untuk mengurutkan hasil"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8488,7 +8493,7 @@ msgstr ""
 "Respons dari API lisensi (endpoint: \"%s\") tidak dapat didekode sebagai JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Kesalahan tidak diketahui"
 
@@ -14489,6 +14494,9 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Input untuk mengurutkan custom post"
 
 #~ msgid "Website:"
 #~ msgstr "Situs web:"

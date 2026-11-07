@@ -1860,6 +1860,11 @@ msgstr ""
 "Özel gönderi üst öğe slug yolunu girin (tüm atadan slug'ları dahil, örn: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Özel bir yazı oluşturmak için girdi"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Oturum açmış kullanıcının özel gönderilerini filtrelemek için girdi"
@@ -5190,8 +5195,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Sonuçları sınırla. İzin verilen maksimum miktar '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Özel gönderileri sıralamak için girdi"
+msgid "Input to sort the results"
+msgstr "Sonuçları sıralamak için girdi"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8449,7 +8454,7 @@ msgstr ""
 "Lisans API'sinden gelen yanıt (uç nokta: \"%s\") JSON olarak çözümlenemedi"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Bilinmeyen hata"
 
@@ -14441,6 +14446,9 @@ msgstr "Kullanıcının güzel adına göre sırala"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Kullanıcının e-postasına göre sırala"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Özel gönderileri sıralamak için girdi"
 
 #~ msgid "Website:"
 #~ msgstr "Web sitesi:"

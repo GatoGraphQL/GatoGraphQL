@@ -1895,6 +1895,11 @@ msgstr ""
 "Cung cấp đường dẫn slug bài đăng cha của bài đăng tùy chỉnh (bao gồm tất cả "
 "các slug tổ tiên, ví dụ: \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Đầu vào để tạo một bài viết tùy chỉnh"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Đầu vào để lọc các bài đăng tùy chỉnh của người dùng đã đăng nhập"
@@ -5282,8 +5287,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Giới hạn kết quả. Số lượng tối đa được phép là '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Đầu vào để sắp xếp các bài đăng tùy chỉnh"
+msgid "Input to sort the results"
+msgstr "Đầu vào để sắp xếp kết quả"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8551,7 +8556,7 @@ msgstr ""
 "dạng JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Lỗi không xác định"
 
@@ -14525,6 +14530,9 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Đầu vào để sắp xếp các bài đăng tùy chỉnh"
 
 #~ msgid "Website:"
 #~ msgstr "Website:"

@@ -1787,6 +1787,11 @@ msgstr ""
 "提供自定义文章父级别名路径（包含所有祖先别名，例如：\"ancestor-slug/post-"
 "slug\"）"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "用于创建自定义文章的输入"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "用于筛选已登录用户自定义文章的输入"
@@ -4902,8 +4907,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "限制结果数量。允许的最大数量为 '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "用于排序自定义文章的输入"
+msgid "Input to sort the results"
+msgstr "用于对结果排序的输入"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -7988,7 +7993,7 @@ msgid ""
 msgstr "许可证 API（端点：\"%s\"）的响应无法解码为 JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "未知错误"
 
@@ -13672,6 +13677,9 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "用于排序自定义文章的输入"
 
 #~ msgid "Website:"
 #~ msgstr "网站："
