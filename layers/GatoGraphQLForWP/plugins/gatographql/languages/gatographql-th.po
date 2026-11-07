@@ -1828,6 +1828,11 @@ msgstr ""
 "ระบุเส้นทาง slug ของพาเรนต์โพสต์แบบกำหนดเอง (รวมถึง slug ของบรรพบุรุษทั้งหมด เช่น: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "อินพุตสำหรับสร้างโพสต์แบบกำหนดเอง"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "อินพุตสำหรับกรองโพสต์แบบกำหนดเองของผู้ใช้ที่เข้าสู่ระบบ"
@@ -5014,8 +5019,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "จำกัดจำนวนผลลัพธ์ จำนวนสูงสุดที่อนุญาตคือ '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Input สำหรับการเรียงลำดับ custom post"
+msgid "Input to sort the results"
+msgstr "อินพุตสำหรับเรียงลำดับผลลัพธ์"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8150,7 +8155,7 @@ msgid ""
 msgstr "ไม่สามารถถอดรหัสการตอบสนองจาก license API (endpoint: \"%s\") เป็น JSON ได้"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "ข้อผิดพลาดที่ไม่ทราบสาเหตุ"
 
@@ -13935,6 +13940,9 @@ msgstr "เรียงลำดับตาม nicename ของผู้ใ�
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "เรียงลำดับตามอีเมลของผู้ใช้"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Input สำหรับการเรียงลำดับ custom post"
 
 #~ msgid "Website:"
 #~ msgstr "เว็บไซต์:"

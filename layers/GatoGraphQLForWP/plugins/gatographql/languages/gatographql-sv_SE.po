@@ -1897,6 +1897,11 @@ msgstr ""
 "Ange sluggsökvägen för det anpassade inläggets förälder (inklusive alla "
 "förfäderslugg, t.ex.: \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Indata för att skapa ett anpassat inlägg"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Indata för att filtrera den inloggade användarens anpassade inlägg"
@@ -5263,8 +5268,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Begränsa resultaten. Det maximala tillåtna antalet är '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Indata för att sortera anpassade inlägg"
+msgid "Input to sort the results"
+msgstr "Indata för att sortera resultaten"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8542,7 +8547,7 @@ msgstr ""
 "Svaret från licens-API:et (slutpunkt: \"%s\") kunde inte avkodas som JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Okänt fel"
 
@@ -14509,6 +14514,9 @@ msgstr "Sortera efter användarens nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortera efter användarens e-postadress"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Indata för att sortera anpassade inlägg"
 
 #~ msgid "Website:"
 #~ msgstr "Webbplats:"

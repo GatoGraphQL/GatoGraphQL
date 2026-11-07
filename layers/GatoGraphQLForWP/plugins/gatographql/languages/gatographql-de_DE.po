@@ -2000,6 +2000,11 @@ msgstr ""
 "Den Slug-Pfad des übergeordneten Custom Posts angeben (einschließlich aller "
 "Vorfahren-Slugs, z. B.: \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Eingabe zum Erstellen eines benutzerdefinierten Beitrags"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Eingabe zum Filtern der Custom Posts des angemeldeten Benutzers"
@@ -5539,8 +5544,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Die Ergebnisse begrenzen. Die maximal zulässige Anzahl beträgt '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Eingabe zum Sortieren benutzerdefinierter Beiträge"
+msgid "Input to sort the results"
+msgstr "Eingabe zum Sortieren der Ergebnisse"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -8893,7 +8898,7 @@ msgstr ""
 "dekodiert werden"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Unbekannter Fehler"
 
@@ -14974,6 +14979,9 @@ msgstr "Sortieren nach dem Nicename des Benutzers"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortieren nach der E-Mail-Adresse des Benutzers"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Eingabe zum Sortieren benutzerdefinierter Beiträge"
 
 #~ msgid "Website:"
 #~ msgstr "Website:"
