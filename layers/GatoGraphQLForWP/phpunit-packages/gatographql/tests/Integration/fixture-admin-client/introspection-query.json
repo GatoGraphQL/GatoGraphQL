@@ -2149,7 +2149,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Category",
+                            "description": "Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -4300,7 +4300,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Tag",
+                            "description": "Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -17160,7 +17160,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Category",
+                            "description": "Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -17629,7 +17629,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Tag",
+                            "description": "Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -40363,7 +40363,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Category",
+                            "description": "Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
@@ -41762,7 +41762,7 @@
                         },
                         {
                             "name": "name",
-                            "description": "Tag",
+                            "description": "Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`",
                             "args": [],
                             "type": {
                                 "kind": "NON_NULL",
