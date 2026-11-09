@@ -23,7 +23,7 @@ class CategoryInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceType
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Category', 'gatographql'),
+            'name' => $this->__('Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`', 'gatographql'),
             'description' => $this->__('Category description', 'gatographql'),
             'count' => $this->__('Number of custom posts containing this category', 'gatographql'),
             'slugPath' => $this->__('Full category slug, from the root ancestor all the way down, separated by \'/\', and not including \'/\' at either end', 'gatographql'),

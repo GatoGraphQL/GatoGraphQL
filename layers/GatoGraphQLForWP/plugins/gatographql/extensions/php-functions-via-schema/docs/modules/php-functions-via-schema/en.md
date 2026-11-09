@@ -335,6 +335,10 @@ Rounds up a number to the next highest integer.
 
 Divide a number by another number.
 
+### `_floatMultiply`
+
+Multiply a number with another number, which can have decimals (eg: a price with `1.1` to raise it by 10%).
+
 ### `_greaterThan`
 
 Indicate if number1 > number2.
