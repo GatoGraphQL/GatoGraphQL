@@ -44609,7 +44609,7 @@
                         },
                         {
                             "name": "objectType",
-                            "description": "The type of the linked object (post type or taxonomy)",
+                            "description": "The type of the linked object (post type or taxonomy). For a post type archive, the post type",
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "String",
@@ -54791,6 +54791,12 @@
                         {
                             "name": "post_type",
                             "description": "Menu item linking to a post type object",
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "post_type_archive",
+                            "description": "Menu item linking to the archive of a post type",
                             "isDeprecated": false,
                             "deprecationReason": null
                         },
