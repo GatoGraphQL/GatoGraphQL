@@ -64,8 +64,11 @@ msgid "Category taxonomy"
 msgstr "Ταξινομία κατηγορίας"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Κατηγορία"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Όνομα κατηγορίας. Το WordPress το αποθηκεύει κωδικοποιημένο σε HTML, γι' "
+"αυτό το `&` επιστρέφει ως `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3531,7 +3534,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Το όνομα του μενού δεν μπορεί να είναι κενό"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3539,7 +3542,14 @@ msgstr ""
 "Για στοιχεία μενού τύπου \"post_type\", απαιτούνται και τα \"objectType\" "
 "και \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Για στοιχεία μενού τύπου \"post_type_archive\", το \"objectType\" είναι "
+"υποχρεωτικό"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3547,7 +3557,7 @@ msgstr ""
 "Για στοιχεία μενού τύπου \"taxonomy\", απαιτούνται και τα \"objectType\" και "
 "\"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Το μενού με ID '%s' δεν ήταν δυνατό να διαγραφεί"
@@ -3651,6 +3661,11 @@ msgid "Menu item linking to a post type object"
 msgstr "Στοιχείο μενού που συνδέεται με αντικείμενο τύπου ανάρτησης"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr ""
+"Στοιχείο μενού που οδηγεί στο αρχείο ενός τύπου περιεχομένου (post type)"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Στοιχείο μενού που συνδέεται με όρο ταξινομίας"
 
@@ -3727,8 +3742,12 @@ msgid "The menu item type"
 msgstr "Ο τύπος του στοιχείου μενού"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Ο τύπος του συνδεδεμένου αντικειμένου (τύπος δημοσίευσης ή ταξινομία)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Ο τύπος του συνδεδεμένου αντικειμένου (post type ή ταξινομία). Για το αρχείο "
+"ενός post type, το post type"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5727,8 +5746,11 @@ msgid "Tag taxonomy"
 msgstr "Ταξινομία ετικέτας"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Ετικέτα"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Όνομα ετικέτας. Το WordPress το αποθηκεύει κωδικοποιημένο σε HTML, γι' αυτό "
+"το `&` επιστρέφει ως `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -14474,11 +14496,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Σειρά μενού"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "Λήψη του ID custom post από URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "Το URL για μετατροπή σε ID custom post"
 
@@ -14873,6 +14895,16 @@ msgstr "Ταξινόμηση με βάση το nicename χρήστη"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Ταξινόμηση με βάση το email χρήστη"
+
+#~ msgid "Category"
+#~ msgstr "Κατηγορία"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr ""
+#~ "Ο τύπος του συνδεδεμένου αντικειμένου (τύπος δημοσίευσης ή ταξινομία)"
+
+#~ msgid "Tag"
+#~ msgstr "Ετικέτα"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Είσοδος για ταξινόμηση προσαρμοσμένων αναρτήσεων"

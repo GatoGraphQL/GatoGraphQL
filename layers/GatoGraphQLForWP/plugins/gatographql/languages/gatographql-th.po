@@ -64,8 +64,10 @@ msgid "Category taxonomy"
 msgstr "taxonomy หมวดหมู่"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "หมวดหมู่"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"ชื่อหมวดหมู่ WordPress จัดเก็บในรูปแบบที่เข้ารหัส HTML ดังนั้น `&` จะถูกส่งกลับมาเป็น `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3257,21 +3259,26 @@ msgstr "องค์ประกอบสื่อ (เช่น รูปภา
 msgid "The menu name cannot be empty"
 msgstr "ชื่อเมนูต้องไม่ว่างเปล่า"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "สำหรับรายการเมนูประเภท \"post_type\" ต้องระบุทั้ง \"objectType\" และ \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr "สำหรับรายการเมนูประเภท \"post_type_archive\" ต้องระบุ \"objectType\""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "สำหรับรายการเมนูประเภท \"taxonomy\" ต้องระบุทั้ง \"objectType\" และ \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ไม่สามารถลบเมนู (menu) ที่มี ID '%s' ได้"
@@ -3368,6 +3375,10 @@ msgid "Menu item linking to a post type object"
 msgstr "รายการเมนูที่ลิงก์ไปยังออบเจกต์ประเภทโพสต์"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "รายการเมนูที่ลิงก์ไปยังหน้าอาร์ไคฟ์ของ post type"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "รายการเมนูที่ลิงก์ไปยัง taxonomy term"
 
@@ -3444,8 +3455,12 @@ msgid "The menu item type"
 msgstr "ประเภทของรายการเมนู"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "ประเภทของออบเจ็กต์ที่เชื่อมโยง (ประเภทโพสต์หรือแท็กซอโนมี)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"ประเภทของออบเจ็กต์ที่ลิงก์ (post type หรือ taxonomy) สำหรับอาร์ไคฟ์ของ post type คือ "
+"post type นั้น"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5282,8 +5297,10 @@ msgid "Tag taxonomy"
 msgstr "อนุกรมวิธานของแท็ก"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "แท็ก"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"ชื่อแท็ก WordPress จัดเก็บในรูปแบบที่เข้ารหัส HTML ดังนั้น `&` จะถูกส่งกลับมาเป็น `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -13550,11 +13567,11 @@ msgstr "URL ใน wp-admin สำหรับแก้ไขโพสต์แ�
 msgid "Menu order"
 msgstr "ลำดับเมนู"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "รับ ID ของโพสต์แบบกำหนดเองจาก URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "URL ที่จะแปลงเป็น ID ของโพสต์แบบกำหนดเอง"
 
@@ -13940,6 +13957,15 @@ msgstr "เรียงลำดับตาม nicename ของผู้ใ�
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "เรียงลำดับตามอีเมลของผู้ใช้"
+
+#~ msgid "Category"
+#~ msgstr "หมวดหมู่"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "ประเภทของออบเจ็กต์ที่เชื่อมโยง (ประเภทโพสต์หรือแท็กซอโนมี)"
+
+#~ msgid "Tag"
+#~ msgstr "แท็ก"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Input สำหรับการเรียงลำดับ custom post"

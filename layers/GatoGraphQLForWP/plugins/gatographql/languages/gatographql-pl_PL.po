@@ -65,8 +65,11 @@ msgid "Category taxonomy"
 msgstr "Taksonomia kategorii"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Kategoria"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nazwa kategorii. WordPress przechowuje ją zakodowaną jako HTML, więc `&` "
+"wraca jako `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3419,7 +3422,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Nazwa menu nie może być pusta"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3427,7 +3430,14 @@ msgstr ""
 "Dla elementów menu typu \"post_type\" wymagane są zarówno \"objectType\", "
 "jak i \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Dla elementów menu typu \"post_type_archive\" wymagane jest pole "
+"\"objectType\""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3435,7 +3445,7 @@ msgstr ""
 "Dla elementów menu typu \"taxonomy\" wymagane są zarówno \"objectType\", jak "
 "i \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Nie można było usunąć menu o ID '%s'"
@@ -3532,6 +3542,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Element menu prowadzący do obiektu typu wpisu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Element menu prowadzący do archiwum typu wpisu"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Element menu prowadzący do terminu taksonomii"
 
@@ -3608,8 +3622,12 @@ msgid "The menu item type"
 msgstr "Typ elementu menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Typ powiązanego obiektu (typ wpisu lub taksonomia)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Typ powiązanego obiektu (typ wpisu lub taksonomia). W przypadku archiwum "
+"typu wpisu jest to typ wpisu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5529,8 +5547,11 @@ msgid "Tag taxonomy"
 msgstr "Taksonomia tagów"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Tag"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nazwa tagu. WordPress przechowuje ją zakodowaną jako HTML, więc `&` wraca "
+"jako `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -14153,11 +14174,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Kolejność w menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "Pobierz identyfikator wpisu niestandardowego z adresu URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "Adres URL do przekształcenia w identyfikator wpisu niestandardowego"
 
@@ -14549,6 +14570,15 @@ msgstr "Sortuj według przyjaznej nazwy użytkownika"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortuj według adresu e-mail użytkownika"
+
+#~ msgid "Category"
+#~ msgstr "Kategoria"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Typ powiązanego obiektu (typ wpisu lub taksonomia)"
+
+#~ msgid "Tag"
+#~ msgstr "Tag"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Dane wejściowe do sortowania wpisów niestandardowych"
