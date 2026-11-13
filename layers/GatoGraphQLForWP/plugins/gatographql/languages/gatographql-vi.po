@@ -64,8 +64,11 @@ msgid "Category taxonomy"
 msgstr "Phân loại danh mục"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Danh mục"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Tên danh mục. WordPress lưu nó ở dạng đã mã hóa HTML, nên `&` được trả về "
+"thành `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3411,7 +3414,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Tên menu không được để trống"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3419,7 +3422,14 @@ msgstr ""
 "Đối với các mục menu thuộc loại \"post_type\", cả \"objectType\" và "
 "\"objectID\" đều là bắt buộc"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Đối với các mục menu thuộc loại \"post_type_archive\", bắt buộc phải có "
+"\"objectType\""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3427,7 +3437,7 @@ msgstr ""
 "Đối với các mục menu thuộc loại \"taxonomy\", cả \"objectType\" và "
 "\"objectID\" đều là bắt buộc"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Không thể xóa menu có ID '%s'"
@@ -3529,6 +3539,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Mục menu liên kết đến một đối tượng kiểu bài đăng"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Mục menu liên kết đến trang lưu trữ của một post type"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Mục menu liên kết đến một thuật ngữ phân loại"
 
@@ -3605,8 +3619,12 @@ msgid "The menu item type"
 msgstr "Loại mục menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Loại của đối tượng được liên kết (kiểu bài viết hoặc phân loại)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Loại của đối tượng được liên kết (post type hoặc taxonomy). Với trang lưu "
+"trữ post type, đó là post type"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5565,8 +5583,11 @@ msgid "Tag taxonomy"
 msgstr "Phân loại thẻ"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Thẻ"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Tên thẻ. WordPress lưu nó ở dạng đã mã hóa HTML, nên `&` được trả về thành "
+"`&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -14137,11 +14158,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Thứ tự menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "Lấy ID bài đăng tùy chỉnh từ một URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "URL cần chuyển đổi thành ID bài đăng tùy chỉnh"
 
@@ -14530,6 +14551,15 @@ msgstr "Sắp xếp theo tên đẹp của người dùng"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sắp xếp theo email của người dùng"
+
+#~ msgid "Category"
+#~ msgstr "Danh mục"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Loại của đối tượng được liên kết (kiểu bài viết hoặc phân loại)"
+
+#~ msgid "Tag"
+#~ msgstr "Thẻ"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Đầu vào để sắp xếp các bài đăng tùy chỉnh"

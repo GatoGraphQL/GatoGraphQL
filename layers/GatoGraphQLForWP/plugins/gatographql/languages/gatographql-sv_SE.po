@@ -64,8 +64,11 @@ msgid "Category taxonomy"
 msgstr "Kategoritaxonomi"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Kategori"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Kategorinamn. WordPress lagrar det HTML-kodat, så `&` kommer tillbaka som "
+"`&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3410,7 +3413,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Menynamnet får inte vara tomt"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3418,7 +3421,12 @@ msgstr ""
 "För menyobjekt av typen \"post_type\" krävs både \"objectType\" och "
 "\"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr "För menyobjekt av typen \"post_type_archive\" krävs \"objectType\""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3426,7 +3434,7 @@ msgstr ""
 "För menyobjekt av typen \"taxonomy\" krävs både \"objectType\" och "
 "\"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Menyn med ID '%s' kunde inte raderas"
@@ -3523,6 +3531,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Menyobjekt som länkar till ett inläggstypsobjekt"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Menyobjekt som länkar till arkivet för en inläggstyp"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Menyobjekt som länkar till en taxonomiterm"
 
@@ -3599,8 +3611,12 @@ msgid "The menu item type"
 msgstr "Menyobjektets typ"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Typen av det länkade objektet (inläggstyp eller taxonomi)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Typen av det länkade objektet (inläggstyp eller taxonomi). För ett "
+"inläggstypsarkiv är det inläggstypen"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5540,8 +5556,11 @@ msgid "Tag taxonomy"
 msgstr "Taggtaxonomi"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Tagg"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Etikettnamn. WordPress lagrar det HTML-kodat, så `&` kommer tillbaka som "
+"`&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -14120,11 +14139,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Menyordning"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "Hämta det anpassade inläggets ID från en URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "URL:en som ska konverteras till ett anpassat inläggs-ID"
 
@@ -14514,6 +14533,15 @@ msgstr "Sortera efter användarens nicename"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Sortera efter användarens e-postadress"
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Typen av det länkade objektet (inläggstyp eller taxonomi)"
+
+#~ msgid "Tag"
+#~ msgstr "Tagg"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Indata för att sortera anpassade inlägg"

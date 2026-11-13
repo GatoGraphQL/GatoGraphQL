@@ -62,8 +62,9 @@ msgid "Category taxonomy"
 msgstr "分类法（Category）"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "分类"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr "分类名称。WordPress 以 HTML 编码形式存储,因此 `&` 会返回为 `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3177,21 +3178,26 @@ msgstr "附加到文章或独立存在的媒体元素（如图片、视频等）
 msgid "The menu name cannot be empty"
 msgstr "菜单名称不能为空"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "对于类型为 \"post_type\" 的菜单项，\"objectType\" 和 \"objectID\" 均为必填项"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr "对于类型为 \"post_type_archive\" 的菜单项,\"objectType\" 为必填项"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "对于类型为 \"taxonomy\" 的菜单项，\"objectType\" 和 \"objectID\" 均为必填项"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ID 为“%s”的菜单无法被删除"
@@ -3288,6 +3294,10 @@ msgid "Menu item linking to a post type object"
 msgstr "链接到文章类型对象的菜单项"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "链接到文章类型归档页的菜单项"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "链接到分类法术语的菜单项"
 
@@ -3364,8 +3374,10 @@ msgid "The menu item type"
 msgstr "菜单项类型"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "链接对象的类型（文章类型或分类法）"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr "所链接对象的类型(文章类型或分类法)。对于文章类型归档页,则为该文章类型"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5170,8 +5182,9 @@ msgid "Tag taxonomy"
 msgstr "标签分类法"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "标签"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr "标签名称。WordPress 以 HTML 编码形式存储,因此 `&` 会返回为 `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -13295,11 +13308,11 @@ msgstr "在wp-admin中编辑该自定义文章的URL，若用户无访问权限�
 msgid "Menu order"
 msgstr "菜单顺序"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "从URL获取自定义文章ID"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "要转换为自定义文章ID的URL"
 
@@ -13677,6 +13690,15 @@ msgstr "按用户昵称排序"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "按用户电子邮件排序"
+
+#~ msgid "Category"
+#~ msgstr "分类"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "链接对象的类型（文章类型或分类法）"
+
+#~ msgid "Tag"
+#~ msgstr "标签"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "用于排序自定义文章的输入"
