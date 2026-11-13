@@ -1,6 +1,6 @@
 {
     "name": "schema-config-graphql-spec-compliance",
-    "version": "20.1.0-dev",
+    "version": "20.0.2",
     "description": "Configure the 'GraphQL Spec Compliance' module in the Schema Configuration",
     "author": "Leonardo Losoviz",
     "license": "MIT",
