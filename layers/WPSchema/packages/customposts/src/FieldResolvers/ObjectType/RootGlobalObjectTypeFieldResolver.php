@@ -17,6 +17,10 @@ use PoP\GraphQLParser\Spec\Parser\Ast\FieldInterface;
 use PoP\Root\App;
 use PoPWPSchema\CustomPosts\Constants\HookNames;
 
+use function current_user_can;
+use function is_post_publicly_viewable;
+use function url_to_postid;
+
 class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldResolver
 {
     private ?IDScalarTypeResolver $idScalarTypeResolver = null;
@@ -107,7 +111,7 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
             case '_urlToCustomPostID':
                 /** @var string */
                 $url = $fieldDataAccessor->getValue('url');
-                $postID = \url_to_postid($url);
+                $postID = url_to_postid($url);
                 if ($postID === 0) {
                     return null;
                 }
@@ -117,10 +121,24 @@ class RootGlobalObjectTypeFieldResolver extends AbstractGlobalObjectTypeFieldRes
                     $postID,
                     $url
                 );
+                if (!$this->isCustomPostVisible($postID)) {
+                    return null;
+                }
                 return $postID;
         }
 
         return parent::resolveValue($objectTypeResolver, $object, $fieldDataAccessor, $objectTypeFieldResolutionFeedbackStore);
+    }
+
+    /**
+     * `url_to_postid()` returns the ID that a URL such as `/?p=123` names,
+     * for a post of any status and type, so the field checks that the user
+     * may see the post.
+     */
+    protected function isCustomPostVisible(int $customPostID): bool
+    {
+        return is_post_publicly_viewable($customPostID)
+            || current_user_can('read_post', $customPostID);
     }
 
     /**
