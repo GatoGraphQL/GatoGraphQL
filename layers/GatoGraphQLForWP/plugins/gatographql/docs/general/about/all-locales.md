@@ -44,10 +44,10 @@
 
 <div class="gato-card gato-about__current-release">
 <div class="gato-about__current-release-version">
-<span class="gato-about__current-release-number">20.1</span>
+<span class="gato-about__current-release-number">21.0</span>
 <span class="gato-badge gato-badge--success">{current}</span>
 </div>
-<a class="button button-primary" href="../../release-notes/20.1/en.md">{read-release-notes-button}</a>
+<a class="button button-primary" href="../../release-notes/21.0/en.md">{read-release-notes-button}</a>
 </div>
 
 <p class="gato-about__intro">{release-notes-intro}</p>
