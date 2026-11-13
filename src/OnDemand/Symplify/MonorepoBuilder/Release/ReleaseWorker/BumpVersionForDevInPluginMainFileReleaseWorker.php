@@ -17,11 +17,15 @@ class BumpVersionForDevInPluginMainFileReleaseWorker extends AbstractConvertVers
         $nextDevVersion = $this->versionUtils->getNextDevVersion($version);
         $requiredNextDevVersion = $this->versionUtils->getRequiredNextFormat($version);
 
-        // The file has already been replaced by a previous ReleaseWorker, so the current version is that for PROD
+        /**
+         * When releasing, a previous ReleaseWorker has already removed "-dev",
+         * so the current version is that for PROD. When bumping the dev
+         * version without a release, the current version still has "-dev".
+         */
         $prodVersion = $version->getVersionString();
         $replacements = [
             // WordPress plugin header
-            '/\bVersion:\s+' . preg_quote($prodVersion) . '\b/' => 'Version: ' . $nextDevVersion,
+            '/\bVersion:\s+' . preg_quote($prodVersion) . '(-dev)?\b/' => 'Version: ' . $nextDevVersion,
             // Gato GraphQL plugin/extension version
             "/" . preg_quote('$pluginVersion') . " = '[a-z0-9.-]+';/" => "\$pluginVersion = '$nextDevVersion';",
             "/" . preg_quote('$extensionVersion') . " = '[a-z0-9.-]+';/" => "\$extensionVersion = '$nextDevVersion';",

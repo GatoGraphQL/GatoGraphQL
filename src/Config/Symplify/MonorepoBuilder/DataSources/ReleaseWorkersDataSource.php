@@ -64,4 +64,26 @@ class ReleaseWorkersDataSource
             PushNextDevReleaseWorker::class,
         ];
     }
+
+    /**
+     * The release workers that open the next dev version: those after
+     * pushing the release tag, without pushing the commit. Taking them
+     * from the release workers keeps the downstream replacements and
+     * additions (as they override getReleaseWorkerClasses).
+     *
+     * @return string[]
+     */
+    public function getBumpDevVersionReleaseWorkerClasses(): array
+    {
+        $releaseWorkerClasses = $this->getReleaseWorkerClasses();
+        $pos = array_search(PushTagReleaseWorker::class, $releaseWorkerClasses);
+        if ($pos === false) {
+            return [];
+        }
+        /** @var int $pos */
+        return array_values(array_filter(
+            array_slice($releaseWorkerClasses, $pos + 1),
+            fn (string $releaseWorkerClass) => $releaseWorkerClass !== PushNextDevReleaseWorker::class
+        ));
+    }
 }

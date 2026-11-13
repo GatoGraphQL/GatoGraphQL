@@ -24,6 +24,15 @@ final class VersionUtils
      */
     private bool $nextVersionIsMajor = false;
 
+    /**
+     * The version that downstream monorepos give to the upstream
+     * packages. When null, they take it from the upstream's most
+     * recent tag, which is right after a release. When bumping the
+     * dev version without a release, the command sets it, as all
+     * the monorepos share the same version.
+     */
+    private ?Version $upstreamVersion = null;
+
     public function __construct(
         ParameterProvider $parameterProvider,
         private UpstreamVersionUtils $upstreamVersionUtils,
@@ -34,6 +43,16 @@ final class VersionUtils
     public function setNextVersionIsMajor(bool $nextVersionIsMajor): void
     {
         $this->nextVersionIsMajor = $nextVersionIsMajor;
+    }
+
+    public function setUpstreamVersion(?Version $upstreamVersion): void
+    {
+        $this->upstreamVersion = $upstreamVersion;
+    }
+
+    public function getUpstreamVersion(): ?Version
+    {
+        return $this->upstreamVersion;
     }
 
     public function getNextVersion(Version | string $version): string
