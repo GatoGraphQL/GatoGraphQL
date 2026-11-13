@@ -39,6 +39,11 @@
                     "type": "media",
                     "id": 1361
                 },
+                "thumbnailFileEntity": {
+                    "type": "media",
+                    "id": 1361
+                },
+                "nonExistingSizeFileEntity": null,
                 "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
                 "attachmentPageEntity": {
                     "type": "media",
@@ -108,6 +113,11 @@
                 "type": "homepage",
                 "id": 0
             },
+            "homepageWithTrackingParams": {
+                "type": "homepage",
+                "id": 0
+            },
+            "homepageSearch": null,
             "rootRelativePath": {
                 "type": "customPost",
                 "id": 1,
@@ -124,6 +134,11 @@
                 "taxonomy": "category"
             },
             "categoryFeed": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            },
+            "categoryRSSFeed": {
                 "type": "taxonomyTerm",
                 "id": 3,
                 "taxonomy": "category"
@@ -188,7 +203,10 @@
             "nonExistingCategory": null,
             "nonExistingAuthor": null,
             "archiveOfPostTypeWithoutArchive": null,
-            "emptyURL": null
+            "emptyURL": null,
+            "draftPage": null,
+            "draftPageViaCustomPostID": null,
+            "termOfNonPubliclyQueryableTaxonomy": null
         }
     }
 }

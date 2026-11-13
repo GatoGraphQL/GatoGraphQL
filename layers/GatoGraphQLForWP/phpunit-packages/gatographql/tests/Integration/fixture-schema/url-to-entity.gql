@@ -19,7 +19,9 @@ query {
     id
     src
     fileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp")
-    resizedFileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-300x150.webp")
+    resizedFileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-300x110.webp")
+    thumbnailFileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-150x150.webp")
+    nonExistingSizeFileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-999x999.webp")
     url
     attachmentPageEntity: _urlToEntity(url: "https://gatographql.lndo.site/graphql-api-header/")
   }
@@ -57,10 +59,13 @@ query {
   urls: self {
     homepage: _urlToEntity(url: "https://gatographql.lndo.site/")
     homepageWithoutTrailingSlash: _urlToEntity(url: "https://gatographql.lndo.site")
+    homepageWithTrackingParams: _urlToEntity(url: "https://gatographql.lndo.site/?utm_source=newsletter&utm_medium=email")
+    homepageSearch: _urlToEntity(url: "https://gatographql.lndo.site/?s=hello")
     rootRelativePath: _urlToEntity(url: "/hello-world/")
     withQueryStringAndFragment: _urlToEntity(url: "https://gatographql.lndo.site/hello-world/?utm_source=newsletter#comments")
     paginatedCategory: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/page/2/")
     categoryFeed: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/feed/")
+    categoryRSSFeed: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/rss/")
     hierarchicalCategoryUnderAnotherParent: _urlToEntity(url: "https://gatographql.lndo.site/category/advanced/most-special-topic/")
     customPostTypeArchive: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/")
     paginatedCustomPostTypeArchive: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/page/2/")
@@ -84,5 +89,10 @@ query {
     nonExistingAuthor: _urlToEntity(url: "https://gatographql.lndo.site/author/non-existing-author/")
     archiveOfPostTypeWithoutArchive: _urlToEntity(url: "https://gatographql.lndo.site/?post_type=post")
     emptyURL: _urlToEntity(url: "")
+
+    # Not visible to the user, or not publicly queryable
+    draftPage: _urlToEntity(url: "https://gatographql.lndo.site/?page_id=3")
+    draftPageViaCustomPostID: _urlToCustomPostID(url: "https://gatographql.lndo.site/?page_id=3")
+    termOfNonPubliclyQueryableTaxonomy: _urlToEntity(url: "https://gatographql.lndo.site/?taxonomy=nav_menu&term=top-menu")
   }
 }
