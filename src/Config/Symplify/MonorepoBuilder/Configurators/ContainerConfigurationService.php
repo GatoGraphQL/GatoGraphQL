@@ -160,6 +160,16 @@ class ContainerConfigurationService
         }
 
         /**
+         * Release workers that open the next dev version
+         */
+        if ($releaseWorkersConfig = $this->getReleaseWorkersDataSource()) {
+            $parameters->set(
+                CustomOption::BUMP_DEV_VERSION_RELEASE_WORKER_CLASSES,
+                $releaseWorkersConfig->getBumpDevVersionReleaseWorkerClasses()
+            );
+        }
+
+        /**
          * Configure services
          */
         $services = $this->containerConfigurator->services();

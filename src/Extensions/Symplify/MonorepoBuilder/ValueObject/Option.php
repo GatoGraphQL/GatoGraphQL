@@ -86,4 +86,8 @@ final class Option
      * @var string
      */
     public final const INSTAWP_CONFIG_ENTRIES = 'instawp-config-entries';
+    /**
+     * @var string
+     */
+    public final const BUMP_DEV_VERSION_RELEASE_WORKER_CLASSES = 'bump-dev-version-release-worker-classes';
 }
