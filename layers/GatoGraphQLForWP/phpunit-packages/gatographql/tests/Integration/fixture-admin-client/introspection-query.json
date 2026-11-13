@@ -21158,6 +21158,36 @@
                             },
                             "isDeprecated": false,
                             "deprecationReason": null
+                        },
+                        {
+                            "name": "_urlToEntity",
+                            "description": "Get the entity that a URL of the site points to, as `{\"type\": ..., \"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, `user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a custom post or a custom post type archive, and `taxonomy` for a taxonomy term. It returns `null` when the URL is not from the site, or points to no entity.",
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "description": "The URL to resolve, either complete or as a path from the root of the site (such as `\/contact\/`)",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": null,
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "JSONObject",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
                         }
                     ],
                     "inputFields": null,
@@ -31764,6 +31794,36 @@
                             "type": {
                                 "kind": "SCALAR",
                                 "name": "ID",
+                                "isOneOf": false,
+                                "ofType": null
+                            },
+                            "isDeprecated": false,
+                            "deprecationReason": null
+                        },
+                        {
+                            "name": "_urlToEntity",
+                            "description": "Get the entity that a URL of the site points to, as `{\"type\": ..., \"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, `user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a custom post or a custom post type archive, and `taxonomy` for a taxonomy term. It returns `null` when the URL is not from the site, or points to no entity.",
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "description": "The URL to resolve, either complete or as a path from the root of the site (such as `\/contact\/`)",
+                                    "type": {
+                                        "kind": "NON_NULL",
+                                        "name": null,
+                                        "isOneOf": false,
+                                        "ofType": {
+                                            "kind": "SCALAR",
+                                            "name": "String",
+                                            "isOneOf": false,
+                                            "ofType": null
+                                        }
+                                    },
+                                    "defaultValue": null
+                                }
+                            ],
+                            "type": {
+                                "kind": "SCALAR",
+                                "name": "JSONObject",
                                 "isOneOf": false,
                                 "ofType": null
                             },

@@ -1,0 +1,88 @@
+query {
+  # Each entity, and the entity its URL resolves to
+  post(by: { slug: "hello-world" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/hello-world/")
+  }
+  page(by: { path: "sample-page" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/sample-page/")
+  }
+  dummyCPT: customPost(by: { slug: "dolor-facilis-repellat-pariatur-veniam-at" }, customPostTypes: ["dummy-cpt"]) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/dolor-facilis-repellat-pariatur-veniam-at/")
+  }
+  mediaItems(pagination: { limit: 1 }, sort: { by: ID, order: ASC }) {
+    id
+    src
+    fileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo.webp")
+    resizedFileEntity: _urlToEntity(url: "https://gatographql.lndo.site/wp-content/uploads/GatoGraphQL-logo-300x150.webp")
+    url
+    attachmentPageEntity: _urlToEntity(url: "https://gatographql.lndo.site/graphql-api-header/")
+  }
+  category: postCategory(by: { slug: "blog" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/")
+  }
+  hierarchicalCategory: postCategory(by: { slug: "most-special-topic" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/resource/special-topic/most-special-topic/")
+  }
+  tag: postTag(by: { slug: "graphql" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/tag/graphql/")
+  }
+  customTaxonomyCategory: category(by: { slug: "capullo" }, taxonomy: "dummy-category") {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/dummy-category/capullo/")
+  }
+  customTaxonomyTag: tag(by: { slug: "jazz" }, taxonomy: "dummy-tag") {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/dummy-tag/jazz/")
+  }
+  user(by: { username: "editor" }) {
+    id
+    url
+    entity: _urlToEntity(url: "https://gatographql.lndo.site/author/editor/")
+  }
+
+  urls: self {
+    homepage: _urlToEntity(url: "https://gatographql.lndo.site/")
+    homepageWithoutTrailingSlash: _urlToEntity(url: "https://gatographql.lndo.site")
+    rootRelativePath: _urlToEntity(url: "/hello-world/")
+    withQueryStringAndFragment: _urlToEntity(url: "https://gatographql.lndo.site/hello-world/?utm_source=newsletter#comments")
+    paginatedCategory: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/page/2/")
+    categoryFeed: _urlToEntity(url: "https://gatographql.lndo.site/category/blog/feed/")
+    hierarchicalCategoryUnderAnotherParent: _urlToEntity(url: "https://gatographql.lndo.site/category/advanced/most-special-topic/")
+    customPostTypeArchive: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/")
+    paginatedCustomPostTypeArchive: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/page/2/")
+    customPostTypeArchiveWithFragment: _urlToEntity(url: "https://gatographql.lndo.site/dummy-cpt/#latest")
+
+    # Plain permalinks
+    plainPost: _urlToEntity(url: "https://gatographql.lndo.site/?p=1")
+    plainPage: _urlToEntity(url: "https://gatographql.lndo.site/?page_id=2")
+    plainCategoryByID: _urlToEntity(url: "https://gatographql.lndo.site/?cat=1")
+    plainCategoryBySlug: _urlToEntity(url: "https://gatographql.lndo.site/?category_name=blog")
+    plainTag: _urlToEntity(url: "https://gatographql.lndo.site/?tag=graphql")
+    plainCustomTaxonomyTerm: _urlToEntity(url: "https://gatographql.lndo.site/?dummy-tag=jazz")
+    plainAuthorByID: _urlToEntity(url: "https://gatographql.lndo.site/?author=1")
+    plainAuthorBySlug: _urlToEntity(url: "https://gatographql.lndo.site/?author_name=editor")
+    plainCustomPostTypeArchive: _urlToEntity(url: "https://gatographql.lndo.site/?post_type=dummy-cpt")
+
+    # Not internal, or pointing to nothing
+    externalDomain: _urlToEntity(url: "https://wordpress.org/hello-world/")
+    nonExistingPost: _urlToEntity(url: "https://gatographql.lndo.site/non-existing-post/")
+    nonExistingCategory: _urlToEntity(url: "https://gatographql.lndo.site/category/non-existing-category/")
+    nonExistingAuthor: _urlToEntity(url: "https://gatographql.lndo.site/author/non-existing-author/")
+    archiveOfPostTypeWithoutArchive: _urlToEntity(url: "https://gatographql.lndo.site/?post_type=post")
+    emptyURL: _urlToEntity(url: "")
+  }
+}
