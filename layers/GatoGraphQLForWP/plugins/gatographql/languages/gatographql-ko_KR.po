@@ -64,8 +64,11 @@ msgid "Category taxonomy"
 msgstr "카테고리 택소노미"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "카테고리"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"카테고리 이름입니다. WordPress는 이를 HTML 인코딩된 상태로 저장하므로 `&`는 "
+"`&amp;`로 반환됩니다"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3257,7 +3260,7 @@ msgstr "게시물에 첨부되거나 독립적인 미디어 요소(이미지, �
 msgid "The menu name cannot be empty"
 msgstr "메뉴 이름은 비워 둘 수 없습니다"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3265,7 +3268,12 @@ msgstr ""
 "\"post_type\" 유형의 메뉴 항목에는 \"objectType\"과 \"objectID\"가 모두 필요"
 "합니다"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr "\"post_type_archive\" 유형의 메뉴 항목에는 \"objectType\"이 필수입니다"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3273,7 +3281,7 @@ msgstr ""
 "\"taxonomy\" 유형의 메뉴 항목에는 \"objectType\"과 \"objectID\"가 모두 필요합"
 "니다"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ID가 '%s'인 메뉴를 삭제할 수 없습니다"
@@ -3370,6 +3378,10 @@ msgid "Menu item linking to a post type object"
 msgstr "게시물 유형 객체에 연결된 메뉴 항목"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "게시물 유형의 아카이브로 연결되는 메뉴 항목"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "택소노미 텀에 연결된 메뉴 항목"
 
@@ -3446,8 +3458,12 @@ msgid "The menu item type"
 msgstr "메뉴 항목 유형"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "연결된 객체의 유형 (게시물 유형 또는 분류)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"연결된 오브젝트의 유형(게시물 유형 또는 택소노미)입니다. 게시물 유형 아카이브"
+"의 경우 해당 게시물 유형입니다"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5294,8 +5310,11 @@ msgid "Tag taxonomy"
 msgstr "태그 택소노미"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "태그"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"태그 이름입니다. WordPress는 이를 HTML 인코딩된 상태로 저장하므로 `&`는 "
+"`&amp;`로 반환됩니다"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -13689,11 +13708,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "메뉴 순서"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "URL에서 커스텀 포스트 ID 가져오기"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "커스텀 포스트 ID로 변환할 URL"
 
@@ -14079,6 +14098,15 @@ msgstr "사용자 닉네임 슬러그 순으로 정렬"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "사용자 이메일 순으로 정렬"
+
+#~ msgid "Category"
+#~ msgstr "카테고리"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "연결된 객체의 유형 (게시물 유형 또는 분류)"
+
+#~ msgid "Tag"
+#~ msgstr "태그"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "커스텀 게시물 정렬을 위한 입력"

@@ -65,8 +65,11 @@ msgid "Category taxonomy"
 msgstr "Taksonomi kategori"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Kategori"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nama kategori. WordPress menyimpannya dalam bentuk HTML-encoded, sehingga "
+"`&` dikembalikan sebagai `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -3377,7 +3380,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Nama menu tidak boleh kosong"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3385,7 +3388,13 @@ msgstr ""
 "Untuk item menu bertipe \"post_type\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Untuk item menu bertipe \"post_type_archive\", \"objectType\" wajib diisi"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3393,7 +3402,7 @@ msgstr ""
 "Untuk item menu bertipe \"taxonomy\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Menu dengan ID '%s' tidak dapat dihapus"
@@ -3490,6 +3499,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Item menu yang menautkan ke objek tipe post"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Item menu yang menautkan ke arsip suatu tipe post"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Item menu yang menautkan ke term taksonomi"
 
@@ -3566,8 +3579,12 @@ msgid "The menu item type"
 msgstr "Tipe item menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Tipe objek yang ditautkan (tipe postingan atau taksonomi)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Tipe objek yang ditautkan (tipe post atau taksonomi). Untuk arsip tipe post, "
+"yaitu tipe post tersebut"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5505,8 +5522,11 @@ msgid "Tag taxonomy"
 msgstr "Taksonomi tag"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Tag"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nama tag. WordPress menyimpannya dalam bentuk HTML-encoded, sehingga `&` "
+"dikembalikan sebagai `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -14099,11 +14119,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Urutan menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
 msgid "Get the custom post ID from a URL"
 msgstr "Dapatkan ID custom post dari sebuah URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
 msgid "The URL to convert to a custom post ID"
 msgstr "URL yang akan dikonversi menjadi ID custom post"
 
@@ -14494,6 +14514,15 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Tipe objek yang ditautkan (tipe postingan atau taksonomi)"
+
+#~ msgid "Tag"
+#~ msgstr "Tag"
 
 #~ msgid "Input to sort custom posts"
 #~ msgstr "Input untuk mengurutkan custom post"
