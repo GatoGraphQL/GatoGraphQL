@@ -326,6 +326,7 @@ class Plugin
                 __('Dummy CPT'),
                 __('Dummy CPTs'),
                 __('dummy CPTs'),
+                true,
             )
         );
 
@@ -339,6 +340,7 @@ class Plugin
                 __('Dummy CPT (Two)'),
                 __('Dummy CPTs (Two)'),
                 __('dummy CPTs (two)'),
+                true,
             )
         );
 
@@ -472,6 +474,7 @@ class Plugin
      * Arguments for registering the post type
      *
      * @param string[] $taxonomies
+     * @param bool $hasArchive Whether the post type has an archive, at the post type's slug
      * @return array<string,mixed>
      */
     protected function getCustomPostTypeArgs(
@@ -479,8 +482,10 @@ class Plugin
         string $name_uc,
         string $names_uc,
         string $names_lc,
+        bool $hasArchive = false,
     ): array {
         return array(
+            'has_archive' => $hasArchive,
             'public' => true,
             'show_in_nav_menus' => true,
             'show_ui' => true,

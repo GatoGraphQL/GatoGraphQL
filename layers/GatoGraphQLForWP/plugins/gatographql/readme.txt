@@ -248,6 +248,7 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 == Changelog ==
 
 = 21.0.0 =
+* Added - Added global field <code>_urlToEntity</code>, which tells what a URL of the site points to (a custom post, a media item, a taxonomy term, a user, the homepage or a custom post type archive), and returns its type and ID, plus the custom post type or the taxonomy, or <code>null</code> when the URL points to none (#3469)
 * Improved - Send the <code>GatoPlugins</code> user agent on the license and update requests to the Gato Store (#3463)
 * Improved - Fix the descriptions of the sort input and the input to create a custom post (#3464)
 * Improved - The descriptions of the category and tag <code>name</code> fields say that WordPress stores the name HTML-encoded, so <code>&amp;</code> comes back as <code>&amp;amp;</code> (#3466)
