@@ -14,6 +14,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
 use WP_REST_Response;
 
 use function add_action;
+use function array_keys;
 use function add_shortcode;
 use function delete_option;
 use function do_shortcode;
@@ -22,8 +23,10 @@ use function esc_html;
 use function esc_url;
 use function flush_rewrite_rules;
 use function get_option;
+use function is_array;
 use function register_nav_menus;
 use function shortcode_atts;
+use function str_ends_with;
 use function wp_get_attachment_image_url;
 use function wp_kses_post;
 
@@ -71,6 +74,7 @@ class Plugin
         $this->maybeAdaptRESTAPIResponse();
 
         add_action('init', $this->registerTestingTaxonomies(...));
+        add_action('init', $this->maybeFlushRewriteRulesForArchives(...), PHP_INT_MAX);
         add_action('init', $this->registerRESTFields(...));
         add_action('init', $this->registerTestingPHPOnlyBlocks(...));
         add_action('init', $this->registerTestingShortcodes(...));
@@ -326,6 +330,7 @@ class Plugin
                 __('Dummy CPT'),
                 __('Dummy CPTs'),
                 __('dummy CPTs'),
+                true,
             )
         );
 
@@ -339,6 +344,7 @@ class Plugin
                 __('Dummy CPT (Two)'),
                 __('Dummy CPTs (Two)'),
                 __('dummy CPTs (two)'),
+                true,
             )
         );
 
@@ -469,9 +475,29 @@ class Plugin
     }
 
     /**
+     * The rewrite rules stored by a site seeded before the testing CPTs had
+     * an archive lack the archive's rules, so `/dummy-cpt/` resolves to
+     * nothing. Flush them once, as soon as the rules are found missing.
+     */
+    protected function maybeFlushRewriteRulesForArchives(): void
+    {
+        $rewriteRules = get_option('rewrite_rules');
+        if (!is_array($rewriteRules) || $rewriteRules === []) {
+            return;
+        }
+        foreach (array_keys($rewriteRules) as $rewriteRule) {
+            if (str_ends_with((string) $rewriteRule, 'dummy-cpt/?$')) {
+                return;
+            }
+        }
+        flush_rewrite_rules();
+    }
+
+    /**
      * Arguments for registering the post type
      *
      * @param string[] $taxonomies
+     * @param bool $hasArchive Whether the post type has an archive, at the post type's slug
      * @return array<string,mixed>
      */
     protected function getCustomPostTypeArgs(
@@ -479,8 +505,10 @@ class Plugin
         string $name_uc,
         string $names_uc,
         string $names_lc,
+        bool $hasArchive = false,
     ): array {
         return array(
+            'has_archive' => $hasArchive,
             'public' => true,
             'show_in_nav_menus' => true,
             'show_ui' => true,

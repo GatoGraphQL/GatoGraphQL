@@ -1,0 +1,217 @@
+{
+    "data": {
+        "post": {
+            "id": 1,
+            "url": "https:\/\/gatographql.lndo.site\/hello-world\/",
+            "entity": {
+                "type": "customPost",
+                "id": 1,
+                "customPostType": "post"
+            }
+        },
+        "page": {
+            "id": 2,
+            "url": "https:\/\/gatographql.lndo.site\/sample-page\/",
+            "entity": {
+                "type": "customPost",
+                "id": 2,
+                "customPostType": "page"
+            }
+        },
+        "dummyCPT": {
+            "id": 1613,
+            "url": "https:\/\/gatographql.lndo.site\/dummy-cpt\/dolor-facilis-repellat-pariatur-veniam-at\/",
+            "entity": {
+                "type": "customPost",
+                "id": 1613,
+                "customPostType": "dummy-cpt"
+            }
+        },
+        "mediaItems": [
+            {
+                "id": 1361,
+                "src": "https:\/\/gatographql.lndo.site\/wp-content\/uploads\/GatoGraphQL-logo.webp",
+                "fileEntity": {
+                    "type": "media",
+                    "id": 1361
+                },
+                "resizedFileEntity": {
+                    "type": "media",
+                    "id": 1361
+                },
+                "thumbnailFileEntity": {
+                    "type": "media",
+                    "id": 1361
+                },
+                "nonExistingSizeFileEntity": null,
+                "url": "https:\/\/gatographql.lndo.site\/graphql-api-header\/",
+                "attachmentPageEntity": {
+                    "type": "media",
+                    "id": 1361
+                }
+            }
+        ],
+        "category": {
+            "id": 3,
+            "url": "https:\/\/gatographql.lndo.site\/category\/blog\/",
+            "entity": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            }
+        },
+        "hierarchicalCategory": {
+            "id": 7,
+            "url": "https:\/\/gatographql.lndo.site\/category\/blog\/resource\/special-topic\/most-special-topic\/",
+            "entity": {
+                "type": "taxonomyTerm",
+                "id": 7,
+                "taxonomy": "category"
+            }
+        },
+        "tag": {
+            "id": 10,
+            "url": "https:\/\/gatographql.lndo.site\/tag\/graphql\/",
+            "entity": {
+                "type": "taxonomyTerm",
+                "id": 10,
+                "taxonomy": "post_tag"
+            }
+        },
+        "customTaxonomyCategory": {
+            "id": 21,
+            "url": "https:\/\/gatographql.lndo.site\/dummy-category\/capullo\/",
+            "entity": {
+                "type": "taxonomyTerm",
+                "id": 21,
+                "taxonomy": "dummy-category"
+            }
+        },
+        "customTaxonomyTag": {
+            "id": 25,
+            "url": "https:\/\/gatographql.lndo.site\/dummy-tag\/jazz\/",
+            "entity": {
+                "type": "taxonomyTerm",
+                "id": 25,
+                "taxonomy": "dummy-tag"
+            }
+        },
+        "user": {
+            "id": 6,
+            "url": "https:\/\/gatographql.lndo.site\/author\/editor\/",
+            "entity": {
+                "type": "user",
+                "id": 6
+            }
+        },
+        "urls": {
+            "homepage": {
+                "type": "homepage",
+                "id": 0
+            },
+            "homepageWithoutTrailingSlash": {
+                "type": "homepage",
+                "id": 0
+            },
+            "homepageWithTrackingParams": {
+                "type": "homepage",
+                "id": 0
+            },
+            "homepageSearch": null,
+            "rootRelativePath": {
+                "type": "customPost",
+                "id": 1,
+                "customPostType": "post"
+            },
+            "withQueryStringAndFragment": {
+                "type": "customPost",
+                "id": 1,
+                "customPostType": "post"
+            },
+            "withNumericQueryParam": {
+                "type": "customPost",
+                "id": 1,
+                "customPostType": "post"
+            },
+            "paginatedCategory": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            },
+            "categoryFeed": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            },
+            "categoryRSSFeed": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            },
+            "hierarchicalCategoryUnderAnotherParent": null,
+            "customPostTypeArchive": {
+                "type": "customPostTypeArchive",
+                "customPostType": "dummy-cpt"
+            },
+            "paginatedCustomPostTypeArchive": {
+                "type": "customPostTypeArchive",
+                "customPostType": "dummy-cpt"
+            },
+            "customPostTypeArchiveWithFragment": {
+                "type": "customPostTypeArchive",
+                "customPostType": "dummy-cpt"
+            },
+            "plainPost": {
+                "type": "customPost",
+                "id": 1,
+                "customPostType": "post"
+            },
+            "plainPage": {
+                "type": "customPost",
+                "id": 2,
+                "customPostType": "page"
+            },
+            "plainCategoryByID": {
+                "type": "taxonomyTerm",
+                "id": 1,
+                "taxonomy": "category"
+            },
+            "plainCategoryBySlug": {
+                "type": "taxonomyTerm",
+                "id": 3,
+                "taxonomy": "category"
+            },
+            "plainTag": {
+                "type": "taxonomyTerm",
+                "id": 10,
+                "taxonomy": "post_tag"
+            },
+            "plainCustomTaxonomyTerm": {
+                "type": "taxonomyTerm",
+                "id": 25,
+                "taxonomy": "dummy-tag"
+            },
+            "plainAuthorByID": {
+                "type": "user",
+                "id": 1
+            },
+            "plainAuthorBySlug": {
+                "type": "user",
+                "id": 6
+            },
+            "plainCustomPostTypeArchive": {
+                "type": "customPostTypeArchive",
+                "customPostType": "dummy-cpt"
+            },
+            "externalDomain": null,
+            "nonExistingPost": null,
+            "nonExistingCategory": null,
+            "nonExistingAuthor": null,
+            "archiveOfPostTypeWithoutArchive": null,
+            "emptyURL": null,
+            "draftPage": null,
+            "draftPageViaCustomPostID": null,
+            "termOfNonPubliclyQueryableTaxonomy": null
+        }
+    }
+}

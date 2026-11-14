@@ -4,6 +4,9 @@
       "globalFields": [
         {
           "name": "_urlToCustomPostID"
+        },
+        {
+          "name": "_urlToEntity"
         }
       ]
     }

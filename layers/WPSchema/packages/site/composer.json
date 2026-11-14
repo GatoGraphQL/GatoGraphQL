@@ -18,6 +18,9 @@
     },
     "require-dev": {
         "johnpbloch/wordpress": "^6.6",
+        "pop-cms-schema/categories": "^21.0",
+        "pop-cms-schema/customposts": "^21.0",
+        "pop-cms-schema/tags": "^21.0",
         "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.2",
         "rector/rector": "^2.1",
