@@ -52,6 +52,7 @@ use function in_array;
 use function is_array;
 use function is_numeric;
 use function is_post_publicly_viewable;
+use function is_post_type_viewable;
 use function is_string;
 use function is_taxonomy_viewable;
 use function ksort;
@@ -111,7 +112,8 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         $url = trim($url);
         $entity = null;
         if ($url !== '') {
-            $entity = $this->resolveInternalURLToEntity($this->getAbsoluteURL($url));
+            $url = $this->getAbsoluteURL($url);
+            $entity = $this->resolveInternalURLToEntity($url);
         }
         /** @var array<string,string|int>|null */
         $entity = App::applyFilters(
@@ -119,7 +121,34 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
             $entity,
             $url
         );
-        return $entity;
+        return $this->isEntityVisible($entity) ? $entity : null;
+    }
+
+    /**
+     * A hook can answer with another entity than the one resolved (such
+     * as its translation into the language the URL names), so the
+     * resolver checks once more that the user may see the custom post, the
+     * media item or the front page that the entity points to.
+     *
+     * @param array<string,string|int>|null $entity
+     */
+    protected function isEntityVisible(?array $entity): bool
+    {
+        if ($entity === null) {
+            return false;
+        }
+        $type = $entity['type'] ?? null;
+        $id = $entity['id'] ?? null;
+        if (!is_int($id)) {
+            return true;
+        }
+        if ($type === URLEntityTypes::CUSTOM_POST || $type === URLEntityTypes::MEDIA) {
+            return $this->getCustomPostEntity($id) !== null;
+        }
+        if ($type === URLEntityTypes::HOMEPAGE && $id !== 0) {
+            return $this->getCustomPostEntity($id) !== null;
+        }
+        return true;
     }
 
     /**
@@ -457,9 +486,9 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
     {
         $queryableCustomPostTypes = App::applyFilters(
             HookNames::URL_TO_ENTITY_QUERYABLE_CUSTOM_POST_TYPES,
-            null
+            []
         );
-        return !is_array($queryableCustomPostTypes) || in_array($customPostType, $queryableCustomPostTypes, true);
+        return is_array($queryableCustomPostTypes) && in_array($customPostType, $queryableCustomPostTypes, true);
     }
 
     /**
@@ -473,9 +502,9 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         }
         $queryableTaxonomies = App::applyFilters(
             HookNames::URL_TO_ENTITY_QUERYABLE_TAXONOMIES,
-            null
+            []
         );
-        return !is_array($queryableTaxonomies) || in_array($taxonomy, $queryableTaxonomies, true);
+        return is_array($queryableTaxonomies) && in_array($taxonomy, $queryableTaxonomies, true);
     }
 
     /**
@@ -720,7 +749,12 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         }
         $customPostType = $queryVars['post_type'];
         $customPostTypeObject = get_post_type_object($customPostType);
-        if ($customPostTypeObject === null || !$customPostTypeObject->has_archive) {
+        if (
+            $customPostTypeObject === null
+            || !$customPostTypeObject->has_archive
+            || !is_post_type_viewable($customPostTypeObject)
+            || !$this->isQueryableCustomPostType($customPostType)
+        ) {
             return null;
         }
         foreach (self::CUSTOM_POST_QUERY_VARS as $customPostQueryVar) {
@@ -805,7 +839,7 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
     }
 
     /**
-     * @param array<string,string> $queryVars
+     * @param array<string|int,string> $queryVars
      */
     protected function joinURL(string $origin, string $path, array $queryVars): string
     {
@@ -815,7 +849,7 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         }
         $queryParts = [];
         foreach ($queryVars as $name => $value) {
-            $queryParts[] = rawurlencode($name) . '=' . rawurlencode($value);
+            $queryParts[] = rawurlencode((string) $name) . '=' . rawurlencode($value);
         }
         return $url . '?' . implode('&', $queryParts);
     }

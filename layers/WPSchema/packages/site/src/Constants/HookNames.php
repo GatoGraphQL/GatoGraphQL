@@ -10,7 +10,8 @@ class HookNames
      * The entity a URL points to, as `_urlToEntity` resolves it (or `null`
      * when it resolves none), for another package to adjust: a translation
      * plugin answers with the entity in the language the URL names, since
-     * WordPress resolves a slug alone.
+     * WordPress resolves a slug alone. It also gets the URL, made absolute
+     * when it was a path from the root of the site.
      */
     public const URL_TO_ENTITY = __CLASS__ . ':url-to-entity';
 
@@ -34,13 +35,15 @@ class HookNames
 
     /**
      * The custom post types whose entries `_urlToEntity` resolves, as the
-     * schema lets them be queried, or `null` for any of them.
+     * schema lets them be queried. It starts empty, so without the
+     * CustomPosts module the field resolves no custom post.
      */
     public const URL_TO_ENTITY_QUERYABLE_CUSTOM_POST_TYPES = __CLASS__ . ':url-to-entity-queryable-custom-post-types';
 
     /**
      * The taxonomies whose terms `_urlToEntity` resolves, as the schema
-     * lets them be queried, or `null` for any of them.
+     * lets them be queried. It starts empty, so without the Categories and
+     * Tags modules the field resolves no term.
      */
     public const URL_TO_ENTITY_QUERYABLE_TAXONOMIES = __CLASS__ . ':url-to-entity-queryable-taxonomies';
 }
