@@ -14174,11 +14174,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Kolejność w menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Pobierz identyfikator wpisu niestandardowego z adresu URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "Adres URL do przekształcenia w identyfikator wpisu niestandardowego"
 
@@ -14532,6 +14532,31 @@ msgid ""
 msgstr ""
 "Czy edytor Gutenberg jest włączony? (tj. wtyczka \"Classic Editor\" nie jest "
 "włączona)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Pobiera encję, na którą wskazuje adres URL witryny, w postaci "
+"`{\"type\": ..., \"id\": ...}`, gdzie `type` to jedna z wartości: "
+"`customPost`, `media`, `taxonomyTerm`, `user`, `homepage` lub "
+"`customPostTypeArchive`, a ponadto `customPostType` dla wpisu "
+"niestandardowego lub archiwum niestandardowego typu wpisu oraz `taxonomy` "
+"dla terminu taksonomii. Zwraca `null`, gdy adres URL nie pochodzi z witryny "
+"lub nie wskazuje żadnej encji."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"Adres URL do rozwiązania, pełny lub jako ścieżka od katalogu głównego "
+"witryny (np. `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

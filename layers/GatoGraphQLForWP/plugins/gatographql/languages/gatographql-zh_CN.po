@@ -13308,11 +13308,11 @@ msgstr "在wp-admin中编辑该自定义文章的URL，若用户无访问权限�
 msgid "Menu order"
 msgstr "菜单顺序"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "从URL获取自定义文章ID"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "要转换为自定义文章ID的URL"
 
@@ -13654,6 +13654,28 @@ msgid ""
 "Is the Gutenberg editor enabled? (i.e. the \"Classic Editor\" plugin is not "
 "enabled)"
 msgstr "是否启用了 Gutenberg 编辑器？（即未启用 \"Classic Editor\" 插件）"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"获取站点中某个 URL 所指向的实体,格式为 `{\"type\": ..., \"id\": ...}`,其中 "
+"`type` 为 `customPost`、`media`、`taxonomyTerm`、`user`、`homepage` 或 "
+"`customPostTypeArchive` 之一;自定义文章或自定义文章类型归档还会附带 "
+"`customPostType`,分类法术语还会附带 `taxonomy`。当该 URL 不属于本站点,或不指"
+"向任何实体时,返回 `null`。"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"要解析的 URL,可以是完整 URL,也可以是从站点根目录开始的路径(例如 `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

@@ -14119,11 +14119,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Urutan menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Dapatkan ID custom post dari sebuah URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL yang akan dikonversi menjadi ID custom post"
 
@@ -14476,6 +14476,31 @@ msgid ""
 msgstr ""
 "Apakah editor Gutenberg diaktifkan? (yaitu plugin \"Classic Editor\" tidak "
 "diaktifkan)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Dapatkan entitas yang ditunjuk oleh sebuah URL situs, dalam bentuk "
+"`{\"type\": ..., \"id\": ...}`, di mana `type` adalah salah satu dari "
+"`customPost`, `media`, `taxonomyTerm`, `user`, `homepage` atau "
+"`customPostTypeArchive`, ditambah `customPostType` untuk custom post atau "
+"arsip custom post type, dan `taxonomy` untuk term taksonomi. Fungsi ini "
+"mengembalikan `null` ketika URL bukan berasal dari situs, atau tidak "
+"menunjuk ke entitas mana pun."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL yang akan diselesaikan, baik lengkap maupun sebagai path dari root situs "
+"(seperti `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

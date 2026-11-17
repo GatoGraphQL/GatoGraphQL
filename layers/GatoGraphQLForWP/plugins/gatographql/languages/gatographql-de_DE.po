@@ -14597,11 +14597,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Menüreihenfolge"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Die ID des benutzerdefinierten Beitrags anhand einer URL ermitteln"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr ""
 "Die URL, die in eine ID eines benutzerdefinierten Beitrags umgewandelt "
@@ -14960,6 +14960,30 @@ msgid ""
 msgstr ""
 "Ist der Gutenberg-Editor aktiviert? (d. h. das Plugin \"Classic Editor\" ist "
 "nicht aktiviert)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Ruft die Entität ab, auf die eine URL der Website verweist, als "
+"`{\"type\": ..., \"id\": ...}`, wobei `type` einer der Werte `customPost`, "
+"`media`, `taxonomyTerm`, `user`, `homepage` oder `customPostTypeArchive` "
+"ist, dazu `customPostType` für einen Custom Post oder ein Custom-Post-Type-"
+"Archiv und `taxonomy` für einen Taxonomie-Begriff. Sie gibt `null` zurück, "
+"wenn die URL nicht von der Website stammt oder auf keine Entität verweist."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"Die aufzulösende URL, entweder vollständig oder als Pfad ab dem "
+"Stammverzeichnis der Website (etwa `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

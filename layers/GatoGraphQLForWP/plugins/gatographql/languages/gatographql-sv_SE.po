@@ -14139,11 +14139,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Menyordning"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Hämta det anpassade inläggets ID från en URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL:en som ska konverteras till ett anpassat inläggs-ID"
 
@@ -14495,6 +14495,30 @@ msgid ""
 msgstr ""
 "Är Gutenberg-redigeraren aktiverad? (dvs. insticksprogrammet \"Classic "
 "Editor\" är inte aktiverat)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Hämta den entitet som en URL på webbplatsen pekar på, som `{\"type\": ..., "
+"\"id\": ...}`, där `type` är ett av `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` eller `customPostTypeArchive`, samt `customPostType` för "
+"ett anpassat inlägg eller ett arkiv för en anpassad inläggstyp, och "
+"`taxonomy` för en taxonomiterm. Den returnerar `null` när URL:en inte "
+"tillhör webbplatsen eller inte pekar på någon entitet."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL:en som ska matchas, antingen komplett eller som en sökväg från "
+"webbplatsens rot (till exempel `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"
