@@ -376,8 +376,9 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         $placeholders = implode(', ', array_fill(0, count($candidateFilePaths), '%s'));
         /** @var string */
         $sql = $wpdb->prepare(
-            "SELECT post_id FROM {$wpdb->postmeta} WHERE meta_key = '_wp_attached_file' AND (meta_value IN ({$placeholders}) OR meta_value LIKE %s) LIMIT 20",
+            "SELECT post_id FROM %i WHERE meta_key = '_wp_attached_file' AND (meta_value IN (" . $placeholders . ") OR meta_value LIKE %s) LIMIT 20",
             [
+                $wpdb->postmeta,
                 ...$candidateFilePaths,
                 $wpdb->esc_like($directoryPrefix . $baseName . '-e') . '%',
             ]
@@ -403,16 +404,30 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         $fileNames = [];
         $metadata = wp_get_attachment_metadata($mediaID);
         if (is_array($metadata)) {
-            if (isset($metadata['file']) && is_string($metadata['file'])) {
-                $fileNames[] = basename($metadata['file']);
+            $file = $this->getEntry($metadata, 'file');
+            if (is_string($file)) {
+                $fileNames[] = basename($file);
             }
-            if (isset($metadata['original_image']) && is_string($metadata['original_image'])) {
-                $fileNames[] = $metadata['original_image'];
+            $originalImage = $this->getEntry($metadata, 'original_image');
+            if (is_string($originalImage)) {
+                $fileNames[] = $originalImage;
             }
-            $fileNames = array_merge($fileNames, $this->getSizeFileNames($metadata['sizes'] ?? null));
+            $fileNames = array_merge($fileNames, $this->getSizeFileNames($this->getEntry($metadata, 'sizes')));
         }
         $fileNames = array_merge($fileNames, $this->getSizeFileNames(get_post_meta($mediaID, '_wp_attachment_backup_sizes', true)));
         return array_values(array_unique($fileNames));
+    }
+
+    /**
+     * The entry under the key, or `null` when there is none. The media
+     * metadata that WordPress stores may lack keys that its documented
+     * shape lists, and hold others (eg: `original_image`).
+     *
+     * @param array<mixed> $entries
+     */
+    protected function getEntry(array $entries, string $key): mixed
+    {
+        return $entries[$key] ?? null;
     }
 
     /**
@@ -534,7 +549,7 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
             return [];
         }
         $rewriteRules = $wp_rewrite->wp_rewrite_rules();
-        if (!is_array($rewriteRules) || $rewriteRules === []) {
+        if ($rewriteRules === []) {
             return [];
         }
 
@@ -560,7 +575,11 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
             $query = WP_MatchesMapRegex::apply($query, $matches);
             $queryVars = [];
             parse_str($query, $queryVars);
-            return $queryVars;
+            return array_filter(
+                $queryVars,
+                fn (int|string $key): bool => is_string($key),
+                ARRAY_FILTER_USE_KEY
+            );
         }
         return [];
     }
@@ -689,7 +708,7 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
         foreach ($slugsByTaxonomy as $taxonomyName => $slugPath) {
             $slugs = explode('/', trim(rawurldecode($slugPath), '/'));
             $slug = array_pop($slugs);
-            if ($slug === null || $slug === '') {
+            if ($slug === '') {
                 continue;
             }
             /** @var array<string,mixed> */
