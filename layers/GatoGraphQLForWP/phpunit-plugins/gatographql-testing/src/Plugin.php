@@ -8,6 +8,7 @@ use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Constants\UserMetaKeys;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\BulkPluginActivationDeactivationExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Executers\GatoGraphQLAdminEndpointsTestExecuter;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\AddDummyCustomAdminEndpointHook;
+use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Hooks\KeepCustomFieldsMetaBoxHook;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\RESTAPI\Endpoints\AdminRESTAPIEndpointManager;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Settings\Options;
 use PHPUnitForGatoGraphQL\GatoGraphQLTesting\Utilities\CustomHeaderAppender;
@@ -48,6 +49,7 @@ class Plugin
          * Initialize all the hooks
          */
         new AddDummyCustomAdminEndpointHook();
+        new KeepCustomFieldsMetaBoxHook();
 
         /**
          * Test executers
