@@ -2254,6 +2254,9 @@
                         },
                         {
                             "name": "_urlToCustomPostID"
+                        },
+                        {
+                            "name": "_urlToEntity"
                         }
                     ],
                     "kind": "OBJECT",
@@ -2918,6 +2921,9 @@
                         },
                         {
                             "name": "_urlToCustomPostID"
+                        },
+                        {
+                            "name": "_urlToEntity"
                         }
                     ],
                     "kind": "OBJECT",

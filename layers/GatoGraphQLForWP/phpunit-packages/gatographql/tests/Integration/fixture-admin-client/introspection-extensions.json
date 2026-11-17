@@ -8914,6 +8914,21 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            "name": "_urlToEntity",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
                         }
                     ],
                     "inputFields": null,
@@ -12851,6 +12866,21 @@
                         },
                         {
                             "name": "_urlToCustomPostID",
+                            "extensions": {
+                                "isMutation": false,
+                                "isSensitiveDataElement": false
+                            },
+                            "args": [
+                                {
+                                    "name": "url",
+                                    "extensions": {
+                                        "isSensitiveDataElement": false
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "name": "_urlToEntity",
                             "extensions": {
                                 "isMutation": false,
                                 "isSensitiveDataElement": false
@@ -24813,6 +24843,12 @@
                         },
                         {
                             "name": "post_type",
+                            "extensions": {
+                                "isSensitiveDataElement": false
+                            }
+                        },
+                        {
+                            "name": "post_type_archive",
                             "extensions": {
                                 "isSensitiveDataElement": false
                             }
