@@ -14158,11 +14158,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Thứ tự menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Lấy ID bài đăng tùy chỉnh từ một URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL cần chuyển đổi thành ID bài đăng tùy chỉnh"
 
@@ -14514,6 +14514,30 @@ msgid ""
 msgstr ""
 "Trình soạn thảo Gutenberg có được bật không? (tức là plugin \"Classic "
 "Editor\" không được bật)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Lấy thực thể mà một URL của trang web trỏ tới, dưới dạng `{\"type\": ..., "
+"\"id\": ...}`, trong đó `type` là một trong các giá trị `customPost`, "
+"`media`, `taxonomyTerm`, `user`, `homepage` hoặc `customPostTypeArchive`, "
+"kèm theo `customPostType` cho một custom post hoặc một trang lưu trữ custom "
+"post type, và `taxonomy` cho một taxonomy term. Trường này trả về `null` khi "
+"URL không thuộc trang web hoặc không trỏ tới thực thể nào."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL cần phân giải, ở dạng đầy đủ hoặc dạng đường dẫn tính từ thư mục gốc của "
+"trang web (chẳng hạn `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

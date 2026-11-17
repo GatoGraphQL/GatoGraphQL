@@ -14355,11 +14355,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Порядок в меню"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Получить ID произвольного типа записи по URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL для преобразования в ID произвольного типа записи"
 
@@ -14710,6 +14710,29 @@ msgid ""
 "enabled)"
 msgstr ""
 "Включён ли редактор Gutenberg? (т.е. плагин «Classic Editor» не активен)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Получает сущность, на которую указывает URL сайта, в виде `{\"type\": ..., "
+"\"id\": ...}`, где `type` — одно из значений `customPost`, `media`, "
+"`taxonomyTerm`, `user`, `homepage` или `customPostTypeArchive`, а также "
+"`customPostType` для произвольной записи или архива произвольного типа "
+"записей и `taxonomy` для термина таксономии. Возвращает `null`, если URL не "
+"принадлежит сайту или не указывает ни на какую сущность."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL для разрешения: полный или путь от корня сайта (например, `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

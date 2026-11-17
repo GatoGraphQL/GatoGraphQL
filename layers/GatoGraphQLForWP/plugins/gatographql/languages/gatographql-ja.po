@@ -14068,11 +14068,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "メニューの順序"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "URLからカスタム投稿IDを取得する"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "カスタム投稿IDに変換するURL"
 
@@ -14422,6 +14422,30 @@ msgid ""
 msgstr ""
 "Gutenbergエディターは有効ですか？（つまり、「Classic Editor」プラグインは有効"
 "になっていません）"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"サイトのURLが指すエンティティを `{\"type\": ..., \"id\": ...}` の形式で取得し"
+"ます。`type` は `customPost`、`media`、`taxonomyTerm`、`user`、`homepage`、"
+"`customPostTypeArchive` のいずれかで、カスタム投稿またはカスタム投稿タイプの"
+"アーカイブの場合は `customPostType`、タクソノミーターム の場合は `taxonomy` "
+"も返します。URLがサイトのものでない場合、またはどのエンティティも指していない"
+"場合は `null` を返します。"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"解決するURL。完全なURL、またはサイトのルートからのパス(例: `/contact/`)のいず"
+"れかを指定します"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

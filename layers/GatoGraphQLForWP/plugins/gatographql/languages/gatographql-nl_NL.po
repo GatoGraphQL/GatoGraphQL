@@ -14467,11 +14467,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Menuvolgorde"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Haal de ID van het aangepaste bericht op uit een URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "De URL om te converteren naar een ID van een aangepast bericht"
 
@@ -14826,6 +14826,30 @@ msgid ""
 msgstr ""
 "Is de Gutenberg-editor ingeschakeld? (d.w.z. de \"Classic Editor\"-plugin is "
 "niet ingeschakeld)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Haal de entiteit op waar een URL van de site naar verwijst, als "
+"`{\"type\": ..., \"id\": ...}`, waarbij `type` een van `customPost`, "
+"`media`, `taxonomyTerm`, `user`, `homepage` of `customPostTypeArchive` is, "
+"plus `customPostType` voor een custom post of een archief van een custom "
+"post type, en `taxonomy` voor een taxonomieterm. Het geeft `null` terug "
+"wanneer de URL niet van de site is of naar geen enkele entiteit verwijst."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"De URL die moet worden omgezet, volledig of als pad vanaf de root van de "
+"site (zoals `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

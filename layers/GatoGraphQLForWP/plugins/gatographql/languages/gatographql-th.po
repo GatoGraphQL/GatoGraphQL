@@ -13567,11 +13567,11 @@ msgstr "URL ใน wp-admin สำหรับแก้ไขโพสต์แ�
 msgid "Menu order"
 msgstr "ลำดับเมนู"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "รับ ID ของโพสต์แบบกำหนดเองจาก URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL ที่จะแปลงเป็น ID ของโพสต์แบบกำหนดเอง"
 
@@ -13921,6 +13921,28 @@ msgid ""
 msgstr ""
 "เปิดใช้งานตัวแก้ไข Gutenberg หรือไม่? (กล่าวคือ ปลั๊กอิน \"Classic Editor\" "
 "ไม่ได้เปิดใช้งาน)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"รับเอนทิตีที่ URL ของไซต์ชี้ไป ในรูปแบบ `{\"type\": ..., \"id\": ...}` โดยที่ `type` "
+"เป็นหนึ่งใน `customPost`, `media`, `taxonomyTerm`, `user`, `homepage` หรือ "
+"`customPostTypeArchive` พร้อมด้วย `customPostType` สำหรับ custom post "
+"หรือหน้าคลังของ custom post type และ `taxonomy` สำหรับ taxonomy term ฟิลด์นี้จะคืนค่า "
+"`null` เมื่อ URL ไม่ได้มาจากไซต์ หรือไม่ได้ชี้ไปที่เอนทิตีใดเลย"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL ที่ต้องการแปลง ไม่ว่าจะเป็น URL แบบเต็ม หรือเป็นพาธจากรากของไซต์ (เช่น `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"

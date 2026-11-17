@@ -14342,11 +14342,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Ordem do menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:58
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Obter o ID do post personalizado a partir de uma URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:87
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "A URL a ser convertida em um ID de post personalizado"
 
@@ -14698,6 +14698,30 @@ msgid ""
 msgstr ""
 "O editor Gutenberg está habilitado? (ou seja, o plugin \"Classic Editor\" "
 "não está habilitado)"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Obtém a entidade para a qual uma URL do site aponta, como `{\"type\": ..., "
+"\"id\": ...}`, em que `type` é um entre `customPost`, `media`, "
+"`taxonomyTerm`, `user`, `homepage` ou `customPostTypeArchive`, além de "
+"`customPostType` para um custom post ou um arquivo de tipo de custom post, e "
+"`taxonomy` para um termo de taxonomia. Retorna `null` quando a URL não é do "
+"site ou não aponta para nenhuma entidade."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"A URL a ser resolvida, completa ou como um caminho a partir da raiz do site "
+"(como `/contact/`)"
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"
