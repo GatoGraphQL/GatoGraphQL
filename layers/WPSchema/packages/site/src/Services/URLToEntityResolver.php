@@ -10,6 +10,7 @@ use PoP\Root\App;
 use PoP\Root\Services\AbstractBasicService;
 use WP;
 use WP_MatchesMapRegex;
+use WP_Post;
 use WP_Rewrite;
 use WP_Taxonomy;
 use WP_Term;
@@ -218,6 +219,11 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
             return null;
         }
 
+        $postsPageEntity = $this->getPostsPageEntity($queryVars);
+        if ($postsPageEntity !== null) {
+            return $postsPageEntity;
+        }
+
         /**
          * The URL is compared as it is first, and then without its
          * pagination and feed, so that a term or a user whose slug is the
@@ -302,6 +308,39 @@ class URLToEntityResolver extends AbstractBasicService implements URLToEntityRes
     {
         $host = strtolower($host);
         return str_starts_with($host, 'www.') ? substr($host, 4) : $host;
+    }
+
+    /**
+     * The page that shows the latest posts ("Posts page" under Settings >
+     * Reading). WordPress serves it as the blog index, not as a page, so
+     * `url_to_postid()` answers 0 for it, and the URL resolved to nothing:
+     * a link to the blog page in a menu was never pointed at its
+     * translation.
+     *
+     * @param array<string,string> $queryVars
+     * @return array<string,string|int>|null
+     */
+    protected function getPostsPageEntity(array $queryVars): ?array
+    {
+        if (get_option('show_on_front') !== 'page') {
+            return null;
+        }
+        $postsPageID = (int) get_option('page_for_posts');
+        if ($postsPageID === 0) {
+            return null;
+        }
+        if (isset($queryVars['page_id'])) {
+            $pageID = (int) $queryVars['page_id'];
+        } elseif (isset($queryVars['pagename'])) {
+            $page = get_page_by_path($queryVars['pagename']);
+            $pageID = $page instanceof WP_Post ? $page->ID : 0;
+        } else {
+            return null;
+        }
+        if ($pageID !== $postsPageID) {
+            return null;
+        }
+        return $this->getCustomPostEntity($postsPageID);
     }
 
     protected function getFrontPageID(): int
