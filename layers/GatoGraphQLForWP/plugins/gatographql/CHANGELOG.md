@@ -8,7 +8,7 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ### Added
 
-- Added global field `_urlToEntity`, which tells what a URL of the site points to (a custom post, a media item, a taxonomy term, a user, the homepage or a custom post type archive), and returns its type and ID, plus the custom post type or the taxonomy, or `null` when the URL points to none. It resolves only what the user may see (such as a published post, or a draft the user can read) and the custom post types and taxonomies that the schema lets be queried (#3469)
+- Added global field `_urlToEntity`, which tells what a URL of the site points to (a custom post, a media item, a taxonomy term, a user, the homepage, the page that shows the latest posts or a custom post type archive), and returns its type and ID, plus the custom post type or the taxonomy, or `null` when the URL points to none. It resolves only what the user may see (such as a published post, or a draft the user can read) and the custom post types and taxonomies that the schema lets be queried (#3469)
 
 ### Improvements
 
