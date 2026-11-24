@@ -172,7 +172,8 @@ composer fix-style
 
 ## Release notes
 
-- **[21.0](docs/release-notes/21.0/en.md)** (current)
+- **[21.1](docs/release-notes/21.1/en.md)** (current)
+- [21.0](docs/release-notes/21.0/en.md)
 - [20.0](docs/release-notes/20.0/en.md)
 - [19.3](docs/release-notes/19.3/en.md)
 - [19.2](docs/release-notes/19.2/en.md)
