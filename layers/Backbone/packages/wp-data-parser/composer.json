@@ -24,7 +24,7 @@
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "21.0-dev"
+            "dev-master": "21.1-dev"
         }
     },
     "config": {
