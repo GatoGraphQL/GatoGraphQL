@@ -23,7 +23,7 @@ class TagInterfaceTypeFieldResolver extends AbstractIsTaxonomyInterfaceTypeField
     public function getFieldDescription(string $fieldName): ?string
     {
         return match ($fieldName) {
-            'name' => $this->__('Tag', 'gatographql'),
+            'name' => $this->__('Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`', 'gatographql'),
             'description' => $this->__('Tag description', 'gatographql'),
             'count' => $this->__('Number of custom posts containing this tag', 'gatographql'),
             default => parent::getFieldDescription($fieldName),

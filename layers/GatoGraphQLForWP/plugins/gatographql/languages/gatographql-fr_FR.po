@@ -65,8 +65,11 @@ msgid "Category taxonomy"
 msgstr "Taxonomie de catégorie"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Catégorie"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nom de la catégorie. WordPress la stocke encodée en HTML, donc `&` revient "
+"sous la forme `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -2014,6 +2017,11 @@ msgstr ""
 "Fournir le chemin de slug du parent de l'article personnalisé (incluant tous "
 "les slugs ancêtres, ex. : \"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Entrée pour créer un article personnalisé"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr ""
@@ -3621,7 +3629,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Le nom du menu ne peut pas être vide"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3629,7 +3637,14 @@ msgstr ""
 "Pour les éléments de menu de type \"post_type\", \"objectType\" et "
 "\"objectID\" sont tous deux obligatoires"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Pour les éléments de menu de type \"post_type_archive\", \"objectType\" est "
+"obligatoire"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3637,7 +3652,7 @@ msgstr ""
 "Pour les éléments de menu de type \"taxonomy\", \"objectType\" et "
 "\"objectID\" sont tous deux obligatoires"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Le menu avec l'ID '%s' n'a pas pu être supprimé"
@@ -3740,6 +3755,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Élément de menu lié à un objet de type d'article"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Élément de menu qui pointe vers l'archive d'un type de contenu"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Élément de menu lié à un terme de taxonomie"
 
@@ -3816,8 +3835,12 @@ msgid "The menu item type"
 msgstr "Le type de l'élément de menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Le type de l'objet lié (type d'article ou taxonomie)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Le type de l'objet lié (type de contenu ou taxonomie). Pour une archive de "
+"type de contenu, le type de contenu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5605,8 +5628,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Limiter les résultats. Le nombre maximum autorisé est '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Entrée pour trier les contenus personnalisés"
+msgid "Input to sort the results"
+msgstr "Entrée pour trier les résultats"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -5883,8 +5906,11 @@ msgid "Tag taxonomy"
 msgstr "Taxonomie de tag"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Tag"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nom de l'étiquette. WordPress la stocke encodée en HTML, donc `&` revient "
+"sous la forme `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -9003,7 +9029,7 @@ msgstr ""
 "être décodée en JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Erreur inconnue"
 
@@ -14706,11 +14732,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Ordre du menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Obtenir l'identifiant du contenu personnalisé à partir d'une URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "L'URL à convertir en identifiant de contenu personnalisé"
 
@@ -15068,6 +15094,31 @@ msgstr ""
 "L'éditeur Gutenberg est-il activé ? (c'est-à-dire que le plugin « Classic "
 "Editor » n'est pas activé)"
 
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Obtenir l'entité vers laquelle pointe une URL du site, sous la forme "
+"`{\"type\": ..., \"id\": ...}`, où `type` vaut `customPost`, `media`, "
+"`taxonomyTerm`, `user`, `homepage` ou `customPostTypeArchive`, avec en plus "
+"`customPostType` pour un contenu personnalisé ou une archive de type de "
+"contenu personnalisé, et `taxonomy` pour un terme de taxonomie. Elle renvoie "
+"`null` lorsque l'URL n'appartient pas au site ou ne pointe vers aucune "
+"entité."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"L'URL à résoudre, soit complète, soit sous forme de chemin depuis la racine "
+"du site (par exemple `/contact/`)"
+
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"
 msgstr "Nom d'usage de l'utilisateur"
@@ -15107,6 +15158,18 @@ msgstr "Trier par nom d'usage de l'utilisateur"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Trier par e-mail de l'utilisateur"
+
+#~ msgid "Category"
+#~ msgstr "Catégorie"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Le type de l'objet lié (type d'article ou taxonomie)"
+
+#~ msgid "Tag"
+#~ msgstr "Tag"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Entrée pour trier les contenus personnalisés"
 
 #~ msgid "Website:"
 #~ msgstr "Site web :"

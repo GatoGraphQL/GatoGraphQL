@@ -65,8 +65,11 @@ msgid "Category taxonomy"
 msgstr "Taksonomi kategori"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "Kategori"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nama kategori. WordPress menyimpannya dalam bentuk HTML-encoded, sehingga "
+"`&` dikembalikan sebagai `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -1886,6 +1889,11 @@ msgstr ""
 "Berikan jalur slug induk custom post (termasuk semua slug leluhur, mis: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "Input untuk membuat custom post"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "Input untuk memfilter custom post milik pengguna yang sedang login"
@@ -3372,7 +3380,7 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr "Nama menu tidak boleh kosong"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3380,7 +3388,13 @@ msgstr ""
 "Untuk item menu bertipe \"post_type\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+"Untuk item menu bertipe \"post_type_archive\", \"objectType\" wajib diisi"
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
@@ -3388,7 +3402,7 @@ msgstr ""
 "Untuk item menu bertipe \"taxonomy\", \"objectType\" dan \"objectID\" "
 "keduanya wajib diisi"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "Menu dengan ID '%s' tidak dapat dihapus"
@@ -3485,6 +3499,10 @@ msgid "Menu item linking to a post type object"
 msgstr "Item menu yang menautkan ke objek tipe post"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "Item menu yang menautkan ke arsip suatu tipe post"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "Item menu yang menautkan ke term taksonomi"
 
@@ -3561,8 +3579,12 @@ msgid "The menu item type"
 msgstr "Tipe item menu"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "Tipe objek yang ditautkan (tipe postingan atau taksonomi)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"Tipe objek yang ditautkan (tipe post atau taksonomi). Untuk arsip tipe post, "
+"yaitu tipe post tersebut"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5229,8 +5251,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "Batasi hasil. Jumlah maksimum yang diizinkan adalah '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Input untuk mengurutkan custom post"
+msgid "Input to sort the results"
+msgstr "Input untuk mengurutkan hasil"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -5500,8 +5522,11 @@ msgid "Tag taxonomy"
 msgstr "Taksonomi tag"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "Tag"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"Nama tag. WordPress menyimpannya dalam bentuk HTML-encoded, sehingga `&` "
+"dikembalikan sebagai `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -8488,7 +8513,7 @@ msgstr ""
 "Respons dari API lisensi (endpoint: \"%s\") tidak dapat didekode sebagai JSON"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "Kesalahan tidak diketahui"
 
@@ -14094,11 +14119,11 @@ msgstr ""
 msgid "Menu order"
 msgstr "Urutan menu"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "Dapatkan ID custom post dari sebuah URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL yang akan dikonversi menjadi ID custom post"
 
@@ -14452,6 +14477,31 @@ msgstr ""
 "Apakah editor Gutenberg diaktifkan? (yaitu plugin \"Classic Editor\" tidak "
 "diaktifkan)"
 
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"Dapatkan entitas yang ditunjuk oleh sebuah URL situs, dalam bentuk "
+"`{\"type\": ..., \"id\": ...}`, di mana `type` adalah salah satu dari "
+"`customPost`, `media`, `taxonomyTerm`, `user`, `homepage` atau "
+"`customPostTypeArchive`, ditambah `customPostType` untuk custom post atau "
+"arsip custom post type, dan `taxonomy` untuk term taksonomi. Fungsi ini "
+"mengembalikan `null` ketika URL bukan berasal dari situs, atau tidak "
+"menunjuk ke entitas mana pun."
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL yang akan diselesaikan, baik lengkap maupun sebagai path dari root situs "
+"(seperti `/contact/`)"
+
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"
 msgstr "Nicename pengguna"
@@ -14489,6 +14539,18 @@ msgstr "Urutkan berdasarkan nicename pengguna"
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "Urutkan berdasarkan email pengguna"
+
+#~ msgid "Category"
+#~ msgstr "Kategori"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "Tipe objek yang ditautkan (tipe postingan atau taksonomi)"
+
+#~ msgid "Tag"
+#~ msgstr "Tag"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Input untuk mengurutkan custom post"
 
 #~ msgid "Website:"
 #~ msgstr "Situs web:"

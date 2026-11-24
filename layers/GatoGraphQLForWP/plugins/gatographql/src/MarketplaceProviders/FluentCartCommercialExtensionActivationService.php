@@ -204,11 +204,6 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
         );
     }
 
-    protected function getFluentCartAPIBaseURL(): string
-    {
-        return 'https://store.gatoplugins.com';
-    }
-
     /**
      * @return array<string,string|int|null>
      */
@@ -230,6 +225,7 @@ class FluentCartCommercialExtensionActivationService extends AbstractMarketplace
     {
         return [
             'timeout' => 15,
+            'user-agent' => $this->getFluentCartRequestUserAgent(),
         ];
     }
 

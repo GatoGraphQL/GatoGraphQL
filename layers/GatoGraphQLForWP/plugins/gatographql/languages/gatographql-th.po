@@ -64,8 +64,10 @@ msgid "Category taxonomy"
 msgstr "taxonomy หมวดหมู่"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
-msgstr "หมวดหมู่"
+msgid ""
+"Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"ชื่อหมวดหมู่ WordPress จัดเก็บในรูปแบบที่เข้ารหัส HTML ดังนั้น `&` จะถูกส่งกลับมาเป็น `&amp;`"
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
 msgid "Category description"
@@ -1828,6 +1830,11 @@ msgstr ""
 "ระบุเส้นทาง slug ของพาเรนต์โพสต์แบบกำหนดเอง (รวมถึง slug ของบรรพบุรุษทั้งหมด เช่น: "
 "\"ancestor-slug/post-slug\")"
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr "อินพุตสำหรับสร้างโพสต์แบบกำหนดเอง"
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr "อินพุตสำหรับกรองโพสต์แบบกำหนดเองของผู้ใช้ที่เข้าสู่ระบบ"
@@ -3252,21 +3259,26 @@ msgstr "องค์ประกอบสื่อ (เช่น รูปภา
 msgid "The menu name cannot be empty"
 msgstr "ชื่อเมนูต้องไม่ว่างเปล่า"
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid ""
 "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "สำหรับรายการเมนูประเภท \"post_type\" ต้องระบุทั้ง \"objectType\" และ \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid ""
+"For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr "สำหรับรายการเมนูประเภท \"post_type_archive\" ต้องระบุ \"objectType\""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid ""
 "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" "
 "are required"
 msgstr ""
 "สำหรับรายการเมนูประเภท \"taxonomy\" ต้องระบุทั้ง \"objectType\" และ \"objectID\""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr "ไม่สามารถลบเมนู (menu) ที่มี ID '%s' ได้"
@@ -3363,6 +3375,10 @@ msgid "Menu item linking to a post type object"
 msgstr "รายการเมนูที่ลิงก์ไปยังออบเจกต์ประเภทโพสต์"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr "รายการเมนูที่ลิงก์ไปยังหน้าอาร์ไคฟ์ของ post type"
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr "รายการเมนูที่ลิงก์ไปยัง taxonomy term"
 
@@ -3439,8 +3455,12 @@ msgid "The menu item type"
 msgstr "ประเภทของรายการเมนู"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
-msgstr "ประเภทของออบเจ็กต์ที่เชื่อมโยง (ประเภทโพสต์หรือแท็กซอโนมี)"
+msgid ""
+"The type of the linked object (post type or taxonomy). For a post type "
+"archive, the post type"
+msgstr ""
+"ประเภทของออบเจ็กต์ที่ลิงก์ (post type หรือ taxonomy) สำหรับอาร์ไคฟ์ของ post type คือ "
+"post type นั้น"
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
 msgid "Child menu items"
@@ -5014,8 +5034,8 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr "จำกัดจำนวนผลลัพธ์ จำนวนสูงสุดที่อนุญาตคือ '%s'"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
-msgstr "Input สำหรับการเรียงลำดับ custom post"
+msgid "Input to sort the results"
+msgstr "อินพุตสำหรับเรียงลำดับผลลัพธ์"
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
 msgid "Sorting direction"
@@ -5277,8 +5297,10 @@ msgid "Tag taxonomy"
 msgstr "อนุกรมวิธานของแท็ก"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
-msgstr "แท็ก"
+msgid ""
+"Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
+msgstr ""
+"ชื่อแท็ก WordPress จัดเก็บในรูปแบบที่เข้ารหัส HTML ดังนั้น `&` จะถูกส่งกลับมาเป็น `&amp;`"
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
 msgid "Tag description"
@@ -8150,7 +8172,7 @@ msgid ""
 msgstr "ไม่สามารถถอดรหัสการตอบสนองจาก license API (endpoint: \"%s\") เป็น JSON ได้"
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr "ข้อผิดพลาดที่ไม่ทราบสาเหตุ"
 
@@ -13545,11 +13567,11 @@ msgstr "URL ใน wp-admin สำหรับแก้ไขโพสต์แ�
 msgid "Menu order"
 msgstr "ลำดับเมนู"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr "รับ ID ของโพสต์แบบกำหนดเองจาก URL"
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr "URL ที่จะแปลงเป็น ID ของโพสต์แบบกำหนดเอง"
 
@@ -13900,6 +13922,28 @@ msgstr ""
 "เปิดใช้งานตัวแก้ไข Gutenberg หรือไม่? (กล่าวคือ ปลั๊กอิน \"Classic Editor\" "
 "ไม่ได้เปิดใช้งาน)"
 
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid ""
+"Get the entity that a URL of the site points to, as `{\"type\": ..., "
+"\"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, "
+"`user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a "
+"custom post or a custom post type archive, and `taxonomy` for a taxonomy "
+"term. It returns `null` when the URL is not from the site, or points to no "
+"entity."
+msgstr ""
+"รับเอนทิตีที่ URL ของไซต์ชี้ไป ในรูปแบบ `{\"type\": ..., \"id\": ...}` โดยที่ `type` "
+"เป็นหนึ่งใน `customPost`, `media`, `taxonomyTerm`, `user`, `homepage` หรือ "
+"`customPostTypeArchive` พร้อมด้วย `customPostType` สำหรับ custom post "
+"หรือหน้าคลังของ custom post type และ `taxonomy` สำหรับ taxonomy term ฟิลด์นี้จะคืนค่า "
+"`null` เมื่อ URL ไม่ได้มาจากไซต์ หรือไม่ได้ชี้ไปที่เอนทิตีใดเลย"
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid ""
+"The URL to resolve, either complete or as a path from the root of the site "
+"(such as `/contact/`)"
+msgstr ""
+"URL ที่ต้องการแปลง ไม่ว่าจะเป็น URL แบบเต็ม หรือเป็นพาธจากรากของไซต์ (เช่น `/contact/`)"
+
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110
 msgid "User's nicename"
 msgstr "nicename ของผู้ใช้"
@@ -13935,6 +13979,18 @@ msgstr "เรียงลำดับตาม nicename ของผู้ใ�
 #: WPSchema/packages/users/src/Overrides/TypeResolvers/EnumType/UserOrderByEnumTypeResolver.php:56
 msgid "Order by user email"
 msgstr "เรียงลำดับตามอีเมลของผู้ใช้"
+
+#~ msgid "Category"
+#~ msgstr "หมวดหมู่"
+
+#~ msgid "The type of the linked object (post type or taxonomy)"
+#~ msgstr "ประเภทของออบเจ็กต์ที่เชื่อมโยง (ประเภทโพสต์หรือแท็กซอโนมี)"
+
+#~ msgid "Tag"
+#~ msgstr "แท็ก"
+
+#~ msgid "Input to sort custom posts"
+#~ msgstr "Input สำหรับการเรียงลำดับ custom post"
 
 #~ msgid "Website:"
 #~ msgstr "เว็บไซต์:"

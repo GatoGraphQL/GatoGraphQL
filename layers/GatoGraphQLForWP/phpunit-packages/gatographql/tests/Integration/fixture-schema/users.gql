@@ -28,9 +28,9 @@ query {
     metaValue(key: "nickname")
     metaValue2: metaValue(key: "first_name")
     meta(keys: ["nickname", "first_name"])
-    metaKeys
+    metaKeys(filter: { exclude: ["wp_dashboard_quick_press_last_post_id"] })
     includingMetaKeys: metaKeys(filter: { include: ["nickname", "first_name"] })
-    excludingMetaKeys: metaKeys(filter: { exclude: ["nickname", "first_name"] })
+    excludingMetaKeys: metaKeys(filter: { exclude: ["nickname", "first_name", "wp_dashboard_quick_press_last_post_id"] })
     includingAndExcludingMetaKeys: metaKeys(filter: { include: ["nickname", "first_name"], exclude: ["first_name"] })
     name
     nicename

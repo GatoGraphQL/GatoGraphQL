@@ -58,7 +58,7 @@ msgid "Category taxonomy"
 msgstr ""
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:26
-msgid "Category"
+msgid "Category name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
 msgstr ""
 
 #: CMSSchema/packages/categories/src/FieldResolvers/InterfaceType/CategoryInterfaceTypeFieldResolver.php:27
@@ -1664,6 +1664,11 @@ msgstr ""
 msgid "Provide the custom post parent slug path (including all ancestor slugs, eg: \"ancestor-slug/post-slug\")"
 msgstr ""
 
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateCustomPostInputObjectTypeResolver.php:16
+#: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootCreateGenericCustomPostInputObjectTypeResolver.php:16
+msgid "Input to create a custom post"
+msgstr ""
+
 #: CMSSchema/packages/custompost-mutations/src/TypeResolvers/InputObjectType/RootMyCustomPostsFilterInputObjectTypeResolver.php:16
 msgid "Input to filter the logged-in user's custom posts"
 msgstr ""
@@ -2936,15 +2941,19 @@ msgstr ""
 msgid "The menu name cannot be empty"
 msgstr ""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:384
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:385
 msgid "For menu items of type \"post_type\", both \"objectType\" and \"objectID\" are required"
 msgstr ""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:405
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:409
+msgid "For menu items of type \"post_type_archive\", \"objectType\" is required"
+msgstr ""
+
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:429
 msgid "For menu items of type \"taxonomy\", both \"objectType\" and \"objectID\" are required"
 msgstr ""
 
-#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:542
+#: CMSSchema/packages/menu-mutations-wp/src/TypeAPIs/MenuTypeMutationAPI.php:566
 #, php-format
 msgid "The menu with ID '%s' could not be deleted"
 msgstr ""
@@ -3038,6 +3047,10 @@ msgid "Menu item linking to a post type object"
 msgstr ""
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:27
+msgid "Menu item linking to the archive of a post type"
+msgstr ""
+
+#: CMSSchema/packages/menu-mutations/src/TypeResolvers/EnumType/MenuItemTypeEnumTypeResolver.php:28
 msgid "Menu item linking to a taxonomy term"
 msgstr ""
 
@@ -3114,7 +3127,7 @@ msgid "The menu item type"
 msgstr ""
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:104
-msgid "The type of the linked object (post type or taxonomy)"
+msgid "The type of the linked object (post type or taxonomy). For a post type archive, the post type"
 msgstr ""
 
 #: CMSSchema/packages/menu-mutations/src/TypeResolvers/InputObjectType/MenuItemInputObjectTypeResolver.php:105
@@ -4536,7 +4549,7 @@ msgid "Limit the results. The maximum amount allowed is '%s'"
 msgstr ""
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:67
-msgid "Input to sort custom posts"
+msgid "Input to sort the results"
 msgstr ""
 
 #: CMSSchema/packages/schema-commons/src/TypeResolvers/InputObjectType/SortInputObjectTypeResolver.php:84
@@ -4782,7 +4795,7 @@ msgid "Tag taxonomy"
 msgstr ""
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:26
-msgid "Tag"
+msgid "Tag name. WordPress stores it HTML-encoded, so `&` comes back as `&amp;`"
 msgstr ""
 
 #: CMSSchema/packages/tags/src/FieldResolvers/InterfaceType/TagInterfaceTypeFieldResolver.php:27
@@ -7367,7 +7380,7 @@ msgid "The response from the license API (endpoint: \"%s\") could not be decoded
 msgstr ""
 
 #: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/AbstractMarketplaceProviderCommercialExtensionActivationService.php:93
-#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:275
+#: GatoGraphQLForWP/plugins/gatographql/src/MarketplaceProviders/FluentCartCommercialExtensionActivationService.php:271
 msgid "Unknown error"
 msgstr ""
 
@@ -11980,11 +11993,11 @@ msgstr ""
 msgid "Menu order"
 msgstr ""
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:56
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:62
 msgid "Get the custom post ID from a URL"
 msgstr ""
 
-#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:85
+#: WPSchema/packages/customposts/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:91
 msgid "The URL to convert to a custom post ID"
 msgstr ""
 
@@ -12300,6 +12313,14 @@ msgstr ""
 
 #: WPSchema/packages/settings/src/FieldResolvers/ObjectType/RootObjectTypeFieldResolver.php:65
 msgid "Is the Gutenberg editor enabled? (i.e. the \"Classic Editor\" plugin is not enabled)"
+msgstr ""
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:66
+msgid "Get the entity that a URL of the site points to, as `{\"type\": ..., \"id\": ...}`, where `type` is one of `customPost`, `media`, `taxonomyTerm`, `user`, `homepage` or `customPostTypeArchive`, plus `customPostType` for a custom post or a custom post type archive, and `taxonomy` for a taxonomy term. It returns `null` when the URL is not from the site, or points to no entity."
+msgstr ""
+
+#: WPSchema/packages/site/src/FieldResolvers/ObjectType/RootGlobalObjectTypeFieldResolver.php:95
+msgid "The URL to resolve, either complete or as a path from the root of the site (such as `/contact/`)"
 msgstr ""
 
 #: WPSchema/packages/users/src/FieldResolvers/ObjectType/UserObjectTypeFieldResolver.php:110

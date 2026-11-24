@@ -321,6 +321,7 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
 
         $args = match ($itemType) {
             MenuItemType::POST_TYPE => $this->createPostTypeMenuItemArgs($title, $objectType, $objectID),
+            MenuItemType::POST_TYPE_ARCHIVE => $this->createPostTypeArchiveMenuItemArgs($title, $objectType),
             MenuItemType::TAXONOMY => $this->createTaxonomyMenuItemArgs($title, $objectType, $objectID),
             default => [
                 'menu-item-type' => 'custom',
@@ -389,6 +390,29 @@ class MenuTypeMutationAPI extends AbstractBasicService implements MenuTypeMutati
             'menu-item-type' => 'post_type',
             'menu-item-object' => $postType,
             'menu-item-object-id' => $objectID,
+            'menu-item-title' => $title,
+            'menu-item-status' => 'publish',
+        ];
+    }
+
+    /**
+     * WordPress builds the URL of the item from the post type, so the
+     * item points at the archive in the language the menu is shown in.
+     *
+     * @throws MenuCRUDMutationException In case of error
+     * @return array<string,mixed>
+     */
+    protected function createPostTypeArchiveMenuItemArgs(string $title, string $postType): array
+    {
+        if ($postType === '') {
+            throw new MenuCRUDMutationException(
+                $this->__('For menu items of type "post_type_archive", "objectType" is required', 'gatographql')
+            );
+        }
+
+        return [
+            'menu-item-type' => 'post_type_archive',
+            'menu-item-object' => $postType,
             'menu-item-title' => $title,
             'menu-item-status' => 'publish',
         ];

@@ -1,6 +1,6 @@
 {
     "name": "schema-config-global-fields",
-    "version": "20.1.0-dev",
+    "version": "21.0.0-dev",
     "description": "Under what types to expose global fields when doing introspection",
     "author": "Leonardo Losoviz",
     "license": "MIT",

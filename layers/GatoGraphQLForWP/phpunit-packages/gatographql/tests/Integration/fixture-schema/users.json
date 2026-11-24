@@ -105,8 +105,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingMetaKeys": [
           "nickname",
@@ -123,8 +122,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingAndExcludingMetaKeys": [
           "nickname"
@@ -301,8 +299,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingMetaKeys": [
           "nickname",
@@ -319,8 +316,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingAndExcludingMetaKeys": [
           "nickname"
@@ -419,8 +415,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingMetaKeys": [
           "nickname",
@@ -437,8 +432,7 @@
           "use_ssl",
           "show_admin_bar_front",
           "locale",
-          "dismissed_wp_pointers",
-          "wp_dashboard_quick_press_last_post_id"
+          "dismissed_wp_pointers"
         ],
         "includingAndExcludingMetaKeys": [
           "nickname"

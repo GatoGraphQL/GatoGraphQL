@@ -101,7 +101,7 @@ class MenuItemInputObjectTypeResolver extends AbstractInputObjectTypeResolver
             MutationInputProperties::LINK_RELATIONSHIP => $this->__('Menu item link relationship (rel/xfn)', 'gatographql'),
             MutationInputProperties::OBJECT_ID => $this->__('The ID of the linked object (eg: post ID)', 'gatographql'),
             MutationInputProperties::ITEM_TYPE => $this->__('The menu item type', 'gatographql'),
-            MutationInputProperties::OBJECT_TYPE => $this->__('The type of the linked object (post type or taxonomy)', 'gatographql'),
+            MutationInputProperties::OBJECT_TYPE => $this->__('The type of the linked object (post type or taxonomy). For a post type archive, the post type', 'gatographql'),
             MutationInputProperties::CHILDREN => $this->__('Child menu items', 'gatographql'),
             default => parent::getInputFieldDescription($inputFieldName),
         };
