@@ -2,7 +2,7 @@
 Contributors: gatographql, leoloso
 Tags: decoupled, GraphQL, headless, webhook, api, wp-cli, rest, rest-api, react, vue, tailwind, astro, wpgraphql, nextjs
 Requires at least: 6.5
-Tested up to: 7.1
+Tested up to: 7.2
 Stable tag: 21.0.0
 Requires PHP: 8.1
 License: GPLv2 or later
@@ -246,6 +246,9 @@ The JavaScript source code for the blocks is under [layers/GatoGraphQLForWP/plug
 16. The Tutorial section explains how to achieve many objectives, exploring all the elements from the GraphQL schema
 
 == Changelog ==
+
+= 21.1.0 =
+* Improved - Tested up to WordPress 7.2 (#3476)
 
 = 21.0.0 =
 * Breaking changes - Field <code>_urlToCustomPostID</code> returns <code>null</code> for a post the user may not see, such as a draft or a private post, instead of its ID, so a query that needs the ID of such a post must run as a user who can read it (#3469)

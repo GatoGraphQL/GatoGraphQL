@@ -6,6 +6,10 @@ Updates should follow the [Keep a CHANGELOG](http://keepachangelog.com/) princip
 
 ## 21.1.0 - DATE
 
+### Improvements
+
+- Tested up to WordPress 7.2 (#3476)
+
 ## 21.0.0 - 24/11/2026
 
 ### Breaking changes
